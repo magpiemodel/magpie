@@ -16,13 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### added
 - **56_ghg_policy** added switch `s56_minimum_cprice`
 - **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
+- **15_food** added `s15_exo_nin` scalar, input data and other configuration for inclusion of India's exogenous diet recommendations by National Institute of Nutrition (NIN)
 
 ### removed
 - **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
 - **scripts** removed argument `mute_ghgprices_until`, now handeld in GAMS code
 
 ### fixed
-- **56_ghg_policy** the renamed switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs. 
+- **56_ghg_policy** the renamed switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs.
 - **31_past** fixed pasture suitability to SSP2 before and including 2020 (only relevant for grassland implementation)
 
 
