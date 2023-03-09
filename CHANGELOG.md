@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### added
 - **56_ghg_policy** added switch `s56_minimum_cprice`
 - **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
+- **scripts** added cluster_resolution output script which writes landuse data on cluster resolution to a shapefile
 
 ### removed
 - **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
