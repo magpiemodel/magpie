@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 i31_manpast_suit(t_all,j) = f31_pastr_suitability(t_all,j,"%c31_past_suit_scen%");
+i31_manpast_suit(t_all,j)$(m_year(t_all) <= sm_fix_SSP2) = f31_pastr_suitability(t_all,j,"ssp245");
 pc31_grass(j,grassland) = f31_LUH2v2("y1995",j,grassland);
 
 
