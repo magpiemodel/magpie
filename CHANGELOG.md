@@ -9,17 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **56_ghg_policy** renamed `cfg$mute_ghgprices_until` to `cfg$gms$c56_mute_ghgprices_until` and changed the default to `y2030`, i.e. no GHG emission pricing in the AFOLU sector before (and including) 2030. This setting will be also used in coupled REMIND-MAgPIE runs.
 - **scripts** Disaggregation of land use to 0.5° now takes land conservation into account - i.e. cropland expansion is not mapped to areas that are subject to land conservation
 - **scripts** Disaggregation of BII merged into standard extra/disaggregation.R
 
 ### added
--
+- **56_ghg_policy** added switch `s56_minimum_cprice`
+- **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
 
 ### removed
--
+- **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
+- **scripts** removed argument `mute_ghgprices_until`, now handeld in GAMS code
 
 ### fixed
--
+- **scripts** Fixed occasional memory failure in the disaggregation script
+- **56_ghg_policy** the renamed switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs.
+- **31_past** fixed pasture suitability to SSP2 before and including 2020 (only relevant for grassland implementation)
 
 
 ## [4.6.4] - 2023-02-22
