@@ -133,10 +133,10 @@ fsecScenario <- function(scenario) {
                         "energy", "bioplastics", "population", "institutions", "timberCities",
                         "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
                         "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
-                        "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP19")),
+                        "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP19", "SSP1energy")),
             # Scenarios (combinations of transformation clusters)
             b_ExternalPressures   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics", "timberCities")),
+                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics", "timberCities", "SSP1energy")),
             b_WaterSoil           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "soil")),
             b_REDDaffRuminants    = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
