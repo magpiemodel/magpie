@@ -10,6 +10,10 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
+if (packageVersion("magpie4") < "1.180.0") {
+  stop("land_cluster_shapefile.R requires magpie4 >= 1.180.0, please update magpie4")
+}
+
 if (!exists("source_include")) {
   outputdir <- Sys.glob("output/*")[[1]]
   lucode2::readArgs("outputdir")
@@ -18,7 +22,6 @@ if (!exists("source_include")) {
 landUse <- magpie4::land(file.path(outputdir, "fulldata.gdx"),
                          dir = outputdir,
                          level = "cell")
-stopifnot(identical(names(dimnames(landUse)), c("j.region", "t", "land")))
 
 clustermap <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
 if (length(clustermap) == 0) {
@@ -29,21 +32,7 @@ if (length(clustermap) == 0) {
 }
 clustermap <- readRDS(clustermap)
 
-cells <- magclass::getCells(landUse)
-clusterMagclass <- magclass::new.magpie(cells, names = "clusterId", fill = seq_along(cells))
-clusterMagclass <- madrat::toolAggregate(clusterMagclass, clustermap, from = "cluster", to = "cell")
-
-clusterPolygons <- terra::as.polygons(magclass::as.SpatRaster(clusterMagclass))
-clusterPolygons <- terra::merge(clusterPolygons, magclass::as.data.frame(landUse, rev = 3),
-                                by.x = "clusterId", by.y = "region")
-names(clusterPolygons) <- c("clusterId", "region", "year", "landtype", "value")
-
-clusterIdToCountry <- clustermap$country
-names(clusterIdToCountry) <- as.integer(sub("^[A-Z]{3}\\.", "", clustermap$cluster))
-clusterPolygons$country <- clusterIdToCountry[clusterPolygons$clusterId]
-clusterPolygons <- clusterPolygons[, c("clusterId", "country", "region", "year", "landtype", "value")]
-
-terra::crs(clusterPolygons) <- "+proj=longlat +datum=WGS84 +no_defs"
+clusterPolygons <- magpie4::clusterOutputToTerraVector(landUse, clustermap)
 
 outfile <- file.path(outputdir, "cluster_resolution.shp")
 message("Writing ", outfile)
