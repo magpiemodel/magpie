@@ -55,6 +55,7 @@ gms$c56_pollutant_prices_noselect;;;;;;;;;;;;;;;;coupling;emulator;coupling;;;R2
 gms$s56_c_price_exp_aff;;;;50;50;50;50;50;50;30;50;50;;;;;;;50;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s56_buffer_aff;;;;0.2;0.2;0.2;0.2;0.2;0.2;0.5;0.2;0.3;;;;;;;0.2;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c56_emis_policy;;;;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+_nosoil;all_nosoil;;;;;;;redd+natveg_nosoil;;;;;;;;;;;;;;;;;;;;;;;;
+gms$s56_minimum_cprice;;;;;;;;;;;;;0;0;18;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$maccs;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c60_2ndgen_biodem;;;;;;;;;;;;;;;;coupling;emulator;coupling;;;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;;;;;;;;;;;;;;;;;;
 gms$c60_2ndgen_biodem_noselect;;;;;;;;;;;;;;;;coupling;emulator;coupling;;;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;;;;;;;;;;;;;;;;;;

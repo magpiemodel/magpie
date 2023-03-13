@@ -301,7 +301,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   # If reports for both bioenergy and GHG prices are available convert them
   # to MAgPIE input, save to the respective input folders, and use it as input
   if (!is.na(cfg$path_to_report_bioenergy) & !is.na(cfg$path_to_report_ghgprices)) {
-    getReportData(cfg$path_to_report_bioenergy, cfg$mute_ghgprices_until, cfg$path_to_report_ghgprices)
+    getReportData(cfg$path_to_report_bioenergy, cfg$path_to_report_ghgprices)
     cfg <- gms::setScenario(cfg,"coupling")
   }
 
@@ -524,7 +524,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   return(cfg$results_folder)
 }
 
-getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y2010", path_to_report_ghgprices = NA) {
+getReportData <- function(path_to_report_bioenergy, path_to_report_ghgprices = NA) {
 
   if (!requireNamespace("magclass", quietly = TRUE)) {
     stop("Package \"magclass\" needed for this function to work. Please install it.",
@@ -541,7 +541,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     write.magpie(out[notGLO,,],f)
   }
 
-  .emissionPrices <- function(mag, mute_ghgprices_until){
+  .emissionPrices <- function(mag){
     out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
     dimnames(out_c)[[3]] <- "co2_c"
 
@@ -555,10 +555,6 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     dimnames(out_ch4)[[3]] <- "ch4"
 
     out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)
-
-    # Set prices to zero before and in the year given in mute_ghgprices_until
-    y_zeroprices <- getYears(mag) <= mute_ghgprices_until
-    out[,y_zeroprices,]<-0
 
     # Remove GLO region
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
@@ -593,11 +589,11 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {
     message("Reading ghg prices from the same file (", path_to_report_bioenergy, ")")
-    .emissionPrices(mag, mute_ghgprices_until)
+    .emissionPrices(mag)
   } else {
     message("Reading ghg prices from ", path_to_report_ghgprices)
     ghgmag <- .readAndPrepare(path_to_report_ghgprices)
-    .emissionPrices(ghgmag, mute_ghgprices_until)
+    .emissionPrices(ghgmag)
   }
 }
 
