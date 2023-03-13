@@ -58,7 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** added options for afforestation assumptions and updated additional data to 4.38
 - **32_forestry** added switch `s32_aff_prot` for protection of afforested areas (0=until end of planning horizon 1=forever)
 - **56_ghg_policy** added two scenarios for GHG emission pricing and options for afforestation
-- **15_food** added switch s15_exo_nin to include exogenous dietary scenario for India as prescribed by NIN
+- **15_food** added switch s15_exo_nin to include exogenous dietary scenario for India as prescribed by NIN. Also swtich c15_NIN_scen to
+  provide dietary scenarios within NIN for India. At present contains only one option
 
 ### removed
 - **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
