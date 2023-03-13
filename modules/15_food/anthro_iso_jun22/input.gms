@@ -251,7 +251,8 @@ $ondelim
 $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
-**Dietary recommendations by NIN, only relevant for India
+**Dietary recommendations by NIN, only relevant for India.
+**Different set elements for sets "t_scen15", "kcal_scen15" and "EAT_scen15" result in the identical target diet as per f15_intake_EATLancet
 table f15_intake_NIN(t_scen15,iso,kcal_scen15,EAT_scen15,kfo)   NIN scenarios for food-specific intake (kcal per capita per day)
 $ondelim
 $include "./modules/15_food/input/f15_intake_NIN_iso.cs3"
