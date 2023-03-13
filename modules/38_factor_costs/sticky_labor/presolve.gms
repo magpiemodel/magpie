@@ -22,7 +22,7 @@ p38_capital_need(t,i,kcr,"mobile") = i38_fac_req(t,i,kcr) * pm_cost_share_crops(
 p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(t,i,kcr)  * pm_cost_share_crops(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
 * minimum labor share based on target and adjustment factor
-if (m_year(t) < s38_startyear_labor_substitution,
+if (m_year(t) <= s38_startyear_labor_substitution,
   p38_min_labor_share(t,j) = 0;
 elseif m_year(t) <= s38_targetyear_labor_share,
   p38_min_labor_share(t,j) = sum(cell(i,j),
