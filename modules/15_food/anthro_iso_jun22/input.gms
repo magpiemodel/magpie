@@ -40,6 +40,9 @@ $setglobal c15_kcal_scen  healthy_BMI
 
 $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
+$setglobal c15_NIN_scen  FLX_hmilk
+* Only one option applicable for India
+
 
 
 * Set-switch for countries affected by country-specific exogenous diet scenario
@@ -120,6 +123,10 @@ scalar s15_livescen_target_subst fade-out of livestock products (0) or substitut
 
 scalar s15_exo_nin Switch for transition towards NIN diet scenario for India (1)  / 1 /;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e9d2797ef4bebb36c9509f069c6bd65e31bbb3b5
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
@@ -250,6 +257,7 @@ table f15_overcons_FAOwaste(iso,kfo)   Ratio between food calorie supply and foo
 $ondelim
 $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
+
 
 **Dietary recommendations by NIN, only relevant for India.
 **Different set elements for sets "t_scen15", "kcal_scen15" and "EAT_scen15" result in the identical target diet as per f15_intake_EATLancet

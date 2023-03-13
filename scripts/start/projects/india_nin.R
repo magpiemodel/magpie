@@ -16,6 +16,7 @@ general_settings <- function(title) {
   ##Downloading new input data
   cfg$force_download <- TRUE
   cfg$info$flag <- "2302"
+
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -53,6 +54,7 @@ general_settings2 <- function(title) {
 
  cfg <- general_settings2(title = "default")
 start_run(cfg, codeCheck=FALSE)
+
 
 ####################################################################333
 ##BAU with special settings as per India requirements
@@ -93,10 +95,89 @@ cfg$gms$s15_exo_diet <- 1               # def = 0
 
 start_run(cfg, codeCheck=FALSE)
 
+####################################################################333
+##NIN_nosugar/oil change scenario - when sugars and oils are allowed to be used as BAU and don't factor in transition
+
+cfg <- general_settings(title = "NIN_high_processed")
+#switch towards exogenous diet scenario
+cfg$gms$s15_exo_nin <- 1               # def = 0
+cfg$gms$s15_exo_sugar       <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_oils        <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_alcohol     <- 0 # default: 1
+
+
+start_run(cfg, codeCheck=FALSE)
+
+####################################################################
+##Only reduction in select commodities - processed food consumption
+
+cfg <- general_settings(title = "NIN_low_processed")
+#switch towards exogenous diet scenario
+cfg$gms$s15_exo_nin <- 1               # def = 0
+cfg$gms$s15_exo_monogastric <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_ruminant    <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_fish        <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_fruitvegnut <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_pulses      <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_sugar       <- 1   # def = 1, options: 0,1
+cfg$gms$s15_exo_oils        <- 1   # def = 1, options: 0,1
+cfg$gms$s15_exo_brans       <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_scp         <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_alcohol     <- 1 # default: 1
+
+
+start_run(cfg, codeCheck=FALSE)
+
+
+###################################################################
+# SSP3 diet scenario
+
+cfg <- general_settings(title = "SSP3")
+
+cfg$gms$c15_food_scenario <- "SSP3"                 # def = SSP2
+cfg$gms$c15_food_scenario_noselect <- "SSP3"        # def = SSP2
+start_run(cfg, codeCheck=FALSE)
+
+
+###################################################################
+
+cfg <- general_settings(title = "High_lib_trade")
+
+cfg$gms$c21_trade_liberalization  <- "l908080r807070"     # def = l909090r808080
+start_run(cfg, codeCheck=FALSE)
+
+###################################################################
+
+cfg <- general_settings(title = "NIN_India_EAT_others_High_lib_trade")
+
+cfg$gms$c21_trade_liberalization  <- "l908080r807070"     # def = l909090r808080
+cfg$gms$s15_exo_nin <- 1               # def = 0
+#ensuring EAT switch gets active for other regions
+#cfg$gms$s15_exo_diet <- 1               # def = 0
+
+start_run(cfg, codeCheck=FALSE)
+
+
+
+###################################################################
+
+cfg <- general_settings(title = "NIN_India_SSP2_others_High_lib_trade")
+
+cfg$gms$c21_trade_liberalization  <- "l908080r807070"     # def = l909090r808080
+
+cfg$gms$s15_exo_nin <- 1               # def = 0
+#ensuring EAT switch gets active for other regions
+cfg$gms$scen_countries15  <- "IND"
+
+start_run(cfg, codeCheck=FALSE)
+
+
+
 
 ###################################################################
 ####regionalized####
-cfg <- general_settings(title = "NIN_India_SSP2_others_slowlib")
+cfg <- general_settings(title = "NIN_India_SSP2_others_regionalized")
+
 
 cfg$gms$c21_trade_liberalization  <- "regionalized"     # def = l909090r808080
 
@@ -106,10 +187,9 @@ cfg$gms$scen_countries15  <- "IND"
 
 start_run(cfg, codeCheck=FALSE)
 
-
-#####################################################################
+#
 #####globalized#############
-cfg <- general_settings(title = "NIN_India_SSP2_others_fastlib")
+cfg <- general_settings(title = "NIN_India_SSP2_others_globalized")
 
 cfg$gms$c21_trade_liberalization  <- "globalized"     # def = l909090r808080
 
@@ -122,7 +202,7 @@ start_run(cfg, codeCheck=FALSE)
 ####################################################################333
 ##BAU with different trade general_settings
 
-cfg <- general_settings(title = "BAU_fastlib")
+cfg <- general_settings(title = "BAU_globalized")
 cfg$gms$c21_trade_liberalization  <- "globalized"     # def = l909090r808080
 
 start_run(cfg, codeCheck=FALSE)
@@ -131,7 +211,7 @@ start_run(cfg, codeCheck=FALSE)
 ####################################################################333
 ##BAU with different trade general_settings
 
-cfg <- general_settings(title = "BAU_slowlib")
+cfg <- general_settings(title = "BAU_regionalized")
 cfg$gms$c21_trade_liberalization  <- "regionalized"     # def = l909090r808080
 
 start_run(cfg, codeCheck=FALSE)
