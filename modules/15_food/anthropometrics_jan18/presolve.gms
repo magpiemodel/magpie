@@ -552,8 +552,7 @@ p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
 *' to 1.
 
 
-if((s15_exo_diet = 1),
-
+if(s15_exo_diet = 1,
 
 * Select from the data set of EAT Lancet scenarios the target years that are
 * consistent with the target year of the fader:
@@ -579,13 +578,13 @@ $ifthen "%c15_kcal_scen%" == "healthy_BMI"
              sum((sex,age), im_demography(t,iso,sex,age))
          );
   i15_intake_EATLancet(i,kfo) =
-        i15_intake_EATLancet_all(i,"2100kcal","%c15_NIN_scen%",kfo);
+        i15_intake_EATLancet_all(i,"2100kcal","%c15_EAT_scen%",kfo);
 $else
   i15_intake_EATLancet(i,kfo) =
-        i15_intake_EATLancet_all(i,"%c15_kcal_scen%","%c15_NIN_scen%",kfo);
-          i15_intake_scen_target(t,i) = sum(kfo,i15_intake_EATLancet(i,kfo));
-        i15_intake_scen_target(t,i) = sum(kfo,i15_intake_NIN(i,kfo));
+        i15_intake_EATLancet_all(i,"%c15_kcal_scen%","%c15_EAT_scen%",kfo);
+        i15_intake_scen_target(t,i) = sum(kfo,i15_intake_EATLancet(i,kfo));
 $endif
+
 
 
 *' 2.) The second step defines the daily per capita intake of different food
