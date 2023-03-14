@@ -552,7 +552,7 @@ p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
 *' to 1.
 
 
-if((s15_exo_diet = 1 or s15_exo_nin = 1),
+if((s15_exo_diet = 1),
 
 
 * Select from the data set of EAT Lancet scenarios the target years that are
@@ -561,10 +561,8 @@ if((s15_exo_diet = 1 or s15_exo_nin = 1),
 
 $ifthen "%c15_exo_foodscen%" == "lin_zero_20_30"
   i15_intake_EATLancet_all(i,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",i,kcal_scen15,EAT_scen15,kfo);
-  i15_intake_NIN_all(i,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2030",i,kcal_scen15,EAT_scen15,kfo);
 $else
   i15_intake_EATLancet_all(i,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2050",i,kcal_scen15,EAT_scen15,kfo);
-  i15_intake_NIN_all(i,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2050",i,kcal_scen15,EAT_scen15,kfo);
 $endif
 
 
@@ -582,14 +580,10 @@ $ifthen "%c15_kcal_scen%" == "healthy_BMI"
          );
   i15_intake_EATLancet(i,kfo) =
         i15_intake_EATLancet_all(i,"2100kcal","%c15_NIN_scen%",kfo);
-  i15_intake_NIN(i,kfo) =
-        i15_intake_NIN_all(i,"2100kcal","%c15_NIN_scen%",kfo);
 $else
   i15_intake_EATLancet(i,kfo) =
         i15_intake_EATLancet_all(i,"%c15_kcal_scen%","%c15_NIN_scen%",kfo);
-  i15_intake_NIN(i,kfo) =
-        i15_intake_NIN_all(i,"%c15_kcal_scen%","%c15_NIN_scen%",kfo);
-        i15_intake_scen_target(t,i) = sum(kfo,i15_intake_EATLancet(i,kfo));
+          i15_intake_scen_target(t,i) = sum(kfo,i15_intake_EATLancet(i,kfo));
         i15_intake_scen_target(t,i) = sum(kfo,i15_intake_NIN(i,kfo));
 $endif
 
