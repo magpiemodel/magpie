@@ -556,7 +556,6 @@ if(s15_exo_diet = 1,
 
 * Select from the data set of EAT Lancet scenarios the target years that are
 * consistent with the target year of the fader:
-*Applying same settings for Eat lancet and NIN
 
 $ifthen "%c15_exo_foodscen%" == "lin_zero_20_30"
   i15_intake_EATLancet_all(i,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",i,kcal_scen15,EAT_scen15,kfo);
