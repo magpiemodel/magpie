@@ -15,13 +15,18 @@ if (packageVersion("magpie4") < "1.180.0") {
 }
 
 if (!exists("source_include")) {
-  outputdir <- Sys.glob("output/*")[[1]]
+  outputdir <- utils::tail(Sys.glob("output/default_*"), 1)
   lucode2::readArgs("outputdir")
 }
 
-landUse <- magpie4::land(file.path(outputdir, "fulldata.gdx"),
-                         dir = outputdir,
-                         level = "cell")
+landUse <- magpie4::land(file.path(outputdir, "fulldata.gdx"), level = "cell")
+cropArea <- magpie4::croparea(file.path(outputdir, "fulldata.gdx"), level = "cell", product_aggr = FALSE)
+x <- magclass::mbind(landUse, cropArea)
+if (!isTRUE(all.equal(x[, , "crop"],
+                      magclass::dimSums(x[, , dimnames(cropArea)[[3]]]),
+                      check.attributes = FALSE))) {
+  stop("Summing up crop area for all crops from magpie4::croparea != crop area from magpie4::land")
+}
 
 clustermap <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
 if (length(clustermap) == 0) {
@@ -32,8 +37,8 @@ if (length(clustermap) == 0) {
 }
 clustermap <- readRDS(clustermap)
 
-clusterPolygons <- magpie4::clusterOutputToTerraVector(landUse, clustermap)
+clusterPolygons <- magpie4::clusterOutputToTerraVector(x, clustermap)
 
-outfile <- file.path(outputdir, "cluster_resolution.shp")
+outfile <- file.path(outputdir, "land_cluster.shp")
 message("Writing ", outfile)
 terra::writeVector(clusterPolygons, outfile, overwrite = TRUE)
