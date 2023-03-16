@@ -54,8 +54,9 @@ for(ssp in c("SSP1","SSP2","SSP5")) {
   cfg$title <- .title(cfg, paste(ssp,"NDC",sep="-"))
   cfg <- setScenario(cfg,c(ssp,"NDC","rcp4p5"))
   cfg$gms$c56_mute_ghgprices_until <- "y2150"
-  cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NDC")
-  cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42",ssp,"-NDC")
+# Input for NDC from R21M42 is not available, therefore NPi is used.
+  cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NPi")
+  cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42",ssp,"-NPi")
   start_run(cfg, codeCheck = FALSE)
 
   cfg$title <- .title(cfg, paste(ssp,"PkBudg900",sep="-"))
