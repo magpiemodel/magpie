@@ -39,6 +39,6 @@ clustermap <- readRDS(clustermap)
 
 clusterPolygons <- magpie4::clusterOutputToTerraVector(x, clustermap)
 
-outfile <- file.path(outputdir, "land_cluster.shp")
+outfile <- file.path(outputdir, "land_cluster.gpkg")
 message("Writing ", outfile)
 terra::writeVector(clusterPolygons, outfile, overwrite = TRUE)
