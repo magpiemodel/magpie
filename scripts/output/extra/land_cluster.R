@@ -6,12 +6,12 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Write land use information on cluster level to a shapefile
+# description: Write land use information on cluster level to land_cluster.gpkg (GeoPackage)
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
 if (packageVersion("magpie4") < "1.180.0") {
-  stop("land_cluster_shapefile.R requires magpie4 >= 1.180.0, please update magpie4")
+  stop("land_cluster.R requires magpie4 >= 1.180.0, please update magpie4")
 }
 
 if (!exists("source_include")) {
