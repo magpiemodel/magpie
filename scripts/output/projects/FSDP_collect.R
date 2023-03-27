@@ -90,22 +90,6 @@ if (dir.exists(hi_datasets_path)) {
 }
 
 ##########
-# Append nutrient surplus reports
-.appendNutrientSurplus <- function(.x) {
-    cfg <- gms::loadConfig(file.path(.x, "config.yml"))
-    title <- cfg$title
-
-    tryCatch(
-        expr = {
-            appendReportNutrientSurplus(scenario = title, dir = .x)
-        }, error = function(e) {
-            message("Unable to append the nutrient surplus dataset!\n", e)
-        }
-    )
-}
-lapply(X = outputdir, FUN = .appendNutrientSurplus)
-
-##########
 # Generate output files
 cat("\nStarting output generation\n")
 
@@ -146,6 +130,7 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|+|Urban Area",
              "Productivity|Landuse Intensity Indicator Tau",
              "Resources|Nitrogen|Cropland Budget|Inputs|+|Fertilizer",
+             "Resources|Nitrogen|Nutrient surplus from land and manure management",
              "Resources|Water|Withdrawal|Agriculture",
              ### Maps
              "Costs",
@@ -266,8 +251,10 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|Cropland|Crops|Other crops|+|Tropical roots",
              "Resources|Land Cover|Cropland|+|Bioenergy crops",
              "Resources|Land Cover|Cropland|+|Fallow Cropland",
-             "Resources|Nitrogen|Cropland Budget|Balance|+|Nutrient Surplus",
-             "Resources|Nitrogen|Pasture Budget|Balance|+|Nutrient Surplus",
+             "Resources|Nitrogen|Pollution|Surplus|+|Cropland (Mt Nr/yr)",
+             "Resources|Nitrogen|Pollution|Surplus|+|Pasture",
+             "Resources|Nitrogen|Pollution|Surplus|+|Animal Waste Management",
+             "Resources|Nitrogen|Pollution|Surplus|+|Non-agricultural land",
              "Resources|Water|Withdrawal|Agriculture",
              "Nutrition|Anthropometrics|People normalweight",
              "Nutrition|Anthropometrics|People obese",
