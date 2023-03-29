@@ -12,15 +12,6 @@
 * Define natural vegetation conservation options based on
 * remaining natural vegation in current time step
 
-* Full remaining primary forest protection
-p22_add_consv(t,j,"PrimForest","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
-* Full remaining secondary forest protection
-p22_add_consv(t,j,"SecdForest","secdforest") = pcm_land(j,"secdforest") * p22_conservation_fader(t);
-* Full remaining forest protection
-p22_add_consv(t,j,"Forest","primforest") =  pcm_land(j,"primforest") * p22_conservation_fader(t);
-p22_add_consv(t,j,"Forest","secdforest") = pcm_land(j,"secdforest") * p22_conservation_fader(t);
-* Full remaining forest and other land conservation
-p22_add_consv(t,j,"Forest_Other",land_natveg) = pcm_land(j,land_natveg) * p22_conservation_fader(t);
 * Include all remaining primary forest areas in IFL conservation target
 p22_add_consv(t,j,"IFL","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
 p22_add_consv(t,j,"BH_IFL","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
