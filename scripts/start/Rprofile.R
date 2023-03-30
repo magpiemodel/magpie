@@ -30,12 +30,12 @@ setSnapshot <- function(snapshotdir=NULL) {
   
   if(is.null(snapshotdir)) {
     fc <- file(".Rprofile")
-    on.exit(close(fc))
+    withr::defer(close(fc))
     writeLines(c('if(file.exists("~/.Rprofile")) source("~/.Rprofile")'),
                fc)
   } else {
     fc <- file(".Rprofile")
-    on.exit(close(fc))
+    withr::defer(close(fc))
     writeLines(c('if(file.exists("~/.Rprofile")) source("~/.Rprofile")',
                  paste0('.libPaths(',deparse(snapshotdir),')'),
                  paste0('print("Setting libPaths to ',snapshotdir,'")')),

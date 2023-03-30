@@ -53,7 +53,7 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
   require(magpie4)
   require(lucode2)
   maindir <- getwd()
-  on.exit(setwd(maindir))
+  withr::defer(setwd(maindir))
   setwd(results_folder)
   folders <- grep(paste("^",id,"__",sep=""),list.dirs(full.names = FALSE, recursive = FALSE),value=TRUE)
   tmp <- grep(paste("^",id,"__default",sep=""),folders)
