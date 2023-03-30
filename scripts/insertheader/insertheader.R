@@ -34,7 +34,7 @@ insertheader <- function(maindir=".",
   }
 
   cwd <- getwd()
-  on.exit(setwd(cwd))
+  withr::defer(setwd(cwd))
   setwd(maindir)
 
   if(is.null(oldkey)) oldkey <- key

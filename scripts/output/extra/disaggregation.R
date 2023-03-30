@@ -38,9 +38,7 @@ bii_hr_out_file <- file.path(outputdir, "cell.bii_0.5.mz")
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 
-sizelimit <- getOption("magclass_sizeLimit")
-options(magclass_sizeLimit = 1e+12)
-on.exit(options(magclass_sizeLimit = sizelimit))
+withr::local_options(list(magclass_sizeLimit = 1e+12))
 
 if (length(map_file) == 0) stop("Could not find map file!")
 if (length(map_file) > 1) {
