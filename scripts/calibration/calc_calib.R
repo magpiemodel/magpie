@@ -94,7 +94,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.1, calibrate_pasture = TRU
   if (!is.null(crop_max)) {
     above_limit <- (calib_factor[, , "crop"] > crop_max)
     calib_factor[, , "crop"][above_limit]  <- crop_max
-    calib_divergence[getCells(calib_factor), , "crop"][above_limit] <- NA
+    calib_divergence[getCells(calib_factor), , "crop"][above_limit] <- calib_accuracy
   }
   if (!calibrate_pasture) {
     calib_factor[, , "past"] <- 1
@@ -162,8 +162,12 @@ update_calib <- function(gdx_file, calib_accuracy = 0.1, calibrate_pasture = TRU
       write_log(calib_best,     "calib_factor.cs3", "best")
       write_log(calib_best_div, "calib_divergence.cs3", "best")
       ####
+      if (any(calib_best) == crop_max) message("Note: A region or a few regions have a calibration factor equal to the maximum possible.
+      Check for possible reasons/inconsistencies.")
       return(TRUE)
     } else {
+      if (any(calib_factor) == crop_max) message("Note: A region or a few regions have a calibration factor equal to the maximum possible.
+      Check for possible reasons/inconsistencies.")
       return(TRUE)
     }
   } else {
