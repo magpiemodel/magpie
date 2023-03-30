@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+### [Unreleased]
+
+### added
+- **15_food** added `s15_exo_nin` scalar, input data and other configuration for inclusion of India's exogenous diet recommendations by National Institute of Nutrition (NIN)
+
 ## [4.6.5] - 2023-03-29
 
 ### changed
@@ -21,7 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **56_ghg_policy** added switch `s56_minimum_cprice`
 - **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
 - **scripts** added output script which writes landuse data on cluster resolution to a shapefile
-- **15_food** added `s15_exo_nin` scalar, input data and other configuration for inclusion of India's exogenous diet recommendations by National Institute of Nutrition (NIN)
 
 
 ### removed
