@@ -52,9 +52,7 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
 performance_collect <- function(id="performance",results_folder="output/",plot=TRUE) {
   require(magpie4)
   require(lucode2)
-  maindir <- getwd()
-  on.exit(setwd(maindir))
-  setwd(results_folder)
+  withr::local_dir(results_folder)
   folders <- grep(paste("^",id,"__",sep=""),list.dirs(full.names = FALSE, recursive = FALSE),value=TRUE)
   tmp <- grep(paste("^",id,"__default",sep=""),folders)
   default <- folders[tmp]
