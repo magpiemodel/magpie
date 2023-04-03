@@ -322,7 +322,7 @@ for (i in 1:length(outputdir)) {
     y     <- NULL
 
     ## BII
-    nc_file <- file.path(outputdir[i], paste(cfg$title, "cell.bii_0.5.mz", sep = "_"))#Note the "_" instead of "-"
+    nc_file <- file.path(outputdir[i], "cell.bii_0.5.mz") #Note the "_" instead of "-"
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "BII (index)"
