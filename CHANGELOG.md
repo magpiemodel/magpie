@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- **15_food** added `s15_exo_nin` scalar, input data and other configuration for inclusion of India's exogenous diet recommendations by National Institute of Nutrition (NIN)
+- **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
 
 ### changed
 -
