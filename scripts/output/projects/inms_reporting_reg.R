@@ -34,9 +34,7 @@ if(!exists("source_include")) {
 
 print(paste0("script started for output directory",outputdir))
 
-wdbefore=getwd()
-on.exit(setwd(wdbefore))
-setwd(outputdir)
+withr::local_dir(outputdir)
 
 cfg <- gms::loadConfig("config.yml")
 title <- cfg$title
