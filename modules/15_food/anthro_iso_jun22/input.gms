@@ -42,6 +42,7 @@ $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
 
 
+
 * Set-switch for countries affected by country-specific exogenous diet scenario
 * Default: all iso countries selected
 sets
@@ -249,5 +250,12 @@ $ondelim
 $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
+
+**This file contains exogenous dietary recommendations for India and EAT Lancet recommendations for all other regions
+**Different set elements for sets "t_scen15", "kcal_scen15" and "EAT_scen15" result in the identical target diet as per f15_intake_EATLancet
+table f15_intake_NIN(t_scen15,iso,kcal_scen15,EAT_scen15,kfo)   NIN scenarios for food-specific intake (kcal per capita per day)
+$ondelim
+$include "./modules/15_food/input/f15_intake_NIN_iso.cs3"
+$offdelim;
 
 *** EOF input.gms ***
