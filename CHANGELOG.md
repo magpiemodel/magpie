@@ -8,10 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### changed
 - **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
 
-### changed
--
 
 ### added
 -
@@ -38,7 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **56_ghg_policy** added switch `s56_minimum_cprice`
 - **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
 - **scripts** added output script which writes landuse data on cluster resolution to a shapefile
-
 
 ### removed
 - **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
@@ -77,17 +75,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
 - **scripts** added SLURM dayMax submission type for standby QOS
 - **sticky_labor** `nl_fix`, `nl_relax` and `nl_release` added
-- **config** added options for afforestation assumptions and updated additional data to 4.38
-- **32_forestry** added switch `s32_aff_prot` for protection of afforested areas (0=until end of planning horizon 1=forever)
-- **56_ghg_policy** added two scenarios for GHG emission pricing and options for afforestation  
 
 ### removed
-- **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
-- **scripts** removed argument `mute_ghgprices_until`, now handeld in GAMS code
+- **42_water_demand** removed fm_multicropping factor because of fallow inconsistency
+
 ### fixed
-- **scripts** Fixed occasional memory failure in the disaggregation script
-- **56_ghg_policy** the renamed switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs.
-- **31_past** fixed pasture suitability to SSP2 before and including 2020 (only relevant for grassland implementation)
+- **14_yields** nl_fix updated to current equation
+- **32_forestry** pm_land_conservation(t,j,"secdforest","restore") now accounts for the rotation length in timber plantations to avoid infeasibilities
+- **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
+- **59_som** division by zero prevented by if condition
+- **scripts** fixed a bug where renvs for high resolution runs were missing some packages
+- **scripts** fixed in the calc_calib.R script the saving of calib_factors used in each iteration to ensure that they correspond to the divergence reported. Changed divergence from zero to NA for those iterations where calib_factors are above the limit. The best_calib selection criterion was changed from selecting the factors of the iteration with the lowest standard deviation to the selection, for each region, of the factor of the iteration with the lowest divergence. Also, factors from the first iteration are now not considered, and if two different factors had the same divergence for a region, the one of the latest iteration is picked.
 
 
 ## [4.6.3] - 2023-01-19
