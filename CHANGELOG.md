@@ -9,11 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
-
 
 ### added
--
+- **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
+
 
 ### removed
 -
