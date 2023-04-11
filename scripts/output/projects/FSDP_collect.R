@@ -272,15 +272,23 @@ var_reg <- c(indicators_main,
              "Income|Number of People Below 1p90 USDppp11/day",
              "Income|Number of People Below 3p20 USDppp11/day",
              "Income|Number of People Below 5p50 USDppp11/day",
-             "Health|Attributable deaths|Risk|Diet and anthropometrics",
-             "Health|Percent change in Attributable deaths|Risk|Diet and anthropometrics",
-             "Health|Years of life lost|Risk|Diet and anthropometric",
-             "Health|Percent change in Years of life lost|Risk|Diet and anthropometrics"
+             "Health|Years of life lost|Disease",
+             "Health|Years of life lost|Disease|+|Congenital Heart Disease",
+             "Health|Years of life lost|Disease|+|Stroke",
+             "Health|Years of life lost|Disease|+|Cancer",
+             "Health|Years of life lost|Disease|+|Type-2 Diabetes",
+             "Health|Years of life lost|Disease|+|Respiratory Disease",
+             "Health|Percent change in Years of life lost|Disease",
+             "Health|Percent change in Years of life lost|Disease|+|Congenital Heart Disease",
+             "Health|Percent change in Years of life lost|Disease|+|Stroke",
+             "Health|Percent change in Years of life lost|Disease|+|Cancer",
+             "Health|Percent change in Years of life lost|Disease|+|Type-2 Diabetes",
+             "Health|Percent change in Years of life lost|Disease|+|Respiratory Disease"
              )
 var_reg <- unique(var_reg)
 
 var_iso <- c("Population",
-             "Health|Years of life lost|Risk|Diet and anthropometrics",
+             "Health|Years of life lost|Disease",
              "Labor|Employment|Agricultural employment",
              "Nutrition|Anthropometrics|People underweight",
              "Nutrition|Anthropometrics|People obese",
