@@ -17,7 +17,7 @@ fsecScenario <- function(scenario) {
   v <- "v36_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = "FSEC", "RCP60"),
+                                  fsec = c("FSEC", "RCP60")),
             d_SSP1bau        = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1", "RCP45")),
             d_SSP1PLUSbau    = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
@@ -193,6 +193,7 @@ fsecScenario <- function(scenario) {
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
   cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/scenario_fsec.csv")
+  cfg <- setScenario(cfg, x[[scenario]]$fsecIndia, scenario_config = "config/scenario_fsecIndia.csv")
 
   # Download gridded population data
   gms::download_unpack(input = "FSEC_populationScenarios_v2_22-08-22.tgz",
