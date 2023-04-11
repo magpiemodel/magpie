@@ -305,7 +305,7 @@ for (i in 1:length(outputdir)) {
   ### ISO and Grid level outputs
   ## only for BAU and SDP in 2020 and 2050 to save time and storage
   years <- c(2020, 2050)
-  scen <- c("BAU", "FSDP")
+  scen <- c("BAU", "FSDP", "SSP2fsdp")
   thisScen <- unlist(strsplit(cfg$title, "_"))[3]
   if (thisScen %in% scen) {
 
