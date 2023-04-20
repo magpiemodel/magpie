@@ -193,7 +193,6 @@ fsecScenario <- function(scenario) {
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
   cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/scenario_fsec.csv")
-  cfg <- setScenario(cfg, x[[scenario]]$fsecIndia, scenario_config = "config/scenario_fsecIndia.csv")
 
   # Download gridded population data
   gms::download_unpack(input = "FSEC_populationScenarios_v2_22-08-22.tgz",
