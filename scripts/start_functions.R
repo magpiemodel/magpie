@@ -227,11 +227,11 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   Sys.setlocale(locale="C")
   maindir <- getwd()
-  on.exit(setwd(maindir))
+  withr::defer(setwd(maindir))
 
   if(lock_model) {
     lock_id <- gms::model_lock(timeout1=1)
-    on.exit(gms::model_unlock(lock_id), add=TRUE)
+    withr::defer(gms::model_unlock(lock_id))
   }
 
   # Apply scenario settings ans check configuration file for consistency
@@ -269,11 +269,17 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
       message("Generating lockfile in '", cfg$results_folder, "'... ", appendLF = FALSE)
       # suppress output of renv::snapshot
       utils::capture.output({
-        utils::capture.output({
-          # snapshot current main renv into run folder
-          renv::snapshot(lockfile = file.path(cfg$results_folder, "_renv.lock"), prompt = FALSE)
+        errorMessage <- utils::capture.output({
+          snapshotSuccess <- tryCatch({
+            # snapshot current main renv into run folder
+            renv::snapshot(lockfile = file.path(cfg$results_folder, "_renv.lock"), prompt = FALSE)
+            TRUE
+          }, error = function(error) FALSE)
         }, type = "message")
       })
+      if (!snapshotSuccess) {
+        stop(paste(errorMessage, collapse = "\n"))
+      }
       message("done.")
     } else {
       # a run renv is loaded, we are presumably starting a HR follow up run
@@ -481,7 +487,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   gms::singleGAMSfile(mainfile=cfg$model, output=file.path(cfg$results_folder, "full.gms"))
   if(lock_model) {
     gms::model_unlock(lock_id)
-    on.exit(setwd(maindir))
+    withr::defer(setwd(maindir))
   }
 
   setwd(cfg$results_folder)

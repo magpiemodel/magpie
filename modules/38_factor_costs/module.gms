@@ -19,7 +19,6 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%factor_costs%" == "mixed_reg_feb17" $include "./modules/38_factor_costs/mixed_reg_feb17/realization.gms"
 $Ifi "%factor_costs%" == "per_ton_fao_may22" $include "./modules/38_factor_costs/per_ton_fao_may22/realization.gms"
 $Ifi "%factor_costs%" == "sticky_feb18" $include "./modules/38_factor_costs/sticky_feb18/realization.gms"
 $Ifi "%factor_costs%" == "sticky_labor" $include "./modules/38_factor_costs/sticky_labor/realization.gms"

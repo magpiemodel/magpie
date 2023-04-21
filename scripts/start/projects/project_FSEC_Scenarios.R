@@ -24,9 +24,9 @@ for (scenarioName in c(
   "a_NitrogenEff", "a_RiceMit", "a_CropeffTax",
   "a_CapitalSubst", "a_MinWage", "a_Bioplastics", "a_LandscapeElements",
   "a_LiberalizedTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
-  "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_AirPollution", "a_SoilCarbon",
+  "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_SoilCarbon",
   # Scenario combination runs
-  "c_BAU", "d_SSP1bau", "d_SSP1PLUSbau", "d_SSP2bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
+  "c_BAU", "d_SSP1bau", "d_SSP1PLUSbau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
   "d_SSP1fsdp", "d_SSP2fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
   "e_FSDP",
   "b_Diet", "b_Livelihoods", "b_NatureSparing", "b_AgroMngmt", "b_ExternalPressures"

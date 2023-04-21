@@ -90,22 +90,6 @@ if (dir.exists(hi_datasets_path)) {
 }
 
 ##########
-# Append nutrient surplus reports
-.appendNutrientSurplus <- function(.x) {
-    cfg <- gms::loadConfig(file.path(.x, "config.yml"))
-    title <- cfg$title
-
-    tryCatch(
-        expr = {
-            appendReportNutrientSurplus(scenario = title, dir = .x)
-        }, error = function(e) {
-            message("Unable to append the nutrient surplus dataset!\n", e)
-        }
-    )
-}
-lapply(X = outputdir, FUN = .appendNutrientSurplus)
-
-##########
 # Generate output files
 cat("\nStarting output generation\n")
 
@@ -123,12 +107,19 @@ var_reg <- c(indicators_main,
              "Biodiversity|Agricultural landscape intactness",
              "Biodiversity|Biodiversity hotspot intactness",
              "Biodiversity|Biodiversity hotspot intactness (unitless)",
+             "Biodiversity|BII in areas outside Biodiversity Hotspots, Intact Forest & Cropland Landscapes",
+             "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
+             "Biodiversity|Biodiversity Hotspot BII",
+             "Biodiversity|Cropland Landscapes BII",
+             "Key Biodiversity Area BII",
+             "Biodiversity|Inverted Simpson crop area diversity index",
              "Population",
              "Income",
              "Nutrition|Calorie Supply|+|Crops",
              "Nutrition|Calorie Supply|+|Livestock products",
              "Demand|++|Crops",
              "Demand|++|Livestock products",
+             "Resources|Land Cover",
              "Resources|Land Cover|+|Cropland",
              "Resources|Land Cover|+|Pastures and Rangelands",
              "Resources|Land Cover|+|Forest",
@@ -139,6 +130,7 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|+|Urban Area",
              "Productivity|Landuse Intensity Indicator Tau",
              "Resources|Nitrogen|Cropland Budget|Inputs|+|Fertilizer",
+             "Resources|Nitrogen|Nutrient surplus from land and manure management",
              "Resources|Water|Withdrawal|Agriculture",
              ### Maps
              "Costs",
@@ -147,6 +139,12 @@ var_reg <- c(indicators_main,
              "Labor|Wages|Hourly labor costs",
              ### Suppl plots
              "Population",
+             "Prices|Index2020|Agriculture|Food products",
+             "Prices|Index2020|Agriculture|Food products|Livestock",
+             "Prices|Index2020|Agriculture|Food products|Plant-based",
+             "SDG|SDG02|Investment in AgR&D",
+             "Costs|TC",
+             "Agricultural Research Intensity",
              "Nutrition|Calorie Intake",
              "Nutrition|Calorie Intake|+|Crops",
              "Nutrition|Calorie Intake|+|Fish",
@@ -253,8 +251,10 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|Cropland|Crops|Other crops|+|Tropical roots",
              "Resources|Land Cover|Cropland|+|Bioenergy crops",
              "Resources|Land Cover|Cropland|+|Fallow Cropland",
-             "Resources|Nitrogen|Cropland Budget|Balance|+|Nutrient Surplus",
-             "Resources|Nitrogen|Pasture Budget|Balance|+|Nutrient Surplus",
+             "Resources|Nitrogen|Pollution|Surplus|+|Cropland",
+             "Resources|Nitrogen|Pollution|Surplus|+|Pasture",
+             "Resources|Nitrogen|Pollution|Surplus|+|Animal Waste Management",
+             "Resources|Nitrogen|Pollution|Surplus|+|Non-agricultural land",
              "Resources|Water|Withdrawal|Agriculture",
              "Nutrition|Anthropometrics|People normalweight",
              "Nutrition|Anthropometrics|People obese",
@@ -271,7 +271,11 @@ var_reg <- c(indicators_main,
              "Income|Fraction of Population below half of Median Income",
              "Income|Number of People Below 1p90 USDppp11/day",
              "Income|Number of People Below 3p20 USDppp11/day",
-             "Income|Number of People Below 5p50 USDppp11/day"
+             "Income|Number of People Below 5p50 USDppp11/day",
+             "Health|Attributable deaths|Risk|Diet and anthropometrics",
+             "Health|Percent change in Attributable deaths|Risk|Diet and anthropometrics",
+             "Health|Years of life lost|Risk|Diet and anthropometric",
+             "Health|Percent change in Years of life lost|Risk|Diet and anthropometrics"
              )
 var_reg <- unique(var_reg)
 
@@ -318,7 +322,7 @@ for (i in 1:length(outputdir)) {
     y     <- NULL
 
     ## BII
-    nc_file <- file.path(outputdir[i], paste(cfg$title, "cell.bii_0.5.mz", sep = "_"))#Note the "_" instead of "-"
+    nc_file <- file.path(outputdir[i], "cell.bii_0.5.mz") #Note the "_" instead of "-"
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "BII (index)"
