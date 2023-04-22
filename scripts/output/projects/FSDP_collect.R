@@ -89,6 +89,44 @@ if (dir.exists(hi_datasets_path)) {
     message("The directory storing health impacts datasets wasn't found. Skipping health impacts.")
 }
 
+magicc7_datasets_path <- "/p/projects/magpie/data/FSEC_magicc7Datasets_raw"
+if (dir.exists(magicc7_datasets_path)) {
+
+    magicc7_datasets <- list.files(magicc7_datasets_path)
+    magicc7_versionToUse  <- grep(rev, magicc7_datasets, value = TRUE)
+
+    if (length(magicc7_versionToUse) == 0) {
+
+        message("No corresponding version ID was found within the MAGICC7 datasets. Using the latest available.")
+
+        highestVersionNr <- max(as.numeric(str_extract(magicc7_datasets, "(?<=v)(.*?)(?=_)")))
+        magicc7_versionToUse <- grep(paste0("v", highestVersionNr), magicc7_datasets, value = TRUE)
+
+    } else if (length(magicc7_versionToUse) >= 2) {
+        stop("Duplicated version IDs were found in the MAGICC7 datasets, only one is expected.")
+    }
+
+    magicc7_versionToUse_path <- file.path(magicc7_datasets_path, magicc7_versionToUse)
+
+  .appendMAGICC7 <- function(.x) {
+      cfg <- gms::loadConfig(file.path(.x, "config.yml"))
+      title <- cfg$title
+
+      tryCatch(
+          expr = {
+              appendReportMAGICC7(resultsPath = magicc7_versionToUse_path, scenario = title, dir = .x)
+          }, error = function(e) {
+              message("Unable to append MAGICC7 dataset for scenario: ", title)
+          }
+      )
+  }
+  lapply(X = outputdir, FUN = .appendMAGICC7)
+
+} else {
+    message("The directory storing MAGICC7 datasets wasn't found. Skipping AR6 global warming calculations.")
+}
+
+
 ##########
 # Generate output files
 cat("\nStarting output generation\n")
