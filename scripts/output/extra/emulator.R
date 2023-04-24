@@ -33,7 +33,7 @@ collect_data_and_make_emulator <- function(outputdir,name_of_fit="linear") {
 
   # lock the model (other emulaotr scripts have to wait until this one finished)
   lock_id <- gms::model_lock(file=".lockemu")
-  on.exit(gms::model_unlock(lock_id,file=".lockemu"))
+  withr::defer(gms::model_unlock(lock_id,file=".lockemu"))
 
   results_path <- "output"
 
