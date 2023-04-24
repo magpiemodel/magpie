@@ -31,14 +31,7 @@ if(!exists("source_include")) {
 ###############################################################################
 
 # For case of sub-folder structure write to the respective folder
-subfolder <- unlist(lapply(strsplit(x = outputdir, split = "/"), FUN = "[", 3))
 title     <- basename(outputdir)
-
-if (all(subfolder == title)) {
-  subfolder <- ""
-} else {
-  subfolder <- subfolder[1]
-}
 
 # Select runs to be displayed
 x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[2]))
@@ -442,26 +435,26 @@ grid <- renameScenario(grid)
 
 message("Saving rds files ...")
 
-saveRDS(reg,  file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
-saveRDS(iso,  file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
-saveRDS(grid, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
+saveRDS(reg,  file = file.path("output", paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
+saveRDS(iso,  file = file.path("output", paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
+saveRDS(grid, file = file.path("output", paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
 
 # save i_to_iso mapping
 gdx     <- file.path(outputdir[1], "fulldata.gdx")
 reg2iso <- readGDX(gdx, "i_to_iso")
 names(reg2iso) <- c("region", "iso_a3")
-write.csv(reg2iso, file.path(unique("output", subfolder), "reg2iso.csv"))
-saveRDS(reg2iso, file = file.path(unique("output", subfolder), "reg2iso.rds"), version = 2, compress = "xz")
+write.csv(reg2iso, file.path("output", "reg2iso.csv"))
+saveRDS(reg2iso, file = file.path("output", "reg2iso.rds"), version = 2, compress = "xz")
 
 # save validation file
-val <- file.path(unique(outputdir[1], subfolder), "validation.mif")
+val <- file.path(outputdir[1], "validation.mif")
 val <- as.data.table(read.quitte(val))
-saveRDS(val, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
+saveRDS(val, file = file.path("output", paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
 #Add new plots here:
 #https://github.com/pik-piam/m4fsdp/blob/master/R/plotFSDP.R
-plotFSDP(outputfolder = file.path("output", unique(subfolder)),
+plotFSDP(outputfolder = "output",
          reg = reg,
          iso = iso,
          grid = grid,
