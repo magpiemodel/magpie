@@ -27,6 +27,7 @@ s30_snv_scenario_start          SNV scenario start year     / 2020 /
 s30_snv_scenario_target         SNV scenario target year      / 2030 /
 s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
+s30_annual_max_growth Max annual cropland growth as share of previous cropland (-) / Inf /
 ;
 
 * Set-switch for countries affected by regional SNV policy
@@ -99,9 +100,7 @@ $if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
 
 
 ********* AVAILABLE CROPLAND *******************************************
-scalar
-s30_annual_max_growth Max annual cropland growth as share of previous cropland (-) / Inf /
-;
+
 
 table f30_avl_cropland(j,marginal_land30) Available land area for cropland (mio. ha)
 $ondelim

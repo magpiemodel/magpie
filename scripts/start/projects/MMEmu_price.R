@@ -29,7 +29,11 @@ cfg$qos <- "standby"
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public" = NULL,
                                "./patch_input" = NULL),
                            getOption("magpie_repos"))
-cfg$input <- append(cfg$input, c(patch = "patch.tgz"))
+cfg$input <- c(regional    = "rev4.84_a10a580c_magpie.tgz",
+               cellular    = "rev4.84_a10a580c_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+               validation  = "rev4.84_a10a580c_validation.tgz",
+               additional  = "additional_data_rev4.39.tgz",
+               patch = "MMEmuR11.tgz")
 
 cfg$output <- c("output_check", "rds_report")
 cfg$force_replace <- TRUE
@@ -39,7 +43,7 @@ cfg <- setScenario(cfg, c(ssp)) #load config presets
 
 ### Identifier and folder
 ###############################################
-identifierFlag <- "Emulator_23-02-14_set-71"
+identifierFlag <- "Emulator_23-04-25_set-76"
 ###############################################
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
@@ -48,14 +52,15 @@ cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 cfg$gms$bioenergy <- "MMEmu_feb23"
 # non-default BE demands
 cfg$gms$c60_1stgen_biodem <- "phaseout2020"
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-Npi-PhaseOut20"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-Npi-PhaseOut50"
 cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
 
 # Subsidies / Prices
 cfg$gms$c60_bioenergy_subsidy_fix_SSP2 <- 300
 cfg$gms$c60_bioenergy_subsidy <- 0
 
-beV <- c(0, 6, 8, 10, 12, 15, 25)
+#beV <- c(0, 6, 8, 10, 12, 15, 25)
+beV <- c(25)
 
 ### GHG
 cfg$gms$ghg_policy  <- "MMEmu_feb23"
