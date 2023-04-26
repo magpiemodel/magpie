@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** added scenario `SSP2EU` in scenario_config.csv
+- **config** modified `eat_lancet_diet` in scenario_config.csv
+- **config** update of additional data to rev4.42
+- **56_ghg_policy** added emission policies without GHG emissions from peatlands
+
 
 ### added
 - **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
