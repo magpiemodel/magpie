@@ -29,7 +29,11 @@ cfg$qos <- "standby"
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public" = NULL,
                                "./patch_input" = NULL),
                            getOption("magpie_repos"))
-cfg$input <- append(cfg$input, c(patch = "patch.tgz"))
+cfg$input <- c(regional    = "rev4.84_a10a580c_magpie.tgz",
+               cellular    = "rev4.84_a10a580c_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+               validation  = "rev4.84_a10a580c_validation.tgz",
+               additional  = "additional_data_rev4.39.tgz",
+               patch = "MMEmuR11.tgz")
 
 cfg$output <- c("output_check", "rds_report")
 cfg$force_replace <- TRUE
@@ -39,7 +43,7 @@ cfg <- setScenario(cfg, c(ssp)) #load config presets
 
 ### Identifier and folder
 ###############################################
-identifierFlag <- "Emulator_23-02-14_set-71"
+identifierFlag <- "Emulator_23-04-25_set-76"
 ###############################################
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
@@ -57,12 +61,13 @@ cfg$gms$c60_bioenergy_subsidy <- 0
 cfg$gms$s60_bioenergy_gj_price_1st <- 0
 cfg$gms$s60_bioenergy_price_2nd <- 0
 
-beV <- c(0, 6, 8, 10, 12, 15, 25)
+#beV <- c(0, 6, 8, 10, 12, 15, 25)
+beV <- c(25)
 
 ### GHG
 cfg$gms$ghg_policy  <- "MMEmu_feb23"
 
-gV <- c(0, 100, 200, 400, 1000, 2000, 3000, 4000)
+gV <- c(0, 100, 1000, 2000, 3000, 4000)
 
 ### Tau / Yield
 cfg$gms$c14_yields_scenario <- "nocc_hist"
@@ -81,7 +86,7 @@ us00_05 <- 1.1197 #src: https://data.worldbank.org/indicator/NY.GDP.DEFL.ZS?end=
 
 for (be in beV){
 
-    cfg$gms$c60_2ndgen_biodem <- paste0("Emu", str_pad(be, 2, pad = "0"))
+    cfg$gms$c60_2ndgen_biodem <- paste0("Emu", str_pad(be, 2, pad = "0"), "const")
 
     for (g in gV){
 

@@ -58,6 +58,7 @@ cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
 # Subsidies / Prices
 cfg$gms$c60_bioenergy_subsidy_fix_SSP2 <- 300
 cfg$gms$c60_bioenergy_subsidy <- 0
+cfg$gms$c60_price_implementation <- "exp"
 
 #beV <- c(0, 6, 8, 10, 12, 15, 25)
 beV <- c(25)
@@ -88,7 +89,7 @@ for (be in beV){
     cfg$gms$s60_bioenergy_price_2nd <- be * us00_05
 
     ##############################################
-    runflag <- "price"
+    runflag <- "price-exp"
     cfg$title <- paste0(str_pad(be, 2, pad = "0"), "G0000", runflag)
 
     start_run(cfg, codeCheck = FALSE)

@@ -43,7 +43,8 @@ scalars
   s60_2ndgen_bioenergy_dem_min_post_fix Minimum dedicated 2nd generation bioenergy demand assumed in each region after SSP2-fix  (mio. GJ per yr) / 1 /
 ;
 
-$setglobal c60_2ndgen_biodem  R21M42-SSP2-NPi
+$setglobal c60_price_implementation  exp
+$setglobal c60_2ndgen_biodem  R21M42-SSP2-Npi-PhaseOut50
 $setglobal c60_2ndgen_biodem_noselect  R21M42-SSP2-NPi
 
 
