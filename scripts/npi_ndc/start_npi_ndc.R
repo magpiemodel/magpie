@@ -301,13 +301,14 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   }
 
   #calculate the reduction target in absolute numbers
-  rel <- data.frame(from=pol_mapping$policyregions,to=paste(pol_mapping$iso,1:dim(pol_mapping)[1],sep="."), stringsAsFactors = FALSE)
   if(dim(pol_mapping)[1] == 59199) {
-    rel <- data.frame(from=pol_mapping$policyregions,to=paste(pol_mapping$iso,1:59199,sep="."), stringsAsFactors = FALSE)
+    rel <- data.frame(from=pol_mapping$policyregions,to=paste(pol_mapping$policyregions,1:59199,sep="."), stringsAsFactors = FALSE)
+    countryCell <- paste(pol_mapping$iso,1:59199,sep=".")
   } else {
     lon <- sub(".", "p", pol_mapping$lon, fixed = TRUE)
     lat <- sub(".", "p", pol_mapping$lat, fixed = TRUE)
-    rel <- data.frame(from=pol_mapping$policyregions,to=paste(lon, lat, pol_mapping$iso,sep="."), stringsAsFactors = FALSE)
+    rel <- data.frame(from=pol_mapping$policyregions,to=paste(lon, lat, pol_mapping$policyregions,sep="."), stringsAsFactors = FALSE)
+    countryCell <- paste(lon, lat, pol_mapping$iso,sep=".")
   }
   if(pol_type=="aff") {
     magpie_policy <- madrat::toolAggregate(x=magpie_policy, rel=rel, weight=weight)
@@ -318,6 +319,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   }
 
   map <- readRDS(map_file)
+  getItems(magpie_policy, dim = 1, raw = TRUE) <- map$cell
   magpie_policy <- madrat::toolAggregate(magpie_policy,map)
 
   return(magpie_policy)
