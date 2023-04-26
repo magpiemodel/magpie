@@ -44,6 +44,15 @@ calc_NPI_NDC <- function(policyregions = "iso",
    m <- merge(coords, pol_mapping, sort =FALSE)
    getItems(land_stock, dim = "iso") <- m$policyregions
   }
+  
+  # select map_file if more than one has been found
+  if(length(map_file) > 1) {
+    if(dim(land_stock)[1] == 67420) {
+      map_file <- grep("67420", map_file, value = TRUE)
+    } else {
+      map_file <- grep("67420", map_file, value = TRUE, invert = TRUE)
+    }
+  }
 
   forest_stock <- dimSums(land_stock[,,c("primforest","secdforest","forestry")], dim=3)
   getNames(forest_stock) <- "forest"
