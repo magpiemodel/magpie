@@ -23,7 +23,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   # load the cell mapping policy
   pol_mapping <- readRDS(cellmapping)
   if(!(policyregions %in% names(pol_mapping))) stop("No cell mapping available for policyregions = ",policyregions)
-  pol_mapping <- pol_mapping[,policyregions]
+  pol_mapping$policyregions <- pol_mapping[[policyregions]]
 
   ##############################################################################
   ##########          Information from the reference observed data   ###########
@@ -31,7 +31,32 @@ calc_NPI_NDC <- function(policyregions = "iso",
 
   #read in cellular land cover (stock) from landuse initialization
   land_stock <- read.magpie(land_stock_file)
-  getItems(land_stock, dim = 1, raw = TRUE) <- paste(pol_mapping,1:59199,sep=".")
+  
+  # use pol_mapping to update spatial mapping of cells to regions
+  # so that not only countries can be used for policies but also smaller
+  # units such as provinces 
+  if(dim(land_stock)[1] == 59199) { # 59199 cells
+    if(dim(pol_mapping)[1] > 59199) {
+      pol_mapping <- pol_mapping[order(pol_mapping$cell),]
+      pol_mapping <- pol_mapping[!is.na(pol_mapping$cell),]
+    }
+    getItems(land_stock, dim = 1, raw = TRUE) <- paste(pol_mapping$policyregions,1:59199,sep=".")
+  } else {
+   coords <- getCoords(land_stock)
+   names(coords) <- c("lon","lat")
+   m <- merge(coords, pol_mapping, sort =FALSE)
+   getItems(land_stock, dim = "iso") <- m$policyregions
+  }
+  
+  # select map_file if more than one has been found
+  if(length(map_file) > 1) {
+    if(dim(land_stock)[1] == 67420) {
+      map_file <- grep("67420", map_file, value = TRUE)
+    } else {
+      map_file <- grep("67420", map_file, value = TRUE, invert = TRUE)
+    }
+  }
+  stopfinot(lenght(map_file) == 1)
 
   forest_stock <- dimSums(land_stock[,,c("primforest","secdforest","forestry")], dim=3)
   getNames(forest_stock) <- "forest"
@@ -223,7 +248,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   tp <- getYears(stock, as.integer=TRUE)
 
   #select and filter countries that exist in the chosen policy mapping
-  policy_countries <- intersect(policy$dummy,unique(pol_mapping))
+  policy_countries <- intersect(policy$dummy,unique(pol_mapping$policyregions))
   policy <- policy[policy$dummy %in% policy_countries,]
 
   #create key to distinguish different cases of baseyear, targetyear combinations
@@ -243,7 +268,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   #Initialize magpie_policy with 0 (country level)
   #This is a return object of this function and contains policy targets at
   #cluster level
-  magpie_policy <- new.magpie(unique(pol_mapping),tp,NULL,0)
+  magpie_policy <- new.magpie(unique(pol_mapping$policyregions),tp,NULL,0)
   keys <- unique(policy$key)
   for (i in keys) {
     #get baseyear and targetyear
@@ -280,7 +305,15 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   }
 
   #calculate the reduction target in absolute numbers
-  rel <- data.frame(from=pol_mapping,to=paste(pol_mapping,1:length(pol_mapping),sep="."), stringsAsFactors = FALSE)
+  if(dim(pol_mapping)[1] == 59199) {
+    rel <- data.frame(from=pol_mapping$policyregions,to=paste(pol_mapping$policyregions,1:59199,sep="."), stringsAsFactors = FALSE)
+    countryCell <- paste(pol_mapping$iso,1:59199,sep=".")
+  } else {
+    lon <- sub(".", "p", pol_mapping$lon, fixed = TRUE)
+    lat <- sub(".", "p", pol_mapping$lat, fixed = TRUE)
+    rel <- data.frame(from=pol_mapping$policyregions,to=paste(lon, lat, pol_mapping$policyregions,sep="."), stringsAsFactors = FALSE)
+    countryCell <- paste(lon, lat, pol_mapping$iso,sep=".")
+  }
   if(pol_type=="aff") {
     magpie_policy <- madrat::toolAggregate(x=magpie_policy, rel=rel, weight=weight)
   } else if(pol_type=="ad") {
@@ -290,7 +323,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   }
 
   map <- readRDS(map_file)
-  getCells(magpie_policy) <- map$cell
+  getItems(magpie_policy, dim = 1, raw = TRUE) <- map$cell
   magpie_policy <- madrat::toolAggregate(magpie_policy,map)
 
   return(magpie_policy)
