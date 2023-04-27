@@ -32,7 +32,9 @@ calc_NPI_NDC <- function(policyregions = "iso",
   #read in cellular land cover (stock) from landuse initialization
   land_stock <- read.magpie(land_stock_file)
   
-  # update spatial names
+  # use pol_mapping to update spatial mapping of cells to regions
+  # so that not only countries can be used for policies but also smaller
+  # units such as provinces 
   if(dim(land_stock)[1] == 59199) { # 59199 cells
     if(dim(pol_mapping)[1] > 59199) {
       pol_mapping <- pol_mapping[order(pol_mapping$cell),]
