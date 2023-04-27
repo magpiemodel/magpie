@@ -56,6 +56,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
       map_file <- grep("67420", map_file, value = TRUE, invert = TRUE)
     }
   }
+  stopfinot(lenght(map_file) == 1)
 
   forest_stock <- dimSums(land_stock[,,c("primforest","secdforest","forestry")], dim=3)
   getNames(forest_stock) <- "forest"
