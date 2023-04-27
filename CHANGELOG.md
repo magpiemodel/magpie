@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
 - **config** added scenario `SSP2EU` in scenario_config.csv
 - **config** modified `eat_lancet_diet` in scenario_config.csv
-- **config** update of additional data to rev4.42
+- **config** update of additional data to rev4.43
 - **56_ghg_policy** added emission policies without GHG emissions from peatlands
 
 
