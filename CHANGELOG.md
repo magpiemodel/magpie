@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
 
 ### added
 - **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
