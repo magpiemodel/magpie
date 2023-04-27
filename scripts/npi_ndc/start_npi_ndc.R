@@ -35,7 +35,8 @@ calc_NPI_NDC <- function(policyregions = "iso",
   # update spatial names
   if(dim(land_stock)[1] == 59199) { # 59199 cells
     if(dim(pol_mapping)[1] > 59199) {
-      pol_mapping <- pol_mapping[order(pol_mapping$cell),][!is.na(pol_mapping$cell),]
+      pol_mapping <- pol_mapping[order(pol_mapping$cell),]
+      pol_mapping <- pol_mapping[!is.na(pol_mapping$cell),]
     }
     getItems(land_stock, dim = 1, raw = TRUE) <- paste(pol_mapping$policyregions,1:59199,sep=".")
   } else {
