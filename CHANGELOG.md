@@ -2,8 +2,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ## [Unreleased]
@@ -13,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** modified `eat_lancet_diet` in scenario_config.csv
 - **config** update of additional data to rev4.43
 - **56_ghg_policy** added emission policies without GHG emissions from peatlands
-
+- **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
 
 ### added
 - **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
