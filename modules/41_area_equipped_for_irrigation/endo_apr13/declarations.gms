@@ -16,7 +16,7 @@ variables
 ;
 
 positive variables
- vm_AEI(j)                      Area equipped for irrigation in each grid cell (mio. ha)
+ vm_AEI(j)                       Area equipped for irrigation in each grid cell (mio. ha)
 ;
 
 equations

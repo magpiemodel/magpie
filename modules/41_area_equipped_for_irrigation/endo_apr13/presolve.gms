@@ -8,7 +8,7 @@
 p41_AEI_start(t,j) = pc41_AEI_start(j);
 
 *' Updating existing capital stocks to account for depreciation
-vm_AEI.lo(j) = pc41_AEI_start(j)/((1- s41_AEI_depreciation)**(m_timestep_length));
+vm_AEI.lo(j) = pc41_AEI_start(j) / ((1 - s41_AEI_depreciation)**(m_timestep_length));
 
-
+*' Unit costs for irrigation expansion
 pc41_unitcost_AEI(i) = f41_c_irrig(t,i);
