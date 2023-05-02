@@ -7,11 +7,9 @@
 
 $setglobal c41_initial_irrigation_area  LUH2v2
 
-parameters
+table
 f41_irrig(t_ini41,j,aei41) Available area equipped for irrigation [AVL] (mio. ha)
-/
 $ondelim
-$include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs2"
+$include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs3"
 $offdelim
-/
 ;
