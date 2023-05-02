@@ -147,63 +147,56 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
-* Used data set: rev4.81_h12_magpie.tgz
-* md5sum: 89bfe8e5c74dd8ba72c023a785d01989
-* Repository: /p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.81_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 93fa9d97ad83b0bcc4e9ec8e9b741566
-* Repository: /p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.81_h12_validation.tgz
-* md5sum: 07eb91a745b1a176ac35cf0d6536d68a
-* Repository: /p/projects/rd3mod/inputdata/output
-*
-* Used data set: additional_data_rev4.36.tgz
-* md5sum: e24c46872f77dc15ad8603bdac1e6065
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
-*
-* Used data set: calibration_H12_per_ton_fao_may22_glo_13Feb23.tgz
-* md5sum: e771e9b6f2202124db3f3bc296596b17
-* Repository: /p/projects/landuse/data/input/calibration
-*
+* 
+* Used data set: rev4.85_h12_magpie.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: rev4.85_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: rev4.85_h12_validation.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: additional_data_rev4.43.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* 
+* Used data set: calibration_H12_per_ton_fao_may22_glo_23Mar23.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   23    7    6    1   43   27    7   11   12   37   20
-*
+*     6   17    9    8    1   44   26    7   10   13   38   21
+* 
 * Regionscode: 62eff8f7
-*
-
-* Regions data revision: 4.81
-*
+* 
+* Regions data revision: 4.85
+* 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.81
-*
+* * Revision: 4.85
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
 * * Number of clusters per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   23    7    6    1   43   27    7   11   12   37   20
+*     6   17    9    8    1   44   26    7   10   13   38   21
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-
-*
-* Warning messages:
-* 1: In gms::update_modules_embedding() :
-*   ./modules/38_factor_costs/mixed_reg_feb17/realization.gms not found, this realization cannot be used!
-* 2: In gms::update_modules_embedding() :
-*   ./modules/51_nitrogen/ipcc2006_sep16/realization.gms not found, this realization cannot be used!
-*
-* Last modification (input data): Wed Feb 15 19:04:47 2023
-*
+* 
+* 
+* Last modification (input data): Fri Apr 28 16:30:54 2023
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
