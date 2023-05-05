@@ -439,17 +439,26 @@ for (i in 1:length(outputdir)) {
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
-    } else missing <- c(missing,nc_file)
+    } else missing <- c(missing, nc_file)
 
     ## Water
     nc_file <- file.path(outputdir[i], "watStressViolations.mz")
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water stress and violations"
-      getSets(a,  fulldim = FALSE)[3] <- "variable"
+      getSets(a, fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y, a)
-    } else missing <- c(missing,nc_file)
+    } else missing <- c(missing, nc_file)
+
+    nc_file <- file.path(outputdir[i], "efvVolume.mz")
+    if (file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[, years, ]
+      getNames(a) <- "water environmental flow violations volume"
+      getSets(a, fulldim = FALSE)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y, a)
+    } else missing <- c(missing, nc_file)
 
     #add dimensions
 
