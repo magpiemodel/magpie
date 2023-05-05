@@ -8,13 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **config** new area equipped for irrigation data in preprocessing (v 4.87)
+- **41_area_equipped_for_irrigation** new area equipped for irrigation data (Mehta2022) replacing old Siebert data
 - **config** added scenario `SSP2EU` in scenario_config.csv
 - **config** modified `eat_lancet_diet` in scenario_config.csv
 - **config** update of additional data to rev4.43
 - **56_ghg_policy** added emission policies without GHG emissions from peatlands
 - **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
 - **config** update of regional and cellular inputs to 4.85 in default.cfg and scenario_config.csv
-- **09_drivers** Harmonization of sets for population, gdp, pal and demography 
+- **09_drivers** Harmonization of sets for population, gdp, pal and demography
 
 ### added
 - **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
