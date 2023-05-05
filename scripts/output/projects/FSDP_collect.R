@@ -371,8 +371,13 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,nc_file)
 
     ## Gridded temperature data from ISIMIP archive for relevant SSP/RCP
-    rcp     <- if (thisScen == "BAU") "ssp245" else "ssp119"
-    nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23/FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23.mz"
+    rcp <- switch(thisScen,
+         "BAU"      = "ssp460",
+         "FSDP"     = "ssp119",
+         "SSP2fsdp" = "ssp245",
+         "Invalid case")
+
+    nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v3_04-05-23/FSEC_GlobalSurfaceTempPerRCP_v3_04-05-23.mz"
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, rcp]
       getNames(a) <- "Global Surface Temperature (C)"
