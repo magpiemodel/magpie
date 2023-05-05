@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
--
+- **config** updated scenario_fsec.csv to reflect new GST validation
+- **scripts** updated global surface temperature maps to new RCPs per scenario
+- **scripts** included new output indicator for water
 
 ### added
 -
