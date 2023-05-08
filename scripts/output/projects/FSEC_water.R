@@ -42,6 +42,13 @@ gdx     <- file.path(outputdir, "fulldata.gdx")
 efvViolation <- waterEFViolation(gdx, level = "grid", dir = outputdir)
 write.magpie(efvViolation, file_name = file.path(outputdir, "efvVolume.mz"))
 
+# Total land
+gridLand  <- reportGridLand(gdx, dir = outputdir)
+totalLand <- dimSums(gridLand, dim = 3)
+# Environmental flow violations per hectare of total area (in m3/ha)
+efvViolation_ha <- (efvViolation * 1000) / totalLand
+write.magpie(efvViolation_ha, file_name = file.path(outputdir, "efvVolume_ha.mz"))
+
 # Binary indicator of EFV
 efvViolation[efvViolation > 0] <- 1
 

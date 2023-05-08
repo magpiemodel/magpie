@@ -454,7 +454,16 @@ for (i in 1:length(outputdir)) {
     nc_file <- file.path(outputdir[i], "efvVolume.mz")
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
-      getNames(a) <- "water environmental flow violations volume"
+      getNames(a) <- "water environmental flow violations volume (km3)"
+      getSets(a, fulldim = FALSE)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y, a)
+    } else missing <- c(missing, nc_file)
+
+    nc_file <- file.path(outputdir[i], "efvVolume_ha.mz")
+    if (file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[, years, ]
+      getNames(a) <- "water environmental flow violations volume (m3/ha)"
       getSets(a, fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y, a)
