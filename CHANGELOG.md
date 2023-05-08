@@ -2,17 +2,24 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ## [Unreleased]
 
 ### changed
--
+- **config** added scenario `SSP2EU` in scenario_config.csv
+- **config** modified `eat_lancet_diet` in scenario_config.csv
+- **config** update of additional data to rev4.43
+- **56_ghg_policy** added emission policies without GHG emissions from peatlands
+- **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
+- **scripts** write landuse data on cluster resolution to a GeoPackage file instead of shapefile
+- **config** update of regional and cellular inputs to 4.85 in default.cfg and scenario_config.csv
+- **09_drivers** Harmonization of sets for population, gdp, pal and demography 
 
 ### added
--
+- **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
+
 
 ### removed
 -
@@ -35,7 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### added
 - **56_ghg_policy** added switch `s56_minimum_cprice`
 - **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
-- **scripts** added output script which writes landuse data on cluster resolution to a GeoPackage file
+- **scripts** added output script which writes landuse data on cluster resolution to a shapefile
+- **scripts** added output script for forest area change at cluster level
 
 ### removed
 - **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`

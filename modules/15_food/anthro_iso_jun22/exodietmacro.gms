@@ -225,7 +225,8 @@ if (s15_run_diet_postprocessing = 1,
 *' to 1.
 
 
-  if(s15_exo_diet = 1,
+   if((s15_exo_diet = 1 or s15_exo_diet = 2),
+
 
 *' 1.) In a first step, the exogenous scenario diets are defined by selecting a
 *' scenario target for total daily per capita food intake

@@ -33,9 +33,7 @@ insertheader <- function(maindir=".",
     return(gsub(".*(\\..*)","\\1",basename(file)))
   }
 
-  cwd <- getwd()
-  withr::defer(setwd(cwd))
-  setwd(maindir)
+  withr::local_dir(maindir)
 
   if(is.null(oldkey)) oldkey <- key
 

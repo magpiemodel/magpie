@@ -198,10 +198,16 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
 
     message("Generating lockfile... ", appendLF = FALSE)
     utils::capture.output({
-      utils::capture.output({
-        renv::snapshot(lockfile = freshLockfile, prompt = FALSE)
+      errorMessage <- utils::capture.output({
+        snapshotSuccess <- tryCatch({
+          renv::snapshot(lockfile = freshLockfile, prompt = FALSE)
+          TRUE
+        }, error = function(error) FALSE)
       }, type = "message")
     })
+    if (!snapshotSuccess) {
+      stop(paste(errorMessage, collapse = "\n"))
+    }
     message("done.")
 
     datetime <- format(Sys.time(), "%Y-%m-%dT%H%M%S")
