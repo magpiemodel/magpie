@@ -227,11 +227,11 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   Sys.setlocale(locale="C")
   maindir <- getwd()
-  on.exit(setwd(maindir))
+  withr::defer(setwd(maindir))
 
   if(lock_model) {
     lock_id <- gms::model_lock(timeout1=1)
-    on.exit(gms::model_unlock(lock_id), add=TRUE)
+    withr::defer(gms::model_unlock(lock_id))
   }
 
   # Apply scenario settings ans check configuration file for consistency
@@ -481,7 +481,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   gms::singleGAMSfile(mainfile=cfg$model, output=file.path(cfg$results_folder, "full.gms"))
   if(lock_model) {
     gms::model_unlock(lock_id)
-    on.exit(setwd(maindir))
+    withr::defer(setwd(maindir))
   }
 
   setwd(cfg$results_folder)

@@ -31,14 +31,7 @@ if(!exists("source_include")) {
 ###############################################################################
 
 # For case of sub-folder structure write to the respective folder
-subfolder <- unlist(lapply(strsplit(x = outputdir, split = "/"), FUN = "[", 3))
 title     <- basename(outputdir)
-
-if (all(subfolder == title)) {
-  subfolder <- ""
-} else {
-  subfolder <- subfolder[1]
-}
 
 # Select runs to be displayed
 x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[2]))
@@ -89,21 +82,43 @@ if (dir.exists(hi_datasets_path)) {
     message("The directory storing health impacts datasets wasn't found. Skipping health impacts.")
 }
 
-##########
-# Append nutrient surplus reports
-.appendNutrientSurplus <- function(.x) {
-    cfg <- gms::loadConfig(file.path(.x, "config.yml"))
-    title <- cfg$title
+magicc7_datasets_path <- "/p/projects/magpie/data/FSEC_magicc7Datasets_raw"
+if (dir.exists(magicc7_datasets_path)) {
 
-    tryCatch(
-        expr = {
-            appendReportNutrientSurplus(scenario = title, dir = .x)
-        }, error = function(e) {
-            message("Unable to append the nutrient surplus dataset!\n", e)
-        }
-    )
+    magicc7_datasets <- list.files(magicc7_datasets_path)
+    magicc7_versionToUse  <- grep(rev, magicc7_datasets, value = TRUE)
+
+    if (length(magicc7_versionToUse) == 0) {
+
+        message("No corresponding version ID was found within the MAGICC7 datasets. Using the latest available.")
+
+        highestVersionNr <- max(as.numeric(str_extract(magicc7_datasets, "(?<=v)(.*?)(?=_)")))
+        magicc7_versionToUse <- grep(paste0("v", highestVersionNr), magicc7_datasets, value = TRUE)
+
+    } else if (length(magicc7_versionToUse) >= 2) {
+        stop("Duplicated version IDs were found in the MAGICC7 datasets, only one is expected.")
+    }
+
+    magicc7_versionToUse_path <- file.path(magicc7_datasets_path, magicc7_versionToUse)
+
+  .appendMAGICC7 <- function(.x) {
+      cfg <- gms::loadConfig(file.path(.x, "config.yml"))
+      title <- cfg$title
+
+      tryCatch(
+          expr = {
+              appendReportMAGICC7(resultsPath = magicc7_versionToUse_path, scenario = title, dir = .x)
+          }, error = function(e) {
+              message("Unable to append MAGICC7 dataset for scenario: ", title)
+          }
+      )
+  }
+  lapply(X = outputdir, FUN = .appendMAGICC7)
+
+} else {
+    message("The directory storing MAGICC7 datasets wasn't found. Skipping AR6 global warming calculations.")
 }
-lapply(X = outputdir, FUN = .appendNutrientSurplus)
+
 
 ##########
 # Generate output files
@@ -123,12 +138,19 @@ var_reg <- c(indicators_main,
              "Biodiversity|Agricultural landscape intactness",
              "Biodiversity|Biodiversity hotspot intactness",
              "Biodiversity|Biodiversity hotspot intactness (unitless)",
+             "Biodiversity|BII in areas outside Biodiversity Hotspots, Intact Forest & Cropland Landscapes",
+             "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
+             "Biodiversity|Biodiversity Hotspot BII",
+             "Biodiversity|Cropland Landscapes BII",
+             "Key Biodiversity Area BII",
+             "Biodiversity|Inverted Simpson crop area diversity index",
              "Population",
              "Income",
              "Nutrition|Calorie Supply|+|Crops",
              "Nutrition|Calorie Supply|+|Livestock products",
              "Demand|++|Crops",
              "Demand|++|Livestock products",
+             "Resources|Land Cover",
              "Resources|Land Cover|+|Cropland",
              "Resources|Land Cover|+|Pastures and Rangelands",
              "Resources|Land Cover|+|Forest",
@@ -139,6 +161,7 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|+|Urban Area",
              "Productivity|Landuse Intensity Indicator Tau",
              "Resources|Nitrogen|Cropland Budget|Inputs|+|Fertilizer",
+             "Resources|Nitrogen|Nutrient surplus from land and manure management",
              "Resources|Water|Withdrawal|Agriculture",
              ### Maps
              "Costs",
@@ -147,6 +170,12 @@ var_reg <- c(indicators_main,
              "Labor|Wages|Hourly labor costs",
              ### Suppl plots
              "Population",
+             "Prices|Index2020|Agriculture|Food products",
+             "Prices|Index2020|Agriculture|Food products|Livestock",
+             "Prices|Index2020|Agriculture|Food products|Plant-based",
+             "SDG|SDG02|Investment in AgR&D",
+             "Costs|TC",
+             "Agricultural Research Intensity",
              "Nutrition|Calorie Intake",
              "Nutrition|Calorie Intake|+|Crops",
              "Nutrition|Calorie Intake|+|Fish",
@@ -253,8 +282,10 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|Cropland|Crops|Other crops|+|Tropical roots",
              "Resources|Land Cover|Cropland|+|Bioenergy crops",
              "Resources|Land Cover|Cropland|+|Fallow Cropland",
-             "Resources|Nitrogen|Cropland Budget|Balance|+|Nutrient Surplus",
-             "Resources|Nitrogen|Pasture Budget|Balance|+|Nutrient Surplus",
+             "Resources|Nitrogen|Pollution|Surplus|+|Cropland",
+             "Resources|Nitrogen|Pollution|Surplus|+|Pasture",
+             "Resources|Nitrogen|Pollution|Surplus|+|Animal Waste Management",
+             "Resources|Nitrogen|Pollution|Surplus|+|Non-agricultural land",
              "Resources|Water|Withdrawal|Agriculture",
              "Nutrition|Anthropometrics|People normalweight",
              "Nutrition|Anthropometrics|People obese",
@@ -271,12 +302,24 @@ var_reg <- c(indicators_main,
              "Income|Fraction of Population below half of Median Income",
              "Income|Number of People Below 1p90 USDppp11/day",
              "Income|Number of People Below 3p20 USDppp11/day",
-             "Income|Number of People Below 5p50 USDppp11/day"
+             "Income|Number of People Below 5p50 USDppp11/day",
+             "Health|Years of life lost|Disease",
+             "Health|Years of life lost|Disease|+|Congenital Heart Disease",
+             "Health|Years of life lost|Disease|+|Stroke",
+             "Health|Years of life lost|Disease|+|Cancer",
+             "Health|Years of life lost|Disease|+|Type-2 Diabetes",
+             "Health|Years of life lost|Disease|+|Respiratory Disease",
+             "Health|Percent change in Years of life lost|Disease",
+             "Health|Percent change in Years of life lost|Disease|+|Congenital Heart Disease",
+             "Health|Percent change in Years of life lost|Disease|+|Stroke",
+             "Health|Percent change in Years of life lost|Disease|+|Cancer",
+             "Health|Percent change in Years of life lost|Disease|+|Type-2 Diabetes",
+             "Health|Percent change in Years of life lost|Disease|+|Respiratory Disease"
              )
 var_reg <- unique(var_reg)
 
 var_iso <- c("Population",
-             "Health|Years of life lost|Risk|Diet and anthropometrics",
+             "Health|Years of life lost|Disease",
              "Labor|Employment|Agricultural employment",
              "Nutrition|Anthropometrics|People underweight",
              "Nutrition|Anthropometrics|People obese",
@@ -301,7 +344,7 @@ for (i in 1:length(outputdir)) {
   ### ISO and Grid level outputs
   ## only for BAU and SDP in 2020 and 2050 to save time and storage
   years <- c(2020, 2050)
-  scen <- c("BAU", "FSDP")
+  scen <- c("BAU", "FSDP", "SSP2fsdp")
   thisScen <- unlist(strsplit(cfg$title, "_"))[3]
   if (thisScen %in% scen) {
 
@@ -318,7 +361,7 @@ for (i in 1:length(outputdir)) {
     y     <- NULL
 
     ## BII
-    nc_file <- file.path(outputdir[i], paste(cfg$title, "cell.bii_0.5.mz", sep = "_"))#Note the "_" instead of "-"
+    nc_file <- file.path(outputdir[i], "cell.bii_0.5.mz") #Note the "_" instead of "-"
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "BII (index)"
@@ -328,8 +371,13 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,nc_file)
 
     ## Gridded temperature data from ISIMIP archive for relevant SSP/RCP
-    rcp     <- if (thisScen == "BAU") "ssp245" else "ssp119"
-    nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23/FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23.mz"
+    rcp <- switch(thisScen,
+         "BAU"      = "ssp460",
+         "FSDP"     = "ssp119",
+         "SSP2fsdp" = "ssp245",
+         "Invalid case")
+
+    nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v3_04-05-23/FSEC_GlobalSurfaceTempPerRCP_v3_04-05-23.mz"
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, rcp]
       getNames(a) <- "Global Surface Temperature (C)"
@@ -391,17 +439,35 @@ for (i in 1:length(outputdir)) {
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
-    } else missing <- c(missing,nc_file)
+    } else missing <- c(missing, nc_file)
 
     ## Water
     nc_file <- file.path(outputdir[i], "watStressViolations.mz")
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water stress and violations"
-      getSets(a,  fulldim = FALSE)[3] <- "variable"
+      getSets(a, fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y, a)
-    } else missing <- c(missing,nc_file)
+    } else missing <- c(missing, nc_file)
+
+    nc_file <- file.path(outputdir[i], "efvVolume.mz")
+    if (file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[, years, ]
+      getNames(a) <- "water environmental flow violations volume (km3)"
+      getSets(a, fulldim = FALSE)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y, a)
+    } else missing <- c(missing, nc_file)
+
+    nc_file <- file.path(outputdir[i], "efvVolume_ha.mz")
+    if (file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[, years, ]
+      getNames(a) <- "water environmental flow violations volume (m3/ha)"
+      getSets(a, fulldim = FALSE)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y, a)
+    } else missing <- c(missing, nc_file)
 
     #add dimensions
 
@@ -438,26 +504,26 @@ grid <- renameScenario(grid)
 
 message("Saving rds files ...")
 
-saveRDS(reg,  file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
-saveRDS(iso,  file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
-saveRDS(grid, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
+saveRDS(reg,  file = file.path("output", paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
+saveRDS(iso,  file = file.path("output", paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
+saveRDS(grid, file = file.path("output", paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
 
 # save i_to_iso mapping
 gdx     <- file.path(outputdir[1], "fulldata.gdx")
 reg2iso <- readGDX(gdx, "i_to_iso")
 names(reg2iso) <- c("region", "iso_a3")
-write.csv(reg2iso, file.path(unique("output", subfolder), "reg2iso.csv"))
-saveRDS(reg2iso, file = file.path(unique("output", subfolder), "reg2iso.rds"), version = 2, compress = "xz")
+write.csv(reg2iso, file.path("output", "reg2iso.csv"))
+saveRDS(reg2iso, file = file.path("output", "reg2iso.rds"), version = 2, compress = "xz")
 
 # save validation file
-val <- file.path(unique(outputdir[1], subfolder), "validation.mif")
+val <- file.path(outputdir[1], "validation.mif")
 val <- as.data.table(read.quitte(val))
-saveRDS(val, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
+saveRDS(val, file = file.path("output", paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
 #Add new plots here:
 #https://github.com/pik-piam/m4fsdp/blob/master/R/plotFSDP.R
-plotFSDP(outputfolder = file.path("output", unique(subfolder)),
+plotFSDP(outputfolder = "output",
          reg = reg,
          iso = iso,
          grid = grid,
