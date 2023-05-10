@@ -5,26 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
-## [Unreleased]
+## [4.6.7] - 2023-05-10
 
 ### changed
+- **09_drivers** Harmonization of sets for population, gdp, pal and demography
+- **56_ghg_policy** added emission policies without GHG emissions from peatlands
 - **config** added scenario `SSP2EU` in scenario_config.csv
 - **config** modified `eat_lancet_diet` in scenario_config.csv
 - **config** update of additional data to rev4.43
-- **56_ghg_policy** added emission policies without GHG emissions from peatlands
-- **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
 - **config** update of regional and cellular inputs to 4.85 in default.cfg and scenario_config.csv
-- **09_drivers** Harmonization of sets for population, gdp, pal and demography 
+- **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
 
 ### added
 - **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
-
-
-### removed
--
-
-### fixed
--
 
 
 ## [4.6.6] - 2023-05-10
@@ -708,7 +701,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.6...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.7...develop
+[4.6.7]: https://github.com/magpiemodel/magpie/compare/v4.6.6...v4.6.7
 [4.6.6]: https://github.com/magpiemodel/magpie/compare/v4.6.5...v4.6.6
 [4.6.5]: https://github.com/magpiemodel/magpie/compare/v4.6.4...v4.6.5
 [4.6.4]: https://github.com/magpiemodel/magpie/compare/v4.6.3...v4.6.4
