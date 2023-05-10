@@ -27,6 +27,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 
+## [4.6.6] - 2023-05-10
+
+### changed
+- **config** updated scenario_fsec.csv to reflect new GST validation
+- **scripts** included new output indicator for water
+- **scripts** updated global surface temperature maps to new RCPs per scenario
+
+
 ## [4.6.5] - 2023-03-29
 
 ### changed
@@ -700,7 +708,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.5...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.6...develop
+[4.6.6]: https://github.com/magpiemodel/magpie/compare/v4.6.5...v4.6.6
 [4.6.5]: https://github.com/magpiemodel/magpie/compare/v4.6.4...v4.6.5
 [4.6.4]: https://github.com/magpiemodel/magpie/compare/v4.6.3...v4.6.4
 [4.6.3]: https://github.com/magpiemodel/magpie/compare/v4.6.2...v4.6.3
