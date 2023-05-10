@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [4.6.6] - 2023-05-05
+## [4.6.6] - 2023-05-10
 
 ### changed
 - **config** updated scenario_fsec.csv to reflect new GST validation
