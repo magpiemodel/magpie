@@ -199,7 +199,7 @@ fsecScenario <- function(scenario) {
                        targetdir = "./input",
                        repositories = cfg$repositories)
   # Download gridded RCP temperature data
-  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23.tgz",
+  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v3_04-05-23.tgz",
                        targetdir = "./input",
                        repositories = cfg$repositories)
 
