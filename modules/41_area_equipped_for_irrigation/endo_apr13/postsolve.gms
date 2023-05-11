@@ -5,10 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
-
 pc41_AEI_start(j)=vm_AEI.l(j) ;
-
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_AEI(t,i,"marginal")     = vm_cost_AEI.m(i);

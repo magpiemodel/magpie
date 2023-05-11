@@ -8,17 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
 
 ### added
--
+- **config** new area equipped for irrigation (AEI) data in preprocessing (4.87)
 
 ### removed
 -
 
 ### fixed
--
-
+- 
 
 ## [4.6.7] - 2023-05-10
 
