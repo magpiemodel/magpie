@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **scripts** start_functions.R can now handle clusters per region flexibly
 - **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
 
 ### added
@@ -17,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
-- 
+-
 
 ## [4.6.7] - 2023-05-10
 
