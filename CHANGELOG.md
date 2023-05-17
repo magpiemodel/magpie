@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
 
 ### added
+- **scenario_config.csv** added a scenario for the NGFS project
 - **config** new area equipped for irrigation (AEI) data in preprocessing (4.87)
 
 ### removed
