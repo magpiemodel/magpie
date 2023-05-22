@@ -27,10 +27,6 @@ else
     f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
   i60_1stgen_bioenergy_subsidy_tdm(t) =
     c60_bioenergy_subsidy;
-  i60_1stgen_bioenergy_subsidy_gj(t) = 
-    s60_bioenergy_gj_price_1st;
-  i60_2ndgen_bioenergy_subsidy(t) =
-    s60_bioenergy_price_2nd;
 );
 
 
@@ -40,6 +36,13 @@ $ifthen "%c60_price_implementation%" == "exp"
       (s60_bioenergy_gj_price_1st / 8) * (8 ** (1 / (2100 - sm_fix_SSP2))) ** (m_year(t) - sm_fix_SSP2);
     i60_2ndgen_bioenergy_subsidy(t) =
       (s60_bioenergy_price_2nd / 8) * (8 ** (1 / (2100 - sm_fix_SSP2))) ** (m_year(t) - sm_fix_SSP2);
+  );
+$else
+  if(m_year(t) > sm_fix_SSP2,
+    i60_1stgen_bioenergy_subsidy_gj(t) = 
+      s60_bioenergy_gj_price_1st;
+    i60_2ndgen_bioenergy_subsidy(t) =
+      s60_bioenergy_price_2nd;
   );
 $endif
 
