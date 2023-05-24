@@ -8,4 +8,7 @@
 sets
   t_ini41  Time periods with area equipped for irrigation initialization data
        / y1995, y2000, y2005, y2010, y2015 /
+
+  aei41    Data source for area equipped for irrigation
+       / LUH2v2, Mehta2022 /
 ;
