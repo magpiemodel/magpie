@@ -11,27 +11,15 @@ scalars
 s41_AEI_depreciation Depreciation rate in capital value of irrigation infrastructure (USD05PPP per USD05PPP) / 0 /
 ;
 
-
 table f41_c_irrig(t_all,i) Irrigation investment costs (USD04MER per ha)
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/endo_apr13/input/f41_c_irrig.csv"
 $offdelim
 ;
 
-parameters
-f41_irrig(j) Available area equipped for irrigation according to Siebert [AVL] (mio. ha)
-/
+table
+f41_irrig(t_ini41,j,aei41) Available area equipped for irrigation [AVL] (mio. ha)
 $ondelim
-$include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs2"
+$include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs3"
 $offdelim
-/
-;
-
-parameters
-f41_irrig_luh(t_ini41,j) Available area equipped for irrigation according to LUH [AVL] (mio. ha)
-/
-$ondelim
-$include "./modules/41_area_equipped_for_irrigation/input/avl_irrig_luh_t.cs2"
-$offdelim
-/
 ;

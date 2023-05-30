@@ -8,24 +8,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **config** added scenario `SSP2EU` in scenario_config.csv
-- **config** modified `eat_lancet_diet` in scenario_config.csv
-- **config** update of additional data to rev4.43
-- **56_ghg_policy** added emission policies without GHG emissions from peatlands
-- **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
-- **scripts** write landuse data on cluster resolution to a GeoPackage file instead of shapefile
-- **config** update of regional and cellular inputs to 4.85 in default.cfg and scenario_config.csv
-- **09_drivers** Harmonization of sets for population, gdp, pal and demography 
+- **scripts** start_functions.R can now handle clusters per region flexibly
+- **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
 
 ### added
-- **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
-
+- **scenario_config.csv** added a scenario for the NGFS project
+- **config** new area equipped for irrigation (AEI) data in preprocessing (4.87)
 
 ### removed
 -
 
 ### fixed
--
+- **config** updated scenario configs to newest preprocessing (4.87)
+
+## [4.6.7] - 2023-05-10
+
+### changed
+- **09_drivers** Harmonization of sets for population, gdp, pal and demography
+- **56_ghg_policy** added emission policies without GHG emissions from peatlands
+- **config** added scenario `SSP2EU` in scenario_config.csv
+- **config** modified `eat_lancet_diet` in scenario_config.csv
+- **config** update of additional data to rev4.43
+- **config** update of regional and cellular inputs to 4.85 in default.cfg and scenario_config.csv
+- **scripts** added output script for forest area change at cluster level
+- **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
+
+### added
+- **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
+
+
+## [4.6.6] - 2023-05-10
+
+### changed
+- **config** updated scenario_fsec.csv to reflect new GST validation
+- **scripts** included new output indicator for water
+- **scripts** updated global surface temperature maps to new RCPs per scenario
 
 
 ## [4.6.5] - 2023-03-29
@@ -43,7 +60,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **56_ghg_policy** added switch `s56_minimum_cprice`
 - **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
 - **scripts** added output script which writes landuse data on cluster resolution to a shapefile
-- **scripts** added output script for forest area change at cluster level
 
 ### removed
 - **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
@@ -701,7 +717,9 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.5...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.7...develop
+[4.6.7]: https://github.com/magpiemodel/magpie/compare/v4.6.6...v4.6.7
+[4.6.6]: https://github.com/magpiemodel/magpie/compare/v4.6.5...v4.6.6
 [4.6.5]: https://github.com/magpiemodel/magpie/compare/v4.6.4...v4.6.5
 [4.6.4]: https://github.com/magpiemodel/magpie/compare/v4.6.3...v4.6.4
 [4.6.3]: https://github.com/magpiemodel/magpie/compare/v4.6.2...v4.6.3
