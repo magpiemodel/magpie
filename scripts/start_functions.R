@@ -273,7 +273,12 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     message("No active renv project found, not using renv.")
   } else {
     # this script always runs in repo root, so we can check whether the main renv is loaded with:
-    if (normalizePath(renv::project()) == normalizePath(".")) {
+    if (!is.null(cfg$coupling_renv_lock)) {
+      # coupling renv.lock is set, we are presumably running remind magpie coupling
+      message("Copying lockfile '", normalizePath(cfg$coupling_renv_lock, mustWork = TRUE),
+              "' into '", cfg$results_folder, "'")
+      file.copy(cfg$coupling_renv_lock, file.path(cfg$results_folder, "_renv.lock"))
+    } else if (normalizePath(renv::project()) == normalizePath(".")) {
       message("Generating lockfile in '", cfg$results_folder, "'... ", appendLF = FALSE)
       # suppress output of renv::snapshot
       utils::capture.output({
@@ -512,7 +517,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   if(is.na(cfg$sequential)) cfg$sequential <- !slurm
 
-  if(slurm & !cfg$sequential) {
+  if(slurm && !cfg$sequential) {
     if(is.null(cfg$qos)) {
       # try to select best QOS based on available resources
       # and available information
