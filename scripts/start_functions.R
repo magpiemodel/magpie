@@ -272,8 +272,12 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   if (is.null(renv::project())) {
     message("No active renv project found, not using renv.")
   } else {
-    # this script always runs in repo root, so we can check whether the main renv is loaded with:
-    if (normalizePath(renv::project()) == normalizePath(".")) {
+    if (!is.null(cfg$renv_lock)) {
+      message("Copying cfg$renv_lock (= '", normalizePath(cfg$renv_lock, mustWork = TRUE), "') into '",
+              cfg$results_folder, "'")
+      file.copy(cfg$renv_lock, file.path(cfg$results_folder, "_renv.lock"))
+    } else if (normalizePath(renv::project()) == normalizePath(".")) {
+      # the main renv is loaded
       message("Generating lockfile in '", cfg$results_folder, "'... ", appendLF = FALSE)
       # suppress output of renv::snapshot
       utils::capture.output({
@@ -290,7 +294,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
       }
       message("done.")
     } else {
-      # a run renv is loaded, we are presumably starting a HR follow up run
+      # a run renv is loaded
       message("Copying lockfile into '", cfg$results_folder, "'")
       file.copy(renv::paths$lockfile(), file.path(cfg$results_folder, "_renv.lock"))
     }
@@ -512,7 +516,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   if(is.na(cfg$sequential)) cfg$sequential <- !slurm
 
-  if(slurm & !cfg$sequential) {
+  if(slurm && !cfg$sequential) {
     if(is.null(cfg$qos)) {
       # try to select best QOS based on available resources
       # and available information
