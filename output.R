@@ -197,8 +197,8 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     freshLockfile <- withr::local_tempfile()
 
     message("Generating lockfile... ", appendLF = FALSE)
-    utils::capture.output({
-      errorMessage <- utils::capture.output({
+    errorMessage1 <- utils::capture.output({
+      errorMessage2 <- utils::capture.output({
         snapshotSuccess <- tryCatch({
           renv::snapshot(lockfile = freshLockfile, prompt = FALSE)
           TRUE
@@ -206,7 +206,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       }, type = "message")
     })
     if (!snapshotSuccess) {
-      stop(paste(errorMessage, collapse = "\n"))
+      stop(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
     }
     message("done.")
 

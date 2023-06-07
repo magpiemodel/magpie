@@ -280,8 +280,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
       # the main renv is loaded
       message("Generating lockfile in '", cfg$results_folder, "'... ", appendLF = FALSE)
       # suppress output of renv::snapshot
-      utils::capture.output({
-        errorMessage <- utils::capture.output({
+      errorMessage1 <- utils::capture.output({
+        errorMessage2 <- utils::capture.output({
           snapshotSuccess <- tryCatch({
             # snapshot current main renv into run folder
             renv::snapshot(lockfile = file.path(cfg$results_folder, "_renv.lock"), prompt = FALSE)
@@ -290,7 +290,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
         }, type = "message")
       })
       if (!snapshotSuccess) {
-        stop(paste(errorMessage, collapse = "\n"))
+        stop(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
       }
       message("done.")
     } else {
