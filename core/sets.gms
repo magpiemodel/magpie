@@ -59,7 +59,7 @@ sets
       CHA_7*CHA_23,
       EUR_24*EUR_32,
       IND_33*IND_40,
-      JPN_41,
+      JPN_41*JPN_41,
       LAM_42*LAM_85,
       MEA_86*MEA_111,
       NEU_112*NEU_118,
@@ -73,7 +73,7 @@ sets
       CHA . (CHA_7*CHA_23)
       EUR . (EUR_24*EUR_32)
       IND . (IND_33*IND_40)
-      JPN . (JPN_41)
+      JPN . (JPN_41*JPN_41)
       LAM . (LAM_42*LAM_85)
       MEA . (MEA_86*MEA_111)
       NEU . (NEU_112*NEU_118)

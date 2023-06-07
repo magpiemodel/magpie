@@ -15,6 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### added
 - **scenario_config.csv** added a scenario for the NGFS project
 - **config** new area equipped for irrigation (AEI) data in preprocessing (4.87)
+- **31_past** added `nocc` and `nocc_hist` option
+- **32_carbon** added `nocc` and `nocc_hist` option
 
 ### removed
 -
