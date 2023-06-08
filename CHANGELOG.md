@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **config** updated scenario configs to newest preprocessing (4.87)
+- **config** corrected wrong names of parameters for peatland costs
 
 ## [4.6.7] - 2023-05-10
 
