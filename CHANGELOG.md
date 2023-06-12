@@ -15,12 +15,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### added
 - **scenario_config.csv** added a scenario for the NGFS project
 - **config** new area equipped for irrigation (AEI) data in preprocessing (4.87)
+- **31_past** added `cc`, `nocc` and `nocc_hist` options for `c31_past_suit_scen` and `c31_grassl_yld_scenario`
+- **32_carbon** added `nocc` and `nocc_hist` option for `c52_land_carbon_sink_rcp`
 
 ### removed
 -
 
 ### fixed
 - **config** updated scenario configs to newest preprocessing (4.87)
+- **config** corrected wrong names of parameters for peatland costs
 
 ## [4.6.7] - 2023-05-10
 

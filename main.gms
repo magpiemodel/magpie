@@ -148,21 +148,21 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.85_h12_magpie.tgz
+* Used data set: rev4.87_h12_magpie.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.85_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* Used data set: rev4.87_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.85_h12_validation.tgz
+* Used data set: rev4.87_h12_validation.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev4.43.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_glo_23Mar23.tgz
 * md5sum: NA
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.85
+* Regions data revision: 4.87
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.85
+* * Revision: 4.87
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Apr 28 16:30:54 2023
+* Last modification (input data): Wed Jun  7 17:53:26 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
