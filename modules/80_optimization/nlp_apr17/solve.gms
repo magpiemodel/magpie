@@ -91,7 +91,7 @@ if ((p80_modelstat(t) <= 2),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
 );
 
-if ((p80_modelstat(t) > 2 and p80_modelstat(t)),
+if ((p80_modelstat(t) > 2),
   Execute_Unload "fulldata.gdx";
   abort "no feasible solution found!";
 );
