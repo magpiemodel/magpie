@@ -117,7 +117,7 @@ repeat
   display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
-if (smax(h,p80_modelstat(t,h)) > 2),
+if (smax(h,p80_modelstat(t,h)) > 2,
     Execute_Unload "fulldata.gdx";
     abort "No feasible solution found!";
 );
