@@ -73,7 +73,7 @@ if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
   display vm_cost_glo.l;
 
 * write extended run information in list file in the case that the final solution is infeasible
-  if((s80_counter >= (s80_maxiter-1) and magpie.modelstat > 2 and magpie.modelstat),
+  if((s80_counter >= (s80_maxiter-1) and magpie.modelstat > 2),
     magpie.solprint = 1
   );
 
