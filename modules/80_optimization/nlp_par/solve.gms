@@ -69,7 +69,7 @@ repeat
         display s80_counter;
         display magpie.modelStat;
 
-      if((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2 AND p80_modelstat(t,h) ne 7),
+      if((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2 AND p80_modelstat(t,h)),
           display "No feasible solution found. Writing LST file.";
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
@@ -117,7 +117,7 @@ repeat
   display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
-if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
+if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)),
     Execute_Unload "fulldata.gdx";
     abort "No feasible solution found!";
 );
