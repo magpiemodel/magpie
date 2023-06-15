@@ -165,7 +165,7 @@ $batinclude "./modules/include.gms" nl_relax
 
 
 * write extended run information in list file in the case that the final solution is infeasible
-  if ((s80_counter >= s80_maxiter and p80_modelstat(t) > 2 and p80_modelstat(t)),
+  if ((s80_counter >= s80_maxiter and p80_modelstat(t) > 2),
     magpie.solprint = 1
   );
 
