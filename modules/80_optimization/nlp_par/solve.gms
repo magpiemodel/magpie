@@ -69,7 +69,7 @@ repeat
         display s80_counter;
         display magpie.modelStat;
 
-      if((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2 AND p80_modelstat(t,h)),
+      if((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2),
           display "No feasible solution found. Writing LST file.";
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
