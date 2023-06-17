@@ -14,4 +14,5 @@
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%peatland%" == "off" $include "./modules/58_peatland/off/realization.gms"
 $Ifi "%peatland%" == "on" $include "./modules/58_peatland/on/realization.gms"
+$Ifi "%peatland%" == "on_2023" $include "./modules/58_peatland/on_2023/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
