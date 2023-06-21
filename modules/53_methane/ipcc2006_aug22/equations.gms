@@ -69,4 +69,4 @@
 
  q53_emissions_resid_burn(i2) ..
     vm_emissions_reg(i2,"resid_burn","ch4") =e=
-      sum(kcr, vm_res_ag_burn(i2,kcr,"dm")) * s53_ef_ch4_res_ag_burn;
+      sum((kcr,w), vm_res_ag_burn(i2,kcr,w,"dm")) * s53_ef_ch4_res_ag_burn;

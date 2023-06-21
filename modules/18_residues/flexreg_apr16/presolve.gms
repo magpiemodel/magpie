@@ -5,6 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v18_res_ag_removal.fx(i,nonused18,attributes)=0;
+v18_res_ag_removal.fx(i,nonused18,w,attributes)=0;
 
 *** EOF solve.gms ***

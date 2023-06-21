@@ -19,7 +19,7 @@ $include "./modules/18_residues/input/f18_attributes_residue_ag.csv"
 $offdelim;
 
 
-table f18_attributes_residue_bg(dm_nr,kve) Nutrient content of belowground crop residues in reactive nitorgen and carbon units Nr C (X per DM)
+table f18_attributes_residue_bg(dm_cnr,kve) Nutrient content of belowground crop residues in reactive nitorgen and carbon units Nr C (X per DM)
 $ondelim
 $include "./modules/18_residues/input/f18_attributes_residue_bg.csv"
 $offdelim;

@@ -2,4 +2,5 @@ name,type,reason
 im_development_state,input,questionnaire
 fm_attributes,input,questionnaire
 vm_prod_reg,input,questionnaire
+vm_prod_kcr_w,input,questionnaire
 vm_area,input,questionnaire

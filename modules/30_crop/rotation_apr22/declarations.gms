@@ -21,6 +21,7 @@ positive variables
 * Fallow land is cropland which is temporarily fallow. Croparea+fallow=cropland
  vm_fallow(j)                           Fallow land (mio. ha)
  vm_area(j,kcr,w)                       Agricultural production area (mio. ha)
+ vm_prod_kcr_w(j,kcr,w)                 Agricultural production per crop group and irrigation type (mio. tDM per yr)
  vm_rotation_penalty(i)                 Penalty for violating rotational constraints (USD05MER)
 ;
 
@@ -30,7 +31,8 @@ equations
  q30_rotation_max(j,rotamax30)          Local maximum rotational constraints (mio. ha)
  q30_rotation_min(j,rotamin30)          Local minimum rotational constraints (mio. ha)
  q30_rotation_max_irrig(j,rotamax30)    Local maximum rotational constraints (mio. ha)
- q30_prod(j,kcr)                        Production of cropped products (mio. tDM)
+ q30_prod_kcr_w(j,kcr,w)                Irrigation type specific production of cropped products (mio. tDM per yr)
+ q30_prod(j,kcr)                        Production of cropped products (mio. tDM per yr)
  q30_carbon(j,ag_pools,stockType)       Cropland above ground carbon content calculation (mio. tC)
  q30_bv_ann(j,potnatveg)                Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)                Biodiversity value of perennial cropland (mio. ha)
@@ -41,13 +43,15 @@ equations
 parameters
  ov_fallow(t,j,type)                         Fallow land (mio. ha)
  ov_area(t,j,kcr,w,type)                     Agricultural production area (mio. ha)
+ ov_prod_kcr_w(t,j,kcr,w,type)               Agricultural production per crop group and irrigation type (mio. tDM per yr)
  ov_rotation_penalty(t,i,type)               Penalty for violating rotational constraints (USD05MER)
  oq30_cropland(t,j,type)                     Total cropland calculation (mio. ha)
  oq30_avl_cropland(t,j,type)                 Available cropland constraint (mio. ha)
  oq30_rotation_max(t,j,rotamax30,type)       Local maximum rotational constraints (mio. ha)
  oq30_rotation_min(t,j,rotamin30,type)       Local minimum rotational constraints (mio. ha)
  oq30_rotation_max_irrig(t,j,rotamax30,type) Local maximum rotational constraints (mio. ha)
- oq30_prod(t,j,kcr,type)                     Production of cropped products (mio. tDM)
+ oq30_prod_kcr_w(t,j,kcr,w,type)             Irrigation type specific production of cropped products (mio. tDM per yr)
+ oq30_prod(t,j,kcr,type)                     Production of cropped products (mio. tDM per yr)
  oq30_carbon(t,j,ag_pools,stockType,type)    Cropland above ground carbon content calculation (mio. tC)
  oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (mio. ha)
  oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (mio. ha)

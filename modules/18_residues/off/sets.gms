@@ -7,8 +7,8 @@
 
 
 sets
-dm_nr(attributes) dry matter and nr
-/dm, nr/
+dm_cnr(attributes) dry matter and nr
+/dm, nr, c/
 ;
 
 *** EOF sets.gms ***

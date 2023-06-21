@@ -54,13 +54,17 @@
    sum((rotamax_kcr30(rotamax_red30,kcr)), vm_area(j2,kcr,"irrigated")) =l=
       vm_AEI(j2) * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
 
-
 *' Agricultural production is calculated by multiplying the area under
-*' production with corresponding yields. Production from rainfed and irrigated
-*' areas is summed up:
+*' production with corresponding yields.
+
+ q30_prod_kcr_w(j2,kcr,w) ..
+   vm_prod_kcr_w(j2,kcr,w) =e= vm_area(j2,kcr,w) * vm_yld(j2,kcr,w);
+
+*' For total production rainfed and irrigated production is summed up:
+*** Maybe test here  other types of contrains (lower)
 
  q30_prod(j2,kcr) ..
-  vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
+  vm_prod(j2,kcr) =e= sum(w, vm_prod_kcr_w(j2,kcr,w));
 
 *' The carbon content of the above ground carbon pools are calculated as a total
 *' for all cropland :

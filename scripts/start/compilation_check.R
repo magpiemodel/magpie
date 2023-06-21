@@ -14,5 +14,11 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 download_and_update(cfg)
 
+# update all parameters which contain the levels and marginals
+# of all variables and equations
+gms::update_fulldataOutput()
+# Update module paths in GAMS code
+gms::update_modules_embedding()
+
 # compile main.gms
 system("gams main.gms action=c")

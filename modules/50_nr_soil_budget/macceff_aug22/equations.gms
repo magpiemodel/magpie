@@ -21,7 +21,7 @@
 
 q50_nr_inputs(i2) ..
                 v50_nr_inputs(i2) =e=
-                vm_res_recycling(i2,"nr")
+                sum((kcr,w), vm_res_recycling(i2,kcr,w,"nr"))
                   + sum((cell(i2,j2),kcr,w), vm_area(j2,kcr,w) * f50_nr_fix_area(kcr))
                   + sum(cell(i2,j2),vm_fallow(j2) * f50_nr_fix_area("tece"))
                   + vm_manure_recycling(i2,"nr")
@@ -37,8 +37,8 @@ q50_nr_inputs(i2) ..
                  v50_nr_withdrawals(i2,kcr) =e=
                  (1-sum(ct,f50_nr_fix_ndfa(ct,i2,kcr))) *
                  (vm_prod_reg(i2,kcr) * fm_attributes("nr",kcr)
-                    + vm_res_biomass_ag(i2,kcr,"nr")
-                    + vm_res_biomass_bg(i2,kcr,"nr"))
+                    + sum(w, vm_res_biomass_ag(i2,kcr,w,"nr")
+                           + vm_res_biomass_bg(i2,kcr,w,"nr")))
                  - vm_dem_seed(i2,kcr)  * fm_attributes("nr",kcr)
                  ;
 
