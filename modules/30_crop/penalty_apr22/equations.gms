@@ -14,7 +14,6 @@
  q30_cropland(j2)  ..
    sum((kcr,w), vm_area(j2,kcr,w)) + vm_fallow(j2) =e= vm_land(j2,"crop");
 
-
 *' We assume that crop production can only take place on suitable cropland area.
 *' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
 *' from cropland production that have a low suitability, e.g. due to steep slopes,
