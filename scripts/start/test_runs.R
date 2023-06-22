@@ -28,7 +28,6 @@ cfg$info$flag <- "weeklyTests"
 
 cfg$output <- c("rds_report") # Only run rds_report after model run
 cfg$results_folder <- "output/:title:"
-cfg$results_folder_highres <- "output"
 cfg$force_replace <- TRUE
 
 # support function to create standardized title
@@ -78,9 +77,11 @@ codeCheck <- FALSE
 
 ### Business-as-usual
 cfg <- fsecScenario(scenario = "c_BAU")
+cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### FSDP Scenario
 cfg <- fsecScenario(scenario = "e_FSDP")
+cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
