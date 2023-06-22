@@ -28,6 +28,7 @@ cfg$info$flag <- "weeklyTests"
 
 cfg$output <- c("rds_report") # Only run rds_report after model run
 cfg$results_folder <- "output/:title:"
+cfg$results_folder_highres <- "output"
 cfg$force_replace <- TRUE
 
 # support function to create standardized title
