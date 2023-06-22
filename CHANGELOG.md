@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **30_crop** in the module realization rotation_apr22 there was a bug, fallow land was on the wrong side of the equation q30_cropland
 - **scripts** start_functions.R can now handle clusters per region flexibly
 - **scripts** the REMIND-MAgPIE coupling now uses renv
 - **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
@@ -23,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
+- **30_crop** corrected q30_cropland in module realization rotation_apr22, where fallow land was on the wrong side of the equation
 - **config** updated scenario configs to newest preprocessing (4.87)
 - **config** corrected wrong names of parameters for peatland costs
 
