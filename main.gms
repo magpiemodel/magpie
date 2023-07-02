@@ -194,8 +194,10 @@ $title magpie
 *     6   17    9    8    1   44   26    7   10   13   38   21
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning message:
+* could not retrieve available packages for url 'https://rse.pik-potsdam.de/r/packages/bin/macosx/contrib/4.2'
 * 
-* Last modification (input data): Wed Jun  7 17:53:26 2023
+* Last modification (input data): Sun Jul  2 21:46:49 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -219,9 +221,9 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  calib
+$setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  BilatPRFade_ON_Nofadeout
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -249,7 +251,7 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
 
-$setglobal crop  penalty_apr22
+$setglobal crop  endo_apr21
 $setglobal past  endo_jun13
 
 $setglobal forestry  dynamic_feb21
@@ -259,7 +261,7 @@ $setglobal natveg  dynamic_feb21
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  sticky_feb18
+$setglobal factor_costs  per_ton_fao_may22
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12
