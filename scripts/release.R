@@ -31,7 +31,7 @@ release <- function(newVersion) {
   message("creating documentation using goxygen...")
   goxygen::goxygen()
   message("uploading documentation to RSE server")
-  system(paste0("rsync -e ssh -avz doc/html rse:/webservice/doc/magpie/", newVersion))
+  system(paste0("rsync -e ssh -avz doc/html/* rse:/webservice/doc/magpie/", newVersion))
 
   message("uploading input data to RSE server")
   sys.source("scripts/start/extra/publish_data.R", envir = new.env()) # only works on cluster
@@ -44,7 +44,7 @@ release <- function(newVersion) {
 
   gert::git_commit(paste("magpie release", newVersion))
   gert::git_push()
-  system(paste0("gh pr create --base master --title 'magpie release ", newVersion, "' --body '' --reviewer tscheypidi"))
+  system(paste0("gh pr create --base master --title 'magpie release ", newVersion, "' --body ''"))
 }
 
 arguments <- commandArgs(TRUE)
@@ -52,3 +52,5 @@ if (length(arguments) != 1) {
   stop("Please pass the new version number, e.g. `Rscript scripts/release.R 4.6.2`")
 }
 release(arguments)
+message("warnings:")
+print(warnings())

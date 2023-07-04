@@ -6,7 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration factors for yields AND land conversion costs for FSEC regional setup (time consuming; up to 40 model runs with 1 or 5 time steps)
+# description: calculate and store new calibration factors for yields AND
+#              land conversion costs for FSEC regional setup
+#              (time consuming; up to 40 model runs with 1 or 5 time steps)
 # --------------------------------------------------------
 
 library(magpie4)
@@ -16,10 +18,9 @@ library(gms)
 source("scripts/start_functions.R")
 source("scripts/projects/fsec.R")
 
-# -----------------------------------------------------------------------------------------------------------------
 # Calibration run
 cfg       <- fsecScenario(scenario = "c_BAU")
-cfg$title <- "FSEC29Nov22"
+cfg$title <- "FSEC24Mar23"
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
 cfg$best_calib                      <- TRUE

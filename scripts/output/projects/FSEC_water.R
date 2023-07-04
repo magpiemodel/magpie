@@ -37,11 +37,25 @@ title <- cfg$title
 message("Generating water indicators output for the run: ", title)
 gdx     <- file.path(outputdir, "fulldata.gdx")
 
-# Grid-level water intdicators
+### Grid-level water indicators ###
+# Volume of environmental flow violations (EFV) (in km^3)
 efvViolation <- waterEFViolation(gdx, level = "grid", dir = outputdir)
+write.magpie(efvViolation, file_name = file.path(outputdir, "efvVolume.mz"))
+
+# Total land (in mio. ha)
+gridLand  <- reportGridLand(gdx, dir = outputdir)
+# transform to ha
+totalLand <- dimSums(gridLand, dim = 3) * 1e6
+# Environmental flow violations per hectare of total area (in m3/ha)
+efvViolation_ha <- ifelse(totalLand > 10, (efvViolation * 1e9) / totalLand, 0)
+write.magpie(efvViolation_ha, file_name = file.path(outputdir, "efvVolume_ha.mz"))
+
+# Binary indicator of EFV
 efvViolation[efvViolation > 0] <- 1
+
+# Water stress indicator (use-to-availability ratio)
 watStress <- waterStressRatio(gdx, level = "grid", dir = outputdir)
 watStressViolations <- watStress
+# mark violations in different color
 watStressViolations[efvViolation == 1] <- 100
-
 write.magpie(watStressViolations, file_name = file.path(outputdir, "watStressViolations.mz"))

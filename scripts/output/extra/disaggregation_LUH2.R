@@ -59,9 +59,7 @@ convertLUH2 <- function(x) {
 
 }
 
-sizelimit <- getOption("magclass_sizeLimit")
-options(magclass_sizeLimit = 1e+12)
-on.exit(options(magclass_sizeLimit = sizelimit))
+withr::local_options(list(magclass_sizeLimit = 1e+12))
 
 
 #### Spatial mapping

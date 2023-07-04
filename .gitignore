@@ -38,3 +38,4 @@ gamslice.txt
 /.lock
 
 /renv.lock
+.Rproj.user

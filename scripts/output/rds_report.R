@@ -26,7 +26,7 @@ if(!exists("source_include")) {
 }
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx	<- file.path(outputdir, "fulldata.gdx")
+gdx <- file.path(outputdir, "fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 mif <- paste0(outputdir, "/report.mif")
 runstatistics  <- paste0(outputdir, "/runstatistics.rda")
@@ -34,7 +34,7 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 ###############################################################################
 
 
-report <- getReport(gdx, scenario = cfg$title)
+report <- getReport(gdx, scenario = cfg$title, dir = outputdir)
 write.report(report, file = mif)
 q <- as.quitte(report)
 if(all(is.na(q$value))) stop("No values in reporting!")

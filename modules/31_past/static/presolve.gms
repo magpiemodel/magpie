@@ -18,10 +18,10 @@ vm_carbon_stock.fx(j,"past",ag_pools) =
 *' Also the biodiversity value (BV) for pasture is fixed
 
 vm_bv.fx(j,"manpast",potnatveg) =
- 					pcm_land(j,"past") * fm_luh2_side_layers(j,"manpast") * fm_bii_coeff("manpast",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+          pcm_land(j,"past") * fm_luh2_side_layers(j,"manpast") * fm_bii_coeff("manpast",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
 vm_bv.fx(j,"rangeland",potnatveg) =
- 					pcm_land(j,"past") * fm_luh2_side_layers(j,"rangeland") * fm_bii_coeff("rangeland",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+          pcm_land(j,"past") * fm_luh2_side_layers(j,"rangeland") * fm_bii_coeff("rangeland",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
 *' Regional costs associated with pasture management are set to zero.
 

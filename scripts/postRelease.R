@@ -31,12 +31,15 @@ postRelease <- function() {
 
   citation::cff2zenodo("CITATION.cff")
 
-  message("TODO: git add -p")
+  message("TODO: git add -p\n",
+          "Press enter when done to commit, push and create PR")
   gms::getLine()
 
   gert::git_commit("merge master into develop")
   gert::git_push()
-  system(paste0("gh pr create --base develop --title 'merge master into develop' --body '' --reviewer tscheypidi"))
+  system(paste0("gh pr create --base develop --title 'merge master into develop' --body ''"))
 }
 
 postRelease()
+message("warnings:")
+print(warnings())

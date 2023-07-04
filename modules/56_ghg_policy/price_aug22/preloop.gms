@@ -28,17 +28,18 @@ $elseif "%c56_pollutant_prices%" == "emulator"
  im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices_emulator(t_all,i,pollutants);
 $else
  im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%") * p56_region_price_shr(t_all,i)
- 																				 + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
-** Harmonize till 2020 if not coupled or emulator
-loop(t_all$(m_year(t_all) <= sm_fix_SSP2),
-im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices(t_all,i,pollutants,"R21M42-SSP2-NPi") * p56_region_price_shr(t_all,i)
-                                        + f56_pollutant_prices(t_all,i,pollutants,"R21M42-SSP2-NPi") * (1-p56_region_price_shr(t_all,i));
-);
+                                         + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
 $endif
-
 
 ***save im_pollutant_prices to parameter
 p56_pollutant_prices_input(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source);
+
+** set GHG prices to zero for historic period
+im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) <= sm_fix_SSP2) = 0;
+** set GHG prices to zero for all future time steps until the year defined by `c56_mute_ghgprices_until`
+im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) > sm_fix_SSP2 AND m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")) = 0;
+** Exception for C price, which can be set to a minium price for all future time steps until the year defined by `c56_mute_ghgprices_until`
+im_pollutant_prices(t_all,i,"co2_c",emis_source)$(m_year(t_all) > sm_fix_SSP2 AND m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")) = s56_minimum_cprice;
 
 ***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
 *12/44 conversion from USD per tC to USD per tCO2
@@ -52,15 +53,6 @@ im_pollutant_prices(t_all,i,"n2o_n_indirect",emis_source)$(im_pollutant_prices(t
 ***lowers the economic incentive for CO2 emission reduction (avoided deforestation) and afforestation
 im_pollutant_prices(t_all,i,"co2_c",emis_source) = im_pollutant_prices(t_all,i,"co2_c",emis_source)*s56_cprice_red_factor;
 
-***phase-in of GHG price over 20 year period; start depends on s56_ghgprice_start
-if (s56_ghgprice_phase_in = 1,
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) < s56_ghgprice_start) = 0;
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) = s56_ghgprice_start) = 0.1*im_pollutant_prices(t_all,i,pollutants,emis_source);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) = s56_ghgprice_start+5) = 0.2*im_pollutant_prices(t_all,i,pollutants,emis_source);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) = s56_ghgprice_start+10) = 0.4*im_pollutant_prices(t_all,i,pollutants,emis_source);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) = s56_ghgprice_start+15) = 0.8*im_pollutant_prices(t_all,i,pollutants,emis_source);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) >= s56_ghgprice_start+20) = im_pollutant_prices(t_all,i,pollutants,emis_source);
-);
 ***multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i);
 
@@ -70,8 +62,8 @@ im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,
 ***construct age-class dependent C price for afforestation incentive
 ***this is needed because time steps (t) and age-classes (ac) can differ. ac and t_all are always in 5-year time steps.
 *For missing years in t_all use C price of previous time step. This step makes sure that C prices for every 5-year time step are available.
-loop(t_all$(m_year(t_all)>=s56_ghgprice_start),
-	im_pollutant_prices(t_all,i,"co2_c",emis_source)$(im_pollutant_prices(t_all,i,"co2_c",emis_source) = 0) = im_pollutant_prices(t_all-1,i,"co2_c",emis_source);
+loop(t_all$(m_year(t_all) > m_year("%c56_mute_ghgprices_until%")),
+  im_pollutant_prices(t_all,i,"co2_c",emis_source)$(im_pollutant_prices(t_all,i,"co2_c",emis_source) = 0) = im_pollutant_prices(t_all-1,i,"co2_c",emis_source);
 );
 *Linear interpolation of C price for missing time steps
 loop(t,
@@ -89,7 +81,7 @@ loop(t,
 );
 
 *initialize age-class dependent C price with same C price for all age-classes
-p56_c_price_aff(t_all,i,ac) = im_pollutant_prices(t_all,i,"co2_c","forestry_vegc");
+p56_c_price_aff(t_all,i,ac) = im_pollutant_prices(t_all,i,"co2_c","%c56_cprice_aff%");
 *Shift C prices in age-classes for reflecting foresight.
 *e.g. ac5 in 2020 should have the C price of ac0 in 2025, and ac20 in 2020 equals to ac0 in 2040
 p56_c_price_aff(t_all,i,ac)$(ord(t_all)+ac.off<card(t_all)) = p56_c_price_aff(t_all+ac.off,i,"ac0");
@@ -97,4 +89,4 @@ p56_c_price_aff(t_all,i,ac)$(ord(t_all)+ac.off<card(t_all)) = p56_c_price_aff(t_
 ac_exp(ac)$(ac.off = s56_c_price_exp_aff/5) = yes;
 p56_c_price_aff(t_all,i,ac)$(ac.off >= s56_c_price_exp_aff/5) = sum(ac_exp, p56_c_price_aff(t_all,i,ac_exp));
 *zero C price before starting year
-p56_c_price_aff(t_all,i,ac)$(m_year(t_all)<s56_ghgprice_start) = 0;
+p56_c_price_aff(t_all,i,ac)$(m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")) = 0;

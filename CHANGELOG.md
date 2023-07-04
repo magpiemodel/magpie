@@ -2,8 +2,118 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+
+## [4.6.7] - 2023-05-10
+
+### changed
+- **09_drivers** Harmonization of sets for population, gdp, pal and demography
+- **56_ghg_policy** added emission policies without GHG emissions from peatlands
+- **config** added scenario `SSP2EU` in scenario_config.csv
+- **config** modified `eat_lancet_diet` in scenario_config.csv
+- **config** update of additional data to rev4.43
+- **config** update of regional and cellular inputs to 4.85 in default.cfg and scenario_config.csv
+- **scripts** added output script for forest area change at cluster level
+- **scripts** NDC/NPI calculations can now handle 59k and 67k cell inputs
+
+### added
+- **15_food** added an option in `s15_exo_diet` to allow for exogenous diet scenario for India
+
+
+## [4.6.6] - 2023-05-10
+
+### changed
+- **config** updated scenario_fsec.csv to reflect new GST validation
+- **scripts** included new output indicator for water
+- **scripts** updated global surface temperature maps to new RCPs per scenario
+
+
+## [4.6.5] - 2023-03-29
+
+### changed
+- **22_land_conservation** Replaced old options for land conservation by new conservation priority areas. These include among others a new 30by30 template (based on Key Biodiversity Areas, unprotected habitat in Biodiversity Hotspots, Ecoregions with a high beta-diversity from the Global Safety Net (Dinerstein et al. 2020) and critical connectivity areas (Brennan et al. 2022), a new Half Earth template based on the Global Safety Net (Dinerstein et al. 2020) and land conservation of irrecoverable carbon (Noon et al. 2022).
+- **56_ghg_policy** renamed `cfg$mute_ghgprices_until` to `cfg$gms$c56_mute_ghgprices_until` and changed the default to `y2030`, i.e. no GHG emission pricing in the AFOLU sector before (and including) 2030. This setting will be also used in coupled REMIND-MAgPIE runs.
+- **config** input data revision to rev4.82 to include new conservation priority areas
+- **config** new options for conservation priority areas (including new 30 by 30 protection)
+- **scripts** calc_calib.R bug fix. If the calibration factor of a region is equal to the maximum allowed value, its divergence is set the maximum allowed divergence.
+- **scripts** Disaggregation of BII merged into standard extra/disaggregation.R
+- **scripts** Disaggregation of land use to 0.5° now takes land conservation into account - i.e. cropland expansion is not mapped to areas that are subject to land conservation
+
+### added
+- **56_ghg_policy** added switch `s56_minimum_cprice`
+- **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
+- **scripts** added output script which writes landuse data on cluster resolution to a shapefile
+
+### removed
+- **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
+- **scripts** removed argument `mute_ghgprices_until`, now handeld in GAMS code
+
+### fixed
+- **31_past** fixed pasture suitability to SSP2 before and including 2020 (only relevant for grassland implementation)
+- **56_ghg_policy** the renamed switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs.
+- **scripts** Fixed occasional memory failure in the disaggregation script
+
+
+## [4.6.4] - 2023-02-22
+
+### changed
+- **15_food** Interpret EAT-Lancet guidelines not as target but as lower/upper limits
+- **config** changed order of output scripts. Some functions in rds_report require gridded outputs.
+- **config** input data revision to rev4.81 for trade margin bugfix
+- **config** scenario_fsec.csv updated input data tgz
+- **config** scenario_fsec.csv updated to new biodiversity scenario
+- **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
+- **scripts** highres.R changed default resolution to c1000
+- **scripts** recalibrate.R and recalibrate_realization were modified to always use best_calib for the yield calibration.
+- **scripts** updated FSEC scenario start and output scripts
+- **scripts** when manually running output scripts for multiple runs the lockfile is only created once
+- **sticky_labor** changed labor cost share constraint from regional to cellular level
+- **sticky_labor** renamed equation `q38_labor_capital_ratio` to `q38_labor_share_target`
+
+### added
+- **15_food** half_overweight scenario added
+- **21_trade** New Bilateral trade realization selfsuff_reduced_bilat22 for bilateral trade within selffsuff constraints
+- **32_forestry** added switch `s32_aff_prot` for protection of afforested areas (0=until end of planning horizon 1=forever)
+- **56_ghg_policy** added two scenarios for GHG emission pricing and options for afforestation
+- **config** added options for afforestation assumptions and updated additional data to 4.38
+- **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
+- **config** changed default for `s_use_gdx` from 2 to 0
+- **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
+- **scripts** added SLURM dayMax submission type for standby QOS
+- **sticky_labor** `nl_fix`, `nl_relax` and `nl_release` added
+
+### removed
+- **42_water_demand** removed fm_multicropping factor because of fallow inconsistency
+
+### fixed
+- **14_yields** nl_fix updated to current equation
+- **32_forestry** pm_land_conservation(t,j,"secdforest","restore") now accounts for the rotation length in timber plantations to avoid infeasibilities
+- **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
+- **59_som** division by zero prevented by if condition
+- **scripts** fixed a bug where renvs for high resolution runs were missing some packages
+- **scripts** fixed in the calc_calib.R script the saving of calib_factors used in each iteration to ensure that they correspond to the divergence reported. Changed divergence from zero to NA for those iterations where calib_factors are above the limit. The best_calib selection criterion was changed from selecting the factors of the iteration with the lowest standard deviation to the selection, for each region, of the factor of the iteration with the lowest divergence. Also, factors from the first iteration are now not considered, and if two different factors had the same divergence for a region, the one of the latest iteration is picked.
+
+
+## [4.6.3] - 2023-01-19
+
+### changed
+- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
+- **30_crop** identical assumptions for bioenergy until 2020
+- **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
+- **38_factos_costs** sticky_labor realization: included option to set a labor share target
+- **62_material** Bioplastic demand identical in all scenarios until 2020
+- **config** added `s38_target_labor_share`, `s38_targetyear_labor_share` and `s38_target_fulfillment` to define labor share target scnarios
+- **config** and **38_factor_costs** changed name of `s38_fix_capital_need` to `s38_startyear_labor_substitution`
+- **config** update input data to rev4.79
+
+### added
+- **31_past** added additional limitation (single climate scenario input) for **grasslands_apr22**
+- **59_som** added new **cellpool_jan23** realization with updated 2019 IPCC guidelines values
+- **scripts** added start script which starts an empty model just regenerating a previous run
+
+### fixed
+- **scripts** make sure that `c_title` in the GAMS code is not containing dots which otherwise could lead to compilation errors
 
 
 ## [4.6.2] - 2023-01-12
@@ -591,7 +701,12 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.2...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.7...develop
+[4.6.7]: https://github.com/magpiemodel/magpie/compare/v4.6.6...v4.6.7
+[4.6.6]: https://github.com/magpiemodel/magpie/compare/v4.6.5...v4.6.6
+[4.6.5]: https://github.com/magpiemodel/magpie/compare/v4.6.4...v4.6.5
+[4.6.4]: https://github.com/magpiemodel/magpie/compare/v4.6.3...v4.6.4
+[4.6.3]: https://github.com/magpiemodel/magpie/compare/v4.6.2...v4.6.3
 [4.6.2]: https://github.com/magpiemodel/magpie/compare/v4.6.1...v4.6.2
 [4.6.1]: https://github.com/magpiemodel/magpie/compare/v4.6.0...v4.6.1
 [4.6.0]: https://github.com/magpiemodel/magpie/compare/v4.5.0...v4.6.0

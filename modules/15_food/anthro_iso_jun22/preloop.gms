@@ -42,14 +42,14 @@ $endif
 
 * Stronger ruminant fadeout for India
 if (s15_rum_share_fadeout_india_strong = 1,
-	i15_rum_share_fadeout(t,"IND") = f15_rum_share_fadeout_india(t);
+  i15_rum_share_fadeout(t,"IND") = f15_rum_share_fadeout_india(t);
 );
 
 * Milk fadeout for India
 if (s15_milk_share_fadeout_india = 0,
-	i15_milk_share_fadeout_india(t) = 1;
+  i15_milk_share_fadeout_india(t) = 1;
 Elseif s15_milk_share_fadeout_india = 1,
-	i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
+  i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
 );
 
 
@@ -80,8 +80,15 @@ i15_exo_foodscen_fader(t,iso) = (1-f15_food_substitution_fader(t,"%c15_exo_foods
 
 $ifthen "%c15_exo_foodscen%" == "lin_zero_20_30"
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",iso,kcal_scen15,EAT_scen15,kfo);
+*extra condition to see if India diet scenario has been selected
+  if(s15_exo_diet = 2,
+  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2030",iso,kcal_scen15,EAT_scen15,kfo);
+  );
 $else
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2050",iso,kcal_scen15,EAT_scen15,kfo);
+  if(s15_exo_diet = 2,
+  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2050",iso,kcal_scen15,EAT_scen15,kfo);
+  );
 $endif
 
 * initial prices in $US per Kcal

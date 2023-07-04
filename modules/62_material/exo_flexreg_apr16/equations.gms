@@ -15,7 +15,7 @@
 *' depending on a scaling factor. This scaling factor is calculated as the
 *' ratio beween the food demand from last timestep and the food demand from
 *' the last historical time step. If an exogenous target for bioplastic production
-*' is set, material demand (substrate) for bioplastic production is included. 
+*' is set, increasing material demand (substrate) for bioplastic production is included. 
 *' For historic years it is assumed that this demand is already part of the
 *' general material demand, therefore the double-counted demand is subtracted.
 
