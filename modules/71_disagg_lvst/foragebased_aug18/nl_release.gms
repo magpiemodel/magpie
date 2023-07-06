@@ -9,5 +9,3 @@
 
 v71_feed_balanceflow.lo(j,kforage)= -Inf;
 v71_feed_balanceflow.up(j,kforage)= Inf;
-
-s71_lp_fix=0;
