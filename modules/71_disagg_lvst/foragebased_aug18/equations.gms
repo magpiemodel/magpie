@@ -32,12 +32,24 @@ q71_feed_forage(j2) ..
 *' [70_livestock] `q70_feed(i2,kap,kall)` for inconsistencies with the FAO inventory of national feed use.
 *' In each cluster the balance flow is constrained by its share of livestock production regarding the regional level by
 
-q71_feed_balanceflow(j2) ..
+q71_feed_balanceflow_nlp(j2)$(s71_lp_fix=0) ..
              sum(kforage, v71_feed_balanceflow(j2,kforage)) =e=
              sum((ct,cell(i2,j2),kli_rum,kforage), fm_feed_balanceflow(ct,i2,kli_rum,kforage) 
-             * (vm_prod(j2,kli_rum) / (vm_prod_reg(i2,kli_rum) + 10**(-6))));
+             * (vm_prod(j2,kli_rum) / (vm_prod_reg(i2,kli_rum))));
 
-*' Note that $10^{-6}$ is required to avoid division by zero.
+*' @stop
+
+* If fixed to linear behaviour (`s71_lp_fix=1`) the balance flow for pasture and fodder production (`kforage`)
+* can be freely distributed among all cells beloning to a region.
+
+q71_feed_balanceflow_lp(i2)$(s71_lp_fix=1) ..
+            sum((cell(i2,j2),kforage), v71_feed_balanceflow(j2,kforage)) =e=
+            sum((ct,kli_rum,kforage), fm_feed_balanceflow(ct,i2,kli_rum,kforage));
+
+* Note that for fixation to linear behaviour `q71_feed_balanceflow_lp` replaces `q71_feed_balanceflow_nlp`.
+
+*' @equations
+
 
 *' To account for the above mentioned fact that monogastric livestock are held close to the population, it is
 *' distributed based on urban area by the formula
