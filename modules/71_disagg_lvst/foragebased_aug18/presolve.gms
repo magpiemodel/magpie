@@ -5,13 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i71_urban_area_share(j) =
-       pm_land_start(j,"urban")/sum(cell(i,j),sum(cell2(i,j3),pm_land_start(j3,"urban")))
-     ;
+i71_forage_cell_prod_share(j,kforage) =
+       pm_prod_init(j,kforage) / (sum(cell(i,j),sum(cell2(i,j3), pm_prod_init(j3,kforage))) + 10**(-6));
 
-s71_lp_fix = 0;
-s71_scale_mon = 1.10;
-s71_punish_additional_mon = 15000;
-
-* Minimal regional production of `kli_rum` to avoid division by zero in `q71_feed_balanceflow_nlp`.
-*vm_prod_reg.lo(i,kli_rum)$(s71_lp_fix=0) = 10**(-6);
+* Note that $10^{-6}$ is required to avoid division by zero.

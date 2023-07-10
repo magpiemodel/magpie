@@ -8,6 +8,7 @@
 
 
 pm_prod_init(j,kcr)=sum(w,fm_croparea("y1995",j,w,kcr)*pm_yields_semi_calib(j,kcr,w));
+pm_prod_init(j,"pasture")=sum(w,pm_land_start(j,"past")*pm_yields_semi_calib(j,"pasture",w));
 
 if (ord(t) = 1,
 

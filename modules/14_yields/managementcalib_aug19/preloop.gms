@@ -136,6 +136,7 @@ if ((s14_calib_ir2rf = 1),
                                    i14_yields_calib(t,j,knbe14,w);
 
   pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
+  pm_yields_semi_calib(j,"pasture",w)  = i14_yields_calib("y1995",j,"pasture",w);
 );
 
 *' @stop

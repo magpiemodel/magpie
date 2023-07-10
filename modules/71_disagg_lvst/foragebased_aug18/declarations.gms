@@ -26,6 +26,7 @@ equations
 
 parameters
  i71_urban_area_share(j)                           Share of urban area within a region (1)
+ i71_forage_cell_prod_share(j,kforage)             Cellular share of forage production within a region (1)
 ;
 
 scalars

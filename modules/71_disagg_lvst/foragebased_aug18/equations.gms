@@ -35,7 +35,7 @@ q71_feed_forage(j2) ..
 q71_feed_balanceflow_nlp(j2)$(s71_lp_fix=0) ..
              sum(kforage, v71_feed_balanceflow(j2,kforage)) =e=
              sum((ct,cell(i2,j2),kli_rum,kforage), fm_feed_balanceflow(ct,i2,kli_rum,kforage) 
-             * (vm_prod(j2,kli_rum) / (vm_prod_reg(i2,kli_rum))));
+             * i71_forage_cell_prod_share(j2,kforage));
 
 *' @stop
 
