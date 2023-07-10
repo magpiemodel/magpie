@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 i71_forage_cell_prod_share(j,kforage) =
-       pm_prod_init(j,kforage) / (sum(cell(i,j),sum(cell2(i,j3), pm_prod_init(j3,kforage))) + 10**(-6));
+*       vm_prod.l(j,kforage) / (sum(cell(i,j),sum(cell2(i,j3), vm_prod.l(j3,kforage))) + 10**(-6));
+       vm_prod.l(j,kforage) / (sum(cell(i,j), vm_prod_reg.l(i,kforage)) + 10**(-6));
 
 * Note that $10^{-6}$ is required to avoid division by zero.

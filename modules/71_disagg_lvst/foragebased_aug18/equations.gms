@@ -33,7 +33,7 @@ q71_feed_forage(j2) ..
 *' In each cluster the balance flow is constrained by its share of livestock production regarding the regional level by
 
 q71_feed_balanceflow_nlp(j2)$(s71_lp_fix=0) ..
-             sum(kforage, v71_feed_balanceflow(j2,kforage)) =e=
+             sum(kforage, v71_feed_balanceflow(j2,kforage) + v71_additional_feed_balanceflow(j2,kforage)) =e=
              sum((ct,cell(i2,j2),kli_rum,kforage), fm_feed_balanceflow(ct,i2,kli_rum,kforage) 
              * i71_forage_cell_prod_share(j2,kforage));
 
@@ -68,6 +68,7 @@ q71_prod_mon_liv(j2,kli_mon) ..
 q71_punishment_mon(i2) ..
                 vm_costs_additional_mon(i2) =e=
                 sum((cell(i2,j2),kli_mon), v71_additional_mon(j2,kli_mon)) *  s71_punish_additional_mon
+              + sum((cell(i2,j2),kforage), v71_additional_feed_balanceflow(j2,kforage)) *  s71_punish_additional_mon
                 ;
 
 *' Note that the punishment costs are based on transport costs and scaled up by one order of magnitude

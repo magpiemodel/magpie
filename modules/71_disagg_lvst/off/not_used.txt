@@ -5,4 +5,3 @@ vm_prod,input,questionnaire
 vm_prod_reg,input,questionnaire
 pm_land_start,input,questionnaire
 pcm_land,input,questionnaire
-pm_prod_init,input,questionnaire
