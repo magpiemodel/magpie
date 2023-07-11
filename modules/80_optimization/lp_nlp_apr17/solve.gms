@@ -72,7 +72,7 @@ $batinclude "./modules/include.gms" nl_fix
 *' of the previous optimization as upper bound and minimizing the land
 *' differences.
 
-    if((magpie.modelstat=1 or magpie.modelstat = 7),
+    if ((magpie.modelstat=1 or magpie.modelstat = 7),
       vm_cost_glo.up = vm_cost_glo.l;
       solve magpie USING nlp MINIMIZING vm_landdiff;
       vm_cost_glo.up = Inf;
@@ -148,7 +148,7 @@ $batinclude "./modules/include.gms" nl_relax
     );
 
 * if solve stopped with an error, try it again with conopt3
-  if((magpie.modelstat = 13),
+  if ((magpie.modelstat = 13),
     display "WARNING: Modelstat 13 | retry with CONOPT3!";
     option nlp = conopt;
     solve magpie USING nlp MINIMIZING vm_cost_glo;
@@ -198,7 +198,7 @@ if ((p80_modelstat(t) < 3),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
 );
 
-if ((p80_modelstat(t) > 2),
+if ((p80_modelstat(t) > 2 and p80_modelstat(t) ne 7),
   Execute_Unload "fulldata.gdx";
   abort "no feasible solution found!";
 );
