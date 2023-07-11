@@ -45,7 +45,7 @@ display vm_cost_glo.l;
 display magpie.modelstat;
 
 * in case of problems try different solvers and optfile settings
-if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
+if (magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
   repeat(
     s80_counter = s80_counter + 1 ;
 
@@ -91,7 +91,7 @@ if ((p80_modelstat(t) <= 2),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
 );
 
-if ((p80_modelstat(t) > 2),
+if ((p80_modelstat(t) > 2 and p80_modelstat(t) ne 7)
   Execute_Unload "fulldata.gdx";
   abort "no feasible solution found!";
 );
