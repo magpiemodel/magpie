@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **31_past** added `cc`, `nocc` and `nocc_hist` options for `c31_past_suit_scen` and `c31_grassl_yld_scenario`
 - **32_carbon** added `nocc` and `nocc_hist` option for `c52_land_carbon_sink_rcp`
 - **config** added `cfg$results_folder_highres` which allows to modify the output folder used in the `highres.R` output script
+- **71_disagg_lvst** added new realisation `foragebased_jul23` which solves GAMS issues at higher spatial resolutions
 
 ### removed
 - **config** s80_num_nonopt_allowed
@@ -25,7 +26,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### fixed
 - **config** updated scenario configs to newest preprocessing (4.87)
 - **config** corrected wrong names of parameters for peatland costs
-- **71_disagg_lvst** wrong unit of v71_feed_balanceflow and too high values (also resolution-dependent) in case of s71_lp_fix = 0 (default)
 - **80_optimization** resolve was not working in nlp_par realization due to s80_num_nonopt_allowed
 
 ## [4.6.7] - 2023-05-10

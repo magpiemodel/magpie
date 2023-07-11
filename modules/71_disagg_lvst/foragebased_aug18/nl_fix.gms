@@ -7,8 +7,10 @@
 
 * ### nl_fix ###
 
-v71_feed_balanceflow.lo(j,kforage)$(sum((cell(i,j),kli_rum),fm_feed_balanceflow(t,i,kli_rum,kforage)) > 0) = 0;
-v71_feed_balanceflow.up(j,kforage)$(sum((cell(i,j),kli_rum),fm_feed_balanceflow(t,i,kli_rum,kforage)) < 0) = 0;
-v71_feed_balanceflow.fx(j,kforage)$(sum((cell(i,j),kli_rum),fm_feed_balanceflow(t,i,kli_rum,kforage)) = 0) = 0;
-v71_feed_balanceflow.fx(j,"pasture")$(pcm_land(j,"past")=0) = 0;
-v71_feed_balanceflow.fx(j,"foddr")$(pcm_land(j,"crop")=0) = 0;
+v71_feed_balanceflow.lo(j,kli_rum,kforage)$(sum(cell(i,j),fm_feed_balanceflow(t,i,kli_rum,kforage)) > 0) = 0;
+v71_feed_balanceflow.up(j,kli_rum,kforage)$(sum(cell(i,j),fm_feed_balanceflow(t,i,kli_rum,kforage)) < 0) = 0;
+v71_feed_balanceflow.fx(j,kli_rum,kforage)$(sum(cell(i,j),fm_feed_balanceflow(t,i,kli_rum,kforage)) = 0) = 0;
+v71_feed_balanceflow.fx(j,kli_rum,"pasture")$(pcm_land(j,"past")=0) = 0;
+v71_feed_balanceflow.fx(j,kli_rum,"foddr")$(pcm_land(j,"crop")=0) = 0;
+
+s71_lp_fix=1;

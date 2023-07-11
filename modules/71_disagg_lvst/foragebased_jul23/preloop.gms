@@ -5,6 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_costs_additional_mon.scale(i) = 10e4;
-*Don't scale this variable. Model is very sensitive to scaling this variable and might become infeasible or very slow.
-*v71_feed_balanceflow.scale(j,kli_rum,kforage) = 10e3;
+i71_urban_area_share(j) =
+       pm_land_start(j,"urban")/sum(cell(i,j),sum(cell2(i,j3),pm_land_start(j3,"urban")))
+     ;
+
+s71_lp_fix = 0;
+s71_scale_mon = 1.10;
+s71_punish_additional_mon = 15000;
+
+* Minimal regional production of `kli_rum` to avoid division by zero in `q71_feed_balanceflow_nlp`.
+vm_prod_reg.lo(i,kli_rum)$(s71_lp_fix=0) = 10**(-6);
