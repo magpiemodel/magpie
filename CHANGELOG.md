@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** s80_num_nonopt_allowed
 
 ### fixed
+- **30_crop** corrected q30_cropland in module realization rotation_apr22, where fallow land was on the wrong side of the equation
 - **config** updated scenario configs to newest preprocessing (4.87)
 - **config** corrected wrong names of parameters for peatland costs
 - **80_optimization** resolve was not working in nlp_par realization due to s80_num_nonopt_allowed
