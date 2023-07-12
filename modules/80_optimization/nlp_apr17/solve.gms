@@ -45,11 +45,11 @@ display vm_cost_glo.l;
 display magpie.modelstat;
 
 * in case of problems try different solvers and optfile settings
-if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
+if (magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
   repeat(
     s80_counter = s80_counter + 1 ;
 
-  if(magpie.modelstat ne s80_modelstat_previter,
+  if (magpie.modelstat ne s80_modelstat_previter,
     display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
     solve magpie USING nlp MINIMIZING vm_cost_glo ;
   elseif magpie.modelstat = s80_modelstat_previter,
@@ -73,7 +73,7 @@ if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
   display vm_cost_glo.l;
 
 * write extended run information in list file in the case that the final solution is infeasible
-  if((s80_counter >= (s80_maxiter-1) and magpie.modelstat > 2 and magpie.modelstat ne 7),
+  if ((s80_counter >= (s80_maxiter-1) and magpie.modelstat > 2),
     magpie.solprint = 1
   );
 
