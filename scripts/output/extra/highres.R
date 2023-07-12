@@ -120,7 +120,11 @@ highres <- function(cfg) {
   tmp[1]    <- paste0(tmp[1], paste0("HR", res))
   cfg$title <- paste(tmp, collapse = "_")
 
-  cfg$results_folder <- paste0("output/HR", res, "/:title:")
+  if(!is.null(cfg$results_folder_highres)) {
+    cfg$results_folder <- file.path(cfg$results_folder_highres,":title:")
+  } else {
+    cfg$results_folder <- paste0("output/HR", res, "/:title:")
+  }
   cfg$force_replace  <- TRUE
   cfg$recalc_npi_ndc <- TRUE
 

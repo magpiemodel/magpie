@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** new area equipped for irrigation (AEI) data in preprocessing (4.87)
 - **31_past** added `cc`, `nocc` and `nocc_hist` options for `c31_past_suit_scen` and `c31_grassl_yld_scenario`
 - **32_carbon** added `nocc` and `nocc_hist` option for `c52_land_carbon_sink_rcp`
+- **config** added `cfg$results_folder_highres` which allows to modify the output folder used in the `highres.R` output script
 
 ### removed
 -
