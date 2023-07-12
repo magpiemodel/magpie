@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
+- **30_crop** corrected q30_cropland in module realization rotation_apr22, where fallow land was on the wrong side of the equation
 - **config** updated scenario configs to newest preprocessing (4.87)
 - **config** corrected wrong names of parameters for peatland costs
 
