@@ -29,7 +29,7 @@ q71_feed_rum_liv(j2, kforage) ..
 q71_balanceflow_constraint(j2, kli_rum, kforage) ..
              v71_feed_balanceflow_share(j2, kli_rum, kforage) =e=
              1 + sum((ct, cell(i2,j2)), fm_feed_balanceflow(ct, i2, kli_rum, kforage) / 
-                     (im_feed_baskets(ct, i2, kli_rum, kforage) * vm_prod_reg(i2, kli_rum) + 10^(-10)))
+                     (im_feed_baskets(ct, i2, kli_rum, kforage) * vm_prod_reg(i2, kli_rum) + 10**(-10)))
              ;
 
 *' The total cellular ruminant production is then given by

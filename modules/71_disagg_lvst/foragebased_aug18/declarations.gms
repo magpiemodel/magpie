@@ -37,7 +37,7 @@ parameters
  ov71_prod_rum(t,j,kli_rum,kforage,type)               Production of forage fed ruminants within a cell (mio. tDM per yr)
  ov71_additional_mon(t,j,kli_mon,type)                 Additional punished production of monogastric livestock (mio. tDM per yr)
  ov_costs_additional_mon(t,i,type)                     Punishment cost for additionally transported monogastric livst_egg (mio. USD05MER per yr)
- ov71_feed_balanceflow_share(t,j,kli_rum,kforage,type) Cellular feed balanceflow multiplier for forage feed for ruminant livestock (mio. tDM per yr)
+ ov71_feed_balanceflow_share(t,j,kli_rum,kforage,type) Cellular feed balanceflow multiplier for forage feed for ruminant livestock (1)
  oq71_feed_rum_liv(t,j,kforage,type)                   Production constraint for ruminant livestock products (mio. tDM per yr)
  oq71_balanceflow_constraint(t,j,kli_rum,kforage,type) Nonlinear balanceflow constraint for cellular forage feed products (mio. tDM per yr)
  oq71_sum_rum_liv(t,j,kli_rum,type)                    Total production of forage fed ruminants (mio. tDM per yr)
