@@ -12,7 +12,7 @@ positive variables
 ;
 
 variables
- v71_feed_balanceflow_share(j,kli_rum,kforage)     Cellular feed balanceflow multiplier for forage feed for ruminant livestock (mio. tDM per yr)
+ v71_feed_balanceflow_share(j,kli_rum,kforage)     Cellular feed balanceflow multiplier for forage feed for ruminant livestock (1)
 ;
 
 equations
