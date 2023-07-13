@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** added `cfg$results_folder_highres` which allows to modify the output folder used in the `highres.R` output script
 
 ### removed
--
+- **scripts** removed .snapshot.Rprofile and the Rprofile.R script, renv now fully supersedes snapshots
 
 ### fixed
 - **30_crop** corrected q30_cropland in module realization rotation_apr22, where fallow land was on the wrong side of the equation
