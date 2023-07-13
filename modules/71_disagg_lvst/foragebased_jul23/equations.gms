@@ -23,14 +23,13 @@ q71_feed_forage(j2) ..
                   sum((kli_rum,kforage), vm_prod(j2,kli_rum)
                  * sum((ct,cell(i2,j2)),im_feed_baskets(ct,i2,kli_rum,kforage)));
 
-*' The above equation contains a split of pasture and fodder fed ruminants, since we assume that depending
-*' on the intensity level of the livestock production, ruminants will graze on pastures (extensive systems)
+*' The above equation contains a split of pasture and fodder fed ruminant feed requirements, since we assume 
+*' that depending on the intensity level of the livestock production, ruminants will graze on pastures (extensive systems)
 *' or will be fed via harvested fodder crops (intensive systems).
 
-
-*' The balance flow for pasture and fodder production (`kforage`) accounts as in
-*' [70_livestock] `q70_feed(i2,kap,kall)` for inconsistencies with the FAO inventory of national feed use.
-*' In each cluster the balance flow is constrained by its share of livestock production regarding the regional level by
+*' The balance flow for pasture and fodder production (`kforage`) accounts as in [70_livestock] `q70_feed(i2,kap,kall)` 
+*' for inconsistencies with the FAO inventory of national feed use. In each cluster the balance flow is constrained by 
+*' its share of livestock production regarding the regional level by
 
 q71_feed_balanceflow_nlp(j2)$(s71_lp_fix=0) ..
              sum(kforage, v71_feed_balanceflow(j2,kforage)) =e=
@@ -49,7 +48,6 @@ q71_feed_balanceflow_lp(i2)$(s71_lp_fix=1) ..
 * Note that for fixation to linear behaviour `q71_feed_balanceflow_lp` replaces `q71_feed_balanceflow_nlp`.
 
 *' @equations
-
 
 *' To account for the above mentioned fact that monogastric livestock are held close to the population, it is
 *' distributed based on urban area by the formula

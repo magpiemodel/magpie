@@ -6,17 +6,17 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variables
- v71_feed_forage(j,kforage)                       Production of forage within a cell (mio. tDM per yr)
- v71_additional_mon(j, kli_mon)                   Additional punished production of monogastric livestock (mio. tDM per yr)
- vm_costs_additional_mon(i)                       Punishment cost for additionally transported monogastric livst_egg (mio. USD05MER per yr)
+ v71_feed_forage(j, kforage)                       Production of forage within a cell (mio. tDM per yr)
+ v71_additional_mon(j, kli_mon)                    Additional punished production of monogastric livestock (mio. tDM per yr)
+ vm_costs_additional_mon(i)                        Punishment cost for additionally transported monogastric livst_egg (mio. USD05MER per yr)
 ;
 
 variables
- v71_feed_balanceflow(j,kforage)                   Cellular feed balanceflow for forage feed for ruminant livestock (mio. tDM per yr)
+ v71_feed_balanceflow(j, kforage)                  Cellular feed balanceflow for forage feed for ruminant livestock (mio. tDM per yr)
 ;
 
 equations
- q71_feed_rum_liv(j,kforage)                       Production constraint for ruminant livestock products (mio. tDM per yr)
+ q71_feed_rum_liv(j, kforage)                      Production constraint for ruminant livestock products (mio. tDM per yr)
  q71_feed_forage(j)                                Forage feed constraint (mio. tDM per yr)
  q71_feed_balanceflow_nlp(j)                       Non-linear balanceflow constraint for forage feed products (mio. tDM per yr)
  q71_feed_balanceflow_lp(i)                        Linear balanceflow constraint for forage feed products (mio. tDM per yr)
