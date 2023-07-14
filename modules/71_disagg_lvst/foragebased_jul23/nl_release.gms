@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
-    s80_maxiter         maximal solve iterations if modelstat is > 2 (1)  / 30 /
-  s80_optfile         switch to use specfied solver settings (1)        / 1 /
-;
+* ### nl_release ###
+
+v71_feed_balanceflow.lo(j,kforage)= -Inf;
+v71_feed_balanceflow.up(j,kforage)= Inf;
