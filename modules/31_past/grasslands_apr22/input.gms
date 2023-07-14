@@ -11,7 +11,7 @@ scalars
   s31_cost_grass_prod  Grasslands factor costs (USD05MER per tDM)                 / 1 /
 ;
 
-$setglobal c31_past_suit_scen  ssp370
+$setglobal c31_past_suit_scen  ssp245
 
 table f31_pastr_suitability(t_all,j,ssp_past) Areas suitable for pasture management (mio. ha)
 $ondelim

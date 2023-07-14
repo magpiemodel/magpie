@@ -21,6 +21,18 @@ sets
    kli(kap) Livestock products
    / livst_rum, livst_pig, livst_chick, livst_egg, livst_milk  /
 
+   kli_rd(kap) Ruminant meat and dairy products
+   / livst_rum,livst_milk /
+
+   kap_to_kfo_ap(kap,kfo_ap) Mapping between animal products and animal food products
+   /livst_rum   . livst_rum
+   livst_pig    . livst_pig
+   livst_chick  . livst_chick
+   livst_egg    . livst_egg
+   livst_milk   . livst_milk
+   fish         . fish
+   /
+
    kforestry(k) forestry products
         / wood, woodfuel /
 

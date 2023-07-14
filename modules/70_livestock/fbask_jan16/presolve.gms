@@ -12,25 +12,38 @@
 *' biophysical pasture yields in the module [14_yields].
 
 *' The exogenous calculation of pasture management requires information on
-*' the number of cattle reared to fulfil the domestic demand for ruminant 
+*' changes in the number of cattle reared to fulfil the food demand for ruminant
 *' livestock products: 
 
 p70_cattle_stock_proxy(t,i) = im_pop(t,i)*pm_kcal_pc_initial(t,i,"livst_rum")
-                  /i70_livestock_productivity(t,i,"sys_beef");   
+                  /i70_livestock_productivity(t,i,"sys_beef");
 
-*' The lower bound for `p70_cattle_stock_proxy` is set to 20% of initial cattle 
-*' stocks in 1995:
+p70_milk_cow_proxy(t,i) = im_pop(t,i)*pm_kcal_pc_initial(t,i,"livst_milk")
+                  /i70_livestock_productivity(t,i,"sys_dairy");
+
+*' The lower bound for `p70_cattle_stock_proxy` and `p70_milk_cow_proxy` is
+*' set to 20% of initial values in 1995:
 
 p70_cattle_stock_proxy(t,i)$(p70_cattle_stock_proxy(t,i) < 0.2*p70_cattle_stock_proxy("y1995",i)) = 0.2*p70_cattle_stock_proxy("y1995",i);
+p70_milk_cow_proxy(t,i)$(p70_milk_cow_proxy(t,i) < 0.2*p70_milk_cow_proxy("y1995",i)) = 0.2*p70_milk_cow_proxy("y1995",i);
 
-*' The parameter `p70_incr_cattle` describes the changes in cattle stocks 
+
+*' The parameter `p70_incr_cattle` describes the changes in the number of cattle
 *' relative to the previous time step:
 
 p70_incr_cattle(t,i)  =  1$(ord(t)=1)
-      + (p70_cattle_stock_proxy(t,i)/p70_cattle_stock_proxy(t-1,i))$(ord(t)>1);
+     + (
+            (  ( pm_kcal_pc_initial(t,i,"livst_rum")*im_feed_baskets(t,i,"livst_rum","pasture")/fm_nutrition_attributes(t,"livst_rum","kcal") )
+               / sum(kli_rd, sum(kap_to_kfo_ap(kli_rd,kfo_ap),pm_kcal_pc_initial(t,i,kfo_ap))*im_feed_baskets(t,i,kli_rd,"pasture")/fm_nutrition_attributes(t,kli_rd,"kcal") )  )
+               * (p70_cattle_stock_proxy(t,i)/p70_cattle_stock_proxy(t-1,i))
+         +
+            (  ( pm_kcal_pc_initial(t,i,"livst_milk")*im_feed_baskets(t,i,"livst_milk","pasture")/fm_nutrition_attributes(t,"livst_milk","kcal") )
+               / sum(kli_rd, sum(kap_to_kfo_ap(kli_rd,kfo_ap),pm_kcal_pc_initial(t,i,kfo_ap))*im_feed_baskets(t,i,kli_rd,"pasture")/fm_nutrition_attributes(t,kli_rd,"kcal") )  )
+               *(p70_milk_cow_proxy(t,i)/p70_milk_cow_proxy(t-1,i))
+       )$(ord(t)>1);
 
 *' The pasture management factor is calculated by applying a linear relationship 
-*' that links changes in pasture management with changes in cattle stocks:
+*' that links changes in pasture management with changes in the number of cattle:
 
 if (m_year(t) <= s70_past_mngmnt_factor_fix,
    pm_past_mngmnt_factor(t,i) = 1;
