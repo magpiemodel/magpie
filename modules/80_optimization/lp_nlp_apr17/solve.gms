@@ -171,7 +171,7 @@ $batinclude "./modules/include.gms" nl_relax
 
   display s80_counter;
 
-  until ((p80_modelstat(t) <= 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
+  until (p80_modelstat(t) <= 2 or s80_counter >= s80_maxiter)
 );
 
 * if s80_add_cplex is 1 add additional solve statement for cplex
