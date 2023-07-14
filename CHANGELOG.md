@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_crop** corrected q30_cropland in module realization rotation_apr22, where fallow land was on the wrong side of the equation
 - **config** updated scenario configs to newest preprocessing (4.87)
 - **config** corrected wrong names of parameters for peatland costs
+- **71_disagg_lvst** reworked `foragebased_aug18` (including removal of linear version and correction of balance flow calculation)
 - **80_optimization** resolve was not working in nlp_par realization due to `s80_num_nonopt_allowed`
 
 ## [4.6.7] - 2023-05-10
