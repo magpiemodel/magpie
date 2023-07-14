@@ -28,8 +28,7 @@ if (s15_run_diet_postprocessing = 1,
   p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
 
   p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) =
-         p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
-         i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+          p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) + i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) * s15_calibrate;
 
 * The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
   p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)<0) = 0;
