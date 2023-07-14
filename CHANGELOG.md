@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** start_functions.R can now handle clusters per region flexibly
 - **scripts** the REMIND-MAgPIE coupling now uses renv
 - **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
+- **70_livestock** consideration of milk demand in the calculation of the pasture management factor 
 
 ### added
 - **scripts** New output script for reporting disaggregated land use patterns to the SEALS (Spatial Economic Allocation Landscape Simulator) downscaling model
