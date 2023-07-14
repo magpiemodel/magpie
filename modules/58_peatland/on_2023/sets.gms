@@ -16,8 +16,13 @@ sets
   ef58(man58) Peatland emissions factors
     / degrad, rewet /
 
-  land58(land) Managed land types
+
+  land58 Peatland land types
+    / intact, crop, past, forestry, peatExtract, unused, rewetted /
+
+  landMan58(land58) Peatland land types
     / crop, past, forestry /
+
 
   stat58 Peatland status
     / intact, 

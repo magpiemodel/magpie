@@ -5,5 +5,3 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v58_expansion.scale(j,stat58) = 10e-3;
-v58_reduction.scale(j,stat58) = 10e-3;
