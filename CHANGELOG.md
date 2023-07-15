@@ -8,20 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **80_optimization** printing of solprint when solver status is 7 re-activated 
 - **scripts** start_functions.R can now handle clusters per region flexibly
 - **scripts** the REMIND-MAgPIE coupling now uses renv
 - **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
 
 ### added
+- **scripts** New output script for reporting disaggregated land use patterns to the SEALS (Spatial Economic Allocation Landscape Simulator) downscaling model
 - **scenario_config.csv** added a scenario for the NGFS project
 - **config** new area equipped for irrigation (AEI) data in preprocessing (4.87)
 - **31_past** added `cc`, `nocc` and `nocc_hist` options for `c31_past_suit_scen` and `c31_grassl_yld_scenario`
 - **32_carbon** added `nocc` and `nocc_hist` option for `c52_land_carbon_sink_rcp`
+- **config** added `cfg$results_folder_highres` which allows to modify the output folder used in the `highres.R` output script
 
 ### removed
--
+- **scripts** removed .snapshot.Rprofile and the Rprofile.R script, renv now fully supersedes snapshots
 
 ### fixed
+- **30_crop** corrected q30_cropland in module realization rotation_apr22, where fallow land was on the wrong side of the equation
 - **config** updated scenario configs to newest preprocessing (4.87)
 - **config** corrected wrong names of parameters for peatland costs
 
