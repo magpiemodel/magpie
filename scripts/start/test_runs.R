@@ -77,9 +77,11 @@ codeCheck <- FALSE
 
 ### Business-as-usual
 cfg <- fsecScenario(scenario = "c_BAU")
+cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### FSDP Scenario
 cfg <- fsecScenario(scenario = "e_FSDP")
+cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 

@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+## [4.6.8] - 2023-07-17
+
+### changed
+- **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
+- **80_optimization** printing of solprint when solver status is 7 re-activated 
+- **scripts** start_functions.R can now handle clusters per region flexibly
+- **scripts** the REMIND-MAgPIE coupling now uses renv
+
+### added
+- **31_past** added `cc`, `nocc` and `nocc_hist` options for `c31_past_suit_scen` and `c31_grassl_yld_scenario`
+- **32_carbon** added `nocc` and `nocc_hist` option for `c52_land_carbon_sink_rcp`
+- **71_disagg_lvst** added new realisation `foragebased_jul23` which solves GAMS issues at higher spatial resolutions
+- **config** added `cfg$results_folder_highres` which allows to modify the output folder used in the `highres.R` output script
+- **config** new area equipped for irrigation (AEI) data in preprocessing (4.87)
+- **scenario_config.csv** added a scenario for the NGFS project
+- **scripts** New output script for reporting disaggregated land use patterns to the SEALS (Spatial Economic Allocation Landscape Simulator) downscaling model
+
+### removed
+- **config** `s80_num_nonopt_allowed`
+- **scripts** removed .snapshot.Rprofile and the Rprofile.R script, renv now fully supersedes snapshots
+
+### fixed
+- **30_crop** corrected q30_cropland in module realization rotation_apr22, where fallow land was on the wrong side of the equation
+- **71_disagg_lvst** reworked `foragebased_aug18` (including removal of linear version and correction of balance flow calculation)
+- **80_optimization** resolve was not working in nlp_par realization due to `s80_num_nonopt_allowed`
+- **config** corrected wrong names of parameters for peatland costs
+- **config** updated scenario configs to newest preprocessing (4.87)
+
 ## [4.6.7] - 2023-05-10
 
 ### changed
@@ -701,7 +729,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.7...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.8...develop
+[4.6.8]: https://github.com/magpiemodel/magpie/compare/v4.6.7...v4.6.8
 [4.6.7]: https://github.com/magpiemodel/magpie/compare/v4.6.6...v4.6.7
 [4.6.6]: https://github.com/magpiemodel/magpie/compare/v4.6.5...v4.6.6
 [4.6.5]: https://github.com/magpiemodel/magpie/compare/v4.6.4...v4.6.5

@@ -74,9 +74,9 @@ highres <- function(cfg) {
       #list files with sftp command
       path <- paste0(sub("scp://","sftp://",repo),"/")
       h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]], ftp_use_epsv = TRUE, dirlistonly = TRUE), silent = TRUE)
-      con <- curl::curl(url = path, "r", handle = h)
+      con <- try(curl::curl(url = path, "r", handle = h), silent = TRUE)
       dat <- try(readLines(con), silent = TRUE)
-      close(con)
+      try(close(con), silent = TRUE)
       found <- c(found,grep(glob2rx(file),dat,value = T))
     } else if (dir.exists(repo)) {
       dat <- list.files(repo)
@@ -120,7 +120,11 @@ highres <- function(cfg) {
   tmp[1]    <- paste0(tmp[1], paste0("HR", res))
   cfg$title <- paste(tmp, collapse = "_")
 
-  cfg$results_folder <- paste0("output/HR", res, "/:title:")
+  if(!is.null(cfg$results_folder_highres)) {
+    cfg$results_folder <- file.path(cfg$results_folder_highres,":title:")
+  } else {
+    cfg$results_folder <- paste0("output/HR", res, "/:title:")
+  }
   cfg$force_replace  <- TRUE
   cfg$recalc_npi_ndc <- TRUE
 
