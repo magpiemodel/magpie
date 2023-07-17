@@ -19,7 +19,7 @@ sets
  grass_from31(grassland) pasture management options
    / pastr,range /
 
- ssp_past SSP scenarios for pasture suitability areas
-   / ssp126, ssp245, ssp370, ssp460, ssp585 /
+ scenario Generic name for the scenario set for the pasture suitability table input
+   / yields /
 
 ;
