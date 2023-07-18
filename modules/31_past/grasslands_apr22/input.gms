@@ -16,7 +16,6 @@ $setglobal c31_past_suit_scen  ssp370
 table f31_pastr_suitability(t_all,j,ssp_past) Areas suitable for pasture management (mio. ha)
 $ondelim
 $include "./modules/31_past/input/f31_pastr_suitability.cs3"
-
 $offdelim
 ;
 
@@ -28,11 +27,20 @@ $offdelim
 
 scalar s31_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
+$setglobal c31_grassl_yld_scenario  cc
+*   options:  cc        (climate change)
+*             nocc      (no climate change)
+*             nocc_hist (no climate change after year defined by sm_fix_cc)
+
 table f31_grassl_yld(t_all,j,grassland,w) LPJmL potential yields per cell (rainfed only) (tDM per ha)
 $ondelim
 $include "./modules/31_past/input/f31_grassl_yld.cs3"
 $offdelim
 ;
+* set values to 1995 if nocc scenario is used, or to sm_fix_cc after sm_fix_cc if nocc_hist is used
+$if "%c31_grassl_yld_scenario%" == "nocc" f31_grassl_yld(t_all,j,grassland,w) = f31_grassl_yld("y1995",j,grassland,w);
+$if "%c31_grassl_yld_scenario%" == "nocc_hist" f31_grassl_yld(t_all,j,grassland,w)$(m_year(t_all) > sm_fix_cc) = f31_grassl_yld(t_all,j,grassland,w)$(m_year(t_all) = sm_fix_cc);
+
 
 table f31_grass_bio(t_all,i, grassland) Estimated regional grass biomass consumption in the past (tDM)
 $ondelim
