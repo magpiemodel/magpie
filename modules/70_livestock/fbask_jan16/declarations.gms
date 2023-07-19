@@ -25,6 +25,7 @@ parameters
  im_feed_baskets(t_all,i,kap,kall)                Feed baskets in tDM per tDM livestock product (1)
  p70_cattle_stock_proxy(t,i)                      Proxy for cattle stocks needed to fullfil food demand for ruminant meat (mio. animals per yr)
  p70_milk_cow_proxy(t,i)                          Proxy for milk cows needed to fullfil food demand for milk (mio. animals per yr)
+ p70_cattle_feed_pc_proxy(t,i,kli_rd)             Proxy for daily per capita feed demand for pasture biomass driven by demand for beef and dairy products (tDM per capita per day)
  p70_incr_cattle(t,i)                             Change in estimated cattle stocks attributed to food demand projections (1)
  pm_past_mngmnt_factor(t,i)                       Regional pasture management intensification factor (1)
  i70_cereal_scp_fadeout(t_all,i)                  Cereal feed fadeout (share 0-1) to be replaced by SCP (1)

@@ -27,19 +27,20 @@ p70_milk_cow_proxy(t,i) = im_pop(t,i)*pm_kcal_pc_initial(t,i,"livst_milk")
 p70_cattle_stock_proxy(t,i)$(p70_cattle_stock_proxy(t,i) < 0.2*p70_cattle_stock_proxy("y1995",i)) = 0.2*p70_cattle_stock_proxy("y1995",i);
 p70_milk_cow_proxy(t,i)$(p70_milk_cow_proxy(t,i) < 0.2*p70_milk_cow_proxy("y1995",i)) = 0.2*p70_milk_cow_proxy("y1995",i);
 
+*' The parameter `p70_cattle_feed_pc_proxy` is a proxy for regional daily per capita
+*' feed demand for pasture biomass driven by demand for beef and dairy products,
+*' which is later used for weighted aggregation.
+p70_cattle_feed_pc_proxy(t,i,kli_rd) = pm_kcal_pc_initial(t,i,kli_rd)*im_feed_baskets(t,i,kli_rd,"pasture")/(fm_nutrition_attributes(t,kli_rd,"kcal") * 10**6);
 
 *' The parameter `p70_incr_cattle` describes the changes in the number of cattle
 *' relative to the previous time step:
 
 p70_incr_cattle(t,i)  =  1$(ord(t)=1)
      + (
-            (  ( pm_kcal_pc_initial(t,i,"livst_rum")*im_feed_baskets(t,i,"livst_rum","pasture")/fm_nutrition_attributes(t,"livst_rum","kcal") )
-               / sum(kli_rd, sum(kap_to_kfo_ap(kli_rd,kfo_ap),pm_kcal_pc_initial(t,i,kfo_ap))*im_feed_baskets(t,i,kli_rd,"pasture")/fm_nutrition_attributes(t,kli_rd,"kcal") )  )
-               * (p70_cattle_stock_proxy(t,i)/p70_cattle_stock_proxy(t-1,i))
-         +
-            (  ( pm_kcal_pc_initial(t,i,"livst_milk")*im_feed_baskets(t,i,"livst_milk","pasture")/fm_nutrition_attributes(t,"livst_milk","kcal") )
-               / sum(kli_rd, sum(kap_to_kfo_ap(kli_rd,kfo_ap),pm_kcal_pc_initial(t,i,kfo_ap))*im_feed_baskets(t,i,kli_rd,"pasture")/fm_nutrition_attributes(t,kli_rd,"kcal") )  )
-               *(p70_milk_cow_proxy(t,i)/p70_milk_cow_proxy(t-1,i))
+          ( p70_cattle_feed_pc_proxy(t,i,"livst_rum") * (p70_cattle_stock_proxy(t,i)/p70_cattle_stock_proxy(t-1,i))
+            +
+            p70_cattle_feed_pc_proxy(t,i,"livst_milk") * (p70_milk_cow_proxy(t,i)/p70_milk_cow_proxy(t-1,i)) )
+          / sum(kli_rd, p70_cattle_feed_pc_proxy(t,i,kli_rd) )
        )$(ord(t)>1);
 
 *' The pasture management factor is calculated by applying a linear relationship 
