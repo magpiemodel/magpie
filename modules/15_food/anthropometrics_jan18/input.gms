@@ -29,7 +29,7 @@ $setglobal c15_fishscen  constant
 $setglobal c15_alcscen  constant
 $setglobal c15_livescen  constant
 $setglobal c15_rumdairyscen  constant
-$setglobal c15_rumdairy_scp_scen  sigmoid_20pc_20_50
+$setglobal c15_rumdairy_scp_scen  constant
 $setglobal c15_livescen_target  constant
 $setglobal c15_exo_foodscen  lin_zero_20_50
 
