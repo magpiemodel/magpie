@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+-  
 
 ### added
 -
@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **70_livestock** consideration of milk demand in the calculation of the pasture management factor
 
 
 ## [4.6.8] - 2023-07-17
