@@ -9,7 +9,7 @@
 
 q15_food_demand(i2,kfo) ..
                 (vm_dem_food(i2,kfo) + sum(ct, f15_household_balanceflow(ct,i2,kfo,"dm")))
-                * sum(ct,(f15_nutrition_attributes(ct,kfo,"kcal") * 10**6)) =g=
+                * sum(ct,(fm_nutrition_attributes(ct,kfo,"kcal") * 10**6)) =g=
                 sum(ct,im_pop(ct,i2) * p15_kcal_pc_calibrated(ct,i2,kfo)) * 365
                 ;
 

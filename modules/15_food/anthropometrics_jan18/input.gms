@@ -105,7 +105,7 @@ $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
 $offdelim;
 
-table f15_nutrition_attributes(t_all,kall,nutrition) Nutrition attributes of food items dedicated for fooduse (mio. kcal per tDM | t Protein per tDM)
+table fm_nutrition_attributes(t_all,kall,nutrition) Nutrition attributes of food items dedicated for fooduse (mio. kcal per tDM | t Protein per tDM)
 $ondelim
 $include "./modules/15_food/input/f15_nutrition_attributes.cs3"
 $offdelim;
