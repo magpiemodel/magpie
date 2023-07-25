@@ -150,22 +150,22 @@ $title magpie
 * 
 * Used data set: rev4.87_h12_magpie.tgz
 * md5sum: 658398f1dcbef89198bd85d61b1db9ad
-* Repository: /p/projects/rd3mod/inputdata/output
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.87_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: 8a1d668acfe66a700eb5da2143b31cb2
-* Repository: /p/projects/rd3mod/inputdata/output
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.87_h12_validation.tgz
 * md5sum: d02217d791b58400e6e3be7186527ed5
-* Repository: /p/projects/rd3mod/inputdata/output
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.43.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 7f537e5df805af11f0e67e84e6010290
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_glo_08Jul23.tgz
-* md5sum: 7315d0f268d6225805a4c1f1c3c05b13
+* Used data set: calibration_H12_per_ton_fao_may22_glo_14Jul23.tgz
+* md5sum: e64650408fd8790f9883e2fd5e372b5e
 * Repository: /p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Thu Jul 13 10:36:10 2023
+* Last modification (input data): Tue Jul 25 13:17:09 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -221,7 +221,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  testCellRes2_default
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -284,7 +284,7 @@ $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 
-$setglobal disagg_lvst  foragebased_aug18
+$setglobal disagg_lvst  foragebased_jul23
 
 $setglobal timber  default
 

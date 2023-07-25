@@ -11,17 +11,22 @@
 *' of harvested area `vm_area` and production `vm_prod_reg`. `f18_cgf` contains
 *' slope and intercept parameters of the CGFs.
 
- q18_prod_res_ag_reg(i2,kcr,attributes) ..
-                 vm_res_biomass_ag(i2,kcr,attributes)
+ q18_prod_res_ag_cell(j2,kcr,attributes) ..
+                 v18_res_biomass_ag_cell(j2,kcr,attributes)
                  =e=
-                 (sum((cell(i2,j2),w), vm_area(j2,kcr,w)) * sum(ct,f18_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
-                 + vm_prod_reg(i2,kcr) * f18_cgf("slope",kcr))
+                 (sum(w, vm_area(j2,kcr,w)) * sum((ct, cell(i2,j2)), f18_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
+                 + vm_prod(j2,kcr) * f18_cgf("slope",kcr))
                  * f18_attributes_residue_ag(attributes,kcr);
+
+ q18_prod_res_ag_reg(i2,kcr,attributes) ..
+                  vm_res_biomass_ag(i2,kcr,attributes)
+                 =e=
+                 sum(cell(i2,j2), v18_res_biomass_ag_cell(j2,kcr,attributes));
 
 *' The BG crop residue biomass `vm_res_biomass_bg` is calculated as a function of
 *' total aboveground biomass.
 
- q18_prod_res_bg_reg(i2,kcr,dm_nr) ..
+ q18_prod_res_bg_cell(i2,kcr,dm_nr) ..
                  vm_res_biomass_bg(i2,kcr,dm_nr)
                  =e=
                  (vm_prod_reg(i2,kcr) + vm_res_biomass_ag(i2,kcr,"dm")) * f18_cgf("bg_to_ag",kcr)
@@ -38,9 +43,16 @@
  q18_res_field_balance(i2,kcr,attributes) ..
                   vm_res_biomass_ag(i2,kcr,attributes)
                   =e=
-                  v18_res_ag_removal(i2,kcr,attributes)
+                  sum(cell(i2,j2), v18_res_ag_removal(j2,kcr,attributes))
                   + vm_res_ag_burn(i2,kcr,attributes)
                   + v18_res_ag_recycling(i2,kcr,attributes);
+
+*' make sure removal is less than biomass produced in each cell
+ q18_cell_field_constraint(j2,kcr,attributes) ..
+              sum(cell(i2,j2), vm_res_biomass_ag(i2,kcr,attributes)) 
+              =g= 
+              v18_res_ag_removal(j2,kcr,attributes);
+
 
 *' The amount of residues burned on fields in a region `vm_res_ag_burn` is
 *' determined by the share (ic18_res_use_min_shr) of AG residue biomass.
@@ -67,20 +79,20 @@
 *' guarantees that mass balances are not violated while a homogeneous
 *' good is extracted from heterogeneous goods.
 
- q18_translate(i2,kres,attributes)..
-                  sum(kres_kcr(kres,kcr), v18_res_ag_removal(i2,kcr,attributes))
+ q18_translate(j2,kres,attributes)..
+                  sum(kres_kcr(kres,kcr), v18_res_ag_removal(j2,kcr,attributes))
                   =e=
-                  vm_prod_reg(i2,kres) * fm_attributes(attributes,kres);
+                  v18_prod_res(j2,kres) * fm_attributes(attributes,kres);
 
-*' Amount produced at cellular level is flexible, can be distributed as it wants 
- q18_prod_res_cell(j2,kres)..
-                  sum(cell(i2,j2), vm_prod_reg(i2,kres))
+*' sum to the regional amount of residues produced for the regional interface  
+ q18_prod_res_reg(i2,kres)..
+                  vm_prod_reg(i2,kres)
                   =e=
-                  v18_prod_res(j2,kres) ;
+                  sum(cell(i2,j2), v18_prod_res(j2,kres)) ;
 
 
 *' Residues recycled to croplands in nutrients `vm_res_recycling(i2,"nr")` are
-*' calcualted based on the amount of AG residues left on field for recycling, the
+*' calculated based on the amount of AG residues left on field for recycling, the
 *' nutrients coming from burned residues, and on biomass that is left in
 *' BG residues. They are calculated to be transmitted to the nitrogen budget
 *' module [50_nr_soil_budget].
@@ -88,7 +100,7 @@
  q18_res_recycling_nr(i2) ..
                   vm_res_recycling(i2,"nr")
                   =e=
-                  sum(kcr,  v18_res_ag_recycling(i2,kcr,"nr")
+                  sum(kcr, v18_res_ag_recycling(i2,kcr,"nr")
                     + vm_res_ag_burn(i2,kcr,"nr")*(1-f18_res_combust_eff(kcr))
                     + vm_res_biomass_bg(i2,kcr,"nr")
                   );
@@ -102,7 +114,7 @@
  q18_res_recycling_pk(i2,pk18) ..
                   vm_res_recycling(i2,pk18)
                   =e=
-                  sum(kcr,
+                  sum(kcr, 
                     v18_res_ag_recycling(i2,kcr,pk18)
                     + vm_res_ag_burn(i2,kcr,pk18)
                   );
@@ -123,5 +135,6 @@
 
 *' Trade of AG residues is not considered, so that all produced AG residues have
 *' to be assigned to uses within the respective world region.
+
 
 *** EOF constraints.gms ***
