@@ -221,7 +221,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  testCellRes2_default
+$setglobal c_title  testCellRes3_flexcell
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -241,7 +241,7 @@ $setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
-$setglobal residues  flexreg_apr16
+$setglobal residues  flexcell_july23
 $setglobal processing  substitution_may21
 
 $setglobal trade  selfsuff_reduced

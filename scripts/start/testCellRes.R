@@ -22,14 +22,14 @@ library(gms)
 source("config/default.cfg")
 
 #start MAgPIE run
-cfg$title <- "testCellRes2_default"
+cfg$title <- "testCellRes2_default_noNewEquation"
 
 #start MAgPIE run
 
 cfg$gms$residues <- "flexreg_apr16"          
-start_run(cfg, codeCheck = TRUE)
+#start_run(cfg, codeCheck = TRUE)
 
-cfg$title <- "testCellRes2_flexcell"
+cfg$title <- "testCellRes3_flexcell"
 cfg$gms$residues <- "flexcell_july23"          
 start_run(cfg, codeCheck = TRUE)
 

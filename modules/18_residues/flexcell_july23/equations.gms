@@ -49,10 +49,9 @@
 
 *' make sure removal is less than biomass produced in each cell
  q18_cell_field_constraint(j2,kcr,attributes) ..
-              sum(cell(i2,j2), vm_res_biomass_ag(i2,kcr,attributes)) 
+             v18_res_biomass_ag_cell(j2,kcr,attributes)
               =g= 
               v18_res_ag_removal(j2,kcr,attributes);
-
 
 *' The amount of residues burned on fields in a region `vm_res_ag_burn` is
 *' determined by the share (ic18_res_use_min_shr) of AG residue biomass.
