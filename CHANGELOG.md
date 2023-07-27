@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--  
+-
 
 ### added
 -
@@ -18,13 +18,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **70_livestock** consideration of milk demand in the calculation of the pasture management factor
+- **scripts** Fixed inaccuracies and inconsistent application of SNV policies during disaggregation in luscale::interpolateAvlCroplandWeighted(), which is called in extra/disaggregation.R
 
 
 ## [4.6.8] - 2023-07-17
 
 ### changed
 - **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
-- **80_optimization** printing of solprint when solver status is 7 re-activated 
+- **80_optimization** printing of solprint when solver status is 7 re-activated
 - **scripts** start_functions.R can now handle clusters per region flexibly
 - **scripts** the REMIND-MAgPIE coupling now uses renv
 
