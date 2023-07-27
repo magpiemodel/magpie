@@ -27,12 +27,6 @@ jobs:
         with:
           extra-repositories: https://cloud.r-project.org https://rse.pik-potsdam.de/r/packages/
 
-      - name: Install R dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages: gms
-          extra-packages: gms
-
       - name: pre-commit Hook
         run: source(".githooks/pre-commit")
         shell: Rscript {0}
