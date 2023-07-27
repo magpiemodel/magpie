@@ -92,7 +92,7 @@ $else
 $endif
 
 * initial prices in $US per Kcal
-i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
-                                                                                  / (f15_nutrition_attributes("y1995",kfo,"kcal")*10**6);
+i15_prices_initial_kcal(iso,kfo)$(fm_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
+                                                                                  / (fm_nutrition_attributes("y1995",kfo,"kcal")*10**6);
 p15_prices_kcal(t,iso,kfo,"iter1")=i15_prices_initial_kcal(iso,kfo);
 p15_convergence_measure(t,iter15)=NA;

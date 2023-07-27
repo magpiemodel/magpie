@@ -5,11 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+## [4.6.9] - 2023-07-27
+
+### fixed
+- **70_livestock** consideration of milk demand in the calculation of the pasture management factor
+- **scripts** Fixed inaccuracies and inconsistent application of SNV policies during disaggregation in luscale::interpolateAvlCroplandWeighted(), which is called in extra/disaggregation.R
+
+
 ## [4.6.8] - 2023-07-17
 
 ### changed
 - **41_area_equipped_for_irrigation** new AEI data (Mehta2022) replacing old Siebert data
-- **80_optimization** printing of solprint when solver status is 7 re-activated 
+- **80_optimization** printing of solprint when solver status is 7 re-activated
 - **scripts** start_functions.R can now handle clusters per region flexibly
 - **scripts** the REMIND-MAgPIE coupling now uses renv
 
@@ -32,6 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **80_optimization** resolve was not working in nlp_par realization due to `s80_num_nonopt_allowed`
 - **config** corrected wrong names of parameters for peatland costs
 - **config** updated scenario configs to newest preprocessing (4.87)
+
 
 ## [4.6.7] - 2023-05-10
 
@@ -729,7 +737,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.8...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.9...develop
+[4.6.9]: https://github.com/magpiemodel/magpie/compare/v4.6.8...v4.6.9
 [4.6.8]: https://github.com/magpiemodel/magpie/compare/v4.6.7...v4.6.8
 [4.6.7]: https://github.com/magpiemodel/magpie/compare/v4.6.6...v4.6.7
 [4.6.6]: https://github.com/magpiemodel/magpie/compare/v4.6.5...v4.6.6
