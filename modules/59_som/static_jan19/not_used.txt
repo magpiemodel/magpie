@@ -5,4 +5,5 @@ vm_area,input,questionnaire
 vm_landexpansion,input,questionnaire
 vm_lu_transitions,input,questionnaire
 pm_climate_class,input,questionnaire
+vm_res_recycling,input,questionnaire
 vm_fallow,input,questionnaire

@@ -55,7 +55,7 @@
  q51_emissions_som(i2,n_pollutants_direct)..
                  vm_emissions_reg(i2,"som",n_pollutants_direct)
                  =e=
-                 sum(cell(i2,j2),vm_nr_som(j2)) * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"som"))
+                 vm_nr_som(i2) * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"som"))
                  / (1-s51_snupe_base) * (1-vm_nr_eff(i2));
 
 *' animal waste management

@@ -53,31 +53,31 @@ q59_carbon_soil(j2,land,stockType) ..
                 =e= v59_som_pool(j2, land) + vm_land(j2, land) * 
                      sum(ct,i59_subsoilc_density(ct,j2));
 
-*' The annual nitrogen release (or sink) for cropland soils is than 
+*' The annual nitrogen release (or sink) for cropland soils is than
 *' calculated by the loss of soil organic carbon given by
 
-q59_nr_som(j2) ..
-           vm_nr_som(j2)
-           =e= sum(ct,i59_lossrate(ct))/m_timestep_length*1/15
-               * (sum((ct,land_from), p59_carbon_density(ct,j2,land_from) * 
-                   vm_lu_transitions(j2,land_from,"crop"))
-               - v59_som_target(j2,"crop"))
+q59_nr_som(i2) ..
+           vm_nr_som(i2)
+           =e= sum(ct, i59_lossrate(ct)) / m_timestep_length * 1/15 *
+               sum(cell(i2, j2), sum((ct, land_from), p59_carbon_density(ct, j2, land_from) *
+                   vm_lu_transitions(j2, land_from, "crop")) - v59_som_target(j2, "crop"))
            ;
 *' with the carbon to nitrogen ratio of soils assumed to be 15:1.
 
-*' The amount of nitrogen that becomes available to cropland farming is 
+*' The amount of nitrogen that becomes available to cropland farming is
 *' limited by loss of soil organic matter by
 
-q59_nr_som_fertilizer(j2) ..
-          vm_nr_som_fertilizer(j2)
+q59_nr_som_fertilizer(i2) ..
+          vm_nr_som_fertilizer(i2)
           =l=
-          vm_nr_som(j2);
+          vm_nr_som(i2);
 
 *' as well as by the amount that crops can take up
 
-q59_nr_som_fertilizer2(j2) ..
-          vm_nr_som_fertilizer(j2)
+q59_nr_som_fertilizer2(i2) ..
+          vm_nr_som_fertilizer(i2)
           =l=
-          vm_landexpansion(j2,"crop") * s59_nitrogen_uptake;
+          sum(cell(i2, j2), vm_landexpansion(j2, "crop")) * s59_nitrogen_uptake;
 
 *' Here we assume a maximum of 200 kg on the expanded area.
+

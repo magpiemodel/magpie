@@ -12,8 +12,8 @@ parameters
 ;
 
 variables
-        vm_nr_som(j)                        Release of soil organic matter (Mt N per yr)
-        vm_nr_som_fertilizer(j)             Uptake of soil organic matter from plants (Mt N per yr)
+        vm_nr_som(i)                        Release of soil organic matter (Mt N per yr)
+        vm_nr_som_fertilizer(i)             Uptake of soil organic matter from plants (Mt N per yr)
 ;
 
 equations
@@ -23,8 +23,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_nr_som(t,j,type)                                           Release of soil organic matter (Mt N per yr)
- ov_nr_som_fertilizer(t,j,type)                                Uptake of soil organic matter from plants (Mt N per yr)
+ ov_nr_som(t,i,type)                                           Release of soil organic matter (Mt N per yr)
+ ov_nr_som_fertilizer(t,i,type)                                Uptake of soil organic matter from plants (Mt N per yr)
  oq59_soilcarbon_cropland(t,j,stockType,type)                  Cropland soil carbon content calculation (mio. tC)
  oq59_soilcarbon_noncropland(t,j,noncropland59,stockType,type) Non-cropland soil carbon content calculation (mio. tC)
 ;

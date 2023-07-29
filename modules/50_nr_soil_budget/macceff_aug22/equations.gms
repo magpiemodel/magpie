@@ -27,7 +27,7 @@ q50_nr_inputs(i2) ..
                   + vm_manure_recycling(i2,"nr")
                   + sum(kli, vm_manure(i2, kli, "stubble_grazing","nr"))
                   + vm_nr_inorg_fert_reg(i2,"crop")
-                  + sum(cell(i2,j2),vm_nr_som_fertilizer(j2))
+                  + vm_nr_som_fertilizer(i2)
                   + sum(ct,f50_nitrogen_balanceflow(ct,i2))
                   + v50_nr_deposition(i2,"crop");
 
