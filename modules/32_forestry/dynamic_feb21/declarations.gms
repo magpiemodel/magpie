@@ -72,6 +72,7 @@ positive variables
  v32_land_reduction(j,type32,ac)                    Forestry land reduction (mio. ha)
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
  v32_hvarea_forestry(j,ac)                          Harvested area from timber plantations (mio. ha)
+ v32_aff_area(i)                                    Regional afforestation area (aff and ndf) (mio. ha)
  vm_prod_forestry(j,kforestry)                      Production of woody biomass from commercial plantations (mio. tDM per yr)
  ;
 
@@ -87,6 +88,7 @@ equations
  q32_land_diff                                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                      Maximum total global afforestation (mio. ha)
  q32_max_aff_reg(i)                                 Maximum total regional afforestation (mio. ha)
+ q32_aff_area(i)                                    Regional afforestation area (aff and ndf) (mio. ha)
  q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
  q32_aff_est(j)                                     Afforestation constraint for establishment age classes (mio. ha)
  q32_hvarea_forestry(j,ac)                          Plantations area harvest (mio. ha)

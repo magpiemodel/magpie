@@ -75,6 +75,10 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
   sum((cell(i2,j2),ac), v32_land(j2,"aff",ac))
         =l= sum(ct, i32_max_aff_area_reg(ct,i2));
 
+ q32_aff_area(i2) ...
+  v32_aff_area(i2)
+        =e= sum((cell(i2,j2),ac), v32_land(j2, "aff", ac) + v32_land(j2, "ndc", ac));
+
 *-----------------------------------------------
 ************** Carbon stock ********************
 *-----------------------------------------------

@@ -157,8 +157,13 @@ else
   v32_land.up(j,"aff",ac_est) = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 );
 
-if(m_year(t) = 2025,
-  v32_land.up(j,"aff","ac0") = s32_max_aff_cell_2025;
+** if(m_year(t) = 2025,
+**   v32_land.up(j,"aff","ac0") = s32_max_aff_cell_2025;
+** );
+
+if(m_year(t) > sm_fix_SSP2,
+  v32_aff_area.up(i) = sum((cell(i2,j2),ac), p32_land(t-1,j2,"aff",ac) + p32_land(t-1,j2,"ndc",ac))
+    * (1+s32_aff_max_growth) ** m_yeardiff(t);
 );
 
 *' No afforestation is allowed if carbon density <= 20 tc/ha
