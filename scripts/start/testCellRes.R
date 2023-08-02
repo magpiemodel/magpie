@@ -29,7 +29,7 @@ cfg$title <- "testCellRes2_default_noNewEquation"
 cfg$gms$residues <- "flexreg_apr16"          
 #start_run(cfg, codeCheck = TRUE)
 
-cfg$title <- "testCellRes3_flexcell"
+cfg$title <- "testCellRes6_flexcell"
 cfg$gms$residues <- "flexcell_july23"          
 start_run(cfg, codeCheck = TRUE)
 

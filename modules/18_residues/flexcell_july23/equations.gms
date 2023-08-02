@@ -40,18 +40,23 @@
 *' `vm_res_biomass_ag(i,kcr,attributes)` is properly assigned to different uses:
 *' removal, on-field burning and recycling of AG residues.
 
+q18_regional_removals(i2,kcr,attributes) ..
+               sum(cell(i2,j2), v18_res_ag_removal(j2,kcr,attributes))
+               =l=
+               v18_res_ag_removal_reg(i2,kcr,attributes);
+
  q18_res_field_balance(i2,kcr,attributes) ..
                   vm_res_biomass_ag(i2,kcr,attributes)
                   =e=
-                  sum(cell(i2,j2), v18_res_ag_removal(j2,kcr,attributes))
+                  v18_res_ag_removal_reg(i2,kcr,attributes)
                   + vm_res_ag_burn(i2,kcr,attributes)
                   + v18_res_ag_recycling(i2,kcr,attributes);
 
 *' make sure removal is less than biomass produced in each cell
- q18_cell_field_constraint(j2,kcr,attributes) ..
-             v18_res_biomass_ag_cell(j2,kcr,attributes)
+ q18_cell_field_constraint(j2,kres) ..
+             sum(kres_kcr(kres,kcr), v18_res_biomass_ag_cell(j2,kcr,"dm"))
               =g= 
-              v18_res_ag_removal(j2,kcr,attributes);
+              v18_prod_res(j2, kres);
 
 *' The amount of residues burned on fields in a region `vm_res_ag_burn` is
 *' determined by the share (ic18_res_use_min_shr) of AG residue biomass.
