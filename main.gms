@@ -149,24 +149,24 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: rev4.87_h12_magpie.tgz
-* md5sum: 658398f1dcbef89198bd85d61b1db9ad
-* Repository: /p/projects/rd3mod/inputdata/output
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.87_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 8a1d668acfe66a700eb5da2143b31cb2
-* Repository: /p/projects/rd3mod/inputdata/output
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.87_h12_validation.tgz
-* md5sum: d02217d791b58400e6e3be7186527ed5
-* Repository: /p/projects/rd3mod/inputdata/output
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.43.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_glo_08Jul23.tgz
-* md5sum: 7315d0f268d6225805a4c1f1c3c05b13
-* Repository: /p/projects/landuse/data/input/calibration
+* Used data set: calibration_H12_per_ton_fao_may22_glo_14Jul23.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -194,8 +194,10 @@ $title magpie
 *     6   17    9    8    1   44   26    7   10   13   38   21
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning message:
+* "~/.Rprofile" is missing a trailing newline
 * 
-* Last modification (input data): Thu Jul 13 10:36:10 2023
+* Last modification (input data): Mon Aug  7 14:25:02 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

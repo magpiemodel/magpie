@@ -18,3 +18,11 @@ sets
 
   alias(land,land_from);
   alias(land,land_to);
+
+sets
+  land_to_non_forest(land_to) Non forest pool for transition
+   /crop, past, other, urban/
+
+  land_from_forest(land_from) Forest pool for transition
+  /primforest, secdforest, forestry /
+;
