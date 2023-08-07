@@ -11,17 +11,17 @@
 *' of harvested area `vm_area` and production `vm_prod_reg`. `f18_cgf` contains
 *' slope and intercept parameters of the CGFs.
 
- q18_prod_res_ag_cell(j2,kcr,attributes) ..
-                 v18_res_biomass_ag_cell(j2,kcr,attributes)
+ q18_prod_res_ag_cell(j2,kcr) ..
+                 v18_res_biomass_ag_cell(j2,kcr)
                  =e=
                  (sum(w, vm_area(j2,kcr,w)) * sum((ct, cell(i2,j2)), f18_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
-                 + vm_prod(j2,kcr) * f18_cgf("slope",kcr))
-                 * f18_attributes_residue_ag(attributes,kcr);
+                 + vm_prod(j2,kcr) * f18_cgf("slope",kcr));
 
  q18_prod_res_ag_reg(i2,kcr,attributes) ..
                   vm_res_biomass_ag(i2,kcr,attributes)
                  =e=
-                 sum(cell(i2,j2), v18_res_biomass_ag_cell(j2,kcr,attributes));
+                 sum(cell(i2,j2), v18_res_biomass_ag_cell(j2,kcr)) 
+                 * f18_attributes_residue_ag(attributes,kcr);
 
 *' The BG crop residue biomass `vm_res_biomass_bg` is calculated as a function of
 *' total aboveground biomass.
@@ -54,7 +54,7 @@ q18_regional_removals(i2,kcr,attributes) ..
 
 *' make sure removal is less than biomass produced in each cell
  q18_cell_field_constraint(j2,kres) ..
-             sum(kres_kcr(kres,kcr), v18_res_biomass_ag_cell(j2,kcr,"dm"))
+             sum(kres_kcr(kres,kcr), v18_res_biomass_ag_cell(j2,kcr))
               =g= 
               v18_prod_res(j2, kres);
 
