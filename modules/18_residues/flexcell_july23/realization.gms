@@ -24,6 +24,11 @@
 *' on @wirsenius_human_2000, @lal_world_2005 and @feller_dungung_2007. If different CGFs are available
 *' for crops within a crop group, we build a weighted average based on the
 *' production in 1995.
+*' 
+*' This realization enforces cluster-level agricultural residue production, based on agricultural production
+*' at the same level. However, other uses such as burning and recycling are allowed to be balanced at the 
+*' regional level, in order to reduce computational complexity.
+
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/18_residues/flexcell_july23/sets.gms"

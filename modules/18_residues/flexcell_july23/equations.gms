@@ -32,6 +32,17 @@
                  (vm_prod_reg(i2,kcr) + vm_res_biomass_ag(i2,kcr,"dm")) * f18_cgf("bg_to_ag",kcr)
                  * f18_attributes_residue_bg(dm_nr,kcr);
 
+*' Variable of removals at regional level needs to be greater than 
+*' the regionally-summed cluster-level variable. This is not an equal-to
+*' for run-time considerations, but should be noted if regional removals 
+*' vm_res_biomass_ag are to be incentivised.
+
+q18_regional_removals(i2,kcr,attributes) ..
+               sum(cell(i2,j2), v18_res_ag_removal(j2,kcr,attributes))
+               =l=
+               v18_res_ag_removal_reg(i2,kcr,attributes);
+
+
 *' In contrast to AG biomass, AG production `vm_res_biomass_ag(i,kcr,attributes)`
 *' is defined as the part of residues which is removed from the field. The
 *' difference between biomass and production is either burned on field or
@@ -39,11 +50,6 @@
 *' The field balance equations ensures that the production of AG residues
 *' `vm_res_biomass_ag(i,kcr,attributes)` is properly assigned to different uses:
 *' removal, on-field burning and recycling of AG residues.
-
-q18_regional_removals(i2,kcr,attributes) ..
-               sum(cell(i2,j2), v18_res_ag_removal(j2,kcr,attributes))
-               =l=
-               v18_res_ag_removal_reg(i2,kcr,attributes);
 
  q18_res_field_balance(i2,kcr,attributes) ..
                   vm_res_biomass_ag(i2,kcr,attributes)
