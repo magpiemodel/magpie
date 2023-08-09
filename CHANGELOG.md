@@ -8,7 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **config**  update preprocessing to newest input data v4.88 with new transport costs
+- **scenario_config.csv** update preprocessing to newest input data v4.88
+
 
 ### added
 -
