@@ -26,6 +26,5 @@ $Ifi "%phase%" == "declarations" $include "./modules/71_disagg_lvst/foragebased_
 $Ifi "%phase%" == "equations" $include "./modules/71_disagg_lvst/foragebased_aug18/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/71_disagg_lvst/foragebased_aug18/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/71_disagg_lvst/foragebased_aug18/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/71_disagg_lvst/foragebased_aug18/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/71_disagg_lvst/foragebased_aug18/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

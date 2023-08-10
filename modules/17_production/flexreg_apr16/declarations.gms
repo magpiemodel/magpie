@@ -15,7 +15,7 @@ equations
 ;
 
 parameters
-pm_prod_init(j,k)               Production initialization for year 1995 (tDM per yr)
+pm_prod_init(j,kcr)               Production initialization for year 1995 (tDM per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
