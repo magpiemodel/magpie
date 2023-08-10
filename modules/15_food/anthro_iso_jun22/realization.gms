@@ -45,4 +45,4 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' diet scenarios, most importantly the shift to the Planetary Health diet
 *' [@willett_food_2019].
 *'
-*' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Jan Philipp Dietrich
+*' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Jan Philipp Dietrich, Felicitas Beier, Marco Springmann

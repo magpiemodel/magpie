@@ -250,9 +250,19 @@ $ondelim
 $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
+*** EAT Lancet diet recommendation
+table f15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15)   Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
+$ondelim
+$include "./modules/15_food/input/f15_targets_EATLancet_iso.cs3"
+$offdelim;
 
-**This file contains exogenous dietary recommendations for India and EAT Lancet recommendations for all other regions
-**Different set elements for sets "t_scen15", "kcal_scen15" and "EAT_scen15" result in the identical target diet as per f15_intake_EATLancet
+table f15_fruitveg2others_kcal_ratio(t_all,iso)   Ratio of calories from fruits and vegetables within the others food category (1)
+$ondelim
+$include "./modules/15_food/input/f15_fruitveg2others_kcal_ratio_iso.csv"
+$offdelim;
+
+* This file contains exogenous dietary recommendations for India and EAT Lancet recommendations for all other regions
+* Different set elements for sets "t_scen15", "kcal_scen15" and "EAT_scen15" result in the identical target diet as per f15_intake_EATLancet
 table f15_intake_NIN(t_scen15,iso,kcal_scen15,EAT_scen15,kfo)   NIN scenarios for food-specific intake (kcal per capita per day)
 $ondelim
 $include "./modules/15_food/input/f15_intake_NIN_iso.cs3"
