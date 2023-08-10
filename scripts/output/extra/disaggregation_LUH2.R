@@ -200,11 +200,15 @@ gc()
 
 b <- protectedArea(gdx,level = "grid",dir=outputdir) / dimSums(land_hr, dim=3)
 b[is.na(b)] <- 0
-luh2 <- data.frame(matrix(nrow=3,ncol=2))
+luh2 <- data.frame(matrix(nrow=7,ncol=2))
 names(luh2) <- c("LUH2","MAgPIE")
-luh2[1,] <- c("primf_prot","primforest")
-luh2[2,] <- c("secdf_prot","secdforest")
-luh2[3,] <- c("primn_secdn_prot","other")
+luh2[1,] <- c("crop_prot","crop")
+luh2[2,] <- c("past_prot","past")
+luh2[3,] <- c("timber_prot","forestry")
+luh2[4,] <- c("primf_prot","primforest")
+luh2[5,] <- c("secdf_prot","secdforest")
+luh2[6,] <- c("urban_prot","urban")
+luh2[7,] <- c("primn_secdn_prot","other")
 b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
 gc()
 if(!file.exists(paste0(out_dir,"/LUH2_protected_area.nc"))){
@@ -216,69 +220,73 @@ gc()
 }
 
 ####### ONLY DYNAMIC FORESTRY ON#############
-
-#### Wood
-land_lr <- madrat::toolAggregate(dimSums(land_hr,dim=3), map_file, from = "cell",to = "cluster")
-
-### Wood: Harvested Area
-a <- harvested_area_timber(gdx,level = "cell")
-b <- a / land_lr
-b <- madrat::toolAggregate(b, map_file, from = "cluster",to = "cell")
-luh2 <- data.frame(matrix(nrow=4,ncol=2))
-names(luh2) <- c("LUH2","MAgPIE")
-luh2[1,] <- c("timber_harv","Forestry")
-luh2[2,] <- c("primf_harv","Primary forest")
-luh2[3,] <- c("secdf_harv","Secondary forest")
-luh2[4,] <- c("primn_secdn_harv","Other land")
-b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
-gc()
-if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_area.nc"))){
-b <- convertLUH2(b)
-gc()
-write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_area.nc"),comment = "unit: fraction of grid-cell area per year")
-rm(a,b)
-gc()
-}
-
-#### Wood: Yields
-a <- ForestYield(gdx,level="cell")
-a_fix<- new.magpie(cells_and_regions=getCells(a),years=getYears(a),
-                      names=getNames(a))
-
-# BugFix in the mean time. Strange jump from ForestYield
-a_fix[,1,]<-0
-a_fix[,-1,]<-setYears(a[,2100,,invert=TRUE],getYears(a_fix[,-1,]))
-a[a>500]<-a_fix[a>500]
-b <- madrat::toolAggregate(a, map_file, from = "cluster",to = "cell")
-luh2 <- data.frame(matrix(nrow=4,ncol=2))
-names(luh2) <- c("LUH2","MAgPIE")
-luh2[1,] <- c("timber_bioh","Forestry")
-luh2[2,] <- c("primf_bioh","Primary forest")
-luh2[3,] <- c("secdf_bioh","Secondary forest")
-luh2[4,] <- c("primn_secdn_bioh","Other land")
-b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
-gc()
-if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_yields.nc"))){
-b <- convertLUH2(b)
-gc()
-write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_yields.nc"),comment = "unit: m3 per ha per year")
-rm(a,b)
-gc()
-}
-
-#### Wood: Harvested Biomass Product Split
-b <- TimberProductionVolumetric(gdx,level = "cell",sumSource = FALSE,sumProduct = FALSE)
-b <- dimSums(b,dim=3.1)
-b <- b/dimSums(b,dim=3)
-getNames(b) <- c("rndwd","fulwd")
-b <- madrat::toolAggregate(b, map_file, from = "cluster",to = "cell")
-if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_biomass_split.nc"))){
-b <- convertLUH2(b)
-gc()
-write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_biomass_split.nc"),comment = "unit: fraction of wood harvest biomass")
-rm(b)
-gc()
-}
+#check for dynamic foresty
+if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
+  message("Start forestry / timber reporting")
+  
+  #### Wood
+  land_lr <- madrat::toolAggregate(dimSums(land_hr,dim=3), map_file, from = "cell",to = "cluster")
+  
+  ### Wood: Harvested Area
+  a <- harvested_area_timber(gdx,level = "cell")
+  b <- a / land_lr
+  b <- madrat::toolAggregate(b, map_file, from = "cluster",to = "cell")
+  luh2 <- data.frame(matrix(nrow=4,ncol=2))
+  names(luh2) <- c("LUH2","MAgPIE")
+  luh2[1,] <- c("timber_harv","Forestry")
+  luh2[2,] <- c("primf_harv","Primary forest")
+  luh2[3,] <- c("secdf_harv","Secondary forest")
+  luh2[4,] <- c("primn_secdn_harv","Other land")
+  b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
+  gc()
+  if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_area.nc"))){
+    b <- convertLUH2(b)
+    gc()
+    write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_area.nc"),comment = "unit: fraction of grid-cell area per year")
+    rm(a,b)
+    gc()
+  }
+  
+  #### Wood: Yields
+  a <- ForestYield(gdx,level="cell")
+  a_fix<- new.magpie(cells_and_regions=getCells(a),years=getYears(a),
+                     names=getNames(a))
+  
+  # BugFix in the mean time. Strange jump from ForestYield
+  a_fix[,1,]<-0
+  a_fix[,-1,]<-setYears(a[,2100,,invert=TRUE],getYears(a_fix[,-1,]))
+  a[a>500]<-a_fix[a>500]
+  b <- madrat::toolAggregate(a, map_file, from = "cluster",to = "cell")
+  luh2 <- data.frame(matrix(nrow=4,ncol=2))
+  names(luh2) <- c("LUH2","MAgPIE")
+  luh2[1,] <- c("timber_bioh","Forestry")
+  luh2[2,] <- c("primf_bioh","Primary forest")
+  luh2[3,] <- c("secdf_bioh","Secondary forest")
+  luh2[4,] <- c("primn_secdn_bioh","Other land")
+  b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
+  gc()
+  if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_yields.nc"))){
+    b <- convertLUH2(b)
+    gc()
+    write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_yields.nc"),comment = "unit: m3 per ha per year")
+    rm(a,b)
+    gc()
+  }
+  
+  #### Wood: Harvested Biomass Product Split
+  b <- TimberProductionVolumetric(gdx,level = "cell",sumSource = FALSE,sumProduct = FALSE)
+  b <- dimSums(b,dim=3.1)
+  b <- b/dimSums(b,dim=3)
+  getNames(b) <- c("rndwd","fulwd")
+  b <- madrat::toolAggregate(b, map_file, from = "cluster",to = "cell")
+  if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_biomass_split.nc"))){
+    b <- convertLUH2(b)
+    gc()
+    write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_biomass_split.nc"),comment = "unit: fraction of wood harvest biomass")
+    rm(b)
+    gc()
+  }
+} else warning("DYNAMIC FORESTRY was NOT active in this MAgPIE run. Therefore wood harvest variables cannot be report in LUH2 format.")
 
 ####### ONLY DYNAMIC FORESTRY ON#############
 
