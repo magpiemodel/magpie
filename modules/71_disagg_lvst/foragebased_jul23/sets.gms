@@ -5,6 +5,23 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_costs_additional_mon.scale(i) = 10e4;
-*Don't scale this variable. Model is very sensitive to scaling this variable and might become infeasible or very slow.
-*v71_feed_balanceflow.scale(j,kli_rum,kforage) = 10e3;
+sets
+   kli_rum(kli) Ruminant livestock
+   /
+   livst_rum, livst_milk
+   /
+
+   kli_mon(kli) Monogastric livestock
+   /
+   livst_pig, livst_chick, livst_egg
+   /
+   
+   kforage(k) Forage feed categories
+   /
+  pasture, foddr
+   / 
+; 
+
+alias(j,j3);
+alias(cell,cell2);
+alias(kforage,kforage2);

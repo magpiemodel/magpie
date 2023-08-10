@@ -69,7 +69,7 @@ repeat
         display s80_counter;
         display magpie.modelStat;
 
-      if((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2 AND p80_modelstat(t,h) ne 7),
+      if ((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2),
           display "No feasible solution found. Writing LST file.";
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
@@ -79,15 +79,15 @@ repeat
 
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
-    if(p80_modelstat(t,h) <= 2,
+    if (p80_modelstat(t,h) <= 2,
         display "Model status <= 2. Handle cleared.";
         s80_resolve = 0;
         p80_handle(h) = 0;
       );
 
-    if(s80_resolve = 1,
+    if (s80_resolve = 1,
       display "Resolve"
-      if(p80_modelstat(t,h) ne s80_modelstat_previter,
+      if (p80_modelstat(t,h) ne s80_modelstat_previter,
               display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
           solve magpie USING nlp MINIMIZING vm_cost_glo ;
         elseif p80_modelstat(t,h) = s80_modelstat_previter,
