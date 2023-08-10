@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **scripts** fixed output/extra/disaggregation_LUH2.R
 
 
 ## [4.6.9] - 2023-07-27
