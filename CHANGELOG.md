@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **scripts** output.R is now faster, because it no longer searches runfolder renvs for full.gms files
+- **GitHub action** the github action is now faster, because it installs binary packages from Posit Package Manager
 
 ### added
 -
