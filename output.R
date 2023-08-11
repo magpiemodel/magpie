@@ -35,7 +35,8 @@ library(gms)
 runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   choose_folder <- function(title="Please choose a folder") {
     # try to use find because it is significantly quicker than list.dirs
-    tmp <- try(system("find ./output -path './output/*/renv' -prune -o -name 'full.gms'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
+    tmp <- try(system("find ./output -path './output/*/renv' -prune -o -name 'full.gms'",
+                      intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
     if("try-error" %in% class(tmp) || length(tmp)==0) {
       tmp <- base::list.dirs("./output/",recursive=TRUE)
       dirs <- NULL
