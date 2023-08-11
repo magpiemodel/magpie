@@ -40,12 +40,12 @@ equations
 
 
 positive variables
-  v15_kcal_regr(iso,kfo)             Uncalibrated regression estimates of calorie demand (kcal per cap per day)
-  v15_kcal_regr_total(iso)           Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
-  v15_demand_regr(iso, regr15)       Uncalibrated regression estimates of kcal shares (1)
-  v15_income_pc_real_ppp_iso(iso)    Real income per cap (USD05PPP per cap)
-  v15_income_balance(iso)            Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)
-  v15_kcal_intake_total_regr(iso)    Food intake (kcal per cap per day)
+  v15_kcal_regr(iso,kfo)                                 Uncalibrated regression estimates of calorie demand (kcal per cap per day)
+  v15_kcal_regr_total(iso)                               Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
+  v15_demand_regr(iso, regr15)                           Uncalibrated regression estimates of kcal shares (1)
+  v15_income_pc_real_ppp_iso(iso)                        Real income per cap (USD05PPP per cap)
+  v15_income_balance(iso)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)
+  v15_kcal_intake_total_regr(iso)                        Food intake (kcal per cap per day)
   v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)     Hierarchical tree parameter regressions (1)
   v15_bmi_shr_regr(iso,sex,age,bmi_group15)              Uncalibrated share of population groups belonging to a certain BMI group (1)
   v15_bmi_shr_overgroups(iso,sex,agegroup15,bmi_group15) Uncalibrated  share of population groups belonging to a certain BMI group (1)
@@ -86,8 +86,8 @@ parameters
   i15_bmi_saturation(sex,agegroup15,bmi_tree15)    BMI share regression saturation (1)
   i15_bmi_halfsat(sex,agegroup15,bmi_tree15)       BMI share regression halfsaturation (1)
 
-  p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)      Uncalibrated regression estimates of BMI shares (1)
-  i15_bmi_shr_calib(t,iso,sex,age,bmi_group15)     Calibration parameters to meet historical BMI shares (1)
+  p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)              Uncalibrated regression estimates of BMI shares (1)
+  i15_bmi_shr_calib(t,iso,sex,age,bmi_group15)             Calibration parameters to meet historical BMI shares (1)
   i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15) Calibration parameters of the last year with historical observations (1)
 
 * diet structure
@@ -154,29 +154,15 @@ parameters
  i15_intake_EATLancet(iso,kfo)                            Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
  i15_intake_detailed_scen_target(t,iso,kfo)               Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
 
+ i15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15)    Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
+ i15_fruitveg2others_kcal_ratio(t,iso)                    Ratio of calories from fruits and vegetables within the others food category (1)
+ i15_fruitveg2others_kcal_ratio_scen(t,iso)               Ratio of calories from fruits and vegetables within the others food category for an exogenous diet scenario (1)
+ p15_intake_detail_fruitveg(t,iso)                        Auxiliary parameter for the intake of fruits and vegetables included in others (kcal per capita per day)
+ p15_intake_detail_nsothers(t,iso)                        Auxiliary parameter for the intake of those nuts and seeds included in others (kcal per capita per day)
+ i15_intake_detailed_scen_fruitveg(t,iso)                 Auxiliary scenario target for the intake of fruits and vegetables included in others (kcal per capita per day)
+ i15_intake_detailed_scen_nsothers(t,iso)                 Auxiliary scenario target for the intake of those nuts and seeds included in others (kcal per capita per day)
 
-*** NEW PARAMETERS IN ISABELLE'S VERSION ***
-
-* transformed to iso (check whether input data is available like that)
- i15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15)     Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
- i15_fruitveg2others_kcal_ratio(t,iso)                     Ratio of calories from fruits and vegetables within the others food category (1)
-* why is the following needed?
- i15_fruitveg2others_kcal_ratio_scen(t,iso)                Ratio of calories from fruits and vegetables within the others food category for an exogenous diet scenario (1)
- p15_intake_detail_fruitveg(t,iso)                  Auxiliary parameter for the intake of fruits and vegetables included in others (kcal per capita per day)
- p15_intake_detail_nsothers(t,iso)                  Auxiliary parameter for the intake of those nuts and seeds included in others (kcal per capita per day)
- i15_intake_detailed_scen_fruitveg(t,iso)                  Auxiliary scenario target for the intake of fruits and vegetables included in others (kcal per capita per day)
- i15_intake_detailed_scen_nsothers(t,iso)                  Auxiliary scenario target for the intake of those nuts and seeds included in others (kcal per capita per day)
-
-* are these needed?
-p15_demand2intake_ratio_ref(i)        Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)
-i15_demand2intake_detailed_ref(i,kfo) Historical ratio between food calorie demand and intake for different food commodities (1)
-
-*** NEW PARAMETERS IN ISABELLE'S VERSION ***
-
-
- p15_foodwaste_growth(t,iso)                    Increase in food waste over time relative to the historical time step of EAT Lancet diets (1)
- i15_kcal_pc_scen_target(t,iso,kfo)             Target for per capita food consumption according to an exogenous diet scenario (kcal per capita per day)
- i15_exo_foodscen_fader(t,iso)                  Fader that converges per capita food consumption to an exogenous diet scenario (1)
+ i15_exo_foodscen_fader(t,iso)                Fader that converges per capita food consumption to an exogenous diet scenario (1)
 
 * country-specific scenario switch
  p15_country_dummy(iso)                       Dummy parameter indicating whether country is affected by diet scenarios (1)
@@ -219,8 +205,6 @@ model m15_food_demand /
       q15_foodtree_kcal_vegetables
   /;
 
-
-
 *' In contrast, the equation `q15_food_demand` is part of MAgPIE, but
 *' not of the food demand model.
 *' @stop
@@ -229,8 +213,6 @@ m15_food_demand.optfile   = 0 ;
 m15_food_demand.scaleopt  = 1 ;
 m15_food_demand.solprint  = 0 ;
 m15_food_demand.holdfixed = 1 ;
-
-
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters

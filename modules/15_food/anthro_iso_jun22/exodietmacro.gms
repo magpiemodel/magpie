@@ -22,7 +22,7 @@ if (s15_run_diet_postprocessing = 1,
           v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
 
 *' Negative values that can possibly occur due to calibration are set to zero.
-   p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
+   p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo) < 0) = 0;
 
 * saving regression outcome for BMI shares
   p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
@@ -42,7 +42,6 @@ if (s15_run_diet_postprocessing = 1,
 
 *###############################################################################
 * ###### Food substitution scenarios
-
 
 * Substitution of ruminant beef with poultry:
   p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
@@ -107,7 +106,7 @@ if (s15_run_diet_postprocessing = 1,
                  + p15_kcal_pc_iso_rumdairy_orig(t,iso) * (1- i15_rumdairy_fadeout(t,iso)));
 
 *** Substitution of ruminant meat and dairy products (kfo_rd) with single-cell protein (SCP) based on protein/cap/day
-  i15_protein_to_kcal_ratio(t,kfo) =  fm_nutrition_attributes(t,kfo,"protein")/fm_nutrition_attributes(t,kfo,"kcal");
+  i15_protein_to_kcal_ratio(t,kfo) = fm_nutrition_attributes(t,kfo,"protein") / fm_nutrition_attributes(t,kfo,"kcal");
 * Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day
 * using i15_protein_to_kcal_ratio(t,kfo_rd).
 * After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted
@@ -170,22 +169,20 @@ if (s15_run_diet_postprocessing = 1,
 * food waste ratio.
 * To achieve maximum consistency, this calibration involves three steps.
 
-* first apply FAO waste factors, than rescale intake proportionally to meet total intake
+* First, FAO waste factors are applied and then intake is proportionally rescaled to meet total intake
 * This distributes the differences in waste estimates rather equally over different products
-
-  p15_intake_detail(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo)/f15_overcons_FAOwaste(iso,kfo);
+  p15_intake_detail(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) / f15_overcons_FAOwaste(iso,kfo);
 
   p15_intake_detail(t,iso,kfo)$(sum(kfo2, p15_intake_detail(t,iso,kfo2))<>0) =
                     p15_intake_detail(t,iso,kfo) / sum(kfo2, p15_intake_detail(t,iso,kfo2))*
                     p15_intake_total(t,iso);
-* to avoid negative waste, we reduce intake where it exceed food availabiltiy
 
+* To avoid negative waste, we reduce intake where it exceed food availabiltiy
   p15_intake_detail(t,iso,kfo)$(p15_intake_detail(t,iso,kfo)>p15_kcal_pc_iso(t,iso,kfo)) =
                   p15_kcal_pc_iso(t,iso,kfo);
 
-* in a second round of calibration, we rescale food waste to meet total food waste.
+* In a second round of calibration, we rescale food waste to meet total food waste.
 * Now, waste is increasing only where there is already waste.
-
    p15_waste_pc(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) - p15_intake_detail(t,iso,kfo);
 
    p15_waste_pc(t,iso,kfo) = 0$(sum(kfo2, p15_waste_pc(t,iso,kfo2))=0) + (
@@ -196,15 +193,14 @@ if (s15_run_diet_postprocessing = 1,
    p15_intake_detail(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) - p15_waste_pc(t,iso,kfo);
 
 
-* the third calibration is only needed for those countries where total intake exceeds calory availabtility
-* here we want to have the inconsistency in the waste, not in the intake.
-
+* The third calibration is only needed for those countries where total intake exceeds calory availabtility.
+* Here we want to have the inconsistency in the waste, not in the intake.
    p15_intake_detail(t,iso,kfo)$(sum(kfo2, p15_intake_detail(t,iso,kfo2))<>0) =
                      p15_intake_detail(t,iso,kfo) / sum(kfo2, p15_intake_detail(t,iso,kfo2))*
                      p15_intake_total(t,iso);
    p15_waste_pc(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) - p15_intake_detail(t,iso,kfo);
 
-* we calculate a product specific demand2intake ratio
+* We calculate a product specific demand2intake ratio
    p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
             (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
 
@@ -216,12 +212,11 @@ if (s15_run_diet_postprocessing = 1,
 * ###### Exogenous EAT Lancet diet scenario
 
 *' @code
-*' Transition to exogenous Planetary Health diet scenarios [@willett_food_2019]:
+*' Transition to exogenous Planetary Health diet (PHD) scenarios [@willett_food_2019]:
 *' It is possible to define exogenous diet scenarios that replace the regression-based
-*' calculation of food intake and demand according to a predefined speed of
-*' convergence from `p15_kcal_pc_calibrated(t,iso,kfo)` to the scenario-dependent target
-*' `i15_kcal_pc_scen_target(t,iso,kfo)` by setting the switch `s15_exo_diet`
-*' to 1, 2 or 3.
+*' calculation of food intake and demand scenario-dependent targets following the
+*' exogenous PHDs, India-specific recommendations or model-internal intake estimates
+*' that hit the PHD targets by setting the switch `s15_exo_diet` to 1, 2 or 3.
 
 if ((s15_exo_diet > 0),
 
@@ -381,7 +376,7 @@ if (s15_exo_diet = 1,
 
     i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) > 0) =
             (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples))) *
-            (i15_intake_EATLancet(iso,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)))
+            (i15_intake_EATLancet(iso,EAT_staples) / sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)))
             ;
 
 * VARTIKA: What about s15_exo_diet = 2? Is there any special treatment needed here?

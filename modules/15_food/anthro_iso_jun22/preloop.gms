@@ -81,12 +81,12 @@ $ifthen "%c15_exo_foodscen%" == "lin_zero_20_30"
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",iso,kcal_scen15,EAT_scen15,kfo);
 *extra condition to see if India diet scenario has been selected
   if (s15_exo_diet = 2,
-  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2030",iso,kcal_scen15,EAT_scen15,kfo);
+    i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2030",iso,kcal_scen15,EAT_scen15,kfo);
   );
 $else
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2050",iso,kcal_scen15,EAT_scen15,kfo);
   if (s15_exo_diet = 2,
-  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2050",iso,kcal_scen15,EAT_scen15,kfo);
+    i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2050",iso,kcal_scen15,EAT_scen15,kfo);
   );
 $endif
 
@@ -95,6 +95,6 @@ i15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15) = f15_rec_EATLancet(iso,EA
 
 * initial prices in $US per Kcal
 i15_prices_initial_kcal(iso,kfo)$(fm_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
-                                                                                  / (fm_nutrition_attributes("y1995",kfo,"kcal")*10**6);
-p15_prices_kcal(t,iso,kfo,"iter1")=i15_prices_initial_kcal(iso,kfo);
-p15_convergence_measure(t,iter15)=NA;
+                                                                                    / (fm_nutrition_attributes("y1995",kfo,"kcal")*10**6);
+p15_prices_kcal(t,iso,kfo,"iter1") = i15_prices_initial_kcal(iso,kfo);
+p15_convergence_measure(t,iter15) = NA;
