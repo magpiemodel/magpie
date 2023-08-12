@@ -8,7 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **config**  update preprocessing to newest input data v4.88 with new transport costs
+- **scenario_config.csv** update preprocessing to newest input data v4.88
+- **scripts** output.R is now faster, because it no longer searches runfolder renvs for full.gms files
+- **GitHub action** the github action is now faster, because it installs binary packages from Posit Package Manager
 
 ### added
 -
