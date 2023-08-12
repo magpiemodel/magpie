@@ -438,8 +438,7 @@ land_bii_hr <- interpolateAvlCroplandWeighted(
   snv_pol_shr = snv_pol_shr,
   snv_pol_fader = snv_pol_fader,
   urban_land_hr = urban_land_hr,
-  wdpa_hr = wdpa_hr,
-  consv_prio_hr = consv_prio_hr,
+  land_consv_hr = land_consv_hr,
   unit = "share"
 )
 
