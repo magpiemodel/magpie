@@ -29,7 +29,6 @@ gdx <- file.path(outputdir, "fulldata.gdx")
 land_hr_file <- file.path(outputdir, "avl_land_full_t_0.5.mz")
 urban_land_hr_file <- file.path(outputdir, "f34_urbanland_0.5.mz")
 wdpa_hr_file <- file.path(outputdir, "wdpa_baseline_0.5.mz")
-consv_prio_hr_file <- file.path(outputdir, "consv_prio_areas_0.5.mz")
 land_consv_hr_out_file <- file.path(outputdir, "cell.conservation_land_0.5.mz")
 land_hr_out_file <- file.path(outputdir, "cell.land_0.5.mz")
 land_hr_share_out_file <- file.path(outputdir, "cell.land_0.5_share.mz")
@@ -175,62 +174,7 @@ if (cfg$gms$urban == "exo_nov21") {
 
 land_consv_hr <- NULL
 if (file.exists(wdpa_hr_file)) {
-  wdpa_hr <- read.magpie(wdpa_hr_file)
-
-  # create full time series
-  land_consv_hr <- new.magpie(getCells(wdpa_hr), getYears(land_lr), getNames(wdpa_hr), fill = wdpa_hr[, nyears(wdpa_hr), ])
-  land_consv_hr[, getYears(wdpa_hr), ] <- wdpa_hr
-
-  if (!all(c(cfg$gms$c22_protect_scenario, cfg$gms$c22_protect_scenario_noselect) %in% "none")) {
-    if (file.exists(consv_prio_hr_file)) {
-      consv_prio_all <- read.magpie(consv_prio_hr_file)
-      consv_prio_hr <- new.magpie(
-        cells = getCells(consv_prio_all),
-        names = getNames(consv_prio_all, dim = 2), fill = 0
-      )
-      iso <- readGDX(gdx, "iso")
-      consv_iso <- readGDX(gdx, "policy_countries22")
-      consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.1)]
-      consv_select <- cfg$gms$c22_protect_scenario
-      consv_noselect <- cfg$gms$c22_protect_scenario_noselect
-
-      if (consv_noselect != "none") {
-        consv_prio_hr <- collapseDim(consv_prio_all[, , consv_noselect], dim = 3.1)
-      }
-      if (consv_select != "none") {
-        consv_prio_hr[consv_iso, , ] <- collapseDim(consv_prio_all[consv_iso, , consv_select], dim = 3.1)
-      } else if (consv_select == "none") {
-        consv_prio_hr[consv_iso, , ] <- 0
-      }
-
-      consv_fader <- readGDX(gdx, "p22_conservation_fader", format = "first_found")
-      consv_prio_hr <- consv_prio_hr * consv_fader[, getYears(land_consv_hr), ]
-
-      # add conservation priority areas
-      land_consv_hr <- (land_consv_hr + consv_prio_hr)
-    } else {
-      warning(paste(
-        "Future land conservation used in MAgPIE run but high resolution",
-        "conservation priority data for disaggregation not found."
-      ))
-    }
-  }
-
-  # Due to internal constraints and compensation (e.g. NDC forest conservation)
-  # the actual land conservation can sometimes be smaller than the land
-  # conservation in the input data (this can especially happen also if
-  # land restoration is switched off). Therefore a scaling is applied here
-  land_consv_lr <- readGDX(gdx, "pm_land_conservation", react = "silent")
-  if (!is.null(land_consv_lr)) {
-    land_consv_lr <- dimSums(land_consv_lr, dim = 3)
-
-    land_consv_hr_agg <- toolAggregate(dimSums(land_consv_hr, dim = 3), map_file, from = "cell", to = "cluster")
-    consv_scaling <- land_consv_lr / land_consv_hr_agg
-    consv_scaling[is.na(consv_scaling) | is.infinite(consv_scaling)] <- 1
-    consv_scaling <- toolAggregate(consv_scaling, map_file, from = "cluster", to = "cell")
-    land_consv_hr <- consv_scaling * land_consv_hr
-  }
-
+  land_consv_hr <- protectedArea(gdx, cfg, level = "grid", dir = outputdir)
   .writeDisagg(land_consv_hr, land_consv_hr_out_file,
     comment = "unit: Mha per grid-cell",
     message = "Write outputs cell.conservation_land"
@@ -274,13 +218,13 @@ land_hr <- interpolateAvlCroplandWeighted(
   x = land_lr,
   x_ini_lr = land_ini_lr,
   x_ini_hr = land_ini_hr,
-  avl_cropland_hr = avl_cropland_hr,
   map = map_file,
+  avl_cropland_hr = avl_cropland_hr,
   marginal_land = marginal_land,
-  snv_pol_shr = snv_pol_shr,
-  snv_pol_fader = snv_pol_fader,
   urban_land_hr = urban_land_hr,
-  land_consv_hr = land_consv_hr
+  land_consv_hr = land_consv_hr,
+  snv_pol_shr = snv_pol_shr,
+  snv_pol_fader = snv_pol_fader
 )
 
 # Write output
@@ -432,13 +376,13 @@ land_bii_hr <- interpolateAvlCroplandWeighted(
   x = land_lr,
   x_ini_lr = land_ini_lr,
   x_ini_hr = land_ini_hr,
-  avl_cropland_hr = avl_cropland_hr,
   map = map_file,
+  avl_cropland_hr = avl_cropland_hr,
   marginal_land = marginal_land,
-  snv_pol_shr = snv_pol_shr,
-  snv_pol_fader = snv_pol_fader,
   urban_land_hr = urban_land_hr,
   land_consv_hr = land_consv_hr,
+  snv_pol_shr = snv_pol_shr,
+  snv_pol_fader = snv_pol_fader,
   unit = "share"
 )
 
