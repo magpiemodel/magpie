@@ -396,6 +396,7 @@ a[crop_hr<crop_threshold] <- NA
 #divide by croparea -> tN/ha; convert from tN/ha to kgN/ha: tN/ha*1000kg/t = 1000 kgN/ha
 
 a <- (a/crop_hr)*1000
+x <- NULL
 
 if(!file.exists(paste0(out_dir,"/LUH2_Nitrogen_fertilizer.nc"))){
 x <- convertLUH2(clean_magpie(collapseNames(a[,,"fertilizer"],collapsedim = 3.1)))
