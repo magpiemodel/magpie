@@ -29,6 +29,7 @@ gdx <- file.path(outputdir, "fulldata.gdx")
 land_hr_file <- file.path(outputdir, "avl_land_full_t_0.5.mz")
 urban_land_hr_file <- file.path(outputdir, "f34_urbanland_0.5.mz")
 wdpa_hr_file <- file.path(outputdir, "wdpa_baseline_0.5.mz")
+consv_prio_hr_file <- file.path(outputdir, "consv_prio_areas_0.5.mz")
 land_consv_hr_out_file <- file.path(outputdir, "cell.conservation_land_0.5.mz")
 land_hr_out_file <- file.path(outputdir, "cell.land_0.5.mz")
 land_hr_share_out_file <- file.path(outputdir, "cell.land_0.5_share.mz")
@@ -58,7 +59,7 @@ if (length(map_file) > 1) {
   write.magpie(x, sub(".mz", ".nc", file), comment = comment, verbose = FALSE)
 }
 
-.dissagcrop <- function(gdx, land_hr, map) {
+.dissagcrop <- function(gdx, land_hr, map_file) {
   area <- croparea(gdx,
     level = "cell", products = "kcr",
     product_aggr = FALSE, water_aggr = FALSE
@@ -71,11 +72,81 @@ if (length(map_file) > 1) {
   crop_shr <- setNames(crop_shr[, getYears(area_shr), "crop"], NULL)
 
   # calculate crop area as share of total cell area
-  area_shr_hr <- madrat::toolAggregate(area_shr, map, to = "cell") * crop_shr
+  area_shr_hr <- madrat::toolAggregate(area_shr, map_file, to = "cell") * crop_shr
   return(area_shr_hr)
 }
 
-.dissagBII <- function(gdx, map, dir) {
+.dissagLandConsv <- function(gdx, cfg, map_file, wdpa_hr_file, consv_prio_hr_file) {
+  land_consv_lr <- readGDX(gdx, "pm_land_conservation", react = "silent")
+  wdpa_hr <- read.magpie(wdpa_hr_file)
+  map <- readRDS(map_file)
+
+  # create full time series
+  land_consv_hr <- new.magpie(map[, "cell"], getYears(land_consv_lr), getNames(wdpa_hr))
+  land_consv_hr[, getYears(land_consv_hr), ] <- wdpa_hr[, nyears(wdpa_hr), ]
+  land_consv_hr[, getYears(wdpa_hr), ] <- wdpa_hr
+
+  if (!all(c(cfg$gms$c22_protect_scenario, cfg$gms$c22_protect_scenario_noselect) %in% "none")) {
+    if (file.exists(consv_prio_hr_file)) {
+      consv_prio_all <- read.magpie(consv_prio_hr_file)
+      consv_prio_hr <- new.magpie(
+        cells_and_regions = map[, "cell"],
+        names = getNames(consv_prio_all, dim = 2), fill = 0
+      )
+      iso <- readGDX(gdx, "iso")
+      consv_iso <- readGDX(gdx, "policy_countries22")
+      consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.1)]
+      consv_select <- cfg$gms$c22_protect_scenario
+      consv_noselect <- cfg$gms$c22_protect_scenario_noselect
+
+      if (consv_noselect != "none") {
+        consv_prio_hr <- collapseDim(consv_prio_all[, , consv_noselect], dim = 3.1)
+      }
+      if (consv_select != "none") {
+        consv_prio_hr[consv_iso, , ] <- collapseDim(consv_prio_all[consv_iso, , consv_select], dim = 3.1)
+      } else if (consv_select == "none") {
+        consv_prio_hr[consv_iso, , ] <- 0
+      }
+      # future conservation only pertains to natveg
+      consv_prio_hr[, , c("crop", "past", "forestry", "urban")] <- 0
+      consv_fader <- readGDX(gdx, "p22_conservation_fader", format = "first_found")
+      consv_prio_hr <- consv_prio_hr * consv_fader[, getYears(land_consv_hr), ]
+
+      # add conservation priority areas
+      land_consv_hr <- (land_consv_hr + consv_prio_hr)
+    } else {
+      warning(paste(
+        "Future land conservation used in MAgPIE run but high resolution",
+        "conservation priority data for disaggregation not found."
+      ))
+    }
+  }
+  # Due to internal constraints and compensation (e.g. NDC forest conservation)
+  # the actual land conservation can sometimes be smaller than the land
+  # conservation in the input data (this can especially happen also if
+  # land restoration is switched off). Therefore a scaling is applied here separately
+  # for grassland and natural vegetation
+  natveg <- c("primforest", "secdforest", "other")
+  consv_sum_lr <- mbind(
+    dimSums(land_consv_lr[, , "past"], 3.2),
+    setNames(dimSums(land_consv_lr[, , natveg], dim = 3), "natveg")
+  )
+  consv_sum_hr_agg <- mbind(
+    toolAggregate(land_consv_hr[, , "past"], map, from = "cell", to = "cluster"),
+    toolAggregate(setNames(dimSums(land_consv_hr[, , natveg], dim = 3), "natveg"),
+      map,
+      from = "cell", to = "cluster"
+    )
+  )
+  consv_scaling <- consv_sum_lr / consv_sum_hr_agg
+  consv_scaling[is.na(consv_scaling) | is.infinite(consv_scaling)] <- 1
+  consv_scaling <- toolAggregate(consv_scaling, map, from = "cluster", to = "cell")
+  land_consv_hr[, , "past"] <- consv_scaling[, , "past"] * land_consv_hr[, , "past"]
+  land_consv_hr[, , natveg] <- consv_scaling[, , "natveg"] * land_consv_hr[, , natveg]
+  return(land_consv_hr)
+}
+
+.dissagBII <- function(gdx, map_file, dir) {
   # Biodiversity intactness indicator (BII) at cluster level
   bii_lr <- BII(gdx,
     file = NULL, level = "cell", mode = "auto", landClass = "all",
@@ -174,7 +245,9 @@ if (cfg$gms$urban == "exo_nov21") {
 
 land_consv_hr <- NULL
 if (file.exists(wdpa_hr_file)) {
-  land_consv_hr <- protectedArea(gdx, cfg, level = "grid", dir = outputdir)
+  land_consv_hr <- .dissagLandConsv(gdx, cfg, map_file, wdpa_hr_file, consv_prio_hr_file)
+
+  # Write gridded conservation land
   .writeDisagg(land_consv_hr, land_consv_hr_out_file,
     comment = "unit: Mha per grid-cell",
     message = "Write outputs cell.conservation_land"
