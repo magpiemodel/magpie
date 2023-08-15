@@ -448,7 +448,7 @@ elseif s15_exo_diet = 3,
 *' and those nuts and seeds that are not included in rapeseed, groundnut and sunflower
 *****BENNI/ISABELLE: Are groundnuts nuts or pulses in the end? Or should they be anyway be a separate target (peanuts)
   p15_intake_detail_fruitveg(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso) * p15_intake_detail(t,iso,"others");
-  p15_intake_detail_nsothers(t,iso) = (1-i15_fruitveg2others_kcal_ratio(t,iso)) * p15_intake_detail(t,iso,"others");
+  p15_intake_detail_nsothers(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso)) * p15_intake_detail(t,iso,"others");
   i15_intake_detailed_scen_fruitveg(t,iso) = p15_intake_detail_fruitveg(t,iso);
   i15_intake_detailed_scen_nsothers(t,iso) = p15_intake_detail_nsothers(t,iso);
 
@@ -564,7 +564,7 @@ if (s15_exo_waste = 1,
    p15_kcal_pc(t,i,kfo)$(
       sum(i_to_iso(i,iso),
          im_pop_iso(t,iso)
-      ) >0 ) =
+      ) > 0) =
                sum(i_to_iso(i,iso),
                  p15_kcal_pc_iso(t,iso,kfo)
                  * im_pop_iso(t,iso)
@@ -575,7 +575,7 @@ if (s15_exo_waste = 1,
    p15_balanceflow_kcal(t,i,kfo)$(
       sum(i_to_iso(i,iso),
          im_pop_iso(t,iso)
-      ) >0 ) =
+      ) > 0) =
                sum(i_to_iso(i,iso),
                  p15_balanceflow_kcal_iso(t,iso,kfo)
                  * im_pop_iso(t,iso)

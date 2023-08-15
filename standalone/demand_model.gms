@@ -14,7 +14,11 @@ $offlisting
 
 $setglobal c_timesteps  pastandfuture
 $setglobal c_past  till_1975
+$setglobal c_title  default
 
+scalars
+s_use_gdx   use of gdx files                                       / 0 /
+;
 
 *******************************MODULE SETUP*************************************
 $setglobal drivers  aug17
