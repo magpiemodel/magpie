@@ -8,7 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **config**  update preprocessing to newest input data v4.88 with new transport costs
+- **scenario_config.csv** update preprocessing to newest input data v4.88
+- **scripts** output.R is now faster, because it no longer searches runfolder renvs for full.gms files
+- **GitHub action** the github action is now faster, because it installs binary packages from Posit Package Manager
 
 ### added
 -
@@ -17,8 +20,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
+- **scripts** fixed output/extra/disaggregation_LUH2.R. The script was not working any more because magpie4::protectedArea was changed to return protected area for all land types. Moreover, the script now also works for runs without dynamic forestry (default run) but with a warning message.
 - **scripts** check_config does not warn about c_input_gdx_path anymore while running empty model
-
 
 ## [4.6.9] - 2023-07-27
 
