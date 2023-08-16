@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+## [4.6.10] - 2023-08-16
+
+### changed
+- **config**  update preprocessing to newest input data v4.88 with new transport costs
+- **GitHub action** the github action is now faster, because it installs binary packages from Posit Package Manager
+- **scenario_config.csv** update preprocessing to newest input data v4.88
+- **scripts** output.R is now faster, because it no longer searches runfolder renvs for full.gms files
+
+### fixed
+- **scripts** check_config does not warn about c_input_gdx_path anymore while running empty model
+- **scripts** fixed erronoeous if clause in output.R
+- **scripts** fixed output/extra/disaggregation_LUH2.R. The script was not working any more because magpie4::protectedArea was changed to return protected area for all land types. Moreover, the script now also works for runs without dynamic forestry (default run) but with a warning message.
+
+
 ## [4.6.9] - 2023-07-27
 
 ### fixed
@@ -737,7 +751,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.9...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.10...develop
+[4.6.10]: https://github.com/magpiemodel/magpie/compare/v4.6.9...v4.6.10
 [4.6.9]: https://github.com/magpiemodel/magpie/compare/v4.6.8...v4.6.9
 [4.6.8]: https://github.com/magpiemodel/magpie/compare/v4.6.7...v4.6.8
 [4.6.7]: https://github.com/magpiemodel/magpie/compare/v4.6.6...v4.6.7
