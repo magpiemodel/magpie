@@ -36,5 +36,5 @@ title <- cfg$title
 reportLandUseForSEALS(
   magCellLand = "cell.land_0.5_share.nc",
   outFile = paste0("cell.land_0.5_SEALS_", title, ".nc"),
-  dir = outputdir, selectyears = c(2015, 2050)
+  dir = outputdir, selectyears = c(2015, 2020, 2025, 2030, 2035, 2040, 2045, 2050)
 )
