@@ -37,10 +37,10 @@
 *' for run-time considerations, but should be noted if regional removals 
 *' vm_res_biomass_ag are to be incentivised.
 
-q18_regional_removals(i2,kcr,attributes) ..
-               sum(cell(i2,j2), v18_res_ag_removal(j2,kcr,attributes))
-               =l=
-               v18_res_ag_removal_reg(i2,kcr,attributes);
+ q18_regional_removals(i2,kcr,attributes) ..
+                sum(cell(i2,j2), v18_res_ag_removal(j2,kcr,attributes))
+                =e=
+              v18_res_ag_removal_reg(i2,kcr,attributes);
 
 
 *' In contrast to AG biomass, AG production `vm_res_biomass_ag(i,kcr,attributes)`
