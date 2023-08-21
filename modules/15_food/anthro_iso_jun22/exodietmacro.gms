@@ -382,7 +382,7 @@ if (s15_exo_diet = 1,
 * VARTIKA: What about s15_exo_diet = 2? Is there any special treatment needed here?
 
 *----------------------------------------------------------------------------------------
-elseif s15_exo_diet = 3,
+elseif (s15_exo_diet = 3),
 *' In case of a MAgPIE-specific realization of the EAT Lancet diet (`s15_exo_diet=3`),
 *' model-internal diet projections are constraint by recommended ranges for intake
 *' (`i15_rec_EATLancet`) of different food groups to ensure healthy and sustainable
@@ -403,6 +403,7 @@ elseif s15_exo_diet = 3,
 *** ISABELLE: Why are roots and staples used as balancing post? Roots has a target
 *** Also: discuss with Isabelle and Benni about splitting the roots target into potatos and cassav_sp (see Marcos distinction between starchy_fruits and roots)
 
+display i15_rec_EATLancet;
 
 *** ISABELLE/BENNI: I think this is not required anymore (food waste calculations have changed since then)
 ** Use p15_intake_detail(t,iso,kfo) instead?
@@ -443,6 +444,8 @@ elseif s15_exo_diet = 3,
   else
      i15_fruitveg2others_kcal_ratio(t,iso) = f15_fruitveg2others_kcal_ratio(t-1,iso);
   );
+
+display i15_fruitveg2others_kcal_ratio;
 
 *' This ratio is used to split the 'others' category into fruits plus vegetables
 *' and those nuts and seeds that are not included in rapeseed, groundnut and sunflower
@@ -499,6 +502,8 @@ elseif s15_exo_diet = 3,
     (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)))
      * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
 
+display i15_intake_detailed_scen_target;
+
 );
 *** End of MAgPIE-specific realization of the EAT Lancet diet
 
@@ -511,6 +516,8 @@ elseif s15_exo_diet = 3,
 
   p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) = p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) * (1-i15_exo_foodscen_fader(t,iso))
                       + p15_bmi_shr_target(t,iso,sex,age,bmi_group15) * i15_exo_foodscen_fader(t,iso);
+
+display p15_intake_detail;
 
 );
 *** End of special postprocessing food demand scenarios.
