@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **70_livestock** fixed division by zero that could occur depending on the scenario set-up
 
 
 ## [4.6.10] - 2023-08-16
