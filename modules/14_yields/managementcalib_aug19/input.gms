@@ -85,8 +85,10 @@ $offdelim
 /
 ;
 
+$onEmpty
 table f14_degradation_yld_reduc(t_all,j,degrad_all) Yield reduction factors due to land degradation (1)
 $ondelim
-$include "./modules/14_yields/input/f14_degradation_yld_reduc.cs3"
+$if exist "./modules/14_yields/input/f14_degradation_yld_reduc.cs3" $include "./modules/14_yields/input/f14_degradation_yld_reduc.cs3"
 $offdelim
 ;
+$offEmpty
