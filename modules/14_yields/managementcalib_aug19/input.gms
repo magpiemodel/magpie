@@ -10,9 +10,16 @@ $setglobal c14_yields_scenario  cc
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
+sets
+  degrad_type(degrad_all) land degradation types considered in yield impacts
+       / poll_loss, soil_loss /
+;
+
 scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
 scalar s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /;
+
+scalar s14_degradation   Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /;
 
 scalars
   s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
@@ -76,4 +83,10 @@ $ondelim
 $include "./modules/14_yields/input/f14_aboveground_fraction.csv"
 $offdelim
 /
+;
+
+table f14_degradation_yld_reduc(t_all,j,degrad_all) Yield reduction factors due to land degradation (1)
+$ondelim
+$include "./modules/14_yields/input/f14_degradation_yld_reduc.cs3"
+$offdelim
 ;

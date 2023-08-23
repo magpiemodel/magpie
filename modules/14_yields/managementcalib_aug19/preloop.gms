@@ -155,10 +155,29 @@ if(sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
 );
 
 
-i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)      *sum(cell(i,j),f14_yld_calib(i,"crop"));
-i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)*sum(cell(i,j),f14_yld_calib(i,"past"));
+i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)
+                                    * sum(cell(i,j),f14_yld_calib(i,"crop"));
+i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)
+                                    * sum(cell(i,j),f14_yld_calib(i,"past"));
 
 *' @stop
+
+*' @code
+*' Land degradation can negatively affect yields. Soil loss for example can
+*' notably affect land productivity. Similarly, the yield of pollinator-dependent crops
+*' is reduced when there is lack of pollinators. To account for the impacts of degradation,
+*' calibrated yields are multiplied by a reduction coefficient that signifies the yield loss
+*' after degradation.
+
+if ((s14_degradation = 1),
+  i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)
+                                      * (1 - sum(degrad_type, f14_degradation_yld_reduc(t,j,degrad_type)));
+  i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)
+                                      * (1 - sum(degrad_type, f14_degradation_yld_reduc(t,j,degrad_type)));
+);
+
+*' @stop
+
 
 ****
 ****
