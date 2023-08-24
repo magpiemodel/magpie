@@ -10,11 +10,6 @@ $setglobal c14_yields_scenario  cc
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
-sets
-  degrad_type(degrad_all) land degradation types considered in yield impacts
-       / poll_loss, soil_loss /
-;
-
 scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
 scalar s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /;
@@ -23,6 +18,7 @@ scalar s14_degradation   Switch to include yield impacts of land degradation(0=n
 
 scalars
   s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
+  s14_yld_reduction_soil_loss  Land productivity declines by 8 per cent in areas where erosion rates are higher that 11 tons per hectare (1)     / 0.08 /
 ;
 
 scalars
@@ -86,9 +82,17 @@ $offdelim
 ;
 
 $onEmpty
-table f14_degradation_yld_reduc(t_all,j,degrad_all) Yield reduction factors due to land degradation (1)
+table f14_yld_ncp_report(t_all,j,ncp_type14) Share of land with intact natures contributions to people (NCP) (1)
 $ondelim
-$if exist "./modules/14_yields/input/f14_degradation_yld_reduc.cs3" $include "./modules/14_yields/input/f14_degradation_yld_reduc.cs3"
+$if exist "./modules/14_yields/input/f14_yld_ncp_report.cs3" $include "./modules/14_yields/input/f14_yld_ncp_report.cs3"
 $offdelim
 ;
 $offEmpty
+
+parameter f14_kcr_pollinator_dependence(kcr) Share of total yield dependent on crop pollination (1)
+/
+$ondelim
+$include "./modules/14_yields/input/f14_kcr_pollinator_dependence.csv"
+$offdelim
+/
+;

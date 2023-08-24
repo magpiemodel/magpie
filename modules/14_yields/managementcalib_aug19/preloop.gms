@@ -165,15 +165,21 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)
 *' @code
 *' Land degradation can negatively affect yields. Soil loss for example can
 *' notably affect land productivity. Similarly, the yield of pollinator-dependent crops
-*' is reduced when there is lack of pollinators. To account for the impacts of degradation,
-*' calibrated yields are multiplied by a reduction coefficient that signifies the yield loss
-*' after degradation.
+*' is reduced when there is a lack of pollinators. To account for the impacts of degradation,
+*' calibrated yields are multiplied by the share of land with intact NCP in each cell and specific
+*' yield reduction coefficients that represent yield loss due to soil erosion and pollination
+*' deficiency on non-intact land.
+
+* set default values in case of missing input file.
+if(sum((t,j,ncp_type14),f14_yld_ncp_report(t,j,ncp_type14)) = 0,
+  f14_yld_ncp_report(t,j,ncp_type14) = 1;
+);
 
 if ((s14_degradation = 1),
-  i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)
-                                      * (1 - sum(degrad_type, f14_degradation_yld_reduc(t,j,degrad_type)));
-  i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)
-                                      * (1 - sum(degrad_type, f14_degradation_yld_reduc(t,j,degrad_type)));
+  i14_yields_calib(t,j,kcr,w) = i14_yields_calib(t,j,kcr,w) * (1 - s14_yld_reduction_soil_loss)
+                                + i14_yields_calib(t,j,kcr,w) * s14_yld_reduction_soil_loss * f14_yld_ncp_report(t,j,"soil_intact");
+  i14_yields_calib(t,j,kcr,w) = i14_yields_calib(t,j,kcr,w) * (1 - f14_kcr_pollinator_dependence(kcr))
+                                + i14_yields_calib(t,j,kcr,w) * f14_kcr_pollinator_dependence(kcr) * f14_yld_ncp_report(t,j,"poll_suff");
 );
 
 *' @stop
