@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** All time steps between 2015 and 2050 are now reported to SEALS
 
 ### added
-- **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific exogeneous yield reduction coefficients that are provided through `./modules/14_yields/input/f14_degradation_yld_reduc.cs3`. The set `degrad_type` provided the choice between different degradation types.
+- **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific information on the state of nature's contributions to people relevant for yields `./modules/14_yields/input/f14_yld_ncp_report.cs3`.
 
 ### removed
 -
