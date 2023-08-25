@@ -18,7 +18,7 @@ scalar s14_degradation   Switch to include yield impacts of land degradation(0=n
 
 scalars
   s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
-  s14_yld_reduction_soil_loss  Land productivity declines by 8 per cent in areas where erosion rates are higher that 11 tons per hectare (1)     / 0.08 /
+  s14_yld_reduction_soil_loss  Land productivity declines by 8 per cent in areas with severe soil loss (>11 tons per hectare) (1)     / 0.08 /
 ;
 
 scalars
