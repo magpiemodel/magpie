@@ -17,7 +17,7 @@ Imports:
     iamc,
     lucode2 (>= 0.36.0),
     luplot,
-    luscale (>= 2.27.4),
+    luscale (>= 2.27.9),
     lusweave,
     m4fsdp,
     madrat,
