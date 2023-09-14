@@ -148,25 +148,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.87_h12_magpie.tgz
-* md5sum: 658398f1dcbef89198bd85d61b1db9ad
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.88_h12_magpie.tgz
+* md5sum: 740da40ceda04850eb374df215837c1b
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.87_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 8a1d668acfe66a700eb5da2143b31cb2
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.88_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: 9edbcc62e75b663eada84524402bccbf
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.87_h12_validation.tgz
-* md5sum: d02217d791b58400e6e3be7186527ed5
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.88_h12_validation.tgz
+* md5sum: d42abd58de683506a807b411d7fe87cb
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.43.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 7f537e5df805af11f0e67e84e6010290
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_glo_08Jul23.tgz
-* md5sum: 7315d0f268d6225805a4c1f1c3c05b13
-* Repository: /p/projects/landuse/data/input/calibration
+* Used data set: calibration_H12_per_ton_fao_may22_glo_08Aug23.tgz
+* md5sum: 5d34e4b54112db10f330f1e59dd60cc9
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.87
+* Regions data revision: 4.88
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.87
+* * Revision: 4.88
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Thu Jul 13 10:36:10 2023
+* Last modification (input data): Wed Aug 23 14:34:40 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
