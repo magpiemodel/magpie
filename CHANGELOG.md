@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **scripts** All time steps between 2015 and 2050 are now reported to SEALS
+-
 
 ### added
 - **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific information on the state of nature's contributions to people relevant for yields `./modules/14_yields/input/f14_yld_ncp_report.cs3`.
@@ -18,6 +18,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 -
+
+
+## [4.6.11] - 2023-09-05
+
+### changed
+- **scripts** All time steps between 2015 and 2050 are now reported to SEALS
+
+### fixed
+- **70_livestock** fixed division by zero that could occur depending on the scenario set-up
 
 
 ## [4.6.10] - 2023-08-16
@@ -766,7 +775,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.10...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.11...develop
+[4.6.11]: https://github.com/magpiemodel/magpie/compare/v4.6.10...v4.6.11
 [4.6.10]: https://github.com/magpiemodel/magpie/compare/v4.6.9...v4.6.10
 [4.6.9]: https://github.com/magpiemodel/magpie/compare/v4.6.8...v4.6.9
 [4.6.8]: https://github.com/magpiemodel/magpie/compare/v4.6.7...v4.6.8
