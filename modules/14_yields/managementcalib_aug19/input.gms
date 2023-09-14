@@ -89,7 +89,7 @@ $offdelim
 ;
 $offEmpty
 
-parameter f14_kcr_pollinator_dependence(kcr) Share of total yield dependent on crop pollination (1)
+parameter f14_kcr_pollinator_dependence(kcr) Share of total yield dependent on biotic pollination (1)
 /
 $ondelim
 $include "./modules/14_yields/input/f14_kcr_pollinator_dependence.csv"
