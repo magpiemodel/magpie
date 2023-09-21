@@ -8,7 +8,7 @@
 
 positive variables
  v18_prod_res(j,kres)                       Cluster-level production of residues (mio. tDM)
- v18_res_biomass_ag_cell(j,kcr)             Production of aboveground residues in each cluster (mio. tDM)
+ v18_res_biomass_ag_clust(j,kcr)             Production of aboveground residues in each cluster (mio. tDM)
  vm_res_biomass_ag(i,kcr,attributes)        Production of aboveground residues in each region (mio. tDM)
  vm_res_biomass_bg(i,kcr,dm_nr)             Production of belowground residues in each region (mio. tDM)
 
@@ -23,16 +23,16 @@ positive variables
 
 equations
 
- q18_prod_res_ag_cell(j,kcr)                Cluster-level production constraint of aboveground residues (mio. tDM)
+ q18_prod_res_ag_clust(j,kcr)               Cluster-level production constraint of aboveground residues (mio. tDM)
  q18_prod_res_ag_reg(i,kcr,attributes)      Regional production constraint of aboveground residues (mio. tDM)
 
- q18_prod_res_bg_cell(i,kcr,dm_nr)          Cluster-level production constraint of belowground residues (mio. tDM)
+ q18_prod_res_bg_clust(i,kcr,dm_nr)         Cluster-level production constraint of belowground residues (mio. tDM)
 
  q18_regional_removals(i,kcr,attributes)    Calculation of regional level removals (mio. tX)
  q18_res_field_balance(i,kcr,attributes)    Calculation of the residues amount recycled to soils (mio. tDM)
- q18_cell_field_constraint(j,kres)          Make sure the amount removed in any cell does not exceet the amoutn available
+ q18_clust_field_constraint(j,kres)         Make sure the amount removed in any cluster does not exceed the amount available
  q18_res_field_burn(i,kcr,attributes)       Fixing of the residues amount burned in a region in respective attribute units DM GJ Nr P K WM C (mio. tX)
- q18_translate(j,kres,attributes)           Transformation of the multiple crop residues into supply balance crop redisues in respective attribute units DM GJ Nr P K WM C (mio. tX)
+ q18_translate(j,kres,attributes)           Transformation of the multiple crop residues into supply balance crop residues in respective attribute units DM GJ Nr P K WM C (mio. tX)
 
  q18_res_recycling_nr(i)                    Nutrient recycling of reaactive nitrogen (mio. tNr)
  q18_res_recycling_pk(i,pk18)               Nutrient recycling of phosphorus and potash (mio. tX)
