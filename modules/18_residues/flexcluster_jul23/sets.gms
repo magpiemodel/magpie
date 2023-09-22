@@ -14,7 +14,7 @@ dm_nr(attributes) dry matter and nr
 pk18(npk) subset of npk containing P and K nutrients
 /p, k/
 
-dev18 country develoment indicator
+dev18 country development indicator
 /high_income,low_income/
 
 burn_scen18 scenario for burning residues on field

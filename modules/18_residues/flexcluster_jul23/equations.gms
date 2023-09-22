@@ -79,7 +79,7 @@
                   * vm_res_biomass_ag(i2,kcr,attributes);
 
 
-*' While the residue biomass is estiamted with a crop-specific nutrient
+*' While the residue biomass is estimated with a crop-specific nutrient
 *' composition (which is required for consistent nutrient budgets), the
 *' removed residues are assumed to have homogeneous properties
 *' (to reduce the number of commodities in MAgPIE) within three crop residue

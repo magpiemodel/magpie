@@ -160,9 +160,9 @@ $title magpie
 * md5sum: d42abd58de683506a807b411d7fe87cb
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.43.tgz
-* md5sum: 7f537e5df805af11f0e67e84e6010290
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.45.tgz
+* md5sum: bb51c8c8608b8b9363582eb4aa220754
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_glo_08Aug23.tgz
 * md5sum: 5d34e4b54112db10f330f1e59dd60cc9
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Wed Aug 23 14:34:40 2023
+* Last modification (input data): Fri Sep 22 15:20:24 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -241,7 +241,7 @@ $setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
-$setglobal residues  flexcell_july23
+$setglobal residues  flexreg_apr16
 $setglobal processing  substitution_may21
 
 $setglobal trade  selfsuff_reduced

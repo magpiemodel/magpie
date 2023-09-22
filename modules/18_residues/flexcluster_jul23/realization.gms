@@ -31,12 +31,12 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/18_residues/flexcell_july23/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/18_residues/flexcell_july23/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/18_residues/flexcell_july23/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/18_residues/flexcell_july23/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/18_residues/flexcell_july23/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/18_residues/flexcell_july23/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/18_residues/flexcell_july23/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/18_residues/flexcell_july23/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/18_residues/flexcluster_jul23/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/18_residues/flexcluster_jul23/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/18_residues/flexcluster_jul23/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/18_residues/flexcluster_jul23/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/18_residues/flexcluster_jul23/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/18_residues/flexcluster_jul23/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/18_residues/flexcluster_jul23/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/18_residues/flexcluster_jul23/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
