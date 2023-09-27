@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ------------------------------------------------------------------------------------------------
-# description: Interpolates MAgPIE results to 0.25 degree resolution in LUH2 format for ISIMIP 3b
+# description: Downscale MAgPIE results to 0.25 degree resolution in LUH2 format for ISIMIP 3b
 # comparison script: FALSE
 # ------------------------------------------------------------------------------------------------
 
