@@ -92,7 +92,7 @@ grarea <- new.magpie(cells_and_regions=mapping_spatial$cell,
                      fill=cal_area(coord[,"lon"],coord[,"lat"], mha=10^-10))
 #grarea <- round(grarea,6)
 
-# adjust total grid land area so that it is smaller than the gridcell area (some cells have a larger area acually; should be investigated)
+# adjust total grid land area so that it is smaller than the gridcell area (some cells have a larger area actually; should be investigated)
 frac <- grarea/dimSums(land_hr, dim=3)
 frac[frac>1] <- 1
 land_hr <- land_hr*frac
@@ -429,7 +429,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_DM.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM.nc"), comment = "unit: tDM-per-ha", , datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
@@ -467,7 +467,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_DM_irrigated.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM_irrigated.nc"), comment = "unit: tDM-per-ha", , datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM_irrigated.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
@@ -486,7 +486,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_Nr.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a, paste0(out_dir, "/LUH2_Yield_Nr.nc"), comment = "unit: kgN-per-ha", , datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+write.magpie(a, paste0(out_dir, "/LUH2_Yield_Nr.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
