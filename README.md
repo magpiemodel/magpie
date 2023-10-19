@@ -37,7 +37,7 @@ Please find a set of tutorials here https://magpiemodel.github.io/tutorials/.
 This guide will give you a brief technical introduction in how to install, run and use the model
 and how to analyse the model output.
 
-Please pay attentions to the MAgPIE Coding Etiquette when you modify the code.
+Please pay attention to the MAgPIE Coding Etiquette when you modify the code.
 The Coding Etiquette you find at the beginning of the documentation mentioned above.
 The Coding Etiquette explains also the naming conventions and other
 structural characteristics.
@@ -150,7 +150,7 @@ following requirements:
 
 For other dependencies comparable measures should apply. When a dependency is
 added this dependency should be added to the *HOW TO INSTALL* section in the
-README file of the model framework (mentioning the depencendy and explaining
+README file of the model framework (mentioning the dependency and explaining
 how it can be installed). If not all requirements can be fulfilled by the new
 dependency this case should be discussed with the model maintainer
 (magpie@pik-potsdam.de) to find a good solution for it.
