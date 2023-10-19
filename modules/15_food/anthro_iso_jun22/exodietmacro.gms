@@ -28,8 +28,7 @@ if (s15_run_diet_postprocessing = 1,
   p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
 
   p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) =
-         p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
-         i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+          p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) + i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) * s15_calibrate;
 
 * The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
   p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)<0) = 0;
@@ -108,7 +107,7 @@ if (s15_run_diet_postprocessing = 1,
                  + p15_kcal_pc_iso_rumdairy_orig(t,iso) * (1- i15_rumdairy_fadeout(t,iso)));
 
 *** Substitution of ruminant meat and dairy products (kfo_rd) with single-cell protein (SCP) based on protein/cap/day
-  i15_protein_to_kcal_ratio(t,kfo) =  f15_nutrition_attributes(t,kfo,"protein")/f15_nutrition_attributes(t,kfo,"kcal");
+  i15_protein_to_kcal_ratio(t,kfo) =  fm_nutrition_attributes(t,kfo,"protein")/fm_nutrition_attributes(t,kfo,"kcal");
 * Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day
 * using i15_protein_to_kcal_ratio(t,kfo_rd).
 * After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted

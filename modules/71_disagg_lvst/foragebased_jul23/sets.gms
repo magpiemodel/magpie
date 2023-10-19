@@ -5,9 +5,23 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* ### nl_release ###
+sets
+   kli_rum(kli) Ruminant livestock
+   /
+   livst_rum, livst_milk
+   /
 
-v71_feed_balanceflow.lo(j,kli_rum,kforage)= -Inf;
-v71_feed_balanceflow.up(j,kli_rum,kforage)= Inf;
+   kli_mon(kli) Monogastric livestock
+   /
+   livst_pig, livst_chick, livst_egg
+   /
+   
+   kforage(k) Forage feed categories
+   /
+  pasture, foddr
+   / 
+; 
 
-s71_lp_fix=0;
+alias(j,j3);
+alias(cell,cell2);
+alias(kforage,kforage2);
