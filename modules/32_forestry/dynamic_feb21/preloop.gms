@@ -218,6 +218,8 @@ loop(j,
 ** Initialization of land
 *p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
+vm_land_forestry.l(j,type32) = sum(ac, p32_land_start_ac(j,type32,ac));
+
 *** NPI/NDC policies BEGIN
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);

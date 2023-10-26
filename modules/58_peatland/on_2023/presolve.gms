@@ -17,8 +17,7 @@ if (m_year(t) <= s58_fix_peatland,
 else
   v58_peatland.lo(j,land58) = 0;
   v58_peatland.l(j,land58) = pc58_peatland(j,land58);
-  v58_peatland.up(j,landMan58) = Inf;
-  v58_peatland.up(j,"unused") = Inf;
+  v58_peatland.up(j,landDrained58) = Inf;
   v58_peatland.up(j,"rewetted") = s58_rewetting_switch;
   v58_peatland.up(j,"intact") = pc58_peatland(j,"intact");
   v58_peatland.fx(j,"peatExtract") = pc58_peatland(j,"peatExtract");

@@ -5,16 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In this realization, the state of peatlands is modelled as described in @humpenoder_peatland_2020.
-*' The initial map of peatland area consists of intact and degraded peatland area for the year 2015. 
+*' @description In this realization, the state of peatlands is modelled based on the 
+*' methodology described in @humpenoder_peatland_2020.  
+*' The initial map for intact, degraded and rewetted peatland in based on the Global Peatland Map 2.0 and Global Peatland Database.
 *' Future peatland dynamics depend on the ratio of total peatland area and total land area. 
-*' GHG emissions from degraded and rewetted peatlands as are calculated based on GHG emission factors from the 
-*' "2013 Supplement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories: Wetlands". 
+*' GHG emissions from peatlands as are calculated based on GHG emission factors from the 
+*' "2013 Supplement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories: Wetlands" and @tiemeyer_peatland_2020. 
 *' @stop
 
 
 *'
-*' @limitations Peatland area and GHG emissions are fixed to 2015 levels for the historic period, 
+*' @limitations Peatland area and GHG emissions are fixed to 2015/2020 levels for the historic period, 
 *' depending on `s58_fix_peatland`. Organic carbon stocks in peatlands are not accounted for. 
 
 *####################### R SECTION START (PHASES) ##############################
@@ -22,7 +23,6 @@ $Ifi "%phase%" == "sets" $include "./modules/58_peatland/on_2023/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/58_peatland/on_2023/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/58_peatland/on_2023/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/58_peatland/on_2023/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/58_peatland/on_2023/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/58_peatland/on_2023/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/58_peatland/on_2023/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/58_peatland/on_2023/postsolve.gms"
