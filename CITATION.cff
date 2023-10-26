@@ -106,11 +106,11 @@ authors:
     given-names: Anne
     affiliation: "Potsdam Institute for Climate Impact Research"
 
-  - family-names: Führlich
+  - family-names: Sauer
     given-names: Pascal
     orcid: https://orcid.org/0000-0002-6856-8239
     affiliation: "Potsdam Institute for Climate Impact Research"
-    email: pascal.fuehrlich@pik-potsdam.de
+    email: pascal.sauer@pik-potsdam.de
 
   - family-names: Lotze-Campen
     given-names: Hermann
@@ -125,8 +125,8 @@ authors:
     email: popp@pik-potsdam.de
 
 title: MAgPIE - An Open Source land-use modeling framework
-version: 4.6.9dev
-date-released: 2023-07-27
+version: 4.6.11dev
+date-released: 2023-09-05
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse

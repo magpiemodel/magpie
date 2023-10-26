@@ -5,9 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-  reg36 regression coefficients
-  / slope, intercept /
-  wage_scen version of wages
-  / baseline, scenario /
-;
+ 
+i18_res_use_burn(t_all,dev18,kcr) = f18_res_use_burn(t_all,"%c18_burn_scen%",dev18,kcr);

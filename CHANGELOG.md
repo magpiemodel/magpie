@@ -8,19 +8,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **config**  update preprocessing to newest input data v4.88 with new transport costs
-- **scenario_config.csv** update preprocessing to newest input data v4.88
-- **scripts** output.R is now faster, because it no longer searches runfolder renvs for full.gms files
-- **GitHub action** the github action is now faster, because it installs binary packages from Posit Package Manager
+- **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
+- **inputdata** There was a major bug (related to proj/terra) in the rev4.91 inputdata that was fixed with rev4.92
+- **scripts** LUH2_disaggregation output script was modified. Specifically, flooded area was made compatible with the LUH definition, cropland and grazing land were added to the states.nc file, and specific naming/details (datatype,  zname, xname, and yname) were added when creating the .nc files.
+- **scripts** For the emulator scripts select a different bioenergy demand variable that excludes bioenergy sources other than second generation bioenergy crops. Set the minimal bioenergy demand to zero. Both avoid artificial clustering of data points and allow for better fits.
+- **36_employment** regression between hourly labor regression and GDP pc changed from linear to log-log
 
 ### added
--
+- **18_residues** Included cluster-level residue realization, for cluster-level production of residues (but balancing of recycling and burning budgets remains at region-level, for computational lightness)
+- **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific information on the state of nature's contributions to people relevant for yields `./modules/14_yields/input/f14_yld_ncp_report.cs3`.
 
 ### removed
 -
 
 ### fixed
 -
+
+
+## [4.6.11] - 2023-09-05
+
+### changed
+- **scripts** All time steps between 2015 and 2050 are now reported to SEALS
+
+### fixed
+- **70_livestock** fixed division by zero that could occur depending on the scenario set-up
+
+
+## [4.6.10] - 2023-08-16
+
+### changed
+- **config**  update preprocessing to newest input data v4.88 with new transport costs
+- **GitHub action** the github action is now faster, because it installs binary packages from Posit Package Manager
+- **scenario_config.csv** update preprocessing to newest input data v4.88
+- **scripts** output.R is now faster, because it no longer searches runfolder renvs for full.gms files
+
+### fixed
+- **scripts** check_config does not warn about c_input_gdx_path anymore while running empty model
+- **scripts** fixed erronoeous if clause in output.R
+- **scripts** fixed output/extra/disaggregation_LUH2.R. The script was not working any more because magpie4::protectedArea was changed to return protected area for all land types. Moreover, the script now also works for runs without dynamic forestry (default run) but with a warning message.
 
 
 ## [4.6.9] - 2023-07-27
@@ -755,7 +780,9 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.9...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.11...develop
+[4.6.11]: https://github.com/magpiemodel/magpie/compare/v4.6.10...v4.6.11
+[4.6.10]: https://github.com/magpiemodel/magpie/compare/v4.6.9...v4.6.10
 [4.6.9]: https://github.com/magpiemodel/magpie/compare/v4.6.8...v4.6.9
 [4.6.8]: https://github.com/magpiemodel/magpie/compare/v4.6.7...v4.6.8
 [4.6.7]: https://github.com/magpiemodel/magpie/compare/v4.6.6...v4.6.7

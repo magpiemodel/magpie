@@ -5,9 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-  reg36 regression coefficients
-  / slope, intercept /
-  wage_scen version of wages
-  / baseline, scenario /
-;
+vm_cost_prod_kres.scale(i,kres) = 10e3;
