@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ------------------------------------------------------------------------------------------------
-# description: Interpolates MAgPIE results to 0.5 degree resolution in LUH2 format for ISIMIP 3b
+# description: Downscale MAgPIE results to 0.25 degree resolution in LUH2 format for ISIMIP 3b
 # comparison script: FALSE
 # ------------------------------------------------------------------------------------------------
 
@@ -46,15 +46,16 @@ out_dir<-paste0(outputdir,"/disaggregation_LUH2")
 convertLUH2 <- function(x) {
   #interpolate years
   years <- getYears(x,as.integer = TRUE)
+  getSets(x, fulldim = FALSE)[1] <- "x.y.iso"
   x <- toolFillYears(x,seq(range(years)[1],range(years)[2],by=1))
-
 
   for(n in seq(1995,2085,15)){
       x_1<- if(n==1995) as.RasterBrick(x[,n:(n+15),]) else  as.RasterBrick(x[,(n+1):(n+15),])
       x_aux<- if(n==1995) x_1 else stack(x_aux,x_1)
   }
   #re-project raster from 0.5 to 0.25 degree
-  x <- suppressWarnings(projectRaster(x_aux,raster(res=c(0.25,0.25)),method = "ngb"))
+  x <- suppressWarnings(raster::projectRaster(x_aux,raster::raster(res=c(0.25,0.25)),method = "ngb"))
+  crs(x) <- "+proj=utm +zone=1 +datum=WGS84"
   return(x)
 
 }
@@ -92,7 +93,7 @@ grarea <- new.magpie(cells_and_regions=mapping_spatial$cell,
                      fill=cal_area(coord[,"lon"],coord[,"lat"], mha=10^-10))
 #grarea <- round(grarea,6)
 
-# adjust total grid land area so that it is smaller than the gridcell area (some cells have a larger area acually; should be investigated)
+# adjust total grid land area so that it is smaller than the gridcell area (some cells have a larger area actually; should be investigated)
 frac <- grarea/dimSums(land_hr, dim=3)
 frac[frac>1] <- 1
 land_hr <- land_hr*frac
@@ -175,8 +176,10 @@ other_hr_shr <- other_hr_shr * setNames(land_hr_shr[,,"other"],NULL)
 
 if(!file.exists(paste0(out_dir,"/LUH2_states.nc"))){
 states <- mbind(dimSums(crop_hr_shr_LUH2_FAO,dim=3.2),
+                setNames(dimSums(crop_hr_shr_LUH2_FAO, dim = 3), "cropland"),
                 setNames(past_range_hr_shr[,,"past"],"pastr"),
                 setNames(past_range_hr_shr[,,"range"],"range"),
+                setNames(dimSums(past_range_hr_shr,dim=3),"grazing"),
                 setNames(land_hr_shr[,,"primforest"],"primf"),
                 setNames(forestry_hr_shr[,,"plant"],"timber"),
                 setNames(land_hr_shr[,,"secdforest"]+forestry_hr_shr[,,"ndc"]+forestry_hr_shr[,,"aff"],"secdf"),
@@ -191,7 +194,7 @@ saveRDS(states,paste0(outputdir,"/states.rds"))
 gc()
 states <- convertLUH2(states)
 gc()
-write.magpie(states,paste0(out_dir,"/LUH2_states.nc"),comment = "unit: fraction of grid-cell area")
+write.magpie(states, paste0(out_dir, "/LUH2_states.nc"), comment = "unit: fraction of grid-cell area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(states)
 gc()
 }
@@ -214,7 +217,7 @@ gc()
 if(!file.exists(paste0(out_dir,"/LUH2_protected_area.nc"))){
 b <- convertLUH2(b)
 gc()
-write.magpie(b,paste0(out_dir,"/LUH2_protected_area.nc"),comment = "unit: fraction of grid-cell")
+write.magpie(b, paste0(out_dir, "/LUH2_protected_area.nc"), comment = "unit: fraction of grid-cell", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(b)
 gc()
 }
@@ -242,7 +245,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_area.nc"))){
     b <- convertLUH2(b)
     gc()
-    write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_area.nc"),comment = "unit: fraction of grid-cell area per year")
+    write.magpie(b, paste0(out_dir, "/LUH2_wood_harvest_area.nc"), comment = "unit: fraction of grid-cell area per year", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
     rm(a,b)
     gc()
   }
@@ -268,7 +271,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_yields.nc"))){
     b <- convertLUH2(b)
     gc()
-    write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_yields.nc"),comment = "unit: m3 per ha per year")
+    write.magpie(b, paste0(out_dir, "/LUH2_wood_harvest_yields.nc"), comment = "unit: m3 per ha per year", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
     rm(a,b)
     gc()
   }
@@ -282,7 +285,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_biomass_split.nc"))){
     b <- convertLUH2(b)
     gc()
-    write.magpie(b,paste0(out_dir,"/LUH2_wood_harvest_biomass_split.nc"),comment = "unit: fraction of wood harvest biomass")
+    write.magpie(b, paste0(out_dir, "/LUH2_wood_harvest_biomass_split.nc"), comment = "unit: fraction of wood harvest biomass", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
     rm(b)
     gc()
   }
@@ -301,35 +304,29 @@ if (any(abs(d) > 0.1 )) message(paste0("Difference between cluster and grid cell
 if(!file.exists(paste0(out_dir,"/LUH2_irrigation.nc"))){
 irrig_hr_shr <- convertLUH2(irrig_hr_shr)
 gc()
-write.magpie(irrig_hr_shr,paste0(out_dir,"/LUH2_irrigation.nc"),comment = "unit: fraction of crop area")
+write.magpie(irrig_hr_shr, paste0(out_dir, "/LUH2_irrigation.nc"), comment = "unit: fraction of crop area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(irrig_hr_shr,d)
 gc()
 }
 
 #### Flood
 
-rice_historical<-calcOutput("Ricearea",cellular=TRUE,aggregate=FALSE, share = FALSE)
-rice_historical<-speed_aggregate(rice_historical,rel=mapping_spatial,from="cell",to="region",weight=NULL)
-share_rice_flooded<-setNames(1-(rice_historical[,,"nonflooded"]/rice_historical[,,"total"])[,c(1995,2000,2005,2010),],NULL)
-share<-speed_aggregate(share_rice_flooded,rel=mapping_spatial,from="region",to="cell",weight=NULL)
+rice <- dimSums(crop_hr[, , "rice_pro"], dim = 3.2)
+crop_hr_c3ann <- dimSums(crop_hr_LUH[, , "c3ann"], dim = 3.2)
 
-rice <- dimSums(crop_hr_shr[,,"rice_pro"],dim=3.2)
-rice[,c(1995,2000,2005,2010),]<-rice[,c(1995,2000,2005,2010),]*share[,c(1995,2000,2005,2010),]
-ye<-getYears(rice, as.integer=T)[!(getYears(rice, as.integer=T) %in% c(1995,2000,2005,2010))]
-rice[,ye,]<-rice[,ye,]*setYears(share[,2010,],NULL)
-flooded<-round(rice,3)
-getNames(flooded,dim=1) <- "flood"
-flooded <- flooded / dimSums(crop_hr_shr_LUH2_FAO[,,"c3ann"],dim=3)
-flooded[!is.finite(flooded)]<-0
-d <- dimSums(flooded* dimSums(crop_hr_shr_LUH2_FAO[,,"c3ann"],dim=3)*dimSums(land_hr,dim=3),dim=c(1,3))-croparea(gdx,level="glo",product_aggr = F,water_aggr = T)[,,"rice_pro"]
-if (any(abs(d) > 0.1 )) message(paste0("Difference between cluster and grid cell production > 0.1 detected!"))
-if(!file.exists(paste0(out_dir,"/LUH2_flood.nc"))){
-flooded <- convertLUH2(flooded)
-gc()
-write.magpie(flooded,paste0(out_dir,"/LUH2_flood.nc"),comment = "unit: flooded fraction of C3 annual crop area")
-rm(flooded,d)
-gc()
+flooded <- rice / crop_hr_c3ann
+flooded[!is.finite(flooded)] <- 0
+
+d <- dimSums(flooded * dimSums(crop_hr_shr_LUH2_FAO[, , "c3ann"], dim = 3) * dimSums(land_hr, dim = 3), dim = c(1, 3)) - croparea(gdx, level = "glo", product_aggr = F, water_aggr = T)[, , "rice_pro"]
+if (any(abs(d) > 0.1)) message(paste0("Difference between cluster and grid cell production > 0.1 detected!"))
+if (!file.exists(paste0(out_dir, "/LUH2_flood.nc"))) {
+  flooded <- convertLUH2(flooded)
+  gc()
+  write.magpie(flooded, paste0(out_dir, "/LUH2_flood.nc"), comment = "unit: flooded fraction of C3 annual crop area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+  rm(flooded, d)
+  gc()
 }
+
 
 #### Bioenergy
 bio_hr_shr <- dimSums(crop_hr_shr[,,c("begr","betr")],dim=3.2)
@@ -344,7 +341,7 @@ getNames(bio_hr_shr,dim=1) <- c("crpbf_c4per","crpbf_c3per")
 if(!file.exists(paste0(out_dir,"/LUH2_bioenergy.nc"))){
 bio_hr_shr <- convertLUH2(bio_hr_shr)
 gc()
-write.magpie(bio_hr_shr,paste0(out_dir,"/LUH2_bioenergy.nc"),comment = "unit: fraction of crop type area occupied by biofuel crops")
+write.magpie(bio_hr_shr, paste0(out_dir, "/LUH2_bioenergy.nc"), comment = "unit: fraction of crop type area occupied by biofuel crops", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(bio_hr_shr,d)
 gc()
 }
@@ -401,19 +398,19 @@ x <- NULL
 if(!file.exists(paste0(out_dir,"/LUH2_Nitrogen_fertilizer.nc"))){
 x <- convertLUH2(clean_magpie(collapseNames(a[,,"fertilizer"],collapsedim = 3.1)))
 gc()
-write.magpie(x,paste0(out_dir,"/LUH2_Nitrogen_fertilizer.nc"),comment = "unit: kgN-per-ha")
+write.magpie(x, paste0(out_dir, "/LUH2_Nitrogen_fertilizer.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 }
 
 if(!file.exists(paste0(out_dir,"/LUH2_Nitrogen_manure.nc"))){
 x <- convertLUH2(clean_magpie(collapseNames(a[,,"manure"],collapsedim = 3.1)))
 gc()
-write.magpie(x,paste0(out_dir,"/LUH2_Nitrogen_manure.nc"),comment = "unit: kgN-per-ha")
+write.magpie(x, paste0(out_dir, "/LUH2_Nitrogen_manure.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 }
 
 if(!file.exists(paste0(out_dir,"/LUH2_Nitrogen_surplus.nc"))){
 x <- convertLUH2(clean_magpie(collapseNames(a[,,"surplus"],collapsedim = 3.1)))
 gc()
-write.magpie(x,paste0(out_dir,"/LUH2_Nitrogen_surplus.nc"),comment = "unit: kgN-per-ha")
+write.magpie(x, paste0(out_dir, "/LUH2_Nitrogen_surplus.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 }
 
 rm(a,x,weight)
@@ -433,7 +430,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_DM.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a,paste0(out_dir,"/LUH2_Yield_DM.nc"),comment = "unit: tDM-per-ha")
+write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
@@ -452,7 +449,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_DM_rainfed.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a,paste0(out_dir,"/LUH2_Yield_DM_rainfed.nc"),comment = "unit: tDM-per-ha")
+write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM_rainfed.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
@@ -471,7 +468,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_DM_irrigated.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a,paste0(out_dir,"/LUH2_Yield_DM_irrigated.nc"),comment = "unit: tDM-per-ha")
+write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM_irrigated.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
@@ -490,7 +487,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_Nr.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a,paste0(out_dir,"/LUH2_Yield_Nr.nc"),comment = "unit: kgN-per-ha")
+write.magpie(a, paste0(out_dir, "/LUH2_Yield_Nr.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
