@@ -32,17 +32,17 @@
  q58_peatland_crop(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"crop") =e=
     pc58_peatland(j2,"crop")
-	+ ((vm_land(j2,"crop")-pcm_land(j2,"crop"))*p58_scaling_factor(j2));
+    + ((vm_land(j2,"crop")-pcm_land(j2,"crop"))*p58_scaling_factor(j2));
 
  q58_peatland_past(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"past") =e=
     pc58_peatland(j2,"past")
-	+ ((vm_land(j2,"past")-pcm_land(j2,"past"))*p58_scaling_factor(j2));
+    + ((vm_land(j2,"past")-pcm_land(j2,"past"))*p58_scaling_factor(j2));
 
  q58_peatland_forestry(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"forestry") =e=
     pc58_peatland(j2,"forestry")
-	+ ((vm_land_forestry(j2,"plant")-vm_land_forestry.l(j2,"plant"))*p58_scaling_factor(j2));
+    + ((vm_land_forestry(j2,"plant")-vm_land_forestry.l(j2,"plant"))*p58_scaling_factor(j2));
 
 *' This constraint avoids the conversion of intact peatland into rewetted peatland. 
 *' Therefore, rewetted peatland area can only increase if degraded peatland area declines.
