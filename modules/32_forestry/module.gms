@@ -16,8 +16,8 @@
 *' the module calculates the corresponding carbon stocks and biodiversity values for all 
 *' three types of managed forest. The module provides expected carbon dioxide removal (CDR) 
 *' from endogenous re/afforestation to the GHG policy module ([56_ghg_policy]). 
-*' Costs related to managed forests including costs for harvesting, establishment and 
-*' management are provided to the cost module ([11_costs]).
+*' Costs related to managed forests, including costs for harvesting, establishment and 
+*' management, are provided to the cost module ([11_costs]).
 *'
 *' @authors Florian Humpenöder, Abhijeet Mishra
 
