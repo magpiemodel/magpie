@@ -11,8 +11,6 @@ vm_emissions_reg.up(i,"peatland",poll58) = Inf;
 
 p58_mapping_cell_climate(j,clcl58) = sum(clcl_mapping(clcl,clcl58),pm_climate_class(j,clcl));
 
-p58_ipcc_wetland_ef(clcl58,land58,emis58) = f58_ipcc_wetland_ef(clcl58,land58,emis58);
-
 * Peatland scaling factor: ratio of total peatland area and total land area
 p58_scaling_factor(j)$(sum(land, pcm_land(j,land)) > 1e-20) = sum(land58, f58_peatland_area(j,land58)) / sum(land, pcm_land(j,land));
 
