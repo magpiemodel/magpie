@@ -7,11 +7,12 @@
 
 *' @equations
 
-*' Sum over total peatland area (degraded, intact, rewetted) is assumed constant. 
-*' Intact peatland area can only decrease.
+*' Constraint for constant total peatland area:
 
  q58_peatland(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   sum(land58, v58_peatland(j2,land58)) =e= sum(land58, pc58_peatland(j2,land58));
+
+*' Constraints for peatland area expansion and reduction:
 
  q58_expansion(j2,land58) ..
         v58_expansion(j2,land58) =g= v58_peatland(j2,land58)-pc58_peatland(j2,land58);
@@ -26,8 +27,8 @@
 *' The following example illustrates the mechanism used for projecting peatland dynamics:
 *' In a given grid cell, the total land area is 50 Mha and the total peatland area is 10 Mha.
 *' Therefore, the scaling factor is 0.2 (10 Mha divided by 50 Mha).
-*' If cropland expands by 5 Mha, 1 Mha of intact peatland is converted to degraded peatland (5 Mha*0.2).
-*' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha * 0.2 = 10 Mha).
+*' If cropland expands by 5 Mha, 1 Mha of intact peatland is converted to degraded peatland (5 Mha x 0.2).
+*' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha x 0.2 = 10 Mha).
 
  q58_peatland_crop(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"crop") =e=
@@ -45,22 +46,26 @@
     + ((vm_land_forestry(j2,"plant")-vm_land_forestry.l(j2,"plant"))*p58_scaling_factor(j2));
 
 *' This constraint avoids the conversion of intact peatland into rewetted peatland. 
-*' Therefore, rewetted peatland area can only increase if degraded peatland area declines.
+*' In each cluster, rewetted peatland area can only increase if no intact peatland area is lost. 
+*' Therefore, rewetted peatland area can only increase if degraded peatland area (`landDrained58`) declines.
 
  q58_peatland_rewet(j2) ..
  v58_expansion(j2,"rewetted") * v58_reduction(j2,"intact") =e= 0;
 
 *' Costs for peatland degradation and rewetting
 
+ q58_peatland_cost_full(j2) ..
+  vm_peatland_cost(j2) =e= v58_peatland_cost(j2);
+
  q58_peatland_cost(j2) ..
-  vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2)
+  v58_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2)
               + v58_peatland(j2,"rewetted") * sum(ct, i58_cost_rewet_recur(ct))
               + sum(landDrainedUsed58, v58_peatland(j2,landDrainedUsed58)) * sum(ct, i58_cost_degrad_recur(ct));
 
  q58_peatland_cost_annuity(j2) ..
   v58_peatland_cost_annuity(j2) =e=
     (v58_expansion(j2,"rewetted") * sum(ct, i58_cost_rewet_onetime(ct))
-    +  sum(landDrainedUsed58, v58_expansion(j2,landDrainedUsed58)) * sum(ct, i58_cost_degrad_onetime(ct)))
+    +  v58_reduction(j2,"intact") * sum(ct, i58_cost_degrad_onetime(ct)))
   * sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
 *' Detailed peatland GHG emissions

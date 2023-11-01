@@ -23,6 +23,7 @@ equations
  q58_peatland_crop(j)          Degraded peatland used as cropland (mio. ha)
  q58_peatland_past(j)          Degraded peatland used as pasture (mio. ha)
  q58_peatland_forestry(j)      Degraded peatland used for forestry (mio. ha)
+ q58_peatland_cost_full(j)     One-time and recurring cost of peatland conversion and management including artifical balance cost (mio. USD05MER per yr)
  q58_peatland_cost(j)          One-time and recurring cost of peatland conversion and management (mio. USD05MER per yr)
  q58_peatland_cost_annuity(j)  Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  q58_peatland_emis_detail(j,land58,emis58) Detailed GHG emissions from peatlands (Tg per yr)
@@ -30,7 +31,8 @@ equations
 ;
 
 variables
- vm_peatland_cost(j)                One-time and recurring cost of managed peatland (mio. USD05MER per yr)
+ vm_peatland_cost(j)                One-time and recurring cost of managed peatland including artifical balance cost (mio. USD05MER per yr)
+ v58_peatland_cost(j)               One-time and recurring cost of managed peatland (mio. USD05MER per yr)
  v58_peatland_cost_annuity(j)       Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
  v58_peatland_emis(j,land58,emis58) Detailed GHG peatland GHG emissions (Tg per yr)
 ;
@@ -43,7 +45,8 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_peatland_cost(t,j,type)                        One-time and recurring cost of managed peatland (mio. USD05MER per yr)
+ ov_peatland_cost(t,j,type)                        One-time and recurring cost of managed peatland including artifical balance cost (mio. USD05MER per yr)
+ ov58_peatland_cost(t,j,type)                      One-time and recurring cost of managed peatland (mio. USD05MER per yr)
  ov58_peatland_cost_annuity(t,j,type)              Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
  ov58_peatland_emis(t,j,land58,emis58,type)        Detailed GHG peatland GHG emissions (Tg per yr)
  ov58_expansion(t,j,land58,type)                   Peatland expansion (mio. ha)
@@ -56,6 +59,7 @@ parameters
  oq58_peatland_crop(t,j,type)                      Degraded peatland used as cropland (mio. ha)
  oq58_peatland_past(t,j,type)                      Degraded peatland used as pasture (mio. ha)
  oq58_peatland_forestry(t,j,type)                  Degraded peatland used for forestry (mio. ha)
+ oq58_peatland_cost_full(t,j,type)                 One-time and recurring cost of peatland conversion and management including artifical balance cost (mio. USD05MER per yr)
  oq58_peatland_cost(t,j,type)                      One-time and recurring cost of peatland conversion and management (mio. USD05MER per yr)
  oq58_peatland_cost_annuity(t,j,type)              Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  oq58_peatland_emis_detail(t,j,land58,emis58,type) Detailed GHG emissions from peatlands (Tg per yr)

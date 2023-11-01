@@ -24,7 +24,6 @@ pc58_peatland(j,"forestry") = min(f58_peatland_area(j,"forestry"),vm_land_forest
 
 * The residual is added to an "unused" category, which represents degraded but unused peatland.
 pc58_peatland(j,"unused") = sum(landDrainedUsed58, f58_peatland_area(j,landDrainedUsed58) - pc58_peatland(j,landDrainedUsed58));
-pc58_peatland(j,"unused")$(pc58_peatland(j,"unused") < 0) = 0;
 
 pc58_peatland(j,"peatExtract") = f58_peatland_area(j,"peatExtract");
 pc58_peatland(j,"intact") = f58_peatland_area(j,"intact");
