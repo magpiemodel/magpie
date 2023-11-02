@@ -71,3 +71,8 @@
           =e=
           (vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
           * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+
+*' Area-based constraint for 2nd gen. bioenergy, depending on `s30_bioen_pol`.
+*' Available area for the cultivation of begr and betr can be limited to the cropland area of the time step given by `s30_bioen_pol_ref_year`.
+ q30_land_bioen(j2)$(s30_bioen_pol = 1) ..
+    sum((kbe30,w), vm_area(j2,kbe30,w)) =l= p30_bioen_pol_ref_area(j2);
