@@ -216,9 +216,8 @@ loop(j,
     );
 );
 ** Initialization of land
-*p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
-
 vm_land_forestry.l(j,type32) = sum(ac, p32_land_start_ac(j,type32,ac));
+pcm_land_forestry(j,type32) = vm_land_forestry.l(j,type32);
 
 *** NPI/NDC policies BEGIN
 ** Afforestation policies NPI and NDCs

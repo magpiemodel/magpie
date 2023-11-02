@@ -43,7 +43,7 @@
  q58_peatland_forestry(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"forestry") =e=
     pc58_peatland(j2,"forestry")
-    + ((vm_land_forestry(j2,"plant")-vm_land_forestry.l(j2,"plant"))*p58_scaling_factor(j2));
+    + ((vm_land_forestry(j2,"plant")-pcm_land_forestry(j2,"plant"))*p58_scaling_factor(j2));
 
 *' This constraint avoids the conversion of intact peatland into rewetted peatland. 
 *' In each cluster, rewetted peatland area can only increase if no intact peatland area is lost. 

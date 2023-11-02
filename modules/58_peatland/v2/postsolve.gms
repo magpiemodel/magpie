@@ -5,16 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* Update of degraded peatland based on current managed land in the last time steps of fixed peatland area.
-if (m_year(t) = s58_fix_peatland,
-  p58_scaling_factor(j)$(sum(land, vm_land.l(j,land)) > 1e-20) = sum(land58, f58_peatland_area(j,land58)) / sum(land, vm_land.l(j,land));
-  pc58_peatland(j,"crop") = min(f58_peatland_area(j,"crop"),vm_land.l(j,"crop") * p58_scaling_factor(j));
-  pc58_peatland(j,"past") = min(f58_peatland_area(j,"past"), vm_land.l(j,"past") * p58_scaling_factor(j));
-  pc58_peatland(j,"forestry") = min(f58_peatland_area(j,"forestry"), vm_land_forestry.l(j,"plant") * p58_scaling_factor(j));
-  pc58_peatland(j,"unused") = sum(landDrainedUsed58, f58_peatland_area(j,landDrainedUsed58) - pc58_peatland(j,landDrainedUsed58));
-else
-  pc58_peatland(j,land58) = v58_peatland.l(j,land58);
-);
+pc58_peatland(j,land58) = v58_peatland.l(j,land58);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_peatland_cost(t,j,"marginal")                        = vm_peatland_cost.m(j);

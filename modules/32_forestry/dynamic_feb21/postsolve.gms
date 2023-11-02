@@ -7,6 +7,7 @@
 *' @code
 *' Exchange land information after optimization
 p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
+pcm_land_forestry(j,type32) = vm_land_forestry.l(j,type32);
 *' @stop
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
