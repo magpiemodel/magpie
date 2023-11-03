@@ -14,7 +14,6 @@ parameters
  p30_snv_scenario_fader(t_all)      SNV scenario fader (1)
  p30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
  p30_bioen_pol_ref_area(j)          Cropland area used as reference for area-based bioenergy constraint (mio. ha)
- p30_bioen_pol                      Area-based 2nd gen bioenergy policy (1)
 ;
 
 positive variables
