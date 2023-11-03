@@ -27,7 +27,6 @@ s30_snv_scenario_start          SNV scenario start year     / 2020 /
 s30_snv_scenario_target         SNV scenario target year      / 2030 /
 s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
-s30_bioen_pol                   Area-based 2nd gen bioenergy policy (0 = off 1 = on)  / 1 /
 s30_bioen_pol_ref_year          Reference year for bioenergy policy   / 2020 /
 ;
 
