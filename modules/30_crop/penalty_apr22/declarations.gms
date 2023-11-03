@@ -14,6 +14,7 @@ parameters
  i30_rotation_incentives(t_all,rota30)  Penalty for violating rotational constraints (USD05MER per ha)
  p30_snv_scenario_fader(t_all)          SNV scenario fader (1)
  p30_rotation_scenario_fader(t_all)     Crop rotation scenario fader (1)
+ p30_bioen_pol_ref_area(j)              Cropland area used as reference for area-based 2nd gen bioenergy constraint (mio. ha)
 ;
 
 positive variables
@@ -36,7 +37,8 @@ equations
  q30_carbon(j,ag_pools,stockType)     Cropland above ground carbon content calculation (mio. tC)
  q30_bv_ann(j,potnatveg)              Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)              Biodiversity value of perennial cropland (mio. ha)
- q30_land_snv(j)                    Land constraint for the SNV policy in cropland areas (mio. ha)
+ q30_land_snv(j)                      Land constraint for the SNV policy in cropland areas (mio. ha)
+ q30_land_bioen(j)                    Land constraint for 2nd gen bioenergy (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -57,6 +59,7 @@ parameters
  oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (mio. ha)
  oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (mio. ha)
  oq30_land_snv(t,j,type)                     Land constraint for the SNV policy in cropland areas (mio. ha)
+ oq30_land_bioen(t,j,type)                   Land constraint for 2nd gen bioenergy (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
