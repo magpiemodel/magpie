@@ -28,6 +28,7 @@ s30_snv_scenario_target         SNV scenario target year      / 2030 /
 s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
 s30_bioen_pol_ref_year          Reference year for 2nd gen bioenergy area constraint   / 2200 /
+s30_bioen_pol_shr               Share of total cropland area in reference year available for 2nd gen bioenergy   / 1 /
 ;
 
 * Set-switch for countries affected by regional SNV policy
