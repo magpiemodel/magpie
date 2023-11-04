@@ -86,4 +86,4 @@
 
 *' Area-based constraint for 2nd gen. bioenergy, limiting the cultivation of begr and betr to the cropland area of the time step given by `s30_bioen_pol_ref_year`.
  q30_land_bioen(j2)$(sum(ct, m_year(ct)) > s30_bioen_pol_ref_year) ..
-    sum((kbe30,w), vm_area(j2,kbe30,w)) =l= p30_bioen_pol_ref_area(j2);
+    sum((kbe30,w), vm_area(j2,kbe30,w)) =l= s30_bioen_pol_shr * p30_bioen_pol_ref_area(j2);

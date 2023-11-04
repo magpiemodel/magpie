@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific information on the state of nature's contributions to people relevant for yields `./modules/14_yields/input/f14_yld_ncp_report.cs3`.
 - **58_peatland** added realization "v2" with updated peatland map and GHG emission factors
 - **32_forestry** new interface `vm_land_forestry`
-- **30_crop** Added option for area-based bioenergy constraint (`s30_bioen_pol_ref_year`) in all realizations. Available area for the cultivation of begr and betr can be limited to the cropland area of a given time step.
+- **30_crop** Added option for area-based bioenergy constraint (`s30_bioen_pol_ref_year`) in all realizations. Available area for the cultivation of begr and betr can be limited to a share (`s30_bioen_pol_shr`) of the total cropland area in the reference year.
 
 ### removed
 -
