@@ -7,7 +7,7 @@
 
 parameters
  p58_scaling_factor(j)              Scaling factor for managed peatland (1)
- p58_calib_factor(t,j,land58)       Calibration factor for managed peatland (1)
+ p58_calib_factor(j,land58)       Calibration factor for managed peatland (1)
  pc58_peatland(j,land58)            Peatland area (mio. ha)
  p58_mapping_cell_climate(j,clcl58) Mapping between cells and climate regions (binary)
  i58_cost_rewet_recur(t)            Recurring costs for rewetted peatland (USD05MER per ha)

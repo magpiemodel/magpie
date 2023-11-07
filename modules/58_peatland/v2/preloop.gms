@@ -13,7 +13,7 @@ p58_mapping_cell_climate(j,clcl58) = sum(clcl_mapping(clcl,clcl58),pm_climate_cl
 
 * Initialization of peatland scaling factor and peatland calibration factor
 p58_scaling_factor(j) = 1;
-p58_calib_factor(t,j,land58) = 1;
+p58_calib_factor(j,land58) = 1;
 
 * Initialization of peatland area
 pc58_peatland(j,land58) = 0;
