@@ -10,9 +10,9 @@ if (m_year(t) <= s58_fix_peatland,
 * For initialization, degraded peatland is estimated by multiplication of managed land (cropland, pasture, forestry) with the peatland scaling factor (p58_scaling_factor) 
 * and simultaneously constrained by observed degraded peatland area (f58_peatland_area).
   p58_scaling_factor(j)$(sum(land, pcm_land(j,land)) > 1e-20) = sum(land58, f58_peatland_area(j,land58)) / sum(land, pcm_land(j,land));
-  p58_calib_factor(j,"crop")$(pcm_land(j,"crop") * p58_scaling_factor(j) > 1e-20) = f58_peatland_area(j,"crop") / (pcm_land(j,"crop") * p58_scaling_factor(j));
-  p58_calib_factor(j,"past")$(pcm_land(j,"past") * p58_scaling_factor(j) > 1e-20) = f58_peatland_area(j,"past") / (pcm_land(j,"past") * p58_scaling_factor(j));
-  p58_calib_factor(j,"forestry")$(pcm_land_forestry(j,"plant") * p58_scaling_factor(j) > 1e-20) = f58_peatland_area(j,"forestry") / (pcm_land_forestry(j,"plant") * p58_scaling_factor(j));
+*  p58_calib_factor(j,"crop")$(pcm_land(j,"crop") * p58_scaling_factor(j) > 1e-20) = f58_peatland_area(j,"crop") / (pcm_land(j,"crop") * p58_scaling_factor(j));
+*  p58_calib_factor(j,"past")$(pcm_land(j,"past") * p58_scaling_factor(j) > 1e-20) = f58_peatland_area(j,"past") / (pcm_land(j,"past") * p58_scaling_factor(j));
+*  p58_calib_factor(j,"forestry")$(pcm_land_forestry(j,"plant") * p58_scaling_factor(j) > 1e-20) = f58_peatland_area(j,"forestry") / (pcm_land_forestry(j,"plant") * p58_scaling_factor(j));
 *  pc58_peatland(j,"crop") = min(f58_peatland_area(j,"crop"),pcm_land(j,"crop") * p58_scaling_factor(j));
 *  pc58_peatland(j,"past") = min(f58_peatland_area(j,"past"), pcm_land(j,"past") * p58_scaling_factor(j));
 *  pc58_peatland(j,"forestry") = min(f58_peatland_area(j,"forestry"), pcm_land_forestry(j,"plant") * p58_scaling_factor(j));
