@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **14_yields_and_config** The new default is to not use yield calibration factors from the preprocessing. The switch s14_use_yield_calib can optionally reenable the use of yield calibration factors.
 - **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
 - **inputdata** There was a major bug (related to proj/terra) in the rev4.91 inputdata that was fixed with rev4.92
 - **scripts** LUH2_disaggregation output script was modified. Specifically, flooded area was made compatible with the LUH definition, cropland and grazing land were added to the states.nc file, and specific naming/details (datatype,  zname, xname, and yname) were added when creating the .nc files.
