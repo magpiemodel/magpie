@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **scripts** Fixed a bug in NPI/NDC calculations leading to missing AD policies when run with 67k
 
 
 ## [4.6.11] - 2023-09-05
