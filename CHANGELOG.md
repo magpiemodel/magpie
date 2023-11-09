@@ -11,17 +11,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
 - **inputdata** There was a major bug (related to proj/terra) in the rev4.91 inputdata that was fixed with rev4.92
 - **scripts** LUH2_disaggregation output script was modified. Specifically, flooded area was made compatible with the LUH definition, cropland and grazing land were added to the states.nc file, and specific naming/details (datatype,  zname, xname, and yname) were added when creating the .nc files.
+- **scripts** For the emulator scripts select a different bioenergy demand variable that excludes bioenergy sources other than second generation bioenergy crops. Set the minimal bioenergy demand to zero. Both avoid artificial clustering of data points and allow for better fits.
 - **36_employment** regression between hourly labor regression and GDP pc changed from linear to log-log
 
 ### added
 - **18_residues** Included cluster-level residue realization, for cluster-level production of residues (but balancing of recycling and burning budgets remains at region-level, for computational lightness)
 - **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific information on the state of nature's contributions to people relevant for yields `./modules/14_yields/input/f14_yld_ncp_report.cs3`.
+- **58_peatland** added realization "v2" with updated peatland map and GHG emission factors
+- **32_forestry** new interface `vm_land_forestry`
 
 ### removed
 -
 
 ### fixed
--
+- **scripts** Fixed a bug in NPI/NDC calculations leading to missing AD policies when run with 67k
 
 
 ## [4.6.11] - 2023-09-05

@@ -69,8 +69,8 @@
 *' The following example illustrates the mechanism used for projecting peatland dynamics:
 *' In a given grid cell, the total land area is 50 Mha and the total peatland area is 10 Mha.
 *' Therefore, the scaling factor is 0.2 (10 Mha divided by 50 Mha).
-*' If cropland expands by 5 Mha, 1 Mha of intact peatland is converted to degraded peatland (5 Mha*0.2).
-*' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha * 0.2 = 10 Mha).
+*' If cropland expands by 5 Mha, 1 Mha of intact peatland is converted to degraded peatland (5 Mha x 0.2).
+*' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha x 0.2 = 10 Mha).
 
  q58_peatland_degrad(j2,land58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland_man(j2,"degrad",land58) =e=
