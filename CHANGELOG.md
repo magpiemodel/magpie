@@ -8,8 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
-- **inputdata** There was a major bug (related to proj/terra) in the rev4.91 inputdata that was fixed with rev4.92
+- **inputdata** Now using inputdata rev4.94 which is based on 67420 cells (67k, previously 59k)
 - **scripts** LUH2_disaggregation output script was modified. Specifically, flooded area was made compatible with the LUH definition, cropland and grazing land were added to the states.nc file, and specific naming/details (datatype,  zname, xname, and yname) were added when creating the .nc files.
 - **scripts** For the emulator scripts select a different bioenergy demand variable that excludes bioenergy sources other than second generation bioenergy crops. Set the minimal bioenergy demand to zero. Both avoid artificial clustering of data points and allow for better fits.
 - **36_employment** regression between hourly labor regression and GDP pc changed from linear to log-log
@@ -24,6 +23,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
+- **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
+- **inputdata** There was a major bug (related to proj/terra) in the rev4.91 inputdata that was fixed with rev4.92
 - **scripts** Fixed a bug in NPI/NDC calculations leading to missing AD policies when run with 67k
 
 
