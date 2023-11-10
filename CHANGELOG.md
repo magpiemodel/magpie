@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **inputdata** Now using inputdata rev4.94 which is based on 67420 cells (67k, previously 59k)
+- **14_yields_and_config** The new default is to not use yield calibration factors from a calibration run. The switch s14_use_yield_calib can optionally reenable the use of yield calibration factors.
 - **scripts** LUH2_disaggregation output script was modified. Specifically, flooded area was made compatible with the LUH definition, cropland and grazing land were added to the states.nc file, and specific naming/details (datatype,  zname, xname, and yname) were added when creating the .nc files.
 - **scripts** For the emulator scripts select a different bioenergy demand variable that excludes bioenergy sources other than second generation bioenergy crops. Set the minimal bioenergy demand to zero. Both avoid artificial clustering of data points and allow for better fits.
 - **36_employment** regression between hourly labor regression and GDP pc changed from linear to log-log
