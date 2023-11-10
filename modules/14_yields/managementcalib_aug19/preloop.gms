@@ -144,13 +144,14 @@ if ((s14_calib_ir2rf = 1),
 ***YIELD CALIBRATION***********************************************************************
 
 *' @code
-*' Calibrated yields are additionally adjusted by calibration factors 'f14_yld_calib'
+*' Calibrated yields can additionally be adjusted by calibration factors 'f14_yld_calib'
 *' determined in a calibration run. As MAgPIE optimizes yield patterns and FAO regional
-*' yields are outlier corrected, historical production and croparea can only be reproduced
-*' with this additional step of correction:
+*' yields are outlier corrected, historical production and croparea can in some cases 
+*' be better represented with this additional correction:
 
-* set default values in case of missing input file
-if(sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
+* set yield calib factors to 1 in case of no use of yield calibration factors (s14_use_yield_calib = 0) 
+* or missing input file 
+if(s14_use_yield_calib = 0 OR sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
   f14_yld_calib(i,ltype14) = 1;
 );
 

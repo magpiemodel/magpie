@@ -22,7 +22,7 @@ source("scripts/projects/fsec.R")
 cfg       <- fsecScenario(scenario = "c_BAU")
 cfg$title <- "FSEC24Mar23"
 cfg$results_folder                  <- "output/:title:"
-cfg$recalibrate                     <- TRUE
+cfg$recalibrate                     <- TRUE # required when penality_apr22 activated
 cfg$best_calib                      <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
 cfg$best_calib_landconversion_cost  <- FALSE
