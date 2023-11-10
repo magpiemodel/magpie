@@ -20,8 +20,8 @@
  q58_reduction(j2,land58) ..
         v58_reduction(j2,land58) =g= pc58_peatland(j2,land58)-v58_peatland(j2,land58);
 
-*' Future peatland degradation (`v58_peatland`) depends on managed land (`vm_land`, `vm_land_forestry`),
-*' scaled with the ratio of total peatland area and total land area (`p58_scaling_factor`).
+*' Future peatland dynamics (`v58_peatland`) depend on managed land (`vm_land`, `vm_land_forestry`),
+*' multiplied with the peatland scaling factor (`p58_scaling_factor`).
 *' By multiplying changes in managed land with the scaling factor we implicitly assume
 *' that intact peatlands are distributed equally within a grid cell.
 *' The following example illustrates the mechanism used for projecting peatland dynamics:
@@ -33,24 +33,17 @@
  q58_peatland_crop(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"crop") =e=
     pc58_peatland(j2,"crop")
-    + ((vm_land(j2,"crop")-pcm_land(j2,"crop"))*p58_scaling_factor(j2)*p58_calib_factor(j2,"crop"));
+    + ((vm_land(j2,"crop")-pcm_land(j2,"crop"))*p58_scaling_factor(j2,"crop"));
 
  q58_peatland_past(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"past") =e=
     pc58_peatland(j2,"past")
-    + ((vm_land(j2,"past")-pcm_land(j2,"past"))*p58_scaling_factor(j2)*p58_calib_factor(j2,"past"));
+    + ((vm_land(j2,"past")-pcm_land(j2,"past"))*p58_scaling_factor(j2,"past"));
 
  q58_peatland_forestry(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"forestry") =e=
     pc58_peatland(j2,"forestry")
-    + ((vm_land_forestry(j2,"plant")-pcm_land_forestry(j2,"plant"))*p58_scaling_factor(j2)*p58_calib_factor(j2,"forestry"));
-
-*' This constraint avoids the conversion of intact peatland into rewetted peatland. 
-*' In each cluster, rewetted peatland area can only increase if no intact peatland area is lost. 
-*' Therefore, rewetted peatland area can only increase if degraded peatland area (`landDrained58`) declines.
-
- q58_peatland_rewet(j2) ..
- v58_expansion(j2,"rewetted") * v58_reduction(j2,"intact") =e= 0;
+    + ((vm_land_forestry(j2,"plant")-pcm_land_forestry(j2,"plant"))*p58_scaling_factor(j2,"forestry"));
 
 *' Costs for peatland degradation and rewetting
 

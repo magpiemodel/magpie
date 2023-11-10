@@ -6,8 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p58_scaling_factor(j)              Scaling factor for managed peatland (1)
- p58_calib_factor(j,land58)       Calibration factor for managed peatland (1)
+ p58_scaling_factor(j,landDrainedUsed58) Scaling factor for managed peatland (1)
  pc58_peatland(j,land58)            Peatland area (mio. ha)
  p58_mapping_cell_climate(j,clcl58) Mapping between cells and climate regions (binary)
  i58_cost_rewet_recur(t)            Recurring costs for rewetted peatland (USD05MER per ha)
@@ -20,7 +19,6 @@ equations
  q58_peatland(j)               Constraint for peatland area (mio. ha)
  q58_expansion(j,land58)       Peatland expansion (mio. ha)
  q58_reduction(j,land58)       Peatland reduction (mio. ha)
- q58_peatland_rewet(j)         Constraint for peatland rewetting (mio. ha)
  q58_peatland_crop(j)          Degraded peatland used as cropland (mio. ha)
  q58_peatland_past(j)          Degraded peatland used as pasture (mio. ha)
  q58_peatland_forestry(j)      Degraded peatland used for forestry (mio. ha)
@@ -56,7 +54,6 @@ parameters
  oq58_peatland(t,j,type)                           Constraint for peatland area (mio. ha)
  oq58_expansion(t,j,land58,type)                   Peatland expansion (mio. ha)
  oq58_reduction(t,j,land58,type)                   Peatland reduction (mio. ha)
- oq58_peatland_rewet(t,j,type)                     Constraint for peatland rewetting (mio. ha)
  oq58_peatland_crop(t,j,type)                      Degraded peatland used as cropland (mio. ha)
  oq58_peatland_past(t,j,type)                      Degraded peatland used as pasture (mio. ha)
  oq58_peatland_forestry(t,j,type)                  Degraded peatland used for forestry (mio. ha)
