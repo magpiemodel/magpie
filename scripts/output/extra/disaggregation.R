@@ -515,7 +515,7 @@ if(cfg$gms$peatland  == "v2") {
              comment = "unit: Mha per grid-cell",
              message = "Write outputs peatland Mha"
 )
-.writeDisagg(peat_hr / dimSums(land_hr, dim = 3.1), peatland_hr_share_out_file,
+.writeDisagg(peat_hr / dimSums(land_hr[,getYears(peat_hr),], dim = 3), peatland_hr_share_out_file,
              comment = "unit: grid-cell land area fraction",
              message = "Write outputs peatland share"
 )
