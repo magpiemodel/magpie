@@ -28,7 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
 - **inputdata** There was a major bug (related to proj/terra) in the rev4.91 inputdata that was fixed with rev4.92
 - **scripts** Fixed a bug in NPI/NDC calculations leading to missing AD policies when run with 67k
-
+- **scripts** Fixed a bug in output/extra/disaggregation.R related to 67k
 
 ## [4.6.11] - 2023-09-05
 
