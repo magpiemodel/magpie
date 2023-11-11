@@ -78,6 +78,7 @@ if (length(map_file) > 1) {
 
   # calculate crop area as share of total cell area
   area_shr_hr <- madrat::toolAggregate(area_shr, map_file, to = "cell") * crop_shr
+  if (length(getCells(area_shr_hr)) == "67420") getSets(area_shr_hr, fulldim = FALSE)[1] <- "x.y.iso"
   return(area_shr_hr)
 }
 
@@ -169,6 +170,7 @@ if (length(map_file) > 1) {
 
   # Disaggregate BII coefficients to grid cell level
   bii_hr <- toolAggregate(x = bii_lr, rel = map_file, from = "cluster", to = "cell")
+  if (length(getCells(bii_hr)) == "67420") getSets(bii_hr, fulldim = FALSE)[1] <- "x.y.iso"
   return(bii_hr)
 }
 
@@ -496,12 +498,15 @@ if(cfg$gms$peatland  == "v2") {
   peat_ini_hr <- add_columns(peat_ini_hr,addnm = "unused",dim = "d3",fill = 0)
   peat_hr <- luscale::interpolate2(peat_lr,peat_ini_hr,map_file)
   peat_hr <- peat_hr[,getYears(peat_hr,as.integer = T) >= cfg$gms$s58_fix_peatland,]
+  if (length(getCells(peat_hr)) == "67420") getSets(peat_hr, fulldim = FALSE)[1] <- "x.y.iso"
+  
 } else if (cfg$gms$peatland  == "on") {
   peat_lr <- PeatlandArea(gdx,level="cell",sum=TRUE)
   peat_ini_hr <- mbind(setNames(read.magpie(peatland_on_intact_hr_file),"intact"),setNames(read.magpie(peatland_on_degrad_hr_file),"degrad"))
   peat_ini_hr <- add_columns(peat_ini_hr,addnm = "rewet",dim = "d3",fill = 0)
   peat_hr <- luscale::interpolate2(peat_lr,peat_ini_hr,map_file)
   peat_hr <- peat_hr[,getYears(peat_hr,as.integer = T) >= cfg$gms$s58_fix_peatland,]
+  if (length(getCells(peat_hr)) == "67420") getSets(peat_hr, fulldim = FALSE)[1] <- "x.y.iso"
 }
 
 
