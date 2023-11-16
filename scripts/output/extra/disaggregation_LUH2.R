@@ -46,15 +46,16 @@ out_dir<-paste0(outputdir,"/disaggregation_LUH2")
 convertLUH2 <- function(x) {
   #interpolate years
   years <- getYears(x,as.integer = TRUE)
+  getSets(x, fulldim = FALSE)[1] <- "x.y.iso"
   x <- toolFillYears(x,seq(range(years)[1],range(years)[2],by=1))
-
 
   for(n in seq(1995,2085,15)){
       x_1<- if(n==1995) as.RasterBrick(x[,n:(n+15),]) else  as.RasterBrick(x[,(n+1):(n+15),])
       x_aux<- if(n==1995) x_1 else stack(x_aux,x_1)
   }
   #re-project raster from 0.5 to 0.25 degree
-  x <- suppressWarnings(projectRaster(x_aux,raster(res=c(0.25,0.25)),method = "ngb"))
+  x <- suppressWarnings(raster::projectRaster(x_aux,raster::raster(res=c(0.25,0.25)),method = "ngb"))
+  crs(x) <- "+proj=utm +zone=1 +datum=WGS84"
   return(x)
 
 }

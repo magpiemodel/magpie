@@ -59,9 +59,14 @@ if (length(map_file) > 1) {
 #  Output functions
 # -----------------------------------------
 
+.fixCoords <- function(x) {
+  getSets(x, fulldim = FALSE)[1] <- "x.y.iso"
+  return(x)
+}
+
 .writeDisagg <- function(x, file, comment, message) {
-  write.magpie(x, file, comment = comment)
-  write.magpie(x, sub(".mz", ".nc", file), comment = comment, verbose = FALSE)
+  write.magpie(.fixCoords(x), file, comment = comment)
+  write.magpie(.fixCoords(x), sub(".mz", ".nc", file), comment = comment, verbose = FALSE)
 }
 
 .dissagcrop <- function(gdx, land_hr, map_file) {
@@ -88,7 +93,8 @@ if (length(map_file) > 1) {
   map <- readRDS(map_file)
 
   # create full time series
-  land_consv_hr <- new.magpie(map[, "cell"], getYears(land_consv_lr), getNames(wdpa_hr))
+  land_consv_hr <- new.magpie(map[, "cell"], getYears(land_consv_lr), getNames(wdpa_hr),
+                             sets = c("x.y.iso", "year", getSets(wdpa_hr, fulldim = FALSE)[3]))
   land_consv_hr[, getYears(land_consv_hr), ] <- wdpa_hr[, nyears(wdpa_hr), ]
   land_consv_hr[, getYears(wdpa_hr), ] <- wdpa_hr
 
@@ -97,7 +103,8 @@ if (length(map_file) > 1) {
       consv_prio_all <- read.magpie(consv_prio_hr_file)
       consv_prio_hr <- new.magpie(
         cells_and_regions = map[, "cell"],
-        names = getNames(consv_prio_all, dim = 2), fill = 0
+        names = getNames(consv_prio_all, dim = 2), fill = 0,
+        sets = c("x.y.iso", "year", "data")
       )
       iso <- readGDX(gdx, "iso")
       consv_iso <- readGDX(gdx, "policy_countries22")
@@ -307,6 +314,7 @@ land_hr <- interpolateAvlCroplandWeighted(
   snv_pol_shr = snv_pol_shr,
   snv_pol_fader = snv_pol_fader
 )
+land_hr <- .fixCoords(land_hr)
 
 # Write output
 .writeDisagg(land_hr, land_hr_out_file,
@@ -466,6 +474,7 @@ land_bii_hr <- interpolateAvlCroplandWeighted(
   snv_pol_fader = snv_pol_fader,
   unit = "share"
 )
+land_bii_hr <- .fixCoords(land_bii_hr)
 
 # Add primary and secondaray other land
 land_bii_hr <- PrimSecdOtherLand(land_bii_hr, land_hr_file)
