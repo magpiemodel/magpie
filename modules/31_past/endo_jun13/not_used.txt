@@ -2,5 +2,4 @@ name,type,reason
 pcm_land, input, not needed
 vm_tau,input,questionnaire
 fm_pastr_tau_hist,input,questionnaire
-sm_fix_SSP2, input, not needed
 sm_fix_cc, input, not needed
