@@ -112,7 +112,13 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: pascal.sauer@pik-potsdam.de
 
-  - family-names: Lotze-Campen
+  - family-names: Köberle
+    given-names: Alexandre
+    orcid: https://orcid.org/0000-0003-0328-4750
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: alexkob@pik-potsdam.de
+
+- family-names: Lotze-Campen
     given-names: Hermann
     orcid: https://orcid.org/0000-0002-0003-5508
     affiliation: "Potsdam Institute for Climate Impact Research"

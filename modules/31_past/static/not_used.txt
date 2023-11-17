@@ -4,5 +4,4 @@ vm_yld, input, not needed
 pm_land_conservation,input,questionnaire
 vm_tau,input,questionnaire
 fm_pastr_tau_hist,input,questionnaire
-sm_fix_SSP2, input, not needed
 sm_fix_cc, input, not needed
