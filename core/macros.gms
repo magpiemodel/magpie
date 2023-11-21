@@ -97,3 +97,8 @@ $macro m_carbon_stock(land,carbon_density,item) \
 $macro m_carbon_stock_ac(land,carbon_density,sets,sets_sub) \
             sum((&&sets), land(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"actual")) + \
             sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
+
+* macro for peatland dynamics
+$macro m_peatland(pc58_peatland,peatland_item,vm_land,pcm_land,land_item,p58_scaling_factor) \
+            pc58_peatland(j2,peatland_item) + ((vm_land(j2,land_item)-pcm_land(j2,land_item)) * p58_scaling_factor(j2)) * \
+            (p58_scaling_factor(j2) * vm_land(j2,land_item) - pc58_peatland(j2,peatland_item)) / ((vm_land(j2,land_item) - pcm_land(j2,land_item)) * p58_scaling_factor(j2) + 1e-6)
