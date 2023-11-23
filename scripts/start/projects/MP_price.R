@@ -22,85 +22,35 @@ library(stringr)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R") #nolinter
 # Source the default config and then over-write it before starting the run.
-source("config/default.cfg") #nolinter
-
-cfg$qos <- "standby"
-#cfg$qos <- "priority"
-
-cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public" = NULL,
-                               "./patch_input" = NULL),
-                           getOption("magpie_repos"))
-
-#R11: a10a580c, R12: 26df900e
-cfg$input <- c(regional    = "rev4.87_26df900e_magpie.tgz",
-               cellular    = "rev4.87_26df900e_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-               validation  = "rev4.87_26df900e_validation.tgz",
-               additional  = "additional_data_rev4.43.tgz",
-               patch = "MMEmuR12_rev4.87.tgz")
-
+source("config/mp_default.cfg") #nolinter
 
 cfg$force_replace <- FALSE
+cfg$qos <- "priority"
 
 ssp <-  "SSP2"
 cfg <- setScenario(cfg, c(ssp)) #load config presets
 
 ### Identifier and folder
 ###############################################
-identifierFlag <- "SCP_23-10-11_set-36_exp2110"
+identifierFlag <- "SCP_23-11-22"
 ###############################################
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
-cfg$gms$c_timesteps <- "coup2110"
 
 ### BE 
-cfg$gms$bioenergy <- "MMEmu_feb23"
-# non-default BE demands
-cfg$gms$c60_1stgen_biodem <- "phaseout2020"
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-Npi-phaseout2020"
 cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
-
-# Subsidies / Prices
-cfg$gms$c60_bioenergy_subsidy_fix_SSP2 <- 300
 cfg$gms$c60_bioenergy_subsidy <- 0
-cfg$gms$c60_price_implementation <- "lin"
-
 beV <- c(0, 5, 7, 10, 15, 25, 45)
 
-
-### GHG
-cfg$gms$c56_mute_ghgprices_until <- "y2020"
-cfg$gms$c56_pollutant_prices <- "G0000"
-
-
 ### Tau / Yield
-cfg$gms$c14_yields_scenario <- "nocc_hist"
 cfg$gms$tc <- "exo"
-cfg$gms$c13_tccost <- "high" #default: medium
-
 
 ### Biodiv
-cfg$gms$biodiversity <- "bii_target"
-#bdV <- c(1) # 0: no BD decrease, 1: decrease allowed
-#blV <- c(0, 0.7, 0.74, 0.78) #BII lower bound (0-1), default 0
-blV <- c(0)
-cfg$gms$s44_cost_bii_missing <- 10 * 1000000 
-
-### Cropland
-cfg$gms$s30_annual_max_growth <- 0.02
-
-
-### Foresty
-cfg$gms$s56_c_price_induced_aff <- 1
-cfg$gms$s32_max_aff_cell_2025 <- 0.005 # def = inf #0.005 = globally 1Mha Aff allowed in 2025
-
+blV <- c(0, 0.7, 0.74, 0.78) #BII lower bound (0-1), default 0
 
 ### Food
-cfg$gms$food <- "anthropometrics_jan18"
-cfg$gms$c20_scp_type <- "hydrogen"
-
-mpV <- c(0)
-
+mpV <- c(0, 30, 50, 76)
 
 
 for (bl in blV) {
@@ -118,8 +68,7 @@ for (bl in blV) {
 
     if (mp != 0){
       cfg$gms$c15_rumdairy_scp_scen <- paste0("MP", str_pad(mp, 2, pad = "0"))
-    }
-    else {
+    } else {
       cfg$gms$c15_rumdairy_scp_scen <- "constant"
     }
 
