@@ -10,18 +10,8 @@
 # position: 1
 # ------------------------------------------------
 
-library(lucode2)
-library(magclass)
-library(gms)
-
 # Load start_run(cfg) function which is needed to start MAgPIE runs
-source("scripts/start_functions.R") #nolinter
-source("config/mp_default.cfg") #nolinter
-
-identifierFlag <- "SCP_23-11-22"
-
-cfg$info$flag <- identifierFlag
-cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
+source("scripts/start_functions.R")
 
 #start MAgPIE run
-start_run(cfg, codeCheck = FALSE)
+start_run(cfg="mp_default.cfg")

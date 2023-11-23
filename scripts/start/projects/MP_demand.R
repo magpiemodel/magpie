@@ -6,8 +6,8 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: MESSAGE-MAgPIE Emulator Demand-Driven
-# position: 5
+# description: MESSAGE-MAgPIE Emulator SCP Demand Setup
+# position: 1
 # ----------------------------------------------------------
 
 ######################################
