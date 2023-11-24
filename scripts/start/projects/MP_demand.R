@@ -76,6 +76,7 @@ for (bl in blV) {
     cfg$results_folder <- paste(
       "output", identifierFlag, preflag, ":title:", sep = "/"
     )
+    cfg$info$flag2 <- preflag
 
     for (be in beV) {
 

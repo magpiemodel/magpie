@@ -65,6 +65,7 @@ for (bl in blV) {
   for (mp in mpV) {
     preflag <- paste0("MP", str_pad(mp, 2, pad = "0"), "BI", str_pad(bl * 100, 2, pad = "0"))
     cfg$results_folder <- paste("output", identifierFlag, preflag, ":title:", sep = "/")
+    cfg$info$flag2 <- preflag
 
     if (mp != 0){
       cfg$gms$c15_rumdairy_scp_scen <- paste0("MP", str_pad(mp, 2, pad = "0"))
