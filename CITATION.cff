@@ -118,7 +118,7 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: alexkob@pik-potsdam.de
 
-- family-names: Lotze-Campen
+  - family-names: Lotze-Campen
     given-names: Hermann
     orcid: https://orcid.org/0000-0002-0003-5508
     affiliation: "Potsdam Institute for Climate Impact Research"

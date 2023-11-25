@@ -46,3 +46,10 @@ table f31_grass_bio(t_all,i, grassland) Estimated regional grass biomass consump
 $ondelim
 $include "./modules/31_past/input/f31_grass_bio_hist.cs3"
 $offdelim;
+
+
+
+table f31_LUH2v2(t_all,j, f31_luh) LUH2v2 land classes separating rangelands from managed pastures
+$ondelim
+$include "./modules/31_past/input/f31_LUH2v2.cs3"
+$offdelim;
