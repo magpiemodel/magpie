@@ -148,25 +148,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.88_h12_magpie.tgz
-* md5sum: 740da40ceda04850eb374df215837c1b
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.94_h12_magpie.tgz
+* md5sum: 25623b5ad3e8b72bd3008da9b69adfe0
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.88_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 9edbcc62e75b663eada84524402bccbf
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.94_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: d7800a0ffe271483116a8f00a939a89a
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.88_h12_validation.tgz
-* md5sum: d42abd58de683506a807b411d7fe87cb
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.94_h12_validation.tgz
+* md5sum: 4b4128910822cf45603cab46f45ccf78
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.45.tgz
-* md5sum: bb51c8c8608b8b9363582eb4aa220754
-* Repository: /p/projects/landuse/data/input/archive
+* Used data set: additional_data_rev4.46.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_glo_08Aug23.tgz
-* md5sum: 5d34e4b54112db10f330f1e59dd60cc9
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -175,15 +175,15 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   17    9    8    1   44   26    7   10   13   38   21
+*     5   16    8    7    2   41   30    8   11   12   39   21
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.88
+* Regions data revision: 4.94
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.88
+* * Revision: 4.94
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -191,11 +191,11 @@ $title magpie
 * * Regionscode: 62eff8f7
 * * Number of clusters per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   17    9    8    1   44   26    7   10   13   38   21
+*     5   16    8    7    2   41   30    8   11   12   39   21
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Sep 22 15:20:24 2023
+* Last modification (input data): Fri Nov 17 19:42:06 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
