@@ -22,6 +22,9 @@ library(gms)
 source("scripts/start_functions.R") #nolinter
 source("config/mp_default.cfg") #nolinter
 
+cfg$force_replace <- FALSE
+cfg$qos <- "priority"
+
 identifierFlag <- "SCP_23-11-27"
 
 cfg$info$flag <- identifierFlag
