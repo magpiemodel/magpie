@@ -27,12 +27,9 @@ source("config/mp_default.cfg") #nolinter
 cfg$force_replace <- FALSE
 cfg$qos <- "priority"
 
-ssp <-  "SSP2"
-cfg <- setScenario(cfg, c(ssp)) #load config presets
-
 ### Identifier and folder
 ###############################################
-identifierFlag <- "SCP_23-11-22"
+identifierFlag <- "SCP_23-11-27"
 ###############################################
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")

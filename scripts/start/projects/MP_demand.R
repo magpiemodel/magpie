@@ -27,12 +27,9 @@ source("config/mp_default.cfg") #nolinter
 cfg$force_replace <- TRUE
 cfg$qos <- "standby"
 
-ssp <-  "SSP2"
-cfg <- setScenario(cfg, c(ssp)) #load config presets
-
 ### Identifier and folder
 ###############################################
-identifierFlag <- "SCP_23-11-22"
+identifierFlag <- "SCP_23-11-27"
 ###############################################
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
@@ -52,11 +49,14 @@ blV <- c(0, 0.7, 0.74, 0.78) #BII lower bound (0-1), default 0
 ### Food
 pV <- c(0, 20, 50, 76) #0, 20, 50, 76
 
+### Forest
+cfg$gms$ s32_max_aff_cell_2025 <- 0.005
+
 
 for (bl in blV) {
   bd <- 0
   if (bl == 0) {
-   bd <- 1
+    bd <- 1
   }
 
   cfg$gms$c44_bii_decrease <- bd
