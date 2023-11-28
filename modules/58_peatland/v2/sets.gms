@@ -7,13 +7,16 @@
 
 sets
  
-  land58 Peatland land types
+  land58 Peatland categories
     / intact, crop, past, forestry, peatExtract, unused, rewetted /
 
-  landDrained58(land58) Peatland land types
+  drained58(land58) Drained peatland categories
     / crop, past, forestry, unused /
 
-  landDrainedUsed58(land58) Peatland land types
+  manPeat58(land58) Drained and managed peatland categories
+    / crop, past, forestry /
+
+  manLand58(land) Managed main land categories
     / crop, past, forestry /
 
   emis58 Wetland emission types
@@ -69,3 +72,5 @@ sets
            /
 
 ;
+
+alias (manPeat58,manPeat58_alias);

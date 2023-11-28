@@ -7,42 +7,50 @@
 
 *' @equations
 
-*' Constraint for constant total peatland area:
+*' Constraint for constant total peatland area over time:
 
- q58_peatland(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
+ q58_peatland(j2) ..
   sum(land58, v58_peatland(j2,land58)) =e= sum(land58, pc58_peatland(j2,land58));
 
-*' Constraints for peatland area expansion and reduction:
+*' Peatland area change:
 
- q58_expansion(j2,land58) ..
-        v58_expansion(j2,land58) =g= v58_peatland(j2,land58)-pc58_peatland(j2,land58);
+ q58_peatlandChange(j2,land58) ..
+        v58_peatlandChange(j2,land58) =e= v58_peatland(j2,land58)-pc58_peatland(j2,land58);
  
- q58_reduction(j2,land58) ..
-        v58_reduction(j2,land58) =g= pc58_peatland(j2,land58)-v58_peatland(j2,land58);
+*' Managed land area expansion and reduction:
 
-*' Future peatland dynamics (`v58_peatland`) depend on changes in managed land 
-*' (`vm_land-pcm_land`, `vm_land_forestry-pcm_land_forestry`),
-*' multiplied with the peatland scaling factor (`p58_scaling_factor`) and an adjustment term for cells where 
-*' the initial peatland area is inconsistent with the scaling factor (see marco m_peatland for details).
-*' By multiplying changes in managed land with the scaling factor we implicitly assume
-*' that intact peatlands are distributed equally within a grid cell.
-*' The following example illustrates the mechanism used for projecting peatland dynamics:
-*' In a given grid cell, the total land area is 50 Mha and the total peatland area is 10 Mha.
-*' Therefore, the scaling factor is 0.2 (10 Mha divided by 50 Mha).
-*' If cropland expands by 5 Mha, 1 Mha of intact peatland is converted to degraded peatland (5 Mha x 0.2).
-*' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha x 0.2 = 10 Mha).
+ q58_manLandExp(j2,manLand58) ..
+  v58_manLandExp(j2,manLand58) =e= 
+   vm_landexpansion(j2,"crop")$(sameas(manLand58,"crop"))
+   + vm_landexpansion(j2,"past")$(sameas(manLand58,"past"))
+   + vm_landexpansion_forestry(j2,"plant")$(sameas(manLand58,"forestry"));
 
- q58_peatland_crop(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
-  v58_peatland(j2,"crop") =e= 
-    m_peatland(pc58_peatland,"crop",vm_land,pcm_land,"crop",p58_scaling_factor);
+ q58_manLandRed(j2,manLand58) ..
+  v58_manLandRed(j2,manLand58) =e= 
+   vm_landreduction(j2,"crop")$(sameas(manLand58,"crop"))
+   + vm_landreduction(j2,"past")$(sameas(manLand58,"past"))
+   + vm_landreduction_forestry(j2,"plant")$(sameas(manLand58,"forestry"));
 
- q58_peatland_past(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
-  v58_peatland(j2,"past") =e=
-    m_peatland(pc58_peatland,"past",vm_land,pcm_land,"past",p58_scaling_factor);
+*' Future peatland dynamics (`v58_peatland`) depend on changes in managed land (`v58_manLandExp`, `v58_manLandRed`), 
+*' multiplied with corresponding scaling factors for expansion (`p58_scaling_factor_exp`) and reduction (`p58_scaling_factor_red`). 
+*' The scaling factor for expansion makes sure that in case the full cell area consists of 
+*' managed land (cropland, pasture, forestry plantations), the full peatland area is drained. 
+*' Likewise, the scaling factor for reduction makes sure that in case no area is used for managed land, 
+*' managed peatland (`manPeat58`) is reduced to zero. 
+*' In case managed land remains unchanged, also managed peatland remains unchanged. 
+*' The distribution of changes in total peatland area to managed peatland categories (`manPeat58`) 
+*' depends on the weight of these categories in the previous time step (`p58_weight`). 
 
- q58_peatland_forestry(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
-  v58_peatland(j2,"forestry") =e=
-    m_peatland(pc58_peatland,"forestry",vm_land_forestry,pcm_land_forestry,"plant",p58_scaling_factor);
+ q58_peatlandMan(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
+  v58_peatland(j2,manPeat58) =e= 
+    pc58_peatland(j2,manPeat58) 
+    + sum(manLand58, v58_manLandExp(j2,manLand58)) * sum(ct, p58_scaling_factor_exp(ct,j2) * p58_weight(ct,j2,manPeat58))
+    - sum(manLand58, v58_manLandRed(j2,manLand58)) * sum(ct, p58_scaling_factor_red(ct,j2) * p58_weight(ct,j2,manPeat58));
+
+*' This constraint avoids the conversion of intact peatland into rewetted peatland.
+
+ q58_peatlandRewet(j2) ..
+    v58_peatlandChange(j2,"rewetted") =l= -sum(drained58, v58_peatlandChange(j2,drained58)) + v58_peatlandChange(j2,"intact");
 
 *' Costs for peatland degradation and rewetting
 
@@ -50,15 +58,20 @@
   vm_peatland_cost(j2) =e= v58_peatland_cost(j2);
 
  q58_peatland_cost(j2) ..
-  v58_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2)
+  v58_peatland_cost(j2) =e= v58_peatland_cost_annuity_intact(j2) + v58_peatland_cost_annuity_rewet(j2)
               + v58_peatland(j2,"rewetted") * sum(ct, i58_cost_rewet_recur(ct))
-              + sum(landDrainedUsed58, v58_peatland(j2,landDrainedUsed58)) * sum(ct, i58_cost_degrad_recur(ct));
+              + sum(manPeat58, v58_peatland(j2,manPeat58)) * sum(ct, i58_cost_degrad_recur(ct));
 
- q58_peatland_cost_annuity(j2) ..
-  v58_peatland_cost_annuity(j2) =e=
-    (v58_expansion(j2,"rewetted") * sum(ct, i58_cost_rewet_onetime(ct))
-    +  v58_reduction(j2,"intact") * sum(ct, i58_cost_degrad_onetime(ct)))
+ q58_peatland_cost_annuity_intact(j2) ..
+  v58_peatland_cost_annuity_intact(j2) =e=
+    -  v58_peatlandChange(j2,"intact") * sum(ct, i58_cost_degrad_onetime(ct))
   * sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
+ 
+ q58_peatland_cost_annuity_rewet(j2) ..
+  v58_peatland_cost_annuity_rewet(j2) =g=
+    v58_peatlandChange(j2,"rewetted") * sum(ct, i58_cost_rewet_onetime(ct))
+  * sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
+
 
 *' Detailed peatland GHG emissions
 

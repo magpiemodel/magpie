@@ -98,7 +98,13 @@ $macro m_carbon_stock_ac(land,carbon_density,sets,sets_sub) \
             sum((&&sets), land(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"actual")) + \
             sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
 
-* macro for peatland dynamics
-$macro m_peatland(peatland,peatland_item,vm_land,pcm_land,land_item,scaling_factor) \
-            peatland(j2,peatland_item) + ((vm_land(j2,land_item)-pcm_land(j2,land_item)) * scaling_factor(j2)) * \
-            (scaling_factor(j2) * vm_land(j2,land_item) - peatland(j2,peatland_item)) / ((vm_land(j2,land_item) - pcm_land(j2,land_item)) * scaling_factor(j2) + 1e-6)
+* macros for peatland scaling factors
+* expansion: (maxPeat - totManPeat) / (maxLand - totManLand)
+$macro m_peatland_scaling_factor_exp(peatland,pcm_land) \
+   ((sum(land58, peatland(j,land58)) - sum(manPeat58, peatland(j,manPeat58))) / (sum(land, pcm_land(j,land)) - sum(manLand58, pcm_land(j,manLand58))) )\
+   $(sum(land58, peatland(j,land58)) > 1e-10 AND sum(land, pcm_land(j,land)) > 1e-10)\
+  + 0$(sum(land58, peatland(j,land58)) <= 1e-10 OR sum(land, pcm_land(j,land)) <= 1e-10)
+* reduction: totManPeat / totManLand
+$macro m_peatland_scaling_factor_red(peatland,pcm_land) \
+   (sum(manPeat58, peatland(j,manPeat58)) / sum(manLand58, pcm_land(j,manLand58)))$(sum(manPeat58, peatland(j,manPeat58)) > 1e-10 AND sum(manLand58, pcm_land(j,manLand58)) > 1e-10) \
+   + 0$(sum(manPeat58, peatland(j,manPeat58)) <= 1e-10 OR sum(manLand58, pcm_land(j,manLand58)) <= 1e-10)

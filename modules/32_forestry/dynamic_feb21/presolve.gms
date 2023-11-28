@@ -15,6 +15,7 @@ ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
 *Reduction of ac_est is not possible.
 v32_hvarea_forestry.fx(j,ac_est) = 0;
 v32_land_reduction.fx(j,type32,ac_est) = 0;
+v32_land_expansion.fx(j,type32,ac_sub) = 0;
 
 ** START ndc **
 * calc NPI/NDC afforestation per time step based on forest stock change
