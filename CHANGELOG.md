@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **18_residues** Included cluster-level residue realization, for cluster-level production of residues (but balancing of recycling and burning budgets remains at region-level, for computational lightness)
 - **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific information on the state of nature's contributions to people relevant for yields `./modules/14_yields/input/f14_yld_ncp_report.cs3`.
 - **58_peatland** added realization "v2" with updated peatland map and GHG emission factors
-- **32_forestry** new interface `vm_land_forestry`
+- **32_forestry** new interfaces `vm_landexpansion_forestry` and `vm_landreduction_forestry`
 - **scripts** added peatland to output/extra/disaggregation.R
 
 ### removed
