@@ -17,21 +17,18 @@ library(lucode2)
 library(magclass)
 library(gms)
 
-# Load start_run(cfg) function which is needed to start MAgPIE runs
+# Load start function needed to start MAgPIE runs
 source("scripts/start_functions.R")
-
-# start MAgPIE runs
+# obtain settings from default config
 source("config/default.cfg")
 
-cfg$force_download <- FALSE
-
-#cfg$results_folder <- "output/:title:"
+# set title and date
 cfg$results_folder <- "output/:title::date:"
 
 #######################
 # SCENARIO DEFINITION #
 #######################
-cfg <- gms::setScenario(cfg, c("SSP2", "NPI"))
+cfg <- setScenario(cfg, c("SSP2", "NPI"))
 
 ### BAU Scenario ###
 # SSP: SSP2
@@ -65,7 +62,7 @@ bau <- function(cfg) {
   cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"      # default
   cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi"      # default
   # Climate Change
-  input['cellular'] <- "rev4.94_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input['cellular'] <- "rev4.94_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }
