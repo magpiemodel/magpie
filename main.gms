@@ -148,25 +148,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.87_h12_magpie.tgz
-* md5sum: 658398f1dcbef89198bd85d61b1db9ad
+* Used data set: rev4.94_h12_magpie.tgz
+* md5sum: 25623b5ad3e8b72bd3008da9b69adfe0
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.87_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 8a1d668acfe66a700eb5da2143b31cb2
+* Used data set: rev4.94_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: d7800a0ffe271483116a8f00a939a89a
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.87_h12_validation.tgz
-* md5sum: d02217d791b58400e6e3be7186527ed5
+* Used data set: rev4.94_h12_validation.tgz
+* md5sum: 4b4128910822cf45603cab46f45ccf78
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.43.tgz
+* Used data set: additional_data_rev4.46.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_glo_08Jul23.tgz
-* md5sum: 7315d0f268d6225805a4c1f1c3c05b13
-* Repository: /p/projects/landuse/data/input/calibration
+* Used data set: calibration_H12_per_ton_fao_may22_glo_08Aug23.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -175,15 +175,15 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   17    9    8    1   44   26    7   10   13   38   21
+*     5   16    8    7    2   41   30    8   11   12   39   21
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.87
+* Regions data revision: 4.94
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.87
+* * Revision: 4.94
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -191,11 +191,11 @@ $title magpie
 * * Regionscode: 62eff8f7
 * * Number of clusters per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   17    9    8    1   44   26    7   10   13   38   21
+*     5   16    8    7    2   41   30    8   11   12   39   21
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Thu Jul 13 10:36:10 2023
+* Last modification (input data): Fri Nov 17 19:42:06 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -284,7 +284,7 @@ $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 
-$setglobal disagg_lvst  foragebased_aug18
+$setglobal disagg_lvst  foragebased_jul23
 
 $setglobal timber  default
 

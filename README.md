@@ -24,8 +24,8 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.6.10 can be found at
-https://rse.pik-potsdam.de/doc/magpie/4.6.10/
+The model documentation for version 4.6.11 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.6.11/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen
@@ -37,7 +37,7 @@ Please find a set of tutorials here https://magpiemodel.github.io/tutorials/.
 This guide will give you a brief technical introduction in how to install, run and use the model
 and how to analyse the model output.
 
-Please pay attentions to the MAgPIE Coding Etiquette when you modify the code.
+Please pay attention to the MAgPIE Coding Etiquette when you modify the code.
 The Coding Etiquette you find at the beginning of the documentation mentioned above.
 The Coding Etiquette explains also the naming conventions and other
 structural characteristics.
@@ -150,7 +150,7 @@ following requirements:
 
 For other dependencies comparable measures should apply. When a dependency is
 added this dependency should be added to the *HOW TO INSTALL* section in the
-README file of the model framework (mentioning the depencendy and explaining
+README file of the model framework (mentioning the dependency and explaining
 how it can be installed). If not all requirements can be fulfilled by the new
 dependency this case should be discussed with the model maintainer
 (magpie@pik-potsdam.de) to find a good solution for it.
@@ -188,7 +188,7 @@ magpie@pik-potsdam.de
 Please contact magpie@pik-potsdam.de
 
 ## CITATION
-See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.6.10/#how-to-cite) in the model documentation for information how to cite the model.
+See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.6.11/#how-to-cite) in the model documentation for information how to cite the model.
 
 ## AUTHORS
 See list of authors in CITATION.cff
