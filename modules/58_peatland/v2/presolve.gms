@@ -7,10 +7,11 @@
 
 
 if (m_year(t) <= s58_fix_peatland,  
+* Managed land area
+  pc58_manLand(j,manPeat58) = m_peatLandMerge(pcm_land,pcm_land_forestry,"j");
+
 * Initialization of peatland area. Drained and used peatland area cannot exceed the corresponding managed area
-  pc58_peatland(j,"crop") = min(f58_peatland_area(j,"crop"),pcm_land(j,"crop"));
-  pc58_peatland(j,"past") = min(f58_peatland_area(j,"past"), pcm_land(j,"past"));
-  pc58_peatland(j,"forestry") = min(f58_peatland_area(j,"forestry"), pcm_land(j,"forestry"));
+  pc58_peatland(j,manPeat58) = min(f58_peatland_area(j,manPeat58),pc58_manLand(j,manPeat58));
 * The residual is added to an "unused" category, which represents drained but unused peatland.
   pc58_peatland(j,"unused") = sum(manPeat58, f58_peatland_area(j,manPeat58) - pc58_peatland(j,manPeat58));
 * Area used for peat extraction 
@@ -38,10 +39,12 @@ else
   i58_cost_degrad_onetime(t) = s58_cost_degrad_onetime;
 );
 
-* Peatland scaling factors for estimating future peatland dynamics; see macros for details.
-p58_scaling_factor_exp(t,j) = m_peatland_scaling_factor_exp(pc58_peatland,pcm_land);
-p58_scaling_factor_red(t,j) = m_peatland_scaling_factor_red(pc58_peatland,pcm_land);
+*' @code
+*' Peatland scaling factor for reduction: currentPeatland / currentManagedLand
 
-* Peatland weight for distribution of total peatland changes to managed peatland categories
-p58_weight(t,j,manPeat58)$(sum(manPeat58_alias, pc58_peatland(j,manPeat58_alias)) > 1e-10) = 
-   pc58_peatland(j,manPeat58) / sum(manPeat58_alias, pc58_peatland(j,manPeat58_alias));
+p58_scalingFactorRed(t,j,manPeat58) = 
+    (pc58_peatland(j,manPeat58)/pc58_manLand(j,manPeat58))
+    $(pc58_peatland(j,manPeat58) > 1e-10 AND pc58_manLand(j,manPeat58) > 1e-10)
+    + 0$(pc58_peatland(j,manPeat58) <= 1e-10 OR pc58_manLand(j,manPeat58) <= 1e-10);
+
+*' @stop

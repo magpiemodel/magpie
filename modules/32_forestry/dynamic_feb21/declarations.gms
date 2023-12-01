@@ -59,6 +59,7 @@ parameters
  p32_bii_coeff(type32,bii_class_secd,potnatveg)     bii coeff (1)
  p32_c_density_ac_fast_forestry(t_all,j,ac)         Carbon densities in plantations based on Braakhekke et al (tC per ha)
  p32_disturbance_loss_ftype32(t,j,type32,ac)        Loss due to disturbances in all plantation type forests (mio. ha)
+ pcm_land_forestry(j,type32)                        Forestry land pools (mio. ha)
 ;
 
 positive variables
@@ -75,6 +76,7 @@ positive variables
  vm_prod_forestry(j,kforestry)                      Production of woody biomass from commercial plantations (mio. tDM per yr)
  vm_landexpansion_forestry(j,type32)                Forestry land expansion (mio. ha)
  vm_landreduction_forestry(j,type32)                Forestry land reduction (mio. ha)
+ vm_land_forestry(j,type32)                         Forestry land pools (mio. ha)
 ;
 
 variables
@@ -84,6 +86,7 @@ variables
 equations
  q32_cost_total(i)                                  Total forestry costs constraint (mio. USD)
  q32_land(j)                                        Land constraint (mio. ha)
+ q32_land_type32(j,type32)                                        Land constraint (mio. ha)
  q32_cdr_aff(j,ac)                                  Calculation of CDR from afforestation (mio. tC)
  q32_carbon(j,ag_pools,stockType)                   Forestry carbon stock calculation (mio. tC)
  q32_land_diff                                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
@@ -126,9 +129,11 @@ parameters
  ov_prod_forestry(t,j,kforestry,type)          Production of woody biomass from commercial plantations (mio. tDM per yr)
  ov_landexpansion_forestry(t,j,type32,type)    Forestry land expansion (mio. ha)
  ov_landreduction_forestry(t,j,type32,type)    Forestry land reduction (mio. ha)
+ ov_land_forestry(t,j,type32,type)             Forestry land pools (mio. ha)
  ov_cdr_aff(t,j,ac,aff_effect,type)            Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_total(t,i,type)                     Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                           Land constraint (mio. ha)
+ oq32_land_type32(t,j,type32,type)             Land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)                     Calculation of CDR from afforestation (mio. tC)
  oq32_carbon(t,j,ag_pools,stockType,type)      Forestry carbon stock calculation (mio. tC)
  oq32_land_diff(t,type)                        Aggregated difference in forestry land compared to previous timestep (mio. ha)

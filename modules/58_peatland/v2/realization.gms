@@ -25,7 +25,7 @@
 
 
 *'
-*' @limitations Peatland area and GHG emissions are fixed to 2015/2020 levels for the historic period, 
+*' @limitations Peatland area and GHG emissions are fixed to 2020 levels for the historic period, 
 *' depending on `s58_fix_peatland`. Organic carbon stocks in peatlands are not accounted for. 
 
 *####################### R SECTION START (PHASES) ##############################

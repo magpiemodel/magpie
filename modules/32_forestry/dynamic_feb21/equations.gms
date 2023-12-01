@@ -56,6 +56,9 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  q32_land(j2) ..
  vm_land(j2,"forestry") =e= sum((type32,ac), v32_land(j2,type32,ac));
 
+ q32_land_type32(j2,type32) ..
+ vm_land_forestry(j2,type32) =e= sum(ac, v32_land(j2,type32,ac));
+
  q32_land_expansion_forestry(j2,type32) ..
  vm_landexpansion_forestry(j2,type32) =e= sum(ac_est, v32_land_expansion(j2,type32,ac_est));
 

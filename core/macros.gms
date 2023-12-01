@@ -98,13 +98,14 @@ $macro m_carbon_stock_ac(land,carbon_density,sets,sets_sub) \
             sum((&&sets), land(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"actual")) + \
             sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
 
-* macros for peatland scaling factors
-* expansion: (maxPeat - totManPeat) / (maxLand - totManLand)
-$macro m_peatland_scaling_factor_exp(peatland,pcm_land) \
-   ((sum(land58, peatland(j,land58)) - sum(manPeat58, peatland(j,manPeat58))) / (sum(land, pcm_land(j,land)) - sum(manLand58, pcm_land(j,manLand58))) )\
-   $(sum(land58, peatland(j,land58)) > 1e-10 AND sum(land, pcm_land(j,land)) > 1e-10)\
-  + 0$(sum(land58, peatland(j,land58)) <= 1e-10 OR sum(land, pcm_land(j,land)) <= 1e-10)
-* reduction: totManPeat / totManLand
-$macro m_peatland_scaling_factor_red(peatland,pcm_land) \
-   (sum(manPeat58, peatland(j,manPeat58)) / sum(manLand58, pcm_land(j,manLand58)))$(sum(manPeat58, peatland(j,manPeat58)) > 1e-10 AND sum(manLand58, pcm_land(j,manLand58)) > 1e-10) \
-   + 0$(sum(manPeat58, peatland(j,manPeat58)) <= 1e-10 OR sum(manLand58, pcm_land(j,manLand58)) <= 1e-10)
+* macro for merging managed land area into peatland categories
+$macro m_peatLandMerge(land,landForestry,set) \
+   land(&&set,"crop")$(sameas(manPeat58,"crop")) \
+   + land(&&set,"past")$(sameas(manPeat58,"past")) \
+   + landForestry(&&set,"plant")$(sameas(manPeat58,"forestry"))
+
+* macro for peatland expansion factor
+$macro m_peatLandLeft(pclandFull,setFull,vland,pcland) \
+    (sum(&&setFull,pclandFull(j2,&&setFull)) \
+     - sum(manPeat58_alias$(not sameas(manPeat58_alias,manPeat58)),vland(j2,manPeat58_alias)) \
+     - sum(manPeat58_alias$(sameas(manPeat58_alias,manPeat58)),pcland(j2,manPeat58_alias)))

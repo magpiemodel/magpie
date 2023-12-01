@@ -277,7 +277,7 @@ $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_aug22
 $setglobal maccs  on_aug22
-$setglobal peatland  on
+$setglobal peatland  v2
 $setglobal som  static_jan19
 
 $setglobal bioenergy  1stgen_priced_dec18
