@@ -29,7 +29,7 @@ mif <- paste0(outputdir, "/agmip_report.mif")
 rds <- paste0(outputdir, "/agmip_report.rds")
 ###############################################################################
 
-report <- getReportAgMIP(gdx, scenario = cfg$title)
+report <- getReportAgMIP(gdx, scenario = cfg$title, detail = TRUE)
 
 ### regional aggregation
 write.report(report, file = mif)
