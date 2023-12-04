@@ -44,7 +44,10 @@ bau <- function(cfg) {
   # For impacts of CC on labor:
   cfg$gms$factor_costs  <- "sticky_labor" # @Alex/Edna/Florian: Should we use this one?
   cfg$gms$labor_prod    <- "exo"
-  cfg$gms$c37_labor_rcp <- "rcp585"       # @Florian: which one to choose for RCP 7p0?
+  cfg$gms$c37_labor_rcp <- "rcp585"
+  # Note: the effect of labor impacts is very low in MAgPIE and we don't have the
+  #       Nelson data implemented. We therefore use the existing data from LAMACLIMA
+  #       and the scenarios rcp119 and rcp585.
 
   ### Components for Decomposition ###
   # Diets: exogenous EATLancet diet
@@ -54,13 +57,18 @@ bau <- function(cfg) {
   # Waste: half food waste
   cfg$gms$s15_exo_waste  <- 0            # default
   cfg$gms$s15_waste_scen <- 1.2          # default (but not active b/c of s15_exo_waste = 0)
-  # Higher endogenous productivity achieved through lower costs
-  cfg$gms$tc         <- "endo_jan22"     # default
-  cfg$gms$c13_tccost <- "medium"         # default
+  # Default interest rate (for default productivity)
+  cfg$gms$s12_interest_lic <- 0.1        # default
+  cfg$gms$s12_interest_hic <- 0.04       # default
+  # Default livestock productivity
+  cfg$gms$c70_feed_scen <- "ssp2"
   # Mitigation: no mitigation beyond NPI (NPI already set in setScenario)
-  cfg$gms$c56_emis_policy      <- "redd+natveg_nosoil"   # default  # @Florian: should it be "red+natveg_nosoil" or "default" for case of current policies / no additional mitigation
+  cfg$gms$c56_emis_policy      <- "redd+natveg_nosoil"   # default
+  cfg$path_to_report_ghgprices <- NA
   cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"      # default
+  cfg$path_to_report_bioenergy <- NA
   cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi"      # default
+
   # Climate Change
   cfg$input['cellular'] <- "rev4.94_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
 
@@ -80,9 +88,12 @@ diet <- function(cfg) {
 # High productivity growth rate similar to productivity trends
 # associated with SSP1 (e.g., PRD 1 in Stehfest et al.)
 prod <- function(cfg) {
-  # Higher endogenous productivity achieved through lower costs
-  cfg$gms$tc         <- "endo_jan22" # default: not necessary to set it again (To Do: remove)
-  cfg$gms$c13_tccost <- "low"        # Should I set it like this? @Jan? Or how was it done in Stehfest et al. PRD1?
+  # Higher endogenous productivity achieved through lower interest rates
+  # representing more trust and therefore easier investments
+  cfg$gms$s12_interest_lic <- 0.06
+  cfg$gms$s12_interest_hic <- 0.04
+  # Livestock productivity follows SSP1
+  cfg$gms$c70_feed_scen <- "ssp1"
   return(cfg)
 }
 
@@ -97,11 +108,20 @@ waste <- function(cfg) {
 
 ### Mitigation component ##
 # Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
+# Note on our implementation:
+# We use a GHG pricing pathway based on a peak budget of 500 with overshoot
+# starting from 2020.
+# Please note that with the diet shift, a lower ghg price would be necessary.
+# However, to be consistent with the other models and for the decomposition
+# scenarios to be "additive", we choose to use the same ghg price for all scenarios
+# where miti is active.
+# Reference: Humpenöder, F., Popp, A., Merfort, L., Luderer, G., Weindl, I., Bodirsky, B., Stevanović, M., Klein, D., Rodrigues, R., Bauer, N., Dietrich, J., Lotze-Campen, H., & Rockström, J. (2023). Data repository - Dietary shifts increase the feasibility of 1.5°C pathways (Version 1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.8328217
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C
-  cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg1300" # @Florian: What to choose for 1.5 degrees?
-  cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-PkBudg1300" # @Florian: What to choose for 1.5 degrees?
-  cfg$gms$c56_emis_policy      <- "sdp_all"                # @Florian: Which emissions to price? all?
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/florianh/projects/paper/LandEnergy/modelrunsGrassland7/remind/output/C_SSP2EU-PkBudg500-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
+  cfg$gms$c56_pollutant_prices <- "coupling"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/florianh/projects/paper/LandEnergy/modelrunsGrassland7/remind/output/C_SSP2EU-PkBudg500-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
+  cfg$gms$c60_2ndgen_biodem    <- "coupling"
   return(cfg)
 }
 
