@@ -38,6 +38,11 @@ land_hr_split_file <- file.path(outputdir, "cell.land_split_0.5.mz")
 land_hr_shr_split_file <- file.path(outputdir, "cell.land_split_0.5_share.mz")
 luh_side_layers <- file.path(outputdir, "luh2_side_layers_0.5.mz")
 bii_hr_out_file <- file.path(outputdir, "cell.bii_0.5.mz")
+peatland_v2_hr_file <- file.path(outputdir, "f58_peatland_area_0.5.mz")
+peatland_on_intact_hr_file <- file.path(outputdir, "f58_peatland_intact_0.5.mz")
+peatland_on_degrad_hr_file <- file.path(outputdir, "f58_peatland_degrad_0.5.mz")
+peatland_hr_out_file <- file.path(outputdir, "cell.peatland_0.5.mz")
+peatland_hr_share_out_file <- file.path(outputdir, "cell.peatland_0.5_share.mz")
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 
@@ -482,6 +487,46 @@ bii_hr <- dimSums(land_bii_hr * bii_hr, dim = 3, na.rm = TRUE)
   comment = "unitless",
   message = "Write output BII at 0.5°"
 )
+gc()
+
+
+# --------------------------------
+# Disaggregate peatland
+# --------------------------------
+
+message("Disaggregating peatland")
+
+#check for peatland version
+if(cfg$gms$peatland  == "v2") {
+  peat_lr <- PeatlandArea(gdx,level="cell",sum=FALSE)
+  peat_ini_hr <- read.magpie(peatland_v2_hr_file)
+  peat_ini_hr <- add_columns(peat_ini_hr,addnm = "rewetted",dim = "d3",fill = 0)
+  peat_ini_hr <- add_columns(peat_ini_hr,addnm = "unused",dim = "d3",fill = 0)
+  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr,peat_ini_hr,map_file))
+  peat_hr <- peat_hr[,getYears(peat_hr,as.integer = T) >= cfg$gms$s58_fix_peatland,]
+
+} else if (cfg$gms$peatland  == "on") {
+  peat_lr <- PeatlandArea(gdx,level="cell",sum=TRUE)
+  peat_ini_hr <- mbind(setNames(read.magpie(peatland_on_intact_hr_file),"intact"),setNames(read.magpie(peatland_on_degrad_hr_file),"degrad"))
+  peat_ini_hr <- add_columns(peat_ini_hr,addnm = "rewet",dim = "d3",fill = 0)
+  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr,peat_ini_hr,map_file))
+  peat_hr <- peat_hr[,getYears(peat_hr,as.integer = T) >= cfg$gms$s58_fix_peatland,]
+}
+peat_hr <- .fixCoords(peat_hr)
+
+# Write output
+.writeDisagg(peat_hr, peatland_hr_out_file,
+             comment = "unit: Mha per grid-cell",
+             message = "Write outputs peatland Mha")
+gc()
+
+out <- peat_hr / dimSums(land_hr[,getYears(peat_hr),], dim = 3)
+out[is.nan(out)] <- 0
+out[is.infinite(out)] <- 0
+
+.writeDisagg(out, peatland_hr_share_out_file,
+             comment = "unit: grid-cell land area fraction",
+             message = "Write outputs peatland share")
 gc()
 
 message("Finished disaggregation")
