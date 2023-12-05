@@ -10,7 +10,7 @@
 *' The initial map for intact, degraded and rewetted peatland is based on the 
 *' [Global Peatland Map 2.0](https://globalpeatlands.org/resource-library/global-peatland-map-20) 
 *' and the [Global Peatland Database](https://greifswaldmoor.de/global-peatland-database-en.html), both for the year 2022. 
-*' Therefore, it is advised to set `s58_fix_peatland` to `2020` when using this realisation. 
+*' Therefore, it is advised to set `s58_fix_peatland` to `2020` when using this realisation (2022 is not available as time step in MAgPIE). 
 *' Future peatland dynamics are estimated by multiplying changes in managed land with a peatland scaling factor. 
 *' GHG emissions from drained and rewetted peatlands as well as from peat extraction are calculated based on GHG emission factors.
 *' In this realisation, peatland GHG emission factors for boreal and tropical climates are based on @IPCC_wetland_2013 and @wilson_2016.
@@ -25,7 +25,7 @@
 
 
 *'
-*' @limitations Peatland area and GHG emissions are fixed to 2020 levels for the historic period, 
+*' @limitations Peatland area and GHG emissions are fixed to 2022 levels for the historic period, 
 *' depending on `s58_fix_peatland`. Organic carbon stocks in peatlands are not accounted for. 
 
 *####################### R SECTION START (PHASES) ##############################

@@ -7,9 +7,10 @@
 
 scalars
   s58_cost_rewet_recur Recurring costs for rewetted peatland (USD05MER per ha) / 200 /
-  s58_cost_rewet_onetime One-time costs for peatland restoration (USD05MER per ha) / 7000 /
-  s58_cost_degrad_recur Recurring costs for degraded peatland (USD05MER per ha) / 0 /
-  s58_cost_degrad_onetime One-time costs for peatland degradation (USD05MER per ha) / 0 /
+  s58_cost_rewet_onetime One-time costs for peatland rewetting (USD05MER per ha) / 7000 /
+  s58_cost_drain_recur Recurring costs for drained and managed peatlands (USD05MER per ha) / 0 /
+  s58_cost_drain_intact_onetime One-time costs for drainage of intact peatland (USD05MER per ha) / 0 /
+  s58_cost_drain_rewet_onetime One-time costs for drainage of rewetted peatland (USD05MER per ha) / 0 /
   s58_rewetting_switch Peatland rewetting on (Inf) or off (0) / Inf /
   s58_fix_peatland Year indicating until when peatland area should be fixed (year) / 2020 /
 ;

@@ -16,8 +16,8 @@ sets
   manPeat58(land58) Drained and managed peatland categories
     / crop, past, forestry /
 
-  manLand58(land) Managed main land categories
-    / crop, past, forestry /
+  cost58 annunity cost categories
+    / drain_intact, drain_rewetted, rewet /
 
   emis58 Wetland emission types
   / co2, doc, ch4, n2o /

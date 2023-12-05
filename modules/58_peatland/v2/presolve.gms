@@ -8,7 +8,7 @@
 
 if (m_year(t) <= s58_fix_peatland,  
 * Managed land area
-  pc58_manLand(j,manPeat58) = m_peatLandMerge(pcm_land,pcm_land_forestry,"j");
+  pc58_manLand(j,manPeat58) = m58_LandMerge(pcm_land,pcm_land_forestry,"j");
 
 * Initialization of peatland area. Drained and used peatland area cannot exceed the corresponding managed area
   pc58_peatland(j,manPeat58) = min(f58_peatland_area(j,manPeat58),pc58_manLand(j,manPeat58));
@@ -22,9 +22,10 @@ if (m_year(t) <= s58_fix_peatland,
 * Peatland area is fixed to `pc58_peatland` until the year given by s58_fix_peatland 
   v58_peatland.fx(j,land58) = pc58_peatland(j,land58);
   i58_cost_rewet_recur(t) = 0;
+  i58_cost_drain_recur(t) = 0;
+  i58_cost_drain_intact_onetime(t) = 0;
+  i58_cost_drain_rewet_onetime(t) = 0;
   i58_cost_rewet_onetime(t) = 0;
-  i58_cost_degrad_recur(t) = 0;
-  i58_cost_degrad_onetime(t) = 0;
 else
 * Define bounds and costs for peatland area after the year given by s58_fix_peatland 
   v58_peatland.lo(j,land58) = 0;
@@ -34,9 +35,10 @@ else
   v58_peatland.up(j,"intact") = pc58_peatland(j,"intact");
   v58_peatland.fx(j,"peatExtract") = pc58_peatland(j,"peatExtract");
   i58_cost_rewet_recur(t) = s58_cost_rewet_recur;
+  i58_cost_drain_recur(t) = s58_cost_drain_recur;
+  i58_cost_drain_intact_onetime(t) = s58_cost_drain_intact_onetime;
+  i58_cost_drain_rewet_onetime(t) = s58_cost_drain_rewet_onetime;
   i58_cost_rewet_onetime(t) = s58_cost_rewet_onetime;
-  i58_cost_degrad_recur(t) = s58_cost_degrad_recur;
-  i58_cost_degrad_onetime(t) = s58_cost_degrad_onetime;
 );
 
 *' @code

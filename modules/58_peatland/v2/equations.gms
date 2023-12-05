@@ -20,15 +20,15 @@
 *' Managed land area:
 
  q58_manLand(j2,manPeat58) ..
-  v58_manLand(j2,manPeat58) =e= m_peatLandMerge(vm_land,vm_land_forestry,"j2");
+  v58_manLand(j2,manPeat58) =e= m58_LandMerge(vm_land,vm_land_forestry,"j2");
 
 *' Managed land area expansion and reduction:
 
  q58_manLandExp(j2,manPeat58) ..
-  v58_manLandExp(j2,manPeat58) =e= m_peatLandMerge(vm_landexpansion,vm_landexpansion_forestry,"j2");
+  v58_manLandExp(j2,manPeat58) =e= m58_LandMerge(vm_landexpansion,vm_landexpansion_forestry,"j2");
 
  q58_manLandRed(j2,manPeat58) ..
-  v58_manLandRed(j2,manPeat58) =e= m_peatLandMerge(vm_landreduction,vm_landreduction_forestry,"j2");
+  v58_manLandRed(j2,manPeat58) =e= m58_LandMerge(vm_landreduction,vm_landreduction_forestry,"j2");
 
 *' Future peatland dynamics (`v58_peatland`) depend on changes in managed land (`v58_manLandExp`, `v58_manLandRed`), 
 *' multiplied with corresponding scaling factors for expansion (`v58_scalingFactorExp`) and reduction (`p58_scalingFactorRed`). 
@@ -45,41 +45,27 @@
     - v58_manLandRed(j2,manPeat58) * sum(ct, p58_scalingFactorRed(ct,j2,manPeat58)); 
 
 *' Peatland scaling factor for expansion: (maxPeatland - totalManagedPeatland) / (maxLand - totalManagedLand). 
-*' See macro `m_peatLandLeft` for details.
+*' See macro `m58_LandLeft` for details.
 
 q58_scalingFactorExp(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_scalingFactorExp(j2,manPeat58) =e= 
-   (m_peatLandLeft(pc58_peatland,"land58",v58_peatland,pc58_peatland) / m_peatLandLeft(pcm_land,"land",v58_manLand,pc58_manLand))
-   $(m_peatLandLeft(pc58_peatland,"land58",pc58_peatland,pc58_peatland) > 1e-10 AND m_peatLandLeft(pcm_land,"land",pc58_manLand,pc58_manLand) > 1e-10)
- + 0$(m_peatLandLeft(pc58_peatland,"land58",pc58_peatland,pc58_peatland) <= 1e-10 OR m_peatLandLeft(pcm_land,"land",pc58_manLand,pc58_manLand) <= 1e-10);
+   (m58_LandLeft(pc58_peatland,"land58",v58_peatland,pc58_peatland) / m58_LandLeft(pcm_land,"land",v58_manLand,pc58_manLand))
+   $(m58_LandLeft(pc58_peatland,"land58",pc58_peatland,pc58_peatland) > 1e-10 AND m58_LandLeft(pcm_land,"land",pc58_manLand,pc58_manLand) > 1e-10)
+ + 0$(m58_LandLeft(pc58_peatland,"land58",pc58_peatland,pc58_peatland) <= 1e-10 OR m58_LandLeft(pcm_land,"land",pc58_manLand,pc58_manLand) <= 1e-10);
 
 *' Costs for peatland degradation and rewetting
 
- q58_peatland_cost_full(j2) ..
-  vm_peatland_cost(j2) =e= v58_peatland_cost(j2);
-
  q58_peatland_cost(j2) ..
-  v58_peatland_cost(j2) =e= v58_peatland_cost_annuity_intact_decrease(j2)
-              + v58_peatland_cost_annuity_rewet_decrease(j2)
-              + v58_peatland_cost_annuity_rewet_increase(j2)
+  vm_peatland_cost(j2) =e= sum(cost58, v58_peatland_cost_annuity(j2,cost58))
               + v58_peatland(j2,"rewetted") * sum(ct, i58_cost_rewet_recur(ct))
-              + sum(manPeat58, v58_peatland(j2,manPeat58)) * sum(ct, i58_cost_degrad_recur(ct));
+              + sum(manPeat58, v58_peatland(j2,manPeat58)) * sum(ct, i58_cost_drain_recur(ct));
 
- q58_peatland_cost_annuity_intact_decrease(j2) ..
-  v58_peatland_cost_annuity_intact_decrease(j2) =g=
-    - v58_peatlandChange(j2,"intact") * sum(ct, i58_cost_degrad_onetime(ct))
+ q58_peatland_cost_annuity(j2,cost58) ..
+  v58_peatland_cost_annuity(j2,cost58) =g=
+    (- v58_peatlandChange(j2,"intact") * sum(ct, i58_cost_drain_intact_onetime(ct)))$sameas(cost58,"drain_intact")
+   + (- v58_peatlandChange(j2,"rewetted") * sum(ct, i58_cost_drain_rewet_onetime(ct)))$sameas(cost58,"drain_rewetted")
+   + (v58_peatlandChange(j2,"rewetted") * sum(ct, i58_cost_rewet_onetime(ct)))$sameas(cost58,"rewet")
   * sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
-
- q58_peatland_cost_annuity_rewet_decrease(j2) ..
-  v58_peatland_cost_annuity_rewet_decrease(j2) =g=
-    - v58_peatlandChange(j2,"rewetted")  * sum(ct, i58_cost_degrad_onetime(ct))
-  * sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
- 
- q58_peatland_cost_annuity_rewet_increase(j2) ..
-  v58_peatland_cost_annuity_rewet_increase(j2) =g=
-    v58_peatlandChange(j2,"rewetted") * sum(ct, i58_cost_rewet_onetime(ct))
-  * sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
-
 
 *' Detailed peatland GHG emissions
 
