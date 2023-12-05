@@ -148,23 +148,23 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.85_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Used data set: rev4.94_h12_magpie.tgz
+* md5sum: 25623b5ad3e8b72bd3008da9b69adfe0
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.85_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Used data set: rev4.94_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: d7800a0ffe271483116a8f00a939a89a
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.85_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Used data set: rev4.94_h12_validation.tgz
+* md5sum: 4b4128910822cf45603cab46f45ccf78
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.43.tgz
+* Used data set: additional_data_rev4.46.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_glo_23Mar23.tgz
+* Used data set: calibration_H12_per_ton_fao_may22_glo_08Aug23.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -175,15 +175,15 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   17    9    8    1   44   26    7   10   13   38   21
+*     5   16    8    7    2   41   30    8   11   12   39   21
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.85
+* Regions data revision: 4.94
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.85
+* * Revision: 4.94
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -191,11 +191,11 @@ $title magpie
 * * Regionscode: 62eff8f7
 * * Number of clusters per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   17    9    8    1   44   26    7   10   13   38   21
+*     5   16    8    7    2   41   30    8   11   12   39   21
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Apr 28 16:30:54 2023
+* Last modification (input data): Fri Nov 17 19:42:06 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -219,9 +219,9 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  calib
+$setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  BilatPRFade_ON_Nofadeout
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -249,7 +249,7 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
 
-$setglobal crop  penalty_apr22
+$setglobal crop  endo_apr21
 $setglobal past  endo_jun13
 
 $setglobal forestry  dynamic_feb21
@@ -259,7 +259,7 @@ $setglobal natveg  dynamic_feb21
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  sticky_feb18
+$setglobal factor_costs  per_ton_fao_may22
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12
@@ -284,7 +284,7 @@ $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 
-$setglobal disagg_lvst  foragebased_aug18
+$setglobal disagg_lvst  foragebased_jul23
 
 $setglobal timber  default
 

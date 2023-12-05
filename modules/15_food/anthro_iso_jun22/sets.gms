@@ -102,9 +102,6 @@ sets
    kfo_lp(kfo) Livestock food products
    / livst_rum,livst_pig,livst_chick, livst_egg, livst_milk /
 
-   kfo_rd(kfo) Ruminant meat and dairy food products
-   / livst_rum,livst_milk /
-
    kfo_st(kfo) Staple products
    / tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
    potato,cassav_sp,sugr_cane,sugr_beet,molasses,brans,scp /
@@ -147,6 +144,10 @@ sets
 
   livst_fadeoutscen15 Scenarios for changed composition of livestock products
        / halving2050, constant /
+
+* The set kfo_rd can be defined in default.cfg and is used in the food substitution scenarios c15_rumdairy_scp_scen and c15_rumdairyscen
+  kfo_rd(kfo) Ruminant meat and dairy food products
+       / livst_rum,livst_milk /
 
   fadeoutscen15  Food substitution scenarios including functional forms with targets and transition periods
        / constant,

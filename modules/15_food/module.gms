@@ -15,7 +15,9 @@
 *' agricultural commodities q15_food_demand.m to change food demand and iterates
 *' with MAgPIE until a common solution is found. Outputs include next to food
 *' demand also projections of anthropometric parameters such as body height and
-*' weight distribution, as well as phyiscal activity levels.
+*' weight distribution, as well as phyiscal activity levels. In addition, this
+*' module also provides information about nutrition attributes of foods that can
+*' be used in other modules via the interface fm_nutrition_attributes.
 *' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################

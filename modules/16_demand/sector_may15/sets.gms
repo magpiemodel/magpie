@@ -21,6 +21,9 @@ sets
    kli(kap) Livestock products
    / livst_rum, livst_pig, livst_chick, livst_egg, livst_milk  /
 
+   kli_rd(kap) Ruminant meat and dairy products
+   / livst_rum,livst_milk /
+
    kforestry(k) forestry products
         / wood, woodfuel /
 
