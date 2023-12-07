@@ -437,10 +437,9 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   # check for inconsistent settings
   if((cfg$recalibrate == TRUE || cfg$recalibrate == "ifneeded")
       && cfg$gms$s14_use_yield_calib == 0) {
-    stop("Recalibration of yields with a calibration run is requested (if needed),
-          but the resulting factors from this run are specified to not be used in the model.
-          This combination of settings is inconsistent and assumed to be unintended.
-          Please check the config and either set `cfg$gms$s14_use_yield_calib <- 1` 
+    stop("The combination of the switches `cfg$recalibrate <- TRUE/ifneeded`
+          and `cfg$gms$s14_use_yield_calib <- 0` is inconsistent.
+          Please check the config and set `cfg$gms$s14_use_yield_calib <- 1` 
           if yield calibration is desired, or `cfg$recalibrate <- FALSE` if not.
           Note that the current default is to not use yield calibration.")
   }
