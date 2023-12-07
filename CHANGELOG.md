@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **start_functions** Check if cfg$recalibrate is consistent with cfg$gms$s14_use_yield_calib
 - **inputdata** Now using inputdata rev4.94 which is based on 67420 cells (67k, previously 59k)
 - **14_yields_and_config** The new default is to not use yield calibration factors from a calibration run. The switch s14_use_yield_calib can optionally reenable the use of yield calibration factors.
 - **scripts** LUH2_disaggregation output script was modified. Specifically, flooded area was made compatible with the LUH definition, cropland and grazing land were added to the states.nc file, and specific naming/details (datatype,  zname, xname, and yname) were added when creating the .nc files.
