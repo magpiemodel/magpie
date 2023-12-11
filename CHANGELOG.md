@@ -8,21 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **start_functions** Check if cfg$recalibrate is consistent with cfg$gms$s14_use_yield_calib
 - **inputdata** Now using inputdata rev4.94 which is based on 67420 cells (67k, previously 59k)
 - **14_yields_and_config** The new default is to not use yield calibration factors from a calibration run. The switch s14_use_yield_calib can optionally reenable the use of yield calibration factors.
 - **scripts** LUH2_disaggregation output script was modified. Specifically, flooded area was made compatible with the LUH definition, cropland and grazing land were added to the states.nc file, and specific naming/details (datatype,  zname, xname, and yname) were added when creating the .nc files.
 - **scripts** For the emulator scripts select a different bioenergy demand variable that excludes bioenergy sources other than second generation bioenergy crops. Set the minimal bioenergy demand to zero. Both avoid artificial clustering of data points and allow for better fits.
 - **31_past** in grasslands_apr22 realization: changed structure of f31_pastr_suitability to align with ssp-rcp specific input data formulation. Changed input filename from cs3 to cs2. Added `cc`, `nocc` and `nocc_hist` options for `i31_manpast_suit` and changed input gams code from table to parameter. Climate scenario assignment moved from preloop.gms to input.gms. Removed pastSuit set in sets.gms as not needed anymore. Adjusted not_used.txt in both grasslands_apr22 and static realizations.
 - **36_employment** regression between hourly labor regression and GDP pc changed from linear to log-log
+- **default.cfg** Default for cfg$gms$peatland changed from `on` to `v2`
 
 ### added
 - **18_residues** Included cluster-level residue realization, for cluster-level production of residues (but balancing of recycling and burning budgets remains at region-level, for computational lightness)
 - **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific information on the state of nature's contributions to people relevant for yields `./modules/14_yields/input/f14_yld_ncp_report.cs3`.
 - **58_peatland** added realization "v2" with updated peatland map and GHG emission factors
-- **32_forestry** new interface `vm_land_forestry`
+- **32_forestry** new interfaces `vm_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
+- **scripts** added peatland to output/extra/disaggregation.R
 
 ### removed
 - **default.cfg** Removed description of cfg$gms$c31_past_suit_scen since no longer needed due to changes in 31_past described below. Its function is now done by cfg$gms$c31_grassl_yld_scenario.
+- **58_peatland** removed realization "on"
 
 ### fixed
 - **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
