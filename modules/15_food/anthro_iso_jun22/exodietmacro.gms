@@ -384,7 +384,7 @@ if (s15_exo_diet = 1,
 *----------------------------------------------------------------------------------------
 elseif (s15_exo_diet = 3),
 *' In case of a MAgPIE-specific realization of the EAT Lancet diet (`s15_exo_diet=3`),
-*' model-internal diet projections are constraint by recommended ranges for intake
+*' model-internal diet projections are constrained by recommended ranges for intake
 *' (`i15_rec_EATLancet`) of different food groups to ensure healthy and sustainable
 *' diets according to the EAT-Lancet Commission. After all calorie recommendations
 *' for non-staple food groups are satisfied, intake of staple crops is modified such
@@ -400,7 +400,7 @@ elseif (s15_exo_diet = 3),
 *' It is, however, switched off for roots, since they will, as staples,
 *' later be treated as balancing post to meet total calorie intake:
   i15_rec_EATLancet(iso,"t_roots","max") = i15_intake_scen_target(t,iso);
-*** ISABELLE: Why are roots and staples used as balancing post? Roots has a target
+*** ISABELLE: Why are roots and staples used as balancing post? Roots has a target...
 *** Also: discuss with Isabelle and Benni about splitting the roots target into potatos and cassav_sp (see Marcos distinction between starchy_fruits and roots)
 
 display i15_rec_EATLancet;
@@ -412,6 +412,14 @@ display i15_rec_EATLancet;
 *  / (i15_calib_fsupply(i) * i15_demand2intake_detailed_ref(i,kfo) * p15_foodwaste_growth(t,i));
 *i15_intake_detailed_scen_target(t,iso,kfo) = p15_intake_detailed_regr(t,i,kfo);
 
+*' For cases where the intake in a EAT-Lancet food group is zero for a country
+*' in a particular time step, a small amount is added to ensure no division by 
+*' zero. This way, all kfo-items in the respective food group are corrected by
+*' the same amount.
+p15_intake_detail(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
+                                   sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2)))) = 0) =
+                                   p15_intake_detail(t,iso,kfo) + 1e-6;
+
 *' The intake target is adjusted to meet the EAT-Lancet recommendations
 *** Minimum recommendations ***
 *' If projected food intake is below minimum, it is increased it to meet
@@ -421,7 +429,7 @@ display i15_rec_EATLancet;
                                                  ) < sum(EATtar_kfo15(EAT_mtargets15,kfo), i15_rec_EATLancet(iso,EAT_mtargets15,"min"))
                                               ) =
     (p15_intake_detail(t,iso,kfo) / sum(EATtar_kfo15(EAT_mtargets15_2,kfo), sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))))
-     * sum(EATtar_kfo15(EAT_mtargets15,kfo),i15_rec_EATLancet(iso,EAT_mtargets15,"min"))
+     * sum(EATtar_kfo15(EAT_mtargets15,kfo), i15_rec_EATLancet(iso,EAT_mtargets15,"min"))
     ;
 
 *** Maximum recommendations ***
@@ -432,7 +440,7 @@ display i15_rec_EATLancet;
                                                 ) > sum(EATtar_kfo15(EAT_mtargets15,kfo), i15_rec_EATLancet(iso,EAT_mtargets15,"max"))
                                             ) =
    (p15_intake_detail(t,iso,kfo) / sum(EATtar_kfo15(EAT_mtargets15_2,kfo), sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))))
-    * sum(EATtar_kfo15(EAT_mtargets15,kfo),i15_rec_EATLancet(iso,EAT_mtargets15,"max"))
+    * sum(EATtar_kfo15(EAT_mtargets15,kfo), i15_rec_EATLancet(iso,EAT_mtargets15,"max"))
     ;
 
 *** Special case: Fruits, vegetables and nuts ***
