@@ -56,6 +56,9 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  q32_land(j2) ..
  vm_land(j2,"forestry") =e= sum((type32,ac), v32_land(j2,type32,ac));
 
+ q32_land_forestry(j2,type32) ..
+ vm_land_forestry(j2,type32) =e= sum(ac, v32_land(j2,type32,ac));
+
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..

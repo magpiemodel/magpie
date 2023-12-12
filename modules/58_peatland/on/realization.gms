@@ -6,10 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description In this realization, the state of peatlands is modelled as described in @humpenoder_peatland_2020.
-*' The initial map of peatland area consists of intact and degraded peatland area for the year 2015. 
-*' Future peatland dynamics depend on the ratio of total peatland area and total land area. 
-*' GHG emissions from degraded and rewetted peatlands as are calculated based on GHG emission factors from the 
-*' "2013 Supplement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories: Wetlands". 
+*' The initial map of peatland area consists of intact and degraded peatland area for the year 2015, 
+*' based on @leifeld_2018 and the [Global Peatland Database](https://greifswaldmoor.de/global-peatland-database-en.html).
+*' Future peatland dynamics are estimated by scaling changes in managed land with the ratio of total peatland area and total land area (peatland scaling factor). 
+*' GHG emissions from degraded and rewetted peatlands are calculated using IPCC wetland GHG emission factors from @IPCC_wetland_2013 and @wilson_2016.
 *' @stop
 
 

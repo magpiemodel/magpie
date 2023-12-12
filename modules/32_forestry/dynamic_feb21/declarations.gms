@@ -59,6 +59,7 @@ parameters
  p32_bii_coeff(type32,bii_class_secd,potnatveg)     bii coeff (1)
  p32_c_density_ac_fast_forestry(t_all,j,ac)         Carbon densities in plantations based on Braakhekke et al (tC per ha)
  p32_disturbance_loss_ftype32(t,j,type32,ac)        Loss due to disturbances in all plantation type forests (mio. ha)
+ pcm_land_forestry(j,type32)                        Forestry land (mio. ha)
 ;
 
 positive variables
@@ -73,6 +74,7 @@ positive variables
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
  v32_hvarea_forestry(j,ac)                          Harvested area from timber plantations (mio. ha)
  vm_prod_forestry(j,kforestry)                      Production of woody biomass from commercial plantations (mio. tDM per yr)
+ vm_land_forestry(j,type32)                         Forestry land (mio. ha)
  ;
 
 variables
@@ -104,6 +106,7 @@ equations
  q32_bv_aff(j,potnatveg)                           Biodiversity value for aff forestry land (Mha)
  q32_bv_ndc(j,potnatveg)                           Biodiversity value for ndc forestry land (Mha)
  q32_bv_plant(j,potnatveg)                         Biodiversity value for plantations (Mha)
+ q32_land_forestry(j,type32)                       Forestry land (Mha)
 ;
 
 
@@ -120,6 +123,7 @@ parameters
  ov32_cost_establishment(t,i,type)          Cost of establishment calculated at the current time step (mio. USD)
  ov32_hvarea_forestry(t,j,ac,type)          Harvested area from timber plantations (mio. ha)
  ov_prod_forestry(t,j,kforestry,type)       Production of woody biomass from commercial plantations (mio. tDM per yr)
+ ov_land_forestry(t,j,type32,type)          Forestry land (mio. ha)
  ov_cdr_aff(t,j,ac,aff_effect,type)         Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_total(t,i,type)                  Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                        Land constraint (mio. ha)
@@ -145,5 +149,6 @@ parameters
  oq32_bv_aff(t,j,potnatveg,type)            Biodiversity value for aff forestry land (Mha)
  oq32_bv_ndc(t,j,potnatveg,type)            Biodiversity value for ndc forestry land (Mha)
  oq32_bv_plant(t,j,potnatveg,type)          Biodiversity value for plantations (Mha)
+ oq32_land_forestry(t,j,type32,type)        Forestry land (Mha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
