@@ -8,6 +8,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+-
+
+### added
+-
+
+### removed
+-
+
+### fixed
+-
+
+
+## [4.7.0] - 2023-12-11
+
+### changed
 - **start_functions** Check if cfg$recalibrate is consistent with cfg$gms$s14_use_yield_calib
 - **inputdata** Now using inputdata rev4.94 which is based on 67420 cells (67k, previously 59k)
 - **14_yields_and_config** The new default is to not use yield calibration factors from a calibration run. The switch s14_use_yield_calib can optionally reenable the use of yield calibration factors.
@@ -18,7 +33,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** Default for cfg$gms$peatland changed from `on` to `v2`
 
 ### added
-- **18_residues** Included cluster-level residue realization, for cluster-level production of residues (but balancing of recycling and burning budgets remains at region-level, for computational lightness)
 - **14_yields/config** Added option for considering impacts of land degradation on yields. If `s14_degradation` is switched to 1, MAgPIE will include cluster-specific information on the state of nature's contributions to people relevant for yields `./modules/14_yields/input/f14_yld_ncp_report.cs3`.
 - **58_peatland** added realization "v2" with updated peatland map and GHG emission factors
 - **32_forestry** new interfaces `vm_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
@@ -29,8 +43,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **58_peatland** removed realization "on"
 
 ### fixed
-- **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
 - **inputdata** There was a major bug (related to proj/terra) in the rev4.91 inputdata that was fixed with rev4.92
+- **inputdata** There was another bug (terra default na.rm changed) in the inputdata that was fixed with rev4.93
 - **scripts** Fixed a bug in NPI/NDC calculations leading to missing AD policies when run with 67k
 - **scripts** Fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
 
@@ -789,7 +803,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.11...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.7.0...develop
+[4.7.0]: https://github.com/magpiemodel/magpie/compare/v4.6.11...v4.7.0
 [4.6.11]: https://github.com/magpiemodel/magpie/compare/v4.6.10...v4.6.11
 [4.6.10]: https://github.com/magpiemodel/magpie/compare/v4.6.9...v4.6.10
 [4.6.9]: https://github.com/magpiemodel/magpie/compare/v4.6.8...v4.6.9
