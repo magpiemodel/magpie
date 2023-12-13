@@ -413,11 +413,11 @@ display i15_rec_EATLancet;
 *i15_intake_detailed_scen_target(t,iso,kfo) = p15_intake_detailed_regr(t,i,kfo);
 
 *' For cases where the intake in a EAT-Lancet food group is zero for a country
-*' in a particular time step, a small amount is added to ensure no division by 
+*' in a particular time step, a small amount is added to ensure no division by
 *' zero. This way, all kfo-items in the respective food group are corrected by
 *' the same amount.
 p15_intake_detail(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
-                                   sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2)))) = 0) =
+                                   sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))) = 0) =
                                    p15_intake_detail(t,iso,kfo) + 1e-6;
 
 *' The intake target is adjusted to meet the EAT-Lancet recommendations
