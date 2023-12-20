@@ -458,11 +458,11 @@ i15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) 
 i15_intake_detailed_scen_target(t,iso,"cassav_sp")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max")) =
       p15_intake_detail_roots(t,iso) / i15_intake_detailed_scen_roots(t,iso) * p15_intake_detail_roots(t,iso) -
       i15_intake_detailed_scen_target(t,iso,"potato") +
-      p15_intake_detail_starchyfruit(t,iso);
+      i15_intake_detailed_scen_starchyfruit(t,iso);
 
 *' Split the 'others' category into fruits plus vegetables
 *' and those nuts and seeds that are not included in rapeseed and sunflower
-  p15_intake_detail_fruitveg(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"others") * p15_intake_detail(t,iso,"others") + p15_intake_detail_starchyfruit(t,iso);
+  p15_intake_detail_fruitveg(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"others") * p15_intake_detail(t,iso,"others") + i15_intake_detailed_scen_starchyfruit(t,iso);
   p15_intake_detail_nsothers(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso,"others")) * p15_intake_detail(t,iso,"others");
   i15_intake_detailed_scen_fruitveg(t,iso) = p15_intake_detail_fruitveg(t,iso);
   i15_intake_detailed_scen_nsothers(t,iso) = p15_intake_detail_nsothers(t,iso);
@@ -473,7 +473,7 @@ i15_intake_detailed_scen_target(t,iso,"cassav_sp")$(p15_intake_detail_roots(t,is
 *' Extract fruits and vegetables that are part of others categroy
 *  Note that starchy fruits are kept at the previously assigned maximum level
 *  and their amount has been added to cassav_sp already.
-  i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - p15_intake_detail_starchyfruit(t,iso);
+  i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso);
 
 *' Minimum recommendation for nuts
 *' (a) nuts and seeds that are included in "others"
