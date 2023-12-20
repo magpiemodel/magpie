@@ -183,12 +183,19 @@ sets
 
   EAT_staples(kfo) All staple food products according to EAT Lancet definition
        / tece, maiz, trce, rice_pro /
-  EAT_nonstaples(kfo) All non-staple food products according to EAT Lancet definition
+
+  EAT_nonstaples_old(kfo) All non-staple food products according to EAT Lancet definition
        / soybean, rapeseed, groundnut, sunflower, puls_pro,
          sugr_cane, sugr_beet,
          oils, sugar, molasses, alcohol, brans, scp,
          livst_rum, livst_pig, livst_chick, livst_egg, livst_milk, fish,
          others /
+   EAT_nonstaples(kfo) All non-staple food products according to EAT Lancet definition
+        / soybean, rapeseed, groundnut, sunflower, puls_pro, potato, cassav_sp,
+          sugr_cane, sugr_beet,
+          oils, sugar, molasses, alcohol, brans, scp,
+          livst_rum, livst_pig, livst_chick, livst_egg, livst_milk, fish,
+          others /
 
 * Isabelle's code:
 EAT_targettype15 Minimum or maximum target type of the EAT Lancet recommendations

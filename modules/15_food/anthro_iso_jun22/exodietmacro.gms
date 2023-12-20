@@ -375,7 +375,7 @@ if (s15_exo_diet = 1,
     );
 
     i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) > 0) =
-            (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples))) *
+            (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old))) *
             (i15_intake_EATLancet(iso,EAT_staples) / sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)))
             ;
 
