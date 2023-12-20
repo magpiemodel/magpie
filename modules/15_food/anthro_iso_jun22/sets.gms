@@ -110,13 +110,10 @@ sets
    / oils,alcohol,sugar /
 
    kfo_ns(kfo) Food products that can be counted towards nuts and nuts_seeds
-    / rapeseed, groundnut, sunflower /
-** BENNI/ISABELLE: Where should groundnut be counted towards?
+    / rapeseed, sunflower /
 
    kfo_norec(kfo) Food products that do not have an EAT-Lancet recommendation
-    / sugr_cane, sugr_beet, molasses, alcohol, scp /
-** Note: To Do: attribute sugr_cane, sugr_bee, molasses to sugar
-* ISABELLE: What about brans?
+    / sugr_cane, sugr_beet, molasses, alcohol /
 
    knf(kall) Non-food products in the sectoral version
    / oilpalm,cottn_pro,foddr, pasture, begr, betr,
@@ -181,17 +178,11 @@ sets
       / rapeseed, sunflower, others /
   EAT_pulses15(kfo) pulses
       / soybean, puls_pro, groundnut /
-** BENNI: are groundnuts nuts or pulses?
-** also note: peanuts (=groundnut?) has actually a single target (shouldn't we separate it?)
   EAT_sugar15(kfo) sugar
       / sugr_cane, sugr_beet, sugar, molasses /
 
   EAT_staples(kfo) All staple food products according to EAT Lancet definition
-       / tece, maiz, trce, rice_pro, potato, cassav_sp /
-*** ISABELLE/BENNI/MARCO: Should potato and cassav_sp be included in staples (balancing post?)
-* Alternatively:
-*EAT_starch(kfo) Food group starch as of EAT
-*  / tece, maiz, trce, rice_pro /
+       / tece, maiz, trce, rice_pro /
   EAT_nonstaples(kfo) All non-staple food products according to EAT Lancet definition
        / soybean, rapeseed, groundnut, sunflower, puls_pro,
          sugr_cane, sugr_beet,
@@ -199,69 +190,31 @@ sets
          livst_rum, livst_pig, livst_chick, livst_egg, livst_milk, fish,
          others /
 
-* Food groups for Marco's diet model (my suggestion)
-*  EAT_starch(kfo) Food group starch as of EAT   --> different from EAT_staples (see above)
-*    / tece, maiz, trce, rice_pro /
-*  EAT_soybeans(kfo) Soybeans as of EAT          --> not new set definition required
-*    / soybean /
-*  EAT_nutsseeds(kfo)  Food group of nuts and seeds as of EAT
-*    / rapeseed, groundnut, sunflower /
-**** BENNI: Is groundnut nuts or pulses?
-*  EAT_legumes(kfo)    Legumes as of EAT
-*    / puls_pro /
-*  EAT_roots(kfo)      Food group of roots as of EAT
-*    / potato, cassav_sp /
-*  EAT_sugar15(kfo)    Sugar as of EAT           --> same as in above code, but different from Isabelle's
-*    / sugr_cane, sugr_beet, sugar, molasses /
-*  EAT_redmeat(kfo)    Food group of red meat as of EAT target
-*    / livst_rum, livst_pig /
-*  EAT_poultry(kfo)    EAT target food group poultry     ---> for 1:1 product, no extra set necessary
-*    / livst_chick /
-*  EAT_eggs(kfo)       EAT target food group eggs        ---> for 1:1 product, no extra set necessary
-*    / livst_egg /
-*  EAT_milk(kfo)       EAT target food group milk
-*    / livst_milk /
-*  EAT_fish(kfo)       EAT target food group fish
-*    / fish /
-*  EAT_fruits      --> common target for fruits and vegetables? (just add up?)
-*  EAT_vegetables  --> common target for fruits and vegetables? (just add up?)
-* For others: check how Isabelle solved this (separation of nuts from other (based on FAO))
-* Where should oils, alcohol, brans, scp be attributed to?
-* For oils (same problem!): just combine oil_palm and oil_veg to one target? (how did Isabelle solve this?)
-* scp -> redmeat?
-* for brans -> keep regression value?
-* alcohol: 0 or default value (Lassen et al.)?
-
-
 * Isabelle's code:
 EAT_targettype15 Minimum or maximum target type of the EAT Lancet recommendations
     / min, max /
 
 EAT_targets15 Food groups as well as individual foods for which EAT Lancet targets are defined
-     / t_nutseeds, t_fruitveg,
+     / t_nutseeds, t_fruitveg, t_fruitstarch,
        t_roots, t_redmeat,
-       t_puls_pro, t_soybean, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+       t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
 
 EAT_mtargets15(EAT_targets15) EAT Lancet food targets where direct mapping to MAgPIE categories is possible
      / t_roots, t_redmeat,
-       t_puls_pro, t_soybean, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+       t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+
+EAT_special MAgPIE food groups that need special treatment with respect to fruit ratio
+     / cassav_sp, others /
 
 EATtar_kfo15(EAT_mtargets15,kfo) Mapping between EAT Lancet food targets and MAgPIE categories
-* ISABELLE: Where are groundnuts? (peanuts have separate target. should we add it?)
-*
-      / t_roots             . (potato, cassav_sp)
-* Note: To Do: split roots target because cassav_sp contains bananas/plantains (see Marco's model: starchy fruits)
-        t_redmeat           . (livst_rum, livst_pig)
-        t_puls_pro          . (puls_pro)
-        t_soybean           . (soybean)
+      / t_redmeat           . (livst_rum, livst_pig, scp)
+        t_legumes           . (puls_pro, groundnut, soybean)
         t_fish              . (fish)
         t_livst_chick       . (livst_chick)
         t_livst_egg         . (livst_egg)
         t_livst_milk        . (livst_milk)
         t_sugar             . (sugar)
-* Note: To Do: add sugr_cane, sugr_beet, molasses
         t_oils              . (oils)
-* Note: To Do: double check whether the oils target contains oil_palm and oil_veg
       /
 
 ;

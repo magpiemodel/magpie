@@ -174,7 +174,7 @@ if (s15_run_diet_postprocessing = 1,
   p15_intake_detail(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) / f15_overcons_FAOwaste(iso,kfo);
 
   p15_intake_detail(t,iso,kfo)$(sum(kfo2, p15_intake_detail(t,iso,kfo2))<>0) =
-                    p15_intake_detail(t,iso,kfo) / sum(kfo2, p15_intake_detail(t,iso,kfo2))*
+                    p15_intake_detail(t,iso,kfo) / sum(kfo2, p15_intake_detail(t,iso,kfo2)) *
                     p15_intake_total(t,iso);
 
 * To avoid negative waste, we reduce intake where it exceed food availabiltiy
@@ -308,8 +308,8 @@ $elseif "%c15_kcal_scen%" == "endo"
 
 $else
   i15_intake_scen_target(t,iso) = sum(kfo,i15_intake_EATLancet_all(iso,"%c15_kcal_scen%","%c15_EAT_scen%",kfo));
-  p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=0;
-  p15_bmi_shr_target(t,iso,sex,age,"medium")=1;
+  p15_bmi_shr_target(t,iso,sex,age,bmi_group15) = 0;
+  p15_bmi_shr_target(t,iso,sex,age,"medium") = 1;
 $endif
 
 *' The intake target is adjusted to meet the calorie target
@@ -395,27 +395,12 @@ elseif (s15_exo_diet = 3),
 *' Where maximum target is not exceeded, total scenario food intake is assigned
 *' to EAT-Lancet recommendation
   i15_rec_EATLancet(iso,EAT_targets15,"max")$(i15_rec_EATLancet(iso,EAT_targets15,"max") = 0) = i15_intake_scen_target(t,iso);
-*** ISABELLE: Why does the i15_rec_EATLancet have to be overwritten, though?
+*** JAN: Should i15_rec_EATLancet be p15_rec_EATLancet then?
 
-*' It is, however, switched off for roots, since they will, as staples,
-*' later be treated as balancing post to meet total calorie intake:
-  i15_rec_EATLancet(iso,"t_roots","max") = i15_intake_scen_target(t,iso);
-*** ISABELLE: Why are roots and staples used as balancing post? Roots has a target...
-*** Also: discuss with Isabelle and Benni about splitting the roots target into potatos and cassav_sp (see Marcos distinction between starchy_fruits and roots)
-
-display i15_rec_EATLancet;
-
-*** ISABELLE/BENNI: I think this is not required anymore (food waste calculations have changed since then)
-** Use p15_intake_detail(t,iso,kfo) instead?
-* The parameter p15_intake_detailed_regr doesn't exist anymore in this realization.
-*p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
-*  / (i15_calib_fsupply(i) * i15_demand2intake_detailed_ref(i,kfo) * p15_foodwaste_growth(t,i));
-*i15_intake_detailed_scen_target(t,iso,kfo) = p15_intake_detailed_regr(t,i,kfo);
-
-*' For cases where the intake in a EAT-Lancet food group is zero for a country
-*' in a particular time step, a small amount is added to ensure no division by
-*' zero. This way, all kfo-items in the respective food group are corrected by
-*' the same amount.
+* For cases where the intake in a EAT-Lancet food group is zero for a country
+* in a particular time step, a small amount is added to ensure no division by
+* zero. This way, all kfo-items in the respective food group are corrected by
+* the same amount.
 p15_intake_detail(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
                                    sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))) = 0) =
                                    p15_intake_detail(t,iso,kfo) + 1e-6;
@@ -444,28 +429,51 @@ p15_intake_detail(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
     ;
 
 *** Special case: Fruits, vegetables and nuts ***
-*' In MAgPIE fruits, vegetables and (some) nuts are combined to the 'other' food category.
+*' In MAgPIE fruits, vegetables and (some) nuts are combined to the 'other' food category;
+*' and bananas and plantains are included in the 'cassav_sp' category.
 *' The f15_fruitveg2others_kcal_ratio gives the historical share (fixed into the future based on last historic year)
-*' of fruits and vegetables in this aggregate category
+*' of fruits and vegetables in this aggregate categories.
   if (sum(sameas(t_past,t),1) = 1,
-     i15_fruitveg2others_kcal_ratio(t,iso) = f15_fruitveg2others_kcal_ratio(t,iso);
+     i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t,iso,EAT_special);
   else
-     i15_fruitveg2others_kcal_ratio(t,iso) = f15_fruitveg2others_kcal_ratio(t-1,iso);
+     i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t-1,iso,EAT_special);
   );
 
-display i15_fruitveg2others_kcal_ratio;
+*' Separation of starchy fruits (bananas and plantains)
+*' and roots (cassava, sweet potato, yams) in the cassav_sp food category
+p15_intake_detail_starchyfruit(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"cassav_sp") * p15_intake_detail(t,iso,"cassav_sp");
+p15_intake_detail_roots(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso,"cassav_sp")) * p15_intake_detail(t,iso,"cassav_sp") + p15_intake_detail(t,iso,"potato");
 
-*' This ratio is used to split the 'others' category into fruits plus vegetables
-*' and those nuts and seeds that are not included in rapeseed, groundnut and sunflower
-*****BENNI/ISABELLE: Are groundnuts nuts or pulses in the end? Or should they be anyway be a separate target (peanuts)
-  p15_intake_detail_fruitveg(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso) * p15_intake_detail(t,iso,"others");
-  p15_intake_detail_nsothers(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso)) * p15_intake_detail(t,iso,"others");
+*' Maximum recommendation for starchy fruits:
+i15_intake_detailed_scen_starchyfruit(t,iso)$(p15_intake_detail_starchyfruit(t,iso) > i15_rec_EATLancet(iso,"t_fruitstarch","max"))
+    = i15_rec_EATLancet(iso,"t_fruitstarch","max");
+
+*' Maximum recommendation for roots:
+i15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
+    = i15_rec_EATLancet(iso,"t_roots","max");
+
+i15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
+    = p15_intake_detail_roots(t,iso) / i15_intake_detailed_scen_roots(t,iso) * p15_intake_detail(t,iso,"potato");
+
+i15_intake_detailed_scen_target(t,iso,"cassav_sp")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max")) =
+      p15_intake_detail_roots(t,iso) / i15_intake_detailed_scen_roots(t,iso) * p15_intake_detail_roots(t,iso) -
+      i15_intake_detailed_scen_target(t,iso,"potato") +
+      p15_intake_detail_starchyfruit(t,iso);
+
+*' Split the 'others' category into fruits plus vegetables
+*' and those nuts and seeds that are not included in rapeseed and sunflower
+  p15_intake_detail_fruitveg(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"others") * p15_intake_detail(t,iso,"others") + p15_intake_detail_starchyfruit(t,iso);
+  p15_intake_detail_nsothers(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso,"others")) * p15_intake_detail(t,iso,"others");
   i15_intake_detailed_scen_fruitveg(t,iso) = p15_intake_detail_fruitveg(t,iso);
   i15_intake_detailed_scen_nsothers(t,iso) = p15_intake_detail_nsothers(t,iso);
 
 *' Minimum recommendation for fruits and vegetables:
   i15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < i15_rec_EATLancet(iso,"t_fruitveg","min"))
     = i15_rec_EATLancet(iso,"t_fruitveg","min");
+*' Extract fruits and vegetables that are part of others categroy
+*  Note that starchy fruits are kept at the previously assigned maximum level
+*  and their amount has been added to cassav_sp already.
+  i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - p15_intake_detail_starchyfruit(t,iso);
 
 *' Minimum recommendation for nuts
 *' (a) nuts and seeds that are included in "others"
@@ -474,8 +482,7 @@ display i15_fruitveg2others_kcal_ratio;
    = (p15_intake_detail_nsothers(t,iso) / (sum(kfo_ns,p15_intake_detail(t,iso,kfo_ns)) + p15_intake_detail_nsothers(t,iso)))
       * i15_rec_EATLancet(iso,"t_nutseeds","min")
     ;
-*' (b) for rapeseed, groundnut, sunflower:
-*** BENNI/ISABELLE: where to put groundnuts? separate?
+*' (b) for rapeseed, sunflower:
   i15_intake_detailed_scen_target(t,iso,kfo_ns)$((sum(kfo_ns2,p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nsothers(t,iso)
                                                   ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
     = (p15_intake_detail(t,iso,kfo_ns) / (sum(kfo_ns2,p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nsothers(t,iso)))
@@ -484,9 +491,6 @@ display i15_fruitveg2others_kcal_ratio;
 
 *' The resulting intake of the "others" category is:
   i15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nsothers(t,iso);
-* Update of the ratio of fruits and vegetables within the "others" category:
-  i15_fruitveg2others_kcal_ratio_scen(t,iso)$(i15_intake_detailed_scen_target(t,iso,"others") > 0)
-   = i15_intake_detailed_scen_fruitveg(t,iso) / i15_intake_detailed_scen_target(t,iso,"others");
 
 * Food commodities that are not included in diet recommendations are set to zero:
   i15_intake_detailed_scen_target(t,iso,kfo_norec) = 0;
@@ -504,8 +508,11 @@ display i15_fruitveg2others_kcal_ratio;
 *****        Should it be done the same way in both? (Should it be taken out of the if-condition (applied to both)?)
 
 *** Balancing calorie requirements ***
-*' After all calorie recommendations for non-staple food groups are satisfied, intake of staple crops is
-*' now modified such that the in step 1.) selected total calorie intake is met:
+*' After all calorie recommendations for non-staple food groups are satisfied,
+*' intake of staple crops is now modified such that the
+*' in step 1.) selected total calorie intake is met.
+*' Note that brans do not have an EAT Lancet target and are kept at their
+*' original level.
   i15_intake_detailed_scen_target(t,iso,EAT_staples) =
     (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)))
      * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
