@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg and scenario_config.csv** Default for cfg$gms$c56_emis_policy changed from `redd+natveg_nosoil` to `reddnatveg_nosoil`,i.e. timber plantations are excluded from carbon pricing by default
 - **default.cfg** Default for cfg$gms$c56_cprice_aff changed from `forestry_vegc` to `secdforest_vegc`
 - **scenario_config.csv** settings for cfg$gms$s35_secdf_distribution in `ForestryEndo` and `ForestryExo` changed from `2` to `0`
+- **scenario_config.csv** removed erroneous setting `cc` from column `input`
 
 ### added
 - **32_forestry** new interfaces `vm_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
