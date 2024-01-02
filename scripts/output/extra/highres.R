@@ -47,7 +47,7 @@ highres <- function(cfg) {
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
 
   # set high resolution, available options are c1000 and c2000
-  res <- "c2000"
+  res <- "c1000"
 
   # search for matching high resolution file in repositories
   # pattern: "rev4.65_h12_*_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
