@@ -160,9 +160,9 @@ $title magpie
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.46.tgz
+* Used data set: additional_data_rev4.47.tgz
 * md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_glo_08Aug23.tgz
 * md5sum: NA
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Dec 22 11:01:20 2023
+* Last modification (input data): Fri Dec 22 16:58:47 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

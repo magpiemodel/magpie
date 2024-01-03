@@ -130,7 +130,10 @@ sets
       ecoSysProtOff,
       ecoSysProtAll_agMgmtExclN2O,
       ecoSysProtAll_agMgmtExclCH4,
-      ecoSysProtAll_agMgmtOff /
+      ecoSysProtAll_agMgmtOff,
+      co2_reddnatveg_nosoil,
+      co2_peatland,
+      co2_reddnatveg_nosoil_peatland /
 
 ;
 *######################### R SECTION END (SETS) ################################
