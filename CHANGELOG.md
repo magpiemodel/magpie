@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** removed erroneous setting `cc` from column `input`
 
 ### added
-- **32_forestry** new interfaces `vm_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
+- **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
 - **scripts** added peatland to output/extra/disaggregation.R
 
 ### removed
