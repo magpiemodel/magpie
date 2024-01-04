@@ -412,9 +412,9 @@ elseif (s15_exo_diet = 3),
 
 * Test whether sums and parentheses are set correctly
 display(sum(EATtar_kfo15(EAT_mtargets15_2,kfo), sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,"puls_pro"))));
-display(p15_intake_detail(t,iso,"puls_pro"))
-display(p15_intake_detail(t,iso,"groundnut"))
-display(p15_intake_detail(t,iso,"soybean"))
+display(p15_intake_detail(t,iso,"puls_pro"));
+display(p15_intake_detail(t,iso,"groundnut"));
+display(p15_intake_detail(t,iso,"soybean"));
 
 *' The intake target is adjusted to meet the EAT-Lancet recommendations
 *** Minimum recommendations ***
