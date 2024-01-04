@@ -392,18 +392,29 @@ elseif (s15_exo_diet = 3),
 * Note: brans is the only food commodity group that will not be affected
 *       by the following calculations.
 
-*' Where maximum target is not exceeded, total scenario food intake is assigned
+*' Where no maximum target is assigned, total scenario food intake is assigned
 *' to EAT-Lancet recommendation
   i15_rec_EATLancet(iso,EAT_targets15,"max")$(i15_rec_EATLancet(iso,EAT_targets15,"max") = 0) = i15_intake_scen_target(t,iso);
 *** JAN: Should i15_rec_EATLancet be p15_rec_EATLancet then?
+*** BENNI:
+*Und assigned wird nicht der total food intake, sondern der (eventuell total-intake korrigierte) endogene intake.
+*Ich würde ausserdem den wert auf 9999 setzen für fälle die man nicht erreichen will, nicht auf 0.
+*Vielleicht will man ja einen max target von 0, zum beispiel bei Zucker. Ausserdem brauchst du dann auch keine sonderregel, und du kannst das ganz weglassen.
+*** FELI: You mean 9999 in the file that is preprocessed? In the calcEATLancetTargets function, right?
 
 * For cases where the intake in a EAT-Lancet food group is zero for a country
 * in a particular time step, a small amount is added to ensure no division by
 * zero. This way, all kfo-items in the respective food group are corrected by
 * the same amount.
-p15_intake_detail(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
+  p15_intake_detail(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
                                    sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))) = 0) =
                                    p15_intake_detail(t,iso,kfo) + 1e-6;
+
+* Test whether sums and parentheses are set correctly
+display(sum(EATtar_kfo15(EAT_mtargets15_2,kfo), sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,"puls_pro"))));
+display(p15_intake_detail(t,iso,"puls_pro"))
+display(p15_intake_detail(t,iso,"groundnut"))
+display(p15_intake_detail(t,iso,"soybean"))
 
 *' The intake target is adjusted to meet the EAT-Lancet recommendations
 *** Minimum recommendations ***
@@ -454,6 +465,11 @@ i15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > i15_rec_
 
 i15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
     = p15_intake_detail_roots(t,iso) / i15_intake_detailed_scen_roots(t,iso) * p15_intake_detail(t,iso,"potato");
+
+* Benni's suggestion:
+*i15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
+*    = i15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso)  * p15_intake_detail(t,iso,"potato");
+
 
 i15_intake_detailed_scen_target(t,iso,"cassav_sp")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max")) =
       p15_intake_detail_roots(t,iso) / i15_intake_detailed_scen_roots(t,iso) * p15_intake_detail_roots(t,iso) -
