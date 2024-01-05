@@ -159,11 +159,11 @@ parameters
  p15_intake_detail_starchyfruit(t,iso)                    Auxiliary parameter for the intake of starchy fruits included in cassav_sp (kcal per capita per day)
  p15_intake_detail_roots(t,iso)                           Auxiliary parameter for the intake of roots (kcal per capita per day)
  p15_intake_detail_fruitveg(t,iso)                        Auxiliary parameter for the intake of fruits and vegetables included in others (kcal per capita per day)
- p15_intake_detail_nsothers(t,iso)                        Auxiliary parameter for the intake of those nuts and seeds included in others (kcal per capita per day)
+ p15_intake_detail_nuts(t,iso)                            Auxiliary parameter for the intake of nuts included in others (kcal per capita per day)
  i15_intake_detailed_scen_starchyfruit(t,iso)             Auxiliary scenario target for the intake of starchy fruits included in cassav_sp (kcal per capita per day)
  i15_intake_detailed_scen_roots(t,iso)                    Auxiliary scenario target for the intake of roots (kcal per capita per day)
  i15_intake_detailed_scen_fruitveg(t,iso)                 Auxiliary scenario target for the intake of fruits and vegetables included in others (kcal per capita per day)
- i15_intake_detailed_scen_nsothers(t,iso)                 Auxiliary scenario target for the intake of those nuts and seeds included in others (kcal per capita per day)
+ i15_intake_detailed_scen_nuts(t,iso)                 Auxiliary scenario target for the intake of nuts included in others (kcal per capita per day)
 
  i15_exo_foodscen_fader(t,iso)                Fader that converges per capita food consumption to an exogenous diet scenario (1)
 

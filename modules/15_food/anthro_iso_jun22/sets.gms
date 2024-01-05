@@ -109,7 +109,7 @@ sets
    kfo_pf(kfo) Processed foods including oils sugar alcohol
    / oils,alcohol,sugar /
 
-   kfo_ns(kfo) Food products that can be counted towards nuts and nuts_seeds
+   kfo_seeds(kfo) Food products that are counted towards seeds
     / rapeseed, sunflower /
 
    kfo_norec(kfo) Food products that do not have an EAT-Lancet recommendation
@@ -174,6 +174,8 @@ sets
       / livst_pig, livst_egg, livst_chick /
   EAT_ruminants15(kfo) ruminant products
       / livst_milk, livst_rum /
+  EAT_redmeat15(kfo)
+     / livest_rum, livst_pig /
   EAT_fruitvegnutseed15(kfo) vegetables fruits nuts seeds
       / rapeseed, sunflower, others /
   EAT_pulses15(kfo) pulses
@@ -212,28 +214,18 @@ EAT_mtargets15(EAT_targets15) EAT Lancet food targets where direct mapping to MA
 EAT_special MAgPIE food groups that need special treatment with respect to fruit ratio
      / cassav_sp, others /
 
-EATtar_kfo15(EAT_mtargets15,kfo) Mapping between EAT Lancet food targets and MAgPIE categories
-      / t_redmeat           . (livst_rum, livst_pig, scp)
-        t_legumes           . (puls_pro, groundnut, soybean)
-        t_fish              . (fish)
-        t_livst_chick       . (livst_chick)
-        t_livst_egg         . (livst_egg)
-        t_livst_milk        . (livst_milk)
-        t_sugar             . (sugar)
-        t_oils              . (oils)
-      /
-
 ;
 
-alias(kst,kst2);
-alias(bmi_group15,bmi_group15_2);
-alias(kfo,kfo2);
-alias(kfo_ap,kfo_ap2);
-alias(kfo_st,kfo_st2);
-alias(kfo_pf,kfo_pf2);
-alias(kfo_ns,kfo_ns2);
-alias(iso,iso2);
-alias(reproductive,reproductive2);
-alias(EAT_staples,EAT_staples2);
-alias(EAT_mtargets15,EAT_mtargets15_2);
-alias(EATtar_kfo15,EATtar_kfo15_2);
+alias(kst, kst2);
+alias(bmi_group15, bmi_group15_2);
+alias(kfo, kfo2);
+alias(kfo_ap, kfo_ap2);
+alias(kfo_st, kfo_st2);
+alias(kfo_pf, kfo_pf2);
+alias(kfo_seeds, kfo_seeds2);
+alias(iso, iso2);
+alias(reproductive, reproductive2);
+alias(EAT_staples, EAT_staples2);
+alias(EAT_pulses15, EAT_pulses15_2);
+alias(EAT_redmeat15, EAT_redmeat15_2)
+alias(EAT_mtargets15, EAT_mtargets15_2);
