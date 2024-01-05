@@ -82,6 +82,7 @@ diet <- function(cfg) {
   cfg$gms$s15_alc_scen  <- 0               # No alcohol allowed as in the definition of EATLancet
   cfg$gms$c15_kcal_scen <- "healthy_BMI"   # default: not necessary to set it again (To Do: remove)
   cfg$gms$c15_EAT_scen  <- "FLX"           # default: not necessary to set it again (To Do: remove)
+  cfg$gms$s15_alc_scen  <- 0               # In EATLancet, no calories for alcohol. 
   return(cfg)
 }
 

@@ -316,6 +316,9 @@ $endif
   i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso) > 0) =
     p15_intake_detail(t,iso,kfo) / p15_intake_total(t,iso) * i15_intake_scen_target(t,iso);
 
+*** BENNI: Is this initiated correctly? (If p15_intake_total = 0, no value is written into i15_intake_detailed_scen_target. Is that a problem?)
+*  Am Ende fadet ja dann p15_intake_detail zu i15_intake_detailed_scen_target, d.h. wir müssen sicherstellen, dass in i15_intake_detailed_scen_target auch echt alles richtig drinsteht.
+
 *' 2.) The second step defines the daily per capita intake of different food
 *' commodities.
 
@@ -410,16 +413,11 @@ elseif (s15_exo_diet = 3),
                                    sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))) = 0) =
                                    p15_intake_detail(t,iso,kfo) + 1e-6;
 
-* Test whether sums and parentheses are set correctly
-display sum(EATtar_kfo15(EAT_mtargets15_2,kfo), sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,"puls_pro")));
-display p15_intake_detail(t,iso,"puls_pro");
-display p15_intake_detail(t,iso,"groundnut");
-display p15_intake_detail(t,iso,"soybean");
-
 *' The intake target is adjusted to meet the EAT-Lancet recommendations
 *** Minimum recommendations ***
-*' If projected food intake is below minimum, it is increased it to meet
-*' the EAT-Lancet recommendations:
+*' For food groups where direct mapping between EATLancet and MAgPIE food groups is possible,
+*' projected food intake it is increased to meet the EAT-Lancet recommendations
+*' if it is below the minimum recommendation:
   i15_intake_detailed_scen_target(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
                                                   sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))
                                                  ) < sum(EATtar_kfo15(EAT_mtargets15,kfo), i15_rec_EATLancet(iso,EAT_mtargets15,"min"))
@@ -429,8 +427,9 @@ display p15_intake_detail(t,iso,"soybean");
     ;
 
 *** Maximum recommendations ***
-*' If projected food intake is above maximum, it is decreased it to meet
-*' the EAT-Lancet recommendations:
+*' For food groups where direct mapping between EATLancet and MAgPIE food groups is possible,
+*' projected food intake it is decreased to meet the EAT-Lancet recommendations
+*' if it is above the maximum recommendation:
   i15_intake_detailed_scen_target(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
                                                 sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))
                                                 ) > sum(EATtar_kfo15(EAT_mtargets15,kfo), i15_rec_EATLancet(iso,EAT_mtargets15,"max"))
@@ -456,28 +455,24 @@ p15_intake_detail_starchyfruit(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"ca
 p15_intake_detail_roots(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso,"cassav_sp")) * p15_intake_detail(t,iso,"cassav_sp") + p15_intake_detail(t,iso,"potato");
 
 *' Maximum recommendation for starchy fruits:
+i15_intake_detailed_scen_starchyfruit(t,iso) = p15_intake_detail_starchyfruit(t,iso);
 i15_intake_detailed_scen_starchyfruit(t,iso)$(p15_intake_detail_starchyfruit(t,iso) > i15_rec_EATLancet(iso,"t_fruitstarch","max"))
     = i15_rec_EATLancet(iso,"t_fruitstarch","max");
 
 *' Maximum recommendation for roots:
+i15_intake_detailed_scen_roots(t,iso) = p15_intake_detail_roots(t,iso);
 i15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
     = i15_rec_EATLancet(iso,"t_roots","max");
 
 i15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
-    = p15_intake_detail_roots(t,iso) / i15_intake_detailed_scen_roots(t,iso) * p15_intake_detail(t,iso,"potato");
-
-* Benni's suggestion:
-*i15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
-*    = i15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso)  * p15_intake_detail(t,iso,"potato");
-
+    = i15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail(t,iso,"potato");
 
 i15_intake_detailed_scen_target(t,iso,"cassav_sp")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max")) =
-      p15_intake_detail_roots(t,iso) / i15_intake_detailed_scen_roots(t,iso) * p15_intake_detail_roots(t,iso) -
+      i15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail_roots(t,iso) -
       i15_intake_detailed_scen_target(t,iso,"potato") +
       i15_intake_detailed_scen_starchyfruit(t,iso);
 
-*' Split the 'others' category into fruits plus vegetables
-*' and those nuts and seeds that are not included in rapeseed and sunflower
+*' Split the 'others' category into fruits plus vegetables and nuts
   p15_intake_detail_fruitveg(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"others") * p15_intake_detail(t,iso,"others") + i15_intake_detailed_scen_starchyfruit(t,iso);
   p15_intake_detail_nsothers(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso,"others")) * p15_intake_detail(t,iso,"others");
   i15_intake_detailed_scen_fruitveg(t,iso) = p15_intake_detail_fruitveg(t,iso);
@@ -513,15 +508,9 @@ i15_intake_detailed_scen_target(t,iso,"cassav_sp")$(p15_intake_detail_roots(t,is
 * Optionally, there is an exception for alcohol:
 * Via 's15_alc_scen' a maximum target for alcohol consumption can be defined, e.g. according to Lassen et al., (2020).
   if (s15_alc_scen > 0,
-* first, reduce projected alcohol consumption by a quarter:
-    i15_intake_detailed_scen_target(t,iso,"alcohol") = p15_intake_detail(t,iso,"alcohol") * 3/4;
-* if still above target, set to maximum:
     i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen * i15_intake_scen_target(t,iso))
      = s15_alc_scen * i15_intake_scen_target(t,iso);
   );
-***** ISABELLE: Why is this done in two steps?
-***** BENNI: This is also done in the other EAT implementation (s15_exo_diet = 1).
-*****        Should it be done the same way in both? (Should it be taken out of the if-condition (applied to both)?)
 
 *** Balancing calorie requirements ***
 *' After all calorie recommendations for non-staple food groups are satisfied,
@@ -534,6 +523,9 @@ i15_intake_detailed_scen_target(t,iso,"cassav_sp")$(p15_intake_detail_roots(t,is
      * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
 
 display i15_intake_detailed_scen_target;
+
+**** FELI: Check whether it gets negative... And come up with solution for fixing this... (Maybe via positive declaration / setting everyting that's negative to 0?)
+* BENNI: What if EATLancet leads to too much calories? Just allow higher values?
 
 );
 *** End of MAgPIE-specific realization of the EAT Lancet diet

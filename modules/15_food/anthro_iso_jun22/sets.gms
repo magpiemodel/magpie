@@ -207,8 +207,7 @@ EAT_targets15 Food groups as well as individual foods for which EAT Lancet targe
        t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
 
 EAT_mtargets15(EAT_targets15) EAT Lancet food targets where direct mapping to MAgPIE categories is possible
-     / t_roots, t_redmeat,
-       t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+     / t_redmeat, t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
 
 EAT_special MAgPIE food groups that need special treatment with respect to fruit ratio
      / cassav_sp, others /
