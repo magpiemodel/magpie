@@ -175,7 +175,7 @@ sets
   EAT_ruminants15(kfo) ruminant products
       / livst_milk, livst_rum /
   EAT_redmeat15(kfo)
-     / livest_rum, livst_pig /
+     / livst_rum, livst_pig /
   EAT_fruitvegnutseed15(kfo) vegetables fruits nuts seeds
       / rapeseed, sunflower, others /
   EAT_pulses15(kfo) pulses
