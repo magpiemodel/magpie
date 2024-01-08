@@ -214,6 +214,18 @@ EAT_mtargets15(EAT_targets15) EAT Lancet food targets where direct mapping to MA
 EAT_special MAgPIE food groups that need special treatment with respect to fruit ratio
      / cassav_sp, others /
 
+
+EATtar_kfo15(EAT_mtargets15,kfo) Mapping between EAT Lancet food targets and MAgPIE categories
+     / t_redmeat           . (livst_rum, livst_pig, scp)
+       t_legumes           . (puls_pro, groundnut, soybean)
+       t_fish              . (fish)
+       t_livst_chick       . (livst_chick)
+       t_livst_egg         . (livst_egg)
+       t_livst_milk        . (livst_milk)
+       t_sugar             . (sugar)
+       t_oils              . (oils)
+     /
+
 ;
 
 alias(kst, kst2);
@@ -227,5 +239,6 @@ alias(iso, iso2);
 alias(reproductive, reproductive2);
 alias(EAT_staples, EAT_staples2);
 alias(EAT_pulses15, EAT_pulses15_2);
-alias(EAT_redmeat15, EAT_redmeat15_2)
+alias(EAT_redmeat15, EAT_redmeat15_2);
+alias(EATtar_kfo15, EATtar_kfo15_2);
 alias(EAT_mtargets15, EAT_mtargets15_2);
