@@ -15,10 +15,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** Default for cfg$gms$c56_cprice_aff changed from `forestry_vegc` to `secdforest_vegc`
 - **scenario_config.csv** settings for cfg$gms$s35_secdf_distribution in `ForestryEndo` and `ForestryExo` changed from `2` to `0`
 - **scenario_config.csv** removed erroneous setting `cc` from column `input`
+- **default.cfg** update default `cfg$gms$c56_pollutant_prices` and `cfg$gms$c60_2ndgen_biodem` to `R32M46-SSP2EU-NPi`
+- **default.cfg** update input data to rev 4.96 
 
 ### added
 - **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
 - **scripts** added peatland to output/extra/disaggregation.R
+- **56_ghg_policy_** added new trajectories for R32M46
+- **60_bioenergy** added new trajectories for R32M46
 
 ### removed
 - **default.cfg** Removed description of cfg$gms$c31_past_suit_scen since no longer needed due to changes in 31_past described below. Its function is now done by cfg$gms$c31_grassl_yld_scenario.
@@ -26,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **scripts** Fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
+- **scripts** bugfix highres.R for bioenergy demand and GHG prices in coupled runs
 
 
 ## [4.7.0] - 2023-12-11
