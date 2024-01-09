@@ -97,6 +97,8 @@ scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  /
 * If the switch is set to 1,the exogenous diets are activated.
 * For all other settings (!=1), the endogenous estimate is used.
 * When activating a target, total calories are always preserved via scaling of staples
+scalar s15_exo_poultry Exogenous EAT Lancet animal product target on  (1) / 1 /;
+scalar s15_exo_redmeatdairy Exogenous EAT Lancet animal product target on  (1) / 1 /;
 scalar s15_exo_monogastric Exogenous EAT Lancet animal product target on  (1) / 1 /;
 scalar s15_exo_ruminant Exogenous EAT Lancet animal product target on  (1) / 1 /;
 scalar s15_exo_fish Exogenous EAT Lancet animal product target on  (1) / 1 /;

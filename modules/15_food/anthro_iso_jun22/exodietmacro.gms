@@ -413,13 +413,13 @@ elseif (s15_exo_diet = 3),
     if (s15_exo_poultry = 1,
 * upper bound for eggs
       i15_intake_detailed_scen_target(t,iso,"livst_egg")$(p15_intake_detail(t,iso,"livst_egg")
-                                                               > i15_rec_EATLancet(iso,"t_livst_egg","max"))
+                                                               > i15_rec_EATLancet(iso,"t_livst_egg","max")
                                                             ) =
              i15_rec_EATLancet(iso,"t_livst_egg","max");
 
 * upper bound for chicken
       i15_intake_detailed_scen_target(t,iso,"livst_chick")$(p15_intake_detail(t,iso,"livst_chick")
-                                                              > i15_rec_EATLancet(iso,"t_livst_chick","max"))
+                                                              > i15_rec_EATLancet(iso,"t_livst_chick","max")
                                                            ) =
             i15_rec_EATLancet(iso,"t_livst_chick","max");
        );
@@ -434,7 +434,7 @@ elseif (s15_exo_diet = 3),
                 * i15_rec_EATLancet(iso,"t_redmeat","max");
 * upper bound for milk
       i15_intake_detailed_scen_target(t,iso,"livst_milk")$(p15_intake_detail(t,iso,"livst_milk")
-                                                               > i15_rec_EATLancet(iso,"t_livst_milk","max"))
+                                                               > i15_rec_EATLancet(iso,"t_livst_milk","max")
                                                             ) =
              i15_rec_EATLancet(iso,"t_livst_milk","max");
     );
@@ -530,7 +530,7 @@ elseif (s15_exo_diet = 3),
 *' upper bound for sugar
     if (s15_exo_sugar = 1,
       i15_intake_detailed_scen_target(t,iso,"sugar")$(p15_intake_detail(t,iso,"sugar")
-                                                              > i15_rec_EATLancet(iso,"t_sugar","max"))
+                                                              > i15_rec_EATLancet(iso,"t_sugar","max")
                                                            ) =
             i15_rec_EATLancet(iso,"t_sugar","max");
     );
@@ -546,7 +546,7 @@ elseif (s15_exo_diet = 3),
 
 * oil palm has a maximum recommendation in EAT
        i15_intake_detailed_scen_target(t,iso,"oils")$(p15_intake_detail(t,iso,"oils")
-                                                        > i15_rec_EATLancet(iso,"t_oils","max"))
+                                                        > i15_rec_EATLancet(iso,"t_oils","max")
                                                      ) =
             i15_rec_EATLancet(iso,"t_oils","max");
     );
