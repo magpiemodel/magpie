@@ -109,8 +109,9 @@ sets
    kfo_pf(kfo) Processed foods including oils sugar alcohol
    / oils,alcohol,sugar /
 
-   kfo_seeds(kfo) Food products that are counted towards seeds
-    / rapeseed, sunflower /
+* Note: From a nutritional perspective, groundnut counts towards nuts
+   kfo_ns(kfo) Food products that are counted towards nuts and seeds
+    / rapeseed, sunflower, groundnut/
 
    kfo_norec(kfo) Food products that do not have an EAT-Lancet recommendation
     / sugr_cane, sugr_beet, molasses, alcohol /
@@ -179,7 +180,7 @@ sets
   EAT_fruitvegnutseed15(kfo) vegetables fruits nuts seeds
       / rapeseed, sunflower, others /
   EAT_pulses15(kfo) pulses
-      / soybean, puls_pro, groundnut /
+      / soybean, puls_pro /
   EAT_sugar15(kfo) sugar
       / sugr_cane, sugr_beet, sugar, molasses /
 
@@ -217,7 +218,7 @@ EAT_special MAgPIE food groups that need special treatment with respect to fruit
 
 EATtar_kfo15(EAT_mtargets15,kfo) Mapping between EAT Lancet food targets and MAgPIE categories
      / t_redmeat           . (livst_rum, livst_pig, scp)
-       t_legumes           . (puls_pro, groundnut, soybean)
+       t_legumes           . (puls_pro, soybean)
        t_fish              . (fish)
        t_livst_chick       . (livst_chick)
        t_livst_egg         . (livst_egg)
@@ -234,7 +235,7 @@ alias(kfo, kfo2);
 alias(kfo_ap, kfo_ap2);
 alias(kfo_st, kfo_st2);
 alias(kfo_pf, kfo_pf2);
-alias(kfo_seeds, kfo_seeds2);
+alias(kfo_ns, kfo_ns2);
 alias(iso, iso2);
 alias(reproductive, reproductive2);
 alias(EAT_staples, EAT_staples2);

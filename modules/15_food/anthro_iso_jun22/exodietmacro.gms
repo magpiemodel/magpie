@@ -406,6 +406,9 @@ elseif (s15_exo_diet = 3),
                                    p15_intake_detail(t,iso,kfo) + 1e-6;
 * FELI: Check whether this is still necessary when the targets are split
 
+* To Do: transform i15_intake_detailed_scen_target and i15_intake_scen_target and p15_intake_detail
+* to grams using i15_protein_to_kcal_ratio
+
 *' The single targets can also be set manually via switches
 *' (e.g., s15_exo_ruminant, s15_exo_fish, etc.).
 
@@ -500,17 +503,16 @@ elseif (s15_exo_diet = 3),
 
 *' Minimum recommendation for nuts & seeds
 *' (a) nuts included in "others"
-        i15_intake_detailed_scen_nuts(t,iso)$((sum(kfo_seeds, p15_intake_detail(t,iso,kfo_seeds)) + p15_intake_detail_nuts(t,iso)
+        i15_intake_detailed_scen_nuts(t,iso)$((sum(kfo_ns, p15_intake_detail(t,iso,kfo_ns)) + p15_intake_detail_nuts(t,iso)
                                                    ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-         = (p15_intake_detail_nuts(t,iso) / (sum(kfo_seeds,p15_intake_detail(t,iso,kfo_seeds)) + p15_intake_detail_nuts(t,iso)))
+         = (p15_intake_detail_nuts(t,iso) / (sum(kfo_ns,p15_intake_detail(t,iso,kfo_ns)) + p15_intake_detail_nuts(t,iso)))
             * i15_rec_EATLancet(iso,"t_nutseeds","min")
           ;
-*FELI: Check here! I think something is wrong with the set!!!
 
-*' (b) for rapeseed, sunflower:
-        i15_intake_detailed_scen_target(t,iso,kfo_seeds)$((sum(kfo_seeds2,p15_intake_detail(t,iso,kfo_seeds2)) + p15_intake_detail_nuts(t,iso)
+*' (b) for other nuts (groundnut) and seeds (rapeseed, sunflower):
+        i15_intake_detailed_scen_target(t,iso,kfo_ns)$((sum(kfo_ns2,p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)
                                                         ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-          = (p15_intake_detail(t,iso,kfo_seeds) / (sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2)) + p15_intake_detail_nuts(t,iso)))
+          = (p15_intake_detail(t,iso,kfo_ns) / (sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)))
              * i15_rec_EATLancet(iso,"t_nutseeds","min")
           ;
 
@@ -565,7 +567,7 @@ elseif (s15_exo_diet = 3),
       );
 *' There is no explicit target for brans in the EATLancet recommendations.
 *' It is therefore set to 0.
-*** BENNI: Why was this decided in the previous implementation? My approach would have been to keep it at the current level / including it as part of staples.
+*** BENNI: Why was this decided in the previous implementation? My approach would have been to keep it at the current level or including it as part of staples.
     if (s15_exo_brans = 1,
        i15_intake_detailed_scen_target(t,iso,"brans") = 0;
        );
@@ -574,6 +576,10 @@ elseif (s15_exo_diet = 3),
     if (s15_exo_scp = 1,
        i15_intake_detailed_scen_target(t,iso,"scp") = 0;
        );
+
+
+* To Do: transform i15_intake_detailed_scen_target and i15_intake_scen_target and p15_intake_detail
+* back to kcal using i15_protein_to_kcal_ratio
 
 *** Balancing calorie requirements ***
 *' After all calorie recommendations for non-staple food groups are satisfied,
