@@ -60,7 +60,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  vm_land_forestry(j2,type32) =e= sum(ac, v32_land(j2,type32,ac));
 
  q32_land_expansion_forestry(j2,type32) ..
- vm_landexpansion_forestry(j2,type32) =e= sum(ac_est, v32_land_expansion(j2,type32,ac_est));
+ vm_landexpansion_forestry(j2,type32) =e= v32_land_expansion(j2,type32);
 
  q32_land_reduction_forestry(j2,type32) ..
  vm_landreduction_forestry(j2,type32) =e= sum(ac_sub, v32_land_reduction(j2,type32,ac_sub));
@@ -95,12 +95,13 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 
 *' Forestry land expansion and reduction is calculated as follows:
 
- q32_land_diff .. vm_landdiff_forestry =e= sum((j2,type32,ac),
-            v32_land_expansion(j2,type32,ac)
-          + v32_land_reduction(j2,type32,ac));
+ q32_land_diff .. vm_landdiff_forestry =e= sum((j2,type32),
+            v32_land_expansion(j2,type32)
+          + sum(ac_sub, v32_land_reduction(j2,type32,ac_sub)));
 
- q32_land_expansion(j2,type32,ac_est) ..
-    v32_land_expansion(j2,type32,ac_est) =e= v32_land(j2,type32,ac_est) - pc32_land(j2,type32,ac_est);
+ q32_land_expansion(j2,type32) ..
+    v32_land_expansion(j2,type32) =e= 
+    sum(ac_est, v32_land(j2,type32,ac_est)) - sum(ac_est, pc32_land(j2,type32,ac_est));
 
  q32_land_reduction(j2,type32,ac_sub) ..
   v32_land_reduction(j2,type32,ac_sub) =e= pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub);
