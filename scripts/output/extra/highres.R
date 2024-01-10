@@ -39,7 +39,7 @@ source("scripts/start_functions.R")
 
 highres <- function(cfg) {
   #lock the model folder
-  lockId <- gms::model_lock(timeout1 = 1)
+  lockId <- gms::model_lock(timeout1 = 24)
   withr::defer(gms::model_unlock(lockId))
 
   if(any(!(modelstat(gdx) %in% c(2,7)))) stop("Modelstat different from 2 or 7 detected")
@@ -145,6 +145,12 @@ highres <- function(cfg) {
   cfg$gms$optimization <- "nlp_par"
   cfg$gms$s15_elastic_demand <- 0
 
+  #get exogenous bioenergy demand and GHG prices from c200 run because these files may have been overwritten
+  write.magpie(readGDX(gdx,"f56_pollutant_prices_coupling"),"modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
+  write.magpie(readGDX(gdx,"f56_pollutant_prices_emulator"),"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
+  write.magpie(readGDX(gdx,"f60_bioenergy_dem_coupling"),"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+  write.magpie(readGDX(gdx,"f60_bioenergy_dem_emulator"),"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
+  
   #get regional afforestation patterns from low resolution run with c200
   aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)
   #Take away initial NDC area for consistency with global afforestation limit
