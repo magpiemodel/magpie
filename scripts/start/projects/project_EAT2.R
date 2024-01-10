@@ -22,6 +22,8 @@ source("scripts/start_functions.R")
 # laod default configuration
 source("config/default.cfg")
 
+cfg$force_download <- TRUE
+
 # Set defaults
 codeCheck <- FALSE
 

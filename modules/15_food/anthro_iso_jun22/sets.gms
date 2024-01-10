@@ -184,6 +184,9 @@ sets
   EAT_sugar15(kfo) sugar
       / sugr_cane, sugr_beet, sugar, molasses /
 
+  EAT_staples_old(kfo) All staple food products according to EAT Lancet definition
+       / tece, maiz, trce, rice_pro, potato, cassav_sp /
+
   EAT_staples(kfo) All staple food products according to EAT Lancet definition
        / tece, maiz, trce, rice_pro /
 
@@ -239,6 +242,7 @@ alias(kfo_ns, kfo_ns2);
 alias(iso, iso2);
 alias(reproductive, reproductive2);
 alias(EAT_staples, EAT_staples2);
+alias(EAT_staples_old, EAT_staples2_old);
 alias(EAT_pulses15, EAT_pulses15_2);
 alias(EAT_redmeat15, EAT_redmeat15_2);
 alias(EATtar_kfo15, EATtar_kfo15_2);

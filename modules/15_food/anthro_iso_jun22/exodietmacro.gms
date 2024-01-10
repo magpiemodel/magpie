@@ -377,9 +377,9 @@ if (s15_exo_diet = 1,
         = s15_alc_scen*i15_intake_scen_target(t,iso);
     );
 
-    i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) > 0) =
+    i15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(sum(EAT_staples2_old,i15_intake_EATLancet(iso,EAT_staples2_old)) > 0) =
             (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old))) *
-            (i15_intake_EATLancet(iso,EAT_staples) / sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)))
+            (i15_intake_EATLancet(iso,EAT_staples_old) / sum(EAT_staples2_old,i15_intake_EATLancet(iso,EAT_staples2_old)))
             ;
 
 * VARTIKA: What about s15_exo_diet = 2?
@@ -508,6 +508,8 @@ elseif (s15_exo_diet = 3),
          = (p15_intake_detail_nuts(t,iso) / (sum(kfo_ns,p15_intake_detail(t,iso,kfo_ns)) + p15_intake_detail_nuts(t,iso)))
             * i15_rec_EATLancet(iso,"t_nutseeds","min")
           ;
+* 25 for peanuts
+* 25 for nuts from other + seeds
 
 *' (b) for other nuts (groundnut) and seeds (rapeseed, sunflower):
         i15_intake_detailed_scen_target(t,iso,kfo_ns)$((sum(kfo_ns2,p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)
