@@ -178,6 +178,8 @@ sets
      / livst_rum, livst_pig /
   EAT_fruitvegnutseed15(kfo) vegetables fruits nuts seeds
       / rapeseed, sunflower, others /
+  EAT_pulses15_old(kfo) pulses
+      / soybean, puls_pro, groundnut /
   EAT_pulses15(kfo) pulses
       / soybean, puls_pro /
   EAT_sugar15(kfo) sugar
@@ -209,7 +211,7 @@ EAT_targettype15 Minimum or maximum target type of the EAT Lancet recommendation
 EAT_targets15 Food groups as well as individual foods for which EAT Lancet targets are defined
      / t_nutseeds, t_fruitveg, t_fruitstarch,
        t_roots, t_redmeat,
-       t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+       t_legumes, t_peanuts, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
 
 EAT_mtargets15(EAT_targets15) EAT Lancet food targets where direct mapping to MAgPIE categories is possible
      / t_redmeat, t_legumes, t_peanuts, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
@@ -244,6 +246,7 @@ alias(reproductive, reproductive2);
 alias(EAT_staples, EAT_staples2);
 alias(EAT_staples_old, EAT_staples2_old);
 alias(EAT_pulses15, EAT_pulses15_2);
+alias(EAT_pulses15_old, EAT_pulses15_2_old);
 alias(EAT_redmeat15, EAT_redmeat15_2);
 alias(EATtar_kfo15, EATtar_kfo15_2);
 alias(EAT_mtargets15, EAT_mtargets15_2);

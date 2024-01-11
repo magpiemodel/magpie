@@ -355,8 +355,8 @@ if (s15_exo_diet = 1,
       = i15_intake_EATLancet(iso,EAT_fruitvegnutseed15));
 *' lower bound for pulses
     if (s15_exo_pulses=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_pulses15)$(i15_intake_detailed_scen_target(t,iso,EAT_pulses15) < i15_intake_EATLancet(iso,EAT_pulses15))
-      = i15_intake_EATLancet(iso,EAT_pulses15));
+      i15_intake_detailed_scen_target(t,iso,EAT_pulses15_old)$(i15_intake_detailed_scen_target(t,iso,EAT_pulses15_old) < i15_intake_EATLancet(iso,EAT_pulses15_old))
+      = i15_intake_EATLancet(iso,EAT_pulses15_old));
 *' upper bound for sugar
     if (s15_exo_sugar=1,
       i15_intake_detailed_scen_target(t,iso,EAT_sugar15)$(i15_intake_detailed_scen_target(t,iso,EAT_sugar15) > i15_intake_EATLancet(iso,EAT_sugar15))
