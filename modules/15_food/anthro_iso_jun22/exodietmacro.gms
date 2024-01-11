@@ -502,21 +502,24 @@ elseif (s15_exo_diet = 3),
         i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso);
 
 *' Minimum recommendation for nuts & seeds
-*' (a) nuts included in "others"
-        i15_intake_detailed_scen_nuts(t,iso)$((sum(kfo_ns, p15_intake_detail(t,iso,kfo_ns)) + p15_intake_detail_nuts(t,iso)
+*' (a) nuts included in "others" counted towards EAT nuts & seeds category
+        i15_intake_detailed_scen_nuts(t,iso)$((sum(kfo_seeds, p15_intake_detail(t,iso,kfo_seeds)) + p15_intake_detail_nuts(t,iso)
                                                    ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-         = (p15_intake_detail_nuts(t,iso) / (sum(kfo_ns,p15_intake_detail(t,iso,kfo_ns)) + p15_intake_detail_nuts(t,iso)))
+         = (p15_intake_detail_nuts(t,iso) / (sum(kfo_seeds,p15_intake_detail(t,iso,kfo_seeds)) + p15_intake_detail_nuts(t,iso)))
             * i15_rec_EATLancet(iso,"t_nutseeds","min")
           ;
-* 25 for peanuts
-* 25 for nuts from other + seeds
-
-*' (b) for other nuts (groundnut) and seeds (rapeseed, sunflower):
-        i15_intake_detailed_scen_target(t,iso,kfo_ns)$((sum(kfo_ns2,p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)
+*' (b) seeds (rapeseed, sunflower):
+        i15_intake_detailed_scen_target(t,iso,kfo_seeds)$((sum(kfo_seeds2,p15_intake_detail(t,iso,kfo_seeds2)) + p15_intake_detail_nuts(t,iso)
                                                         ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-          = (p15_intake_detail(t,iso,kfo_ns) / (sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)))
+          = (p15_intake_detail(t,iso,kfo_seeds) / (sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2)) + p15_intake_detail_nuts(t,iso)))
              * i15_rec_EATLancet(iso,"t_nutseeds","min")
           ;
+*' (c) For model-internal reasons, MAgPIE considers the peanuts target separate from the other nuts & seeds
+*** BENNI: Can you replace "model-internal reasons" with a short explanation why we went for the solution to separate peanuts from nuts?
+        i15_intake_detailed_scen_target(t,iso,"groundnut")$(p15_intake_detail(t,iso,"groundnut")
+                                                           < i15_rec_EATLancet(iso,"t_peanuts","min")
+                                                       ) =
+              i15_rec_EATLancet(iso,"t_peanuts","min");
 
 *' The resulting intake of the "others" category is:
         i15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
