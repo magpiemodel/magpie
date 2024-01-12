@@ -407,7 +407,7 @@ elseif (s15_exo_diet = 3),
 * FELI: Check whether this is still necessary when the targets are split
 
 * To Do: transform i15_intake_detailed_scen_target and i15_intake_scen_target and p15_intake_detail
-* to grams using i15_protein_to_kcal_ratio
+* to grams using
 
 *' The single targets can also be set manually via switches
 *' (e.g., s15_exo_ruminant, s15_exo_fish, etc.).
@@ -456,12 +456,13 @@ elseif (s15_exo_diet = 3),
 *** Special case: Fruits, vegetables and nuts ***
 *' In MAgPIE fruits, vegetables and nuts are combined in the 'other' food category;
 *' Bananas and plantains are included in the 'cassav_sp' category.
-*' The f15_fruitveg2others_kcal_ratio gives the historical share (fixed into the future based on last historic year)
+*' The f15_fruitveg2others_kcal_ratio gives the regional average historical share
+*' (fixed into the future based on last historic year)
 *' of fruits and vegetables in these aggregate categories.
         if (sum(sameas(t_past,t),1) = 1,
-           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t,iso,EAT_special);
+           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = sum(i_to_iso(i,iso), f15_fruitveg2others_kcal_ratio(t,i,EAT_special));
         else
-           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t-1,iso,EAT_special);
+           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = sum(i_to_iso(i,iso), f15_fruitveg2others_kcal_ratio(t-1,i,EAT_special));
         );
 
 *' Separation of starchy fruits (bananas and plantains)

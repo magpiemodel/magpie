@@ -258,9 +258,9 @@ $ondelim
 $include "./modules/15_food/input/f15_targets_EATLancet_iso.cs3"
 $offdelim;
 
-table f15_fruitveg2others_kcal_ratio(t_all,iso,EAT_special)  Ratio of calories from fruits and vegetables within the others and cassav_sp food categories (1)
+table f15_fruitveg2others_kcal_ratio(t_all,i,EAT_special)  Ratio of calories from fruits and vegetables within the others and cassav_sp food categories (1)
 $ondelim
-$include "./modules/15_food/input/f15_fruitveg2others_kcal_ratio_iso.cs3"
+$include "./modules/15_food/input/f15_fruitveg2others_kcal_ratio.cs3"
 $offdelim;
 
 * This file contains exogenous dietary recommendations for India and EAT Lancet recommendations for all other regions
