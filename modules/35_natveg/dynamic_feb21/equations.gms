@@ -74,23 +74,23 @@
 
  q35_landdiff .. vm_landdiff_natveg =e=
           sum((j2,ac),
-              v35_other_expansion(j2,ac)
+              v35_other_expansion(j2)
               + v35_other_reduction(j2,ac)
-              + v35_secdforest_expansion(j2,ac)
+              + v35_secdforest_expansion(j2)
               + v35_secdforest_reduction(j2,ac)
               + v35_primforest_reduction(j2));
 
- q35_other_expansion(j2,ac_est) ..
-  v35_other_expansion(j2,ac_est) =e=
-    v35_other(j2,ac_est) - pc35_other(j2,ac_est);
+ q35_other_expansion(j2) ..
+  v35_other_expansion(j2) =e=
+    sum(ac_est, v35_other(j2,ac_est));
 
  q35_other_reduction(j2,ac_sub) ..
   v35_other_reduction(j2,ac_sub) =e=
     pc35_other(j2,ac_sub) - v35_other(j2,ac_sub);
 
- q35_secdforest_expansion(j2,ac_est) ..
-  v35_secdforest_expansion(j2,ac_est) =e=
-    v35_secdforest(j2,ac_est) - pc35_secdforest(j2,ac_est);
+ q35_secdforest_expansion(j2) ..
+  v35_secdforest_expansion(j2) =e=
+    sum(ac_est, v35_secdforest(j2,ac_est));
 
  q35_secdforest_reduction(j2,ac_sub) ..
   v35_secdforest_reduction(j2,ac_sub) =e=
