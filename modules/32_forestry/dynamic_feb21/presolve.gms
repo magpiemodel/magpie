@@ -130,7 +130,7 @@ elseif s32_hvarea = 2,
 ** overwrite bounds for ac_est
 v32_land.lo(j,"plant",ac_est) = 0;
 v32_land.up(j,"plant",ac_est) = Inf;
-v32_land.l(j,"plant",ac_est) = 0;
+v32_land.l(j,"plant",ac_est) = 0.001;
 
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac_est
