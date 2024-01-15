@@ -73,11 +73,11 @@
 *' This information is then passed to the land module ([10_land]):
 
  q35_landdiff .. vm_landdiff_natveg =e=
-          sum((j2,ac),
+          sum(j2,
               v35_other_expansion(j2)
-              + v35_other_reduction(j2,ac)
+              + sum(ac_sub, v35_other_reduction(j2,ac_sub))
               + v35_secdforest_expansion(j2)
-              + v35_secdforest_reduction(j2,ac)
+              + sum(ac_sub, v35_secdforest_reduction(j2,ac_sub))
               + v35_primforest_reduction(j2));
 
  q35_other_expansion(j2) ..
