@@ -462,7 +462,7 @@ elseif (s15_exo_diet = 3),
         if (sum(sameas(t_past,t),1) = 1,
            i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = sum(i_to_iso(i,iso), f15_fruitveg2others_kcal_ratio(t,i,EAT_special));
         else
-           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = sum(i_to_iso(i,iso), f15_fruitveg2others_kcal_ratio(t-1,i,EAT_special));
+           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = i15_fruitveg2others_kcal_ratio(t-1,iso,EAT_special);
         );
 
 *' Separation of starchy fruits (bananas and plantains)
