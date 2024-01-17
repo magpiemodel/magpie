@@ -32,7 +32,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** Fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
 - **scripts** bugfix highres.R for bioenergy demand and GHG prices in coupled runs
 - **35_natveg** bugfixes ac_est
-- **44_biodiversity** bugfix condition for constraints
 
 
 ## [4.7.0] - 2023-12-11
