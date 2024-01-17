@@ -387,7 +387,7 @@ if (s15_exo_diet = 1,
 * (Note: The old EATLancet implementation should be deleted soon.)
 
 *----------------------------------------------------------------------------------------
-elseif (s15_exo_diet = 3),
+elseif s15_exo_diet = 3,
 *' In case of a MAgPIE-specific realization of the EAT Lancet diet (`s15_exo_diet=3`),
 *' model-internal diet projections are constrained by recommended ranges for intake
 *' (`i15_rec_EATLancet`) of different food groups to ensure healthy and sustainable
@@ -593,7 +593,7 @@ elseif (s15_exo_diet = 3),
 *' in step 1.) selected total calorie intake is met.
 *' Note that brans do not have an EAT Lancet target and are kept at their
 *' original level.
-  i15_intake_detailed_scen_target(t,iso,EAT_staples) =
+  i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)) > 0) =
     (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)))
      * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
 
