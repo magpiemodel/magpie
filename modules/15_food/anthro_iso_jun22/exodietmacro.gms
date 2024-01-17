@@ -404,36 +404,37 @@ elseif s15_exo_diet = 3,
   p15_intake_detail(t,iso,kfo)$(sum(EATtar_kfo15(EAT_mtargets15_2,kfo),
                                    sum(EATtar_kfo15_2(EAT_mtargets15_2,kfo2), p15_intake_detail(t,iso,kfo2))) = 0) =
                                    p15_intake_detail(t,iso,kfo) + 1e-6;
-* FELI: Check whether this is still necessary when the targets are split
 
-* To Do: transform i15_intake_detailed_scen_target and i15_intake_scen_target and p15_intake_detail
-* to grams using
-
-*' The single targets can also be set manually via switches
+*' The single targets can be set manually via switches
 *' (e.g., s15_exo_ruminant, s15_exo_fish, etc.).
 
-*' upper bound for chicken and eggs
-    if (s15_exo_poultry = 1,
+*' upper bound for monogastric products
+    if (s15_exo_monogastric = 1,
 * upper bound for eggs
       i15_intake_detailed_scen_target(t,iso,"livst_egg")$(p15_intake_detail(t,iso,"livst_egg")
                                                                > i15_rec_EATLancet(iso,"t_livst_egg","max")
                                                             ) =
              i15_rec_EATLancet(iso,"t_livst_egg","max");
-
 * upper bound for chicken
       i15_intake_detailed_scen_target(t,iso,"livst_chick")$(p15_intake_detail(t,iso,"livst_chick")
-                                                              > i15_rec_EATLancet(iso,"t_livst_chick","max")
+                                                             > i15_rec_EATLancet(iso,"t_livst_chick","max")
+                                                          ) =
+           i15_rec_EATLancet(iso,"t_livst_chick","max");
+* upper bound for redmeat (share of pigs in redmeat)
+      i15_intake_detailed_scen_target(t,iso,"livst_pig")$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
+                                                              > i15_rec_EATLancet(iso,"t_redmeat","max")
                                                            ) =
-            i15_rec_EATLancet(iso,"t_livst_chick","max");
+            (p15_intake_detail(t,iso,"livst_pig") / sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2)))
+               * i15_rec_EATLancet(iso,"t_redmeat","max");
        );
 
-*' upper bound for redmeat and milk
-    if (s15_exo_redmeatdairy = 1,
+*' upper bound for ruminant products
+    if (s15_exo_ruminant = 1,
 * upper bound for redmeat (pig and ruminant)
-      i15_intake_detailed_scen_target(t,iso,EAT_redmeat15)$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
+      i15_intake_detailed_scen_target(t,iso,"livst_rum")$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
                                                                > i15_rec_EATLancet(iso,"t_redmeat","max")
                                                             ) =
-             (p15_intake_detail(t,iso,EAT_redmeat15) / sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2)))
+             (p15_intake_detail(t,iso,"livst_rum") / sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2)))
                 * i15_rec_EATLancet(iso,"t_redmeat","max");
 * upper bound for milk
       i15_intake_detailed_scen_target(t,iso,"livst_milk")$(p15_intake_detail(t,iso,"livst_milk")
@@ -574,6 +575,7 @@ elseif s15_exo_diet = 3,
 *' There is no explicit target for brans in the EATLancet recommendations.
 *' It is therefore set to 0.
 *** BENNI: Why was this decided in the previous implementation? My approach would have been to keep it at the current level or including it as part of staples.
+*** To Do: exclude from both old and new (as last step when approval for the rest of the implementation by Benni/Isabelle)
     if (s15_exo_brans = 1,
        i15_intake_detailed_scen_target(t,iso,"brans") = 0;
        );
@@ -582,10 +584,6 @@ elseif s15_exo_diet = 3,
     if (s15_exo_scp = 1,
        i15_intake_detailed_scen_target(t,iso,"scp") = 0;
        );
-
-
-* To Do: transform i15_intake_detailed_scen_target and i15_intake_scen_target and p15_intake_detail
-* back to kcal using i15_protein_to_kcal_ratio
 
 *** Balancing calorie requirements ***
 *' After all calorie recommendations for non-staple food groups are satisfied,
@@ -597,11 +595,8 @@ elseif s15_exo_diet = 3,
     (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)))
      * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
 
-display i15_intake_detailed_scen_target;
-
-**** FELI: Check whether it gets negative... And come up with solution for fixing this... (Maybe via positive declaration / setting everyting that's negative to 0?)
-* BENNI: What if EATLancet leads to too much calories? Just allow higher values?
-* JAN: Can a parameter be declared as positive? Or only variables?
+  if (i15_intake_detailed_scen_target(t,iso,EAT_staples) < 0, abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.", i15_intake_detailed_scen_target(t,iso,EAT_staples););
+* JAN: Is there if(any(x)) in GAMS? Or does this above check for each individual and therefore is a if any?
 
 );
 *** End of MAgPIE-specific realization of the EAT Lancet diet
@@ -615,8 +610,6 @@ display i15_intake_detailed_scen_target;
 
   p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) = p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) * (1-i15_exo_foodscen_fader(t,iso))
                       + p15_bmi_shr_target(t,iso,sex,age,bmi_group15) * i15_exo_foodscen_fader(t,iso);
-
-display p15_intake_detail;
 
 );
 *** End of special postprocessing food demand scenarios.
