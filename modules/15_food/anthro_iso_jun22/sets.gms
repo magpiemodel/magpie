@@ -174,7 +174,7 @@ sets
       / livst_pig, livst_egg, livst_chick /
   EAT_ruminants15(kfo) ruminant products
       / livst_milk, livst_rum /
-  EAT_redmeat15(kfo)
+  EAT_redmeat15(kfo) livstock products that are categorized as red meat
      / livst_rum, livst_pig /
   EAT_fruitvegnutseed15(kfo) vegetables fruits nuts seeds
       / rapeseed, sunflower, others /
