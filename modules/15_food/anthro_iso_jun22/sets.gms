@@ -204,7 +204,6 @@ sets
           livst_rum, livst_pig, livst_chick, livst_egg, livst_milk, fish,
           others /
 
-* Isabelle's code:
 EAT_targettype15 Minimum or maximum target type of the EAT Lancet recommendations
     / min, max /
 
