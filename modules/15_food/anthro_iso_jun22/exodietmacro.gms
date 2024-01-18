@@ -595,8 +595,10 @@ elseif s15_exo_diet = 3,
     (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)))
      * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
 
-  if (i15_intake_detailed_scen_target(t,iso,EAT_staples) < 0, abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.", i15_intake_detailed_scen_target(t,iso,EAT_staples););
-* JAN: Is there if(any(x)) in GAMS? Or does this above check for each individual and therefore is a if any?
+  if (smin((iso,EAT_staples), i15_intake_detailed_scen_target(t,iso,EAT_staples)) < 0,
+     abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
+     );
+
 
 );
 *** End of MAgPIE-specific realization of the EAT Lancet diet
