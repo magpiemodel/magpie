@@ -82,7 +82,7 @@ diet <- function(cfg) {
   cfg$gms$s15_alc_scen  <- 0               # No alcohol allowed as in the definition of EATLancet
   cfg$gms$c15_kcal_scen <- "healthy_BMI"   # default: not necessary to set it again (To Do: remove)
   cfg$gms$c15_EAT_scen  <- "FLX"           # default: not necessary to set it again (To Do: remove)
-  cfg$gms$s15_alc_scen  <- 0               # In EATLancet, no calories for alcohol. 
+  cfg$gms$s15_alc_scen  <- 0               # In EATLancet, no calories for alcohol.
   return(cfg)
 }
 
@@ -232,7 +232,7 @@ cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_PROD #
-#	Decomposition Scenario. Removed productivity trend from ELM
+# Decomposition Scenario. Removed productivity trend from ELM
 cfg$title <- "ELM_PROD"
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
@@ -242,7 +242,7 @@ cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_WAST #
-#	Decomposition Scenario. Removes FLW from ELM
+# Decomposition Scenario. Removes FLW from ELM
 cfg$title <- "ELM_WAST"
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
@@ -262,7 +262,7 @@ cfg <- miti(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_NoCC #
-#	Decomposition Scenario. Removes climate impacts (NoCC) from ELM
+# Decomposition Scenario. Removes climate impacts (NoCC) from ELM
 cfg$title <- "ELM_NoCC"
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
@@ -273,7 +273,7 @@ cfg <- noCC(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_MITI #
-#	Decomposition Scenario. Removes climate mitigation and LUC policies from ELM
+# Decomposition Scenario. Removes climate mitigation and LUC policies from ELM
 cfg$title <- "ELM_MITI"
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
