@@ -101,7 +101,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 
  q32_land_expansion(j2,type32) ..
     v32_land_expansion(j2,type32) =e= 
-    sum(ac_est, v32_land(j2,type32,ac_est)) - sum(ac_est, pc32_land(j2,type32,ac_est));
+    sum(ac_est, v32_land(j2,type32,ac_est));
 
  q32_land_reduction(j2,type32,ac_sub) ..
   v32_land_reduction(j2,type32,ac_sub) =e= pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub);
