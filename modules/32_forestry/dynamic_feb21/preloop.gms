@@ -274,18 +274,11 @@ p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0 AND sum((cell(i,j),ac),p32_la
 
 ** Initialze calibration factor for growing stocks as 1
 ** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later
-p32_gs_scaling_reg(i) = 1;
+pm_gs_forestry_scaling_reg(i) = 1;
 ** Calculate the ratio between target growing stock (reported by FAO) and observed growing stock (value at initialization in MAgPIE)
-p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
+pm_gs_forestry_scaling_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 ** Calibration factors lower than 1 are set to 1
-p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
-
-** Save pm_carbon_density_ac_forestry in a parameter before upscaling to FAO growing stocks.
-** This allows to use plantation growth curves for CO2 price driven afforestation.
-p32_c_density_ac_fast_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
-
-** Update c-density for timber plantations based on calibration factor to match FAO growing stocks
-pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+pm_gs_forestry_scaling_reg(i)$(pm_gs_forestry_scaling_reg(i) < 1) = 1;
 
 ** set bii coefficients
 p32_bii_coeff(type32,bii_class_secd,potnatveg) = 0;

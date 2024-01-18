@@ -49,7 +49,7 @@ parameters
  p32_aff_bgp(j,ac)                                  Biophysical impact of afforestation (tCeq per ha)
  p32_tcre_glo(j)                                    Global mean Transient Climate Response to cumulative Emissions (degree C per tC per ha)
  p32_observed_gs_reg(i)                             Observed growing stock (tDM per ha)
- p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
+ pm_gs_forestry_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
  p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
  p32_updated_gs_reg(t,i)                            Updated growing stock information after calibration (m3 per ha)
  p32_plantation_contribution(t_ext,i)               Share of roundwood production coming from timber plantations (percent)
@@ -57,7 +57,6 @@ parameters
  p32_ac_dist(j,ac)                                  Actual share of age-class distribution (1)
  p32_avg_increment(t_all,j,ac)                      Mean annual increment (tC per ha per year)
  p32_bii_coeff(type32,bii_class_secd,potnatveg)     bii coeff (1)
- p32_c_density_ac_fast_forestry(t_all,j,ac)         Carbon densities in plantations based on Braakhekke et al (tC per ha)
  p32_disturbance_loss_ftype32(t,j,type32,ac)        Loss due to disturbances in all plantation type forests (mio. ha)
  pcm_land_forestry(j,type32)                        Forestry land pools (mio. ha)
 ;

@@ -30,7 +30,7 @@ parameters
  p35_updated_gs_natfor(t,i)                       Updated growing stock in natural forests after calibration (m3 per ha)
  p35_land_start_ac(j,ac,land_natveg)              Initial Natural vegetation area (mio. ha)
  p35_observed_gs_reg(i)                           Observed growing stock in natural forests before calibration (m3 per ha)
- p35_gs_scaling_reg(i)                            Regional calibration factors for natural vegetation yields (1)
+ pm_gs_natveg_scaling_reg(i)                            Regional calibration factors for natural vegetation yields (1)
  p35_protection_dist(j,ac)                        Distribution of secondary forest protection (1)
  p35_land_restoration(j,land_natveg)              Actual secondary forest and other land restoration area (mio. ha)
 ;
