@@ -123,7 +123,7 @@ elseif s32_hvarea = 2,
 ** The offset is needed because the first element of ac is ac0, which is not included in p32_rotation_cellular_harvesting.
   v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
 ** After the rotation period, plantations are free for harvesting
-  v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+  v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
   s32_establishment_static = 0;
   s32_establishment_dynamic = 1;
 );

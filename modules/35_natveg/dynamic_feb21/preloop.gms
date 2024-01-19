@@ -74,7 +74,7 @@ p35_gs_scaling_reg(i) = 1;
 p35_gs_scaling_reg(i)$(f35_gs_relativetarget(i)>0 AND p35_observed_gs_reg(i)>0) = f35_gs_relativetarget(i) / p35_observed_gs_reg(i);
 
 ** Update c-densitiy based on calibration factor for growing stocks
-pm_carbon_density_ac(t_all,j,ac,"vegc") = pm_carbon_density_ac(t_all,j,ac,"vegc") * sum(cell(i,j),p35_gs_scaling_reg(i));
+*pm_carbon_density_ac(t_all,j,ac,"vegc") = pm_carbon_density_ac(t_all,j,ac,"vegc") * sum(cell(i,j),p35_gs_scaling_reg(i));
 
 * -----------------------------
 * Set forest damage trajectory
