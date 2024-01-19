@@ -46,6 +46,9 @@ $ifthen "%c73_wood_scen%" == "construction"
 p73_timber_demand_gdp_pop(t_all,i,"wood") = p73_timber_demand_gdp_pop(t_all,i,"wood") * f73_demand_modifier(t_all,"%c73_wood_scen%");
 $endif
 
+*Temporary bugfix for MEA; has to be moved to pre-processing!
+p73_timber_demand_gdp_pop(t_all,"MEA","woodfuel") = p73_timber_demand_gdp_pop(t_all,"MEA","woodfuel") * 0.5;
+
 ** Convert to tDM from mio m3
 ** p73_timber_demand_gdp_pop is in mio m^3
 ** pm_demand_ext in mio ton DM
