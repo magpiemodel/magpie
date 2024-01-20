@@ -122,8 +122,8 @@ elseif s32_hvarea = 2,
 ** Fix timber plantations until the end of the rotation. "ac.off" identical to "ord(ac)-1".
 ** The offset is needed because the first element of ac is ac0, which is not included in p32_rotation_cellular_harvesting.
   v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
-** After the rotation period, timber plantations are harvested to avoid unrealistic carbon storage in timber plantations.
-  v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
+** After the rotation period, plantations are free for harvesting
+  v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
   s32_establishment_static = 0;
   s32_establishment_dynamic = 1;
 );
