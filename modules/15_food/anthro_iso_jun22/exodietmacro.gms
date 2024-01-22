@@ -457,11 +457,11 @@ elseif s15_exo_diet = 3,
 *** Special case: Fruits, vegetables and nuts ***
 *' In MAgPIE fruits, vegetables and nuts are combined in the 'other' food category;
 *' Bananas and plantains are included in the 'cassav_sp' category.
-*' The f15_fruitveg2others_kcal_ratio gives the regional average historical share
+*' The f15_fruitveg2others_kcal_ratio gives the country-level historical share
 *' (fixed into the future based on last historic year)
 *' of fruits and vegetables in these aggregate categories.
         if (sum(sameas(t_past,t),1) = 1,
-           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = sum(i_to_iso(i,iso), f15_fruitveg2others_kcal_ratio(t,i,EAT_special));
+           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t,iso,EAT_special);
         else
            i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = i15_fruitveg2others_kcal_ratio(t-1,iso,EAT_special);
         );
@@ -498,30 +498,40 @@ elseif s15_exo_diet = 3,
 *' Minimum recommendation for fruits and vegetables:
         i15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < i15_rec_EATLancet(iso,"t_fruitveg","min"))
             = i15_rec_EATLancet(iso,"t_fruitveg","min");
-*' Extract fruits and vegetables that are part of others categroy
-*  Note that starchy fruits are kept at the previously assigned maximum level
-*  and their amount has been added to cassav_sp already.
-        i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso);
 
 *' Minimum recommendation for nuts & seeds
-*' (a) nuts included in "others" counted towards EAT nuts & seeds category
+*' (a) nuts included in "others" count towards nuts & seeds EAT target,
+*' but they are scaled by the same amount as vegetables
+*' because in MAgPIE, they are represented by a uniform category.
         i15_intake_detailed_scen_nuts(t,iso)$((sum(kfo_seeds, p15_intake_detail(t,iso,kfo_seeds)) + p15_intake_detail_nuts(t,iso)
                                                    ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-         = (p15_intake_detail_nuts(t,iso) / (sum(kfo_seeds,p15_intake_detail(t,iso,kfo_seeds)) + p15_intake_detail_nuts(t,iso)))
-            * i15_rec_EATLancet(iso,"t_nutseeds","min")
+            = p15_intake_detail_nuts(t,iso) * (i15_intake_detailed_scen_fruitveg(t,iso) / (p15_intake_detail_fruitveg(t,iso))
           ;
-*' (b) seeds (rapeseed, sunflower):
-        i15_intake_detailed_scen_target(t,iso,kfo_seeds)$((sum(kfo_seeds2,p15_intake_detail(t,iso,kfo_seeds2)) + p15_intake_detail_nuts(t,iso)
+*** BENNI: It is not scaled up if the nuts target is fulfilled. Is this correct? That way we lose the 1:1 connection of nuts and fruits&vegetables, but otherwise we would potentially overfulfill nuts.
+*** Note: It could even already be overfulfilled by this method, right? I would ensure that we don't overfulfill by this equation: (Makes sense to you?)
+        i15_intake_detailed_scen_nuts(t,iso)$(i15_intake_detailed_scen_nuts(t,iso) > i15_rec_EATLancet(iso,"t_nutseeds","min"))
+            = i15_rec_EATLancet(iso,"t_nutseeds","min");
+
+*' (b) seeds (rapeseed, sunflower) are scaled up towards the EAT target if scaling
+*' of nuts in others was not sufficient to meet the nuts target.
+        i15_intake_detailed_scen_target(t,iso,kfo_seeds)$((sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2)) + i15_intake_detailed_scen_nuts(t,iso)
                                                         ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-          = (p15_intake_detail(t,iso,kfo_seeds) / (sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2)) + p15_intake_detail_nuts(t,iso)))
-             * i15_rec_EATLancet(iso,"t_nutseeds","min")
-          ;
+                    = p15_intake_detail(t,iso,kfo_seeds) / (sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2)))
+                       * (i15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts)
+                    ;
+
 *' (c) For model-internal reasons, MAgPIE considers the peanuts target separate from the other nuts & seeds
 *** BENNI: Can you replace "model-internal reasons" with a short explanation why we went for the solution to separate peanuts from nuts?
         i15_intake_detailed_scen_target(t,iso,"groundnut")$(p15_intake_detail(t,iso,"groundnut")
                                                            < i15_rec_EATLancet(iso,"t_peanuts","min")
                                                        ) =
               i15_rec_EATLancet(iso,"t_peanuts","min");
+
+*' Extract fruits and vegetables that are part of others categroy
+*  Note that starchy fruits are kept at the previously assigned maximum level
+*  and their amount has been added to cassav_sp already.
+        i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso);
+*** BENNI: Please double check whether the starchyfruit should be subtracted here or before the nut treatment happens.
 
 *' The resulting intake of the "others" category is:
         i15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
