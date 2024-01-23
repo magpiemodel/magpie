@@ -9,9 +9,9 @@
 *'
 *' @description The peatland module calculates GHG emissions from degrading/drained peatlands.
 *'
-*' @authors Florian Humpenöder
+*' @authors Florian Humpenöder, Debbora Leip
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%peatland%" == "off" $include "./modules/58_peatland/off/realization.gms"
-$Ifi "%peatland%" == "on" $include "./modules/58_peatland/on/realization.gms"
+$Ifi "%peatland%" == "v2" $include "./modules/58_peatland/v2/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

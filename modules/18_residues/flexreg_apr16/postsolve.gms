@@ -10,6 +10,7 @@
 *** EOF postsolve.gms ***
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
+ ov18_prod_res(t,j,kres,"marginal")                    = v18_prod_res.m(j,kres);
  ov_res_biomass_ag(t,i,kcr,w,attributes,"marginal")      = vm_res_biomass_ag.m(i,kcr,w,attributes);
  ov_res_biomass_bg(t,i,kcr,w,dm_cnr,"marginal")          = vm_res_biomass_bg.m(i,kcr,w,dm_cnr);
  ov18_res_ag_removal(t,i,kcr,w,attributes,"marginal")    = v18_res_ag_removal.m(i,kcr,w,attributes);

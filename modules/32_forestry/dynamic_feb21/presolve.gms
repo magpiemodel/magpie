@@ -92,6 +92,7 @@ pc32_land(j,type32,ac) = v32_land.l(j,type32,ac);
 p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
+pcm_land_forestry(j,type32) =  sum(ac, v32_land.l(j,type32,ac));
 
 ** reset all bounds
 v32_land.lo(j,type32,ac) = 0;

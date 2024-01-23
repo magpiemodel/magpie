@@ -1,5 +1,11 @@
 name, type, reason
 vm_land, input, not used
 pcm_land, input, not used
+vm_land_forestry, input, not used
+pcm_land_forestry, input, not used
 pm_interest, input, not used
 pm_climate_class, input, not used
+vm_landexpansion, input, not used
+vm_landreduction, input, not used
+vm_landexpansion_forestry, input, not used
+vm_landreduction_forestry, input, not used
