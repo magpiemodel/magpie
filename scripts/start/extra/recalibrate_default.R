@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new land conversion cost calibration factors for default setup (time consuming; up to 40 model runs with 1 or 5 time steps)
+# description: calculate and store new land conversion cost calibration factors for default setup (time consuming; up to 40 model runs with 5 time steps)
 # --------------------------------------------------------
 
 library(magpie4)
@@ -18,13 +18,8 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
-
-cfg$recalibrate_landconversion_cost <- TRUE
-cfg$best_calib_landconversion_cost <- FALSE
-
-cfg$recalibrate <- "ifneeded"
-cfg$gms$c_timesteps <- 5
-cfg$sequential <- TRUE
+cfg$recalibrate <- FALSE
+cfg$recalibrate_landconversion_cost <- "ifneeded"
 cfg$title <- "calib_run"
 cfg$output <- c("rds_report","validation_short")
 cfg$force_replace <- TRUE
