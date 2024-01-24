@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** update input data to rev 4.96 
 - **default.cfg** changed default for `cfg$gms$s56_buffer_aff` from 0.2 to 0.5
 - **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
+- **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
 
 ### added
 - **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
@@ -36,6 +37,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg** bugfixes ac_est
 - **35_natveg** removed scaling of pm_carbon_density_ac
 - **52_carbon** bugfix acx long-term carbon density
+- **32_forestry** keep c-density for timber plantations constant after rotation length to avoid unrealistic carbon sequestration in unharvested timber plantation
+- **32_forestry** bugfix unit p32_observed_gs_reg
 
 ## [4.7.0] - 2023-12-11
 
