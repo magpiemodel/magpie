@@ -11,7 +11,7 @@ i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hard
 loop(t_all$(m_year(t_all)>=2015),
 i21_trade_bal_reduction(t_all,"wood") = i21_trade_bal_reduction(t_all,"wood") * s21_trade_bal_damper;
 );
-i21_trade_bal_reduction(t_all,"woodfuel") = i21_trade_bal_reduction(t_all,"wood");
+*i21_trade_bal_reduction(t_all,"woodfuel") = i21_trade_bal_reduction(t_all,"wood");
 
 i21_trade_margin(h,k_trade) = f21_trade_margin(h,k_trade);
 
