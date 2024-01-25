@@ -53,7 +53,7 @@ gms$c55_scen_conf_noselect;;;;ssp1;ssp2;ssp2;ssp3;ssp4;ssp5;ssp1;ssp1;ssp1;ssp1;
 gms$c56_pollutant_prices;;;;;;;;;;;;;;;;;coupling;emulator;coupling;;;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;;;;;;;;;;;;;;;;;;;
 gms$c56_pollutant_prices_noselect;;;;;;;;;;;;;;;;;coupling;emulator;coupling;;;R21M42-SDP-NPi;R21M42-SDP-NPi;R21M42-SDP-NPi;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;;;;;;;;;;;;;;;;;;;
 gms$s56_c_price_exp_aff;;;;50;50;50;50;50;50;50;30;50;50;;;;;;;50;;;;;;;;;;;;;;;;;;;;;;;;;
-gms$s56_buffer_aff;;;;0.2;0.2;0.2;0.2;0.2;0.2;0.2;0.5;0.2;0.3;;;;;;;0.2;;;;;;;;;;;;;;;;;;;;;;;;;
+gms$s56_buffer_aff;;;;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.2;0.3;;;;;;;0.5;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c56_emis_policy;;;;reddnatveg_nosoil;reddnatveg_nosoil;reddnatveg_nosoil;reddnatveg_nosoil;reddnatveg_nosoil;reddnatveg_nosoil;reddnatveg_nosoil;reddnatveg_nosoil;redd_nosoil;all_nosoil;;;;;;;reddnatveg_nosoil;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s56_minimum_cprice;;;;;;;;;;;;;;0;0;18;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$maccs;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
