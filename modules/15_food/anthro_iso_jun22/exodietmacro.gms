@@ -377,13 +377,15 @@ if (s15_exo_diet = 1,
     );
 
     i15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(sum(EAT_staples2_old, i15_intake_EATLancet(iso,EAT_staples2_old)) > 0) =
-            smax(0 , (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)))) *
+            (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old))) *
             (i15_intake_EATLancet(iso,EAT_staples_old) / sum(EAT_staples2_old, i15_intake_EATLancet(iso,EAT_staples2_old)))
             ;
 
 * Correction where calorie balancing would lead to negative i15_intake_detailed_scen_target values
-    i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)) < 0) =
-             i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old))
+    i15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old)) < 0) =
+                    0;
+    i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old)) < 0) =
+             i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old))
                     ;
 *** BENNI / JAN: Please double check: The correction is the same as above commented out code
 * The purpose is to correct cases where the EATLancet diet lead to more consumption than allowed by calorie target and staple balancing not sufficient to bring it down.
@@ -623,12 +625,14 @@ display i15_intake_detailed_scen_target;
 *' Note that brans do not have an EAT Lancet target and are kept at their
 *' original level.
   i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)) > 0) =
-      smax(0, (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples))))
+      (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)))
        * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
 
 * Correction where calorie balancing would lead to negative i15_intake_detailed_scen_target values
-  i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)) < 0) =
-         i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) / sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples));
+  i15_intake_detailed_scen_target(t,iso,EAT_staples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
+         0;
+  i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
+         i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) / sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2));
 
   if (smin((iso,kfo), i15_intake_detailed_scen_target(t,iso,kfo)) < 0,
      abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
