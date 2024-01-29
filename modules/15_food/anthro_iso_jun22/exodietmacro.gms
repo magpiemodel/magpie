@@ -316,8 +316,7 @@ $endif
   i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso) > 0) =
     p15_intake_detail(t,iso,kfo) / p15_intake_total(t,iso) * i15_intake_scen_target(t,iso);
 
-*** BENNI: Is this initiated correctly? (If p15_intake_total = 0, no value is written into i15_intake_detailed_scen_target. Is that a problem?)
-*  Am Ende fadet ja dann p15_intake_detail zu i15_intake_detailed_scen_target, d.h. wir müssen sicherstellen, dass in i15_intake_detailed_scen_target auch echt alles richtig drinsteht.
+  i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso) = 0) = 0;
 
 *' 2.) The second step defines the daily per capita intake of different food
 *' commodities.
@@ -381,6 +380,10 @@ if (s15_exo_diet = 1,
             (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old))) *
             (i15_intake_EATLancet(iso,EAT_staples_old) / sum(EAT_staples2_old,i15_intake_EATLancet(iso,EAT_staples2_old)))
             ;
+
+    if (smin((iso,EAT_staples_old), i15_intake_detailed_scen_target(t,iso,EAT_staples_old)) < 0,
+       abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
+       );
 
 * VARTIKA: What about s15_exo_diet = 2?
 * Can this be transformed to the new diet implementation? Did you have target values there?
@@ -505,7 +508,7 @@ elseif s15_exo_diet = 3,
 *' because in MAgPIE, they are represented by a uniform category.
         i15_intake_detailed_scen_nuts(t,iso)$((sum(kfo_seeds, p15_intake_detail(t,iso,kfo_seeds)) + p15_intake_detail_nuts(t,iso)
                                                    ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-            = p15_intake_detail_nuts(t,iso) * (i15_intake_detailed_scen_fruitveg(t,iso) / (p15_intake_detail_fruitveg(t,iso))
+            = p15_intake_detail_nuts(t,iso) * i15_intake_detailed_scen_fruitveg(t,iso) / p15_intake_detail_fruitveg(t,iso)
           ;
 *** BENNI: It is not scaled up if the nuts target is fulfilled. Is this correct? That way we lose the 1:1 connection of nuts and fruits&vegetables, but otherwise we would potentially overfulfill nuts.
 *** Note: It could even already be overfulfilled by this method, right? I would ensure that we don't overfulfill by this equation: (Makes sense to you?)
@@ -516,8 +519,8 @@ elseif s15_exo_diet = 3,
 *' of nuts in others was not sufficient to meet the nuts target.
         i15_intake_detailed_scen_target(t,iso,kfo_seeds)$((sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2)) + i15_intake_detailed_scen_nuts(t,iso)
                                                         ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-                    = p15_intake_detail(t,iso,kfo_seeds) / (sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2)))
-                       * (i15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts)
+                    = p15_intake_detail(t,iso,kfo_seeds) / sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2))
+                       * (i15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts(t,iso))
                     ;
 
 *' (c) For model-internal reasons, MAgPIE considers the peanuts target separate from the other nuts & seeds
