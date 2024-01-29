@@ -547,9 +547,9 @@ display i15_intake_detailed_scen_target;
         i15_intake_detailed_scen_target(t,iso,kfo_seeds)$(i15_intake_detailed_scen_target(t,iso,kfo_seeds) < 0) = 0;
 
 * Just to make sure. Can probably be deleted after testing (Just included because I removed the if conditions above as suggested by Benni)
-        if ((sum(kfo_seeds, i15_intake_detailed_scen_target(t,iso,kfo_seeds)) + i15_intake_detailed_scen_nuts(t,iso)) < i15_rec_EATLancet(iso,"t_nutseeds","min"),
-           abort "The nuts target is not fulfilled. Please make sure enough nuts and seeds are consumed";
-        );
+*        if ((sum(kfo_seeds, i15_intake_detailed_scen_target(t,iso,kfo_seeds)) + i15_intake_detailed_scen_nuts(t,iso)) < i15_rec_EATLancet(iso,"t_nutseeds","min"),
+*           abort "The nuts target is not fulfilled. Please make sure enough nuts and seeds are consumed";
+*        );
 
 *' (c) For model-internal reasons, MAgPIE considers the peanuts target separate from the other nuts & seeds
 *** BENNI: Can you replace "model-internal reasons" with a short explanation why we went for the solution to separate peanuts from nuts even though the EATLancet 2 recommendation is having it as one nuts target?
