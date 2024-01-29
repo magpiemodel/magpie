@@ -376,14 +376,24 @@ if (s15_exo_diet = 1,
         = s15_alc_scen*i15_intake_scen_target(t,iso);
     );
 
-    i15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(sum(EAT_staples2_old,i15_intake_EATLancet(iso,EAT_staples2_old)) > 0) =
-            (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old))) *
-            (i15_intake_EATLancet(iso,EAT_staples_old) / sum(EAT_staples2_old,i15_intake_EATLancet(iso,EAT_staples2_old)))
+    i15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(sum(EAT_staples2_old, i15_intake_EATLancet(iso,EAT_staples2_old)) > 0) =
+            smax(0 , (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)))) *
+            (i15_intake_EATLancet(iso,EAT_staples_old) / sum(EAT_staples2_old, i15_intake_EATLancet(iso,EAT_staples2_old)))
             ;
 
-    if (smin((iso,EAT_staples_old), i15_intake_detailed_scen_target(t,iso,EAT_staples_old)) < 0,
+* Correction where calorie balancing would lead to negative i15_intake_detailed_scen_target values
+    i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)) < 0) =
+             i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old))
+                    ;
+*** BENNI / JAN: Please double check: The correction is the same as above commented out code
+* The purpose is to correct cases where the EATLancet diet lead to more consumption than allowed by calorie target and staple balancing not sufficient to bring it down.
+*    i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)) < 0) =
+*            i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) + (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old))) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)
+*            ;
+
+    if (smin((iso,kfo), i15_intake_detailed_scen_target(t,iso,kfo)) < 0,
        abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
-       );
+    );
 
 * VARTIKA: What about s15_exo_diet = 2?
 * Can this be transformed to the new diet implementation? Did you have target values there?
@@ -502,42 +512,50 @@ elseif s15_exo_diet = 3,
         i15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < i15_rec_EATLancet(iso,"t_fruitveg","min"))
             = i15_rec_EATLancet(iso,"t_fruitveg","min");
 
-*' Minimum recommendation for nuts & seeds
-*' (a) nuts included in "others" count towards nuts & seeds EAT target,
-*' but they are scaled by the same amount as vegetables
-*' because in MAgPIE, they are represented by a uniform category.
-        i15_intake_detailed_scen_nuts(t,iso)$((sum(kfo_seeds, p15_intake_detail(t,iso,kfo_seeds)) + p15_intake_detail_nuts(t,iso)
-                                                   ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
-            = p15_intake_detail_nuts(t,iso) * i15_intake_detailed_scen_fruitveg(t,iso) / p15_intake_detail_fruitveg(t,iso)
-          ;
-*** BENNI: It is not scaled up if the nuts target is fulfilled. Is this correct? That way we lose the 1:1 connection of nuts and fruits&vegetables, but otherwise we would potentially overfulfill nuts.
-*** Note: It could even already be overfulfilled by this method, right? I would ensure that we don't overfulfill by this equation: (Makes sense to you?)
-        i15_intake_detailed_scen_nuts(t,iso)$(i15_intake_detailed_scen_nuts(t,iso) > i15_rec_EATLancet(iso,"t_nutseeds","min"))
-            = i15_rec_EATLancet(iso,"t_nutseeds","min");
+*' Extract fruits and vegetables that are part of others categroy
+*  Note that starchy fruits are kept at the previously assigned maximum level
+*  and their amount has been added to cassav_sp already.
+        i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso);
 
-*' (b) seeds (rapeseed, sunflower) are scaled up towards the EAT target if scaling
-*' of nuts in others was not sufficient to meet the nuts target.
-        i15_intake_detailed_scen_target(t,iso,kfo_seeds)$((sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2)) + i15_intake_detailed_scen_nuts(t,iso)
-                                                        ) < i15_rec_EATLancet(iso,"t_nutseeds","min"))
+*' Minimum recommendation for nuts & seeds
+*' (a) nuts included in "others"
+*' are scaled by the same amount as fruits and vegetables
+*' because the food group "others" is treated as homogenous food category
+        i15_intake_detailed_scen_nuts(t,iso)
+            = p15_intake_detail_nuts(t,iso) * i15_intake_detailed_scen_fruitveg(t,iso) / (p15_intake_detail_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso))
+          ;
+
+*' The resulting intake of the "others" category is:
+        i15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
+
+* Check (temporarily for testing)
+display i15_intake_detailed_scen_target;
+*' (b) seeds (rapeseed, sunflower) are scaled up or down towards the EAT target
+*' considering scaling of nuts in others.
+*' Note that the nuts in others count towards the EAT target
+        i15_intake_detailed_scen_target(t,iso,kfo_seeds)
                     = p15_intake_detail(t,iso,kfo_seeds) / sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2))
                        * (i15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts(t,iso))
                     ;
+* Check (temporarily for testing)
+display i15_intake_detailed_scen_target;
+
+* If seeds have been corrected downwards because nuts target already overfulfilled with nuts in others,
+* seed consumption is reduced to zero.
+        i15_intake_detailed_scen_target(t,iso,kfo_seeds)$(i15_intake_detailed_scen_target(t,iso,kfo_seeds) < 0) = 0;
+
+* Just to make sure. Can probably be deleted after testing (Just included because I removed the if conditions above as suggested by Benni)
+        if ((sum(kfo_seeds, i15_intake_detailed_scen_target(t,iso,kfo_seeds)) + i15_intake_detailed_scen_nuts(t,iso)) < i15_rec_EATLancet(iso,"t_nutseeds","min"),
+           abort "The nuts target is not fulfilled. Please make sure enough nuts and seeds are consumed";
+        );
 
 *' (c) For model-internal reasons, MAgPIE considers the peanuts target separate from the other nuts & seeds
-*** BENNI: Can you replace "model-internal reasons" with a short explanation why we went for the solution to separate peanuts from nuts?
+*** BENNI: Can you replace "model-internal reasons" with a short explanation why we went for the solution to separate peanuts from nuts even though the EATLancet 2 recommendation is having it as one nuts target?
         i15_intake_detailed_scen_target(t,iso,"groundnut")$(p15_intake_detail(t,iso,"groundnut")
                                                            < i15_rec_EATLancet(iso,"t_peanuts","min")
                                                        ) =
               i15_rec_EATLancet(iso,"t_peanuts","min");
 
-*' Extract fruits and vegetables that are part of others categroy
-*  Note that starchy fruits are kept at the previously assigned maximum level
-*  and their amount has been added to cassav_sp already.
-        i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso);
-*** BENNI: Please double check whether the starchyfruit should be subtracted here or before the nut treatment happens.
-
-*' The resulting intake of the "others" category is:
-        i15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
     );
 
 *' lower bound for legumes
@@ -605,13 +623,16 @@ elseif s15_exo_diet = 3,
 *' Note that brans do not have an EAT Lancet target and are kept at their
 *' original level.
   i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)) > 0) =
-    (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)))
-     * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
+      smax(0, (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples))))
+       * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
 
-  if (smin((iso,EAT_staples), i15_intake_detailed_scen_target(t,iso,EAT_staples)) < 0,
+* Correction where calorie balancing would lead to negative i15_intake_detailed_scen_target values
+  i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)) < 0) =
+         i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) / sum(EAT_nonstaples, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples));
+
+  if (smin((iso,kfo), i15_intake_detailed_scen_target(t,iso,kfo)) < 0,
      abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
      );
-
 
 );
 *** End of MAgPIE-specific realization of the EAT Lancet diet
