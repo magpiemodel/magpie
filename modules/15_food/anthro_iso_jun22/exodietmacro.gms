@@ -218,7 +218,7 @@ if (s15_run_diet_postprocessing = 1,
 *' exogenous PHDs, India-specific recommendations or model-internal intake estimates
 *' that hit the PHD targets by setting the switch `s15_exo_diet` to 1, 2 or 3.
 
-if ((s15_exo_diet > 0),
+if (s15_exo_diet > 0,
 
 *' 1.) In a first step, the exogenous scenario diets are defined by selecting a
 *' scenario target for total daily per capita food intake
@@ -387,11 +387,6 @@ if (s15_exo_diet = 1,
     i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old)) < 0) =
              i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old))
                     ;
-*** BENNI / JAN: Please double check: The correction is the same as above commented out code
-* The purpose is to correct cases where the EATLancet diet lead to more consumption than allowed by calorie target and staple balancing not sufficient to bring it down.
-*    i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)) < 0) =
-*            i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) + (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old))) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)
-*            ;
 
     if (smin((iso,kfo), i15_intake_detailed_scen_target(t,iso,kfo)) < 0,
        abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
@@ -530,8 +525,6 @@ elseif s15_exo_diet = 3,
 *' The resulting intake of the "others" category is:
         i15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
 
-* Check (temporarily for testing)
-display i15_intake_detailed_scen_target;
 *' (b) seeds (rapeseed, sunflower) are scaled up or down towards the EAT target
 *' considering scaling of nuts in others.
 *' Note that the nuts in others count towards the EAT target
@@ -539,8 +532,6 @@ display i15_intake_detailed_scen_target;
                     = p15_intake_detail(t,iso,kfo_seeds) / sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2))
                        * (i15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts(t,iso))
                     ;
-* Check (temporarily for testing)
-display i15_intake_detailed_scen_target;
 
 * If seeds have been corrected downwards because nuts target already overfulfilled with nuts in others,
 * seed consumption is reduced to zero.
@@ -632,7 +623,8 @@ display i15_intake_detailed_scen_target;
   i15_intake_detailed_scen_target(t,iso,EAT_staples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
          0;
   i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
-         i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) / sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2));
+         i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) /
+         sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2));
 
   if (smin((iso,kfo), i15_intake_detailed_scen_target(t,iso,kfo)) < 0,
      abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";

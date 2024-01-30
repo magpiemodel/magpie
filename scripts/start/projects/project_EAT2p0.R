@@ -119,13 +119,14 @@ waste <- function(cfg) {
 # where miti is active.
 # Reference: Humpenöder, F., Popp, A., Merfort, L., Luderer, G., Weindl, I., Bodirsky, B., Stevanović, M., Klein, D., Rodrigues, R., Bauer, N., Dietrich, J., Lotze-Campen, H., & Rockström, J. (2023). Data repository - Dietary shifts increase the feasibility of 1.5°C pathways (Version 1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.8328217
 miti <- function(cfg) {
+  # NDCs
+  cfg <- setScenario(cfg, c("SSP2", "NDC"))
+
   # Mitigation: consistent with 1.5C
   cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/florianh/projects/paper/LandEnergy/modelrunsGrassland7/remind/output/C_SSP2EU-PkBudg500-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/florianh/projects/paper/LandEnergy/modelrunsGrassland7/remind/output/C_SSP2EU-PkBudg500-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
-
-# Switch on NDCs?
 
   return(cfg)
 }
