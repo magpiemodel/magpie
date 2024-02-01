@@ -48,7 +48,7 @@ parameters
  pm_representative_rotation(t_all,i)                Representative regional rotation (1)
  p32_aff_bgp(j,ac)                                  Biophysical impact of afforestation (tCeq per ha)
  p32_tcre_glo(j)                                    Global mean Transient Climate Response to cumulative Emissions (degree C per tC per ha)
- p32_observed_gs_reg(i)                             Observed growing stock (tDM per ha)
+ p32_observed_gs_reg(i)                             Observed growing stock (m3 per ha)
  p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
  p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
  p32_updated_gs_reg(t,i)                            Updated growing stock information after calibration (m3 per ha)

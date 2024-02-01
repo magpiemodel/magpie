@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **15_food** Added improved EAT Lancet diet implementation
+- **15_food** Added improved EAT Lancet diet implementation (EAT 2p0)
+- **default.cfg** update input data to rev 4.98
 - **start_functions** Check if cfg$recalibrate is consistent with cfg$gms$s14_use_yield_calib
 - **31_past** in grasslands_apr22 realization: changed structure of f31_pastr_suitability to align with ssp-rcp specific input data formulation. Changed input filename from cs3 to cs2. Added `cc`, `nocc` and `nocc_hist` options for `i31_manpast_suit` and changed input gams code from table to parameter. Climate scenario assignment moved from preloop.gms to input.gms. Removed pastSuit set in sets.gms as not needed anymore. Adjusted not_used.txt in both grasslands_apr22 and static realizations.
 - **default.cfg** Default for cfg$gms$peatland changed from `on` to `v2`
@@ -17,7 +18,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** settings for cfg$gms$s35_secdf_distribution in `ForestryEndo` and `ForestryExo` changed from `2` to `0`
 - **scenario_config.csv** removed erroneous setting `cc` from column `input`
 - **default.cfg** update default `cfg$gms$c56_pollutant_prices` and `cfg$gms$c60_2ndgen_biodem` to `R32M46-SSP2EU-NPi`
-- **default.cfg** update input data to rev 4.97
+- **default.cfg** update input data to rev 4.96
+- **default.cfg** changed default for `cfg$gms$s56_buffer_aff` from 0.2 to 0.5
+- **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
+- **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
 
 ### added
 - **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
@@ -33,7 +37,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** Fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
 - **scripts** bugfix highres.R for bioenergy demand and GHG prices in coupled runs
 - **35_natveg** bugfixes ac_est
-
+- **35_natveg** removed scaling of pm_carbon_density_ac
+- **52_carbon** bugfix acx long-term carbon density
+- **32_forestry** keep c-density for timber plantations constant after rotation length to avoid unrealistic carbon sequestration in unharvested timber plantation
+- **32_forestry** bugfix unit p32_observed_gs_reg
 
 ## [4.7.0] - 2023-12-11
 
