@@ -381,6 +381,8 @@ if (s15_exo_diet = 1,
             (i15_intake_EATLancet(iso,EAT_staples_old) / sum(EAT_staples2_old, i15_intake_EATLancet(iso,EAT_staples2_old)))
             ;
 
+display i15_intake_detailed_scen_target;
+
 * Correction where calorie balancing would lead to negative i15_intake_detailed_scen_target values
     i15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old)) < 0) =
                     0;
@@ -609,6 +611,8 @@ elseif s15_exo_diet = 3,
   i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)) > 0) =
       (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)))
        * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
+
+display i15_intake_detailed_scen_target;
 
 * Correction where calorie balancing would lead to negative i15_intake_detailed_scen_target values
   i15_intake_detailed_scen_target(t,iso,EAT_staples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
