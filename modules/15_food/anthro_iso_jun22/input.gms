@@ -102,7 +102,7 @@ scalar s15_exo_redmeatdairy Exogenous EAT Lancet animal product target on  (1) /
 scalar s15_exo_monogastric Exogenous EAT Lancet animal product target on  (1) / 1 /;
 scalar s15_exo_ruminant Exogenous EAT Lancet animal product target on  (1) / 1 /;
 scalar s15_exo_fish Exogenous EAT Lancet animal product target on  (1) / 1 /;
-scalar s15_exo_fruitvegnut Exogenous EAT Lancet fruit vegetable nut seeds target on  (1) / 1 /;
+scalar s15_exo_fruitvegnutroots Exogenous EAT Lancet fruit vegetable nut seeds target on  (1) / 1 /;
 scalar s15_exo_pulses Exogenous pulses target on  (1) / 1 /;
 scalar s15_exo_sugar Exogenous sugar target on  (1) / 1 /;
 scalar s15_exo_oils Exogenous oils (1) / 1 /;

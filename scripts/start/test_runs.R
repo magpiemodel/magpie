@@ -54,7 +54,6 @@ for(ssp in c("SSP1","SSP2EU","SSP5")) {
   cfg$title <- .title(cfg, paste(ssp,"NDC",sep="-"))
   cfg <- setScenario(cfg,c(ssp,"NDC","rcp4p5"))
   cfg$gms$c56_mute_ghgprices_until <- "y2150"
-# Input for NDC from R32M46 is not available, therefore NPi is used.
   cfg$gms$c56_pollutant_prices <- paste0("R32M46-",ssp,"-NDC")
   cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-",ssp,"-NDC")
   start_run(cfg, codeCheck = FALSE)
@@ -84,4 +83,3 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 cfg <- fsecScenario(scenario = "e_FSDP")
 cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
-

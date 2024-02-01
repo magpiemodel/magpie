@@ -212,23 +212,26 @@ EAT_targets15 Food groups as well as individual foods for which EAT Lancet targe
        t_roots, t_redmeat,
        t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
 
-EAT_mtargets15(EAT_targets15) EAT Lancet food targets where direct mapping to MAgPIE categories is possible
-     / t_redmeat, t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+EAT_mtargets15(EAT_targets15) EAT Lancet food targets mapping to MAgPIE categories
+     / t_redmeat, t_legumes, t_nutseeds, t_roots, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
 
 EAT_special MAgPIE food groups that need special treatment with respect to fruit ratio
      / cassav_sp, others /
 
-
+* Note: It is not a 1 to 1 mapping. For certain groups (e.g., others, cassav_sp,
+* there are special rules in exodietmacro.gms)
 EATtar_kfo15(EAT_mtargets15,kfo) Mapping between EAT Lancet food targets and MAgPIE categories
-     / t_redmeat           . (livst_rum, livst_pig, scp)
-       t_legumes           . (puls_pro, soybean, groundnut)
-       t_fish              . (fish)
-       t_livst_chick       . (livst_chick)
-       t_livst_egg         . (livst_egg)
-       t_livst_milk        . (livst_milk)
-       t_sugar             . (sugar)
-       t_oils              . (oils)
-     /
+    / t_redmeat           . (livst_rum, livst_pig)
+      t_legumes           . (puls_pro, soybean)
+      t_nutseeds          . (rapeseed, sunflower, groundnut)
+      t_roots             . (cassav_sp, potato)
+      t_fish              . (fish)
+      t_livst_chick       . (livst_chick)
+      t_livst_egg         . (livst_egg)
+      t_livst_milk        . (livst_milk)
+      t_sugar             . (sugar)
+      t_oils              . (oils)
+    /
 
 ;
 

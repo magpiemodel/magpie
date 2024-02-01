@@ -349,7 +349,7 @@ if (s15_exo_diet = 1,
     if (s15_exo_fish=1,
         i15_intake_detailed_scen_target(t,iso,"fish") = i15_intake_EATLancet(iso,"fish"));
 *' lower bound for fruits, veggies, nuts and seeds
-    if (s15_exo_fruitvegnut=1,
+    if (s15_exo_fruitvegnutroots=1,
       i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15)$(i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15) < i15_intake_EATLancet(iso,EAT_fruitvegnutseed15))
       = i15_intake_EATLancet(iso,EAT_fruitvegnutseed15));
 *' lower bound for pulses
@@ -463,7 +463,7 @@ elseif s15_exo_diet = 3,
 
 *' lower bound for fruits, veggies, nuts and seeds
 *' and upper bound for starchy fruits and roots
-    if (s15_exo_fruitvegnut = 1,
+    if (s15_exo_fruitvegnutroots = 1,
 *** Special case: Fruits, vegetables and nuts ***
 *' In MAgPIE fruits, vegetables and nuts are combined in the 'other' food category;
 *' Bananas and plantains are included in the 'cassav_sp' category.
@@ -518,7 +518,7 @@ elseif s15_exo_diet = 3,
 *' (a) nuts included in "others"
 *' are scaled by the same amount as fruits and vegetables
 *' because the food group "others" is treated as homogenous food category
-        i15_intake_detailed_scen_nuts(t,iso)
+        i15_intake_detailed_scen_nuts(t,iso)$(p15_intake_detail_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso) > 0)
             = p15_intake_detail_nuts(t,iso) * i15_intake_detailed_scen_fruitveg(t,iso) / (p15_intake_detail_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso))
           ;
 
@@ -528,17 +528,17 @@ elseif s15_exo_diet = 3,
 *' (b) remaining nuts (groundnut) and seeds (rapeseed, sunflower) are scaled
 *' up or down towards the EAT nuts target
 *' considering scaling of nuts in others.
-        i15_intake_detailed_scen_target(t,iso,kfo_ns)
-                    = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
+        i15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) > 0)
+                            = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
                        * (i15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts(t,iso))
                     ;
 
-*** ISABELLE: Please double-check whether I can remove the if condition here
+*** ISABELLE: Please double-check whether I can remove the if condition from the nuts target equations
 *** ($((sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)))
 *** Benni and my reasoning was that if the nuts in others (i15_intake_detailed_scen_nuts already over-fulfill the nuts and seeds target,
 *** it would be ok to correct the seeds and groundnuts down, too...)
 
-* If seeds have been corrected downwards because nuts target already overfulfilled with nuts in others,
+* If seeds have been corrected downwards below zero because nuts target already overfulfilled with nuts in others,
 * seed and groundnut consumption is reduced to zero.
         i15_intake_detailed_scen_target(t,iso,kfo_ns)$(i15_intake_detailed_scen_target(t,iso,kfo_ns) < 0) = 0;
 
@@ -590,9 +590,7 @@ elseif s15_exo_diet = 3,
         = s15_alc_scen * i15_intake_scen_target(t,iso);
       );
 *' There is no explicit target for brans in the EATLancet recommendations.
-*' It is therefore set to 0.
-*** BENNI: Why was this decided in the previous implementation? My approach would have been to keep it at the current level or including it as part of staples.
-*** To Do: exclude from both old and new (as last step when approval for the rest of the implementation by Benni/Isabelle)
+*' It is set to 0 when s15_exo_brans is activated.
     if (s15_exo_brans = 1,
        i15_intake_detailed_scen_target(t,iso,"brans") = 0;
        );
