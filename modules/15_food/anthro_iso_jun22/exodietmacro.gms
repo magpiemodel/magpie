@@ -525,29 +525,22 @@ elseif s15_exo_diet = 3,
 *' The resulting intake of the "others" category is:
         i15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
 
-*' (b) seeds (rapeseed, sunflower) are scaled up or down towards the EAT target
+*' (b) remaining nuts (groundnut) and seeds (rapeseed, sunflower) are scaled
+*' up or down towards the EAT nuts target
 *' considering scaling of nuts in others.
-*' Note that the nuts in others count towards the EAT target
-        i15_intake_detailed_scen_target(t,iso,kfo_seeds)
-                    = p15_intake_detail(t,iso,kfo_seeds) / sum(kfo_seeds2, p15_intake_detail(t,iso,kfo_seeds2))
+        i15_intake_detailed_scen_target(t,iso,kfo_ns)
+                    = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
                        * (i15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts(t,iso))
                     ;
 
+*** ISABELLE: Please double-check whether I can remove the if condition here
+*** ($((sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)))
+*** Benni and my reasoning was that if the nuts in others (i15_intake_detailed_scen_nuts already over-fulfill the nuts and seeds target,
+*** it would be ok to correct the seeds and groundnuts down, too...)
+
 * If seeds have been corrected downwards because nuts target already overfulfilled with nuts in others,
-* seed consumption is reduced to zero.
-        i15_intake_detailed_scen_target(t,iso,kfo_seeds)$(i15_intake_detailed_scen_target(t,iso,kfo_seeds) < 0) = 0;
-
-* Just to make sure. Can probably be deleted after testing (Just included because I removed the if conditions above as suggested by Benni)
-*        if ((sum(kfo_seeds, i15_intake_detailed_scen_target(t,iso,kfo_seeds)) + i15_intake_detailed_scen_nuts(t,iso)) < i15_rec_EATLancet(iso,"t_nutseeds","min"),
-*           abort "The nuts target is not fulfilled. Please make sure enough nuts and seeds are consumed";
-*        );
-
-*' (c) For model-internal reasons, MAgPIE considers the peanuts target separate from the other nuts & seeds
-*** BENNI: Can you replace "model-internal reasons" with a short explanation why we went for the solution to separate peanuts from nuts even though the EATLancet 2 recommendation is having it as one nuts target?
-        i15_intake_detailed_scen_target(t,iso,"groundnut")$(p15_intake_detail(t,iso,"groundnut")
-                                                           < i15_rec_EATLancet(iso,"t_peanuts","min")
-                                                       ) =
-              i15_rec_EATLancet(iso,"t_peanuts","min");
+* seed and groundnut consumption is reduced to zero.
+        i15_intake_detailed_scen_target(t,iso,kfo_ns)$(i15_intake_detailed_scen_target(t,iso,kfo_ns) < 0) = 0;
 
     );
 

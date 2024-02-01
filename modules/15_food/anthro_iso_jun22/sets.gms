@@ -109,8 +109,8 @@ sets
    kfo_pf(kfo) Processed foods including oils sugar alcohol
    / oils,alcohol,sugar /
 
-   kfo_seeds(kfo) Food products that are counted towards seeds
-    / rapeseed, sunflower/
+   kfo_ns(kfo) Food products that are counted towards seeds and nuts other than those included in others
+    / rapeseed, sunflower, groundnut /
 
    kfo_norec(kfo) Food products that do not have an EAT-Lancet recommendation
     / sugr_cane, sugr_beet, molasses, alcohol /
@@ -210,10 +210,10 @@ EAT_targettype15 Minimum or maximum target type of the EAT Lancet recommendation
 EAT_targets15 Food groups as well as individual foods for which EAT Lancet targets are defined
      / t_nutseeds, t_fruitveg, t_fruitstarch,
        t_roots, t_redmeat,
-       t_legumes, t_peanuts, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+       t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
 
 EAT_mtargets15(EAT_targets15) EAT Lancet food targets where direct mapping to MAgPIE categories is possible
-     / t_redmeat, t_legumes, t_peanuts, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+     / t_redmeat, t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
 
 EAT_special MAgPIE food groups that need special treatment with respect to fruit ratio
      / cassav_sp, others /
@@ -221,8 +221,7 @@ EAT_special MAgPIE food groups that need special treatment with respect to fruit
 
 EATtar_kfo15(EAT_mtargets15,kfo) Mapping between EAT Lancet food targets and MAgPIE categories
      / t_redmeat           . (livst_rum, livst_pig, scp)
-       t_legumes           . (puls_pro, soybean)
-       t_peanuts           . (groundnut)
+       t_legumes           . (puls_pro, soybean, groundnut)
        t_fish              . (fish)
        t_livst_chick       . (livst_chick)
        t_livst_egg         . (livst_egg)
@@ -239,7 +238,7 @@ alias(kfo, kfo2);
 alias(kfo_ap, kfo_ap2);
 alias(kfo_st, kfo_st2);
 alias(kfo_pf, kfo_pf2);
-alias(kfo_seeds, kfo_seeds2);
+alias(kfo_ns, kfo_ns2);
 alias(iso, iso2);
 alias(reproductive, reproductive2);
 alias(EAT_staples, EAT_staples2);
