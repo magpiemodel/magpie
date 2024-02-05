@@ -21,11 +21,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
 - **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
 
+
 ### added
 - **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
 - **scripts** added peatland to output/extra/disaggregation.R
 - **56_ghg_policy_** added new trajectories for R32M46
 - **60_bioenergy** added new trajectories for R32M46
+- **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
 
 ### removed
 - **default.cfg** Removed description of cfg$gms$c31_past_suit_scen since no longer needed due to changes in 31_past described below. Its function is now done by cfg$gms$c31_grassl_yld_scenario.
