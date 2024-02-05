@@ -394,10 +394,6 @@ display i15_intake_detailed_scen_target;
        abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
     );
 
-* VARTIKA: What about s15_exo_diet = 2?
-* Can this be transformed to the new diet implementation? Did you have target values there?
-* (Note: The old EATLancet implementation should be deleted soon.)
-
 *----------------------------------------------------------------------------------------
 elseif s15_exo_diet = 3,
 *' In case of a MAgPIE-specific realization of the EAT Lancet diet (`s15_exo_diet=3`),

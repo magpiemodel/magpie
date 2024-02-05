@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **15_food** Added improved EAT Lancet diet implementation (EAT 2p0)
-- **default.cfg** update input data to rev 4.98
+- **default.cfg** update input data to rev 4.99 (new validation data, new EATLancet recommendations, new semi-natural vegtation cropland data)
 - **start_functions** Check if cfg$recalibrate is consistent with cfg$gms$s14_use_yield_calib
 - **31_past** in grasslands_apr22 realization: changed structure of f31_pastr_suitability to align with ssp-rcp specific input data formulation. Changed input filename from cs3 to cs2. Added `cc`, `nocc` and `nocc_hist` options for `i31_manpast_suit` and changed input gams code from table to parameter. Climate scenario assignment moved from preloop.gms to input.gms. Removed pastSuit set in sets.gms as not needed anymore. Adjusted not_used.txt in both grasslands_apr22 and static realizations.
 - **default.cfg** Default for cfg$gms$peatland changed from `on` to `v2`
