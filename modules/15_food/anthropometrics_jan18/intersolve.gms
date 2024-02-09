@@ -352,12 +352,12 @@ if(s15_exo_diet = 1,
 
 * Via 's15_alc_scen' a maximum target for alcohol consumption is defined.
   if(s15_alc_scen>0,
-    i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
-    i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
+    p15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
+    p15_intake_detailed_scen_target(t,i,"alcohol")$(p15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
      = s15_alc_scen*i15_intake_scen_target(t,i);
      );
 
-  i15_intake_detailed_scen_target(t,i,EAT_staples) = (
+  p15_intake_detailed_scen_target(t,i,EAT_staples) = (
           i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
           i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
 
@@ -374,7 +374,7 @@ if(s15_exo_diet = 1,
 
 
     i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
-                                    *i15_intake_detailed_scen_target(t,i,kfo))
+                                    *p15_intake_detailed_scen_target(t,i,kfo))
                                     *p15_foodwaste_growth(t,i);
 
 *' In the last step, the regression-based calculation of daily per capita food demand

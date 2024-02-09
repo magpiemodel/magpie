@@ -313,10 +313,10 @@ $else
 $endif
 
 *' The intake target is adjusted to meet the calorie target
-  i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso) > 0) =
+  p15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso) > 0) =
     p15_intake_detail(t,iso,kfo) / p15_intake_total(t,iso) * i15_intake_scen_target(t,iso);
 
-  i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso) = 0) = 0;
+  p15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso) = 0) = 0;
 
 *' 2.) The second step defines the daily per capita intake of different food
 *' commodities.
@@ -339,64 +339,64 @@ if (s15_exo_diet = 1,
 
 *' upper bound for monogastric meat and eggs
     if (s15_exo_monogastric=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15)$(i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15) > i15_intake_EATLancet(iso,EAT_monogastrics15))
+      p15_intake_detailed_scen_target(t,iso,EAT_monogastrics15)$(p15_intake_detailed_scen_target(t,iso,EAT_monogastrics15) > i15_intake_EATLancet(iso,EAT_monogastrics15))
         = i15_intake_EATLancet(iso,EAT_monogastrics15));
 *' upper bound for ruminant products
     if (s15_exo_ruminant=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_ruminants15)$(i15_intake_detailed_scen_target(t,iso,EAT_ruminants15) > i15_intake_EATLancet(iso,EAT_ruminants15))
+      p15_intake_detailed_scen_target(t,iso,EAT_ruminants15)$(p15_intake_detailed_scen_target(t,iso,EAT_ruminants15) > i15_intake_EATLancet(iso,EAT_ruminants15))
         = i15_intake_EATLancet(iso,EAT_ruminants15));
 *' target value for fish
     if (s15_exo_fish=1,
-        i15_intake_detailed_scen_target(t,iso,"fish") = i15_intake_EATLancet(iso,"fish"));
+        p15_intake_detailed_scen_target(t,iso,"fish") = i15_intake_EATLancet(iso,"fish"));
 *' lower bound for fruits, veggies, nuts and seeds
-    if (s15_exo_fruitvegnutroots=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15)$(i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15) < i15_intake_EATLancet(iso,EAT_fruitvegnutseed15))
+    if (s15_exo_fruitvegnut=1,
+      p15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15)$(p15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15) < i15_intake_EATLancet(iso,EAT_fruitvegnutseed15))
       = i15_intake_EATLancet(iso,EAT_fruitvegnutseed15));
 *' lower bound for pulses
     if (s15_exo_pulses=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_pulses15_old)$(i15_intake_detailed_scen_target(t,iso,EAT_pulses15_old) < i15_intake_EATLancet(iso,EAT_pulses15_old))
+      p15_intake_detailed_scen_target(t,iso,EAT_pulses15_old)$(p15_intake_detailed_scen_target(t,iso,EAT_pulses15_old) < i15_intake_EATLancet(iso,EAT_pulses15_old))
       = i15_intake_EATLancet(iso,EAT_pulses15_old));
 *' upper bound for sugar
     if (s15_exo_sugar=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_sugar15)$(i15_intake_detailed_scen_target(t,iso,EAT_sugar15) > i15_intake_EATLancet(iso,EAT_sugar15))
+      p15_intake_detailed_scen_target(t,iso,EAT_sugar15)$(p15_intake_detailed_scen_target(t,iso,EAT_sugar15) > i15_intake_EATLancet(iso,EAT_sugar15))
         = i15_intake_EATLancet(iso,EAT_sugar15));
 *' target value for oils
     if (s15_exo_oils=1,
-      i15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils"));
+      p15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils"));
 *' target value for brans
     if (s15_exo_brans=1,
-      i15_intake_detailed_scen_target(t,iso,"brans") = i15_intake_EATLancet(iso,"brans"));
+      p15_intake_detailed_scen_target(t,iso,"brans") = i15_intake_EATLancet(iso,"brans"));
 *' target value for single cell protein
     if (s15_exo_scp=1,
-      i15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
+      p15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
 *' upper bound for alcohol
 * alcohol target is not part of EAT Lancet recommendation. Upper boundary is therefore included as specific switch s15_alc_scen
     if (s15_exo_alcohol=1,
-      i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
+      p15_intake_detailed_scen_target(t,iso,"alcohol")$(p15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
         = s15_alc_scen*i15_intake_scen_target(t,iso);
     );
 
-    i15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(sum(EAT_staples2_old, i15_intake_EATLancet(iso,EAT_staples2_old)) > 0) =
-            (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old))) *
+    p15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(sum(EAT_staples2_old, i15_intake_EATLancet(iso,EAT_staples2_old)) > 0) =
+            (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old))) *
             (i15_intake_EATLancet(iso,EAT_staples_old) / sum(EAT_staples2_old, i15_intake_EATLancet(iso,EAT_staples2_old)))
             ;
 
-* Correction where calorie balancing would lead to negative i15_intake_detailed_scen_target values
-    i15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old)) < 0) =
+* Correction where calorie balancing would lead to negative p15_intake_detailed_scen_target values
+    p15_intake_detailed_scen_target(t,iso,EAT_staples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old)) < 0) =
                     0;
-    i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old)) < 0) =
-             i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples2_old, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old))
+    p15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2_old, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old)) < 0) =
+             i15_intake_scen_target(t,iso) * p15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples2_old, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old))
                     ;
 
-    if (smin((iso,kfo), i15_intake_detailed_scen_target(t,iso,kfo)) < 0,
-       abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
+    if (smin((iso,kfo), p15_intake_detailed_scen_target(t,iso,kfo)) < 0,
+       abort "The parameter p15_intake_detailed_scen_target became negative after calorie balancing.";
     );
 
 *----------------------------------------------------------------------------------------
 elseif s15_exo_diet = 3,
 *' In case of a MAgPIE-specific realization of the EAT Lancet diet (`s15_exo_diet=3`),
 *' model-internal diet projections are constrained by recommended ranges for intake
-*' (`i15_rec_EATLancet`) of different food groups to ensure healthy and sustainable
+*' (`f15_rec_EATLancet`) of different food groups to ensure healthy and sustainable
 *' diets according to the EAT-Lancet Commission. After all calorie recommendations
 *' for non-staple food groups are satisfied, intake of staple crops is modified such
 *' that the in step 1.) selected total calorie intake is met.
@@ -417,52 +417,50 @@ elseif s15_exo_diet = 3,
 *' upper bound for monogastric products
     if (s15_exo_monogastric = 1,
 * upper bound for eggs
-      i15_intake_detailed_scen_target(t,iso,"livst_egg")$(p15_intake_detail(t,iso,"livst_egg")
-                                                               > i15_rec_EATLancet(iso,"t_livst_egg","max")
+      p15_intake_detailed_scen_target(t,iso,"livst_egg")$(p15_intake_detail(t,iso,"livst_egg")
+                                                               > f15_rec_EATLancet(iso,"t_livst_egg","max")
                                                             ) =
-             i15_rec_EATLancet(iso,"t_livst_egg","max");
+             f15_rec_EATLancet(iso,"t_livst_egg","max");
 * upper bound for chicken
-      i15_intake_detailed_scen_target(t,iso,"livst_chick")$(p15_intake_detail(t,iso,"livst_chick")
-                                                             > i15_rec_EATLancet(iso,"t_livst_chick","max")
+      p15_intake_detailed_scen_target(t,iso,"livst_chick")$(p15_intake_detail(t,iso,"livst_chick")
+                                                             > f15_rec_EATLancet(iso,"t_livst_chick","max")
                                                           ) =
-           i15_rec_EATLancet(iso,"t_livst_chick","max");
+           f15_rec_EATLancet(iso,"t_livst_chick","max");
 * upper bound for redmeat (share of pigs in redmeat)
-      i15_intake_detailed_scen_target(t,iso,"livst_pig")$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
-                                                              > i15_rec_EATLancet(iso,"t_redmeat","max")
+      p15_intake_detailed_scen_target(t,iso,"livst_pig")$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
+                                                              > f15_rec_EATLancet(iso,"t_redmeat","max")
                                                            ) =
             (p15_intake_detail(t,iso,"livst_pig") / sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2)))
-               * i15_rec_EATLancet(iso,"t_redmeat","max");
+               * f15_rec_EATLancet(iso,"t_redmeat","max");
        );
 
 *' upper bound for ruminant products
     if (s15_exo_ruminant = 1,
 * upper bound for redmeat (pig and ruminant)
-      i15_intake_detailed_scen_target(t,iso,"livst_rum")$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
-                                                               > i15_rec_EATLancet(iso,"t_redmeat","max")
+      p15_intake_detailed_scen_target(t,iso,"livst_rum")$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
+                                                               > f15_rec_EATLancet(iso,"t_redmeat","max")
                                                             ) =
              (p15_intake_detail(t,iso,"livst_rum") / sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2)))
-                * i15_rec_EATLancet(iso,"t_redmeat","max");
+                * f15_rec_EATLancet(iso,"t_redmeat","max");
 * upper bound for milk
-      i15_intake_detailed_scen_target(t,iso,"livst_milk")$(p15_intake_detail(t,iso,"livst_milk")
-                                                               > i15_rec_EATLancet(iso,"t_livst_milk","max")
+      p15_intake_detailed_scen_target(t,iso,"livst_milk")$(p15_intake_detail(t,iso,"livst_milk")
+                                                               > f15_rec_EATLancet(iso,"t_livst_milk","max")
                                                             ) =
-             i15_rec_EATLancet(iso,"t_livst_milk","max");
+             f15_rec_EATLancet(iso,"t_livst_milk","max");
     );
 
 *' lower bound for fish
     if (s15_exo_fish = 1,
-         i15_intake_detailed_scen_target(t,iso,"fish")$(p15_intake_detail(t,iso,"fish")
-                                                            < i15_rec_EATLancet(iso,"t_fish","min")
+         p15_intake_detailed_scen_target(t,iso,"fish")$(p15_intake_detail(t,iso,"fish")
+                                                            < f15_rec_EATLancet(iso,"t_fish","min")
                                                         ) =
-               i15_rec_EATLancet(iso,"t_fish","min");
+               f15_rec_EATLancet(iso,"t_fish","min");
     );
 
-*' lower bound for fruits, veggies, nuts and seeds
-*' and upper bound for starchy fruits and roots
-    if (s15_exo_fruitvegnutroots = 1,
-*** Special case: Fruits, vegetables and nuts ***
+
+*** Special case: Fruits, vegetables, nuts, and roots ***
 *' In MAgPIE fruits, vegetables and nuts are combined in the 'other' food category;
-*' Bananas and plantains are included in the 'cassav_sp' category.
+*' Starchy fruits (bananas and plantains) are included in the 'cassav_sp' category.
 *' The f15_fruitveg2others_kcal_ratio gives the country-level historical share
 *' (fixed into the future based on last historic year)
 *' of fruits and vegetables in these aggregate categories.
@@ -477,23 +475,17 @@ elseif s15_exo_diet = 3,
         p15_intake_detail_starchyfruit(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"cassav_sp") * p15_intake_detail(t,iso,"cassav_sp");
         p15_intake_detail_roots(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso,"cassav_sp")) * p15_intake_detail(t,iso,"cassav_sp") + p15_intake_detail(t,iso,"potato");
 
-*' Maximum recommendation for starchy fruits:
+* Initialize scenario target for case that switch is not active
         i15_intake_detailed_scen_starchyfruit(t,iso) = p15_intake_detail_starchyfruit(t,iso);
-        i15_intake_detailed_scen_starchyfruit(t,iso)$(p15_intake_detail_starchyfruit(t,iso) > i15_rec_EATLancet(iso,"t_fruitstarch","max"))
-           = i15_rec_EATLancet(iso,"t_fruitstarch","max");
-
-*' Maximum recommendation for roots:
         i15_intake_detailed_scen_roots(t,iso) = p15_intake_detail_roots(t,iso);
-        i15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
-            = i15_rec_EATLancet(iso,"t_roots","max");
+        p15_intake_detailed_scen_target(t,iso,"potato") = p15_intake_detail(t,iso,"potato");
 
-        i15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max"))
-            = i15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail(t,iso,"potato");
+*' lower bound for fruits, veggies, nuts and seeds
+    if (s15_exo_fruitvegnut = 1,
 
-        i15_intake_detailed_scen_target(t,iso,"cassav_sp")$(p15_intake_detail_roots(t,iso) > i15_rec_EATLancet(iso,"t_roots","max")) =
-              i15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail_roots(t,iso) -
-              i15_intake_detailed_scen_target(t,iso,"potato") +
-              i15_intake_detailed_scen_starchyfruit(t,iso);
+*' Maximum recommendation for starchy fruits:
+        i15_intake_detailed_scen_starchyfruit(t,iso)$(p15_intake_detail_starchyfruit(t,iso) > f15_rec_EATLancet(iso,"t_fruitstarch","max"))
+           = f15_rec_EATLancet(iso,"t_fruitstarch","max");
 
 *' Split the 'others' category into fruits plus vegetables and nuts
         p15_intake_detail_fruitveg(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"others") * p15_intake_detail(t,iso,"others") + i15_intake_detailed_scen_starchyfruit(t,iso);
@@ -502,10 +494,10 @@ elseif s15_exo_diet = 3,
         i15_intake_detailed_scen_nuts(t,iso) = p15_intake_detail_nuts(t,iso);
 
 *' Minimum recommendation for fruits and vegetables:
-        i15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < i15_rec_EATLancet(iso,"t_fruitveg","min"))
-            = i15_rec_EATLancet(iso,"t_fruitveg","min");
+        i15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < f15_rec_EATLancet(iso,"t_fruitveg","min"))
+            = f15_rec_EATLancet(iso,"t_fruitveg","min");
 
-*' Extract fruits and vegetables that are part of others categroy
+*' Extract fruits and vegetables that are part of others category
 *  Note that starchy fruits are kept at the previously assigned maximum level
 *  and their amount has been added to cassav_sp already.
         i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso);
@@ -519,103 +511,119 @@ elseif s15_exo_diet = 3,
           ;
 
 *' The resulting intake of the "others" category is:
-        i15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
+        p15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
 
 *' (b) remaining nuts (groundnut) and seeds (rapeseed, sunflower) are scaled
 *' up or down towards the EAT nuts target
 *' considering scaling of nuts in others.
-        i15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) > 0)
+        p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) > 0)
                             = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
-                       * (i15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts(t,iso))
+                       * (f15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts(t,iso))
                     ;
 
 *** ISABELLE: Please double-check whether I can remove the if condition from the nuts target equations
 *** ($((sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)))
 *** Benni and my reasoning was that if the nuts in others (i15_intake_detailed_scen_nuts already over-fulfill the nuts and seeds target,
-*** it would be ok to correct the seeds and groundnuts down, too...)
+*** it would be ok to correct the seeds and groundnuts down...)
 
 * If seeds have been corrected downwards below zero because nuts target already overfulfilled with nuts in others,
 * seed and groundnut consumption is reduced to zero.
-        i15_intake_detailed_scen_target(t,iso,kfo_ns)$(i15_intake_detailed_scen_target(t,iso,kfo_ns) < 0) = 0;
+        p15_intake_detailed_scen_target(t,iso,kfo_ns)$(p15_intake_detailed_scen_target(t,iso,kfo_ns) < 0) = 0;
 
     );
 
+*' upper bound for roots
+    if (s15_exo_roots = 1,
+
+*' Maximum recommendation for roots:
+        i15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max"))
+          = f15_rec_EATLancet(iso,"t_roots","max");
+
+        p15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max"))
+          = i15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail(t,iso,"potato");
+
+    );
+
+* Assign starchy fruit and cassava roots back to cassava_sp scenario target
+    p15_intake_detailed_scen_target(t,iso,"cassav_sp") =
+      i15_intake_detailed_scen_roots(t,iso) -
+      p15_intake_detailed_scen_target(t,iso,"potato") +
+      i15_intake_detailed_scen_starchyfruit(t,iso);
+
 *' lower bound for legumes
     if (s15_exo_pulses = 1,
-       i15_intake_detailed_scen_target(t,iso,EAT_pulses15)$(sum(EAT_pulses15_2, p15_intake_detail(t,iso,EAT_pulses15_2))
-                                                                 < i15_rec_EATLancet(iso,"t_legumes","min")
+       p15_intake_detailed_scen_target(t,iso,EAT_pulses15)$(sum(EAT_pulses15_2, p15_intake_detail(t,iso,EAT_pulses15_2))
+                                                                 < f15_rec_EATLancet(iso,"t_legumes","min")
                                                                ) =
             (p15_intake_detail(t,iso,EAT_pulses15) / sum(EAT_pulses15_2, p15_intake_detail(t,iso,EAT_pulses15_2)))
-             * i15_rec_EATLancet(iso,"t_legumes","min");
+             * f15_rec_EATLancet(iso,"t_legumes","min");
     );
 
 *' upper bound for sugar
     if (s15_exo_sugar = 1,
-      i15_intake_detailed_scen_target(t,iso,"sugar")$(p15_intake_detail(t,iso,"sugar")
-                                                              > i15_rec_EATLancet(iso,"t_sugar","max")
+      p15_intake_detailed_scen_target(t,iso,"sugar")$(p15_intake_detail(t,iso,"sugar")
+                                                              > f15_rec_EATLancet(iso,"t_sugar","max")
                                                            ) =
-            i15_rec_EATLancet(iso,"t_sugar","max");
+            f15_rec_EATLancet(iso,"t_sugar","max");
     );
 
 *' upper and lower bound for oils
     if (s15_exo_oils = 1,
-*      i15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils")
+*      p15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils")
 * oil_veg has a minimum and maximum recommendation in EAT
-       i15_intake_detailed_scen_target(t,iso,"oils")$(p15_intake_detail(t,iso,"oils")
-                                                       < i15_rec_EATLancet(iso,"t_oils","min")
+       p15_intake_detailed_scen_target(t,iso,"oils")$(p15_intake_detail(t,iso,"oils")
+                                                       < f15_rec_EATLancet(iso,"t_oils","min")
                                                       ) =
-            i15_rec_EATLancet(iso,"t_oils","min");
+            f15_rec_EATLancet(iso,"t_oils","min");
 
 * oil palm has a maximum recommendation in EAT
-       i15_intake_detailed_scen_target(t,iso,"oils")$(p15_intake_detail(t,iso,"oils")
-                                                        > i15_rec_EATLancet(iso,"t_oils","max")
+       p15_intake_detailed_scen_target(t,iso,"oils")$(p15_intake_detail(t,iso,"oils")
+                                                        > f15_rec_EATLancet(iso,"t_oils","max")
                                                      ) =
-            i15_rec_EATLancet(iso,"t_oils","max");
+            f15_rec_EATLancet(iso,"t_oils","max");
     );
 
 
 * Food commodities that are not included in diet recommendations are set to zero:
- i15_intake_detailed_scen_target(t,iso,kfo_norec) = 0;
+ p15_intake_detailed_scen_target(t,iso,kfo_norec) = 0;
 
 * Optionally, there is an exception for alcohol if s15_exo_alcohol = 1:
 * Even though it would be 0 following the EAT Lancet recommendation,
 * an alternative maximum target can be set via 's15_alc_scen' for alcohol consumption,
 * e.g. following the recommendation according to Lassen et al., (2020).
     if (s15_exo_alcohol = 1,
-       i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen * i15_intake_scen_target(t,iso))
+       p15_intake_detailed_scen_target(t,iso,"alcohol")$(p15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen * i15_intake_scen_target(t,iso))
         = s15_alc_scen * i15_intake_scen_target(t,iso);
       );
 *' There is no explicit target for brans in the EATLancet recommendations.
 *' It is set to 0 when s15_exo_brans is activated.
     if (s15_exo_brans = 1,
-       i15_intake_detailed_scen_target(t,iso,"brans") = 0;
+       p15_intake_detailed_scen_target(t,iso,"brans") = 0;
        );
 *' There is no explicit target for single cell protein in the EATLancet recommendations.
 *' It is therefore set to 0.
     if (s15_exo_scp = 1,
-       i15_intake_detailed_scen_target(t,iso,"scp") = 0;
+       p15_intake_detailed_scen_target(t,iso,"scp") = 0;
        );
 
 *** Balancing calorie requirements ***
 *' After all calorie recommendations for non-staple food groups are satisfied,
-*' intake of staple crops is now modified such that the
-*' in step 1.) selected total calorie intake is met.
-*' Note that brans do not have an EAT Lancet target and are kept at their
-*' original level.
-  i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)) > 0) =
-      (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)))
+*' intake of staple crops is now modified such that
+*' the above-selected total calorie intake is met.
+  p15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)) > 0) =
+      (i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)))
        * (p15_intake_detail(t,iso,EAT_staples) / sum(EAT_staples2, p15_intake_detail(t,iso,EAT_staples2)));
 
 
-* Correction where calorie balancing would lead to negative i15_intake_detailed_scen_target values
-  i15_intake_detailed_scen_target(t,iso,EAT_staples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
+* Correction where calorie balancing would lead to negative p15_intake_detailed_scen_target values
+  p15_intake_detailed_scen_target(t,iso,EAT_staples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
          0;
-  i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
-         i15_intake_scen_target(t,iso) * i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) /
-         sum(EAT_nonstaples2, i15_intake_detailed_scen_target(t,iso,EAT_nonstaples2));
+  p15_intake_detailed_scen_target(t,iso,EAT_nonstaples)$(i15_intake_scen_target(t,iso) - sum(EAT_nonstaples2, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2)) < 0) =
+         i15_intake_scen_target(t,iso) * p15_intake_detailed_scen_target(t,iso,EAT_nonstaples) /
+         sum(EAT_nonstaples2, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2));
 
-  if (smin((iso,kfo), i15_intake_detailed_scen_target(t,iso,kfo)) < 0,
-     abort "The parameter i15_intake_detailed_scen_target became negative after calorie balancing.";
+  if (smin((iso,kfo), p15_intake_detailed_scen_target(t,iso,kfo)) < 0,
+     abort "The parameter p15_intake_detailed_scen_target became negative after calorie balancing.";
      );
 
 );
@@ -626,7 +634,7 @@ elseif s15_exo_diet = 3,
 *' convergence (note that fading should start after the historical time slice of
 *' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t,iso)`):
   p15_intake_detail(t,iso,kfo) = p15_intake_detail(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
-                      + i15_intake_detailed_scen_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
+                      + p15_intake_detailed_scen_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
 
   p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) = p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) * (1-i15_exo_foodscen_fader(t,iso))
                       + p15_bmi_shr_target(t,iso,sex,age,bmi_group15) * i15_exo_foodscen_fader(t,iso);

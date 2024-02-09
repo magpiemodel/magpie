@@ -152,9 +152,8 @@ parameters
  i15_intake_scen_target(t,iso)                            Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) Food-specific per capita calorie intake according to various EAT Lancet diet scenarios (kcal per capita per day)
  i15_intake_EATLancet(iso,kfo)                            Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
- i15_intake_detailed_scen_target(t,iso,kfo)               Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ p15_intake_detailed_scen_target(t,iso,kfo)               Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
 
- i15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15)    Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
  i15_fruitveg2others_kcal_ratio(t,iso,EAT_special)        Ratio of calories from fruits and vegetables within the others and cassav_sp food categories (1)
  p15_intake_detail_starchyfruit(t,iso)                    Auxiliary parameter for the intake of starchy fruits included in cassav_sp (kcal per capita per day)
  p15_intake_detail_roots(t,iso)                           Auxiliary parameter for the intake of roots (kcal per capita per day)

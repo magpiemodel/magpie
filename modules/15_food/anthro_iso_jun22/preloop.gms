@@ -90,9 +90,6 @@ $else
   );
 $endif
 
-* Initialisation of the recommendations for healthy food intake:
-i15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15) = f15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15);
-
 * initial prices in $US per Kcal
 i15_prices_initial_kcal(iso,kfo)$(fm_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
                                                                                     / (fm_nutrition_attributes("y1995",kfo,"kcal")*10**6);
