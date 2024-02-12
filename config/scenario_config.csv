@@ -2,6 +2,8 @@
 gms$c09_pop_scenario;;;;SSP1;SSP2;SSP2EU;SSP3;SSP4;SSP5;SSP1;SSP1;SSP1;SSP1;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;;;;;;;;;;;
 gms$c09_gdp_scenario;;;;SSP1;SSP2;SSP2EU;SSP3;SSP4;SSP5;SSP1;SDP_EI;SDP_RC;SDP_MC;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;;;;;;;;;;;
 gms$c09_pal_scenario;;;;SSP1;SSP2;SSP2EU;SSP3;SSP4;SSP5;SSP1;SSP2;SSP1;SSP1;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;;;;;;;;;;;
+gms$s12_interest_lic;;;;;;;;;;;;;;;;;;;;;;0.06;;;;;;;;;;;;;;;;;;;;;;;;
+gms$s12_interest_hic;;;;;;;;;;;;;;;;;;;;;;0.04;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c15_food_scenario;;;;SSP1;SSP2;SSP2;SSP3;SSP4;SSP5;SSP1;SSP2;SSP1;SSP1;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;;;;;;;;;;;SSP2
 gms$c15_food_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;;;;;;;;;;;SSP2
 gms$s15_elastic_demand;;;;0;0;0;0;0;0;0;0;0;0;;;;;;;0;0;0;0;0;0;0;0;;;;;;;;;;;;;;;;;;;
@@ -65,7 +67,7 @@ gms$c60_1stgen_biodem;;;;phaseout2020;const2020;const2020;const2030;const2020;ph
 gms$c60_biodem_level;;;;;;;;;;;;;;;;;1;0;;;;;1;1;1;1;1;;;;;;;;;;;;;;;;;;;
 gms$c60_bioenergy_subsidy;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c60_res_2ndgenBE_dem;;;;ssp1;ssp2;ssp2;ssp3;ssp4;ssp5;sdp;ssp2;sdp;sdp;;;;;;;sdp;;;ssp4;sdp;ssp4;ssp4;sdp;;;;;;;;;;;;;;;;;;;
-gms$c70_feed_scen;;;;ssp1;ssp2;ssp2;ssp3;ssp4;ssp5;ssp1;ssp5;ssp1;ssp1;;;;;;;ssp1;;;ssp4;ssp1;ssp4;ssp4;ssp1;;;;;;;;;;;;;;;;;;;
+gms$c70_feed_scen;;;;ssp1;ssp2;ssp2;ssp3;ssp4;ssp5;ssp1;ssp5;ssp1;ssp1;;;;;;;ssp1;;ssp1;ssp4;ssp1;ssp4;ssp4;ssp1;;;;;;;;;;;;;;;;;;;
 gms$c_timesteps;;;;;;;;;;;;;;;;;less_TS;less_TS;;;;;5year;5year;5year;5year;5year;;;;;;;;;;;;;;;;;;;
 gms$c14_yields_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;cc;cc;cc;cc;cc;;;;;;;;;;;;;;;;;;;
 gms$c42_watdem_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;cc;cc;cc;cc;cc;;;;;;;;;;;;;;;;;;;
