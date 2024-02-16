@@ -30,4 +30,3 @@
  q44_bv_weighted(j2) .. v44_bv_weighted(j2)
           =e=
           f44_rr_layer(j2) * sum((potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg));
-          

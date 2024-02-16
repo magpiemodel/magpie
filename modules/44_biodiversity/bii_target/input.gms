@@ -30,6 +30,6 @@ parameters
 f44_rr_layer(j) Range-rarity restoration prioritization layer (unitless)
 /
 $ondelim
-$include "./modules/44_biodiversity/bv_btc_mar21/input/rr_layer.cs2"
+$include "./modules/44_biodiversity/bii_target/input/rr_layer.cs2"
 $offdelim
 /

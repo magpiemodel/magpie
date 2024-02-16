@@ -28,12 +28,11 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public" 
                                "./patch_input" = NULL),
                            getOption("magpie_repos"))
 
-#R11: a10a580c , R37: acb82c28
-cfg$input <- c(regional    = "rev4.84_a10a580c_magpie.tgz",
-               cellular    = "rev4.84_a10a580c_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-               validation  = "rev4.84_a10a580c_validation.tgz",
-               additional  = "additional_data_rev4.39.tgz",
-               patch = "MMEmuR11.tgz")
+cfg$input <- c(regional    = "rev4.87_26df900e_magpie.tgz",
+               cellular    = "rev4.87_26df900e_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+               validation  = "rev4.87_26df900e_validation.tgz",
+               additional  = "additional_data_rev4.43.tgz",
+           patch = "MMEmuR12_rev4.87.tgz")
 
 
 cfg$output <- c("output_check", "rds_report")
@@ -45,10 +44,10 @@ cfg <- setScenario(cfg, c(ssp)) #load config presets
 ### Identifier and folder
 ###############################################
 identifierFlag <- "MMEmu_default"
-cfg$title <- "Default_R11_patched"
+cfg$title <- "Default_MMRegOnly"
 ###############################################
 cfg$info$flag <- identifierFlag
-cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
+#cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
 ##########################################################
 start_run(cfg, codeCheck = FALSE)
