@@ -11,6 +11,7 @@ positive variables
  vm_bv(j,landcover44,potnatveg)     Biodiversity stock for all land cover classes (Mha)
  v44_bii(i,biome44)           Biodiversity Intactness Index BII (1)
  v44_bii_missing(i,biome44)       Missing BII increase for compliance with BII target (1)
+ v44_bv_weighted(j)                 Range-rarity weighted biodiversity stock (Mha)
 ;
 
 parameters
@@ -23,6 +24,7 @@ equations
  q44_bii(i,biome44)                     Biodiversity Intactness Index BII (1)
  q44_bii_target(i,biome44)              Missing BII increase for compliance with BII target (1)
  q44_cost(i)              Biodiversity cost (mio USD)
+  q44_bv_weighted(j)                     Range-rarity weighted biodiversity stock (Mha)
 ;
 
 
