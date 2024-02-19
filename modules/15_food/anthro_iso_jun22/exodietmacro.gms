@@ -517,14 +517,14 @@ elseif s15_exo_diet = 3,
 *' up or down towards the EAT nuts target
 *' considering scaling of nuts in others.
         p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) > 0)
-                            = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
-                       * (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso))
-                    ;
+          = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
+            * (sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) - p15_intake_detailed_scen_nuts(t,iso))
+        ;
 
-*** ISABELLE: Please double-check whether I can remove the if condition from the nuts target equations
-*** ($((sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)))
-*** Benni and my reasoning was that if the nuts in others (p15_intake_detailed_scen_nuts already over-fulfill the nuts and seeds target,
-*** it would be ok to correct the seeds and groundnuts down...)
+       p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detailed_scen_target,iso,kfo_ns2) < (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso)))
+          = p15_intake_detailed_scen_target(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detailed_scen_target(t,iso,kfo_ns2))
+            * (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso))
+        ;
 
 * If seeds have been corrected downwards below zero because nuts target already overfulfilled with nuts in others,
 * seed and groundnut consumption is reduced to zero.
@@ -536,11 +536,11 @@ elseif s15_exo_diet = 3,
     if (s15_exo_roots = 1,
 
 *' Maximum recommendation for roots:
-        p15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max"))
-          = f15_rec_EATLancet(iso,"t_roots","max");
+        p15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max")) =
+          f15_rec_EATLancet(iso,"t_roots","max");
 
-        p15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max"))
-          = p15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail(t,iso,"potato");
+        p15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max")) =
+          p15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail(t,iso,"potato");
 
     );
 
