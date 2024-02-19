@@ -521,7 +521,7 @@ elseif s15_exo_diet = 3,
             * (sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) - p15_intake_detailed_scen_nuts(t,iso))
         ;
 
-       p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detailed_scen_target,iso,kfo_ns2) < (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso)))
+       p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detailed_scen_target(t,iso,kfo_ns2)) < (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso)))
           = p15_intake_detailed_scen_target(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detailed_scen_target(t,iso,kfo_ns2))
             * (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso))
         ;
