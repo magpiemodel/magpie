@@ -322,7 +322,7 @@ $endif
 *' commodities.
 
 *----------------------------------------------------------------------------------------
-if (s15_exo_diet = 1,
+if ((s15_exo_diet = 1 or s15_exo_diet = 2),
 *' In case of diet scenarios that are parametrized to a food-specific data set published
 *' by the EAT-Lancet Commission (`s15_exo_diet=1`), this calculation step consists of
 *' filling up the scenario target for total daily per capita food intake according
@@ -459,71 +459,71 @@ elseif s15_exo_diet = 3,
 
 
 *** Special case: Fruits, vegetables, nuts, and roots ***
-*' In MAgPIE fruits, vegetables and nuts are combined in the 'other' food category;
+*' In MAgPIE fruits, vegetables and certain nuts are combined in the 'other' food category;
 *' Starchy fruits (bananas and plantains) are included in the 'cassav_sp' category.
 *' The f15_fruitveg2others_kcal_ratio gives the country-level historical share
 *' (fixed into the future based on last historic year)
 *' of fruits and vegetables in these aggregate categories.
         if (sum(sameas(t_past,t),1) = 1,
-           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t,iso,EAT_special);
+           i15_fruit_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t,iso,EAT_special);
         else
-           i15_fruitveg2others_kcal_ratio(t,iso,EAT_special) = i15_fruitveg2others_kcal_ratio(t-1,iso,EAT_special);
+           i15_fruit_ratio(t,iso,EAT_special) = i15_fruit_ratio(t-1,iso,EAT_special);
         );
 
 *' Separation of starchy fruits (bananas and plantains)
 *' and roots (cassava, sweet potato, yams) in the cassav_sp food category
-        p15_intake_detail_starchyfruit(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"cassav_sp") * p15_intake_detail(t,iso,"cassav_sp");
-        p15_intake_detail_roots(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso,"cassav_sp")) * p15_intake_detail(t,iso,"cassav_sp") + p15_intake_detail(t,iso,"potato");
+        p15_intake_detail_starchyfruit(t,iso) = i15_fruit_ratio(t,iso,"cassav_sp") * p15_intake_detail(t,iso,"cassav_sp");
+        p15_intake_detail_roots(t,iso) = (1 - i15_fruit_ratio(t,iso,"cassav_sp")) * p15_intake_detail(t,iso,"cassav_sp") + p15_intake_detail(t,iso,"potato");
 
 * Initialize scenario target for case that switch is not active
-        i15_intake_detailed_scen_starchyfruit(t,iso) = p15_intake_detail_starchyfruit(t,iso);
-        i15_intake_detailed_scen_roots(t,iso) = p15_intake_detail_roots(t,iso);
+        p15_intake_detailed_scen_starchyfruit(t,iso) = p15_intake_detail_starchyfruit(t,iso);
+        p15_intake_detailed_scen_roots(t,iso) = p15_intake_detail_roots(t,iso);
         p15_intake_detailed_scen_target(t,iso,"potato") = p15_intake_detail(t,iso,"potato");
 
 *' lower bound for fruits, veggies, nuts and seeds
     if (s15_exo_fruitvegnut = 1,
 
 *' Maximum recommendation for starchy fruits:
-        i15_intake_detailed_scen_starchyfruit(t,iso)$(p15_intake_detail_starchyfruit(t,iso) > f15_rec_EATLancet(iso,"t_fruitstarch","max"))
+        p15_intake_detailed_scen_starchyfruit(t,iso)$(p15_intake_detail_starchyfruit(t,iso) > f15_rec_EATLancet(iso,"t_fruitstarch","max"))
            = f15_rec_EATLancet(iso,"t_fruitstarch","max");
 
 *' Split the 'others' category into fruits plus vegetables and nuts
-        p15_intake_detail_fruitveg(t,iso) = i15_fruitveg2others_kcal_ratio(t,iso,"others") * p15_intake_detail(t,iso,"others") + i15_intake_detailed_scen_starchyfruit(t,iso);
-        p15_intake_detail_nuts(t,iso) = (1 - i15_fruitveg2others_kcal_ratio(t,iso,"others")) * p15_intake_detail(t,iso,"others");
-        i15_intake_detailed_scen_fruitveg(t,iso) = p15_intake_detail_fruitveg(t,iso);
-        i15_intake_detailed_scen_nuts(t,iso) = p15_intake_detail_nuts(t,iso);
+        p15_intake_detail_fruitveg(t,iso) = i15_fruit_ratio(t,iso,"others") * p15_intake_detail(t,iso,"others") + p15_intake_detailed_scen_starchyfruit(t,iso);
+        p15_intake_detail_nuts(t,iso) = (1 - i15_fruit_ratio(t,iso,"others")) * p15_intake_detail(t,iso,"others");
+        p15_intake_detailed_scen_fruitveg(t,iso) = p15_intake_detail_fruitveg(t,iso);
+        p15_intake_detailed_scen_nuts(t,iso) = p15_intake_detail_nuts(t,iso);
 
 *' Minimum recommendation for fruits and vegetables:
-        i15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < f15_rec_EATLancet(iso,"t_fruitveg","min"))
+        p15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < f15_rec_EATLancet(iso,"t_fruitveg","min"))
             = f15_rec_EATLancet(iso,"t_fruitveg","min");
 
 *' Extract fruits and vegetables that are part of others category
 *  Note that starchy fruits are kept at the previously assigned maximum level
 *  and their amount has been added to cassav_sp already.
-        i15_intake_detailed_scen_fruitveg(t,iso) = i15_intake_detailed_scen_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso);
+        p15_intake_detailed_scen_fruitveg(t,iso) = p15_intake_detailed_scen_fruitveg(t,iso) - p15_intake_detailed_scen_starchyfruit(t,iso);
 
 *' Minimum recommendation for nuts & seeds
 *' (a) nuts included in "others"
 *' are scaled by the same amount as fruits and vegetables
 *' because the food group "others" is treated as homogenous food category
-        i15_intake_detailed_scen_nuts(t,iso)$(p15_intake_detail_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso) > 0)
-            = p15_intake_detail_nuts(t,iso) * i15_intake_detailed_scen_fruitveg(t,iso) / (p15_intake_detail_fruitveg(t,iso) - i15_intake_detailed_scen_starchyfruit(t,iso))
+        p15_intake_detailed_scen_nuts(t,iso)$(p15_intake_detail_fruitveg(t,iso) - p15_intake_detailed_scen_starchyfruit(t,iso) > 0)
+            = p15_intake_detail_nuts(t,iso) * p15_intake_detailed_scen_fruitveg(t,iso) / (p15_intake_detail_fruitveg(t,iso) - p15_intake_detail_starchyfruit(t,iso))
           ;
 
 *' The resulting intake of the "others" category is:
-        p15_intake_detailed_scen_target(t,iso,"others") = i15_intake_detailed_scen_fruitveg(t,iso) + i15_intake_detailed_scen_nuts(t,iso);
+        p15_intake_detailed_scen_target(t,iso,"others") = p15_intake_detailed_scen_fruitveg(t,iso) + p15_intake_detailed_scen_nuts(t,iso);
 
 *' (b) remaining nuts (groundnut) and seeds (rapeseed, sunflower) are scaled
 *' up or down towards the EAT nuts target
 *' considering scaling of nuts in others.
         p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) > 0)
                             = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
-                       * (f15_rec_EATLancet(iso,"t_nutseeds","min") - i15_intake_detailed_scen_nuts(t,iso))
+                       * (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso))
                     ;
 
 *** ISABELLE: Please double-check whether I can remove the if condition from the nuts target equations
 *** ($((sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) + p15_intake_detail_nuts(t,iso)))
-*** Benni and my reasoning was that if the nuts in others (i15_intake_detailed_scen_nuts already over-fulfill the nuts and seeds target,
+*** Benni and my reasoning was that if the nuts in others (p15_intake_detailed_scen_nuts already over-fulfill the nuts and seeds target,
 *** it would be ok to correct the seeds and groundnuts down...)
 
 * If seeds have been corrected downwards below zero because nuts target already overfulfilled with nuts in others,
@@ -536,19 +536,19 @@ elseif s15_exo_diet = 3,
     if (s15_exo_roots = 1,
 
 *' Maximum recommendation for roots:
-        i15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max"))
+        p15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max"))
           = f15_rec_EATLancet(iso,"t_roots","max");
 
         p15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max"))
-          = i15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail(t,iso,"potato");
+          = p15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail(t,iso,"potato");
 
     );
 
 * Assign starchy fruit and cassava roots back to cassava_sp scenario target
     p15_intake_detailed_scen_target(t,iso,"cassav_sp") =
-      i15_intake_detailed_scen_roots(t,iso) -
+      p15_intake_detailed_scen_roots(t,iso) -
       p15_intake_detailed_scen_target(t,iso,"potato") +
-      i15_intake_detailed_scen_starchyfruit(t,iso);
+      p15_intake_detailed_scen_starchyfruit(t,iso);
 
 *' lower bound for legumes
     if (s15_exo_pulses = 1,
@@ -569,7 +569,6 @@ elseif s15_exo_diet = 3,
 
 *' upper and lower bound for oils
     if (s15_exo_oils = 1,
-*      p15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils")
 * oil_veg has a minimum and maximum recommendation in EAT
        p15_intake_detailed_scen_target(t,iso,"oils")$(p15_intake_detail(t,iso,"oils")
                                                        < f15_rec_EATLancet(iso,"t_oils","min")

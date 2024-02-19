@@ -107,7 +107,7 @@ scalar s15_exo_roots Exogenous EAT Lancet root target on (1) / 1 /;
 scalar s15_exo_pulses Exogenous pulses target on  (1) / 1 /;
 scalar s15_exo_sugar Exogenous sugar target on  (1) / 1 /;
 scalar s15_exo_oils Exogenous oils (1) / 1 /;
-scalar s15_exo_brans Exogenous brans (1) / 1 /;
+scalar s15_exo_brans Exogenous brans (1) / 0 /;
 scalar s15_exo_scp Exogenous microbial protein target on  (1) / 1 /;
 * The EAT-Lancet diet only allows for added sugars, but does not include processed food or
 * alcohol. Via 's15_alc_scen' a maximum target for alcohol consumption can be defined.
