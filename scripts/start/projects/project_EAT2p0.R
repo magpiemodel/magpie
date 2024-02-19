@@ -78,11 +78,10 @@ bau <- function(cfg) {
 ### Diet component ##
 # Globally achieves EL2 diet by 2050               # To Do: Check implementation
 diet <- function(cfg) {
-  cfg$gms$s15_exo_diet  <- 1               # To Do: switch to 3 once implementation is ready
+  cfg$gms$s15_exo_diet  <- 3
   cfg$gms$s15_alc_scen  <- 0               # No alcohol allowed as in the definition of EATLancet
   cfg$gms$c15_kcal_scen <- "healthy_BMI"   # default: not necessary to set it again (To Do: remove)
   cfg$gms$c15_EAT_scen  <- "FLX"           # default: not necessary to set it again (To Do: remove)
-  cfg$gms$s15_alc_scen  <- 0               # In EATLancet, no calories for alcohol.
   return(cfg)
 }
 
