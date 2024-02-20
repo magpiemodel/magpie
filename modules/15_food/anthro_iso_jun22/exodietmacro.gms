@@ -464,11 +464,11 @@ elseif s15_exo_diet = 3,
 *' The f15_fruitveg2others_kcal_ratio gives the country-level historical share
 *' (fixed into the future based on last historic year)
 *' of fruits and vegetables in these aggregate categories.
-        if (sum(sameas(t_past,t),1) = 1,
-           i15_fruit_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t,iso,EAT_special);
-        else
-           i15_fruit_ratio(t,iso,EAT_special) = i15_fruit_ratio(t-1,iso,EAT_special);
-        );
+    if (sum(sameas(t_past,t),1) = 1,
+        i15_fruit_ratio(t,iso,EAT_special) = f15_fruitveg2others_kcal_ratio(t,iso,EAT_special);
+    else
+        i15_fruit_ratio(t,iso,EAT_special) = i15_fruit_ratio(t-1,iso,EAT_special);
+    );
 
 *' Separation of starchy fruits (bananas and plantains)
 *' and roots (cassava, sweet potato, yams) in the cassav_sp food category
@@ -499,7 +499,7 @@ elseif s15_exo_diet = 3,
 
 *' Extract fruits and vegetables that are part of others category
 *  Note that starchy fruits are kept at the previously assigned maximum level
-*  and their amount has been added to cassav_sp already.
+*  and their amount will be added to cassav_sp.
         p15_intake_detailed_scen_fruitveg(t,iso) = p15_intake_detailed_scen_fruitveg(t,iso) - p15_intake_detailed_scen_starchyfruit(t,iso);
 
 *' Minimum recommendation for nuts & seeds
@@ -507,7 +507,7 @@ elseif s15_exo_diet = 3,
 *' are scaled by the same amount as fruits and vegetables
 *' because the food group "others" is treated as homogenous food category
         p15_intake_detailed_scen_nuts(t,iso)$(p15_intake_detail_fruitveg(t,iso) - p15_intake_detailed_scen_starchyfruit(t,iso) > 0)
-            = p15_intake_detail_nuts(t,iso) * p15_intake_detailed_scen_fruitveg(t,iso) / (p15_intake_detail_fruitveg(t,iso) - p15_intake_detail_starchyfruit(t,iso))
+            = p15_intake_detail_nuts(t,iso) * p15_intake_detailed_scen_fruitveg(t,iso) / (p15_intake_detail_fruitveg(t,iso) - p15_intake_detailed_scen_starchyfruit(t,iso))
           ;
 
 *' The resulting intake of the "others" category is:
@@ -517,14 +517,9 @@ elseif s15_exo_diet = 3,
 *' up or down towards the EAT nuts target
 *' considering scaling of nuts in others.
         p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) > 0)
-          = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
-            * (sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) - p15_intake_detailed_scen_nuts(t,iso))
-        ;
+            = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
+                * (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso));
 
-       p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detailed_scen_target(t,iso,kfo_ns2)) < (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso)))
-          = p15_intake_detailed_scen_target(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detailed_scen_target(t,iso,kfo_ns2))
-            * (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso))
-        ;
 
 * If seeds have been corrected downwards below zero because nuts target already overfulfilled with nuts in others,
 * seed and groundnut consumption is reduced to zero.
@@ -622,6 +617,7 @@ elseif s15_exo_diet = 3,
          sum(EAT_nonstaples2, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2));
 
   if (smin((iso,kfo), p15_intake_detailed_scen_target(t,iso,kfo)) < 0,
+     display p15_intake_detailed_scen_target;
      abort "The parameter p15_intake_detailed_scen_target became negative after calorie balancing.";
      );
 
