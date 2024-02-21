@@ -64,9 +64,46 @@ if (length(map_file) > 1) {
   return(x)
 }
 
+.ncdf4Write <- function(x, filename, unit = "", missval = -9999) {
+  # magclass objects are sparse, fill gaps with NA
+  xy <- getCoords(x)
+  lonCoords <- seq(min(xy$x), max(xy$x), 0.5)
+  latCoords <- seq(max(xy$y), min(xy$y), -0.5)
+
+  coords <- expand.grid(x = lonCoords, y = latCoords)
+  coords <- paste0(coords$x, "|", coords$y)
+  coords <- gsub("\\.", "p", coords)
+  coords <- sub("\\|", ".", coords)
+
+  getItems(x, 1.3) <- NULL
+
+  extended <- new.magpie(coords, getItems(x, 2), getItems(x, 3))
+  extended[getItems(x, 1), , ] <- x
+  x <- extended
+
+  # create netCDF file
+  lonLatTime <- list(ncdf4::ncdim_def("lon", "degrees_east", lonCoords),
+                     ncdf4::ncdim_def("lat", "degrees_north", latCoords),
+                     ncdf4::ncdim_def("time", "years", getYears(x, as.integer = TRUE), unlim = TRUE))
+  vars <- lapply(getItems(x, 3), function(vname) {
+    return(ncdf4::ncvar_def(vname, units = unit, dim = lonLatTime, missval = missval))
+  })
+
+  nc <- ncdf4::nc_create(filename, vars = vars)
+  withr::defer(ncdf4::nc_close(nc))
+
+  for (vname in getItems(x, 3)) {
+    ncdf4::ncvar_put(nc, vname, x[, , vname])
+  }
+}
+
 .writeDisagg <- function(x, file, comment, message) {
-  write.magpie(.fixCoords(x), file, comment = comment)
-  write.magpie(.fixCoords(x), sub(".mz", ".nc", file), comment = comment, verbose = FALSE)
+  base::message(message)
+  x <- .fixCoords(x)
+  write.magpie(x, file, comment = comment)
+
+  unit <- if (grepl("^unit: ", comment)) sub("^unit: ", "", comment) else ""
+  .ncdf4Write(x, sub(".mz", ".nc", file), unit = unit)
 }
 
 .dissagcrop <- function(gdx, land_hr, map_file) {
