@@ -84,13 +84,15 @@ if (length(map_file) > 1) {
   # create netCDF file
   lonLatTime <- list(ncdf4::ncdim_def("lon", "degrees_east", lonCoords),
                      ncdf4::ncdim_def("lat", "degrees_north", latCoords),
-                     ncdf4::ncdim_def("time", "years", getYears(x, as.integer = TRUE), unlim = TRUE))
+                     ncdf4::ncdim_def("time", "years since 0", getYears(x, as.integer = TRUE), unlim = TRUE))
   vars <- lapply(getItems(x, 3), function(vname) {
     return(ncdf4::ncvar_def(vname, units = unit, dim = lonLatTime, missval = missval))
   })
 
   nc <- ncdf4::nc_create(filename, vars = vars)
   withr::defer(ncdf4::nc_close(nc))
+
+  ncdf4::ncatt_put(nc, "time", "axis", "T")
 
   for (vname in getItems(x, 3)) {
     ncdf4::ncvar_put(nc, vname, x[, , vname])
