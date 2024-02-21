@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **58_peatland** removed realization "on"
 
 ### fixed
+- **scripts** Fixed writing of NetCDF files in output/reportMAgPIE2SEALS.R
 - **scripts** Fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
 - **scripts** bugfix highres.R for bioenergy demand and GHG prices in coupled runs
 - **35_natveg** bugfixes ac_est
