@@ -64,7 +64,7 @@ if (length(map_file) > 1) {
   return(x)
 }
 
-.ncdf4Write <- function(x, filename, unit = "", missval = -9999) {
+.ncdf4Write <- function(x, filename, unit = "", compression = 2, missval = -9999) {
   # magclass objects are sparse, fill gaps with NA
   xy <- getCoords(x)
   lonCoords <- seq(min(xy$x), max(xy$x), 0.5)
@@ -86,7 +86,8 @@ if (length(map_file) > 1) {
                      ncdf4::ncdim_def("lat", "degrees_north", latCoords),
                      ncdf4::ncdim_def("time", "years since 0", getYears(x, as.integer = TRUE), unlim = TRUE))
   vars <- lapply(getItems(x, 3), function(vname) {
-    return(ncdf4::ncvar_def(vname, units = unit, dim = lonLatTime, missval = missval))
+    return(ncdf4::ncvar_def(vname, units = unit, dim = lonLatTime,
+                            missval = missval, compression = compression))
   })
 
   nc <- ncdf4::nc_create(filename, vars = vars)
