@@ -381,6 +381,9 @@ gc()
 land_split_hr <- land_hr[, getYears(area_shr_hr), ]
 area_hr <- area_shr_hr * dimSums(land_split_hr, dim = 3)
 
+rm(area_shr_hr)
+gc()
+
 # replace crop in land_hr in with crop_kfo_rf, crop_kfo_ir, crop_kbe_rf
 # and crop_kbe_ir
 kbe <- c("betr", "begr")
@@ -409,6 +412,8 @@ land_split_hr <- land_split_hr[, , "crop", invert = TRUE]
 # combine land_split_hr with crop_hr.
 land_split_hr <- mbind(crop_hr, fallow, land_split_hr)
 
+rm(crop_kfo_rf, crop_kfo_ir, crop_kbe_rf, crop_kbe_ir, crop_hr, fallow, area_hr)
+
 # split "forestry" into timber plantations, pre-scribed afforestation (NPi/NDC) and endogenous afforestation (CO2 price driven)
 message("Disaggregating forestry")
 farea <- dimSums(landForestry(gdx, level = "cell"), dim = "ac")
@@ -430,6 +435,9 @@ land_split_hr <- land_split_hr[, , "forestry", invert = TRUE]
 # combine land_split_hr with farea_hr
 land_split_hr <- mbind(land_split_hr, farea_hr)
 
+rm(farea, farea_shr, farea_hr)
+gc()
+
 # Write output
 .writeDisagg(land_split_hr, land_hr_split_file,
   comment = "unit: Mha per grid-cell",
@@ -439,6 +447,7 @@ land_split_hr <- mbind(land_split_hr, farea_hr)
   comment = "unit: grid-cell land area fraction",
   message = "Write cropsplit land area share"
 )
+rm(land_split_hr)
 gc()
 
 # --------------------------------
@@ -508,6 +517,9 @@ land_bii_hr <- interpolateAvlCroplandWeighted(
   snv_pol_fader = snv_pol_fader,
   unit = "share"
 )
+
+rm(land_consv_hr, urban_land_hr)
+
 land_bii_hr <- .fixCoords(land_bii_hr)
 
 # Add primary and secondaray other land
@@ -518,12 +530,14 @@ land_bii_hr <- land_bii_hr * side_layers_hr[, , c("forested", "nonforested")]
 
 # Sum over land classes
 bii_hr <- dimSums(land_bii_hr * bii_hr, dim = 3, na.rm = TRUE)
+rm(land_bii_hr)
 
 # Write output
 .writeDisagg(bii_hr, bii_hr_out_file,
   comment = "unitless",
   message = "Write output BII at 0.5°"
 )
+rm(bii_hr)
 gc()
 
 
@@ -560,6 +574,8 @@ gc()
 out <- peat_hr / dimSums(land_hr[,getYears(peat_hr),], dim = 3)
 out[is.nan(out)] <- 0
 out[is.infinite(out)] <- 0
+
+rm(land_hr, peat_hr)
 
 .writeDisagg(out, peatland_hr_share_out_file,
              comment = "unit: grid-cell land area fraction",
