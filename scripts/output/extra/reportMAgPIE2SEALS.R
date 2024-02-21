@@ -34,7 +34,7 @@ title <- cfg$title
 
 # Restructure data to conform to SEALS
 reportLandUseForSEALS(
-  magCellLand = "cell.land_0.5_share.nc",
+  magCellLand = "cell.land_0.5_share.mz",
   outFile = paste0("cell.land_0.5_SEALS_", title, ".nc"),
-  dir = outputdir, selectyears = c(2015, 2020, 2025, 2030, 2035, 2040, 2045, 2050)
+  dir = outputdir, selectyears = c(2020, 2030, 2040, 2050)
 )
