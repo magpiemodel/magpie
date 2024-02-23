@@ -97,3 +97,14 @@ $macro m_carbon_stock(land,carbon_density,item) \
 $macro m_carbon_stock_ac(land,carbon_density,sets,sets_sub) \
             sum((&&sets), land(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"actual")) + \
             sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
+
+* macros for peatland module
+$macro m58_LandMerge(land,landForestry,set) \
+   land(&&set,"crop")$(sameas(manPeat58,"crop")) \
+   + land(&&set,"past")$(sameas(manPeat58,"past")) \
+   + landForestry(&&set,"plant")$(sameas(manPeat58,"forestry"))
+
+$macro m58_LandLeft(pclandFull,setFull,vland,pcland) \
+    (sum(&&setFull,pclandFull(j2,&&setFull)) \
+     - sum(manPeat58_alias$(not sameas(manPeat58_alias,manPeat58)),vland(j2,manPeat58_alias)) \
+     - sum(manPeat58_alias$(sameas(manPeat58_alias,manPeat58)),pcland(j2,manPeat58_alias)))

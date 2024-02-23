@@ -25,8 +25,13 @@ sets
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, cottn_pro, begr, betr /
 
-   knbe14(kcr) Cropping activities excluding bioenergy plants
+  knbe14(kcr) Cropping activities excluding bioenergy plants
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, cottn_pro /
+
+  ncp_type14 natures contributions to people (NCP) relevant for agricultural yields
+       / soil_intact, poll_suff /
+
 ;
+

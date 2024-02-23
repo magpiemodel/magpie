@@ -9,6 +9,9 @@ i71_urban_area_share(j) =
        pm_land_start(j,"urban")/sum(cell(i,j),sum(cell2(i,j3),pm_land_start(j3,"urban")))
      ;
 
-s71_lp_fix = 0;
 s71_scale_mon = 1.10;
 s71_punish_additional_mon = 15000;
+
+* Minimal regional production of `kli_rum` to avoid division by zero in `q71_feed_balanceflow`.
+vm_prod_reg.lo(i,kli_rum) = 10**(-6);
+

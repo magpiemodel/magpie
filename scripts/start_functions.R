@@ -246,7 +246,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   # Apply scenario settings ans check configuration file for consistency
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg, extras = c("info", "repositories"), saveCheck = TRUE)
+  cfg <- gms::check_config(cfg, extras = c("info", "repositories", "gms$c_input_gdx_path"), saveCheck = TRUE)
 
   # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
@@ -274,12 +274,16 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   if (is.null(renv::project())) {
     message("No active renv project found, not using renv.")
   } else {
-    # this script always runs in repo root, so we can check whether the main renv is loaded with:
-    if (normalizePath(renv::project()) == normalizePath(".")) {
+    if (!is.null(cfg$renv_lock)) {
+      message("Copying cfg$renv_lock (= '", normalizePath(cfg$renv_lock, mustWork = TRUE), "') into '",
+              cfg$results_folder, "'")
+      file.copy(cfg$renv_lock, file.path(cfg$results_folder, "_renv.lock"))
+    } else if (normalizePath(renv::project()) == normalizePath(".")) {
+      # the main renv is loaded
       message("Generating lockfile in '", cfg$results_folder, "'... ", appendLF = FALSE)
       # suppress output of renv::snapshot
-      utils::capture.output({
-        errorMessage <- utils::capture.output({
+      errorMessage1 <- utils::capture.output({
+        errorMessage2 <- utils::capture.output({
           snapshotSuccess <- tryCatch({
             # snapshot current main renv into run folder
             renv::snapshot(lockfile = file.path(cfg$results_folder, "_renv.lock"), prompt = FALSE)
@@ -288,11 +292,11 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
         }, type = "message")
       })
       if (!snapshotSuccess) {
-        stop(paste(errorMessage, collapse = "\n"))
+        stop(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
       }
       message("done.")
     } else {
-      # a run renv is loaded, we are presumably starting a HR follow up run
+      # a run renv is loaded
       message("Copying lockfile into '", cfg$results_folder, "'")
       file.copy(renv::paths$lockfile(), file.path(cfg$results_folder, "_renv.lock"))
     }
@@ -431,6 +435,18 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   }
 
   # Yield calibration
+
+  # check for inconsistent settings
+  if((cfg$recalibrate == TRUE || cfg$recalibrate == "ifneeded")
+      && cfg$gms$s14_use_yield_calib == 0) {
+    stop("The combination of the switch configurations `cfg$recalibrate <- TRUE/ifneeded`
+          and `cfg$gms$s14_use_yield_calib <- 0` is inconsistent.
+          Please check the config and set `cfg$gms$s14_use_yield_calib <- 1` 
+          if yield calibration is desired, or `cfg$recalibrate <- FALSE` if not.
+          Note that the current default is to not use yield calibration.")
+  }
+
+  # decide if calibration is needed if "ifneeded" is specified
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
   if(cfg$recalibrate=="ifneeded") {
     if(!file.exists(calib_file)) {
@@ -514,7 +530,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   if(is.na(cfg$sequential)) cfg$sequential <- !slurm
 
-  if(slurm & !cfg$sequential) {
+  if(slurm && !cfg$sequential) {
     if(is.null(cfg$qos)) {
       # try to select best QOS based on available resources
       # and available information
