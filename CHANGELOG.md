@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** settings for cfg$gms$s35_secdf_distribution in `ForestryEndo` and `ForestryExo` changed from `2` to `0`
 - **scenario_config.csv** removed erroneous setting `cc` from column `input`
 - **default.cfg** update default `cfg$gms$c56_pollutant_prices` and `cfg$gms$c60_2ndgen_biodem` to `R32M46-SSP2EU-NPi`
-- **default.cfg** update input data to rev 4.96 
+- **default.cfg** update input data to rev 4.96
 - **default.cfg** changed default for `cfg$gms$s56_buffer_aff` from 0.2 to 0.5
 - **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
 - **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **58_peatland** removed realization "on"
 
 ### fixed
+- **scripts** Fixed writing of NetCDF files in output/reportMAgPIE2SEALS.R
 - **scripts** Fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
 - **scripts** bugfix highres.R for bioenergy demand and GHG prices in coupled runs
 - **35_natveg** bugfixes ac_est
