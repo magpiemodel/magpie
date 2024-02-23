@@ -41,6 +41,21 @@ sets
       R2M41-SSP2-Budg950,
       R2M41-SSP2-NDC,
       R2M41-SSP2-NPi,
+      R32M46-SDP_MC-NDC,
+      R32M46-SDP_MC-NPi,
+      R32M46-SDP_MC-PkBudg650,
+      R32M46-SSP1-NDC,
+      R32M46-SSP1-NPi,
+      R32M46-SSP1-PkBudg1050,
+      R32M46-SSP1-PkBudg650,
+      R32M46-SSP2EU-NDC,
+      R32M46-SSP2EU-NPi,
+      R32M46-SSP2EU-PkBudg1050,
+      R32M46-SSP2EU-PkBudg650,
+      R32M46-SSP5-NDC,
+      R32M46-SSP5-NPi,
+      R32M46-SSP5-PkBudg1050,
+      R32M46-SSP5-PkBudg650,
       SSPDB-SSP1-19-IMAGE,
       SSPDB-SSP1-19-REMIND-MAGPIE,
       SSPDB-SSP1-26-IMAGE,
@@ -115,7 +130,10 @@ sets
       ecoSysProtOff,
       ecoSysProtAll_agMgmtExclN2O,
       ecoSysProtAll_agMgmtExclCH4,
-      ecoSysProtAll_agMgmtOff /
+      ecoSysProtAll_agMgmtOff,
+      co2_reddnatveg_nosoil,
+      co2_peatland,
+      co2_reddnatveg_nosoil_peatland /
 
 ;
 *######################### R SECTION END (SETS) ################################

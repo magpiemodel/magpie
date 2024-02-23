@@ -148,21 +148,21 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.94_h12_magpie.tgz
-* md5sum: 25623b5ad3e8b72bd3008da9b69adfe0
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.94_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: d7800a0ffe271483116a8f00a939a89a
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.94_h12_validation.tgz
-* md5sum: 4b4128910822cf45603cab46f45ccf78
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: additional_data_rev4.46.tgz
+* Used data set: rev4.96_h12_magpie.tgz
 * md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: rev4.96_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: rev4.96_h12_validation.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: additional_data_rev4.47.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_glo_08Aug23.tgz
 * md5sum: NA
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.94
+* Regions data revision: 4.96
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.94
+* * Revision: 4.96
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Nov 17 19:42:06 2023
+* Last modification (input data): Fri Dec 22 16:58:47 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
