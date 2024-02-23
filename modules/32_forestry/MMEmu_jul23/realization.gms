@@ -34,12 +34,12 @@
 *' @limitations Rotation lengths for timber plantations are not endogenous.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/32_forestry/dynamic_feb21/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/32_forestry/dynamic_feb21/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/32_forestry/dynamic_feb21/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/32_forestry/dynamic_feb21/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/32_forestry/dynamic_feb21/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/32_forestry/dynamic_feb21/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/32_forestry/dynamic_feb21/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/32_forestry/dynamic_feb21/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/32_forestry/MMEmu_jul23/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/32_forestry/MMEmu_jul23/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/32_forestry/MMEmu_jul23/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/32_forestry/MMEmu_jul23/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/32_forestry/MMEmu_jul23/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/32_forestry/MMEmu_jul23/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/32_forestry/MMEmu_jul23/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/32_forestry/MMEmu_jul23/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
