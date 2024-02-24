@@ -20,6 +20,8 @@ f15_supply2intake_ratio_bottomup.cs3
 f15_supply2intake_ratio_FAO_iso.cs3
 f15_intake_EATLancet.cs3
 f15_intake_EATLancet_iso.cs3
+f15_targets_EATLancet_iso.cs3
+f15_fruitveg2others_kcal_ratio_iso.cs3
 f15_food_substitution_fader.csv
 f15_ruminant_fadeout_india.csv
 f15_milk_fadeout_india.csv

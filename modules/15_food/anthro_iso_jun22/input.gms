@@ -101,10 +101,11 @@ scalar s15_exo_monogastric Exogenous EAT Lancet animal product target on  (1) / 
 scalar s15_exo_ruminant Exogenous EAT Lancet animal product target on  (1) / 1 /;
 scalar s15_exo_fish Exogenous EAT Lancet animal product target on  (1) / 1 /;
 scalar s15_exo_fruitvegnut Exogenous EAT Lancet fruit vegetable nut seeds target on  (1) / 1 /;
+scalar s15_exo_roots Exogenous EAT Lancet root target on (1) / 1 /;
 scalar s15_exo_pulses Exogenous pulses target on  (1) / 1 /;
 scalar s15_exo_sugar Exogenous sugar target on  (1) / 1 /;
 scalar s15_exo_oils Exogenous oils (1) / 1 /;
-scalar s15_exo_brans Exogenous brans (1) / 1 /;
+scalar s15_exo_brans Exogenous brans (1) / 0 /;
 scalar s15_exo_scp Exogenous microbial protein target on  (1) / 1 /;
 * The EAT-Lancet diet only allows for added sugars, but does not include processed food or
 * alcohol. Via 's15_alc_scen' a maximum target for alcohol consumption can be defined.
@@ -250,9 +251,19 @@ $ondelim
 $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
+*** EAT Lancet diet recommendation
+table f15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15)   Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
+$ondelim
+$include "./modules/15_food/input/f15_targets_EATLancet_iso.cs3"
+$offdelim;
 
-**This file contains exogenous dietary recommendations for India and EAT Lancet recommendations for all other regions
-**Different set elements for sets "t_scen15", "kcal_scen15" and "EAT_scen15" result in the identical target diet as per f15_intake_EATLancet
+table f15_fruitveg2others_kcal_ratio(t_all,iso,EAT_special)  Country-specific ratio of calories from fruits and vegetables within the others and cassav_sp food categories (1)
+$ondelim
+$include "./modules/15_food/input/f15_fruitveg2others_kcal_ratio_iso.cs3"
+$offdelim;
+
+* This file contains exogenous dietary recommendations for India and EAT Lancet recommendations for all other regions
+* Different set elements for sets "t_scen15", "kcal_scen15" and "EAT_scen15" result in the identical target diet as per f15_intake_EATLancet
 table f15_intake_NIN(t_scen15,iso,kcal_scen15,EAT_scen15,kfo)   NIN scenarios for food-specific intake (kcal per capita per day)
 $ondelim
 $include "./modules/15_food/input/f15_intake_NIN_iso.cs3"

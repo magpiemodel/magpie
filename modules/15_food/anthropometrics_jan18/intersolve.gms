@@ -223,12 +223,12 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
 
 *** Substitution of ruminant meat and dairy products (kfo_rd) with single-cell protein (SCP) based on protein/cap/day
 i15_protein_to_kcal_ratio(t,kfo) =  fm_nutrition_attributes(t,kfo,"protein")/fm_nutrition_attributes(t,kfo,"kcal");
-* Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day 
+* Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day
 * using i15_protein_to_kcal_ratio(t,kfo_rd).
 * After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted
 * back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") +
-  sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) * 
+  sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) *
   i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
 p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_rumdairy_scp_fadeout(t,i);
 
@@ -352,12 +352,12 @@ if(s15_exo_diet = 1,
 
 * Via 's15_alc_scen' a maximum target for alcohol consumption is defined.
   if(s15_alc_scen>0,
-    i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
-    i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
+    p15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
+    p15_intake_detailed_scen_target(t,i,"alcohol")$(p15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
      = s15_alc_scen*i15_intake_scen_target(t,i);
      );
 
-  i15_intake_detailed_scen_target(t,i,EAT_staples) = (
+  p15_intake_detailed_scen_target(t,i,EAT_staples) = (
           i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
           i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
 
@@ -374,7 +374,7 @@ if(s15_exo_diet = 1,
 
 
     i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
-                                    *i15_intake_detailed_scen_target(t,i,kfo))
+                                    *p15_intake_detailed_scen_target(t,i,kfo))
                                     *p15_foodwaste_growth(t,i);
 
 *' In the last step, the regression-based calculation of daily per capita food demand
