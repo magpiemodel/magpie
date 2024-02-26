@@ -31,7 +31,7 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public" 
 cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
                cellular    = "rev4.96_26df900e_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
                validation  = "rev4.96_26df900e_validation.tgz",
-               additional  = "additional_data_rev4.43.tgz")
+               additional  = "additional_data_rev4.47.tgz")
 
 
 cfg$output <- c("output_check", "rds_report")
@@ -41,7 +41,7 @@ cfg$force_replace <- TRUE
 ### Identifier and folder
 ###############################################
 identifierFlag <- "MMEmu_default"
-cfg$title <- "Default_rev4.87-calib"
+cfg$title <- "Default_rev4.96-calib"
 ###############################################
 cfg$info$flag <- identifierFlag
 #cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
