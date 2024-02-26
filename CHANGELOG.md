@@ -41,6 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **52_carbon** bugfix acx long-term carbon density
 - **32_forestry** keep c-density for timber plantations constant after rotation length to avoid unrealistic carbon sequestration in unharvested timber plantation
 - **32_forestry** bugfix unit p32_observed_gs_reg
+- **21_trade** introduced s21_manna_from_heaven for fixing v21_manna_from_heaven to zero. Without fixing to zero, v21_manna_from_heaven was used unnecessarily in runs started with highres.R
 
 ## [4.7.0] - 2023-12-11
 
