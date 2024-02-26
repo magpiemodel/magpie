@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **58_peatland** removed realization "on"
 
 ### fixed
+- **scripts** fixed disaggregation_LUH2.R which no longer relies on the old raster-based write.magpie for nc files
 - **scripts** fixed memory spike leading to crashes in disaggregation.R
 - **scripts** Fixed writing of NetCDF files in output/reportMAgPIE2SEALS.R
 - **scripts** Fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k

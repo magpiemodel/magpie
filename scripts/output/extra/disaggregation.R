@@ -68,9 +68,7 @@ if (length(map_file) > 1) {
   base::message(message)
   x <- .fixCoords(x)
   write.magpie(x, file, comment = comment)
-
-  unit <- if (grepl("^unit: ", comment)) sub("^unit: ", "", comment) else ""
-  write.magpie(x, sub(".mz", ".nc", file), unit = unit)
+  write.magpie(x, sub(".mz", ".nc", file), comment = comment)
 }
 
 .dissagcrop <- function(gdx, land_hr, map_file) {
