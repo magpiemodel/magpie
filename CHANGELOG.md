@@ -32,10 +32,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **58_peatland** removed realization "on"
 
 ### fixed
-- **scripts** fixed disaggregation_LUH2.R which no longer relies on the old raster-based write.magpie for nc files
+- **scripts** disaggregation_LUH2.R which no longer relies on the old raster-based write.magpie for nc files
 - **scripts** fixed memory spike leading to crashes in disaggregation.R
-- **scripts** Fixed writing of NetCDF files in output/reportMAgPIE2SEALS.R
-- **scripts** Fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
+- **scripts** fixed writing of NetCDF files in output/reportMAgPIE2SEALS.R
+- **scripts** fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
 - **scripts** bugfix highres.R for bioenergy demand and GHG prices in coupled runs
 - **35_natveg** bugfixes ac_est
 - **35_natveg** removed scaling of pm_carbon_density_ac
