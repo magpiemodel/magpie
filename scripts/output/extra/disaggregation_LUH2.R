@@ -226,10 +226,10 @@ gc()
 #check for dynamic foresty
 if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   message("Start forestry / timber reporting")
-  
+
   #### Wood
   land_lr <- madrat::toolAggregate(dimSums(land_hr,dim=3), map_file, from = "cell",to = "cluster")
-  
+
   ### Wood: Harvested Area
   a <- harvested_area_timber(gdx,level = "cell")
   b <- a / land_lr
@@ -249,12 +249,12 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
     rm(a,b)
     gc()
   }
-  
+
   #### Wood: Yields
   a <- ForestYield(gdx,level="cell")
   a_fix<- new.magpie(cells_and_regions=getCells(a),years=getYears(a),
                      names=getNames(a))
-  
+
   # BugFix in the mean time. Strange jump from ForestYield
   a_fix[,1,]<-0
   a_fix[,-1,]<-setYears(a[,2100,,invert=TRUE],getYears(a_fix[,-1,]))
@@ -275,7 +275,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
     rm(a,b)
     gc()
   }
-  
+
   #### Wood: Harvested Biomass Product Split
   b <- TimberProductionVolumetric(gdx,level = "cell",sumSource = FALSE,sumProduct = FALSE)
   b <- dimSums(b,dim=3.1)
