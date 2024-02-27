@@ -89,7 +89,6 @@
                    items = scen56))
 
   gms::writeSets(sets, "modules/56_ghg_policy/price_aug22/sets.gms")
-  gms::writeSets(sets, "modules/56_ghg_policy/MMEmu_feb23/sets.gms")
 
   ### 60_bioenergy
   scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
@@ -100,7 +99,7 @@
                     items = scen2nd60))
 
   gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
-  gms::writeSets(sets , "modules/60_bioenergy/MMEmu_feb23/sets.gms")
+  gms::writeSets(sets , "modules/60_bioenergy/1st2ndgen_priced_feb24/sets.gms")
 }
 
 # Function to extract information from info.txt
