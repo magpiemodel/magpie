@@ -62,7 +62,7 @@ convertLUH2 <- function(x) {
 
 # code taken from the old raster-based nc writing in write.magpie
 # https://raw.githubusercontent.com/pik-piam/magclass/19fc7d098fbbea4af26240d6472e7e088356bf57/R/write.magpie.R
-writeRasterBrick <- function(x, file_name, comment = NULL, zname = "Time", ...) {
+writeRasterBrick <- function(x, filePath, comment = NULL, zname = "Time", ...) {
   if (!requireNamespace("ncdf4", quietly = TRUE) || !requireNamespace("raster", quietly = TRUE)) {
     stop("The packages \"ncdf4\" and \"raster\" are required!")
   }
@@ -89,20 +89,15 @@ writeRasterBrick <- function(x, file_name, comment = NULL, zname = "Time", ...) 
       unit <- "not specified"
     }
   }
-  # raster is using partial matching resulting in a warning if warnPartialMatchDollar is set
-  suppressSpecificWarnings({
-    raster::writeRaster(.sub(x, varnames[1]), filename = filePath, format = "CDF", overwrite = TRUE,
-                        compression = 9, zname = zname, zunit = zunit, varname = varnames[1], varunit = unit, ...)
-  }, "partial match of 'group' to 'groups'", fixed = TRUE)
+  raster::writeRaster(.sub(x, varnames[1]), filename = filePath, format = "CDF", overwrite = TRUE,
+                      compression = 9, zname = zname, zunit = zunit, varname = varnames[1], varunit = unit, ...)
   nc <- ncdf4::nc_open(filePath, write = TRUE)
   if (zunit == "years") {
     try(ncdf4::ncvar_put(nc, zname, years), silent = TRUE)
   }
   if (length(varnames) > 1) {
     for (i in varnames[-1]) {
-      suppressSpecificWarnings({
-        nc <- ncdf4::ncvar_add(nc, ncdf4::ncvar_def(i, unit, nc$dim, compression = 9))
-      }, "partial match of 'group' to 'groups'", fixed = TRUE)
+      nc <- ncdf4::ncvar_add(nc, ncdf4::ncvar_def(i, unit, nc$dim, compression = 9))
       ncdf4::ncvar_put(nc, i, aperm(as.array(.sub(x, i)), c(2, 1, 3)))
     }
   }
@@ -353,7 +348,7 @@ if (any(abs(d) > 0.1 )) message(paste0("Difference between cluster and grid cell
 if(!file.exists(paste0(out_dir,"/LUH2_irrigation.nc"))){
 irrig_hr_shr <- convertLUH2(irrig_hr_shr)
 gc()
-writewriteRasterBrick(irrig_hr_shr, paste0(out_dir, "/LUH2_irrigation.nc"), comment = "unit: fraction of crop area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(irrig_hr_shr, paste0(out_dir, "/LUH2_irrigation.nc"), comment = "unit: fraction of crop area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(irrig_hr_shr,d)
 gc()
 }
