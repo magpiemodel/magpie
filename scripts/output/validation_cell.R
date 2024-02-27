@@ -42,8 +42,8 @@ LU <- plotCorrHist2D(
 
 ######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with LUH ########
 magpie <- croparea(gdx, level = "cell", product_aggr = FALSE, water_aggr = TRUE)[, getYears(historical_LU), crops]
-historical1 <- dimOrder(readGDX(gdx, "fm_croparea")[, getYears(historical_LU), crops], perm = c(2, 1), dim = 3)
-historical1 <- dimSums(historical1, dim = 3.2)
+historical1 <- read.magpie(paste0(outputdir, "/LUH2_croparea_0.5.mz"))
+historical1 <- gdxAggregate(gdx, historical1, to = "cluster", absolute = TRUE, dir = outputdir)
 
 
 Crops <- plotCorrHist2D(
@@ -52,12 +52,9 @@ Crops <- plotCorrHist2D(
     axisTitleFont = 11, TitleFontSize = 12, legendTitleFont = 10, legendTextFont = 8, statFont = 2, stat = FALSE, table = TRUE, tag = "year"
 )
 
-######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with SPAM ########
-cells <- if (length(mapping$cell) == 59199) "magpiecell" else if (length(mapping$cell) == 67420) "lpjcell"
-if (cells == "lpjcell") {
-    mapping <- readRDS(map_file)
-    historical <- readSource(type = "MAPSPAM", subtype = "physical")[, , crops]
-    historical <- magpiesort(toolAggregate(historical, rel = mapping, from = "cell", to = "cluster")) / 1e6
+######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with MAPSPAM ########
+    historical <- read.magpie(paste0(outputdir, "/MAPSPAM_croparea_0.5.mz"))
+    historical <- magpiesort(gdxAggregate(gdx, historical, to = "cluster", absolute = TRUE, dir = outputdir)) 
     historical <- dimSums(historical, dim = 3.2)
 
     CropsSPAM <- plotCorrHist2D(
@@ -66,7 +63,7 @@ if (cells == "lpjcell") {
         axisTitleFont = 11, TitleFontSize = 12, legendTitleFont = 10, legendTextFont = 8, statFont = 2, stat = FALSE, table = TRUE,
         palette = "PiYG", tag = "year"
     )
-}
+
 ######################################### Generates document ##############################################
 template <- c(
     "\\documentclass[a4paper, portrait ]{article}",
