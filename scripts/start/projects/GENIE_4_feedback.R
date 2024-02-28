@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: GENIE project MESSAGE-MAgPIE Emulator - Step 1: export tau
+# description: GENIE project MESSAGE-MAgPIE Emulator - emulator feedback run
 # ----------------------------------------------------------
 
 ######################################
@@ -34,32 +34,79 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
                patch       = "MMEmuR12_rev4.96.tgz")
 
 
-cfg$output <- c("output_check", "rds_report")
+cfg$output <- c("output_check", "extra/disaggregation", "rds_report")
 
 preset <-  "GENIE_SCP"
-cfg <- setScenario(cfg, c(preset)) #load config presets
+cfg <- setScenario(cfg, c(preset)) #load config presetswrite it before starting the run.
 
 cfg$force_replace <- FALSE
-cfg$qos <- "priority"
 
 ### Identifier and folder
 ###############################################
 identifierFlag <- "SCP_24_02_29"
-cfg$title <- "Default_rev4.96-preset"
 ###############################################
-
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
-cfg$gms$c44_bii_decrease <- 0
-cfg$gms$c22_protect_scenario <- "BH" 
 
+### BE 
 cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
 cfg$gms$c60_bioenergy_subsidy <- 0
 
-cfg$gms$c60_2ndgen_biodem <- "R32M46-SSP2EU-NPi"
+### Tau / Yield
+cfg$gms$tc <- "exo" 
 
-cfg$title <- "Tau"
+### Biodiv
+blV <- c(0) #BII lower bound (0-1), default 0
+#0, 0.7, 0.74, 0.78
 
-#start MAgPIE run
-start_run(cfg, codeCheck = FALSE)
+### Food
+mpV <- c(0) #0, 25, 50, 75
+
+
+for (bl in blV) {
+  bd <- 0
+  pa <- "BH"
+  if (bl == 0) {
+    bd <- 1
+    pa <- "none"
+  }
+
+ cfg$gms$c44_bii_decrease <- bd
+ cfg$gms$s44_bii_lower_bound <- bl
+ cfg$gms$c22_protect_scenario <- pa
+
+ for (mp in mpV) {
+
+    if (mp != 0){
+      m = 100 - mp
+      cfg$gms$c15_rumdairy_scp_scen <- paste0("sigmoid_", m, "pc_25_50")
+    } else {
+      cfg$gms$c15_rumdairy_scp_scen <- "constant"
+    }
+
+    preflag <- paste0("MP", str_pad(mp, 2, pad = "0"),
+    "BD", bd, "BI", str_pad(bl * 100, 2, pad = "0")
+    )
+    cfg$results_folder <- paste(
+    # "output", identifierFlag, preflag, ":title:", sep = "/"
+    "output", identifierFlag, ":title:", sep = "/"
+    )
+    
+    n <- "Feedback_step13_400f"
+    m <- n
+    cfg$gms$c60_2ndgen_biodem <- n
+    cfg$gms$c56_pollutant_prices <- m
+
+
+    ##############################################
+    #runflag <- paste("feedback", f_flag, sep = "_")
+    runflag <- paste0(m, "") 
+
+    cfg$title <- paste0(preflag, runflag)
+
+    start_run(cfg, codeCheck = FALSE)
+
+
+ } # MP replacement
+} # BII lower bound

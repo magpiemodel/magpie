@@ -6,8 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: MESSAGE-MAgPIE Emulator SCP Price Setup
-# position: 1
+# description: GENIE project MESSAGE-MAgPIE Emulator - Step 2: price-based biomass potential
 # ----------------------------------------------------------
 
 ######################################
@@ -22,14 +21,30 @@ library(stringr)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R") #nolinter
 # Source the default config and then over-write it before starting the run.
-source("config/mp_default.cfg") #nolinter
+source("config/default.cfg") #nolinter
+
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public" = NULL,
+                                "./patch_input" = NULL),
+                           getOption("magpie_repos"))
+
+cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
+               cellular    = "rev4.96_26df900e_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+               validation  = "rev4.96_26df900e_validation.tgz",
+               additional  = "additional_data_rev4.47.tgz",
+               patch       = "MMEmuR12_rev4.96.tgz")
+
+
+cfg$output <- c("output_check", "rds_report")
+
+preset <-  "GENIE_SCP"
+cfg <- setScenario(cfg, c(preset)) #load config presetswrite it before starting the run.
 
 cfg$force_replace <- FALSE
 cfg$qos <- "priority"
 
 ### Identifier and folder
 ###############################################
-identifierFlag <- "SCP_23-11-27"
+identifierFlag <- "SCP_24_02_29"
 ###############################################
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
@@ -47,17 +62,20 @@ cfg$gms$tc <- "exo"
 blV <- c(0, 0.7, 0.74, 0.78) #BII lower bound (0-1), default 0
 
 ### Food
-mpV <- c(0, 30, 50, 76)
+mpV <- c(0, 25, 50, 75)
 
 
 for (bl in blV) {
   bd <- 0
+  pa <- "BH"
   if (bl == 0) {
     bd <- 1
+    pa <- "none"
   }
 
   cfg$gms$c44_bii_decrease <- bd
   cfg$gms$s44_bii_lower_bound <- bl
+  cfg$gms$c22_protect_scenario <- pa
 
   for (mp in mpV) {
     preflag <- paste0("MP", str_pad(mp, 2, pad = "0"), "BI", str_pad(bl * 100, 2, pad = "0"))
@@ -65,7 +83,8 @@ for (bl in blV) {
     cfg$info$flag2 <- preflag
 
     if (mp != 0){
-      cfg$gms$c15_rumdairy_scp_scen <- paste0("MP", str_pad(mp, 2, pad = "0"))
+      m = 100 - mp
+      cfg$gms$c15_rumdairy_scp_scen <- paste0("sigmoid_", m, "pc_25_50")
     } else {
       cfg$gms$c15_rumdairy_scp_scen <- "constant"
     }
