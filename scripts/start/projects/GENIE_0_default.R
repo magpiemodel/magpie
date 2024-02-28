@@ -6,8 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: MESSAGE-MAgPIE Emulator Default varient for Tau readout
-# position: 1
+# description: GENIE project MESSAGE-MAgPIE Emulator Default script
 # ----------------------------------------------------------
 
 ######################################
@@ -36,11 +35,9 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
 
 
 cfg$output <- c("output_check", "rds_report")
-cfg$force_replace <- TRUE
 
 preset <-  "GENIE_SCP"
 cfg <- setScenario(cfg, c(preset)) #load config presets
-
 
 ### Identifier and folder
 ###############################################
@@ -48,7 +45,6 @@ identifierFlag <- "MMEmu_default"
 cfg$title <- "Default_rev4.96-preset"
 ###############################################
 cfg$info$flag <- identifierFlag
-#cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
 ##########################################################
 start_run(cfg, codeCheck = FALSE)
