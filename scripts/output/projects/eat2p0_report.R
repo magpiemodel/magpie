@@ -25,8 +25,8 @@ if(!exists("source_include")) {
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 gdx <- file.path(outputdir, "fulldata.gdx")
-mif <- paste0(outputdir, "/agmip_report.mif")
-rds <- paste0(outputdir, "/agmip_report.rds")
+mif <- paste0(outputdir, "/eat2p0_report.mif")
+rds <- paste0(outputdir, "/eat2p0_report.rds")
 ###############################################################################
 
 report <- getReportAgMIP(gdx, scenario = cfg$title)

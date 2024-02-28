@@ -11,8 +11,9 @@ vm_emissions_reg.up(i,"peatland",poll58) = Inf;
 
 p58_mapping_cell_climate(j,clcl58) = sum(clcl_mapping(clcl,clcl58),pm_climate_class(j,clcl));
 
-* Peatland scaling factor: ratio of total peatland area and total land area
-p58_scaling_factor(j)$(sum(land, pcm_land(j,land)) > 1e-20) = sum(land58, f58_peatland_area(j,land58)) / sum(land, pcm_land(j,land));
-
 * Initialization of peatland area
 pc58_peatland(j,land58) = 0;
+
+* For the internal GHG emission pricing it is assumed that intact peatlands have the same GHG emission factors as rewetted peatlands.
+* Without this assumption, GHG emissions of intact peatlands would be zero (no data available). This can lead to cases where intact peatland is converted to rewetted peatland.
+f58_ipcc_wetland_ef(clcl58,"intact",emis58) = f58_ipcc_wetland_ef(clcl58,"rewetted",emis58);

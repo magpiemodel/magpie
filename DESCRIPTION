@@ -21,7 +21,7 @@ Imports:
     lusweave,
     m4fsdp,
     madrat,
-    magclass,
+    magclass (>= 6.14.0),
     magpie4,
     MagpieNCGains,
     magpiesets,

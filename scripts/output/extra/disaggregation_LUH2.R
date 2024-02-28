@@ -46,17 +46,62 @@ out_dir<-paste0(outputdir,"/disaggregation_LUH2")
 convertLUH2 <- function(x) {
   #interpolate years
   years <- getYears(x,as.integer = TRUE)
+  getSets(x, fulldim = FALSE)[1] <- "x.y.iso"
   x <- toolFillYears(x,seq(range(years)[1],range(years)[2],by=1))
-
 
   for(n in seq(1995,2085,15)){
       x_1<- if(n==1995) as.RasterBrick(x[,n:(n+15),]) else  as.RasterBrick(x[,(n+1):(n+15),])
       x_aux<- if(n==1995) x_1 else stack(x_aux,x_1)
   }
   #re-project raster from 0.5 to 0.25 degree
-  x <- suppressWarnings(projectRaster(x_aux,raster(res=c(0.25,0.25)),method = "ngb"))
+  x <- suppressWarnings(raster::projectRaster(x_aux,raster::raster(res=c(0.25,0.25)),method = "ngb"))
+  crs(x) <- "+proj=utm +zone=1 +datum=WGS84"
   return(x)
 
+}
+
+# code taken from the old raster-based nc writing in write.magpie
+# https://raw.githubusercontent.com/pik-piam/magclass/19fc7d098fbbea4af26240d6472e7e088356bf57/R/write.magpie.R
+writeRasterBrick <- function(x, filePath, comment = NULL, zname = "Time", ...) {
+  if (!requireNamespace("ncdf4", quietly = TRUE) || !requireNamespace("raster", quietly = TRUE)) {
+    stop("The packages \"ncdf4\" and \"raster\" are required!")
+  }
+  .sub <- function(rx, name) {
+    layer <- sub("^.*\\.\\.", "", names(rx))
+    if (length(unique(layer)) == 1) return(rx)
+    return(rx[[which(layer == name)]])
+  }
+  tmp <- names(x)
+  tmp <- strsplit(tmp, "\\..")
+  years <- sort(unique(unlist(lapply(tmp, function(x) x[1]))))
+  varnames <- sort(unique(unlist(lapply(tmp, function(x) x[2]))))
+  zunit <- ifelse(all(isYear(years)), "years", "")
+  years <- as.numeric(gsub("y", "", years))
+  if (is.null(varnames)) varnames <- "Variable"
+  if (is.null(comment)) {
+    unit <- "not specified"
+  } else {
+    indicators <- sub(":.*$", "", comment)
+    units <- sub("^.*: ", "", comment)
+    if (any(grepl("unit", indicators))) {
+      unit <- units[grep("unit", indicators)]
+    } else {
+      unit <- "not specified"
+    }
+  }
+  raster::writeRaster(.sub(x, varnames[1]), filename = filePath, format = "CDF", overwrite = TRUE,
+                      compression = 9, zname = zname, zunit = zunit, varname = varnames[1], varunit = unit, ...)
+  nc <- ncdf4::nc_open(filePath, write = TRUE)
+  if (zunit == "years") {
+    try(ncdf4::ncvar_put(nc, zname, years), silent = TRUE)
+  }
+  if (length(varnames) > 1) {
+    for (i in varnames[-1]) {
+      nc <- ncdf4::ncvar_add(nc, ncdf4::ncvar_def(i, unit, nc$dim, compression = 9))
+      ncdf4::ncvar_put(nc, i, aperm(as.array(.sub(x, i)), c(2, 1, 3)))
+    }
+  }
+  ncdf4::nc_close(nc)
 }
 
 withr::local_options(list(magclass_sizeLimit = 1e+12))
@@ -193,7 +238,7 @@ saveRDS(states,paste0(outputdir,"/states.rds"))
 gc()
 states <- convertLUH2(states)
 gc()
-write.magpie(states, paste0(out_dir, "/LUH2_states.nc"), comment = "unit: fraction of grid-cell area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(states, paste0(out_dir, "/LUH2_states.nc"), comment = "unit: fraction of grid-cell area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(states)
 gc()
 }
@@ -216,7 +261,7 @@ gc()
 if(!file.exists(paste0(out_dir,"/LUH2_protected_area.nc"))){
 b <- convertLUH2(b)
 gc()
-write.magpie(b, paste0(out_dir, "/LUH2_protected_area.nc"), comment = "unit: fraction of grid-cell", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(b, paste0(out_dir, "/LUH2_protected_area.nc"), comment = "unit: fraction of grid-cell", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(b)
 gc()
 }
@@ -225,10 +270,10 @@ gc()
 #check for dynamic foresty
 if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   message("Start forestry / timber reporting")
-  
+
   #### Wood
   land_lr <- madrat::toolAggregate(dimSums(land_hr,dim=3), map_file, from = "cell",to = "cluster")
-  
+
   ### Wood: Harvested Area
   a <- harvested_area_timber(gdx,level = "cell")
   b <- a / land_lr
@@ -244,16 +289,16 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_area.nc"))){
     b <- convertLUH2(b)
     gc()
-    write.magpie(b, paste0(out_dir, "/LUH2_wood_harvest_area.nc"), comment = "unit: fraction of grid-cell area per year", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+    writeRasterBrick(b, paste0(out_dir, "/LUH2_wood_harvest_area.nc"), comment = "unit: fraction of grid-cell area per year", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
     rm(a,b)
     gc()
   }
-  
+
   #### Wood: Yields
   a <- ForestYield(gdx,level="cell")
   a_fix<- new.magpie(cells_and_regions=getCells(a),years=getYears(a),
                      names=getNames(a))
-  
+
   # BugFix in the mean time. Strange jump from ForestYield
   a_fix[,1,]<-0
   a_fix[,-1,]<-setYears(a[,2100,,invert=TRUE],getYears(a_fix[,-1,]))
@@ -270,11 +315,11 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_yields.nc"))){
     b <- convertLUH2(b)
     gc()
-    write.magpie(b, paste0(out_dir, "/LUH2_wood_harvest_yields.nc"), comment = "unit: m3 per ha per year", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+    writeRasterBrick(b, paste0(out_dir, "/LUH2_wood_harvest_yields.nc"), comment = "unit: m3 per ha per year", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
     rm(a,b)
     gc()
   }
-  
+
   #### Wood: Harvested Biomass Product Split
   b <- TimberProductionVolumetric(gdx,level = "cell",sumSource = FALSE,sumProduct = FALSE)
   b <- dimSums(b,dim=3.1)
@@ -284,7 +329,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_biomass_split.nc"))){
     b <- convertLUH2(b)
     gc()
-    write.magpie(b, paste0(out_dir, "/LUH2_wood_harvest_biomass_split.nc"), comment = "unit: fraction of wood harvest biomass", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+    writeRasterBrick(b, paste0(out_dir, "/LUH2_wood_harvest_biomass_split.nc"), comment = "unit: fraction of wood harvest biomass", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
     rm(b)
     gc()
   }
@@ -303,7 +348,7 @@ if (any(abs(d) > 0.1 )) message(paste0("Difference between cluster and grid cell
 if(!file.exists(paste0(out_dir,"/LUH2_irrigation.nc"))){
 irrig_hr_shr <- convertLUH2(irrig_hr_shr)
 gc()
-write.magpie(irrig_hr_shr, paste0(out_dir, "/LUH2_irrigation.nc"), comment = "unit: fraction of crop area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(irrig_hr_shr, paste0(out_dir, "/LUH2_irrigation.nc"), comment = "unit: fraction of crop area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(irrig_hr_shr,d)
 gc()
 }
@@ -321,7 +366,7 @@ if (any(abs(d) > 0.1)) message(paste0("Difference between cluster and grid cell 
 if (!file.exists(paste0(out_dir, "/LUH2_flood.nc"))) {
   flooded <- convertLUH2(flooded)
   gc()
-  write.magpie(flooded, paste0(out_dir, "/LUH2_flood.nc"), comment = "unit: flooded fraction of C3 annual crop area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+  writeRasterBrick(flooded, paste0(out_dir, "/LUH2_flood.nc"), comment = "unit: flooded fraction of C3 annual crop area", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
   rm(flooded, d)
   gc()
 }
@@ -340,7 +385,7 @@ getNames(bio_hr_shr,dim=1) <- c("crpbf_c4per","crpbf_c3per")
 if(!file.exists(paste0(out_dir,"/LUH2_bioenergy.nc"))){
 bio_hr_shr <- convertLUH2(bio_hr_shr)
 gc()
-write.magpie(bio_hr_shr, paste0(out_dir, "/LUH2_bioenergy.nc"), comment = "unit: fraction of crop type area occupied by biofuel crops", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(bio_hr_shr, paste0(out_dir, "/LUH2_bioenergy.nc"), comment = "unit: fraction of crop type area occupied by biofuel crops", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(bio_hr_shr,d)
 gc()
 }
@@ -397,19 +442,19 @@ x <- NULL
 if(!file.exists(paste0(out_dir,"/LUH2_Nitrogen_fertilizer.nc"))){
 x <- convertLUH2(clean_magpie(collapseNames(a[,,"fertilizer"],collapsedim = 3.1)))
 gc()
-write.magpie(x, paste0(out_dir, "/LUH2_Nitrogen_fertilizer.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(x, paste0(out_dir, "/LUH2_Nitrogen_fertilizer.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 }
 
 if(!file.exists(paste0(out_dir,"/LUH2_Nitrogen_manure.nc"))){
 x <- convertLUH2(clean_magpie(collapseNames(a[,,"manure"],collapsedim = 3.1)))
 gc()
-write.magpie(x, paste0(out_dir, "/LUH2_Nitrogen_manure.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(x, paste0(out_dir, "/LUH2_Nitrogen_manure.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 }
 
 if(!file.exists(paste0(out_dir,"/LUH2_Nitrogen_surplus.nc"))){
 x <- convertLUH2(clean_magpie(collapseNames(a[,,"surplus"],collapsedim = 3.1)))
 gc()
-write.magpie(x, paste0(out_dir, "/LUH2_Nitrogen_surplus.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(x, paste0(out_dir, "/LUH2_Nitrogen_surplus.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 }
 
 rm(a,x,weight)
@@ -429,7 +474,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_DM.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(a, paste0(out_dir, "/LUH2_Yield_DM.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
@@ -448,7 +493,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_DM_rainfed.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM_rainfed.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(a, paste0(out_dir, "/LUH2_Yield_DM_rainfed.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
@@ -467,7 +512,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_DM_irrigated.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a, paste0(out_dir, "/LUH2_Yield_DM_irrigated.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(a, paste0(out_dir, "/LUH2_Yield_DM_irrigated.nc"), comment = "unit: tDM-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }
@@ -486,7 +531,7 @@ a[,,n]<-dimSums(yield_kr_su[,,n],dim=3)/dimSums(map_LUHMAg_grid[,,n],dim=3)
 if(!file.exists(paste0(out_dir,"/LUH2_Yield_Nr.nc"))){
 a <- convertLUH2(a)
 gc()
-write.magpie(a, paste0(out_dir, "/LUH2_Yield_Nr.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
+writeRasterBrick(a, paste0(out_dir, "/LUH2_Yield_Nr.nc"), comment = "unit: kgN-per-ha", datatype = "FLT8S", zname = "time", xname = "lon", yname = "lat")
 rm(a,yield_kr,yield_kr_su)
 gc()
 }

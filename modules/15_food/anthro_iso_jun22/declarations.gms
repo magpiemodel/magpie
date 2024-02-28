@@ -11,14 +11,11 @@ equations
 ;
 
 positive variables
-  vm_dem_food(i,kall)       Food demand (mio. tDM per yr)
+  vm_dem_food(i,kall)    Food demand (mio. tDM per yr)
 ;
 
 
 *** #### Food Demand Model
-
-
-
 equations
   q15_aim                Objective function of food demand model (mio. USD05PPP)
   q15_budget(iso)        Household budget constraint (USD05PPP per cap per day)
@@ -39,19 +36,18 @@ equations
   q15_foodtree_kcal_processed(iso,kfo_pf)           Demand for processed products  (kcal per cap per day)
   q15_foodtree_kcal_staples(iso,kfo_st)             Demand for staple products  (kcal per cap per day)
   q15_foodtree_kcal_vegetables(iso)                 Demand for vegetable and fruit products  (kcal per cap per day)
-
 ;
 
 
 positive variables
-  v15_kcal_regr(iso,kfo)             Uncalibrated regression estimates of calorie demand (kcal per cap per day)
-  v15_kcal_regr_total(iso)           Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
-  v15_demand_regr(iso, regr15)       Uncalibrated regression estimates of kcal shares (1)
-  v15_income_pc_real_ppp_iso(iso)    Real income per cap (USD05PPP per cap)
-  v15_income_balance(iso)            Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)
-  v15_kcal_intake_total_regr(iso)    Food intake (kcal per cap per day)
-  v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)   Hierarchical tree parameter regressions (1)
-  v15_bmi_shr_regr(iso,sex,age,bmi_group15) Uncalibrated share of population groups belonging to a certain BMI group (1)
+  v15_kcal_regr(iso,kfo)                                 Uncalibrated regression estimates of calorie demand (kcal per cap per day)
+  v15_kcal_regr_total(iso)                               Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
+  v15_demand_regr(iso, regr15)                           Uncalibrated regression estimates of kcal shares (1)
+  v15_income_pc_real_ppp_iso(iso)                        Real income per cap (USD05PPP per cap)
+  v15_income_balance(iso)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)
+  v15_kcal_intake_total_regr(iso)                        Food intake (kcal per cap per day)
+  v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)     Hierarchical tree parameter regressions (1)
+  v15_bmi_shr_regr(iso,sex,age,bmi_group15)              Uncalibrated share of population groups belonging to a certain BMI group (1)
   v15_bmi_shr_overgroups(iso,sex,agegroup15,bmi_group15) Uncalibrated  share of population groups belonging to a certain BMI group (1)
 ;
 
@@ -71,27 +67,27 @@ parameters
  p15_iteration_counter(t)               Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
  p15_convergence_measure(t,iter15)      Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
  i15_dem_intercept(iso,regr15)          Food regression parameters intercept in kcal or as share (X)
- i15_dem_saturation(iso,regr15)             Food regression parameters saturation in kcal or as share (X)
- i15_dem_halfsat(iso,regr15)                Food regression parameters halfsaturation (USD05PPP per cap)
- i15_dem_nonsat(iso,regr15)                 Food regression parameters nonsaturation (1)
+ i15_dem_saturation(iso,regr15)         Food regression parameters saturation in kcal or as share (X)
+ i15_dem_halfsat(iso,regr15)            Food regression parameters halfsaturation (USD05PPP per cap)
+ i15_dem_nonsat(iso,regr15)             Food regression parameters nonsaturation (1)
 
 *prices
  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
-  p15_bodyheight(t,iso,sex,age,estimates15)        Body height (cm per cap)
-  p15_bodyweight(t,iso,sex,age,bmi_group15)        Body weight (kg per cap)
-  p15_bodyheight_calib(t,iso,sex,age_new_estimated15)         Calibration factor for regional height differences (cm)
-  p15_kcal_growth_food(t_all,iso,underaged15)      Average per capita demand for body size growth relevant food items in the last three 5-year steps (kcal per capita per day)
-  p15_physical_activity_level(t,iso,sex,age)       Physical activity levels in PAL relative to basic metabolic rate BMR (kcal per kcal)
+  p15_bodyheight(t,iso,sex,age,estimates15)           Body height (cm per cap)
+  p15_bodyweight(t,iso,sex,age,bmi_group15)           Body weight (kg per cap)
+  p15_bodyheight_calib(t,iso,sex,age_new_estimated15) Calibration factor for regional height differences (cm)
+  p15_kcal_growth_food(t_all,iso,underaged15)         Average per capita demand for body size growth relevant food items in the last three 5-year steps (kcal per capita per day)
+  p15_physical_activity_level(t,iso,sex,age)          Physical activity levels in PAL relative to basic metabolic rate BMR (kcal per kcal)
 
   i15_bmi_intercept(sex,agegroup15,bmi_tree15)     BMI share regression intercept (1)
   i15_bmi_saturation(sex,agegroup15,bmi_tree15)    BMI share regression saturation (1)
   i15_bmi_halfsat(sex,agegroup15,bmi_tree15)       BMI share regression halfsaturation (1)
 
-  p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)      Uncalibrated regression estimates of BMI shares (1)
-  i15_bmi_shr_calib(t,iso,sex,age,bmi_group15)     Calibration parameters to meet historical BMI shares (1)
+  p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)              Uncalibrated regression estimates of BMI shares (1)
+  i15_bmi_shr_calib(t,iso,sex,age,bmi_group15)             Calibration parameters to meet historical BMI shares (1)
   i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15) Calibration parameters of the last year with historical observations (1)
 
 * diet structure
@@ -101,20 +97,20 @@ parameters
 
   i15_milk_share_fadeout_india(t_all)              Temporal fader of milk share in india (applied before food demand model) (1)
   i15_rum_share_fadeout(t_all,iso)                 Temporal fader of ruminant meat share (applied before food demand model) (1)
-  i15_ruminant_fadeout(t,iso)                        Ruminant fadeout share (1)
-  i15_fish_fadeout(t,iso)                            Fish fadeout share (1)
-  i15_alcohol_fadeout(t,iso)                         Alcohol fadeout share (1)
-  i15_livestock_fadeout(t,iso)                       Livestock fadeout share (1)
-  i15_rumdairy_fadeout(t,iso)                        Ruminant meat and dairy fadeout share (1)
-  i15_rumdairy_scp_fadeout(t,iso)                    Ruminant meat and dairy fadeout share to be replaced by SCP (1)
-  i15_livestock_fadeout_threshold(t,iso)             Livestock fadeout share for threshold (1)
+  i15_ruminant_fadeout(t,iso)                      Ruminant fadeout share (1)
+  i15_fish_fadeout(t,iso)                          Fish fadeout share (1)
+  i15_alcohol_fadeout(t,iso)                       Alcohol fadeout share (1)
+  i15_livestock_fadeout(t,iso)                     Livestock fadeout share (1)
+  i15_rumdairy_fadeout(t,iso)                      Ruminant meat and dairy fadeout share (1)
+  i15_rumdairy_scp_fadeout(t,iso)                  Ruminant meat and dairy fadeout share to be replaced by SCP (1)
+  i15_livestock_fadeout_threshold(t,iso)           Livestock fadeout share for threshold (1)
 
-  i15_protein_to_kcal_ratio(t,kfo)           protein-to-kcal ratio (g protein per kcal)
+  i15_protein_to_kcal_ratio(t,kfo)                   Protein-to-kcal ratio (g protein per kcal)
 
- i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
- i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
- i15_livestock_kcal_structure_iso(t,iso,kfo_ap)      Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
- i15_processed_kcal_structure_iso                    Share of single processed products within total processed food (1)
+  i15_staples_kcal_structure_iso(t,iso,kfo_st)       Share of single staple products within total staples (1)
+  i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
+  i15_livestock_kcal_structure_iso(t,iso,kfo_ap)     Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
+  i15_processed_kcal_structure_iso                   Share of single processed products within total processed food (1)
 
 * diet calibration
   p15_kcal_calib(t,iso,kfo)                   Balance flow to diverge from mean calories of regressions (kcal per cap per day)
@@ -125,42 +121,50 @@ parameters
 
 * before shock
  o15_kcal_regr_initial(t,iso,kfo)             Uncalibrated per capita demand before price shock (kcal per capita per day)
- pm_kcal_pc_initial(t,i,kall)                  Per capita consumption in food demand model before price shock (kcal per capita per day)
+ pm_kcal_pc_initial(t,i,kall)                 Per capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_initial_iso(t,iso,kfo)           Per capita consumption in food demand model before price shock on country level (kcal per capita per day)
 
 * after price shock
- p15_kcal_pc_iso(t,iso,kfo)                      Per capita consumption in food demand model after price shock on country level (kcal per capita per day)
- p15_kcal_pc(t,i,kfo)                            Per capita consumption in food demand model after price shock on regional level (kcal per capita per day)
- p15_kcal_pc_calibrated(t,i,kfo)                 Calibrated per capita consumption in food demand model after price shock (kcal per capita per day)
- p15_kcal_pc_iso_orig(t,iso,kfo)            Auxiliary parameter for per capita food consumption - basis for convergence into waste and diet scenarios (kcal per capita per day)
- p15_kcal_pc_iso_livestock_orig(t,iso)      Auxiliary parameter for per capita livestock consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
- p15_kcal_pc_iso_rumdairy_orig(t,iso)      Auxiliary parameter for per capita ruminant and dairy consumption - basis for scenarios of ruminant-based food substitution (kcal per capita per day)
- p15_kcal_pc_iso_plant_orig(t,iso)          Auxiliary parameter for per capita plant-based food consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
+ p15_kcal_pc_iso(t,iso,kfo)                        Per capita consumption in food demand model after price shock on country level (kcal per capita per day)
+ p15_kcal_pc(t,i,kfo)                              Per capita consumption in food demand model after price shock on regional level (kcal per capita per day)
+ p15_kcal_pc_calibrated(t,i,kfo)                   Calibrated per capita consumption in food demand model after price shock (kcal per capita per day)
+ p15_kcal_pc_iso_orig(t,iso,kfo)                   Auxiliary parameter for per capita food consumption - basis for convergence into waste and diet scenarios (kcal per capita per day)
+ p15_kcal_pc_iso_livestock_orig(t,iso)             Auxiliary parameter for per capita livestock consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
+ p15_kcal_pc_iso_rumdairy_orig(t,iso)              Auxiliary parameter for per capita ruminant and dairy consumption - basis for scenarios of ruminant-based food substitution (kcal per capita per day)
+ p15_kcal_pc_iso_plant_orig(t,iso)                 Auxiliary parameter for per capita plant-based food consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
  p15_livestock_kcal_structure_orig(t,iso,kfo_lp)   Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
  p15_rumdairy_kcal_structure_orig(t,iso,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
  p15_plant_kcal_structure_orig(t,iso,kfo_pp)       Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
- p15_kcal_pc_livestock_supply_target(iso)      Target of per capita livestock consumption (kcal per capita per day)
+ p15_kcal_pc_livestock_supply_target(iso)          Target of per capita livestock consumption (kcal per capita per day)
 
- p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
- p15_bmi_shr_target(t,iso,sex,age,bmi_group15)         Target for BMI shares under exogenous scenarios (1)
- p15_intake_total(t,iso)                Total food intake in a country (kcal per capita per day)
+ p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) Calibrated estimates of BMI share for population groups  (1)
+ p15_bmi_shr_target(t,iso,sex,age,bmi_group15)     Target for BMI shares under exogenous scenarios (1)
+ p15_intake_total(t,iso)                           Total food intake in a country (kcal per capita per day)
 
 *food waste
- p15_demand2intake_ratio(t,iso)                 Ratio between food calorie demand and intake (kcal per kcal)
- p15_waste_pc(t,iso,kfo)                        Household waste by food group (kcal per capita per day)
- p15_intake_detail(t,iso,kfo)                   Intake by food group (kcal per capita per day)
- p15_demand2intake_ratio_detail(t,iso,kfo)      Food waste ratio by food group (kcal per kcal)
+ p15_demand2intake_ratio(t,iso)                   Ratio between food calorie demand and intake (kcal per kcal)
+ p15_waste_pc(t,iso,kfo)                          Household waste by food group (kcal per capita per day)
+ p15_intake_detail(t,iso,kfo)                     Intake by food group (kcal per capita per day)
+ p15_demand2intake_ratio_detail(t,iso,kfo)        Food waste ratio by food group (kcal per kcal)
  p15_demand2intake_ratio_detail_preexo(t,iso,kfo) Food waste as outcome of regression (kcal per kcal)
 
 * transition to exogenous scenario diets
- i15_intake_scen_target(t,iso)                  Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
- i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo)       Food-specific per capita calorie intake according to various EAT Lancet diet scenarios (kcal per capita per day)
- i15_intake_EATLancet(iso,kfo)                  Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
- i15_intake_detailed_scen_target(t,iso,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ i15_intake_scen_target(t,iso)                            Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) Food-specific per capita calorie intake according to various EAT Lancet diet scenarios (kcal per capita per day)
+ i15_intake_EATLancet(iso,kfo)                            Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
+ p15_intake_detailed_scen_target(t,iso,kfo)               Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
 
- p15_foodwaste_growth(t,iso)                    Increase in food waste over time relative to the historical time step of EAT Lancet diets (1)
- i15_kcal_pc_scen_target(t,iso,kfo)             Target for per capita food consumption according to an exogenous diet scenario (kcal per capita per day)
- i15_exo_foodscen_fader(t,iso)                  Fader that converges per capita food consumption to an exogenous diet scenario (1)
+ i15_fruit_ratio(t,iso,EAT_special)                       Ratio of calories from fruits and vegetables within the others and cassav_sp food categories (1)
+ p15_intake_detail_starchyfruit(t,iso)                    Auxiliary parameter for the intake of starchy fruits included in cassav_sp (kcal per capita per day)
+ p15_intake_detail_roots(t,iso)                           Auxiliary parameter for the intake of roots (kcal per capita per day)
+ p15_intake_detail_fruitveg(t,iso)                        Auxiliary parameter for the intake of fruits and vegetables included in others (kcal per capita per day)
+ p15_intake_detail_nuts(t,iso)                            Auxiliary parameter for the intake of nuts included in others (kcal per capita per day)
+ p15_intake_detailed_scen_starchyfruit(t,iso)             Auxiliary scenario target for the intake of starchy fruits included in cassav_sp (kcal per capita per day)
+ p15_intake_detailed_scen_roots(t,iso)                    Auxiliary scenario target for the intake of roots (kcal per capita per day)
+ p15_intake_detailed_scen_fruitveg(t,iso)                 Auxiliary scenario target for the intake of fruits and vegetables included in others (kcal per capita per day)
+ p15_intake_detailed_scen_nuts(t,iso)                     Auxiliary scenario target for the intake of nuts included in others (kcal per capita per day)
+
+ i15_exo_foodscen_fader(t,iso)                Fader that converges per capita food consumption to an exogenous diet scenario (1)
 
 * country-specific scenario switch
  p15_country_dummy(iso)                       Dummy parameter indicating whether country is affected by diet scenarios (1)
@@ -171,13 +175,13 @@ parameters
 ;
 
 scalars
- s15_year                    Current year as integer value (yr)  /2000/
+ s15_year          Current year as integer value (yr)  / 2000 /
 ;
+
 
 *' @code
 *' The food demand model consists of the following equations, which are not
 *' part of MAgPIE.
-
 model m15_food_demand /
       q15_aim,
       q15_budget,
@@ -203,8 +207,6 @@ model m15_food_demand /
       q15_foodtree_kcal_vegetables
   /;
 
-
-
 *' In contrast, the equation `q15_food_demand` is part of MAgPIE, but
 *' not of the food demand model.
 *' @stop
@@ -213,8 +215,6 @@ m15_food_demand.optfile   = 0 ;
 m15_food_demand.scaleopt  = 1 ;
 m15_food_demand.solprint  = 0 ;
 m15_food_demand.holdfixed = 1 ;
-
-
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters

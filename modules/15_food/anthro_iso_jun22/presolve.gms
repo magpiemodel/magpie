@@ -317,7 +317,7 @@ $include "./modules/15_food/anthro_iso_jun22/exodietmacro.gms";
 * some calculations for postprocessing and other modules
 p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
 pm_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
-o15_kcal_regr_initial(t,iso,kfo)=v15_kcal_regr.l(iso,kfo);
+o15_kcal_regr_initial(t,iso,kfo) = v15_kcal_regr.l(iso,kfo);
 
 
 *' @stop
