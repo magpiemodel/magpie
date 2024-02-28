@@ -17,7 +17,7 @@ library(lusweave)
 library(magpiesets)
 
 ############################# BASIC CONFIGURATION ##############################
-if (!file.exists(paste0(outputdir, "/LUH2_croparea_0.5.mz"))) stop("LUH2_croparea_0.5.mz and MAPSPAM_croparea_0.5.mz files are missing")
+if (!file.exists(paste0(outputdir, "/LUH2_croparea_0.5.mz"))) stop("Cell validation is not possible. LUH2_croparea_0.5.mz and MAPSPAM_croparea_0.5.mz files are missing")
 map_file <- Sys.glob(file.path(outputdir, "/clustermap_*.rds"))
 gdx <- file.path(outputdir, "/fulldata.gdx")
 cfg <- gms::loadConfig(file.path(outputdir, "/config.yml"))
@@ -42,7 +42,8 @@ LU <- plotCorrHist2D(
 ######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with LUH ########
 magpie <- croparea(gdx, level = "cell", product_aggr = FALSE, water_aggr = TRUE)[, , crops]
 historical1 <- read.magpie(paste0(outputdir, "/LUH2_croparea_0.5.mz"))
-historical1 <- magpiesort(dimSums(gdxAggregate(gdx, historical1, to = "cell", absolute = TRUE, dir = outputdir),dim=3.1))[, , crops]
+historical1 <- magpiesort((gdxAggregate(gdx, historical1, to = "cell", absolute = TRUE, dir = outputdir)))[, , crops]
+historical1 <- dimSums(historical1, dim = 3.1)
 
 intYears <- intersect(getYears(magpie, as.integer = TRUE), getYears(historical1, as.integer = TRUE))
 Crops <- plotCorrHist2D(
@@ -83,7 +84,7 @@ template <- c(
     "@"
 )
 
-############################## Plots LUH vs. magpie land use types ##########################################################
+############################## Plots LUH vs. magpie land use types ####################################################
 x <- LU[[1]]
 y <- as.data.frame(LU[[2]])
 colnames(y) <- y[1, ]
@@ -143,7 +144,7 @@ b1 <- 0
 for (i in 1:length(namesReport1)) {
     swlatex(sw, paste0("\\subsection{", namesReport1[i], "}"))
     a1 <- b1 + 1
-    b1 <- a1 + length((intYears)) - 1
+    b1 <- a1 + length(intYears) - 1
     swfigure(sw, tmpplot1, x = x1, c(a1:b1))
     swtable(sw, collapseNames(as.magpie(y1[a1:b1, ])),
         table.placement = "H", caption.placement = "top",
@@ -181,7 +182,7 @@ for (i in 1:length(namesReport1)) {
         swlatex(sw, paste0("\\subsection{", namesReport1[i], "}"))
         swlatex(sw, "\\qquad \\textbf{MAPSPAM} \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\textbf{LUH2}")
         a2 <- b2 + 1
-        b2 <- a2 + length(getYears(historical)) - 1
+        b2 <- a2 + length(intYears2) - 1
         swfigure(sw, tmpplot2, x2 = x2, x3 = x3, range = c(a2:b2))
         swtable(sw, collapseNames(as.magpie(y2[a2:b2, ])),
             table.placement = "H", caption.placement = "top",
