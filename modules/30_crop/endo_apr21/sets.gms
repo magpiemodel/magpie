@@ -53,4 +53,7 @@ sets
 
    policy_target30 Target year for cropland policy
    / none, by2030, by2050 /
+   
+   crop_treecover30
+   / CropTreecoverArea /
 ;

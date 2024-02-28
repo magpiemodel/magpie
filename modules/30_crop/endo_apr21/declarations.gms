@@ -13,6 +13,7 @@ parameters
  i30_avl_cropland_iso(iso)          Available land area for cropland at ISO level (mio. ha)
  p30_snv_scenario_fader(t_all)      SNV scenario fader (1)
  p30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
+ i30_cropland_treecover(j)          Cropland area covered by trees (mio. ha)
 ;
 
 positive variables

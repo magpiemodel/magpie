@@ -113,3 +113,10 @@ $include "./modules/30_crop/endo_apr21/input/avl_cropland_iso.cs3"
 $offdelim
 ;
 
+********* CroplandTreecover *******************************************
+
+table f30_cropland_treecover(j,crop_treecover30) Cropland area covered by trees (mio. ha)
+$ondelim
+$include "./modules/30_crop/endo_apr21/input/CroplandTreecover.cs3"
+$offdelim
+;

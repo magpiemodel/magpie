@@ -25,3 +25,5 @@ p30_country_dummy(policy_countries30) = 1;
 * Countries are weighted by available cropland area.
 i30_avl_cropland_iso(iso) = f30_avl_cropland_iso(iso,"%c30_marginal_land%");
 p30_country_snv_weight(i) = sum(i_to_iso(i,iso), p30_country_dummy(iso) * i30_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), i30_avl_cropland_iso(iso));
+
+i30_cropland_treecover(j) = f30_cropland_treecover(j,"CropTreecoverArea");
