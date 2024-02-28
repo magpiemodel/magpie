@@ -1,24 +1,23 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-# ---------------------------------------------------------------------------------------------------
-# description: Writes a validation file where land use types and main crops (soybean, maize, rice and
-# temparate cereals/wheat) at cellular level are compared to LUH and SPAM initial values.
-# ---------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------
+# description: Comparison at cellular level of land and crop types with LUH2 and MAPSPAM
+# comparison script: FALSE
+# ---------------------------------------------------------------
 
 library(magpie4)
 library(luscale)
-library(mrcommons)
 library(luplot)
-library(mrmagpie)
 library(lusweave)
 library(magpiesets)
 
 ############################# BASIC CONFIGURATION ##############################
+if (!file.exists(paste0(outputdir, "/LUH2_croparea_0.5.mz"))) stop("LUH2_croparea_0.5.mz and MAPSPAM_croparea_0.5.mz files are missing")
 map_file <- Sys.glob(file.path(outputdir, "/clustermap_*.rds"))
 gdx <- file.path(outputdir, "/fulldata.gdx")
 cfg <- gms::loadConfig(file.path(outputdir, "/config.yml"))
@@ -41,32 +40,30 @@ LU <- plotCorrHist2D(
 )
 
 ######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with LUH ########
-magpie <- croparea(gdx, level = "cell", product_aggr = FALSE, water_aggr = TRUE)[, getYears(historical_LU), crops]
-historical1 <- dimOrder(readGDX(gdx, "fm_croparea")[, getYears(historical_LU), crops], perm = c(2, 1), dim = 3)
-historical1 <- dimSums(historical1, dim = 3.2)
+magpie <- croparea(gdx, level = "cell", product_aggr = FALSE, water_aggr = TRUE)[, , crops]
+historical1 <- read.magpie(paste0(outputdir, "/LUH2_croparea_0.5.mz"))
+historical1 <- magpiesort(dimSums(gdxAggregate(gdx, historical1, to = "cell", absolute = TRUE, dir = outputdir),dim=3.1))[, , crops]
 
-
+intYears <- intersect(getYears(magpie, as.integer = TRUE), getYears(historical1, as.integer = TRUE))
 Crops <- plotCorrHist2D(
-    x = historical1, y = magpie, xlab = "LUH2 \n (mio.ha)", ylab = "MAgPIE \n (mio.ha)", bins = 35,
+    x = historical1[,intYears,], y = magpie[,intYears,], xlab = "LUH2 \n (mio.ha)", ylab = "MAgPIE \n (mio.ha)", bins = 35,
     folder = out_dir, file = "/validationCropCell", breaks = c(1, 10, 50), nrows = 2, ncols = 2, axisFont = 10,
     axisTitleFont = 11, TitleFontSize = 12, legendTitleFont = 10, legendTextFont = 8, statFont = 2, stat = FALSE, table = TRUE, tag = "year"
 )
 
-######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with SPAM ########
-cells <- if (length(mapping$cell) == 59199) "magpiecell" else if (length(mapping$cell) == 67420) "lpjcell"
-if (cells == "lpjcell") {
-    mapping <- readRDS(map_file)
-    historical <- readSource(type = "MAPSPAM", subtype = "physical")[, , crops]
-    historical <- magpiesort(toolAggregate(historical, rel = mapping, from = "cell", to = "cluster")) / 1e6
-    historical <- dimSums(historical, dim = 3.2)
+######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with MAPSPAM ########
+historical <- read.magpie(paste0(outputdir, "/MAPSPAM_croparea_0.5.mz"))
+historical <- magpiesort(gdxAggregate(gdx, historical, to = "cell", absolute = TRUE, dir = outputdir))[,,crops] 
+historical <- dimSums(historical, dim = 3.2)
+intYears2 <- intersect(getYears(magpie, as.integer = TRUE), getYears(historical, as.integer = TRUE))
 
-    CropsSPAM <- plotCorrHist2D(
-        x = historical, y = magpie[, getYears(historical), ], xlab = "MAPSPAM \n (mio.ha)", ylab = "MAgPIE \n (mio.ha)", bins = 35,
-        folder = out_dir, file = "/validationCropCellSPAM", breaks = c(1, 10, 50), nrows = 2, ncols = 2, axisFont = 10,
-        axisTitleFont = 11, TitleFontSize = 12, legendTitleFont = 10, legendTextFont = 8, statFont = 2, stat = FALSE, table = TRUE,
-        palette = "PiYG", tag = "year"
-    )
-}
+CropsSPAM <- plotCorrHist2D(
+    x = historical, y = magpie[, intYears2, ], xlab = "MAPSPAM \n (mio.ha)", ylab = "MAgPIE \n (mio.ha)", bins = 35,
+    folder = out_dir, file = "/validationCropCellSPAM", breaks = c(1, 10, 50), nrows = 2, ncols = 2, axisFont = 10,
+    axisTitleFont = 11, TitleFontSize = 12, legendTitleFont = 10, legendTextFont = 8, statFont = 2, stat = FALSE, table = TRUE,
+    palette = "PiYG", tag = "year"
+)
+
 ######################################### Generates document ##############################################
 template <- c(
     "\\documentclass[a4paper, portrait ]{article}",
@@ -119,11 +116,12 @@ for (i in 1:length(namesReport)) {
         table.placement = "H", caption.placement = "top",
         transpose = FALSE, caption = paste0("Compilation of error measurements for ", namesReport[i], " data comparing MAgPIE outputs \\& the LUH2 set at cluster level"), vert.lines = 0, align = "c"
     )
+    swlatex(sw, "\\newpage")
 }
-swlatex(sw, "\\newpage")
+
 
 ############################## Plots LUH vs. magpie crop types ##########################################################
-swlatex(sw, "\\section{Crop types between 1995-2015 compared to LUH2}")
+swlatex(sw, "\\section{", paste0("MAgPIE crop types compared to LUH2 (", intYears[1], "-", intYears[length(intYears)], ")"), "}")
 
 namesReport1 <- as.character(magpiesets::reportingnames(getNames(magpie)))
 x1 <- Crops[[1]]
@@ -145,20 +143,21 @@ b1 <- 0
 for (i in 1:length(namesReport1)) {
     swlatex(sw, paste0("\\subsection{", namesReport1[i], "}"))
     a1 <- b1 + 1
-    b1 <- a1 + length(getYears(historical1)) - 1
+    b1 <- a1 + length((intYears)) - 1
     swfigure(sw, tmpplot1, x = x1, c(a1:b1))
     swtable(sw, collapseNames(as.magpie(y1[a1:b1, ])),
         table.placement = "H", caption.placement = "top",
-        transpose = FALSE, caption = paste0("Compilation of error measurements for ", namesReport[i], " data comparing MAgPIE outputs \\& the LUH2 set at cluster level"), vert.lines = 0, align = "c"
+        transpose = FALSE, caption = paste0("Compilation of error measurements for ", namesReport1[i], " data comparing MAgPIE outputs \\& the LUH2 set at cluster level"), vert.lines = 0, align = "c"
     )
+    swlatex(sw, "\\newpage")
 }
 
 
 ############################## Plots MAPSPAM vs. magpie crop types ##########################################################
 
-if (cells == "lpjcell") {
+
     swlatex(sw, "\\newpage")
-    swlatex(sw, "\\section{Crop types between 1995-2015 compared to MAPSPAM}")
+    swlatex(sw, "\\section{", paste0("MAgPIE crop types compared to MAPSPAM (", intYears2[1], "-", intYears2[length(intYears2)], ")"), "}")
 
     x2 <- CropsSPAM[[1]]
     names(x2) <- paste0(names(x2), "MAP")
@@ -190,7 +189,7 @@ if (cells == "lpjcell") {
         )
         swlatex(sw, "\\newpage")
     }
-}
+
 ########## Details about statistics ##########
 swlatex(sw, "\\newpage")
 swlatex(sw, "\\section{Details about statistical measuremens of error and goodness of fit}")
