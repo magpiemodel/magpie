@@ -56,4 +56,8 @@ sets
    
    crop_treecover30
    / CropTreecoverArea /
+   
+   land_agfor(land) land types allowed for AgroForestry policy 
+   / secdforest, other /
+
 ;

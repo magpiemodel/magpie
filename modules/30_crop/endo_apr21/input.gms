@@ -23,8 +23,14 @@ $setglobal c30_rotation_constraints  on
 scalars
 s30_snv_shr                     Share of available cropland that is witheld for other land cover types (1) / 0 /
 s30_snv_shr_noselect            Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_snv_scenario_start          SNV scenario start year     / 2020 /
+s30_snv_scenario_start          SNV scenario start year       / 2020 /
 s30_snv_scenario_target         SNV scenario target year      / 2030 /
+
+s30_agfor_shr                   Share of cropland used for AgroForestry in target year (1) / 0.2 /
+s30_agfor_shr_noselect          Share of cropland used for AgroForestry in target year (1) / 0 /
+s30_agfor_scenario_start        AgroForestry scenario start year       / 2020 /
+s30_agfor_scenario_target       AgroForestry scenario target year      / 2050 /
+
 s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
 ;

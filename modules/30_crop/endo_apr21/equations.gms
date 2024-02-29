@@ -32,6 +32,18 @@
             sum(ct, p30_snv_shr(ct,j2)) * vm_land(j2,"crop")
           + sum((ct,land_snv,consv_type), pm_land_conservation(ct,j2,land_snv,consv_type));
 
+ q30_land_agfor(j2) ..
+            sum(land_agfor, vm_land(j2,land_agfor) - p30_land_agfor_start_year(j2,land_agfor))
+            =g=
+            sum(ct, p30_agfor_shr(ct,j2)) * vm_land(j2,"crop") - i30_cropland_treecover(j2);
+            
+ q30_land_agfor_trans(j2) ..
+         sum(land_agfor, vm_lu_transitions(j2,"crop",land_agfor))
+         =g=
+         vm_land(j2,"crop") * (sum(ct, p30_agfor_shr(ct,j2)) - sum(pt, p30_agfor_shr(pt,j2)));
+ 
+
+
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect
 *' crop rotations limiting the share a specific crop can cover of the total area

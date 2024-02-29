@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+p30_land_agfor_start_year(j,land)$(m_year(t) = s30_agfor_scenario_start) = vm_land.l(j,land);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_fallow(t,j,"marginal")                      = vm_fallow.m(j);

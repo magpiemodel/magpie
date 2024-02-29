@@ -7,13 +7,16 @@
 
 parameters
  p30_avl_cropland(t,j)              Total available land for crop cultivation (mio. ha)
- p30_country_snv_weight(i)          SNV policy country weight per region (1)
+ p30_country_weight(i)              SNV and AgroForestry policy country weight per region (1)
  p30_snv_shr(t,j)                   Share of semi-natural vegetation in cropland areas (1)
+ p30_agfor_shr(t,j)                 Share of AgroForestry in cropland areas (1)
  p30_country_dummy(iso)             Dummy parameter indicating whether country is affected by selected SNV policy (1)
  i30_avl_cropland_iso(iso)          Available land area for cropland at ISO level (mio. ha)
  p30_snv_scenario_fader(t_all)      SNV scenario fader (1)
+ p30_agfor_scenario_fader(t_all)    AgroForestry scenario fader (1)
  p30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
  i30_cropland_treecover(j)          Cropland area covered by trees (mio. ha)
+ p30_land_agfor_start_year(j,land)  Land area in start year of AgroForestry policy (mio. ha)
 ;
 
 positive variables
@@ -33,6 +36,8 @@ equations
  q30_bv_ann(j,potnatveg)            Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)            Biodiversity value of perennial cropland (mio. ha)
  q30_land_snv(j)                    Land constraint for the SNV policy in cropland areas (mio. ha)
+ q30_land_agfor(j)                  Land constraint for AgroForestry policy in cropland areas (mio. ha)
+ q30_land_agfor_trans(j)            Land transition constraint for AgroForestry policy in cropland areas (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
