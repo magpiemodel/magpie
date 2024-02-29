@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: GENIE project MESSAGE-MAgPIE Emulator - Step 2: price-based biomass potential
+# description: GENIE project MESSAGE-MAgPIE Emulator - Step 2 - price-based biomass potential
 # ----------------------------------------------------------
 
 ######################################

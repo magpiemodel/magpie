@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: GENIE project MESSAGE-MAgPIE Emulator - Step 3: ghg price sensitivity for step 2 biomass demands
+# description: GENIE project MESSAGE-MAgPIE Emulator - Step 3 - ghg price sensitivity for step 2 biomass demands
 # ----------------------------------------------------------
 
 ######################################
@@ -83,7 +83,8 @@ for (bl in blV) {
   for (mp in mpV) {
 
     if (mp != 0){
-      cfg$gms$c15_rumdairy_scp_scen <- paste0("MP", str_pad(mp, 2, pad = "0"))
+      m = 100 - mp
+      cfg$gms$c15_rumdairy_scp_scen <- paste0("sigmoid_", m, "pc_25_50")
     } else {
       cfg$gms$c15_rumdairy_scp_scen <- "constant"
     }

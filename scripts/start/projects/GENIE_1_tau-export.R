@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: GENIE project MESSAGE-MAgPIE Emulator - Step 1: export tau
+# description: GENIE project MESSAGE-MAgPIE Emulator - Step 1 - export tau
 # ----------------------------------------------------------
 
 ######################################
