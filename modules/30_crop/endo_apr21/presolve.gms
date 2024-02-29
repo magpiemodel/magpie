@@ -33,7 +33,14 @@ p30_snv_shr(t,j) = p30_snv_scenario_fader(t) *
   (s30_snv_shr * sum(cell(i,j), p30_country_weight(i))
   + s30_snv_shr_noselect * sum(cell(i,j), 1-p30_country_weight(i)));
 
-*' Minimum semi-natural vegetation (SNV) share is fading in after 2020
+*' Cropland relocation in response to SNV policy is based on exogeneous land cover information
+p30_snv_relocation(t,j) = (p30_snv_scenario_fader(t) - p30_snv_scenario_fader(t-1)) *
+  (i30_snv_relocation_target(j) * sum(cell(i,j), p30_country_weight(i))
+  + s30_snv_shr_noselect * sum(cell(i,j), 1-p30_country_weight(i)));
+p30_max_snv_relocation(t,j) = p30_snv_shr(t,j) * (p30_snv_scenario_fader(t) - p30_snv_scenario_fader(t-1)) * pcm_land(j,"crop");
+p30_snv_relocation(t,j)$(p30_snv_relocation(t, j) > p30_max_snv_relocation(t,j)) = p30_max_snv_relocation(t,j);
+
+*' Minimum agroforestry share is fading in after 2020
 p30_agfor_shr(t,j) = p30_agfor_scenario_fader(t) *
   (s30_agfor_shr * sum(cell(i,j), p30_country_weight(i))
   + s30_agfor_shr_noselect * sum(cell(i,j), 1-p30_country_weight(i)));

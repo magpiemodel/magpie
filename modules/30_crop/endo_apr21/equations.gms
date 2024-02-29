@@ -32,16 +32,26 @@
             sum(ct, p30_snv_shr(ct,j2)) * vm_land(j2,"crop")
           + sum((ct,land_snv,consv_type), pm_land_conservation(ct,j2,land_snv,consv_type));
 
+*' The semi-natural vegetation constraint for cropland areas has been suggested at the per square
+*' kilometer scale. The amount of cropland requiring relocation has therefor been derived from
+*' exogeneous high-resolution land cover information from the Copernicus Global Land Service
+*' (@buchhorn_copernicus_2020).
+
+ q30_land_snv_trans(j2) ..
+         sum(land_snv, vm_lu_transitions(j2,"crop",land_snv)) =g= sum(ct, p30_snv_relocation(ct,j2));
+
+*' Agroforestry constraints
+
  q30_land_agfor(j2) ..
             sum(land_agfor, vm_land(j2,land_agfor) - p30_land_agfor_start_year(j2,land_agfor))
             =g=
             sum(ct, p30_agfor_shr(ct,j2)) * vm_land(j2,"crop") - i30_cropland_treecover(j2);
-            
+
  q30_land_agfor_trans(j2) ..
          sum(land_agfor, vm_lu_transitions(j2,"crop",land_agfor))
          =g=
          vm_land(j2,"crop") * (sum(ct, p30_agfor_shr(ct,j2)) - sum(pt, p30_agfor_shr(pt,j2)));
- 
+
 
 
 *' As additional constraints minimum and maximum rotational constraints limit
