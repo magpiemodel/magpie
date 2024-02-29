@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration factors for 
+# description: calculate and store new calibration factors for
 #              land conversion costs for FSEC regional setup
 #              (time consuming; up to 40 model runs with 5 time steps)
 # --------------------------------------------------------
