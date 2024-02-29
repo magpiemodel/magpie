@@ -6,8 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: MESSAGE-MAgPIE Emulator Debug Setup
-# position: 1
+# description: GENIE project MESSAGE-MAgPIE Emulator Default script
 # ----------------------------------------------------------
 
 ######################################
@@ -24,60 +23,28 @@ source("scripts/start_functions.R") #nolinter
 # Source the default config and then over-write it before starting the run.
 source("config/default.cfg") #nolinter
 
-cfg$qos <- "standby"
-
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public" = NULL,
-                               "./patch_input" = NULL),
+                                "./patch_input" = NULL),
                            getOption("magpie_repos"))
-cfg$input <- append(cfg$input, c(patch = "patch.tgz"))
+
+cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
+               cellular    = "rev4.96_26df900e_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+               validation  = "rev4.96_26df900e_validation.tgz",
+               additional  = "additional_data_rev4.47.tgz",
+               patch       = "MMEmuR12_rev4.96.tgz")
+
 
 cfg$output <- c("output_check", "rds_report")
-cfg$force_replace <- TRUE
 
-ssp <-  "SSP2"
-cfg <- setScenario(cfg, c(ssp)) #load config presets
+preset <-  "GENIE_SCP"
+cfg <- setScenario(cfg, c(preset)) #load config presets
 
 ### Identifier and folder
 ###############################################
-identifierFlag <- "Emulator_23-02-14_set-71"
+identifierFlag <- "MMEmu_default"
+cfg$title <- "Default_rev4.96-preset"
 ###############################################
 cfg$info$flag <- identifierFlag
-cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
-### BE 
-cfg$gms$bioenergy <- "MMEmu_feb23"
-# non-default BE demands
-cfg$gms$c60_1stgen_biodem <- "phaseout2020"
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-Npi-PhaseOut20"
-cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
-
-# Subsidies / Prices
-cfg$gms$c60_bioenergy_subsidy_fix_SSP2 <- 300
-cfg$gms$c60_bioenergy_subsidy <- 0
-
-cfg$gms$s60_bioenergy_gj_price_1st <- 0
-cfg$gms$s60_bioenergy_price_2nd <- 0
-
-
-### GHG
-cfg$gms$ghg_policy  <- "MMEmu_feb23"
-cfg$gms$s56_ghgprice_startprice <- 0
-cfg$gms$s56_ghgprice_endprice <- 0
-
-
-### Tau / Yield
-cfg$gms$c14_yields_scenario <- "nocc_hist"
-
-### Biodiv
-cfg$gms$c44_bii_decrease <- 0
-
-
-### Cropland
-cfg$gms$s30_annual_max_growth <- 0.02
-
-
-
-##############################################
-cfg$title <- "B00G0000_tau"
-
+##########################################################
 start_run(cfg, codeCheck = FALSE)

@@ -38,11 +38,6 @@ land_hr_split_file <- file.path(outputdir, "cell.land_split_0.5.mz")
 land_hr_shr_split_file <- file.path(outputdir, "cell.land_split_0.5_share.mz")
 luh_side_layers <- file.path(outputdir, "luh2_side_layers_0.5.mz")
 bii_hr_out_file <- file.path(outputdir, "cell.bii_0.5.mz")
-peatland_v2_hr_file <- file.path(outputdir, "f58_peatland_area_0.5.mz")
-peatland_on_intact_hr_file <- file.path(outputdir, "f58_peatland_intact_0.5.mz")
-peatland_on_degrad_hr_file <- file.path(outputdir, "f58_peatland_degrad_0.5.mz")
-peatland_hr_out_file <- file.path(outputdir, "cell.peatland_0.5.mz")
-peatland_hr_share_out_file <- file.path(outputdir, "cell.peatland_0.5_share.mz")
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 
@@ -58,11 +53,6 @@ if (length(map_file) > 1) {
 # -----------------------------------------
 #  Output functions
 # -----------------------------------------
-
-.fixCoords <- function(x) {
-  getSets(x, fulldim = FALSE)[1] <- "x.y.iso"
-  return(x)
-}
 
 .writeDisagg <- function(x, file, comment, message) {
   base::message(message)
@@ -94,8 +84,7 @@ if (length(map_file) > 1) {
   map <- readRDS(map_file)
 
   # create full time series
-  land_consv_hr <- new.magpie(map[, "cell"], getYears(land_consv_lr), getNames(wdpa_hr),
-                             sets = c("x.y.iso", "year", getSets(wdpa_hr, fulldim = FALSE)[3]))
+  land_consv_hr <- new.magpie(map[, "cell"], getYears(land_consv_lr), getNames(wdpa_hr))
   land_consv_hr[, getYears(land_consv_hr), ] <- wdpa_hr[, nyears(wdpa_hr), ]
   land_consv_hr[, getYears(wdpa_hr), ] <- wdpa_hr
 
@@ -104,8 +93,7 @@ if (length(map_file) > 1) {
       consv_prio_all <- read.magpie(consv_prio_hr_file)
       consv_prio_hr <- new.magpie(
         cells_and_regions = map[, "cell"],
-        names = getNames(consv_prio_all, dim = 2), fill = 0,
-        sets = c("x.y.iso", "year", "data")
+        names = getNames(consv_prio_all, dim = 2), fill = 0
       )
       iso <- readGDX(gdx, "iso")
       consv_iso <- readGDX(gdx, "policy_countries22")
@@ -313,7 +301,6 @@ land_hr <- interpolateAvlCroplandWeighted(
   snv_pol_shr = snv_pol_shr,
   snv_pol_fader = snv_pol_fader
 )
-land_hr <- .fixCoords(land_hr)
 
 # Write output
 .writeDisagg(land_hr, land_hr_out_file,
@@ -548,3 +535,4 @@ rm(land_hr, peat_hr)
 gc()
 
 message("Finished disaggregation")
+
