@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_fallow(t,j,"marginal")                      = vm_fallow.m(j);
  ov_area(t,j,kcr,w,"marginal")                  = vm_area.m(j,kcr,w);

@@ -28,8 +28,8 @@ m_linear_cell_data_interpol(i30_snv_relocation_target, s30_snv_shr,s30_snv_reloc
 fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 
 ****** Regional share of semi-natural vegetation (SNV) in cropland areas for selective countries:
-* Country switch to determine countries for which a SNV or AgroForestry policy shall be applied.
-* In the default case, the SNV and AgroForestry policies affect all countries when activated.
+* Country switch to determine countries for which a SNV policy shall be applied.
+* In the default case, the SNV policy affect all countries when activated.
 p30_country_dummy(iso) = 0;
 p30_country_dummy(policy_countries30) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
