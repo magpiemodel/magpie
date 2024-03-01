@@ -32,3 +32,10 @@ p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") * (1 - p30_snv
 * only activate constraints which are binding
 rotamax_red30(rotamax30) = yes$(i30_rotation_incentives(t,rotamax30) > 0);
 rotamin_red30(rotamin30) = yes$(i30_rotation_incentives(t,rotamin30) > 0);
+
+*' Cropland growth constraint after SSP2 fix
+if(m_year(t) <= sm_fix_SSP2,
+  v30_crop_area.up(i) = Inf;
+else
+  v30_crop_area.up(i) = v30_crop_area.l(i) * (1 + s30_annual_max_growth) ** m_yeardiff(t);
+);

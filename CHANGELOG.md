@@ -28,6 +28,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **56_ghg_policy_** added new trajectories for R32M46
 - **60_bioenergy** added new trajectories for R32M46
 - **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
+- **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth` 
+- **default.cfg** added early afforestation constraint `cfg$gms$s32_max_aff_cell_2025` 
+- **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing` 
+- **default.cfg** added settings for new price-driven bioenergy realization `1st2ndgen_priced_feb24`: `cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix`, `cfg$gms$c60_bioenergy_subsidy_fix_SSP2`, `s60_bioenergy_gj_price_1st`,
+`s60_bioenergy_price_2nd`, `c60_price_implementation`
+- **core** added `coup2110`timesteps
+- **15_food** added additional sigmoid food substition scenarios `sigmoid_75pc_25_50`, `sigmoid_50pc_25_50` and `sigmoid_25pc_25_50`
+- **30_crop** Add regional cropland equation `q30_crop_reg` and presolve growth constraint
 
 ### removed
 - **default.cfg** Removed description of cfg$gms$c31_past_suit_scen since no longer needed due to changes in 31_past described below. Its function is now done by cfg$gms$c31_grassl_yld_scenario.

@@ -22,6 +22,7 @@ positive variables
  vm_fallow(j)                           Fallow land (mio. ha)
  vm_area(j,kcr,w)                       Agricultural production area (mio. ha)
  vm_rotation_penalty(i)                 Penalty for violating rotational constraints (USD05MER)
+ v30_crop_area(i)                       Total regional crop production area (mio. ha)
 ;
 
 equations
@@ -34,7 +35,8 @@ equations
  q30_carbon(j,ag_pools,stockType)       Cropland above ground carbon content calculation (mio. tC)
  q30_bv_ann(j,potnatveg)                Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)                Biodiversity value of perennial cropland (mio. ha)
- q30_land_snv(j)                    Land constraint for the SNV policy in cropland areas (mio. ha)
+ q30_land_snv(j)                        Land constraint for the SNV policy in cropland areas (mio. ha)
+ q30_crop_reg(i)                        Total regional crop production area (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -42,6 +44,7 @@ parameters
  ov_fallow(t,j,type)                         Fallow land (mio. ha)
  ov_area(t,j,kcr,w,type)                     Agricultural production area (mio. ha)
  ov_rotation_penalty(t,i,type)               Penalty for violating rotational constraints (USD05MER)
+ ov30_crop_area(t,i,type)                    Total regional crop production area (mio. ha)
  oq30_cropland(t,j,type)                     Total cropland calculation (mio. ha)
  oq30_avl_cropland(t,j,type)                 Available cropland constraint (mio. ha)
  oq30_rotation_max(t,j,rotamax30,type)       Local maximum rotational constraints (mio. ha)
@@ -52,6 +55,7 @@ parameters
  oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (mio. ha)
  oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (mio. ha)
  oq30_land_snv(t,j,type)                     Land constraint for the SNV policy in cropland areas (mio. ha)
+ oq30_crop_reg(t,i,type)                     Total regional crop production area (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
