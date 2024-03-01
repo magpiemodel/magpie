@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** changed default for `cfg$gms$s56_buffer_aff` from 0.2 to 0.5
 - **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
 - **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
+- **44_biodiversity** update `bii_target realization` to take `f44_rr_layer` into account in `q44_bii` 
 
 ### added
 - **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
@@ -35,7 +36,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 `s60_bioenergy_price_2nd`, `c60_price_implementation`
 - **core** added `coup2110`timesteps
 - **15_food** added additional sigmoid food substition scenarios `sigmoid_75pc_25_50`, `sigmoid_50pc_25_50` and `sigmoid_25pc_25_50`
-- **30_crop** Add regional cropland equation `q30_crop_reg` and presolve growth constraint
+- **30_crop** added regional cropland equation `q30_crop_reg` and presolve growth constraint
+- **32_forestry** added cluster-level new afforestation area constraint
+- **60_bioenergy** added new realization `1st2ndgen_priced_feb24` to enable price-driven 2nd gen bioenergy production
+- **scripts** added automatic set writer for new bioenergy realization to `start_functions`
+- **scripts** added start scripts for the GENIE project
+- **scenario_config.csv** added preset for GENIE project
 
 ### removed
 - **default.cfg** Removed description of cfg$gms$c31_past_suit_scen since no longer needed due to changes in 31_past described below. Its function is now done by cfg$gms$c31_grassl_yld_scenario.
