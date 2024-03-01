@@ -5,8 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p30_land_agfor_start_year(j,land)$(m_year(t) = s30_agfor_scenario_start) = vm_land.l(j,land);
-
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_fallow(t,j,"marginal")                      = vm_fallow.m(j);
  ov_area(t,j,kcr,w,"marginal")                  = vm_area.m(j,kcr,w);
@@ -21,8 +19,6 @@ p30_land_agfor_start_year(j,land)$(m_year(t) = s30_agfor_scenario_start) = vm_la
  oq30_bv_per(t,j,potnatveg,"marginal")          = q30_bv_per.m(j,potnatveg);
  oq30_land_snv(t,j,"marginal")                  = q30_land_snv.m(j);
  oq30_land_snv_trans(t,j,"marginal")            = q30_land_snv_trans.m(j);
- oq30_land_agfor(t,j,"marginal")                = q30_land_agfor.m(j);
- oq30_land_agfor_trans(t,j,"marginal")          = q30_land_agfor_trans.m(j);
  ov_fallow(t,j,"level")                         = vm_fallow.l(j);
  ov_area(t,j,kcr,w,"level")                     = vm_area.l(j,kcr,w);
  ov_rotation_penalty(t,i,"level")               = vm_rotation_penalty.l(i);
@@ -36,8 +32,6 @@ p30_land_agfor_start_year(j,land)$(m_year(t) = s30_agfor_scenario_start) = vm_la
  oq30_bv_per(t,j,potnatveg,"level")             = q30_bv_per.l(j,potnatveg);
  oq30_land_snv(t,j,"level")                     = q30_land_snv.l(j);
  oq30_land_snv_trans(t,j,"level")               = q30_land_snv_trans.l(j);
- oq30_land_agfor(t,j,"level")                   = q30_land_agfor.l(j);
- oq30_land_agfor_trans(t,j,"level")             = q30_land_agfor_trans.l(j);
  ov_fallow(t,j,"upper")                         = vm_fallow.up(j);
  ov_area(t,j,kcr,w,"upper")                     = vm_area.up(j,kcr,w);
  ov_rotation_penalty(t,i,"upper")               = vm_rotation_penalty.up(i);
@@ -51,8 +45,6 @@ p30_land_agfor_start_year(j,land)$(m_year(t) = s30_agfor_scenario_start) = vm_la
  oq30_bv_per(t,j,potnatveg,"upper")             = q30_bv_per.up(j,potnatveg);
  oq30_land_snv(t,j,"upper")                     = q30_land_snv.up(j);
  oq30_land_snv_trans(t,j,"upper")               = q30_land_snv_trans.up(j);
- oq30_land_agfor(t,j,"upper")                   = q30_land_agfor.up(j);
- oq30_land_agfor_trans(t,j,"upper")             = q30_land_agfor_trans.up(j);
  ov_fallow(t,j,"lower")                         = vm_fallow.lo(j);
  ov_area(t,j,kcr,w,"lower")                     = vm_area.lo(j,kcr,w);
  ov_rotation_penalty(t,i,"lower")               = vm_rotation_penalty.lo(i);
@@ -66,6 +58,4 @@ p30_land_agfor_start_year(j,land)$(m_year(t) = s30_agfor_scenario_start) = vm_la
  oq30_bv_per(t,j,potnatveg,"lower")             = q30_bv_per.lo(j,potnatveg);
  oq30_land_snv(t,j,"lower")                     = q30_land_snv.lo(j);
  oq30_land_snv_trans(t,j,"lower")               = q30_land_snv_trans.lo(j);
- oq30_land_agfor(t,j,"lower")                   = q30_land_agfor.lo(j);
- oq30_land_agfor_trans(t,j,"lower")             = q30_land_agfor_trans.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

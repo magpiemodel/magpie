@@ -27,12 +27,6 @@ s30_snv_scenario_start          SNV scenario start year       / 2020 /
 s30_snv_scenario_target         SNV scenario target year      / 2030 /
 s30_snv_relocation_data_x1      First reference value in SNV target cropland data (1) / 0.2 /
 s30_snv_relocation_data_x2      Second reference value in SNV target cropland data (1) / 0.5 /
-
-s30_agfor_shr                   Share of cropland used for AgroForestry in target year (1) / 0.2 /
-s30_agfor_shr_noselect          Share of cropland used for AgroForestry in target year (1) / 0 /
-s30_agfor_scenario_start        AgroForestry scenario start year       / 2020 /
-s30_agfor_scenario_target       AgroForestry scenario target year      / 2050 /
-
 s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
 ;
@@ -118,14 +112,6 @@ $offdelim
 table f30_avl_cropland_iso(iso,marginal_land30) Available land area for cropland at ISO level (mio. ha)
 $ondelim
 $include "./modules/30_crop/endo_apr21/input/avl_cropland_iso.cs3"
-$offdelim
-;
-
-********* CROPLAND TREECOVER *******************************************
-
-table f30_cropland_treecover(j,crop_treecover30) Cropland area covered by trees (mio. ha)
-$ondelim
-$include "./modules/30_crop/endo_apr21/input/CroplandTreecover.cs3"
 $offdelim
 ;
 
