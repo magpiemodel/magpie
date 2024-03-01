@@ -29,7 +29,7 @@ fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 
 ****** Regional share of semi-natural vegetation (SNV) in cropland areas for selective countries:
 * Country switch to determine countries for which a SNV policy shall be applied.
-* In the default case, the SNV policy affect all countries when activated.
+* In the default case, the SNV policy affects all countries when activated.
 p30_country_dummy(iso) = 0;
 p30_country_dummy(policy_countries30) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
