@@ -33,7 +33,7 @@
           + sum((ct,land_snv,consv_type), pm_land_conservation(ct,j2,land_snv,consv_type));
 
 *' The semi-natural vegetation constraint for cropland areas has been suggested at the per square
-*' kilometer scale. The amount of cropland requiring relocation has therefor been derived from
+*' kilometer scale. The amount of cropland requiring relocation has therefore been derived from
 *' exogeneous high-resolution land cover information from the Copernicus Global Land Service
 *' (@buchhorn_copernicus_2020).
 
