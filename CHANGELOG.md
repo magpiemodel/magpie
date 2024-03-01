@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
 
 ### added
+- **30_crop** Improved representation of cropland requiring relocation in response to introducing semi-natural habitat at the 1 km level based on high-resolution satellite imagery.
 - **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
 - **scripts** added peatland to output/extra/disaggregation.R
 - **56_ghg_policy_** added new trajectories for R32M46
