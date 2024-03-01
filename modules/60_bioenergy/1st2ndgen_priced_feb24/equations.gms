@@ -66,10 +66,12 @@ q60_res_2ndgenBE(i2) ..
   =g=
   sum(ct,i60_res_2ndgenBE_dem(ct,i2));
 
-*' Finally, an incentive is provided for the production of 1st generation
-*' bioenergy from oils and ethanol even beyond the exogeneous minimum demand.
-*' The incentive is kept low, but should provide a more realistic
-*' overproduction from couple products.
+*' Finally, an incentive is provided for the production of 1st and 2nd generation
+*' bioenergy beyond the exogeneous minimum demand. 1st generation bioenergy can be incentivized
+*' mass- or energy-based, the former, for comparability, in line with other realizations and constant over time. 
+*' The energy-based incentive can take different forms and is applied to both 1st and 2nd generation. 
+*' Combined with low or fade-out exogenous demands, this is useful to assess bioenergy production potentials, however
+*' the endogenous technological change in $13\_TC may react very strongly and create a positive feedback loop
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
   =e= sum((ct,k1st60), vm_dem_bioen(i2,k1st60) * (-i60_1stgen_bioenergy_subsidy_tdm(ct)))
