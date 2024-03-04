@@ -21,7 +21,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** changed default for `cfg$gms$s56_buffer_aff` from 0.2 to 0.5
 - **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
 - **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
-- **44_biodiversity** update `bii_target realization` to take `f44_rr_layer` into account in `q44_bii` 
+- **44_biodiversity** update `bii_target realization` to take `f44_rr_layer` into account in `q44_bii`
+- **config** update additional data to rev4.49
 
 ### added
 - **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
