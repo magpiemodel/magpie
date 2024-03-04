@@ -43,7 +43,7 @@ fsecScenario <- function(scenario) {
                                   "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
                                   "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19", "labor1p9"))
+                                  "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19", "labor1p9")),
             # FSDPs (without external)
             d_SSP1fsdp       = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
