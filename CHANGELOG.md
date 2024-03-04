@@ -851,7 +851,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.7.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.7.1...develop
+[4.7.1]: https://github.com/magpiemodel/magpie/compare/v4.7.0...v4.7.1
 [4.7.0]: https://github.com/magpiemodel/magpie/compare/v4.6.11...v4.7.0
 [4.6.11]: https://github.com/magpiemodel/magpie/compare/v4.6.10...v4.6.11
 [4.6.10]: https://github.com/magpiemodel/magpie/compare/v4.6.9...v4.6.10
