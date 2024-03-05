@@ -8,43 +8,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **15_food** Added improved EAT Lancet diet implementation (EAT 2p0)
-- **default.cfg** update input data to rev 4.99 (new validation data, new EATLancet recommendations, new semi-natural vegtation cropland data)
-- **start_functions** Check if cfg$recalibrate is consistent with cfg$gms$s14_use_yield_calib
-- **31_past** in grasslands_apr22 realization: changed structure of f31_pastr_suitability to align with ssp-rcp specific input data formulation. Changed input filename from cs3 to cs2. Added `cc`, `nocc` and `nocc_hist` options for `i31_manpast_suit` and changed input gams code from table to parameter. Climate scenario assignment moved from preloop.gms to input.gms. Removed pastSuit set in sets.gms as not needed anymore. Adjusted not_used.txt in both grasslands_apr22 and static realizations.
-- **default.cfg** Default for cfg$gms$peatland changed from `on` to `v2`
-- **default.cfg and scenario_config.csv** Default for cfg$gms$c56_emis_policy changed from `redd+natveg_nosoil` to `reddnatveg_nosoil`,i.e. timber plantations are excluded from carbon pricing by default
-- **default.cfg** Default for cfg$gms$c56_cprice_aff changed from `forestry_vegc` to `secdforest_vegc`
-- **scenario_config.csv** settings for cfg$gms$s35_secdf_distribution in `ForestryEndo` and `ForestryExo` changed from `2` to `0`
-- **scenario_config.csv** removed erroneous setting `cc` from column `input`
-- **default.cfg** update default `cfg$gms$c56_pollutant_prices` and `cfg$gms$c60_2ndgen_biodem` to `R32M46-SSP2EU-NPi`
-- **default.cfg** changed default for `cfg$gms$s56_buffer_aff` from 0.2 to 0.5
-- **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
-- **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
+-
 
 ### added
-- **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
-- **scripts** added peatland to output/extra/disaggregation.R
-- **56_ghg_policy_** added new trajectories for R32M46
-- **60_bioenergy** added new trajectories for R32M46
 - **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
 
 ### removed
-- **default.cfg** Removed description of cfg$gms$c31_past_suit_scen since no longer needed due to changes in 31_past described below. Its function is now done by cfg$gms$c31_grassl_yld_scenario.
-- **58_peatland** removed realization "on"
+-
 
 ### fixed
-- **scripts** disaggregation_LUH2.R which no longer relies on the old raster-based write.magpie for nc files
-- **scripts** fixed memory spike leading to crashes in disaggregation.R
-- **scripts** fixed writing of NetCDF files in output/reportMAgPIE2SEALS.R
-- **scripts** fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
-- **scripts** bugfix highres.R for bioenergy demand and GHG prices in coupled runs
+-
+
+
+## [4.7.1] - 2024-02-28
+
+### changed
+- **15_food** Added improved EAT Lancet diet implementation (EAT 2p0)
+- **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
+- **31_past** in grasslands_apr22 realization: changed structure of f31_pastr_suitability to align with ssp-rcp specific input data formulation. Changed input filename from cs3 to cs2. Added `cc`, `nocc` and `nocc_hist` options for `i31_manpast_suit` and changed input gams code from table to parameter. Climate scenario assignment moved from preloop.gms to input.gms. Removed pastSuit set in sets.gms as not needed anymore. Adjusted not_used.txt in both grasslands_apr22 and static realizations.
+- **default.cfg and scenario_config.csv** Default for cfg$gms$c56_emis_policy changed from `redd+natveg_nosoil` to `reddnatveg_nosoil`,i.e. timber plantations are excluded from carbon pricing by default
+- **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
+- **default.cfg** changed default for `cfg$gms$s56_buffer_aff` from 0.2 to 0.5
+- **default.cfg** Default for cfg$gms$c56_cprice_aff changed from `forestry_vegc` to `secdforest_vegc`
+- **default.cfg** Default for cfg$gms$peatland changed from `on` to `v2`
+- **default.cfg** update default `cfg$gms$c56_pollutant_prices` and `cfg$gms$c60_2ndgen_biodem` to `R32M46-SSP2EU-NPi`
+- **default.cfg** update input data to rev 4.99 (new validation data, new EATLancet recommendations, new semi-natural vegtation cropland data)
+- **scenario_config.csv** removed erroneous setting `cc` from column `input`
+- **scenario_config.csv** settings for cfg$gms$s35_secdf_distribution in `ForestryEndo` and `ForestryExo` changed from `2` to `0`
+- **start_functions** Check if cfg$recalibrate is consistent with cfg$gms$s14_use_yield_calib
+
+### added
+- **32_forestry** new interfaces `vm_land_forestry`, `pcm_land_forestry` `vm_landexpansion_forestry` and `vm_landreduction_forestry`
+- **56_ghg_policy_** added new trajectories for R32M46
+- **60_bioenergy** added new trajectories for R32M46
+- **scripts** added peatland to output/extra/disaggregation.R
+
+### removed
+- **58_peatland** removed realization "on"
+- **default.cfg** Removed description of cfg$gms$c31_past_suit_scen since no longer needed due to changes in 31_past described below. Its function is now done by cfg$gms$c31_grassl_yld_scenario.
+
+### fixed
+- **21_trade** introduced s21_manna_from_heaven for fixing v21_manna_from_heaven to zero. Without fixing to zero, v21_manna_from_heaven was used unnecessarily in runs started with highres.R
+- **32_forestry** bugfix unit p32_observed_gs_reg
+- **32_forestry** keep c-density for timber plantations constant after rotation length to avoid unrealistic carbon sequestration in unharvested timber plantation
 - **35_natveg** bugfixes ac_est
 - **35_natveg** removed scaling of pm_carbon_density_ac
 - **52_carbon** bugfix acx long-term carbon density
-- **32_forestry** keep c-density for timber plantations constant after rotation length to avoid unrealistic carbon sequestration in unharvested timber plantation
-- **32_forestry** bugfix unit p32_observed_gs_reg
-- **21_trade** introduced s21_manna_from_heaven for fixing v21_manna_from_heaven to zero. Without fixing to zero, v21_manna_from_heaven was used unnecessarily in runs started with highres.R
+- **scripts** bugfix highres.R for bioenergy demand and GHG prices in coupled runs
+- **scripts** disaggregation_LUH2.R which no longer relies on the old raster-based write.magpie for nc files
+- **scripts** fixed disaggregation.R and disaggregation_LUH2.R to be used with 67k
+- **scripts** fixed memory spike leading to crashes in disaggregation.R
+- **scripts** fixed writing of NetCDF files in output/reportMAgPIE2SEALS.R
+
 
 ## [4.7.0] - 2023-12-11
 
@@ -822,7 +837,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.7.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.7.1...develop
+[4.7.1]: https://github.com/magpiemodel/magpie/compare/v4.7.0...v4.7.1
 [4.7.0]: https://github.com/magpiemodel/magpie/compare/v4.6.11...v4.7.0
 [4.6.11]: https://github.com/magpiemodel/magpie/compare/v4.6.10...v4.6.11
 [4.6.10]: https://github.com/magpiemodel/magpie/compare/v4.6.9...v4.6.10
