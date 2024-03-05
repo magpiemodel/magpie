@@ -9,6 +9,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### added
 - **config** added `.codeCheck` with additonal configuration when running `gms::codeCheck`
 
+## [Unreleased]
+
+### changed
+-
+
+### added
+- **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
+
+### removed
+-
+
+### fixed
+-
+
+
 ## [4.7.1] - 2024-02-28
 
 ### changed
