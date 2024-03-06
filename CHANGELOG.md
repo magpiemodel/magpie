@@ -4,7 +4,6 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-
 ## [Unreleased]
 
 ### changed
@@ -26,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** added automatic set writer for new bioenergy realization to `start_functions`
 - **scripts** added start scripts for the GENIE project
 - **scenario_config.csv** added preset for GENIE project
+- **config** added `.codeCheck` with additonal configuration when running `gms::codeCheck`
 
 ### removed
 -
