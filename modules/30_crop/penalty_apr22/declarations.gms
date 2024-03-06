@@ -9,7 +9,7 @@ parameters
  p30_avl_cropland(t,j)                  Total available land for crop cultivation (mio. ha)
  p30_country_snv_weight(i)              SNV policy country weight per region (1)
  p30_snv_shr(t,j)                       Share of semi-natural vegetation in cropland areas (1)
- i30_snv_relocation_target(j)           Overall cropland area that requires relocation due SNV policy (mio. ha)
+ i30_snv_relocation_target(j)           Overall cropland area that requires relocation due to SNV policy (mio. ha)
  p30_snv_relocation(t,j)                Cropland area that is actually relocated during time step (mio. ha)
  p30_max_snv_relocation(t,j)            Maximum cropland relocation during time step (mio. ha)
  p30_country_dummy(iso)                 Dummy parameter indicating whether country is affected by selected cropland policy (1)

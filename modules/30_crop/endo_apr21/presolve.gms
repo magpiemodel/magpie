@@ -34,13 +34,16 @@ p30_snv_shr(t,j) = p30_snv_scenario_fader(t) *
   + s30_snv_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
 
 *' Cropland relocation in response to SNV policy is based on exogeneous land
-*' cover information. The rate of the policy implementation is derived based
+*' cover information from the Copernicus Global Land Service (@buchhorn_copernicus_2020).
+*' The rate of the policy implementation is derived based
 *' on the difference of scenario fader values in consecutive time steps
 p30_snv_relocation(t,j) = (p30_snv_scenario_fader(t) - p30_snv_scenario_fader(t-1)) *
   (i30_snv_relocation_target(j) * sum(cell(i,j), p30_country_snv_weight(i))
   + s30_snv_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
 *' The following lines take care of mismatches in the input
-*' data (derived from satellite imagery) and cropland reduction
+*' data (derived from satellite imagery from the Copernicus
+*' Global Land Service (@buchhorn_copernicus_2020)) and in
+*' cases of cropland reduction
 p30_max_snv_relocation(t,j) = p30_snv_shr(t,j) * (p30_snv_scenario_fader(t) - p30_snv_scenario_fader(t-1)) * pcm_land(j,"crop");
 p30_snv_relocation(t,j)$(p30_snv_relocation(t, j) > p30_max_snv_relocation(t,j)) = p30_max_snv_relocation(t,j);
 
