@@ -24,6 +24,17 @@ source("config/default.cfg")
 
 # set title and date
 cfg$results_folder <- "output/:title::date:"
+cfg$force_download <- TRUE
+
+# Special outputs required for Deep Dive
+cfg$qos <- "standby_maxMem_dayMax"
+cfg$output <- c("output_check",
+                "extra/highres",
+                "extra/disaggregation",
+                "projects/FSEC_nitrogenPollution",
+                "projects/FSEC_water",
+                "agmip_report",
+                "rds_report")
 
 #######################
 # SCENARIO DEFINITION #
