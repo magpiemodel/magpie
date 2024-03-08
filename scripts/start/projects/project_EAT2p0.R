@@ -153,9 +153,9 @@ noCC <- function(cfg) {
 }
 
 ### RCP 2.6 ###
-# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU
+# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU using GFDL climate model.
 rcp26 <- function(cfg) {
-  cfg$input['cellular'] <- "rev4.99_h12_5033a1ce_cellularmagpie_c200_IPSL-CM6A-LR-ssp126_lpjml-8e6c5eb1.tgz"
+  cfg$input["cellular"] <- "rev4.99_h12_05fd702e_cellularmagpie_c200_GFDL-ESM4-ssp126_lpjml-8e6c5eb1.tgz"
   return(cfg)
 }
 
