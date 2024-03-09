@@ -50,3 +50,14 @@ p30_snv_relocation(t,j)$(p30_snv_relocation(t, j) > p30_max_snv_relocation(t,j))
 *' Area potentially available for cropping
 p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") * (1 - p30_snv_shr(t,j));
 *' @stop
+
+* Growth of trees on cropland is modelled by shifting age-classes according to time step length.
+s30_shift = m_timestep_length_forestry/5;
+* example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s30_shift = 1)
+    p30_treecover(t,j,ac)$(ord(ac) > s30_shift) = pc30_treecover(j,ac-s30_shift);
+* account for cases at the end of the age class set (s30_shift > 1) which are not shifted by the above calculation
+    p30_treecover(t,j,"acx") = p30_treecover(t,j,"acx")
+                  + sum(ac$(ord(ac) > card(ac)-s30_shift), pc30_treecover(j,ac));
+
+pc30_treecover(j,ac) = p30_treecover(t,j,ac);
+v30_treecover.l(j,ac) = p30_treecover(t,j,ac);

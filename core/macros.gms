@@ -97,12 +97,12 @@ $macro m_linear_cell_data_interpol(output,x,input_x1,input_x2,input_y1,input_y2)
 * macro for simple carbon stocks
 $macro m_carbon_stock(land,carbon_density,item) \
             (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actual")) + \
-            (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
+            (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actualNoAcEst"))
 
 * macro for carbon stocks with age classes
 $macro m_carbon_stock_ac(land,carbon_density,sets,sets_sub) \
             sum((&&sets), land(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"actual")) + \
-            sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
+            sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"))
 
 * macros for peatland module
 $macro m58_LandMerge(land,landForestry,set) \
