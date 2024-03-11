@@ -61,3 +61,32 @@ s30_shift = m_timestep_length_forestry/5;
 
 pc30_treecover(j,ac) = p30_treecover(t,j,ac);
 v30_treecover.l(j,ac) = p30_treecover(t,j,ac);
+
+p30_treecover_shr(t,j) = p30_treecover_scenario_fader(t) *
+  (s30_treecover_shr * sum(cell(i,j), p30_country_snv_weight(i))
+  + s30_treecover_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
+
+*define ac_est and ac_sub
+ac_est(ac) = no;
+ac_est(ac) = yes$(ord(ac) <= (m_yeardiff_forestry(t)/5));
+
+ac_sub(ac) = no;
+ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
+
+* fix before s30_treecover_scenario_start to pc30_treecover(j,ac)?
+if(m_year(t) <= s30_treecover_scenario_start,
+ v30_treecover.fx(j,ac) = pc30_treecover(j,ac);
+else
+ v30_treecover.lo(j,ac_est) = 0;
+ v30_treecover.up(j,ac_est) = Inf;
+ if(s30_treecover_decrease = 1,
+  v30_treecover.lo(j,ac_sub) = 0;
+  v30_treecover.up(j,ac_sub) = pc30_treecover(j,ac_sub);
+ else
+  v30_treecover.fx(j,ac_sub) = pc30_treecover(j,ac_sub);  
+ );
+);
+
+p30_betr_shr(t,j) = p30_betr_scenario_fader(t) *
+  (s30_betr_shr * sum(cell(i,j), p30_country_snv_weight(i))
+  + s30_betr_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));

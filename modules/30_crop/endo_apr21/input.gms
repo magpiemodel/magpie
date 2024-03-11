@@ -31,6 +31,15 @@ s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
 s30_treecover_plantation        Growth curve switch for tree cover on cropland 0=natveg 1=plantations (1) / 0 /
 s30_treecover_bii_coeff         BII coefficent to be used for tree cover on cropland 0=natural vegetation 1=plantation (1) / 0 /
+s30_treecover_shr                     Share of treecover on cropland (1) / 0 /
+s30_treecover_shr_noselect            Share of treecover on cropland (1) / 0 /
+s30_treecover_scenario_start          Cropland treecover scenario start year       / 2020 /
+s30_treecover_scenario_target         Cropland treecover scenario target year      / 2030 /
+s30_treecover_decrease                Cropland treecover can decrease (1) or not (0) / 0 /
+s30_betr_shr                          Share of bioenergy trees on cropland (1) / 0.25 /
+s30_betr_shr_noselect            Share of betr on cropland (1) / 0 /
+s30_betr_scenario_start          betr scenario start year       / 2020 /
+s30_betr_scenario_target         betr scenario target year      / 2030 /
 ;
 
 * Set-switch for countries affected by regional SNV policy

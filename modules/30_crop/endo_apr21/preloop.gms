@@ -9,6 +9,8 @@
 * sigmoidal interpolation between start year and target year
 m_sigmoid_time_interpol(p30_snv_scenario_fader,s30_snv_scenario_start,s30_snv_scenario_target,0,1);
 m_sigmoid_time_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
+m_sigmoid_time_interpol(p30_treecover_scenario_fader,s30_treecover_scenario_start,s30_treecover_scenario_target,0,1);
+m_sigmoid_time_interpol(p30_betr_scenario_fader,s30_betr_scenario_start,s30_betr_scenario_target,0,1);
 
 * linear interpolation to estimate the cropland that
 * requires relocation due to SNV policy

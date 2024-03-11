@@ -40,6 +40,19 @@
  q30_land_snv_trans(j2) ..
          sum(land_snv, vm_lu_transitions(j2,"crop",land_snv)) =g= sum(ct, p30_snv_relocation(ct,j2));
 
+ q30_treecover(j2) ..
+ sum(ac, v30_treecover(j2,ac)) =g= sum(ct, p30_treecover_shr(ct,j2)) * vm_land(j2,"crop");
+
+ q30_betr(j2) ..
+    sum(w, vm_area(j2,"betr",w)) =g=
+     vm_land(j2,"crop") * sum(ct, p30_betr_shr(ct,j2));
+
+*' This constraint distributes additions to forestry land over ac_est,
+*' which depends on the time step length (e.g. ac0 and ac5 for a 10 year time step).
+
+ q30_treecover_est(j2,ac_est) ..
+ v30_treecover(j2,ac_est) =e= sum(ac_est2, v30_treecover(j2,ac_est2))/card(ac_est2);
+
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect
 *' crop rotations limiting the share a specific crop can cover of the total area

@@ -24,6 +24,10 @@ parameters
  pc30_treecover(j,ac)               Cropland tree cover per age class in current time step (mio. ha)
  p30_carbon_density_ac(t,j,ac,ag_pools) Carbon density cropland tree cover (tC per ha)
  p30_treecover_bii_coeff(bii_class_secd,potnatveg)    bii coeff (1)
+ p30_treecover_shr(t,j)                 Share of treecover on cropland (1)
+ p30_treecover_scenario_fader(t_all)    Cropland treecover scenario fader (1)
+ p30_betr_shr(t,j)                 Share of betr on cropland (1)
+ p30_betr_scenario_fader(t_all)    betr scenario fader (1)
 ;
 
 positive variables
@@ -45,6 +49,9 @@ equations
  q30_bv_per(j,potnatveg)            Biodiversity value of perennial cropland (mio. ha)
  q30_land_snv(j)                    Land constraint for the SNV policy in cropland areas (mio. ha)
  q30_land_snv_trans(j)              Land transition constraint for SNV policy in cropland areas (mio. ha)
+ q30_treecover(j)                   Land constraint cropland treecover (mio. ha)
+ q30_treecover_est(j,ac)            Land constraint cropland treecover (mio. ha)
+ q30_betr(j)                        Land constraint betr (mio. ha)
  q30_bv_treecover(j,potnatveg)      Biodiversity value for cropland treecover (Mha)
 ;
 
@@ -64,6 +71,9 @@ parameters
  oq30_bv_per(t,j,potnatveg,type)          Biodiversity value of perennial cropland (mio. ha)
  oq30_land_snv(t,j,type)                  Land constraint for the SNV policy in cropland areas (mio. ha)
  oq30_land_snv_trans(t,j,type)            Land transition constraint for SNV policy in cropland areas (mio. ha)
+ oq30_treecover(t,j,type)                 Land constraint cropland treecover (mio. ha)
+ oq30_treecover_est(t,j,ac,type)          Land constraint cropland treecover (mio. ha)
+ oq30_betr(t,j,type)                      Land constraint betr (mio. ha)
  oq30_bv_treecover(t,j,potnatveg,type)    Biodiversity value for cropland treecover (Mha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
