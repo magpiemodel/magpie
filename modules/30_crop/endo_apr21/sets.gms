@@ -53,4 +53,8 @@ sets
 
    policy_target30 Target year for cropland policy
    / none, by2030, by2050 /
+
+   relocation_target30 Cropland requiring relocation based on different SNV targets
+   / SNV20TargetCropland, SNV50TargetCropland /
+
 ;

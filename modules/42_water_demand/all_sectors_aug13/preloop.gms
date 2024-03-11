@@ -13,5 +13,5 @@ i42_wat_req_k(t,j,kli) = f42_wat_req_kli(kli);
 * Trajectory for environmental flow policy
 * (linear interpolation from start year to target year)
 p42_efp(t_all,"off") = 0;
-m_linear_interpol(p42_efp_fader, s42_efp_startyear, s42_efp_targetyear, 0, 1);
+m_linear_time_interpol(p42_efp_fader, s42_efp_startyear, s42_efp_targetyear, 0, 1);
 p42_efp(t_all, "on") = p42_efp_fader(t_all);
