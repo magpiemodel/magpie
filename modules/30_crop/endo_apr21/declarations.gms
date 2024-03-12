@@ -22,12 +22,12 @@ parameters
  p30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
  p30_treecover(t,j,ac)              Cropland tree cover per age class (mio. ha)
  pc30_treecover(j,ac)               Cropland tree cover per age class in current time step (mio. ha)
- p30_carbon_density_ac(t,j,ac,ag_pools) Carbon density cropland tree cover (tC per ha)
- p30_treecover_bii_coeff(bii_class_secd,potnatveg)    bii coeff (1)
- p30_treecover_shr(t,j)                 Share of treecover on cropland (1)
- p30_treecover_scenario_fader(t_all)    Cropland treecover scenario fader (1)
- p30_betr_shr(t,j)                 Share of betr on cropland (1)
- p30_betr_scenario_fader(t_all)    betr scenario fader (1)
+ p30_carbon_density_ac(t,j,ac,ag_pools)  Carbon density cropland tree cover (tC per ha)
+ p30_treecover_bii_coeff(bii_class_secd,potnatveg)  BII coefficient for cropland treecover (1)
+ p30_treecover_min_shr(t,j)         Minimum share of treecover on cropland (1)
+ p30_treecover_scenario_fader(t_all)  Cropland treecover scenario fader (1)
+ p30_betr_min_shr(t,j)             Minimum share of bioenergy trees on cropland (1)
+ p30_betr_scenario_fader(t_all)    Bioenergy trees scenario fader (1)
 ;
 
 positive variables

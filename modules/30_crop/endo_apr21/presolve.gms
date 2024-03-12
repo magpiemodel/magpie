@@ -62,9 +62,9 @@ s30_shift = m_timestep_length_forestry/5;
 pc30_treecover(j,ac) = p30_treecover(t,j,ac);
 v30_treecover.l(j,ac) = p30_treecover(t,j,ac);
 
-p30_treecover_shr(t,j) = p30_treecover_scenario_fader(t) *
-  (s30_treecover_shr * sum(cell(i,j), p30_country_snv_weight(i))
-  + s30_treecover_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
+p30_treecover_min_shr(t,j) = p30_treecover_scenario_fader(t) *
+  (s30_treecover_min_shr * sum(cell(i,j), p30_country_snv_weight(i))
+  + s30_treecover_min_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
 
 *define ac_est and ac_sub
 ac_est(ac) = no;
@@ -87,6 +87,6 @@ else
  );
 );
 
-p30_betr_shr(t,j) = p30_betr_scenario_fader(t) *
-  (s30_betr_shr * sum(cell(i,j), p30_country_snv_weight(i))
-  + s30_betr_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
+p30_betr_min_shr(t,j) = p30_betr_scenario_fader(t) *
+  (s30_betr_min_shr * sum(cell(i,j), p30_country_snv_weight(i))
+  + s30_betr_min_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
