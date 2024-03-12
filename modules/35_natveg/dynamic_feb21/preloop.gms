@@ -65,4 +65,4 @@ p35_land_start_ac(j,ac,"secdforest") = i35_secdforest(j,ac);
 * -----------------------------
 * Set forest damage trajectory
 * -----------------------------
-m_sigmoid_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);
+m_sigmoid_time_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);
