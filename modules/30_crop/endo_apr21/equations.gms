@@ -10,7 +10,7 @@
 *' the sum of crop and water supply type specific land requirements:
 
  q30_cropland(j2)  ..
-   sum((kcr,w), vm_area(j2,kcr,w)) + vm_fallow(j2) + sum(ac, v30_treecover(j2,ac)) =e= vm_land(j2,"crop");
+   sum((kcr,w), vm_area(j2,kcr,w)) + vm_fallow(j2) + vm_treecover_area(j2) =e= vm_land(j2,"crop");
 
 *' We assume that crop production can only take place on suitable cropland area.
 *' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
@@ -40,19 +40,6 @@
  q30_land_snv_trans(j2) ..
          sum(land_snv, vm_lu_transitions(j2,"crop",land_snv)) =g= sum(ct, p30_snv_relocation(ct,j2));
 
- q30_treecover(j2) ..
- sum(ac, v30_treecover(j2,ac)) =g= sum(ct, p30_treecover_min_shr(ct,j2)) * vm_land(j2,"crop");
-
- q30_betr(j2) ..
-    sum(w, vm_area(j2,"betr",w)) =g=
-     vm_land(j2,"crop") * sum(ct, p30_betr_min_shr(ct,j2));
-
-*' This constraint distributes additions to forestry land over ac_est,
-*' which depends on the time step length (e.g. ac0 and ac5 for a 10 year time step).
-
- q30_treecover_est(j2,ac_est) ..
- v30_treecover(j2,ac_est) =e= sum(ac_est2, v30_treecover(j2,ac_est2))/card(ac_est2);
-
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect
 *' crop rotations limiting the share a specific crop can cover of the total area
@@ -80,9 +67,8 @@
 *' for all cropland :
 
  q30_carbon(j2,ag_pools,stockType) ..
- vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
-   m_carbon_stock(vm_land,fm_carbon_density,"crop") + 
-   m_carbon_stock_ac(v30_treecover,p30_carbon_density_ac,"ac","ac_sub");
+  vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
+  m_carbon_stock(vm_land,fm_carbon_density,"crop") + vm_treecover_carbon(j2,ag_pools,stockType);
 
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
  q30_bv_ann(j2,potnatveg) .. vm_bv(j2,"crop_ann",potnatveg)
@@ -93,8 +79,3 @@
           =e=
           (vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
           * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
-
- q30_bv_treecover(j2,potnatveg) .. vm_bv(j2,"crop_tree",potnatveg)
-          =e=
-          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v30_treecover(j2,ac)) * 
-          p30_treecover_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);

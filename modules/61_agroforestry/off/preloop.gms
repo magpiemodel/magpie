@@ -5,13 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pm_land_start(j,land) = f10_land("y1995",j,land);
-
-pcm_land(j,land) = pm_land_start(j,land);
-vm_land.l(j,land) = pcm_land(j,land);
-
-pm_treecover_shr(j) = 0;
-pm_treecover_shr(j)$(f10_land("y2015",j,"crop") > 1e-10) = 
- (f10_treecover(j)/f10_land("y2015",j,"crop"));
-
-*** EOF pre.gms ***
+vm_cost_agroforestry.fx(j) = 0;
+vm_treecover_area.fx(j) = 0;
+vm_treecover_carbon.fx(j,ag_pools,stockType) = 0;
+vm_bv(j,"crop_tree",potnatveg) = 0;

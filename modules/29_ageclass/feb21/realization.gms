@@ -22,4 +22,5 @@ $Ifi "%phase%" == "sets" $include "./modules/29_ageclass/feb21/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/29_ageclass/feb21/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/29_ageclass/feb21/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/29_ageclass/feb21/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/29_ageclass/feb21/presolve.gms"
 *######################## R SECTION END (PHASES) ###############################

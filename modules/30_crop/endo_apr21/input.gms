@@ -29,17 +29,6 @@ s30_snv_relocation_data_x1      First reference value in SNV target cropland dat
 s30_snv_relocation_data_x2      Second reference value in SNV target cropland data (1) / 0.5 /
 s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
-s30_treecover_plantation        Growth curve switch for tree cover on cropland 0=natveg 1=plantations (1) / 0 /
-s30_treecover_bii_coeff         BII coefficent to be used for tree cover on cropland 0=secondary vegetation 1=timber plantations (1) / 0 /
-s30_treecover_min_shr           Share of treecover on cropland (1) / 0 /
-s30_treecover_min_shr_noselect  Share of treecover on cropland (1) / 0 /
-s30_treecover_scenario_start    Cropland treecover scenario start year       / 2020 /
-s30_treecover_scenario_target   Cropland treecover scenario target year      / 2030 /
-s30_treecover_decrease          Cropland treecover can decrease (1) or not (0) / 0 /
-s30_betr_min_shr                Minimum share of bioenergy trees on cropland (1) / 0 /
-s30_betr_min_shr_noselect       Minimum share of bioenergy trees on cropland (1) / 0 /
-s30_betr_scenario_start         Bioenergy trees scenario start year       / 2020 /
-s30_betr_scenario_target        Bioenergy trees scenario target year      / 2050 /
 ;
 
 * Set-switch for countries affected by regional SNV policy
@@ -132,14 +121,4 @@ table f30_snv_target_cropland(j,relocation_target30) Cropland in 2019 requiring 
 $ondelim
 $include "./modules/30_crop/endo_apr21/input/SNVTargetCropland.cs3"
 $offdelim
-;
-
-********* Cropland tree cover *******************************************
-
-parameter f30_treecover(j) Tree cover on cropland in 2019 (mio. ha)
-/
-$ondelim
-$include "./modules/30_crop/endo_apr21/input/CroplandTreecover.cs2"
-$offdelim
-/
 ;
