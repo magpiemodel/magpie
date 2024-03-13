@@ -29,11 +29,12 @@ cfg$force_download <- TRUE
 # Special outputs required for Deep Dive
 cfg$qos <- "standby_maxMem_dayMax"
 cfg$output <- c("output_check",
-                "extra/highres",
+               # "extra/highres", # do manually on last magpie run
                 "extra/disaggregation",
-                "projects/FSEC_nitrogenPollution",
-                "projects/FSEC_water",
+               # "projects/FSEC_nitrogenPollution", # do manually on last (high-res) magpie run
+               # "projects/FSEC_water", # do manually on last (high-res) magpie run
                 "agmip_report",
+                # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
                 "rds_report")
 
 #######################
