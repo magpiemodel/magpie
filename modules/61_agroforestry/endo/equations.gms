@@ -33,7 +33,7 @@ q61_reward_treecover(j2) ..
 *' Bioenergy tree reward
 q61_reward_betr(j2) ..
   v61_reward_betr(j2) =e= 
-  sum(ac, v61_treecover(j2,ac)) * i61_reward_betr;
+  sum(w, vm_area(j2,"betr",w)) * i61_reward_betr;
 
 *' Tree cover establishment
 q61_treecover_est(j2,ac_est) ..
