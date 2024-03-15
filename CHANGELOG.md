@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
 
 ### added
 - **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **52_carbon** i52_land_carbon_sink was not identical before 2020 for different RCPs. Fixed by setting to RCPBU until the year defined in sm_fix_cc.
+- **inputdata** currency fixed in historic value of production for crops and livestock which affects e.g. total labor costs and in turn hourly labor costs, bugfix in aggregation weight of capital cost share out of factor costs
 
 
 ## [4.7.1] - 2024-02-28
