@@ -281,7 +281,7 @@ $setglobal peatland  v2
 $setglobal som  static_jan19
 
 $setglobal bioenergy  1stgen_priced_dec18
-$setglobal agroforestry  exo
+$setglobal agroforestry  off
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 

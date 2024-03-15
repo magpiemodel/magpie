@@ -8,4 +8,4 @@
 vm_cost_agroforestry.fx(j) = 0;
 vm_treecover_area.fx(j) = 0;
 vm_treecover_carbon.fx(j,ag_pools,stockType) = 0;
-vm_bv(j,"crop_tree",potnatveg) = 0;
+vm_bv.fx(j,"crop_tree",potnatveg) = 0;
