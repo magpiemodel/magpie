@@ -5,6 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+** for testing
+v73_prod_heaven_timber.fx(j,kforestry) = 0;
+
 ** Plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid distortion of cost
 s73_free_prod_cost$(s73_timber_demand_switch = 0) = s73_timber_prod_cost_wood;
 

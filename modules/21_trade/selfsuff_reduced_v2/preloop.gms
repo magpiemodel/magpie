@@ -16,7 +16,5 @@ elseif (s21_trade_tariff=0),
     i21_trade_tariff(h,k_trade) = 0;
 );
 
-pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);
-pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);
-*Implausible jumps in selfsuff for wood in some regions.
-pm_selfsuff_ext(tstart21,h,kforestry) = f21_self_suff("y2010",h,kforestry);
+p21_timber_trade_glo("wood") = s21_wood_trade_glo;
+p21_timber_trade_glo("woodfuel") = s21_woodfuel_trade_glo;

@@ -16,13 +16,13 @@ sets
 * foddr is not traded as too bulky
 * pasture it not traded as too bulky
 * begr and betr are not traded because biomass is traded in REMIND
-   k_trade(kall) Production activities of tradable commodities
+   k_trade(kall) Production activities of tradable agricultural commodities
    / tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
    potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,
    oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
    livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish /
 
-   k_trade_wood(kall) wood trade
+   k_trade_timber(kall) Production activities of tradable timber commodities
    / wood, woodfuel /
 
 * We limit trade of secondary products as this allows for extreme specialisation

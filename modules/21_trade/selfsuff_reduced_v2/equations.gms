@@ -71,11 +71,11 @@
  sum(supreg(h2,i2),vm_cost_trade(i2)) =e= sum(k_trade,v21_cost_trade_reg(h2,k_trade));
 
 
-q21_wood_prod(i2,k_trade_wood)..
-vm_prod_reg(i2,k_trade_wood) =e= vm_supply(i2,k_trade_wood) + v21_wood_import(i2,k_trade_wood) - v21_wood_export(i2,k_trade_wood);
+q21_timber_prod(i2,k_trade_timber)..
+vm_prod_reg(i2,k_trade_timber) =e= vm_supply(i2,k_trade_timber) + v21_timber_import(i2,k_trade_timber) - v21_timber_export(i2,k_trade_timber);
 
-q21_wood_import(k_trade_wood)..
-sum(i2, v21_wood_import(i2,k_trade_wood)) =l= 0.8 * sum(i2, vm_supply(i2,k_trade_wood));
+q21_timber_import(k_trade_timber)..
+sum(i2, v21_timber_import(i2,k_trade_timber)) =l= p21_timber_trade_glo(k_trade_timber) * sum(i2, vm_supply(i2,k_trade_timber));
 
-q21_wood_export(k_trade_wood)..
-sum(i2, v21_wood_export(i2,k_trade_wood)) =e= sum(i2, v21_wood_import(i2,k_trade_wood));
+q21_timber_export(k_trade_timber)..
+sum(i2, v21_timber_export(i2,k_trade_timber)) =e= sum(i2, v21_timber_import(i2,k_trade_timber));
