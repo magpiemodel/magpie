@@ -9,7 +9,9 @@ parameters
  i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
  i21_trade_margin(h,k_trade)                    Trade margins (USD05MER per tDM)
  i21_trade_tariff(h,k_trade)                    Trade tariffs (USD05MER per tDM)
- p21_timber_trade_glo(k_trade_timber)
+ p21_wood_trade_glo(t_all)
+ p21_woodfuel_trade_glo(t_all)
+ p21_timber_trade_glo(t_all,k_trade_timber)
 ;
 
 positive variables

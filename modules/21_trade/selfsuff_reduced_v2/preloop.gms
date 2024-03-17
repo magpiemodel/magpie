@@ -16,5 +16,9 @@ elseif (s21_trade_tariff=0),
     i21_trade_tariff(h,k_trade) = 0;
 );
 
-p21_timber_trade_glo("wood") = s21_wood_trade_glo;
-p21_timber_trade_glo("woodfuel") = s21_woodfuel_trade_glo;
+
+m_linear_time_interpol(p21_wood_trade_glo,s21_start_year,s21_target_year,s21_start_value,s21_target_value_wood);
+m_linear_time_interpol(p21_woodfuel_trade_glo,s21_start_year,s21_target_year,s21_start_value,s21_target_value_woodfuel);
+
+p21_timber_trade_glo(t_all,"wood") = p21_wood_trade_glo(t_all);
+p21_timber_trade_glo(t_all,"woodfuel") = p21_woodfuel_trade_glo(t_all);
