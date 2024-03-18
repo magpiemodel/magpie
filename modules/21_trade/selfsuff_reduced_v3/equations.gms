@@ -11,7 +11,7 @@
 
  q21_trade_glo(k_trade)..
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
-  sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
+  sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade) * i21_timber_exception(k_trade));
 *'
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(h2,k_notrade)..
