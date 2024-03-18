@@ -54,7 +54,7 @@
  + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
  q21_excess_dem_timber(k_trade_timber)..
- v21_excess_dem(k_trade_timber) =l= sum(i2, vm_supply(i2,k_trade_timber)) * sum(ct,p21_timber_trade_glo(ct,k_trade_timber)); 
+ v21_excess_dem(k_trade_timber) =l= sum(i2, vm_supply(i2,k_trade_timber)) * s21_timber_trade_glo; 
 
 *' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].
 *' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.

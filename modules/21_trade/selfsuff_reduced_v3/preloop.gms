@@ -28,9 +28,3 @@ pm_selfsuff_ext(tstart21,h,kforestry) = f21_self_suff("y2010",h,kforestry);
 
 i21_timber_exception(k_trade) = 1;
 i21_timber_exception(k_trade_timber) = 0;
-
-m_linear_time_interpol(p21_wood_trade_glo,s21_start_year,s21_target_year,s21_start_value,s21_target_value_wood);
-m_linear_time_interpol(p21_woodfuel_trade_glo,s21_start_year,s21_target_year,s21_start_value,s21_target_value_woodfuel);
-
-p21_timber_trade_glo(t_all,"wood") = p21_wood_trade_glo(t_all);
-p21_timber_trade_glo(t_all,"woodfuel") = p21_woodfuel_trade_glo(t_all);

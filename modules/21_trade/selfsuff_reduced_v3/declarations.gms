@@ -11,9 +11,6 @@ parameters
  i21_trade_tariff(h,k_trade)                    Trade tariffs (USD05MER per tDM)
  pm_selfsuff_ext(t_ext,h,kforestry)            Self sufficiency for timber products in extended time frame (1)
  i21_timber_exception(k_trade)
- p21_wood_trade_glo(t_all)
- p21_woodfuel_trade_glo(t_all)
- p21_timber_trade_glo(t_all,k_trade_timber)
 ;
 
 positive variables

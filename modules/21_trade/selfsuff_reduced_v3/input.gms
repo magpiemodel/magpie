@@ -11,11 +11,7 @@ $setglobal c21_trade_liberalization  l909090r808080
 scalars
   s21_trade_tariff Trade tariff switch (1=on 0=off)  (1)                   / 1 /
   s21_trade_bal_damper Fraction to ease self sufficiency pool trade for roundwood / 0.65 /
-  s21_start_year / 2020 /
-  s21_target_year / 2050 /
-  s21_start_value / 0.05 /
-  s21_target_value_woodfuel / 0.05 /
-  s21_target_value_wood / 0.1 /
+  s21_timber_trade_glo / 0.1 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)
