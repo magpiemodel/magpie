@@ -10,7 +10,6 @@ $setglobal c21_trade_liberalization  l909090r808080
 
 scalars
   s21_trade_tariff Trade tariff switch (1=on 0=off)  (1)                   / 1 /
-  s21_trade_bal_damper Fraction to ease self sufficiency pool trade for roundwood / 0.65 /
   s21_timber_trade_glo Share of global timber demand that can be traded globally / 0.1 /
 ;
 

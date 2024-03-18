@@ -58,6 +58,12 @@ q21_trade_bilat(h2,k_trade)..
  $(sum(ct,f21_self_suff(ct,h2,k_trade)) < 1))
  + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
+*' Exception for timber; see `i21_timber_exception` in constrains `q21_trade_reg` and `q21_excess_dem`. 
+*' A certain share of the global timber demand can be traded globally.
+
+ q21_excess_dem_timber(k_trade_timber)..
+ v21_excess_dem(k_trade_timber) =l= sum(i2, vm_supply(i2,k_trade_timber)) * s21_timber_trade_glo; 
+
 *' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].
 *' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.
 

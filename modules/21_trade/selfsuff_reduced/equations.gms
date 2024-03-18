@@ -53,7 +53,8 @@
  $(sum(ct,f21_self_suff(ct,h2,k_trade)) < 1))
  + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
-*' A certain share of the global timber demand that can be traded globally.
+*' Exception for timber; see `i21_timber_exception` in constrains `q21_trade_reg` and `q21_excess_dem`. 
+*' A certain share of the global timber demand can be traded globally.
 
  q21_excess_dem_timber(k_trade_timber)..
  v21_excess_dem(k_trade_timber) =l= sum(i2, vm_supply(i2,k_trade_timber)) * s21_timber_trade_glo; 
