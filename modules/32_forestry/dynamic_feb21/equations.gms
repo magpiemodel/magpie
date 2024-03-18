@@ -175,7 +175,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_establishment_dynamic(i2)$s32_establishment_dynamic ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future_reg(i2))
               =e=
-              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) * p32_plantation_contribution(ct,i2))
+              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, sum(supreg(h2,i2),pm_selfsuff_ext(ct,h2,kforestry))) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2))
               ;
 
 *' Constraint to maintain the average regional timber yield at rotation age, accounting for the cellular timber yield (`pc32_yield_forestry_future`).
