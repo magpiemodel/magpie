@@ -20,6 +20,4 @@ $Ifi "%trade%" == "free_apr16" $include "./modules/21_trade/free_apr16/realizati
 $Ifi "%trade%" == "off" $include "./modules/21_trade/off/realization.gms"
 $Ifi "%trade%" == "selfsuff_reduced" $include "./modules/21_trade/selfsuff_reduced/realization.gms"
 $Ifi "%trade%" == "selfsuff_reduced_bilateral22" $include "./modules/21_trade/selfsuff_reduced_bilateral22/realization.gms"
-$Ifi "%trade%" == "selfsuff_reduced_v2" $include "./modules/21_trade/selfsuff_reduced_v2/realization.gms"
-$Ifi "%trade%" == "selfsuff_reduced_v3" $include "./modules/21_trade/selfsuff_reduced_v3/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
