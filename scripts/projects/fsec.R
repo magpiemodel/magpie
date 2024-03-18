@@ -14,10 +14,12 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v36_FSEC"
+  v <- "v39_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "RCP60")),
+            f_BAUlabor8p5    = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "RCP60", "labor8p5")),
             d_SSP1bau        = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1", "RCP45")),
             d_SSP1PLUSbau    = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
@@ -36,6 +38,12 @@ fsecScenario <- function(scenario) {
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
                                   "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
                                   "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19")),
+            f_FSDPlabor1p9 = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC",
+                                  "energy", "bioplastics", "population", "institutions", "timberCities",
+                                  "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
+                                  "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
+                                  "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19", "labor1p9")),
             # FSDPs (without external)
             d_SSP1fsdp       = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
