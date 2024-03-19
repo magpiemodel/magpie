@@ -134,9 +134,9 @@ miti <- function(cfg) {
   cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 
   # Mitigation: consistent with 1.5C considering Diet change
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-DS-rem-5.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-DS-rem-5.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
@@ -148,7 +148,7 @@ bioenergy <- function(cfg) {
   cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 
   # Bioenergy demand from coupled REMIND-MAgPIE run where 1.5 is reached with ghg prices on land and considering diet shift
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-DS-rem-5.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
