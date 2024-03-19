@@ -53,7 +53,6 @@
  $(sum(ct,f21_self_suff(ct,h2,k_trade)) < 1))
  + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
-
 *' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].
 *' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.
 
