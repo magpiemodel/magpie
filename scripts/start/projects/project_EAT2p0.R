@@ -40,7 +40,7 @@ cfg$output <- c("output_check",
 #######################
 # SCENARIO DEFINITION #
 #######################
-cfg <- setScenario(cfg, c("SSP2", "NPI"))
+cfg <- setScenario(cfg, c("cc", "SSP2", "NDC")) # double check with Cornell team about NPi or NDC
 
 ### BAU Scenario ###
 # SSP: SSP2
@@ -131,10 +131,10 @@ miti <- function(cfg) {
   # NDCs
   cfg <- setScenario(cfg, c("SSP2", "NDC"))
 
-  # Mitigation: consistent with 1.5C
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/florianh/projects/paper/LandEnergy/modelrunsGrassland7/remind/output/C_SSP2EU-PkBudg500-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
+  # Mitigation: consistent with 1.5C considering diet change
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/florianh/projects/paper/LandEnergy/modelrunsGrassland7/remind/output/C_SSP2EU-PkBudg500-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-PkBudg500-rem-5.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
@@ -144,12 +144,8 @@ miti <- function(cfg) {
 # No climate change impacts
 noCC <- function(cfg) {
   # deactivate climate change impacts
-  cfg$gms$c59_som_scenario        <- "nocc"
-  cfg$gms$c14_yields_scenario     <- "nocc"
-  cfg$gms$c31_grassl_yld_scenario <- "nocc" # Note: anyway not active in current default.
-  cfg$gms$c42_watdem_scenario     <- "nocc"
-  cfg$gms$c43_watavail_scenario   <- "nocc"
-  cfg$gms$c52_carbon_scenario     <- "nocc"
+  cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+
   return(cfg)
 }
 
