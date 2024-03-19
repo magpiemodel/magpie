@@ -49,9 +49,9 @@
 
  q21_excess_dem(k_trade)..
  v21_excess_dem(k_trade) =g=
- (sum(h2, sum(supreg(h2,i2),vm_supply(i2,k_trade))*(1 - sum(ct,f21_self_suff(ct,h2,k_trade)))
+ sum(h2, sum(supreg(h2,i2),vm_supply(i2,k_trade))*(1 - sum(ct,f21_self_suff(ct,h2,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade)) < 1))
- + sum(ct,f21_trade_balanceflow(ct,k_trade)));
+ + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
 
 *' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].
