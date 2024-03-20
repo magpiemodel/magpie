@@ -64,8 +64,8 @@
  q21_cost_trade_reg(h2,k_trade)..
  v21_cost_trade_reg(h2,k_trade) =g=
  (i21_trade_margin(h2,k_trade) + i21_trade_tariff(h2,k_trade))
- *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade))
- + v21_import_for_feasibility(h2,k_trade) * s21_cost_import_for_feasibility;
+ *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade)) 
+ + v21_import_for_feasibility(h2,k_trade) * s21_cost_import;
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(h2)..

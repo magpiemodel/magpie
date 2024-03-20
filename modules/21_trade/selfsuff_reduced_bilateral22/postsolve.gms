@@ -13,6 +13,7 @@
  ov21_cost_margin_reg(t,i,k_trade,"marginal")        = v21_cost_margin_reg.m(i,k_trade);
  ov_cost_trade(t,i,"marginal")                       = vm_cost_trade.m(i);
  ov21_cost_trade_reg(t,i,k_trade,"marginal")         = v21_cost_trade_reg.m(i,k_trade);
+ ov21_import_for_feasibility(t,h,k_trade,"marginal") = v21_import_for_feasibility.m(h,k_trade);
  oq21_trade_glo(t,k_trade,"marginal")                = q21_trade_glo.m(k_trade);
  oq21_notrade(t,h,k_notrade,"marginal")              = q21_notrade.m(h,k_notrade);
  oq21_trade_reg(t,h,k_trade,"marginal")              = q21_trade_reg.m(h,k_trade);
@@ -33,6 +34,7 @@
  ov21_cost_margin_reg(t,i,k_trade,"level")           = v21_cost_margin_reg.l(i,k_trade);
  ov_cost_trade(t,i,"level")                          = vm_cost_trade.l(i);
  ov21_cost_trade_reg(t,i,k_trade,"level")            = v21_cost_trade_reg.l(i,k_trade);
+ ov21_import_for_feasibility(t,h,k_trade,"level")    = v21_import_for_feasibility.l(h,k_trade);
  oq21_trade_glo(t,k_trade,"level")                   = q21_trade_glo.l(k_trade);
  oq21_notrade(t,h,k_notrade,"level")                 = q21_notrade.l(h,k_notrade);
  oq21_trade_reg(t,h,k_trade,"level")                 = q21_trade_reg.l(h,k_trade);
@@ -53,6 +55,7 @@
  ov21_cost_margin_reg(t,i,k_trade,"upper")           = v21_cost_margin_reg.up(i,k_trade);
  ov_cost_trade(t,i,"upper")                          = vm_cost_trade.up(i);
  ov21_cost_trade_reg(t,i,k_trade,"upper")            = v21_cost_trade_reg.up(i,k_trade);
+ ov21_import_for_feasibility(t,h,k_trade,"upper")    = v21_import_for_feasibility.up(h,k_trade);
  oq21_trade_glo(t,k_trade,"upper")                   = q21_trade_glo.up(k_trade);
  oq21_notrade(t,h,k_notrade,"upper")                 = q21_notrade.up(h,k_notrade);
  oq21_trade_reg(t,h,k_trade,"upper")                 = q21_trade_reg.up(h,k_trade);
@@ -73,6 +76,7 @@
  ov21_cost_margin_reg(t,i,k_trade,"lower")           = v21_cost_margin_reg.lo(i,k_trade);
  ov_cost_trade(t,i,"lower")                          = vm_cost_trade.lo(i);
  ov21_cost_trade_reg(t,i,k_trade,"lower")            = v21_cost_trade_reg.lo(i,k_trade);
+ ov21_import_for_feasibility(t,h,k_trade,"lower")    = v21_import_for_feasibility.lo(h,k_trade);
  oq21_trade_glo(t,k_trade,"lower")                   = q21_trade_glo.lo(k_trade);
  oq21_notrade(t,h,k_notrade,"lower")                 = q21_notrade.lo(h,k_notrade);
  oq21_trade_reg(t,h,k_trade,"lower")                 = q21_trade_reg.lo(h,k_trade);

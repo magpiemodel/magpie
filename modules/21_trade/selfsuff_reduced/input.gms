@@ -5,12 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c21_trade_liberalization  l908080r807070
+$setglobal c21_trade_liberalization  l909090r808080
 *   options are "regionalized" and "globalized" and "fragmented"
+
+sets
+  k_import21(k_trade) Commodities that can have additional imports to maintain feasibility
+                    / wood, woodfuel /
+;
 
 scalars
   s21_trade_tariff Trade tariff switch (1=on 0=off)  (1)                   / 1 /
-  s21_cost_import_for_feasibility Cost extra production (USD05MER per tDM) / 10000 /
+  s21_cost_import Cost for additional imports to maintain feasibility (USD05MER per tDM) / 10000 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)

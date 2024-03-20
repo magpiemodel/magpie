@@ -10,7 +10,6 @@ parameters
  i21_trade_margin(i_ex,i_im,k_trade)            Trade transport and admin costs (USD05MER per tDM)
  i21_trade_tariff(t_all, i_ex,i_im,k_trade)            Trade tariffs (USD05MER per tDM)
  pm_selfsuff_ext(t_ext,h,kforestry)             Self sufficiency for timber products in extended time frame (1)
- i21_timber_exception(k_trade)                 Helper for excluding timber products (1)
 ;
 
 positive variables
@@ -21,6 +20,7 @@ positive variables
  v21_cost_margin_reg(i,k_trade)          Rregional trade margins for each tradable commodity (mio. USD05MER per yr)
  vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER per yr)
  v21_cost_trade_reg(i,k_trade)           Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
+ v21_import_for_feasibility(h,k_trade)   Additional imports to maintain feasibility (mio. tDM per yr)
 ;
 
 equations
@@ -48,6 +48,7 @@ parameters
  ov21_cost_margin_reg(t,i,k_trade,type)        Rregional trade margins for each tradable commodity (mio. USD05MER per yr)
  ov_cost_trade(t,i,type)                       Regional  trade costs (mio. USD05MER per yr)
  ov21_cost_trade_reg(t,i,k_trade,type)         Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
+ ov21_import_for_feasibility(t,h,k_trade,type) Additional imports to maintain feasibility (mio. tDM per yr)
  oq21_trade_glo(t,k_trade,type)                Global production constraint (mio. tDM per yr)
  oq21_notrade(t,h,k_notrade,type)              Superregional production constraint of non-tradable commodities (mio. tDM per yr)
  oq21_trade_reg(t,h,k_trade,type)              Superregional trade balances i.e. minimum self-sufficiency ratio (1)

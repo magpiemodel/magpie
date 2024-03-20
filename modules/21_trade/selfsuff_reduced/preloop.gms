@@ -21,6 +21,6 @@ pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);
 *Implausible jumps in selfsuff for wood in some regions.
 pm_selfsuff_ext(tstart21,h,kforestry) = f21_self_suff("y2010",h,kforestry);
 
-*v21_extra_prod.fx(h,k_trade) = 0;
-*v21_extra_prod.lo(h,k_trade_timber) = 0;
-*v21_extra_prod.up(h,k_trade_timber) = Inf;
+v21_import_for_feasibility.fx(h,k_trade) = 0;
+v21_import_for_feasibility.lo(h,k_import21) = 0;
+v21_import_for_feasibility.up(h,k_import21) = Inf;

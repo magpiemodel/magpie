@@ -17,7 +17,7 @@ positive variables
  v21_excess_prod(h,k_trade)              Superregional excess production (mio. tDM per yr)
  vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER per yr)
  v21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
- v21_import_for_feasibility(h,k_trade)               Extra production (mio. tDM per yr)
+ v21_import_for_feasibility(h,k_trade)   Additional imports to maintain feasibility (mio. tDM per yr)
 ;
 
 equations
@@ -37,7 +37,7 @@ parameters
  ov21_excess_prod(t,h,k_trade,type)            Superregional excess production (mio. tDM per yr)
  ov_cost_trade(t,i,type)                       Regional  trade costs (mio. USD05MER per yr)
  ov21_cost_trade_reg(t,h,k_trade,type)         Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
- ov21_import_for_feasibility(t,h,k_trade,type) Extra production (mio. tDM per yr)
+ ov21_import_for_feasibility(t,h,k_trade,type) Additional imports to maintain feasibility (mio. tDM per yr)
  oq21_trade_glo(t,k_trade,type)                Global production constraint (mio. tDM per yr)
  oq21_notrade(t,h,k_notrade,type)              Superregional production constraint of non-tradable commodities (mio. tDM per yr)
  oq21_trade_reg(t,h,k_trade,type)              Superregional trade balances i.e. minimum self-sufficiency ratio (1)
