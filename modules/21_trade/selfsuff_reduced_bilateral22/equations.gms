@@ -11,7 +11,7 @@
 
  q21_trade_glo(k_trade)..
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
- sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade)) * i21_timber_exception(k_trade);
+ sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
 *' amount produced superregionally must be equal to supply + net trade
 q21_trade_bilat(h2,k_trade)..
@@ -33,7 +33,7 @@ q21_trade_bilat(h2,k_trade)..
 
  q21_trade_reg(h2,k_trade)..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =g=
- ()(sum(supreg(h2,i2),vm_supply(i2,k_trade)) + v21_excess_prod(h2,k_trade))
+ ((sum(supreg(h2,i2),vm_supply(i2,k_trade)) + v21_excess_prod(h2,k_trade))
  *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade) >= 1))
  + (sum(supreg(h2,i2),vm_supply(i2,k_trade))*sum(ct,f21_self_suff(ct,h2,k_trade))
@@ -79,7 +79,7 @@ q21_costs_margins(i2,k_trade)..
 q21_cost_trade_reg(i2,k_trade)..
   v21_cost_trade_reg(i2,k_trade) =g=
   v21_cost_tariff_reg(i2,k_trade) + v21_cost_margin_reg(i2,k_trade) 
- + v21_import_for_feasibility(h2,k_trade) * s21_cost_import;
+ + sum(supreg(h2,i2), v21_import_for_feasibility(h2,k_trade)) * s21_cost_import;
 
 *' Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(i2)..

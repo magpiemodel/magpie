@@ -19,7 +19,6 @@
  oq21_trade_reg(t,h,k_trade,"marginal")              = q21_trade_reg.m(h,k_trade);
  oq21_trade_reg_up(t,h,k_trade,"marginal")           = q21_trade_reg_up.m(h,k_trade);
  oq21_excess_dem(t,k_trade,"marginal")               = q21_excess_dem.m(k_trade);
- oq21_excess_dem_timber(t,k_trade_timber,"marginal") = q21_excess_dem_timber.m(k_trade_timber);
  oq21_excess_supply(t,h,k_trade,"marginal")          = q21_excess_supply.m(h,k_trade);
  oq21_trade_bilat(t,h,k_trade,"marginal")            = q21_trade_bilat.m(h,k_trade);
  oq21_costs_tariffs(t,i,k_trade,"marginal")          = q21_costs_tariffs.m(i,k_trade);
@@ -40,7 +39,6 @@
  oq21_trade_reg(t,h,k_trade,"level")                 = q21_trade_reg.l(h,k_trade);
  oq21_trade_reg_up(t,h,k_trade,"level")              = q21_trade_reg_up.l(h,k_trade);
  oq21_excess_dem(t,k_trade,"level")                  = q21_excess_dem.l(k_trade);
- oq21_excess_dem_timber(t,k_trade_timber,"level")    = q21_excess_dem_timber.l(k_trade_timber);
  oq21_excess_supply(t,h,k_trade,"level")             = q21_excess_supply.l(h,k_trade);
  oq21_trade_bilat(t,h,k_trade,"level")               = q21_trade_bilat.l(h,k_trade);
  oq21_costs_tariffs(t,i,k_trade,"level")             = q21_costs_tariffs.l(i,k_trade);
@@ -61,7 +59,6 @@
  oq21_trade_reg(t,h,k_trade,"upper")                 = q21_trade_reg.up(h,k_trade);
  oq21_trade_reg_up(t,h,k_trade,"upper")              = q21_trade_reg_up.up(h,k_trade);
  oq21_excess_dem(t,k_trade,"upper")                  = q21_excess_dem.up(k_trade);
- oq21_excess_dem_timber(t,k_trade_timber,"upper")    = q21_excess_dem_timber.up(k_trade_timber);
  oq21_excess_supply(t,h,k_trade,"upper")             = q21_excess_supply.up(h,k_trade);
  oq21_trade_bilat(t,h,k_trade,"upper")               = q21_trade_bilat.up(h,k_trade);
  oq21_costs_tariffs(t,i,k_trade,"upper")             = q21_costs_tariffs.up(i,k_trade);
@@ -82,7 +79,6 @@
  oq21_trade_reg(t,h,k_trade,"lower")                 = q21_trade_reg.lo(h,k_trade);
  oq21_trade_reg_up(t,h,k_trade,"lower")              = q21_trade_reg_up.lo(h,k_trade);
  oq21_excess_dem(t,k_trade,"lower")                  = q21_excess_dem.lo(k_trade);
- oq21_excess_dem_timber(t,k_trade_timber,"lower")    = q21_excess_dem_timber.lo(k_trade_timber);
  oq21_excess_supply(t,h,k_trade,"lower")             = q21_excess_supply.lo(h,k_trade);
  oq21_trade_bilat(t,h,k_trade,"lower")               = q21_trade_bilat.lo(h,k_trade);
  oq21_costs_tariffs(t,i,k_trade,"lower")             = q21_costs_tariffs.lo(i,k_trade);
