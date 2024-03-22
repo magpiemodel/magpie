@@ -41,7 +41,7 @@ cfg$output <- c("output_check",
 #######################
 # SCENARIO DEFINITION #
 #######################
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 # Note: The climate change impacts setting differs from the global AgMIP model comparision set-up.
 #       We do not include climate change impacts in the coupled REMIND-MAgPIE runs for the PB Deep Dive.
 
@@ -83,7 +83,7 @@ bau <- function(cfg) {
   cfg$gms$s32_aff_plantation <- 1
 
   # Setting REMIND scenario for blackmagicc
-  cfg$magicc_emis_scen <- 
+  cfg$magicc_emis_scen <- "SSP2EU-DSPkB500-DS"
   
   return(cfg)
 }
@@ -154,7 +154,6 @@ priceCO2 <- function(cfg) {
 
   # Mitigation: consistent with 1.5C considering Diet change
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem    <- "coupling"
   cfg$gms$c56_emis_policy      <- "ecoSysProtAll" 
 
   return(cfg)
@@ -167,7 +166,6 @@ priceNonCO2 <- function(cfg) {
 
   # Mitigation: consistent with 1.5C considering Diet change
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem    <- "coupling"
   cfg$gms$c56_emis_policy      <- "ecoSysProtAll_agMgmtOff" 
 
   return(cfg)
@@ -181,7 +179,7 @@ priceNonCO2 <- function(cfg) {
 # Business as usual scenario based on SSP2
 # with a higher climate impact reflected by RCP 7.0
 cfg$title <- "BAU"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
@@ -189,7 +187,7 @@ start_run(cfg, codeCheck = FALSE)
 # Decomposition scenario.
 # Globally achieves EL2 (Diet+Waste+Prod) by 2050
 cfg$title <- "MITI_Diet"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
@@ -199,7 +197,7 @@ start_run(cfg, codeCheck = FALSE)
 # MITI_Bioenergy #
 # Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "MITI_Bioenergy"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- bioenergy(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -207,7 +205,7 @@ start_run(cfg, codeCheck = FALSE)
 # MITI_CO2 #
 # Decomposition Scenario. Adds CO2 pricing on land-use change emissions with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "MITI_CO2"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- priceCO2(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -215,7 +213,7 @@ start_run(cfg, codeCheck = FALSE)
 # MITI_NonCO2 #
 # Decomposition Scenario. Adds non-CO2 pricing with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "MITI_NonCO2"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- priceNonCO2(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -223,134 +221,20 @@ start_run(cfg, codeCheck = FALSE)
 # MITI_Prod #
 # All production-side land-based mitigation measures
 cfg$title <- "MITI_Prod"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
-cfg <- bau(cfg = cfg)
-cfg <- bioenergy(cfg = cfg)
-cfg <- priceCO2(cfg = cfg)
-cfg <- priceNonCO2(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-
-
-# BAU_MITI #
-# Decomposition Scenario. Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
-cfg$title <- "BAU_MITI"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
+start_run(cfg, codeCheck = FALSE)
 
-# BAU_BIOENERGY #
-# Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
-cfg$title <- "BAU_BE"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+# MITI_Full #
+# All production-side land-based mitigation measures and demand-side mitigation (diet change)
+cfg$title <- "MITI_Full"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 cfg <- bau(cfg = cfg)
-cfg <- bioenergy(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
-
-# EL2 #
-# Full EAT-Lancet Scenario (diet, productivity, FLW) without mitigation and higher climate impacts based on RCP 7.0
-cfg$title <- "EL2"
-cfg <- bau(cfg = cfg)
+# Mititgation
+cfg <- miti(cfg = cfg)
+# PHD
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
-
-# ELM #
-# Full EAT-Lancet scenario (diet, productivity, FLW) with mitigation policies consistent with 1.5C. Climate based on a lower climate impacts with RCP 2.6
-cfg$title <- "ELM"
-cfg <- bau(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-# ELM # TEST RUN
-# Full EAT-Lancet scenario (diet, productivity, FLW) with mitigation policies consistent with 1.5C. Climate based on a lower climate impacts with RCP 2.6
-cfg$title <- "ELM_TestBEirrig"
-cfg <- bau(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
-# Allow irrigation of bioenergy crops
-cfg$gms$c30_bioen_water <- "all"
-start_run(cfg, codeCheck = FALSE)
-
-# ELM # TEST RUN
-# Full EAT-Lancet scenario (diet, productivity, FLW) with mitigation policies consistent with 1.5C. Climate based on a lower climate impacts with RCP 2.6
-cfg$title <- "ELM_TestPlantations"
-cfg <- bau(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
-# Forest plantations can be used for ghg-price driven afforestation
-cfg$gms$s32_aff_plantation <- 1
-start_run(cfg, codeCheck = FALSE)
-
-
-# ELM_Diet #
-# Decomposition Scenario. Removes Diet from ELM
-cfg$title <- "ELM_DIET"
-cfg <- bau(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
-
-# ELM_PROD #
-# Decomposition Scenario. Removed productivity trend from ELM
-cfg$title <- "ELM_PROD"
-cfg <- bau(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- waste(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
-
-# ELM_WAST #
-# Decomposition Scenario. Removes FLW from ELM
-cfg$title <- "ELM_WAST"
-cfg <- bau(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
-
-# ELM_RCP70 #
-# Decomposition Scenario. Applies RCP 7.0 climate impacts to ELM
-cfg$title <- "ELM_RCP70"
-cfg <- bau(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-cfg <- miti(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
-
-# ELM_NoCC #
-# Decomposition Scenario. Removes climate impacts (NoCC) from ELM
-cfg$title <- "ELM_NoCC"
-cfg <- bau(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- noCC(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
-
-# ELM_MITI #
-# Decomposition Scenario. Removes climate mitigation and LUC policies from ELM
-cfg$title <- "ELM_MITI"
-cfg <- bau(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
