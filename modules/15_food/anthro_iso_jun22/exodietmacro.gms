@@ -621,6 +621,10 @@ elseif s15_exo_diet = 3,
      abort "The parameter p15_intake_detailed_scen_target became negative after calorie balancing.";
      );
 
+* Correction of very small values
+  p15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_detailed_scen_target(t,iso,kfo) < 0) = 0;
+
+
 );
 *** End of MAgPIE-specific realization of the EAT Lancet diet
 

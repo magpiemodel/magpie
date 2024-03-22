@@ -34,6 +34,7 @@ cfg$output <- c("output_check",
                 "projects/FSEC_nitrogenPollution",
                 "projects/FSEC_water",
                 "agmip_report",
+                "runBlackmagicc",
                 # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
                 "rds_report")
 
@@ -54,14 +55,6 @@ cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 # RCP/GCM: 7p0 shocks on crops, livestock, labor
 # Trade: BAU
 bau <- function(cfg) {
-  ### General settings ###
-  # For impacts of CC on labor:
-  cfg$gms$factor_costs  <- "sticky_labor" # @Alex/Edna/Florian: Should we use this one?
-  cfg$gms$labor_prod    <- "exo"
-  cfg$gms$c37_labor_rcp <- "rcp585"
-  # Note: the effect of labor impacts is very low in MAgPIE and we don't have the
-  #       Nelson data implemented. We therefore use the existing data from LAMACLIMA
-  #       and the scenarios rcp119 and rcp585.
 
   ### Components for Decomposition ###
   # Diets: exogenous EATLancet diet
@@ -75,16 +68,22 @@ bau <- function(cfg) {
   cfg$gms$s12_interest_lic <- 0.1        # default
   cfg$gms$s12_interest_hic <- 0.04       # default
   # Default livestock productivity
-  cfg$gms$c70_feed_scen <- "ssp2"
-  # Mitigation: no mitigation beyond NPI (NPI already set in setScenario)
-  cfg$gms$c56_emis_policy      <- "redd+natveg_nosoil"   # default
-  cfg$path_to_report_ghgprices <- NA
-  cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"      # default
-  cfg$path_to_report_bioenergy <- NA
-  cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi"      # default
+  cfg$gms$c70_feed_scen <- "ssp2"        # default
+  # Mitigation: no mitigation beyond NDC (NDC set in setScenario)
+  cfg$gms$c56_emis_policy      <- "none" 
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
+  cfg$gms$c56_pollutant_prices <- "none"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
+  cfg$gms$c60_2ndgen_biodem    <- "none"
 
-  # Climate Change
-  cfg$input['cellular'] <- "rev4.99_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  ### Deactivate certain sustainability standard settings
+  # bioenergy plantations can be irrigated
+  cfg$gms$c30_bioen_water <- "all"
+  # forest plantations allowed for afforestation under ghg price
+  cfg$gms$s32_aff_plantation <- 1
+
+  # Setting REMIND scenario for blackmagicc
+  cfg$magicc_emis_scen <- 
   
   return(cfg)
 }
@@ -123,21 +122,15 @@ waste <- function(cfg) {
 # Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
 # Note on our implementation:
 # We use a GHG pricing pathway based on a peak budget of 500 with overshoot
-# starting from 2020.
-# Please note that with the diet shift, a lower ghg price would be necessary.
-# However, to be consistent with the other models and for the decomposition
-# scenarios to be "additive", we choose to use the same ghg price for all scenarios
-# where miti is active.
-# Reference: Humpenöder, F., Popp, A., Merfort, L., Luderer, G., Weindl, I., Bodirsky, B., Stevanović, M., Klein, D., Rodrigues, R., Bauer, N., Dietrich, J., Lotze-Campen, H., & Rockström, J. (2023). Data repository - Dietary shifts increase the feasibility of 1.5°C pathways (Version 1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.8328217
+# starting from 2020 and diet shift.
 miti <- function(cfg) {
   # NDCs
   cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 
   # Mitigation: consistent with 1.5C considering Diet change
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
+  cfg$gms$c56_emis_policy      <- "ecoSysProtAll" 
 
   return(cfg)
 }
@@ -147,26 +140,36 @@ bioenergy <- function(cfg) {
   # NDCs
   cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 
+  # No ghg pricing in land system
   # Bioenergy demand from coupled REMIND-MAgPIE run where 1.5 is reached with ghg prices on land and considering diet shift
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-noDSPkB500-DS-rem-5.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
 }
 
-### NoCC component ##
-# No climate change impacts
-noCC <- function(cfg) {
-  # deactivate climate change impacts
+# CO2 from land use change is priced.
+priceCO2 <- function(cfg) {
+  # NDCs
   cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+
+  # Mitigation: consistent with 1.5C considering Diet change
+  cfg$gms$c56_pollutant_prices <- "coupling"
+  cfg$gms$c60_2ndgen_biodem    <- "coupling"
+  cfg$gms$c56_emis_policy      <- "ecoSysProtAll" 
 
   return(cfg)
 }
 
-### RCP 2.6 ###
-# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU using GFDL climate model.
-rcp26 <- function(cfg) {
-  cfg$input["cellular"] <- "rev4.99_h12_05fd702e_cellularmagpie_c200_GFDL-ESM4-ssp126_lpjml-8e6c5eb1.tgz"
+# Pricing of all CH4 and N2O emissions except for peatland
+priceNonCO2 <- function(cfg) {
+  # NDCs
+  cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+
+  # Mitigation: consistent with 1.5C considering Diet change
+  cfg$gms$c56_pollutant_prices <- "coupling"
+  cfg$gms$c60_2ndgen_biodem    <- "coupling"
+  cfg$gms$c56_emis_policy      <- "ecoSysProtAll_agMgmtOff" 
+
   return(cfg)
 }
 
@@ -178,58 +181,71 @@ rcp26 <- function(cfg) {
 # Business as usual scenario based on SSP2
 # with a higher climate impact reflected by RCP 7.0
 cfg$title <- "BAU"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
-# BAU_DIET #
-# Decomposition scenario. Adds EL2.0 Diet to BAU:
-# Globally achieves EL2 diet by 2050
-cfg$title <- "BAU_DIET"
+# MITI_DIET #
+# Decomposition scenario.
+# Globally achieves EL2 (Diet+Waste+Prod) by 2050
+cfg$title <- "MITI_Diet"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
+cfg <- prod(cfg = cfg)
+cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
-# BAU_PROD #
-# Decomposition scenario adds high productivity to BAU
-cfg$title <- "BAU_PROD"
+# MITI_Bioenergy #
+# Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "MITI_Bioenergy"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 cfg <- bau(cfg = cfg)
-cfg <- prod(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
+cfg <- bioenergy(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
 
-# BAU_WAST #
-# Decomposition scenario. Adds a reduction (halving) of food loss and waste
-cfg$title <- "BAU_WAST"
+# MITI_CO2 #
+# Decomposition Scenario. Adds CO2 pricing on land-use change emissions with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "MITI_CO2"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 cfg <- bau(cfg = cfg)
-cfg <- waste(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
+cfg <- priceCO2(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
 
-# BAU_RCP26 #
-# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU
-cfg$title <- "BAU_RCP26"
+# MITI_NonCO2 #
+# Decomposition Scenario. Adds non-CO2 pricing with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "MITI_NonCO2"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 cfg <- bau(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
+cfg <- priceNonCO2(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
 
-# BAU_NoCC #
-# Decomposition scenario. Remove climate impacts (NoCC) from BAU to isolate climate effects
-cfg$title <- "BAU_NoCC"
+# MITI_Prod #
+# All production-side land-based mitigation measures
+cfg$title <- "MITI_Prod"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 cfg <- bau(cfg = cfg)
-cfg <- noCC(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
+cfg <- bioenergy(cfg = cfg)
+cfg <- priceCO2(cfg = cfg)
+cfg <- priceNonCO2(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
+
 
 # BAU_MITI #
 # Decomposition Scenario. Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "BAU_MITI"
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
+#start_run(cfg, codeCheck = FALSE)
 
 # BAU_BIOENERGY #
 # Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "BAU_BE"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 cfg <- bau(cfg = cfg)
 cfg <- bioenergy(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
+#start_run(cfg, codeCheck = FALSE)
 
 # EL2 #
 # Full EAT-Lancet Scenario (diet, productivity, FLW) without mitigation and higher climate impacts based on RCP 7.0
