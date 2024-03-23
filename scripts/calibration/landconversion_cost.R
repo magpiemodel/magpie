@@ -39,10 +39,10 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05) {
   require(magclass)
   require(magpie4)
   require(gdx)
-  y <- 2015
-  magpie <- setYears(land(gdx_file)[, y, "crop"], NULL)
+  y <- readGDX(gdx_file,"t")
+  magpie <- land(gdx_file)[, y, "crop"]
   hist <- dimSums(readGDX(gdx_file, "f10_land")[, , "crop"], dim = 1.2)
-  data <- setYears(hist[, y, "crop"], NULL)
+  data <- hist[, y, "crop"]
   shrLost <- (setYears(hist[getRegions(magpie), 2015, ], NULL) - setYears(hist[getRegions(magpie), 1995, ], NULL)) / setYears(hist[getRegions(magpie), 1995, ], NULL)
   if (nregions(magpie) != nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
     stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
@@ -52,27 +52,25 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05) {
     out[out == 0] <- 1
     out[is.na(out)] <- 1
     getNames(out) <- NULL
-    getYears(out) <- NULL
 
     out[which(out < 0, arr.ind = T)] <- 1
   } else if (mode == "reward") {
     out <- magpie / data
     out[is.na(out)] <- 0
     getNames(out) <- NULL
-    getYears(out) <- NULL
 
     # only reward if share of cropland lost between 1995 and 2015 exceeds a certain threshold. Otherwise set to 0.
-    out[which(shrLost > -calib_accuracy, arr.ind = T)] <- 0
+    out[rownames(which(shrLost > -calib_accuracy, arr.ind = T)),,] <- 0
     out[which(out < 0, arr.ind = T)] <- 0
   }
+  out <- lowpass(out,i = 5)
   return(magpiesort(out))
 }
 
 time_series_cost <- function(calib_factor) {
-  out2 <- new.magpie(getRegions(calib_factor), years = c(1995, 2015, seq(2050, 2150, by = 5)), fill = 1)
-  out2[, 2015, ] <- calib_factor
-  out2 <- time_interpolate(out2, seq(2000, 2015, by = 5), integrate_interpolated_years = T)
-  out2050 <- calib_factor
+  out2 <- new.magpie(getRegions(calib_factor), years = c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5)), fill = 1)
+  out2[, getYears(calib_factor), ] <- calib_factor
+  out2050 <- setYears(calib_factor[,2015,],NULL)
   out2050[out2050 < 1] <- 1
   out2[, seq(2050, 2150, by = 5), ] <- out2050
   out2 <- time_interpolate(out2, seq(2020, 2050, by = 5), integrate_interpolated_years = T)
@@ -80,11 +78,8 @@ time_series_cost <- function(calib_factor) {
 }
 
 time_series_reward <- function(calib_factor) {
-  out2 <- new.magpie(getRegions(calib_factor),
-    years = c(1995, 2015, seq(2050, 2150, by = 5)), fill = 0
-  )
-  out2[, 2015, ] <- calib_factor
-  out2 <- time_interpolate(out2, seq(2000, 2015, by = 5), integrate_interpolated_years = T)
+  out2 <- new.magpie(getRegions(calib_factor), years = c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5)), fill = 0)
+  out2[, getYears(calib_factor), ] <- calib_factor
   out2 <- time_interpolate(out2, seq(2020, 2050, by = 5), integrate_interpolated_years = T)
   return(out2)
 }
@@ -100,6 +95,8 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
   require(magclass)
   require(magpie4)
   if (!(modelstat(gdx_file)[1, 1, 1] %in% c(1, 2, 7))) stop("Calibration run infeasible")
+  
+  y <- readGDX(gdx_file,"t")
 
   calib_correction_cost <- getCalibFactor(gdx_file, mode = "cost", calib_accuracy = calib_accuracy)
   calib_divergence_cost <- abs(calib_correction_cost - 1)
@@ -111,10 +108,10 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
 
   ### -> in case it is the first step, it forces the initial factors to be equal to 1
   if (file.exists(calib_file)) {
-    old_calib <- setYears(magpiesort(read.magpie(calib_file))[, 2015, ], NULL)
+    old_calib <- magpiesort(read.magpie(calib_file))[,y,]
     start_flag <- FALSE
   } else {
-    old_calib <- new.magpie(cells_and_regions = getCells(calib_divergence_cost), names = c("cost", "reward"), fill = 1)
+    old_calib <- new.magpie(cells_and_regions = getCells(calib_divergence_cost), years = y, names = c("cost", "reward"), fill = 1)
     start_flag <- TRUE
   }
 
@@ -126,10 +123,16 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
     reward_exists <- (calib_factor_reward > 0)
     calib_factor_cost[reward_exists] <- cost_max
 
-    # also set start value for India to cost_max for better convergence
+    # set value for India to cost_max for better convergence
     if ("IND" %in% getRegions(calib_factor_cost)) {
       calib_factor_cost["IND", , ] <- cost_max
     }
+    
+    # set value for CAZ to cost_max for better convergence
+    if ("CAZ" %in% getRegions(calib_factor_cost)) {
+      calib_factor_cost["CAZ", , ] <- cost_max
+    }
+    
   }
 
   if (!start_flag) {
@@ -162,7 +165,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x, file, calibration_step) {
     x <- add_dimension(x, dim = 3.1, add = "iteration", nm = paste0("iter", calibration_step))
-    try(write.magpie(round(setYears(x, NULL), 3), file, append = (calibration_step != 1)))
+    try(write.magpie(round(x, 3), file, append = (calibration_step != 1)))
   }
 
   write_log(calib_correction_cost, "land_conversion_cost_calib_correction.cs3", calibration_step)
@@ -186,14 +189,12 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
       factors_data <- read.magpie("land_conversion_cost_calib_factor.cs3")
       calib_cost_best <- factors_data[, , which.min(apply(as.array(divergence_data), c(3), sd))]
       getNames(calib_cost_best) <- NULL
-      getYears(calib_cost_best) <- NULL
       calib_cost_best <- time_series_cost(calib_cost_best)
 
       divergence_data <- read.magpie("land_conversion_reward_calib_divergence.cs3")
       factors_data <- read.magpie("land_conversion_reward_calib_factor.cs3")
       calib_reward_best <- factors_data[, , which.min(apply(as.array(divergence_data), c(3), sd))]
       getNames(calib_reward_best) <- NULL
-      getYears(calib_reward_best) <- NULL
       calib_reward_best <- time_series_reward(calib_reward_best)
 
       calib_best_full <- mbind(
@@ -211,8 +212,8 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
       )
       write.magpie(round(calib_best_full, 3), calib_file, comment = comment)
 
-      write_log(calib_best_full[, 2015, "cost"], "land_conversion_cost_calib_factor.cs3", "best")
-      write_log(calib_best_full[, 2015, "reward"], "land_conversion_reward_calib_factor.cs3", "best")
+      write_log(calib_best_full[, , "cost"], "land_conversion_cost_calib_factor.cs3", "best")
+      write_log(calib_best_full[, , "reward"], "land_conversion_reward_calib_factor.cs3", "best")
       ####
       return(TRUE)
     } else {
