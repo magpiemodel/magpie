@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v39_FSEC"
+  v <- "v39c_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "RCP60")),
@@ -207,7 +207,7 @@ fsecScenario <- function(scenario) {
                        targetdir = "./input",
                        repositories = cfg$repositories)
   # Download gridded RCP temperature data
-  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.mz",
+  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.tgz",
                        targetdir = "./input",
                        repositories = cfg$repositories)
 
