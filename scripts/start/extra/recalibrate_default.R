@@ -23,5 +23,6 @@ cfg$recalibrate_landconversion_cost <- TRUE
 cfg$title <- "calib_run"
 cfg$output <- c("rds_report","validation_short")
 cfg$force_replace <- TRUE
+cfg$qos <- "priority"
 start_run(cfg,codeCheck=FALSE)
 magpie4::submitCalibration("H12")
