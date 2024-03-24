@@ -63,6 +63,8 @@ $batinclude "./modules/include.gms" nl_fix
 *' linear optimization if no non-linearities remain in the model (Please note
 *' that the solve statement still declares a nonlinear / nlp problem even
 *' though we expect it to be linear!).
+*' Solve statement is put twice for improved model results, 
+*' in particular for matching LHS and RHS of equations.
 
     solve magpie USING nlp MINIMIZING vm_cost_glo;
     solve magpie USING nlp MINIMIZING vm_cost_glo;
@@ -75,6 +77,7 @@ $batinclude "./modules/include.gms" nl_fix
 
     if ((magpie.modelstat=1 or magpie.modelstat = 7),
       vm_cost_glo.up = vm_cost_glo.l;
+      solve magpie USING nlp MINIMIZING vm_landdiff;
       solve magpie USING nlp MINIMIZING vm_landdiff;
       vm_cost_glo.up = Inf;
     );

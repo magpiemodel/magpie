@@ -37,6 +37,8 @@ Flg_Prep = FALSE
 $offecho
 
 *' @code
+*' Solve statement is put twice for improved model results, 
+*' in particular for matching LHS and RHS of equations.
 solve magpie USING nlp MINIMIZING vm_cost_glo;
 solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' @stop
