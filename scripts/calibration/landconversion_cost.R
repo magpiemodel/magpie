@@ -123,17 +123,6 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, lowpass_filter = 5, ca
   if (start_flag & !is.null(cost_max)) {
     reward_exists <- (calib_factor_reward > 0)
     calib_factor_cost[reward_exists] <- cost_max
-
-    # set value for India to cost_max for better convergence
-    if ("IND" %in% getRegions(calib_factor_cost)) {
-      calib_factor_cost["IND", , ] <- cost_max
-    }
-    
-    # set value for CAZ to cost_max for better convergence
-    if ("CAZ" %in% getRegions(calib_factor_cost)) {
-      calib_factor_cost["CAZ", , ] <- cost_max
-    }
-    
   }
 
   if (!start_flag) {
@@ -151,14 +140,24 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, lowpass_filter = 5, ca
     calib_factor_cost[set_to_one] <- 1
   }
 
+  # set value for India to cost_max for better convergence
+  if ("IND" %in% getRegions(calib_factor_cost)) {
+    calib_factor_cost["IND", , ] <- cost_max
+  }
+  
+  # set value for CAZ to cost_max for better convergence
+  if ("CAZ" %in% getRegions(calib_factor_cost)) {
+    calib_factor_cost["CAZ", , ] <- cost_max
+  }
+  
   if (!is.null(cost_max)) {
-    above_limit <- (calib_factor_cost > cost_max)
+    above_limit <- (calib_factor_cost >= cost_max)
     calib_factor_cost[above_limit] <- cost_max
     calib_divergence_cost[getRegions(calib_factor_cost), , ][above_limit] <- 0
   }
 
   if (!is.null(cost_min)) {
-    below_limit <- (calib_factor_cost < cost_min)
+    below_limit <- (calib_factor_cost <= cost_min)
     calib_factor_cost[below_limit] <- cost_min
     calib_divergence_cost[getRegions(calib_factor_cost), , ][below_limit] <- 0
   }
