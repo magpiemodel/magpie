@@ -726,6 +726,8 @@ for (i in 1:length(outputdirLR)) {
   } else {
     this_outputdirHR <- outputdirLR[i]
   }
+  
+  cfgHR <- gms::loadConfig(file.path(this_outputdirHR, "config.yml"))
 
   ### regional level outputs
   ## read in from LR runs
@@ -791,7 +793,7 @@ for (i in 1:length(outputdirLR)) {
     } else missing <- c(missing, nc_file)
 
     ## Crop diversity
-    nc_file <- file.path(this_outputdirHR, paste0(cfg$title, "-CropDiversityGridded.mz"))
+    nc_file <- file.path(this_outputdirHR, paste0(cfgHR$title, "-CropDiversityGridded.mz"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
       getNames(a) <- "Shannon crop diversity (index)"
@@ -832,7 +834,7 @@ for (i in 1:length(outputdirLR)) {
     } else missing <- c(missing,nc_file)
 
     ## Nitrogen
-    nc_file <- file.path(this_outputdirHR, paste(cfg$title, "nutrientSurplus_intensity.mz", sep = "-"))
+    nc_file <- file.path(this_outputdirHR, paste(cfgHR$title, "nutrientSurplus_intensity.mz", sep = "-"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "nutrientSurplus (kg N per ha)"
