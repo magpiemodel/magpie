@@ -63,11 +63,11 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05) {
     out[rownames(which(shrLost > -calib_accuracy, arr.ind = T)),,] <- 0
     out[which(out < 0, arr.ind = T)] <- 0
   }
-  out <- lowpass(out,i = 5)
   return(magpiesort(out))
 }
 
-time_series_cost <- function(calib_factor) {
+time_series_cost <- function(calib_factor, lowpass_filter = 5) {
+  calib_factor <- lowpass(calib_factor,i = lowpass_filter)
   out2 <- new.magpie(getRegions(calib_factor), years = c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5)), fill = 1)
   out2[, getYears(calib_factor), ] <- calib_factor
   out2050 <- setYears(calib_factor[,2015,],NULL)
@@ -77,7 +77,8 @@ time_series_cost <- function(calib_factor) {
   return(out2)
 }
 
-time_series_reward <- function(calib_factor) {
+time_series_reward <- function(calib_factor, lowpass_filter = 5) {
+  calib_factor <- lowpass(calib_factor,i = lowpass_filter)
   out2 <- new.magpie(getRegions(calib_factor), years = c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5)), fill = 0)
   out2[, getYears(calib_factor), ] <- calib_factor
   out2 <- time_interpolate(out2, seq(2020, 2050, by = 5), integrate_interpolated_years = T)
@@ -91,7 +92,7 @@ getHistCrop <- function() {
 }
 
 # Calculate the correction factor and save it
-update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96, calib_file, cost_max = 3, cost_min = 0.05, calibration_step = "", n_maxcalib = 40, best_calib = TRUE) {
+update_calib <- function(gdx_file, calib_accuracy = 0.05, lowpass_filter = 5, calib_file, cost_max = 3, cost_min = 0.05, calibration_step = "", n_maxcalib = 20, best_calib = FALSE) {
   require(magclass)
   require(magpie4)
   if (!(modelstat(gdx_file)[1, 1, 1] %in% c(1, 2, 7))) stop("Calibration run infeasible")
@@ -115,8 +116,8 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
     start_flag <- TRUE
   }
 
-  calib_factor_cost <- setNames(old_calib[, , "cost"], NULL) * (damping_factor * (calib_correction_cost - 1) + 1)
-  calib_factor_reward <- setNames(old_calib[, , "reward"], NULL) * (damping_factor * (calib_correction_reward))
+  calib_factor_cost <- setNames(old_calib[, , "cost"], NULL) * ((calib_correction_cost - 1) + 1)
+  calib_factor_reward <- setNames(old_calib[, , "reward"], NULL) * ((calib_correction_reward))
 
   # if reward exists, start cost calibration with cost_max instead of 1
   if (start_flag & !is.null(cost_max)) {
@@ -189,13 +190,13 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
       factors_data <- read.magpie("land_conversion_cost_calib_factor.cs3")
       calib_cost_best <- factors_data[, , which.min(apply(as.array(divergence_data), c(3), sd))]
       getNames(calib_cost_best) <- NULL
-      calib_cost_best <- time_series_cost(calib_cost_best)
+      calib_cost_best <- time_series_cost(calib_cost_best, lowpass_filter = 0)
 
       divergence_data <- read.magpie("land_conversion_reward_calib_divergence.cs3")
       factors_data <- read.magpie("land_conversion_reward_calib_factor.cs3")
       calib_reward_best <- factors_data[, , which.min(apply(as.array(divergence_data), c(3), sd))]
       getNames(calib_reward_best) <- NULL
-      calib_reward_best <- time_series_reward(calib_reward_best)
+      calib_reward_best <- time_series_reward(calib_reward_best, lowpass_filter = 0)
 
       calib_best_full <- mbind(
         add_dimension(calib_cost_best, dim = 3.1, nm = "cost"),
@@ -220,8 +221,8 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
       return(TRUE)
     }
   } else {
-    calib_factor_cost <- time_series_cost(calib_factor_cost)
-    calib_factor_reward <- time_series_reward(calib_factor_reward)
+    calib_factor_cost <- time_series_cost(calib_factor_cost, lowpass_filter = lowpass_filter)
+    calib_factor_reward <- time_series_reward(calib_factor_reward, lowpass_filter = lowpass_filter)
 
     calib_full <- mbind(
       add_dimension(calib_factor_cost, dim = 3.1, nm = "cost"),
@@ -245,19 +246,19 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
 
 
 
-calibrate_magpie <- function(n_maxcalib = 40,
+calibrate_magpie <- function(n_maxcalib = 20,
                              restart = TRUE,
                              calib_accuracy = 0.05,
                              cost_max = 3,
                              cost_min = 0.05,
                              calib_magpie_name = "magpie_calib",
-                             damping_factor = 0.96,
+                             lowpass_filter = 5,
                              calib_file = "modules/39_landconversion/input/f39_calib.csv",
                              putfolder = "land_conversion_cost_calib_run",
                              data_workspace = NULL,
                              logoption = 3,
                              debug = FALSE,
-                             best_calib = TRUE) {
+                             best_calib = FALSE) {
   require(magclass)
 
   if (!restart) {
@@ -272,7 +273,7 @@ calibrate_magpie <- function(n_maxcalib = 40,
     cat(paste("\nStarting land conversion cost calibration iteration", i, "with s_use_gdx =", s_use_gdx, "\n"))
     calibration_run(putfolder = putfolder, calib_magpie_name = calib_magpie_name, logoption = logoption, s_use_gdx = s_use_gdx)
     if (debug) file.copy(paste0(putfolder, "/fulldata.gdx"), paste0("fulldata_calib", i, ".gdx"))
-    done <- update_calib(gdx_file = paste0(putfolder, "/fulldata.gdx"), calib_accuracy = calib_accuracy, cost_max = cost_max, cost_min = cost_min, damping_factor = damping_factor, calib_file = calib_file, calibration_step = i, n_maxcalib = n_maxcalib, best_calib = best_calib)
+    done <- update_calib(gdx_file = paste0(putfolder, "/fulldata.gdx"), calib_accuracy = calib_accuracy, cost_max = cost_max, cost_min = cost_min, lowpass_filter = lowpass_filter, calib_file = calib_file, calibration_step = i, n_maxcalib = n_maxcalib, best_calib = best_calib)
     if (done & s_use_gdx == 2) {
       s_use_gdx <- 0
       next
