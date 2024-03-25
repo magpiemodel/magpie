@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Collect reg, iso and grid level data from multiple FSDP runs
+# description: Collect reg, iso and grid level data from multiple FSDP runs (requires LR or HR runs)
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
@@ -142,6 +142,7 @@ var_reg <- c(indicators_main,
              "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
              "Biodiversity|Biodiversity Hotspot BII",
              "Biodiversity|Cropland Landscapes BII",
+             "Biodiversity|BII in 30x30 Landscapes",
              "Key Biodiversity Area BII",
              "Biodiversity|Inverted Simpson crop area diversity index",
              "Population",
