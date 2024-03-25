@@ -26,7 +26,7 @@ p22_country_weight(i) = sum(i_to_iso(i,iso), p22_country_dummy(iso) * i22_land_i
 
 ** Trajectory for implementation of land conservation
 * sigmoidal interpolation between 2020 and target year
-m_sigmoid_interpol(p22_conservation_fader,s22_conservation_start,s22_conservation_target,0,1);
+m_sigmoid_time_interpol(p22_conservation_fader,s22_conservation_start,s22_conservation_target,0,1);
 
 ** Initialise additional conservation area
 p22_add_consv(t,j,consv22_all,land) = 0;

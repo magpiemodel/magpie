@@ -7,8 +7,20 @@
 
 ** Trajectory for cropland scenarios
 * sigmoidal interpolation between start year and target year
-m_sigmoid_interpol(p30_snv_scenario_fader,s30_snv_scenario_start,s30_snv_scenario_target,0,1);
-m_sigmoid_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
+m_sigmoid_time_interpol(p30_snv_scenario_fader,s30_snv_scenario_start,s30_snv_scenario_target,0,1);
+m_sigmoid_time_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
+
+* linear interpolation to estimate the cropland that
+* requires relocation due to SNV policy
+if (s30_snv_shr = 0,
+i30_snv_relocation_target(j) = 0;
+
+elseif s30_snv_shr <= s30_snv_relocation_data_x1,
+m_linear_cell_data_interpol(i30_snv_relocation_target, s30_snv_shr,0,s30_snv_relocation_data_x1,0, f30_snv_target_cropland(j, "SNV20TargetCropland"));
+
+elseif s30_snv_shr > s30_snv_relocation_data_x1,
+m_linear_cell_data_interpol(i30_snv_relocation_target, s30_snv_shr,s30_snv_relocation_data_x1, s30_snv_relocation_data_x2,f30_snv_target_cropland(j, "SNV20TargetCropland"), f30_snv_target_cropland(j, "SNV50TargetCropland"));
+);
 
 *due to some rounding errors the input data currently may contain in some cases
 *very small, negative numbers. These numbers have to be set to 0 as area
