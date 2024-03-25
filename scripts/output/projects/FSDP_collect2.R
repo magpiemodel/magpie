@@ -384,7 +384,7 @@ var_reg_HR <- c(
              "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
              "Biodiversity|Biodiversity Hotspot BII",
              "Biodiversity|Cropland Landscapes BII",
-             "Key Biodiversity Area BII",
+             "Biodiversity|Key Biodiversity Area BII",
              "Biodiversity|Inverted Simpson crop area diversity index",
              "Resources|Land Cover",
              "Resources|Land Cover|+|Cropland",
