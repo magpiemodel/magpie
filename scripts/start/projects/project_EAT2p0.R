@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: EAT2p0 project simulations 2023
+# description: EAT2p0 project simulations 2024
 # ----------------------------------------------------------
 
 ######################################
