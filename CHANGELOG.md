@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **scripts** modified output reporting for SEALS to account for forestry plantations
 - **config** updated FSEC scenario config for revision and included new calibration file (after cost fix in preprocessing)
 - **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
 - **21_trade** Revision of trade module. Replaced `cfg$gms$s21_trade_bal_damper` in favour of `cfg$gms$k_import21`, which allows for additional imports to maintain feasibility
@@ -14,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/calibration/landconversion_cost.R** Revised calibration approach for conversion costs for cropland. Information from all calibration time steps in combination with a lowpass filter is now used for deriving the calibration factors, which avoids the previous zickzack pattern. The previous option `cfg$damping_factor_landconversion_cost` has been removed in favor of `cfg$lowpass_filter_landconversion_cost`. 
 
 ### added
+- **scripts** add additional BII reporting variables in FSDP_collect.R
 - **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
 - **config** added `.codeCheck` with additonal configuration when running `gms::codeCheck`
 - **30_crop** Improved representation of cropland requiring relocation in response to introducing semi-natural habitat at the 1 km level based on high-resolution satellite imagery.
