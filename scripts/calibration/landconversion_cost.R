@@ -91,7 +91,7 @@ getHistCrop <- function() {
 }
 
 # Calculate the correction factor and save it
-update_calib <- function(gdx_file, calib_accuracy = 0.05, lowpass_filter = 1, calib_file, cost_max = 2, cost_min = 0.05, calibration_step = "", n_maxcalib = 40, best_calib = FALSE) {
+update_calib <- function(gdx_file, calib_accuracy = 0.05, lowpass_filter = 1, calib_file, cost_max = 3, cost_min = 0.05, calibration_step = "", n_maxcalib = 40, best_calib = FALSE) {
   require(magclass)
   require(magpie4)
   if (!(modelstat(gdx_file)[1, 1, 1] %in% c(1, 2, 7))) stop("Calibration run infeasible")
@@ -240,7 +240,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, lowpass_filter = 1, ca
 calibrate_magpie <- function(n_maxcalib = 40,
                              restart = TRUE,
                              calib_accuracy = 0.05,
-                             cost_max = 2,
+                             cost_max = 3,
                              cost_min = 0.05,
                              calib_magpie_name = "magpie_calib",
                              lowpass_filter = 1,
