@@ -37,6 +37,7 @@
                    + vm_costs_additional_mon(i2)
                    + sum(cell(i2,j2),vm_cost_land_transition(j2))
                    + sum(cell(i2,j2), vm_peatland_cost(j2))
+                   + sum(cell(i2,j2), vm_cost_agroforestry(j2))
                    + sum(cell(i2,j2),vm_cost_bv_loss(j2))
                    + sum(cell(i2,j2),vm_cost_urban(j2))
                    + sum(cell(i2,j2),vm_water_cost(i2))

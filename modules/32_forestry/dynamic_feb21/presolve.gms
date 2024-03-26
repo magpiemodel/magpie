@@ -5,13 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*define ac_est and ac_sub
-ac_est(ac) = no;
-ac_est(ac) = yes$(ord(ac) <= (m_yeardiff_forestry(t)/5));
-
-ac_sub(ac) = no;
-ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
-
 *Reduction of ac_est is not possible.
 v32_hvarea_forestry.fx(j,ac_est) = 0;
 v32_land_reduction.fx(j,type32,ac_est) = 0;

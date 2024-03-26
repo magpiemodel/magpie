@@ -10,7 +10,7 @@
 *' the sum of crop and water supply type specific land requirements:
 
  q30_cropland(j2)  ..
-   sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop");
+   sum((kcr,w), vm_area(j2,kcr,w)) + vm_fallow(j2) + vm_treecover_area(j2) =e= vm_land(j2,"crop");
 
 *' We assume that crop production can only take place on suitable cropland area.
 *' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
@@ -67,8 +67,8 @@
 *' for all cropland :
 
  q30_carbon(j2,ag_pools,stockType) ..
- vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
-   m_carbon_stock(vm_land,fm_carbon_density,"crop");
+  vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
+  m_carbon_stock(vm_land,fm_carbon_density,"crop") + vm_treecover_carbon(j2,ag_pools,stockType);
 
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
  q30_bv_ann(j2,potnatveg) .. vm_bv(j2,"crop_ann",potnatveg)
