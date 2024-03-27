@@ -25,3 +25,11 @@ $ondelim
 $include "./modules/44_biodiversity/bii_target/input/biorealm_biome.cs3"
 $offdelim
 ;
+
+parameters
+f44_rr_layer(j) Range-rarity restoration prioritization layer (unitless)
+/
+$ondelim
+$include "./modules/44_biodiversity/bii_target/input/rr_layer.cs2"
+$offdelim
+/

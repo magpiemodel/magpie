@@ -12,10 +12,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
 - **21_trade** Revision of trade module. Replaced `cfg$gms$s21_trade_bal_damper` in favour of `cfg$gms$k_import21`, which allows for additional imports to maintain feasibility
 - **58_peatland** Threshold in equations changed from 1e-10 to 1e-8 to avoid rare divisions by zero
+- - **44_biodiversity** update `bii_target realization` to take `f44_rr_layer` into account in `q44_bii`
+- **default.cfg** update additional data to rev4.49
 
 ### added
 - **scripts** add additional BII reporting variables in FSDP_collect.R
 - **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
+- **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth` 
+- **default.cfg** added early afforestation constraint `cfg$gms$s32_max_aff_cell_2025` 
+- **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing` 
+- **default.cfg** added settings for new price-driven bioenergy realization `1st2ndgen_priced_feb24`: `cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix`, `cfg$gms$c60_bioenergy_subsidy_fix_SSP2`, `s60_bioenergy_gj_price_1st`,
+`s60_bioenergy_price_2nd`, `c60_price_implementation`
+- **core** added `coup2110`timesteps
+- **15_food** added additional sigmoid food substition scenarios `sigmoid_75pc_25_50`, `sigmoid_50pc_25_50` and `sigmoid_25pc_25_50`
+- **30_crop** added regional cropland equation `q30_crop_reg` and presolve growth constraint
+- **32_forestry** added cluster-level new afforestation area constraint
+- **60_bioenergy** added new realization `1st2ndgen_priced_feb24` to enable price-driven 2nd gen bioenergy production
+- **scripts** added automatic set writer for new bioenergy realization to `start_functions`
+- **scripts** added start scripts for the GENIE project
+- **scenario_config.csv** added preset for GENIE project
 - **config** added `.codeCheck` with additonal configuration when running `gms::codeCheck`
 - **30_crop** Improved representation of cropland requiring relocation in response to introducing semi-natural habitat at the 1 km level based on high-resolution satellite imagery.
 

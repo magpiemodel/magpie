@@ -26,6 +26,7 @@ positive variables
  vm_rotation_penalty(i)               Penalty for violating rotational constraints (mio. USD05MER)
  v30_penalty_max_irrig(j,rotamax30)   Penalty for violating max rotational constraints on irrigated land (mio. USD05MER)
  v30_penalty(j,rota30) Penalty for violating rotational constraints (mio. USD05MER)
+ v30_crop_area(i)                     Total regional crop production area (mio. ha)
 ;
 
 equations
@@ -40,6 +41,7 @@ equations
  q30_bv_ann(j,potnatveg)              Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)              Biodiversity value of perennial cropland (mio. ha)
  q30_land_snv(j)                    Land constraint for the SNV policy in cropland areas (mio. ha)
+ q30_crop_reg(i)                      Total regional crop production area (mio. ha)
  q30_land_snv_trans(j)              Land transition constraint for SNV policy in cropland areas (mio. ha)
 ;
 
@@ -50,6 +52,7 @@ parameters
  ov_rotation_penalty(t,i,type)               Penalty for violating rotational constraints (mio. USD05MER)
  ov30_penalty_max_irrig(t,j,rotamax30,type)  Penalty for violating max rotational constraints on irrigated land (mio. USD05MER)
  ov30_penalty(t,j,rota30,type)               Penalty for violating rotational constraints (mio. USD05MER)
+ ov30_crop_area(t,i,type)                    Total regional crop production area (mio. ha)
  oq30_cropland(t,j,type)                     Total cropland calculation (mio. ha)
  oq30_avl_cropland(t,j,type)                 Available cropland constraint (mio. ha)
  oq30_rotation_penalty(t,i,type)             Total penalty for rotational constraint violations (mio. USD05MER)
@@ -61,6 +64,7 @@ parameters
  oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (mio. ha)
  oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (mio. ha)
  oq30_land_snv(t,j,type)                     Land constraint for the SNV policy in cropland areas (mio. ha)
+ oq30_crop_reg(t,i,type)                     Total regional crop production area (mio. ha)
  oq30_land_snv_trans(t,j,type)               Land transition constraint for SNV policy in cropland areas (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

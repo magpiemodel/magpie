@@ -47,3 +47,10 @@ rotamax_red30(rotamax30) = yes$(i30_rotation_max_shr(t,rotamax30) < 1);
 rotamin_red30(rotamin30) = yes$(i30_rotation_min_shr(t,rotamin30) > 0);
 
 vm_rotation_penalty.fx(i)=0;
+
+*' Cropland growth constraint after SSP2 fix
+if(m_year(t) <= sm_fix_SSP2,
+  v30_crop_area.up(i) = Inf;
+else
+  v30_crop_area.up(i) = v30_crop_area.l(i) * (1 + s30_annual_max_growth) ** m_yeardiff(t);
+);
