@@ -11,7 +11,7 @@
 *' @code
 *' Total demand for bioenergy comes from different origins
 *' 1st generation bioenergy demand is a fixed trajectory of minimum production
-*' requirements. Second generation bioenergy splits into a Demand
+*' requirements. Second generation bioenergy splits into a demand
 *' for dedicated bioenergy crops, which are fully substitutable based on their
 *' energy content, and residues which are also fully substitutable based on
 *' their energy content.
@@ -68,7 +68,7 @@ q60_res_2ndgenBE(i2) ..
 
 *' Finally, an incentive is provided for the production of 1st and 2nd generation
 *' bioenergy beyond the exogeneous minimum demand. 1st generation bioenergy can be incentivized
-*' mass- or energy-based, the former, for comparability, in line with other realizations and constant over time. 
+*' mass- or energy-based.  For comparability, the former is in line with other realizations and constant over time. 
 *' The energy-based incentive can take different forms and is applied to both 1st and 2nd generation. 
 *' Combined with low or fade-out exogenous demands, this is useful to assess bioenergy production potentials, however
 *' the endogenous technological change in [13_tc] may react very strongly and create a positive feedback loop
