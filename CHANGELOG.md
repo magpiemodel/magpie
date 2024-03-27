@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **scripts** cfg$gms$s35_secdf_distribution <- 2 for FSEC
 - **scripts** modified output reporting for SEALS to account for forestry plantations
 - **config** updated FSEC scenario config for revision and included new calibration file (after cost fix in preprocessing)
 - **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
