@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core**    removed no longer needed set `si` Suitability classes
 
 ### fixed
+- **52_carbon** removing jump of carbon content into fully grown forest when a forest changes from second-last age class to last age-class.
 - **52_carbon** i52_land_carbon_sink was not identical before 2020 for different RCPs. Fixed by setting to RCPBU until the year defined in sm_fix_cc.
 - **inputdata** currency fixed in historic value of production for crops and livestock which affects e.g. total labor costs and in turn hourly labor costs, bugfix in aggregation weight of capital cost share out of factor costs
 - **80_optimization** duplicated solve statement in all instances to avoid non-matchting left- and right-hand sides of equations
