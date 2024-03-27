@@ -225,7 +225,8 @@ fsecScenario <- function(scenario) {
                        "rds_report_iso",
                        "rds_report")
   cfg$force_download  <- TRUE
-  cfg$gms$s80_optfile <- 1
+  cfg$gms$s80_optfile <- 0
+  cfg$gms$s80_maxiter <- 100
 
   return(cfg)
 }
