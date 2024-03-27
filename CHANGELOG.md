@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### added
 - **scripts** add additional BII reporting variables in FSDP_collect.R
 - **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
+- **scripts** added "checkSummation" output script for consistency checking a report.mif
 - **config** added `.codeCheck` with additonal configuration when running `gms::codeCheck`
 - **30_crop** Improved representation of cropland requiring relocation in response to introducing semi-natural habitat at the 1 km level based on high-resolution satellite imagery.
 
