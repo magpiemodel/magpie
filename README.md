@@ -126,6 +126,9 @@ PATH environment variable. Search for a tutorial online if you are unsure how to
 1. choose "1" for a default run
 1. then select "1" for direct execution
 
+### troubleshooting
+Please check [this discussion](https://github.com/magpiemodel/magpie/discussions/650) for known problems and solutions and to report new problems you encounter while setting up MAgPIE.
+
 ## DOCKER
 To use Docker, copy your `gamslice.txt`
 into the MAgPIE main directory, and build the magpie image using the command
