@@ -6,6 +6,7 @@ gms$s12_interest_lic;;;0.06;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s12_interest_hic;;;0.04;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$food;anthro_iso_jun22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s14_use_yield_calib;1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+gms$s14_minimum_wood_yield;10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s15_exo_waste;;;;;;;;0;0;0;0;0;0;0;0;1;;;;;;;;;;;;;;;;;0;1;;;;;;;;;;;;;;;;;
 gms$s15_exo_diet;;;;;;;;1;1;1;1;1;1;1;1;0;;;;;;;;;;;;;;;;;1;1;;;;;;;;;;;;;;;;;
 gms$c15_kcal_scen;;;;;;;;no_underweight;half_overweight;endo;endo;endo;endo;endo;endo;endo;;;;;;;;;;;;;;;;;no_underweight_half_overweight;no_underweight_half_overweight;;;;;;;;;;;;;;;;;
