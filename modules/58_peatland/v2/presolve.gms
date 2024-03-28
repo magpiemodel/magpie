@@ -46,7 +46,7 @@ else
 
 p58_scalingFactorRed(t,j,manPeat58) = 
     (pc58_peatland(j,manPeat58)/pc58_manLand(j,manPeat58))
-    $(pc58_peatland(j,manPeat58) > 1e-8 AND pc58_manLand(j,manPeat58) > 1e-8)
-    + 0$(pc58_peatland(j,manPeat58) <= 1e-8 OR pc58_manLand(j,manPeat58) <= 1e-8);
+    $(pc58_peatland(j,manPeat58) > 1e-6 AND pc58_manLand(j,manPeat58) > 1e-6)
+    + 0$(pc58_peatland(j,manPeat58) <= 1e-6 OR pc58_manLand(j,manPeat58) <= 1e-6);
 
 *' @stop

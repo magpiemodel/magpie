@@ -39,6 +39,7 @@ for (r in realizations) {
     cfg$gms$c38_fac_req <- fac_req
     cfg$gms$c70_fac_req_regr <- fac_req
     cfg$title <- paste("calib_run", r, fac_req, sep = "_")
+    cfg$qos <- "priority"
     start_run(cfg)
     magpie4::submitCalibration(paste("H12", r, fac_req, sep = "_"))
   }

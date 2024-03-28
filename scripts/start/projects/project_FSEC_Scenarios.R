@@ -16,6 +16,11 @@ source("scripts/projects/fsec.R")
 codeCheck <- FALSE
 
 for (scenarioName in c(
+  # Scenario combination runs
+  "c_BAU", 
+  "d_SSP2fsdp", 
+  "e_FSDP",
+  "b_Diet", "b_Livelihoods", "b_NatureSparing", "b_AgroMngmt", "b_ExternalPressures",
   # Single transformation runs
   "a_Population", "a_EconDevelop", "a_EnergyTrans",
   "a_NoUnderweight", "a_HalfOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes",
@@ -25,13 +30,11 @@ for (scenarioName in c(
   "a_CapitalSubst", "a_MinWage", "a_Bioplastics", "a_LandscapeElements",
   "a_LiberalizedTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
   "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_SoilCarbon",
-  # Scenario combination runs
-  "c_BAU", "d_SSP1bau", "d_SSP1PLUSbau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
-  "d_SSP1fsdp", "d_SSP2fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
-  "e_FSDP",
-  "b_Diet", "b_Livelihoods", "b_NatureSparing", "b_AgroMngmt", "b_ExternalPressures",
+  # Other SSPs
+  "d_SSP1fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
+  "d_SSP1bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
   # Sensitivity checks 
-  "f_BAUlabor8p5", "f_FSDPlabor1p9"
+  "f_BAUlabor8p5", "f_FSDPlabor1p9", "d_SSP1PLUSbau"
 )) {
 
     # Start runs

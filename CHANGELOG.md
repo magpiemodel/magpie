@@ -7,11 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **scripts** cfg$gms$s35_secdf_distribution <- 2 for FSEC
 - **scripts** modified output reporting for SEALS to account for forestry plantations
 - **config** updated FSEC scenario config for revision and included new calibration file (after cost fix in preprocessing)
 - **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
 - **21_trade** Revision of trade module. Replaced `cfg$gms$s21_trade_bal_damper` in favour of `cfg$gms$k_import21`, which allows for additional imports to maintain feasibility
-- **58_peatland** Threshold in equations changed from 1e-10 to 1e-8 to avoid rare divisions by zero
+- **58_peatland** Threshold in equations changed from 1e-10 to 1e-6 to avoid rare divisions by zero
+- **scripts/calibration/landconversion_cost.R** Revised calibration approach for conversion costs for cropland. Information from all calibration time steps in combination with a lowpass filter is now used for deriving the calibration factors, which avoids the previous zickzack pattern. The previous option `cfg$damping_factor_landconversion_cost` has been removed in favor of `cfg$lowpass_filter_landconversion_cost`. 
 
 ### added
 - **scripts** add additional BII reporting variables in FSDP_collect.R
@@ -23,8 +25,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core**    removed no longer needed set `si` Suitability classes
 
 ### fixed
+- **52_carbon** removing jump of carbon content into fully grown forest when a forest changes from second-last age class to last age-class.
 - **52_carbon** i52_land_carbon_sink was not identical before 2020 for different RCPs. Fixed by setting to RCPBU until the year defined in sm_fix_cc.
 - **inputdata** currency fixed in historic value of production for crops and livestock which affects e.g. total labor costs and in turn hourly labor costs, bugfix in aggregation weight of capital cost share out of factor costs
+- **80_optimization** duplicated solve statement in all instances to avoid non-matchting left- and right-hand sides of equations
 
 
 ## [4.7.1] - 2024-02-28
