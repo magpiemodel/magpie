@@ -5,17 +5,17 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 Sys.setenv(RENV_PATHS_LIBRARY = "renv/library")
+if (Sys.info()[["sysname"]] == "Windows") {
+  # make renv use R's default download function to prevent
+  # curl: (35) schannel: next InitializeSecurityContext failed: Unknown error
+  # (0x80092012) - The revocation function was unable to check revocation for the certificate.
+  options(renv.download.override = utils::download.file)
+}
+
+# do not check if library and renv.lock are in sync, because renv.lock does not exist
+options(renv.config.synchronized.check = FALSE)
 
 source("renv/activate.R")
-
-renvVersion <- "0.16.0"
-if (packageVersion("renv") != renvVersion) {
-  renvLockExisted <- file.exists(renv::paths$lockfile())
-  renv::upgrade(version = renvVersion, reload = TRUE, prompt = FALSE)
-  if (!renvLockExisted) {
-    unlink(renv::paths$lockfile())
-  }
-}
 
 if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
   options(repos = c(getOption("repos"), pik = "https://rse.pik-potsdam.de/r/packages"))
@@ -26,6 +26,10 @@ if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
   message("R package dependencies are not installed in this renv, installing now...")
   renv::hydrate() # auto-detect and install all dependencies
   message("Finished installing R package dependencies.")
+}
+
+if (!requireNamespace("piamenv", quietly = TRUE)) {
+  renv::install("piamenv", prompt = FALSE)
 }
 
 # source global .Rprofile (very important to load user specific settings)
