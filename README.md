@@ -65,31 +65,75 @@ When using a modified version of **MAgPIE** which is not identical to versions
 in the official main repository at https://github.com/magpiemodel add a suffix
 to the name to allow distinguishing versions (format **MAgPIE-suffix**).
 
-## SYSTEM REQUIREMENTS
+## HARDWARE REQUIREMENTS
 The model is quite resource heavy and works best on machines with high CPU clock
-and memory. Recommended is a machine with Windows, MacOS or Linux, with at least
-16GB of memory and a Core i7 CPU or similar.
+and memory. Recommended is a machine with at least 16GB of memory and a Core i7 CPU or similar.
 
 ## HOW TO INSTALL
-MAgPIE requires *GAMS* (https://www.gams.com/) including licenses for the
-solvers *CONOPT* and (optionally) *CPLEX* for its core calculations. As the model
-benefits significantly of recent improvements in *GAMS* and *CONOPT4* it is
-recommended to work with the most recent versions of both.
-Please make sure that the GAMS installation path is added to the PATH variable
-of the system.
+- we assume you know how to edit the PATH environment variable, just search for a tutorial online if unsure
+- on Windows terminal = PowerShell
+- commands formatted as `code` should generally be run in a terminal
 
-In addition *R* (https://www.r-project.org/) is required for pre- and
-postprocessing and run management (needs to be added to the PATH variable
-as well).
+### gams >= 43.4.1
+- make sure you have a gams license incl. the CONOPT solver
+- [download gams](https://www.gams.com/download)
+- install gams
+  - [unix](https://www.gams.com/46/docs/UG_UNIX_INSTALL.html)
+  - [macOS](https://www.gams.com/46/docs/UG_MAC_INSTALL.html)
+  - [Windows](https://www.gams.com/46/docs/UG_WIN_INSTALL.html)
+  - add the gams path (like `C:\gams\46`) to your PATH
 
-Several R packages are required to run MAgPIE. Under Windows you first need to install
-Rtools (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
-variable. When running R from the MAgPIE folder for the first time all
-required packages are automatically installed into an isolated,
-project specific R package environment (renv).
-For post-processing model outputs *Latex* is required
-(https://www.latex-project.org/get/). To be seen by the model it also needs to
-added to the PATH variable of your system.
+### Windows only - winget / chocolatey
+winget and chocolatey are package managers, they allow installing magpie requirements via a simple command. You only need one package manager, and you only need to run the install command for your package manager (either `winget install ...` or `choco install ...`, but not both). If neither package manager works you can fall back to downloading and running installers, but usually this requires additional steps after the installation like adding a path to the PATH environment variable.
+
+- check if `winget` is already installed by running `winget` in a terminal
+- if missing install it as described [here](https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget)
+- alternative: [install chocolatey](https://chocolatey.org/install)
+
+### Windows only - git
+- `winget install --id Git.Git -e --source winget`
+- `choco install -y git`
+- or [download](https://git-scm.com/download/win) and run installer
+
+### R >= 4.1.2
+- Ubuntu: `sudo apt install r-base`
+- macOS: `brew install r`
+- Windows
+  - `winget install posit.rig`, restart terminal, then `rig add release`
+  - `choco install -y rig`, restart terminal, then `rig add release`
+  - or [download](https://github.com/r-lib/rig/releases/tag/latest) and run installer
+
+### Windows only - Rtools
+- `rig add rtools`
+- or [download](https://cloud.r-project.org/bin/windows/Rtools/) and run installer, make sure your R and Rtools versions are the same
+
+### pandoc
+- Ubuntu: `sudo apt install pandoc`
+- macOS: `brew install pandoc`
+- Windows:
+  - `winget install -e --id JohnMacFarlane.Pandoc`
+  - [download](https://pandoc.org/installing.html) and run installer (`choco install -y pandoc` did not work during testing)
+
+### TeX
+- Windows:
+  - `winget install -e --id MiKTeX.MiKTeX`
+  - `choco install -y tinytex`
+
+### check setup is complete
+- restart terminal
+- `gams` should print many lines including "The installed license is valid."
+- `git --version`
+- `Rscript --version`
+- `pandoc --version`
+
+### MAgPIE
+```sh
+git clone https://github.com/magpiemodel/magpie.git
+cd magpie
+Rscript start.R
+```
+- choose "1" for a default run
+- then select "1" for direct execution
 
 ## DOCKER
 To use Docker, copy your `gamslice.txt`
