@@ -28,6 +28,10 @@ if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
   message("Finished installing R package dependencies.")
 }
 
+if (!requireNamespace("piamenv", quietly = TRUE)) {
+  renv::install("piamenv", prompt = FALSE)
+}
+
 # source global .Rprofile (very important to load user specific settings)
 if (file.exists("~/.Rprofile")) {
   source("~/.Rprofile")
