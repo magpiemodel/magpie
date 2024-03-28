@@ -6,11 +6,14 @@
 # |  Contact: magpie@pik-potsdam.de
 Sys.setenv(RENV_PATHS_LIBRARY = "renv/library")
 if (Sys.info()[["sysname"]] == "Windows") {
-  # use R's default download function to prevent
+  # make renv use R's default download function to prevent
   # curl: (35) schannel: next InitializeSecurityContext failed: Unknown error
   # (0x80092012) - The revocation function was unable to check revocation for the certificate.
   options(renv.download.override = utils::download.file)
 }
+
+# do not check if library and renv.lock are in sync, because renv.lock does not exist
+options(renv.config.synchronized.check = FALSE)
 
 source("renv/activate.R")
 
