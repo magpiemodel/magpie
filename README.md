@@ -122,8 +122,7 @@ PATH environment variable. Search for a tutorial online if you are unsure how to
 ### download and run MAgPIE
 1. download MAgPIE with `git clone https://github.com/magpiemodel/magpie.git`
 1. go into the MAgPIE folder `cd magpie`
-1. start a MAgPIE run with `Rscript start.R`
-  - first time only: this will install all required R packages (takes a while)
+1. start a MAgPIE run with `Rscript start.R`, first time: installs all required R packages (takes a while)
 1. choose "1" for a default run
 1. then select "1" for direct execution
 
