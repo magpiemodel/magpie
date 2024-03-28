@@ -5,17 +5,14 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 Sys.setenv(RENV_PATHS_LIBRARY = "renv/library")
+if (Sys.info()[["sysname"]] == "Windows") {
+  # use R's default download function to prevent
+  # curl: (35) schannel: next InitializeSecurityContext failed: Unknown error
+  # (0x80092012) - The revocation function was unable to check revocation for the certificate.
+  options(renv.download.override = utils::download.file)
+}
 
 source("renv/activate.R")
-
-renvVersion <- "0.16.0"
-if (packageVersion("renv") != renvVersion) {
-  renvLockExisted <- file.exists(renv::paths$lockfile())
-  renv::upgrade(version = renvVersion, reload = TRUE, prompt = FALSE)
-  if (!renvLockExisted) {
-    unlink(renv::paths$lockfile())
-  }
-}
 
 if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
   options(repos = c(getOption("repos"), pik = "https://rse.pik-potsdam.de/r/packages"))
