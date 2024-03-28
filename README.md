@@ -70,54 +70,42 @@ The model is quite resource heavy and works best on machines with high CPU clock
 and memory. Recommended is a machine with at least 16GB of memory and a Core i7 CPU or similar.
 
 ## HOW TO INSTALL
-- we assume you know how to edit the PATH environment variable, just search for a tutorial online if unsure
-- on Windows terminal = PowerShell
-- commands formatted as `code` should generally be run in a terminal
+Commands formatted as `code` should generally be run in a terminal (PowerShell on Windows).
 
-### gams >= 43.4.1
-- make sure you have a gams license incl. the CONOPT solver
-- [download gams](https://www.gams.com/download)
-- install gams
-  - [unix](https://www.gams.com/46/docs/UG_UNIX_INSTALL.html)
-  - [macOS](https://www.gams.com/46/docs/UG_MAC_INSTALL.html)
-  - [Windows](https://www.gams.com/46/docs/UG_WIN_INSTALL.html)
-  - add the gams path (like `C:\gams\46`) to your PATH
+### List of Requirements
+- license for gams incl. CONOPT solver
+- gams >= 43.4.1
+- git >= 2.16.1
+- R >= 4.1.2 (+ matching Rtools on Windows)
+- pandoc >= 2.14.2
+- TeX >= 3.14159265
 
-### Windows only - winget / chocolatey
-winget and chocolatey are package managers, they allow installing magpie requirements via a simple command. You only need one package manager, and you only need to run the install command for your package manager (either `winget install ...` or `choco install ...`, but not both). If neither package manager works you can fall back to downloading and running installers, but usually this requires additional steps after the installation like adding a path to the PATH environment variable.
+### OS specific setup
+Choose your operating system and follow the instructions there. You can also
+install requirements differently (e.g. using only installers on Windows), in
+the end it is only important that all requirements are installed in a suitable
+version and added to the PATH environment variable, so MAgPIE can use them.
 
-- check if `winget` is already installed by running `winget` in a terminal
-- if missing install it as described [here](https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget)
-- alternative: [install chocolatey](https://chocolatey.org/install)
+#### Ubuntu
+1. make sure you have a gams license incl. the CONOPT solver
+1. [install gams](https://www.gams.com/46/docs/UG_UNIX_INSTALL.html)
+1. install git, R, and pandoc with `sudo apt install git r-base pandoc`
+1. install TinyTeX with `Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'`
 
-### Windows only - git
-- `winget install --id Git.Git -e --source winget`
-- `choco install -y git`
-- or [download](https://git-scm.com/download/win) and run installer
+#### macOS
+1. make sure you have a gams license incl. the CONOPT solver
+1. [install gams](https://www.gams.com/46/docs/UG_MAC_INSTALL.html)
+1. install git, R, and pandoc with `brew install git r pandoc`
+1. install TinyTeX with `Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'`
 
-### R >= 4.1.2
-- Ubuntu: `sudo apt install r-base`
-- macOS: `brew install r`
-- Windows
-  - `winget install posit.rig`, restart terminal, then `rig add release`
-  - `choco install -y rig`, restart terminal, then `rig add release`
-  - or [download](https://github.com/r-lib/rig/releases/tag/latest) and run installer
-
-### Windows only - Rtools
-- `rig add rtools`
-- or [download](https://cloud.r-project.org/bin/windows/Rtools/) and run installer, make sure your R and Rtools versions are the same
-
-### pandoc
-- Ubuntu: `sudo apt install pandoc`
-- macOS: `brew install pandoc`
-- Windows:
-  - `winget install -e --id JohnMacFarlane.Pandoc`
-  - [download](https://pandoc.org/installing.html) and run installer (`choco install -y pandoc` did not work during testing)
-
-### TeX
-- Windows:
-  - `winget install -e --id MiKTeX.MiKTeX`
-  - `choco install -y tinytex`
+#### Windows
+1. make sure you have a gams license incl. the CONOPT solver
+1. [install gams](https://www.gams.com/46/docs/UG_WIN_INSTALL.html)
+1. [install pandoc](https://pandoc.org/installing.html)
+1. [install chocolatey](https://chocolatey.org/install)
+1. install git, rig (R installer), and tinytex with `choco install -y git rig tinytex`
+1. restart terminal
+1. install R and Rtools with `rig add release; rig add rtools`
 
 ### check setup is complete
 - restart terminal
@@ -125,15 +113,19 @@ winget and chocolatey are package managers, they allow installing magpie require
 - `git --version`
 - `Rscript --version`
 - `pandoc --version`
+- `tex --version`
 
-### MAgPIE
-```sh
-git clone https://github.com/magpiemodel/magpie.git
-cd magpie
-Rscript start.R
-```
-- choose "1" for a default run
-- then select "1" for direct execution
+If any of these are not found: Find the path to that executable
+(gams/git/Rscript/pandoc/tex, on Windows ending in '.exe') and add it to your
+PATH environment variable. Search for a tutorial online if you are unsure how to do that.
+
+### download and run MAgPIE
+1. download MAgPIE with `git clone https://github.com/magpiemodel/magpie.git`
+1. go into the MAgPIE folder `cd magpie`
+1. start a MAgPIE run with `Rscript start.R`
+  - first time only: this will install all required R packages (takes a while)
+1. choose "1" for a default run
+1. then select "1" for direct execution
 
 ## DOCKER
 To use Docker, copy your `gamslice.txt`
