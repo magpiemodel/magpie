@@ -101,7 +101,7 @@ version and added to the PATH environment variable, so MAgPIE can use them.
 #### Windows
 1. make sure you have a gams license incl. the CONOPT solver
 1. [install gams](https://www.gams.com/46/docs/UG_WIN_INSTALL.html)
-1. [install pandoc](https://pandoc.org/installing.html)
+1. [download .msi pandoc file](https://github.com/jgm/pandoc/releases/latest) and run installer (`choco install pandoc` did not work in testing)
 1. [install chocolatey](https://chocolatey.org/install)
 1. install git, rig (R installer), and tinytex with `choco install -y git rig tinytex`
 1. restart terminal
