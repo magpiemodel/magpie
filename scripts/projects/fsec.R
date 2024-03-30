@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v39f_FSEC"
+  v <- "v39g_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "RCP60")),
