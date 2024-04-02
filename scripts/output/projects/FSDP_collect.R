@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -137,12 +137,12 @@ var_reg <- c(indicators_main,
              ### Validation
              "Biodiversity|Agricultural landscape intactness",
              "Biodiversity|Biodiversity hotspot intactness",
-             "Biodiversity|Biodiversity hotspot intactness (unitless)",
              "Biodiversity|BII in areas outside Biodiversity Hotspots, Intact Forest & Cropland Landscapes",
              "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
              "Biodiversity|Biodiversity Hotspot BII",
+             "Biodiversity|BII in 30x30 Landscapes",
              "Biodiversity|Cropland Landscapes BII",
-             "Key Biodiversity Area BII",
+             "Biodiversity|Key Biodiversity Area BII",
              "Biodiversity|Inverted Simpson crop area diversity index",
              "Population",
              "Income",
@@ -472,7 +472,7 @@ var_reg <- c(indicators_main,
              "Resources|Nitrogen|Pollution|Surplus|+|Animal Waste Management",
              "Resources|Nitrogen|Pollution|Surplus|+|Non-agricultural land",
              "Resources|Water|Withdrawal|Agriculture",
-             
+
              "Resources|Nitrogen|Cropland Budget|Soil Nitrogen Uptake Efficiency",
 
              "Emissions|CH4_GWP*AR6|Land",
@@ -702,7 +702,7 @@ for (i in 1:length(outputdir)) {
       iso <- rbind(iso, a)
     } else missing <- c(missing,rep)
   }
-  
+
   scen <- c("BAU", "FSDP", "SSP2fsdp")
   #scen <- c("ERROR")
   thisScen <- unlist(strsplit(cfg$title, "_"))[3]
