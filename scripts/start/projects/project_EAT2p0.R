@@ -291,3 +291,31 @@ cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
+
+
+# Test Productivity
+
+# BAU_PROD #
+# Decomposition scenario of higher productivity
+cfg$title <- "Test_PROD_feed"
+cfg <- bau(cfg = cfg)
+# Livestock productivity (both efficiency and feed basket) follows SSP1
+# (mainly for ruminant products because SSP2 already high)
+cfg$gms$c70_feed_scen <- "ssp1"
+start_run(cfg, codeCheck = FALSE)
+
+cfg$title <- "Test_PROD_interestrate"
+cfg <- bau(cfg = cfg)
+# Higher endogenous productivity achieved through lower interest rates
+# representing more trust and therefore easier investments
+cfg$gms$s12_interest_lic <- 0.06
+cfg$gms$s12_interest_hic <- 0.04
+start_run(cfg, codeCheck = FALSE)
+
+cfg$title <- "Test_PROD_veryLowinterest"
+cfg <- bau(cfg = cfg)
+# Higher endogenous productivity achieved through lower interest rates
+# representing more trust and therefore easier investments
+cfg$gms$s12_interest_lic <- 0.02
+cfg$gms$s12_interest_hic <- 0.02
+start_run(cfg, codeCheck = FALSE)

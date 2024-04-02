@@ -41,7 +41,7 @@ cfg$output <- c("output_check",
 #######################
 # SCENARIO DEFINITION #
 #######################
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPi", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # Note: The climate change impacts setting differs from the global AgMIP model comparision set-up.
 #       We do not include climate change impacts in the coupled REMIND-MAgPIE runs for the PB Deep Dive
 #       because we focus exclusively on the mitigation aspect without climate change impacts.
@@ -179,7 +179,7 @@ priceNonCO2 <- function(cfg) {
 # BAU #
 # Business as usual scenario based on SSP2
 cfg$title <- "BAU_NPi"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPi", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
@@ -192,7 +192,7 @@ start_run(cfg, codeCheck = FALSE)
 # Decomposition scenario.
 # Globally achieves EL2 (Diet+Waste+Prod) by 2050
 cfg$title <- "BAU_Diet"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPi", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
@@ -202,7 +202,7 @@ start_run(cfg, codeCheck = FALSE)
 # BAU + Bioenergy #
 # Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "BAU_Bioenergy"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPi", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- bioenergy(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -210,7 +210,7 @@ start_run(cfg, codeCheck = FALSE)
 # BAU + pricing of CO2 in land sector #
 # Decomposition Scenario. Adds CO2 pricing on land-use change emissions with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "BAU_CO2"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPi", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- priceCO2(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -218,7 +218,7 @@ start_run(cfg, codeCheck = FALSE)
 # BAU + NonCO2 pricing in land sector #
 # Decomposition Scenario. Adds non-CO2 pricing with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "BAU_NonCO2"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPi", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- priceNonCO2(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)

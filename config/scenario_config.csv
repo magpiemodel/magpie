@@ -87,4 +87,4 @@ gms$c52_land_carbon_sink_rcp;;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c57_macc_version;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;PBL_2022;PBL_2022;PBL_2022;PBL_2022;;;;;;;;;;;;;;;
 gms$c57_macc_scenario;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Default;Optimistic;Default;Optimistic;;;;;;;;;;;;;;;
 gms$s58_rewetting_switch;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0;1;0;1;;;;;;;;;;;;;;;
-magicc_emis_scen;;;;;;;;;;;;;;;;;;;;;;;SSP2EU-DSPkB500-DS;SSP2EU-DSPkB500-DS;;;;;;;;;;;;;;;;;;;;;;;;
+magicc_emis_scen;;;;;;;;;;;;;;;;;;;;;;;SSP2EU-DSPkB500-DS_betax;SSP2EU-DSPkB500-DS_betax;;;;;;;;;;;;;;;;;;;;;;;;
