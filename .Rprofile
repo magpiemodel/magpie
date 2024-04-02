@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -12,8 +12,11 @@ if (Sys.info()[["sysname"]] == "Windows") {
   options(renv.download.override = utils::download.file)
 }
 
-# do not check if library and renv.lock are in sync, because renv.lock does not exist
-options(renv.config.synchronized.check = FALSE)
+# do not check if library and renv.lock are in sync, because normally renv.lock does not exist
+options(renv.config.synchronized.check = FALSE,
+        renv.config.user.profile = TRUE) # load user specific settings from ~/.Rprofile
+
+# the text "renvVersion" is required for a check in a coupling script, will be removed soon
 
 source("renv/activate.R")
 
@@ -28,11 +31,7 @@ if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
   message("Finished installing R package dependencies.")
 }
 
+# in case bootstrapping fails halfway, install piamenv and rely on requirement auto-fixing
 if (!requireNamespace("piamenv", quietly = TRUE)) {
   renv::install("piamenv", prompt = FALSE)
-}
-
-# source global .Rprofile (very important to load user specific settings)
-if (file.exists("~/.Rprofile")) {
-  source("~/.Rprofile")
 }
