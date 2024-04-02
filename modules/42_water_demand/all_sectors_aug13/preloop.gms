@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -13,5 +13,5 @@ i42_wat_req_k(t,j,kli) = f42_wat_req_kli(kli);
 * Trajectory for environmental flow policy
 * (linear interpolation from start year to target year)
 p42_efp(t_all,"off") = 0;
-m_linear_interpol(p42_efp_fader, s42_efp_startyear, s42_efp_targetyear, 0, 1);
+m_linear_time_interpol(p42_efp_fader, s42_efp_startyear, s42_efp_targetyear, 0, 1);
 p42_efp(t_all, "on") = p42_efp_fader(t_all);

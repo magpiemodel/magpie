@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -55,4 +55,5 @@ $elseif "%c52_land_carbon_sink_rcp%" == "nocc_hist"
   i52_land_carbon_sink(t_all,i)$(m_year(t_all) > sm_fix_cc) = f52_land_carbon_sink(t_all,i,"RCPBU")$(m_year(t_all) = sm_fix_cc);
 $else 
   i52_land_carbon_sink(t_all,i) = f52_land_carbon_sink(t_all,i,"%c52_land_carbon_sink_rcp%");
+  i52_land_carbon_sink(t_all,i)$(m_year(t_all) <= sm_fix_cc) = f52_land_carbon_sink(t_all,i,"RCPBU")$(m_year(t_all) <= sm_fix_cc);
 $endif

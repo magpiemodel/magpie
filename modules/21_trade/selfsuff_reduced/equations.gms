@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,11 +28,11 @@
 
  q21_trade_reg(h2,k_trade)..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =g=
- (sum(supreg(h2,i2),vm_supply(i2,k_trade)) + v21_excess_prod(h2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade))
+ ((sum(supreg(h2,i2),vm_supply(i2,k_trade)) + v21_excess_prod(h2,k_trade))
+ *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade) >= 1))
- + sum(supreg(h2,i2),vm_supply(i2,k_trade))*sum(ct,f21_self_suff(ct,h2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade))
+ + (sum(supreg(h2,i2),vm_supply(i2,k_trade))*sum(ct,f21_self_suff(ct,h2,k_trade))
+ *sum(ct,i21_trade_bal_reduction(ct,k_trade)) - v21_import_for_feasibility(h2,k_trade))
  $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1));
 
 *' Upper bound for production.
@@ -51,7 +51,7 @@
  v21_excess_dem(k_trade) =g=
  sum(h2, sum(supreg(h2,i2),vm_supply(i2,k_trade))*(1 - sum(ct,f21_self_suff(ct,h2,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade)) < 1))
- + sum(ct,f21_trade_balanceflow(ct,k_trade));
+ + sum(ct,f21_trade_balanceflow(ct,k_trade)) + sum(h2, v21_import_for_feasibility(h2,k_trade));
 
 *' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].
 *' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.
@@ -64,7 +64,8 @@
  q21_cost_trade_reg(h2,k_trade)..
  v21_cost_trade_reg(h2,k_trade) =g=
  (i21_trade_margin(h2,k_trade) + i21_trade_tariff(h2,k_trade))
- *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade));
+ *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade)) 
+ + v21_import_for_feasibility(h2,k_trade) * s21_cost_import;
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(h2)..

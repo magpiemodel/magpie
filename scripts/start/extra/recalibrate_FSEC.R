@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration factors for 
+# description: calculate and store new calibration factors for
 #              land conversion costs for FSEC regional setup
 #              (time consuming; up to 40 model runs with 5 time steps)
 # --------------------------------------------------------
@@ -20,9 +20,9 @@ source("scripts/projects/fsec.R")
 
 # Calibration run
 cfg       <- fsecScenario(scenario = "c_BAU")
-cfg$title <- "FSEC24Mar23"
+cfg$title <- "FSEC14Mar2024"
 cfg$results_folder                  <- "output/:title:"
-cfg$recalibrate                     <- FALSE # required when penality_apr22 activated
+cfg$recalibrate                     <- TRUE # required when penality_apr22 activated
 cfg$best_calib                      <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
 cfg$best_calib_landconversion_cost  <- FALSE

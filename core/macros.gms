@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -73,20 +73,26 @@ $macro m_fillmissingyears(input,sets) loop(t_all, \
           ct_all(t_all) = no;    \
        );
 
-* macro for linear interpolation
-$macro m_linear_interpol(input,start_year,target_year,start_value,target_value) \
+*** Time interpolation
+* macro for linear time interpolation
+$macro m_linear_time_interpol(input,start_year,target_year,start_value,target_value) \
   input(t_all)$(m_year(t_all) > start_year AND m_year(t_all) < target_year) = ((m_year(t_all)-start_year) / (target_year-start_year));  \
   input(t_all) = start_value + input(t_all) * (target_value-start_value); \
   input(t_all)$(m_year(t_all) <= start_year) = start_value; \
   input(t_all)$(m_year(t_all) >= target_year) = target_value;
 
-* macro for sigmoid interpolation (S-shaped curve)
-$macro m_sigmoid_interpol(input,start_year,target_year,start_value,target_value) \
+* macro for sigmoid time interpolation (S-shaped curve)
+$macro m_sigmoid_time_interpol(input,start_year,target_year,start_value,target_value) \
   input(t_all)$(m_year(t_all) >= start_year AND m_year(t_all) <= target_year) = ((m_year(t_all)-start_year) / (target_year-start_year));  \
   input(t_all) = 1 / (1 + exp(-10*(input(t_all)-0.5))); \
   input(t_all) = start_value + input(t_all) * (target_value-start_value); \
     input(t_all)$(m_year(t_all) <= start_year) = start_value; \
     input(t_all)$(m_year(t_all) >= target_year) = target_value;
+
+*** Data interpolation
+* macro for linear cell data interpolation
+$macro m_linear_cell_data_interpol(output,x,input_x1,input_x2,input_y1,input_y2) \
+  output(j) = input_y1 + (input_y2 - input_y1)/(input_x2 - input_x1) * (x - input_x1);
 
 * macro for simple carbon stocks
 $macro m_carbon_stock(land,carbon_density,item) \

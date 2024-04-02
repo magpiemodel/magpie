@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,10 +14,12 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v36_FSEC"
+  v <- "v39_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "RCP60")),
+            f_BAUlabor8p5    = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "RCP60", "labor8p5")),
             d_SSP1bau        = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1", "RCP45")),
             d_SSP1PLUSbau    = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
@@ -36,6 +38,12 @@ fsecScenario <- function(scenario) {
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
                                   "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
                                   "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19")),
+            f_FSDPlabor1p9 = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC",
+                                  "energy", "bioplastics", "population", "institutions", "timberCities",
+                                  "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
+                                  "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
+                                  "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19", "labor1p9")),
             # FSDPs (without external)
             d_SSP1fsdp       = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
@@ -199,7 +207,7 @@ fsecScenario <- function(scenario) {
                        targetdir = "./input",
                        repositories = cfg$repositories)
   # Download gridded RCP temperature data
-  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v3_04-05-23.tgz",
+  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.mz",
                        targetdir = "./input",
                        repositories = cfg$repositories)
 

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -65,4 +65,4 @@ p35_land_start_ac(j,ac,"secdforest") = i35_secdforest(j,ac);
 * -----------------------------
 * Set forest damage trajectory
 * -----------------------------
-m_sigmoid_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);
+m_sigmoid_time_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);

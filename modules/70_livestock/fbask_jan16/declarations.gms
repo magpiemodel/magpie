@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -35,6 +35,7 @@ parameters
  p70_cost_share_livst(t,i,factors)                Capital and labor shares of the regional factor costs for plant production for livestock  (1)
  p70_cost_share_calibration(i)                    Summation factor used to calibrate calculated capital shares with historical values (1)
  i70_cost_regr(i,kap,cost_regr)                   Regression coefficients for livestock factor requirements (1)
+ i70_fac_req_livst(t_all,i,kli)                   Factor requirements (USD05MER per tDM)
 ;
 
 
