@@ -6,9 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-
-
-*' @code
 *' Total demand for bioenergy comes from different origins
 *' 1st generation bioenergy demand is a fixed trajectory of minimum production
 *' requirements. Second generation bioenergy splits into a demand
@@ -71,7 +68,7 @@ q60_res_2ndgenBE(i2) ..
 *' mass- or energy-based.  For comparability, the former is in line with other realizations and constant over time. 
 *' The energy-based incentive can take different forms and is applied to both 1st and 2nd generation. 
 *' Combined with low or fade-out exogenous demands, this is useful to assess bioenergy production potentials, however
-*' the endogenous technological change in [13_tc] may react very strongly and create a positive feedback loop
+*' the endogenous technological change in [13_tc] may react very strongly and create a positive feedback loop.
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
   =e= sum((ct,k1st60), vm_dem_bioen(i2,k1st60) * (-i60_1stgen_bioenergy_subsidy_tdm(ct)))
