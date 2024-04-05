@@ -304,6 +304,21 @@ cfg <- bau(cfg = cfg)
 cfg$gms$c70_feed_scen <- "ssp1"
 start_run(cfg, codeCheck = FALSE)
 
+cfg$title <- "Test_PROD_feedSSP5"
+cfg <- bau(cfg = cfg)
+# Livestock productivity (both efficiency and feed basket) follows SSP1
+# (mainly for ruminant products because SSP2 already high)
+cfg$gms$c70_feed_scen <- "ssp5"
+start_run(cfg, codeCheck = FALSE)
+
+# BAU_PROD #
+# Decomposition scenario adds high productivity to BAU
+cfg$title <- "BAU_PROD2"
+cfg <- bau(cfg = cfg)
+cfg <- prod(cfg = cfg)
+cfg$gms$c70_feed_scen <- "ssp5"
+start_run(cfg, codeCheck = FALSE)
+
 cfg$title <- "Test_PROD_interestrate"
 cfg <- bau(cfg = cfg)
 # Higher endogenous productivity achieved through lower interest rates
