@@ -48,10 +48,8 @@
 *' See macro `m58_LandLeft` for details.
 
 q58_scalingFactorExp(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
-  v58_scalingFactorExp(j2,manPeat58) =e= 
-   (m58_LandLeft(pc58_peatland,"land58",v58_peatland,pc58_peatland) / m58_LandLeft(pcm_land,"land",v58_manLand,pc58_manLand))
-   $(m58_LandLeft(pc58_peatland,"land58",pc58_peatland,pc58_peatland) > 1e-6 AND m58_LandLeft(pcm_land,"land",pc58_manLand,pc58_manLand) > 1e-6)
- + 0$(m58_LandLeft(pc58_peatland,"land58",pc58_peatland,pc58_peatland) <= 1e-6 OR m58_LandLeft(pcm_land,"land",pc58_manLand,pc58_manLand) <= 1e-6);
+  v58_scalingFactorExp(j2,manPeat58) * m58_LandLeft(pcm_land,"land",v58_manLand,pc58_manLand) =e= 
+    m58_LandLeft(pc58_peatland,"land58",v58_peatland,pc58_peatland) ;
 
 *' Costs for peatland degradation and rewetting
 
