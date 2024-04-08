@@ -16,13 +16,13 @@ scalars
 
 table fm_bii_coeff(bii_class44,potnatveg) Biodiversity Intactness Index coefficients (unitless)
 $ondelim
-$include "./modules/44_biodiversity/bii_target/input/f44_bii_coeff.cs3"
+$include "./modules/44_biodiversity/bii_target_apr24/input/f44_bii_coeff.cs3"
 $offdelim
 ;
 
 table f44_biome(j,biome44) Share of biome type in each spatial unit (1)
 $ondelim
-$include "./modules/44_biodiversity/bii_target/input/biorealm_biome.cs3"
+$include "./modules/44_biodiversity/bii_target_apr24/input/biorealm_biome.cs3"
 $offdelim
 ;
 
@@ -30,6 +30,6 @@ parameters
 f44_rr_layer(j) Range-rarity restoration prioritization layer (unitless)
 /
 $ondelim
-$include "./modules/44_biodiversity/bii_target/input/rr_layer.cs2"
+$include "./modules/44_biodiversity/bii_target_apr24/input/rr_layer.cs2"
 $offdelim
 /
