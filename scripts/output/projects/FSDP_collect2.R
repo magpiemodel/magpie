@@ -182,6 +182,7 @@ var_reg_LR <- c(
              "Production|+|Pasture",
              "Production|+|Bioenergy crops",
              "Timber|Volumetric|Production|Roundwood",
+             "Production|Bioenergy|2nd generation|++|Bioenergy crops",
 
              "Costs",
              "Value|Bioeconomy Demand",
