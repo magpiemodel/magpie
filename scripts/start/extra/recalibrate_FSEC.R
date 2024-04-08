@@ -26,7 +26,7 @@ cfg$recalibrate                     <- TRUE # required when penality_apr22 activ
 cfg$best_calib                      <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
 cfg$best_calib_landconversion_cost  <- FALSE
-cfg$output                          <- c("rds_report", "validation_short")
+cfg$output                          <- c("rds_report")
 cfg$force_replace                   <- TRUE
 cfg$qos <- "priority"
 start_run(cfg, codeCheck = FALSE)

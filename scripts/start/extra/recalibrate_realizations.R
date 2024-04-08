@@ -25,7 +25,7 @@ cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- FALSE
 cfg$recalibrate_landconversion_cost <- TRUE
 
-cfg$output <- c("rds_report", "validation_short")
+cfg$output <- c("rds_report")
 cfg$force_download <- TRUE
 
 cfg$gms$c_timesteps <- "calib"
