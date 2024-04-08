@@ -234,6 +234,7 @@ var_reg <- c(indicators_main,
              "Resources|Water|Withdrawal|Agriculture",
              "Resources|Land Cover|Cropland|Area equipped for irrigation",
              "Value|Bioeconomy Demand",
+             "Production|Bioenergy|2nd generation|++|Bioenergy crops",
              ### Maps
              "Costs",
              "Population",
