@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v39b_FSEC"
+  v <- "v39kb_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "RCP60")),
@@ -225,7 +225,8 @@ fsecScenario <- function(scenario) {
                        "rds_report_iso",
                        "rds_report")
   cfg$force_download  <- TRUE
-  cfg$gms$s80_optfile <- 1
+  cfg$gms$s80_optfile <- 0
+  cfg$gms$s80_maxiter <- 100
 
   return(cfg)
 }
