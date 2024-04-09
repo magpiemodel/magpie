@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v39_FSEC"
+  v <- "v39k_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "RCP60")),
@@ -207,7 +207,7 @@ fsecScenario <- function(scenario) {
                        targetdir = "./input",
                        repositories = cfg$repositories)
   # Download gridded RCP temperature data
-  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.mz",
+  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.tgz",
                        targetdir = "./input",
                        repositories = cfg$repositories)
 
@@ -225,7 +225,8 @@ fsecScenario <- function(scenario) {
                        "rds_report_iso",
                        "rds_report")
   cfg$force_download  <- TRUE
-  cfg$gms$s80_optfile <- 1
+  cfg$gms$s80_optfile <- 0
+  cfg$gms$s80_maxiter <- 100
 
   return(cfg)
 }
