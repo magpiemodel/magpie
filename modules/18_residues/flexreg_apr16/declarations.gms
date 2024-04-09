@@ -39,6 +39,7 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
+ ov18_prod_res(t,j,kres,type)                      Cellular production of residues (mio. tDM)
  ov_res_biomass_ag(t,i,kcr,w,attributes,type)      Production of aboveground residues in each region (mio. tDM)
  ov_res_biomass_bg(t,i,kcr,w,dm_cnr,type)          Production of belowground residues in each region (mio. tDM)
  ov18_res_ag_removal(t,i,kcr,w,attributes,type)    Removal of crop residues in respective attribute units DM GJ Nr P K WM C (mio. tX)
@@ -51,6 +52,7 @@ parameters
  oq18_res_field_balance(t,i,kcr,w,attributes,type) Calculation of the residues amount recycled to soils (mio. tDM)
  oq18_res_field_burn(t,i,kcr,w,attributes,type)    Fixing of the residues amount burned in a region in respective attribute units DM GJ Nr P K WM C (mio. tX)
  oq18_translate(t,i,kres,attributes,type)          Transformation of the multiple crop residues into supply balance crop redisues in respective attribute units DM GJ Nr P K WM C (mio. tX)
+ oq18_prod_res_cell(t,j,kres,type)                 Allows for distribution of residues to cellular level (mio. tDM)
  oq18_res_recycling_cnr(t,i,kcr,w,c_nr,type)       Nutrient recycling of carbon and reaactive nitrogen (mio. tX)
  oq18_res_recycling_pk(t,i,kcr,w,pk18,type)        Nutrient recycling of phosphorus and potash (mio. tX)
  oq18_cost_prod_res(t,i,kres,type)                 Production costs of harvesting crop residues (mio. USD05MER)

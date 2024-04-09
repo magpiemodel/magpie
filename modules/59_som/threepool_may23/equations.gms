@@ -11,20 +11,19 @@
 *' For every cell a new equilibrium value for the soil organic carbon pool
 *' on cropland is calculated as the sum over all crop types and irrigation regimes via
 
-q59_steadystate_term_crop(i2, tillage59, w, soilPools59) .. 
-  v59_topsoilc_crop_steadystate(i2, tillage59, w, soilPools59)  =e=     
+q59_steadystate_term_crop(i2, sPools59, w, tillage59) .. 
+  v59_topsoilc_crop_steadystate(i2, sPools59, w, tillage59)  =e=     
     sum(kcr_tillage59(kcr, tillage59), vm_res_recycling(i2, kcr, w, "c") * 
-      sum(ct, i59_cinput_multiplier(ct, i2, "residues", tillage59, w, soilPools59) /
-              i59_topsoilc_decay(ct, i2, tillage59, w, soilPools59)));
+                                         i59_cinput_multiplier_residue(i2, sPools59, kcr)) /
+        sum(ct, f59_topsoilc_decay(ct, i2, sPools59, w, tillage59));
 
 *' as well as for all non cropland via
                                   
-q59_steadystate_term_noncrop(i2, noncropland59, soilPools59) ..  
-  v59_topsoilc_noncrop_steadystate(i2, noncropland59, soilPools59)  =e=        
-    sum(ct, i59_litter_recycling(ct, i2) * 
-      sum(cell(i2,j2), vm_land(j2, noncropland59)) *
-      i59_cinput_multiplier(ct, i2, "litter", "no_tillage", "rainfed", soilPools59) /
-      i59_topsoilc_decay(ct, i2, "no_tillage", "rainfed", soilPools59));
+q59_steadystate_term_noncrop(i2, noncropland59, sPools59) ..  
+  v59_topsoilc_noncrop_steadystate(i2, noncropland59, sPools59)  =e=        
+    sum(ct, f59_litter_input(ct, i2, sPools59) /
+            f59_topsoilc_decay(ct, i2, sPools59, "rainfed", "notill")) *
+      sum(cell(i2,j2), vm_land(j2, noncropland59));
 
 *' To account for land-use transitions the previous carbon stocks has to be adjusted
 *' to calculate the new actual carbon stocks. Previous stocks are thus given by   
@@ -32,12 +31,12 @@ q59_steadystate_term_noncrop(i2, noncropland59, soilPools59) ..
 *' from area being non-cropland in the time step before. 
 *' For cropland the previous SOC state after accounting for transitions is given by
 
-q59_previousstate_term_crop(i2, tillage59, w, soilPools59) ..
-  v59_topsoilc_crop_previousstate(i2, tillage59, w, soilPools59)     
-    =e= sum(ct, p59_topsoilc_density(ct, i2, "crop", soilPools59) *
+q59_previousstate_term_crop(i2, sPools59, w, tillage59) ..
+  v59_topsoilc_crop_previousstate(i2, sPools59, w, tillage59)     
+    =e= sum(ct, p59_topsoilc_density_pre(ct, i2, "crop", sPools59) *
             sum((cell(i2, j2), kcr_tillage59(kcr, tillage59)), vm_area(j2, kcr, w))) +
-           sum((ct, noncropland59), (p59_topsoilc_density(ct, i2, noncropland59, soilPools59) -
-                                    p59_topsoilc_density(ct, i2, "crop", soilPools59)) *
+           sum((ct, noncropland59), (p59_topsoilc_density_pre(ct, i2, noncropland59, sPools59) -
+                                    p59_topsoilc_density_pre(ct, i2, "crop", sPools59)) *
             v59_cropland_transitions(i2, tillage59, w, noncropland59));  
 
 *' with v59_cropland_transitions being a helper variable that translates cropland transitions
@@ -50,30 +49,30 @@ q59_lutransitions_to_cropareas(i2, noncropland59) ..
 *' The previous SOC state on non-cropland after accounting for land-use transition is not 
 *' tillage- and irrgations-type-specific and thus given by
 
-q59_previousstate_term_noncrop(i2, noncropland59, soilPools59) ..
-  v59_topsoilc_noncrop_previousstate(i2, noncropland59, soilPools59)
-    =e= sum((ct, land_from), p59_topsoilc_density(ct, i2, land_from, soilPools59) *
+q59_previousstate_term_noncrop(i2, noncropland59, sPools59) ..
+  v59_topsoilc_noncrop_previousstate(i2, noncropland59, sPools59)
+    =e= sum((ct, land_from), p59_topsoilc_density_pre(ct, i2, land_from, sPools59) *
             sum(cell(i2, j2), vm_lu_transitions(j2, land_from, noncropland59)));
  
 *' Following the 2019-Refinement of the IPCC guidelines 2006 for cropland the actual state
 *' can be calculated via
 
-q59_actualstate_crop(i2, soilPools59) ..
-               v59_topsoilc_actualstate(i2, "crop", soilPools59)
-               =e= sum((tillage59, w), v59_topsoilc_crop_previousstate(i2, tillage59, w, soilPools59) * 
-                        (1 - sum(ct, i59_topsoilc_decay_max1(ct, i2, tillage59, w, soilPools59)))) +
-                   sum((tillage59, w), v59_topsoilc_crop_steadystate(i2, tillage59, w, soilPools59) *
-                        sum(ct, i59_topsoilc_decay_max1(ct, i2, tillage59, w, soilPools59)))
+q59_actualstate_crop(i2, sPools59) ..
+               v59_topsoilc_actualstate(i2, "crop", sPools59)
+               =e= sum((tillage59, w), v59_topsoilc_crop_previousstate(i2, sPools59, w, tillage59) * 
+                        (1 - sum(ct, i59_topsoilc_decay_max1(ct, i2, sPools59, w, tillage59)))) +
+                   sum((tillage59, w), v59_topsoilc_crop_steadystate(i2, sPools59, w, tillage59) *
+                        sum(ct, i59_topsoilc_decay_max1(ct, i2, sPools59, w, tillage59)))
                ;
 
 *' for cropland and via
                
-q59_actualstate_noncrop(i2, noncropland59, soilPools59) ..
-               v59_topsoilc_actualstate(i2, noncropland59, soilPools59)
-               =e= v59_topsoilc_noncrop_previousstate(i2, noncropland59, soilPools59) *
-                        (1 - sum(ct, i59_topsoilc_decay_max1(ct, i2, "no_tillage", "rainfed", soilPools59))) +
-                   v59_topsoilc_noncrop_steadystate(i2, noncropland59, soilPools59) *
-                        sum(ct, i59_topsoilc_decay_max1(ct, i2, "no_tillage", "rainfed", soilPools59))
+q59_actualstate_noncrop(i2, noncropland59, sPools59) ..
+               v59_topsoilc_actualstate(i2, noncropland59, sPools59)
+               =e= v59_topsoilc_noncrop_previousstate(i2, noncropland59, sPools59) *
+                        (1 - sum(ct, i59_topsoilc_decay_max1(ct, i2, sPools59, "rainfed", "notill"))) +
+                   v59_topsoilc_noncrop_steadystate(i2, noncropland59, sPools59) *
+                        sum(ct, i59_topsoilc_decay_max1(ct, i2, sPools59, "rainfed", "notill"))
               ;
 
 *' for non-cropland.
@@ -83,7 +82,7 @@ q59_actualstate_noncrop(i2, noncropland59, soilPools59) ..
 
 q59_carbon_soil(i2, land, stockType) ..
                 sum(cell(i2,j2), vm_carbon_stock(j2, land, "soilc", stockType))
-                =e= sum(soilPools59, v59_topsoilc_actualstate(i2, land, soilPools59)) + 
+                =e= sum(sPools59, v59_topsoilc_actualstate(i2, land, sPools59)) + 
                     sum(cell(i2,j2), vm_land(j2, land) * sum(ct, i59_subsoilc_density(ct, j2)));
 
 *' Note, that as long as the three pool soil model is on regional scale, cluster scale soil carbon stocks 
@@ -94,10 +93,10 @@ q59_carbon_soil(i2, land, stockType) ..
 
 q59_nr_som(i2) ..
              vm_nr_som(i2)
-               =e= 1/m_timestep_length * 1/15 * sum((tillage59, w, soilPools59), 
-                        (v59_topsoilc_crop_previousstate(i2, tillage59, w, soilPools59) -
-                         v59_topsoilc_crop_steadystate(i2, tillage59, w, soilPools59))
-                        * sum(ct, i59_topsoilc_decay_max1(ct, i2, tillage59, w, soilPools59)))
+               =e= 1/m_timestep_length * 1/15 * sum((tillage59, w, sPools59), 
+                        (v59_topsoilc_crop_previousstate(i2, sPools59, w, tillage59) -
+                         v59_topsoilc_crop_steadystate(i2, sPools59, w, tillage59))
+                        * sum(ct, i59_topsoilc_decay_max1(ct, i2, sPools59, w, tillage59)))
               ;
 
 *' with the carbon to nitrogen ratio of soils assumed to be 15:1.
