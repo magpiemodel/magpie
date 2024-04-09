@@ -24,8 +24,8 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.7.1 can be found at
-https://rse.pik-potsdam.de/doc/magpie/4.7.1/
+The model documentation for version 4.7.2 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.7.2/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen
@@ -65,31 +65,69 @@ When using a modified version of **MAgPIE** which is not identical to versions
 in the official main repository at https://github.com/magpiemodel add a suffix
 to the name to allow distinguishing versions (format **MAgPIE-suffix**).
 
-## SYSTEM REQUIREMENTS
+## HARDWARE REQUIREMENTS
 The model is quite resource heavy and works best on machines with high CPU clock
-and memory. Recommended is a machine with Windows, MacOS or Linux, with at least
-16GB of memory and a Core i7 CPU or similar.
+and memory. Recommended is a machine with at least 16GB of memory and a Core i7 CPU or similar.
 
 ## HOW TO INSTALL
-MAgPIE requires *GAMS* (https://www.gams.com/) including licenses for the
-solvers *CONOPT* and (optionally) *CPLEX* for its core calculations. As the model
-benefits significantly of recent improvements in *GAMS* and *CONOPT4* it is
-recommended to work with the most recent versions of both.
-Please make sure that the GAMS installation path is added to the PATH variable
-of the system.
+Commands formatted as `code` should generally be run in a terminal (PowerShell on Windows).
 
-In addition *R* (https://www.r-project.org/) is required for pre- and
-postprocessing and run management (needs to be added to the PATH variable
-as well).
+### List of Requirements
+- license for gams incl. CONOPT solver
+- gams >= 43.4.1
+- git >= 2.16.1
+- R >= 4.1.2 (+ matching Rtools on Windows)
+- pandoc >= 2.14.2
+- TeX >= 3.14159265
 
-Several R packages are required to run MAgPIE. Under Windows you first need to install
-Rtools (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
-variable. When running R from the MAgPIE folder for the first time all
-required packages are automatically installed into an isolated,
-project specific R package environment (renv).
-For post-processing model outputs *Latex* is required
-(https://www.latex-project.org/get/). To be seen by the model it also needs to
-added to the PATH variable of your system.
+### OS specific setup
+Choose your operating system and follow the instructions there. You can also
+install requirements differently (e.g. using only installers on Windows), in
+the end it is only important that all requirements are installed in a suitable
+version and added to the PATH environment variable, so MAgPIE can use them.
+
+#### Ubuntu
+1. make sure you have a gams license incl. the CONOPT solver
+1. [install gams](https://www.gams.com/46/docs/UG_UNIX_INSTALL.html)
+1. install git, R, and pandoc with `sudo apt install git r-base pandoc`
+1. install TinyTeX with `Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'`
+
+#### macOS
+1. make sure you have a gams license incl. the CONOPT solver
+1. [install gams](https://www.gams.com/46/docs/UG_MAC_INSTALL.html)
+1. install git, R, and pandoc with `brew install git r pandoc`
+1. install TinyTeX with `Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'`
+
+#### Windows
+1. make sure you have a gams license incl. the CONOPT solver
+1. [install gams](https://www.gams.com/46/docs/UG_WIN_INSTALL.html)
+1. [download .msi pandoc file](https://github.com/jgm/pandoc/releases/latest) and run installer (`choco install pandoc` did not work in testing)
+1. [install chocolatey](https://chocolatey.org/install)
+1. install git, rig (R installer), and tinytex with `choco install -y git rig tinytex`
+1. restart terminal
+1. install R and Rtools with `rig add release; rig add rtools`
+
+### check setup is complete
+- restart terminal
+- `gams` should print many lines including "The installed license is valid."
+- `git --version`
+- `Rscript --version`
+- `pandoc --version`
+- `tex --version`
+
+If any of these are not found: Find the path to that executable
+(gams/git/Rscript/pandoc/tex, on Windows ending in '.exe') and add it to your
+PATH environment variable. Search for a tutorial online if you are unsure how to do that.
+
+### download and run MAgPIE
+1. download MAgPIE with `git clone https://github.com/magpiemodel/magpie.git`
+1. go into the MAgPIE folder `cd magpie`
+1. start a MAgPIE run with `Rscript start.R`, first time: installs all required R packages (takes a while)
+1. choose "1" for a default run
+1. then select "1" for direct execution
+
+### troubleshooting
+Please check [this discussion](https://github.com/magpiemodel/magpie/discussions/650) for known problems and solutions and to report new problems you encounter while setting up MAgPIE.
 
 ## DOCKER
 To use Docker, copy your `gamslice.txt`
@@ -188,7 +226,7 @@ magpie@pik-potsdam.de
 Please contact magpie@pik-potsdam.de
 
 ## CITATION
-See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.7.1/#how-to-cite) in the model documentation for information how to cite the model.
+See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.7.2/#how-to-cite) in the model documentation for information how to cite the model.
 
 ## AUTHORS
 See list of authors in CITATION.cff

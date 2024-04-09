@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -32,8 +32,9 @@
  *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade) >= 1))
  + (sum(supreg(h2,i2),vm_supply(i2,k_trade))*sum(ct,f21_self_suff(ct,h2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade)) - v21_import_for_feasibility(h2,k_trade))
- $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1));
+ *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1))
+ - v21_import_for_feasibility(h2,k_trade);
 
 *' Upper bound for production.
 
