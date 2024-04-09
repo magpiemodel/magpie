@@ -40,7 +40,7 @@ cfg$output <- c("output_check",
 #######################
 # SCENARIO DEFINITION #
 #######################
-cfg <- setScenario(cfg, c("cc", "SSP2", "NDC")) # double check with Cornell team about NPi or NDC
+cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 
 ### BAU Scenario ###
 # SSP: SSP2
@@ -145,7 +145,7 @@ miti <- function(cfg) {
 # No climate change impacts
 noCC <- function(cfg) {
   # deactivate climate change impacts
-  cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+  cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
 
   return(cfg)
 }
@@ -290,47 +290,4 @@ cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 cfg <- rcp26(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-
-# Test Productivity
-
-# BAU_PROD #
-# Decomposition scenario of higher productivity
-cfg$title <- "Test_PROD_feed"
-cfg <- bau(cfg = cfg)
-# Livestock productivity (both efficiency and feed basket) follows SSP1
-# (mainly for ruminant products because SSP2 already high)
-cfg$gms$c70_feed_scen <- "ssp1"
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- "Test_PROD_feedSSP5"
-cfg <- bau(cfg = cfg)
-# Livestock productivity (both efficiency and feed basket) follows SSP1
-# (mainly for ruminant products because SSP2 already high)
-cfg$gms$c70_feed_scen <- "ssp5"
-start_run(cfg, codeCheck = FALSE)
-
-# BAU_PROD #
-# Decomposition scenario adds high productivity to BAU
-cfg$title <- "BAU_PROD2"
-cfg <- bau(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg$gms$c70_feed_scen <- "ssp5"
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- "Test_PROD_interestrate"
-cfg <- bau(cfg = cfg)
-# Higher endogenous productivity achieved through lower interest rates
-# representing more trust and therefore easier investments
-cfg$gms$s12_interest_lic <- 0.06
-cfg$gms$s12_interest_hic <- 0.04
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- "Test_PROD_veryLowinterest"
-cfg <- bau(cfg = cfg)
-# Higher endogenous productivity achieved through lower interest rates
-# representing more trust and therefore easier investments
-cfg$gms$s12_interest_lic <- 0.02
-cfg$gms$s12_interest_hic <- 0.02
 start_run(cfg, codeCheck = FALSE)
