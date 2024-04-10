@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -37,6 +37,9 @@ Flg_Prep = FALSE
 $offecho
 
 *' @code
+*' Solve statement is put twice for improved model results, 
+*' in particular for matching LHS and RHS of equations.
+solve magpie USING nlp MINIMIZING vm_cost_glo;
 solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' @stop
 
@@ -51,16 +54,19 @@ if (magpie.modelstat > 2,
 
   if (magpie.modelstat ne s80_modelstat_previter,
     display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
-    solve magpie USING nlp MINIMIZING vm_cost_glo ;
+    solve magpie USING nlp MINIMIZING vm_cost_glo;
+    solve magpie USING nlp MINIMIZING vm_cost_glo;
   elseif magpie.modelstat = s80_modelstat_previter,
       if(magpie.optfile = s80_optfile_previter,
             display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
         magpie.optfile = 2;
           solve magpie USING nlp MINIMIZING vm_cost_glo;
+          solve magpie USING nlp MINIMIZING vm_cost_glo;
           magpie.optfile   = s80_optfile;
     else
       display "Modelstat > 2 | Retry solve with CONOPT3";
       option nlp = conopt;
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       option nlp = conopt4;
       );

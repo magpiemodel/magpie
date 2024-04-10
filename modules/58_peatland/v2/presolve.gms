@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -46,7 +46,7 @@ else
 
 p58_scalingFactorRed(t,j,manPeat58) = 
     (pc58_peatland(j,manPeat58)/pc58_manLand(j,manPeat58))
-    $(pc58_peatland(j,manPeat58) > 1e-10 AND pc58_manLand(j,manPeat58) > 1e-10)
-    + 0$(pc58_peatland(j,manPeat58) <= 1e-10 OR pc58_manLand(j,manPeat58) <= 1e-10);
+    $(pc58_peatland(j,manPeat58) > 1e-8 AND pc58_manLand(j,manPeat58) > 1e-8)
+    + 0$(pc58_peatland(j,manPeat58) <= 1e-8 OR pc58_manLand(j,manPeat58) <= 1e-8);
 
 *' @stop

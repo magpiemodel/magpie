@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -24,6 +24,18 @@ source("config/default.cfg")
 
 # set title and date
 cfg$results_folder <- "output/:title::date:"
+cfg$force_download <- TRUE
+
+# Special outputs required for Deep Dive
+cfg$qos <- "standby_maxMem_dayMax"
+cfg$output <- c("output_check",
+               # "extra/highres", # do manually on last magpie run
+                "extra/disaggregation",
+               # "projects/FSEC_nitrogenPollution", # do manually on last (high-res) magpie run
+               # "projects/FSEC_water", # do manually on last (high-res) magpie run
+                "agmip_report",
+                # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
+                "rds_report")
 
 #######################
 # SCENARIO DEFINITION #
@@ -70,18 +82,16 @@ bau <- function(cfg) {
   cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi"      # default
 
   # Climate Change
-  cfg$input['cellular'] <- "WARNINGS2_rev4.95_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
-
+  cfg$input['cellular'] <- "rev4.99_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  
   return(cfg)
 }
 
 ### Diet component ##
-# Globally achieves EL2 diet by 2050               # To Do: Check implementation
+# Globally achieves EL2 diet by 2050
 diet <- function(cfg) {
   cfg$gms$s15_exo_diet  <- 3
-  cfg$gms$s15_alc_scen  <- 0               # No alcohol allowed as in the definition of EATLancet
-  cfg$gms$c15_kcal_scen <- "healthy_BMI"   # default: not necessary to set it again (To Do: remove)
-  cfg$gms$c15_EAT_scen  <- "FLX"           # default: not necessary to set it again (To Do: remove)
+  
   return(cfg)
 }
 
@@ -144,9 +154,9 @@ noCC <- function(cfg) {
 }
 
 ### RCP 2.6 ###
-# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU
+# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU using GFDL climate model.
 rcp26 <- function(cfg) {
-  cfg$input['cellular'] <- "WARNINGS4_rev4.95_h12_5033a1ce_cellularmagpie_c200_IPSL-CM6A-LR-ssp126_lpjml-8e6c5eb1.tgz"
+  cfg$input["cellular"] <- "rev4.99_h12_05fd702e_cellularmagpie_c200_GFDL-ESM4-ssp126_lpjml-8e6c5eb1.tgz"
   return(cfg)
 }
 

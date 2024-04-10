@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,18 +20,22 @@ sets
       PIK_LIN,
       PIK_NPI,
       PIK_OPT,
+      R21M42-SDP-NDC,
       R21M42-SDP-NPi,
       R21M42-SDP-PkBudg1000,
       R21M42-SDP-PkBudg1100,
       R21M42-SDP-PkBudg900,
+      R21M42-SSP1-NDC,
       R21M42-SSP1-NPi,
       R21M42-SSP1-PkBudg1100,
       R21M42-SSP1-PkBudg1300,
       R21M42-SSP1-PkBudg900,
+      R21M42-SSP2-NDC,
       R21M42-SSP2-NPi,
       R21M42-SSP2-PkBudg1100,
       R21M42-SSP2-PkBudg1300,
       R21M42-SSP2-PkBudg900,
+      R21M42-SSP5-NDC,
       R21M42-SSP5-NPi,
       R21M42-SSP5-PkBudg1100,
       R21M42-SSP5-PkBudg1300,

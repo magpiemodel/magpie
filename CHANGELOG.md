@@ -4,18 +4,51 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+
 ## [Unreleased]
 
 ### changed
+- **default.cfg** updated inputdata revision to 4.104 to have NDC scenarios included
+- **scripts** cfg$gms$s35_secdf_distribution <- 2 for FSEC
+- **scripts** modified output reporting for SEALS to account for forestry plantations
+- **config** updated FSEC scenario config for revision and included new calibration file (after cost fix in preprocessing)
+- **config** added switch for minimum timber yields
+- **21_trade** v21_import_for_feasibility now available for all coutnries, not just for importers
 - **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
+- **21_trade** Revision of trade module. Replaced `cfg$gms$s21_trade_bal_damper` in favour of `cfg$gms$k_import21`, which allows for additional imports to maintain feasibility
+- **scripts/calibration/landconversion_cost.R** Revised calibration approach for conversion costs for cropland. Information from all calibration time steps in combination with a lowpass filter is now used for deriving the calibration factors, which avoids the previous zickzack pattern. The previous option `cfg$damping_factor_landconversion_cost` has been removed in favor of `cfg$lowpass_filter_landconversion_cost`. 
 
 ### added
-- **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
-- **config** added `.codeCheck` with additonal configuration when running `gms::codeCheck`
-- **30_crop** Improved representation of cropland requiring relocation in response to introducing semi-natural habitat at the 1 km level based on high-resolution satellite imagery.
+- **14_yields** added minimum threshold for wood yields. Below this threshold, wood yields are set to zero.
+- **56_ghg_policy** added NDC scenarios
+- **60_bioenergy** added NDC scenarios 
 
 ### removed
-- **core**    removed no longer needed set `si` Suitability classes
+-
+
+### fixed
+- **52_carbon** removing jump of carbon content into fully grown forest when a forest changes from second-last age class to last age-class.
+- **80_optimization** duplicated solve statement in all instances to avoid non-matchting left- and right-hand sides of equations
+- **58_peatland** Equation `q58_scalingFactorExp` revised to avoid division by zero. 
+
+
+## [4.7.2] - 2024-04-02
+
+### changed
+- **21_trade** Revision of trade module. Replaced `cfg$gms$s21_trade_bal_damper` in favour of `cfg$gms$k_import21`, which allows for additional imports to maintain feasibility
+- **58_peatland** Threshold in equations changed from 1e-10 to 1e-8 to avoid rare divisions by zero
+- **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
+- **config** updated FSEC scenario config for revision and included new calibration file (after cost fix in preprocessing)
+- **scripts** modified output reporting for SEALS to account for forestry plantations
+
+### added
+- **30_crop** Improved representation of cropland requiring relocation in response to introducing semi-natural habitat at the 1 km level based on high-resolution satellite imagery.
+- **config** added `.codeCheck` with additonal configuration when running `gms::codeCheck`
+- **scripts** add additional BII reporting variables in FSDP_collect.R
+- **scripts** added a new validation_cell.R output script that generates a pdf with the comparison of magpie land use and crop type outputs with LUH and MAPSPAM historical data at cellular resolution.
+
+### removed
+- **core** removed no longer needed set `si` Suitability classes
 
 ### fixed
 - **52_carbon** i52_land_carbon_sink was not identical before 2020 for different RCPs. Fixed by setting to RCPBU until the year defined in sm_fix_cc.
@@ -839,7 +872,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.7.1...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.7.2...develop
+[4.7.2]: https://github.com/magpiemodel/magpie/compare/v4.7.1...v4.7.2
 [4.7.1]: https://github.com/magpiemodel/magpie/compare/v4.7.0...v4.7.1
 [4.7.0]: https://github.com/magpiemodel/magpie/compare/v4.6.11...v4.7.0
 [4.6.11]: https://github.com/magpiemodel/magpie/compare/v4.6.10...v4.6.11
