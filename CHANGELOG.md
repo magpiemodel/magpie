@@ -8,10 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **default.cfg** updated inputdata revision to 4.104 to have NDC scenarios included
+- **scripts** cfg$gms$s35_secdf_distribution <- 2 for FSEC
+- **scripts** modified output reporting for SEALS to account for forestry plantations
+- **config** updated FSEC scenario config for revision and included new calibration file (after cost fix in preprocessing)
+- **config** added switch for minimum timber yields
+- **21_trade** v21_import_for_feasibility now available for all coutnries, not just for importers
+- **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
+- **21_trade** Revision of trade module. Replaced `cfg$gms$s21_trade_bal_damper` in favour of `cfg$gms$k_import21`, which allows for additional imports to maintain feasibility
+- **scripts/calibration/landconversion_cost.R** Revised calibration approach for conversion costs for cropland. Information from all calibration time steps in combination with a lowpass filter is now used for deriving the calibration factors, which avoids the previous zickzack pattern. The previous option `cfg$damping_factor_landconversion_cost` has been removed in favor of `cfg$lowpass_filter_landconversion_cost`. 
 - **default.cfg** update additional data to rev4.50
 - **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
 
 ### added
+- **14_yields** added minimum threshold for wood yields. Below this threshold, wood yields are set to zero.
+- **56_ghg_policy** added NDC scenarios
+- **60_bioenergy** added NDC scenarios 
 - **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth` 
 - **default.cfg** added early afforestation constraint `cfg$gms$s32_max_aff_cell_2025` 
 - **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing` 
@@ -31,7 +43,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **52_carbon** removing jump of carbon content into fully grown forest when a forest changes from second-last age class to last age-class.
+- **80_optimization** duplicated solve statement in all instances to avoid non-matchting left- and right-hand sides of equations
+- **58_peatland** Equation `q58_scalingFactorExp` revised to avoid division by zero. 
+
 
 ## [4.7.2] - 2024-04-02
 

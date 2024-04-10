@@ -487,7 +487,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
                      restart = cfg$restart_landconversion_cost,
                      calib_accuracy = cfg$calib_accuracy_landconversion_cost,
-                     damping_factor = cfg$damping_factor_landconversion_cost,
+                     lowpass_filter = cfg$lowpass_filter_landconversion_cost,
                      cost_max = cfg$cost_calib_max_landconversion_cost,
                      cost_min = cfg$cost_calib_min_landconversion_cost,
                      calib_file = land_calib_file,
