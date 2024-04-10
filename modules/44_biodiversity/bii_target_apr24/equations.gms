@@ -26,3 +26,4 @@
 
  q44_cost(i2) .. sum(cell(i2,j2), vm_cost_bv_loss(j2)) =e= 
           sum(biome44, v44_bii_missing(i2,biome44)) * s44_cost_bii_missing;
+
