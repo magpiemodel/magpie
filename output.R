@@ -34,7 +34,7 @@ library(gms)
 
 runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   choose_folder <- function(title="Please choose a folder") {
-    dirs <- c(Sys.glob("./output/*/full.gms"), Sys.glob("./output/HRc*/*/full.gms"))
+    dirs <- c(Sys.glob("./output/*/full.gms"), Sys.glob("./output/HR*/*/full.gms"))
     dirs <- sub("^\\./output/", "", dirs)
     dirs <- sub("/full\\.gms$", "", dirs)
     dirs <- sort(dirs)
