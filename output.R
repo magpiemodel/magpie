@@ -34,23 +34,9 @@ library(gms)
 
 runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   choose_folder <- function(title="Please choose a folder") {
-    # try to use find because it is significantly quicker than list.dirs
-    tmp <- try({
-      suppressWarnings({
-        system("find ./output -path './output/*/renv' -prune -o -name 'full.gms'",
-               intern = TRUE,  ignore.stderr = TRUE)
-      })
-    }, silent = TRUE)
-    if("try-error" %in% class(tmp) || length(tmp)==0) {
-      tmp <- base::list.dirs("./output/",recursive=TRUE)
-      dirs <- NULL
-      for (i in seq_along(tmp)) {
-        if (file.exists(file.path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
-      }
-    } else {
-      tmp <- grep("/full.gms$", tmp, value = TRUE)
-      dirs <- sub("full.gms","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
-    }
+    dirs <- c(Sys.glob("./output/*/full.gms"), Sys.glob("./output/HRc*/*/full.gms"))
+    dirs <- sub("^\\./output/", "", dirs)
+    dirs <- sub("/full\\.gms$", "", dirs)
     dirs <- sort(dirs)
     dirs <- c("all",dirs)
     cat("\n",title,":\n", sep="")
