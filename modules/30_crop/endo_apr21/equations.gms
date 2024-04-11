@@ -6,39 +6,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' The total land requirements for cropland are calculated as
-*' the sum of crop and water supply type specific land requirements:
 
- q30_cropland(j2)  ..
-   sum((kcr,w), vm_area(j2,kcr,w)) + vm_fallow(j2) + vm_treecover_area(j2) =e= vm_land(j2,"crop");
+*' Agricultural production is calculated by multiplying the area under
+*' production with corresponding yields. Production from rainfed and irrigated
+*' areas is summed up:
 
-*' We assume that crop production can only take place on suitable cropland area.
-*' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
-*' from cropland production that have a low suitability, e.g. due to steep slopes,
-*' to estimate the available cropland area. The cultivated area therefore has
-*' to be smaller than the available cropland area. Moreover, the available cropland
-*' can be reduced by constraining the cropland area in favour of other land types,
-*' in order to increase compositional heterogeneity of land types at the cell level.
+ q30_prod(j2,kcr) ..
+  vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
 
- q30_avl_cropland(j2) ..
-   vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
-
-*' The semi-natural land constraint in cropland areas for sustaining critical regulating NCP
-*' for agricultural production is added on top of land conserved for other reasons
-*' (e.g. conservation of intact ecosystems or protection of biodiversity hotspots).
- q30_land_snv(j2) ..
-            sum(land_snv, vm_land(j2,land_snv))
-            =g=
-            sum(ct, p30_snv_shr(ct,j2)) * vm_land(j2,"crop")
-          + sum((ct,land_snv,consv_type), pm_land_conservation(ct,j2,land_snv,consv_type));
-
-*' The semi-natural vegetation constraint for cropland areas has been suggested at the per square
-*' kilometer scale. The amount of cropland requiring relocation has therefore been derived from
-*' exogeneous high-resolution land cover information from the Copernicus Global Land Service
-*' (@buchhorn_copernicus_2020).
-
- q30_land_snv_trans(j2) ..
-         sum(land_snv, vm_lu_transitions(j2,"crop",land_snv)) =g= sum(ct, p30_snv_relocation(ct,j2));
 
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect
@@ -49,6 +24,7 @@
    sum((crp_kcr30(crpmax30,kcr)), vm_area(j2,kcr,w)) =l=
      sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_max_shr(crpmax30);
 
+
 *' On the other hand, it reflects boundary conditions such as minimum self
 *' sufficiency constraints:
 
@@ -56,26 +32,26 @@
    sum((crp_kcr30(crpmin30,kcr)), vm_area(j2,kcr,w)) =g=
      sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_min_shr(crpmin30);
 
-*' Agricultural production is calculated by multiplying the area under
-*' production with corresponding yields. Production from rainfed and irrigated
-*' areas is summed up:
 
- q30_prod(j2,kcr) ..
-  vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
+*' Bioenergy tree minimum share
+q30_betr_shr(j2) ..
+  sum(w, vm_area(j2,"betr",w)) =g=
+  sum(ct, p30_betr_min_shr(ct,j2)) * vm_land(j2,"crop");
 
-*' The carbon content of the above ground carbon pools are calculated as a total
-*' for all cropland :
 
- q30_carbon(j2,ag_pools,stockType) ..
-  vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
-  m_carbon_stock(vm_land,fm_carbon_density,"crop") + vm_treecover_carbon(j2,ag_pools,stockType);
+*' The carbon stocks of the above ground carbon pools are calculated based on croparea and related carbon density.
+
+ q30_carbon(j2,ag_pools) ..
+  vm_carbon_stock_croparea(j2,ag_pools) =e=
+            sum((kcr,w), vm_area(j2,kcr,w)) * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools));
+
 
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
+
  q30_bv_ann(j2,potnatveg) .. vm_bv(j2,"crop_ann",potnatveg)
           =e=
           sum((crop_ann30,w), vm_area(j2,crop_ann30,w)) * fm_bii_coeff("crop_ann",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
  q30_bv_per(j2,potnatveg) .. vm_bv(j2,"crop_per",potnatveg)
           =e=
-          (vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
-          * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          sum((crop_per30,w), vm_area(j2,crop_per30,w)) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);

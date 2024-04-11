@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-table f29_forestageclasses(j,ac_poulter) Poulter age-class area in each cluster (1)
+table f28_forestageclasses(j,ac_poulter) Poulter age-class area in each cluster (1)
 $ondelim
-$include "./modules/29_ageclass/input/forestageclasses.cs3"
+$include "./modules/28_ageclass/input/forestageclasses.cs3"
 $offdelim
 ;

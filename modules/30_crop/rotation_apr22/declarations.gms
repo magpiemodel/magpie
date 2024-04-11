@@ -6,39 +6,24 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p30_avl_cropland(t,j)                  Total available land for crop cultivation (mio. ha)
- p30_country_snv_weight(i)              SNV policy country weight per region (1)
- p30_snv_shr(t,j)                       Share of semi-natural vegetation in cropland areas (1)
- i30_snv_relocation_target(j)           Overall cropland area that requires relocation due SNV policy (mio. ha)
- p30_snv_relocation(t,j)                Cropland area that is actually relocated during time step (mio. ha)
- p30_max_snv_relocation(t,j)            Maximum cropland relocation during time step (mio. ha)
- p30_country_dummy(iso)                 Dummy parameter indicating whether country is affected by selected cropland policy (1)
- i30_avl_cropland_iso(iso)              Available land area for cropland at ISO level (mio. ha)
  i30_rotation_max_shr(t_all,rotamax30)  Maximum share of a certain crop group on cropland (ha per ha)
  i30_rotation_min_shr(t_all,rotamin30)  Minimum share of a certain crop group on cropland (ha per ha)
- p30_snv_scenario_fader(t_all)          SNV scenario fader (1)
  p30_rotation_scenario_fader(t_all)     Crop rotation scenario fader (1)
 ;
 
 positive variables
-* Fallow land is cropland which is temporarily fallow. Croparea+fallow=cropland
- vm_fallow(j)                           Fallow land (mio. ha)
  vm_area(j,kcr,w)                       Agricultural production area (mio. ha)
  vm_rotation_penalty(i)                 Penalty for violating rotational constraints (USD05MER)
 ;
 
 equations
- q30_cropland(j)                        Total cropland calculation (mio. ha)
- q30_avl_cropland(j)                    Available cropland constraint (mio. ha)
  q30_rotation_max(j,rotamax30)          Local maximum rotational constraints (mio. ha)
  q30_rotation_min(j,rotamin30)          Local minimum rotational constraints (mio. ha)
  q30_rotation_max_irrig(j,rotamax30)    Local maximum rotational constraints (mio. ha)
  q30_prod(j,kcr)                        Production of cropped products (mio. tDM)
- q30_carbon(j,ag_pools,stockType)       Cropland above ground carbon content calculation (mio. tC)
+ q30_carbon(j,ag_pools)                 Croplarea above ground carbon content calculation (mio. tC)
  q30_bv_ann(j,potnatveg)                Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)                Biodiversity value of perennial cropland (mio. ha)
- q30_land_snv(j)                        Land constraint for the SNV policy in cropland areas (mio. ha)
- q30_land_snv_trans(j)                  Land transition constraint for SNV policy in cropland areas (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

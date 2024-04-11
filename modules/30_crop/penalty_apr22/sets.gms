@@ -84,12 +84,4 @@ sets
    crop_per30(kcr) perennial crops
     / oilpalm, begr, sugr_cane, betr /
 
-   marginal_land30 Marginal land scenarios
-    / all_marginal, q33_marginal, no_marginal  /
-
-   policy_target30 Target year for cropland policy
-   / none, by2030, by2050 /
-
-   relocation_target30 Cropland requiring relocation based on different SNV targets
-   / SNV20TargetCropland, SNV50TargetCropland /
 ;

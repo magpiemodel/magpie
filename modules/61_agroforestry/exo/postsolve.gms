@@ -5,7 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pc61_treecover(j,ac) = v61_treecover.l(j,ac);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_agroforestry(t,j,"marginal")                     = vm_cost_agroforestry.m(j);

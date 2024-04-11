@@ -5,10 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pm_land_start(j,land) = f10_land("y1995",j,land);
-pm_land_hist(t_ini10,j,land) = f10_land(t_ini10,j,land);
+sets
 
-pcm_land(j,land) = pm_land_start(j,land);
-vm_land.l(j,land) = pcm_land(j,land);
+   marginal_land30 Marginal land scenarios
+    / all_marginal, q33_marginal, no_marginal  /
 
-*** EOF pre.gms ***
+   policy_target30 Target year for cropland policy
+   / none, by2030, by2050 /
+
+   relocation_target30 Cropland requiring relocation based on different SNV targets
+   / SNV20TargetCropland, SNV50TargetCropland /
+
+;

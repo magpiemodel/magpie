@@ -31,13 +31,3 @@ $ondelim
 $include "./modules/10_land/input/avl_land_t_iso.cs3"
 $offdelim
 ;
-
-********* Cropland tree cover *******************************************
-
-parameter f10_treecover(j) Tree cover on cropland in 2019 (mio. ha)
-/
-$ondelim
-$include "./modules/10_land/input/CroplandTreecover.cs2"
-$offdelim
-/
-;
