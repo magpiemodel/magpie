@@ -655,12 +655,7 @@ var_reg <- c(indicators_main,
              "Health|Years of life lost|Disease|+|Cancer",
              "Health|Years of life lost|Disease|+|Type-2 Diabetes",
              "Health|Years of life lost|Disease|+|Respiratory Disease",
-             "Health|Percent change in Years of life lost|Disease",
-             "Health|Percent change in Years of life lost|Disease|+|Congenital Heart Disease",
-             "Health|Percent change in Years of life lost|Disease|+|Stroke",
-             "Health|Percent change in Years of life lost|Disease|+|Cancer",
-             "Health|Percent change in Years of life lost|Disease|+|Type-2 Diabetes",
-             "Health|Percent change in Years of life lost|Disease|+|Respiratory Disease"
+             "Health|Attributable deaths|Disease"
 )
 var_reg <- unique(var_reg)
 
