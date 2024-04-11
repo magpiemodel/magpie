@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -37,9 +37,9 @@ j2(j) = no;
 loop(h,
   h2(h) = yes;
   i2(i)$supreg(h,i) = yes;
-    loop(i2, j2(j)$cell(i2,j) = yes);
-  solve magpie USING nlp MINIMIZING vm_cost_glo ;
-    h2(h) = no;
+  loop(i2, j2(j)$cell(i2,j) = yes);
+  solve magpie USING nlp MINIMIZING vm_cost_glo;
+  h2(h) = no;
   i2(i) = no;
   j2(j) = no;
   p80_handle(h) = magpie.handle;
@@ -69,7 +69,7 @@ repeat
         display s80_counter;
         display magpie.modelStat;
 
-      if((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2 AND p80_modelstat(t,h) ne 7),
+      if ((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2),
           display "No feasible solution found. Writing LST file.";
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
@@ -79,17 +79,17 @@ repeat
 
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
-    if(p80_modelstat(t,h) <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
+    if (p80_modelstat(t,h) <= 2,
         display "Model status <= 2. Handle cleared.";
         s80_resolve = 0;
         p80_handle(h) = 0;
       );
 
-    if(s80_resolve = 1,
+    if (s80_resolve = 1,
       display "Resolve"
-      if(p80_modelstat(t,h) ne s80_modelstat_previter,
+      if (p80_modelstat(t,h) ne s80_modelstat_previter,
               display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
-          solve magpie USING nlp MINIMIZING vm_cost_glo ;
+          solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_modelstat(t,h) = s80_modelstat_previter,
               if(magpie.optfile = s80_optfile_previter,
               display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";

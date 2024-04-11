@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -120,7 +120,11 @@ highres <- function(cfg) {
   tmp[1]    <- paste0(tmp[1], paste0("HR", res))
   cfg$title <- paste(tmp, collapse = "_")
 
-  cfg$results_folder <- paste0("output/HR", res, "/:title:")
+  if(!is.null(cfg$results_folder_highres)) {
+    cfg$results_folder <- file.path(cfg$results_folder_highres,":title:")
+  } else {
+    cfg$results_folder <- paste0("output/HR", res, "/:title:")
+  }
   cfg$force_replace  <- TRUE
   cfg$recalc_npi_ndc <- TRUE
 
@@ -141,6 +145,12 @@ highres <- function(cfg) {
   cfg$gms$optimization <- "nlp_par"
   cfg$gms$s15_elastic_demand <- 0
 
+  #get exogenous bioenergy demand and GHG prices from c200 run because these files may have been overwritten
+  write.magpie(readGDX(gdx,"f56_pollutant_prices_coupling"),"modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
+  write.magpie(readGDX(gdx,"f56_pollutant_prices_emulator"),"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
+  write.magpie(readGDX(gdx,"f60_bioenergy_dem_coupling"),"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+  write.magpie(readGDX(gdx,"f60_bioenergy_dem_emulator"),"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
+  
   #get regional afforestation patterns from low resolution run with c200
   aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)
   #Take away initial NDC area for consistency with global afforestation limit

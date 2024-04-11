@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -52,11 +52,6 @@ Elseif s15_milk_share_fadeout_india = 1,
   i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
 );
 
-display i15_milk_share_fadeout_india;
-
-
-
-
 
 
 * ###### Exogenous food waste and diet scenarios as well as food substitution scenarios
@@ -98,7 +93,7 @@ i15_exo_foodscen_fader(t,i) = (1-f15_food_substitution_fader(t,"%c15_exo_foodsce
 
 
 * initial prices in $US per Kcal
-i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
-                                                                                  / (f15_nutrition_attributes("y1995",kfo,"kcal")*10**6);
+i15_prices_initial_kcal(iso,kfo)$(fm_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
+                                                                                  / (fm_nutrition_attributes("y1995",kfo,"kcal")*10**6);
 p15_prices_kcal(t,iso,kfo,"iter1")=i15_prices_initial_kcal(iso,kfo);
 p15_convergence_measure(t,iter15)=NA;

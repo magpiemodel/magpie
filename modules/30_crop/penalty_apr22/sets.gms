@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -89,4 +89,7 @@ sets
 
    policy_target30 Target year for cropland policy
    / none, by2030, by2050 /
+
+   relocation_target30 Cropland requiring relocation based on different SNV targets
+   / SNV20TargetCropland, SNV50TargetCropland /
 ;

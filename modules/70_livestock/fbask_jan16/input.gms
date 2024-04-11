@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -76,13 +76,13 @@ $include "./modules/70_livestock/fbask_jan16/input/f70_hist_cap_share.csv"
 $offdelim
 ;
 
-table f70_hist_factor_costs_livst(i,kli) Historical factor costs in livestock production (mio. USD05MER)
+table f70_hist_factor_costs_livst(t_all,i,kli) Historical factor costs in livestock production (mio. USD05MER)
 $ondelim
-$include "./modules/70_livestock/fbask_jan16/input/f70_hist_factor_costs_livst.csv"
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_factor_costs_livst.cs3"
 $offdelim
 ;
 
-table f70_hist_prod_livst(i,kli,attributes) Historical production quantity of livestock products (mio. t)
+table f70_hist_prod_livst(t_all,i,kli,attributes) Historical production quantity of livestock products (mio. t)
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_hist_prod_livst.cs3"
 $offdelim

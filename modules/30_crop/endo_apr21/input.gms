@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -23,8 +23,10 @@ $setglobal c30_rotation_constraints  on
 scalars
 s30_snv_shr                     Share of available cropland that is witheld for other land cover types (1) / 0 /
 s30_snv_shr_noselect            Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_snv_scenario_start          SNV scenario start year     / 2020 /
+s30_snv_scenario_start          SNV scenario start year       / 2020 /
 s30_snv_scenario_target         SNV scenario target year      / 2030 /
+s30_snv_relocation_data_x1      First reference value in SNV target cropland data (1) / 0.2 /
+s30_snv_relocation_data_x2      Second reference value in SNV target cropland data (1) / 0.5 /
 s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
 ;
@@ -113,3 +115,10 @@ $include "./modules/30_crop/endo_apr21/input/avl_cropland_iso.cs3"
 $offdelim
 ;
 
+********* SNV TARGET CROPLAND *******************************************
+
+table f30_snv_target_cropland(j,relocation_target30) Cropland in 2019 requiring relocation due to SNV policy (mio. ha)
+$ondelim
+$include "./modules/30_crop/endo_apr21/input/SNVTargetCropland.cs3"
+$offdelim
+;

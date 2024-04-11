@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -29,7 +29,7 @@
 *' For harvesting decisions we assume that land owners stick to their establishment decision,
 *' e.g. if a plantation has been established with a rotation length of 30 years
 *' it will be harvested after 30 years, even so the rotation length in the prevailing
-*' time step, used for establishment, is shorter or longer.
+*' time step, used for establishment, is shorter or longer. See @mishra_forestry_2021 for more details.
 
 *' @limitations Rotation lengths for timber plantations are not endogenous.
 

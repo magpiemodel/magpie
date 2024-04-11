@@ -1,6 +1,16 @@
-title;start;mag_scen;co2tax_name;co2tax_2025
-2;1;SSP2,NPI;Base;C_SSP2-Base-rem-5
-3;0;SSP2,NDC;NDC;C_SSP2-NDC-rem-5
-4;0;SSP2,NDC;PkBudg1300;C_SSP2-PkBudg1300-rem-5
-5;0;SSP2,NDC;PkBudg1100;C_SSP2-PkBudg1100-rem-5
-5;0;SSP2,NDC;PkBudg900;C_SSP2-PkBudg900-rem-5
+start;mag_scen;ghgtax_name;mifname;no_ghgprices_land_until
+0;SDP-MC|NPI|nocc_hist;Base; C_SDP_MC-Base;y2150
+0;SDP-MC|NDC|nocc_hist;NDC; C_SDP_MC-NDC;y2150
+0;SDP-MC|NDC|nocc_hist;PkBudg500; C_SDP_MC-PkBudg500;y2030
+0;SSP1|NPI|nocc_hist;Base; C_SSP1-Base;y2150
+0;SSP1|NDC|nocc_hist;NDC; C_SSP1-NDC;y2150
+0;SSP1|NDC|nocc_hist;PkBudg1150; C_SSP1-PkBudg1150;y2030
+0;SSP1|NDC|nocc_hist;PkBudg500; C_SSP1-PkBudg500;y2030
+0;SSP2|NPI|nocc_hist;Base; C_SSP2EU-Base;y2150
+0;SSP2|NDC|nocc_hist;NDC; C_SSP2EU-NDC;y2150
+1;SSP2|NDC|nocc_hist;PkBudg1150; C_SSP2EU-PkBudg1150;y2030
+0;SSP2|NDC|nocc_hist;PkBudg500; C_SSP2EU-PkBudg500;y2030
+0;SSP5|NPI|nocc_hist;Base; C_SSP5-Base;y2150
+0;SSP5|NDC|nocc_hist;NDC; C_SSP5-NDC;y2150
+0;SSP5|NDC|nocc_hist;PkBudg1150; C_SSP5-PkBudg1150;y2030
+0;SSP5|NDC|nocc_hist;PkBudg500; C_SSP5-PkBudg500;y2030

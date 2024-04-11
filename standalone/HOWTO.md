@@ -4,7 +4,7 @@
 
 Standalone models can be used to run simulations which only require a subset of modules coming with the model. It can also be used to run a module isolated from the rest of the code.
 
-A new standalone model is created by copying the template.gms within the standalone folder to a gms file with the name of the new model. The new model file needs to include all modules relevant for the calculation (done by adding a line for each module in the "MODULE SETUP" section) and make sure that all interfaces of the modules are properly adressed. Especially, interfaces to modules not part of that reduced model need to be fed with information coming from that new model file.
+A new standalone model is created by copying the template.gms within the standalone folder to a gms file with the name of the new model. The new model file needs to include all modules relevant for the calculation (done by adding a line for each module in the "MODULE SETUP" section) and make sure that all interfaces of the modules are properly addressed. Especially, interfaces to modules not part of that reduced model need to be fed with information coming from that new model file.
 
 The standalone model file needs to follow the coding etiquette as any other file, meaning that it is only allowed to interact through interfaces with the modules. This is necessary to allow the reduced model to work with all realizations of a coupled module.
 

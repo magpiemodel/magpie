@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,7 +9,10 @@ parameters
  p30_avl_cropland(t,j)              Total available land for crop cultivation (mio. ha)
  p30_country_snv_weight(i)          SNV policy country weight per region (1)
  p30_snv_shr(t,j)                   Share of semi-natural vegetation in cropland areas (1)
- p30_country_dummy(iso)             Dummy parameter indicating whether country is affected by selected SNV policy (1)
+ i30_snv_relocation_target(j)       Overall cropland area that requires relocation due to SNV policy (mio. ha)
+ p30_snv_relocation(t,j)            Cropland area that is actually relocated during time step (mio. ha)
+ p30_max_snv_relocation(t,j)        Maximum cropland relocation during time step (mio. ha)
+ p30_country_dummy(iso)             Dummy parameter indicating whether country is affected by selected cropland policy (1)
  i30_avl_cropland_iso(iso)          Available land area for cropland at ISO level (mio. ha)
  p30_snv_scenario_fader(t_all)      SNV scenario fader (1)
  p30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
@@ -32,6 +35,7 @@ equations
  q30_bv_ann(j,potnatveg)            Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)            Biodiversity value of perennial cropland (mio. ha)
  q30_land_snv(j)                    Land constraint for the SNV policy in cropland areas (mio. ha)
+ q30_land_snv_trans(j)              Land transition constraint for SNV policy in cropland areas (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -48,6 +52,7 @@ parameters
  oq30_bv_ann(t,j,potnatveg,type)          Biodiversity value of annual cropland (mio. ha)
  oq30_bv_per(t,j,potnatveg,type)          Biodiversity value of perennial cropland (mio. ha)
  oq30_land_snv(t,j,type)                  Land constraint for the SNV policy in cropland areas (mio. ha)
+ oq30_land_snv_trans(t,j,type)            Land transition constraint for SNV policy in cropland areas (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

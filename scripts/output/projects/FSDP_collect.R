@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Collect reg, iso and grid level data from multiple FSDP runs
+# description: Collect reg, iso and grid level data from multiple FSDP runs (requires LR or HR runs)
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
@@ -137,12 +137,12 @@ var_reg <- c(indicators_main,
              ### Validation
              "Biodiversity|Agricultural landscape intactness",
              "Biodiversity|Biodiversity hotspot intactness",
-             "Biodiversity|Biodiversity hotspot intactness (unitless)",
              "Biodiversity|BII in areas outside Biodiversity Hotspots, Intact Forest & Cropland Landscapes",
              "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
              "Biodiversity|Biodiversity Hotspot BII",
+             "Biodiversity|BII in 30x30 Landscapes",
              "Biodiversity|Cropland Landscapes BII",
-             "Key Biodiversity Area BII",
+             "Biodiversity|Key Biodiversity Area BII",
              "Biodiversity|Inverted Simpson crop area diversity index",
              "Population",
              "Income",
@@ -166,6 +166,7 @@ var_reg <- c(indicators_main,
              "Production|+|Livestock products",
              "Production|+|Secondary products",
              "Production|+|Pasture",
+             "Production|+|Bioenergy crops",
              "Timber|Volumetric|Production|Roundwood",
              "Resources|Land Cover",
              "Resources|Land Cover|+|Cropland",
@@ -199,21 +200,24 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Tropical roots",
              "Resources|Land Cover|Cropland|Croparea|+|Bioenergy crops",
              "Productivity|Landuse Intensity Indicator Tau",
-             "Productivity|Feed conversion efficiency|Ruminant meat and dairy",
-             "Productivity|Feed conversion efficiency|Monogastric meat",
-             "Productivity|Feed conversion efficiency|Poultry meat and eggs",
-             "Productivity|Feed conversion efficiency|+|Cereal Intensity",
-             "Productivity|Feed conversion efficiency|+|Oilcrop intensity",
-             "Productivity|Feed conversion efficiency|+|Pasture intensity",
-             "Productivity|Yield by physical area|+|Crops",
-             "Productivity|Yield by physical area|Crops|+|Cereals",
-             "Productivity|Yield by physical area|Crops|+|Oil crops",
-             "Productivity|Yield by physical area|Crops|+|Sugar crops",
-             "Productivity|Yield by physical area|Crops|+|Other crops",
-             "Productivity|Yield by physical area|Crops|Other crops|+|Fruits Vegetables Nuts",
-             "Productivity|Yield by physical area|+|Pasture",
-             "Productivity|Yield by physical area|+|Bioenergy crops",
-             "Productivity|Yield by physical area|+|Forage",
+             "Productivity|Feed conversion",
+             "Productivity|Feed conversion|Ruminant meat and dairy",
+             "Productivity|Feed conversion|Poultry meat and eggs",
+             "Productivity|Feed conversion|Monogastric meat",
+             "Productivity|Feed conversion|+|Cereal Intensity",
+             "Productivity|Feed conversion|+|Oilcrop intensity",
+             "Productivity|Feed conversion|+|Pasture intensity",
+             "Productivity|Roughage share|Ruminant meat and dairy",
+             "Productivity|Pasture share|Ruminant meat and dairy",
+             "Productivity|Yield by physical area|Crops",
+             "Productivity|Yield by physical area|Crops|Cereals",
+             "Productivity|Yield by physical area|Crops|Oil crops",
+             "Productivity|Yield by physical area|Crops|Sugar crops",
+             "Productivity|Yield by physical area|Crops|Other crops",
+             "Productivity|Yield by physical area|Crops|Other crops|Fruits Vegetables Nuts",
+             "Productivity|Yield by physical area|Pasture",
+             "Productivity|Yield by physical area|Bioenergy crops",
+             "Productivity|Yield by physical area|Forage",
              "Resources|Nitrogen|Cropland Budget|Inputs",
              "Resources|Nitrogen|Cropland Budget|Inputs|+|Fertilizer",
              "Resources|Nitrogen|Cropland Budget|Inputs|+|Biological Fixation Symbiotic Crops",
@@ -230,6 +234,7 @@ var_reg <- c(indicators_main,
              "Resources|Water|Withdrawal|Agriculture",
              "Resources|Land Cover|Cropland|Area equipped for irrigation",
              "Value|Bioeconomy Demand",
+             "Production|Bioenergy|2nd generation|++|Bioenergy crops",
              ### Maps
              "Costs",
              "Population",
@@ -469,6 +474,8 @@ var_reg <- c(indicators_main,
              "Resources|Nitrogen|Pollution|Surplus|+|Non-agricultural land",
              "Resources|Water|Withdrawal|Agriculture",
 
+             "Resources|Nitrogen|Cropland Budget|Soil Nitrogen Uptake Efficiency",
+
              "Emissions|CH4_GWP*AR6|Land",
              "Emissions|CH4_GWP*AR6|Land|+|Agriculture",
              "Emissions|CH4_GWP*AR6|Land|+|Biomass Burning",
@@ -695,7 +702,12 @@ for (i in 1:length(outputdir)) {
       a <- droplevels(a)
       iso <- rbind(iso, a)
     } else missing <- c(missing,rep)
+  }
 
+  scen <- c("BAU", "FSDP", "SSP2fsdp")
+  #scen <- c("ERROR")
+  thisScen <- unlist(strsplit(cfg$title, "_"))[3]
+  if (thisScen %in% scen) {
     ###Grid level outputs
     y     <- NULL
 
@@ -705,7 +717,6 @@ for (i in 1:length(outputdir)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "BII (index)"
       getSets(a,fulldim = F)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,nc_file)
 
@@ -716,12 +727,13 @@ for (i in 1:length(outputdir)) {
                   "SSP2fsdp" = "ssp245",
                   "Invalid case")
 
-    nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v3_04-05-23/FSEC_GlobalSurfaceTempPerRCP_v3_04-05-23.mz"
+
+    nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24/FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.mz"
+
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, rcp]
       getNames(a) <- "Global Surface Temperature (C)"
       getSets(a, fulldim = FALSE)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y, a)
     } else missing <- c(missing, nc_file)
 
@@ -731,7 +743,6 @@ for (i in 1:length(outputdir)) {
       a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
       getNames(a) <- "Shannon crop diversity (index)"
       getSets(a,fulldim = F)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,nc_file)
 
@@ -741,7 +752,6 @@ for (i in 1:length(outputdir)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- paste0(getNames(a)," (Mha)")
       getSets(a,fulldim = F)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,nc_file)
 
@@ -752,7 +762,6 @@ for (i in 1:length(outputdir)) {
       land_hr_shr <- a #needed for croparea shares
       getNames(a) <- paste0(getNames(a)," (area share)")
       getSets(a,fulldim = F)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,nc_file)
 
@@ -766,7 +775,6 @@ for (i in 1:length(outputdir)) {
       a[a < 0] <- 0
       getNames(a) <- paste0("Cropland|",getNames(a)," (area share)")
       getSets(a,fulldim = F)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,nc_file)
 
@@ -776,7 +784,6 @@ for (i in 1:length(outputdir)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "nutrientSurplus (kg N per ha)"
       getSets(a,fulldim = F)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing, nc_file)
 
@@ -786,7 +793,6 @@ for (i in 1:length(outputdir)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water stress and violations"
       getSets(a, fulldim = FALSE)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y, a)
     } else missing <- c(missing, nc_file)
 
@@ -795,7 +801,6 @@ for (i in 1:length(outputdir)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water environmental flow violations volume (km3)"
       getSets(a, fulldim = FALSE)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y, a)
     } else missing <- c(missing, nc_file)
 
@@ -804,7 +809,6 @@ for (i in 1:length(outputdir)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water environmental flow violations volume (m3/ha)"
       getSets(a, fulldim = FALSE)[3] <- "variable"
-      a <- addLocation(a)
       y <- mbind(y, a)
     } else missing <- c(missing, nc_file)
 
@@ -837,15 +841,16 @@ renameScenario <- function(rep) {
   return(rep)
 }
 
-reg  <- renameScenario(reg)
-iso  <- renameScenario(iso)
-grid <- renameScenario(grid)
-
 message("Saving rds files ...")
 
+reg  <- renameScenario(reg)
 saveRDS(reg,  file = file.path("output", paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
+iso  <- renameScenario(iso)
 saveRDS(iso,  file = file.path("output", paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
-saveRDS(grid, file = file.path("output", paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
+if(!is.null(grid)){
+  grid <- renameScenario(grid)
+  saveRDS(grid, file = file.path("output", paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
+}
 
 # save i_to_iso mapping
 gdx     <- file.path(outputdir[1], "fulldata.gdx")

@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -42,28 +42,27 @@ cfg$gms$c_timesteps <- timeSteps
 
 
 # Reference and Policy run for SSP1, SSP2 and SSP5
-for(ssp in c("SSP1","SSP2","SSP5")) {
+for(ssp in c("SSP1","SSP2EU","SSP5")) {
 
   cfg$title <- .title(cfg, paste(ssp,"Ref",sep="-"))
   cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
   cfg$gms$c56_mute_ghgprices_until <- "y2150"
-  cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NPi")
-  cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-NPi")
+  cfg$gms$c56_pollutant_prices <- paste0("R32M46-",ssp,"-NPi")
+  cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-",ssp,"-NPi")
   start_run(cfg, codeCheck = FALSE)
 
   cfg$title <- .title(cfg, paste(ssp,"NDC",sep="-"))
   cfg <- setScenario(cfg,c(ssp,"NDC","rcp4p5"))
   cfg$gms$c56_mute_ghgprices_until <- "y2150"
-# Input for NDC from R21M42 is not available, therefore NPi is used.
-  cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NPi")
-  cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-NPi")
+  cfg$gms$c56_pollutant_prices <- paste0("R32M46-",ssp,"-NDC")
+  cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-",ssp,"-NDC")
   start_run(cfg, codeCheck = FALSE)
 
-  cfg$title <- .title(cfg, paste(ssp,"PkBudg900",sep="-"))
+  cfg$title <- .title(cfg, paste(ssp,"PkBudg650",sep="-"))
   cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
   cfg$gms$c56_mute_ghgprices_until <- "y2030"
-  cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
-  cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
+  cfg$gms$c56_pollutant_prices <- paste0("R32M46-",ssp,"-PkBudg650")
+  cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-",ssp,"-PkBudg650")
   start_run(cfg, codeCheck = FALSE)
 
 }
@@ -77,9 +76,10 @@ codeCheck <- FALSE
 
 ### Business-as-usual
 cfg <- fsecScenario(scenario = "c_BAU")
+cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### FSDP Scenario
 cfg <- fsecScenario(scenario = "e_FSDP")
+cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
-

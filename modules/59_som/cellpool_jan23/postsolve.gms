@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -7,7 +7,7 @@
 
 p59_som_pool(j,land) = v59_som_pool.l(j,land);
 p59_land_before(j,land) = vm_land.l(j,land);
-p59_carbon_density(t,j,land)$(pcm_land(j,land) > 1e-20) = p59_som_pool(j,land) / pcm_land(j,land);
+p59_carbon_density(t,j,land)$(pcm_land(j,land) > 1e-10) = p59_som_pool(j,land) / pcm_land(j,land);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov59_som_target(t,j,land,"marginal")                      = v59_som_target.m(j,land);

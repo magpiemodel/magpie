@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,5 +16,6 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%disagg_lvst%" == "foragebased_aug18" $include "./modules/71_disagg_lvst/foragebased_aug18/realization.gms"
+$Ifi "%disagg_lvst%" == "foragebased_jul23" $include "./modules/71_disagg_lvst/foragebased_jul23/realization.gms"
 $Ifi "%disagg_lvst%" == "off" $include "./modules/71_disagg_lvst/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

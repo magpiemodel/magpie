@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -33,6 +33,8 @@ s30_snv_scenario_start          SNV scenario start year     / 2020 /
 s30_snv_scenario_target         SNV scenario target year      / 2030 /
 s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
+s30_snv_relocation_data_x1      First reference value in SNV target cropland data (1) / 0.2 /
+s30_snv_relocation_data_x2      Second reference value in SNV target cropland data (1) / 0.5 /
 ;
 
 * Set-switch for countries affected by regional SNV policy
@@ -116,3 +118,10 @@ $include "./modules/30_crop/rotation_apr22/input/avl_cropland_iso.cs3"
 $offdelim
 ;
 
+********* SNV TARGET CROPLAND *******************************************
+
+table f30_snv_target_cropland(j,relocation_target30) Cropland in 2019 requiring relocation due to SNV policy (mio. ha)
+$ondelim
+$include "./modules/30_crop/rotation_apr22/input/SNVTargetCropland.cs3"
+$offdelim
+;

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -215,8 +215,6 @@ loop(j,
     p32_land_start_ac(j,"ndc","ac0") = p32_land_start_ac(j,"ndc","ac0") + (pm_land_start(j,"forestry") - sum((type32,ac),p32_land_start_ac(j,type32,ac)));
     );
 );
-** Initialization of land
-*p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
 *** NPI/NDC policies BEGIN
 ** Afforestation policies NPI and NDCs
@@ -268,7 +266,7 @@ p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantati
 *******************************************************************************
 ** Calibrate plantations yields
 *******************************************************************************
-** Initialize with 1 tDM/ha - to avoid dvision by 0
+** Initialize with 1 m3 per ha - to avoid dvision by 0
 p32_observed_gs_reg(i) = 1;
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
@@ -288,6 +286,8 @@ p32_c_density_ac_fast_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all
 
 ** Update c-density for timber plantations based on calibration factor to match FAO growing stocks
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+** keep c-density for timber plantations constant after rotation length to avoid unrealistic carbon sequestration in unharvested timber plantations
+pm_carbon_density_ac_forestry(t_all,j,ac,"vegc")$(ac.off >= p32_rotation_cellular_harvesting(t_all,j)) = sum(ac2$(ac2.off = p32_rotation_cellular_harvesting(t_all,j)), pm_carbon_density_ac_forestry(t_all,j,ac2,"vegc"));
 
 ** set bii coefficients
 p32_bii_coeff(type32,bii_class_secd,potnatveg) = 0;

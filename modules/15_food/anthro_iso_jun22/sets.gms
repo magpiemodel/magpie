@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -102,15 +102,18 @@ sets
    kfo_lp(kfo) Livestock food products
    / livst_rum,livst_pig,livst_chick, livst_egg, livst_milk /
 
-   kfo_rd(kfo) Ruminant meat and dairy food products
-   / livst_rum,livst_milk /
-
    kfo_st(kfo) Staple products
    / tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
    potato,cassav_sp,sugr_cane,sugr_beet,molasses,brans,scp /
 
    kfo_pf(kfo) Processed foods including oils sugar alcohol
    / oils,alcohol,sugar /
+
+   kfo_ns(kfo) Food products that are counted towards seeds and nuts other than those included in others
+    / rapeseed, sunflower, groundnut /
+
+   kfo_norec(kfo) Food products that do not have an EAT-Lancet recommendation
+    / sugr_cane, sugr_beet, molasses, alcohol /
 
    knf(kall) Non-food products in the sectoral version
    / oilpalm,cottn_pro,foddr, pasture, begr, betr,
@@ -119,7 +122,7 @@ sets
    wood, woodfuel /
 
    nutrition Nutrition attributes
-   /kcal, protein/
+    / kcal, protein/
 
    par15 Parameters for food module
    / intercept,saturation,halfsaturation,non_saturation /
@@ -148,6 +151,10 @@ sets
   livst_fadeoutscen15 Scenarios for changed composition of livestock products
        / halving2050, constant /
 
+* The set kfo_rd can be defined in default.cfg and is used in the food substitution scenarios c15_rumdairy_scp_scen and c15_rumdairyscen
+  kfo_rd(kfo) Ruminant meat and dairy food products
+       / livst_rum,livst_milk /
+
   fadeoutscen15  Food substitution scenarios including functional forms with targets and transition periods
        / constant,
          lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_zero_20_70, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
@@ -163,34 +170,86 @@ sets
   EAT_scen15  Scenario of daily per capita calorie intake
        / BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat /
 
-   EAT_monogastrics15(kfo) monogastic products
+  EAT_monogastrics15(kfo) monogastic products
       / livst_pig, livst_egg, livst_chick /
-   EAT_ruminants15(kfo) ruminant products
+  EAT_ruminants15(kfo) ruminant products
       / livst_milk, livst_rum /
-   EAT_fruitvegnutseed15(kfo) vegetables fruits nuts seeds
-       /rapeseed,sunflower,others/
-   EAT_pulses15(kfo) pulses
-         /soybean,puls_pro,groundnut/
-   EAT_sugar15(kfo) sugar
-         /sugr_cane,sugr_beet,sugar,molasses/
+  EAT_redmeat15(kfo) livstock products that are categorized as red meat
+     / livst_rum, livst_pig /
+  EAT_fruitvegnutseed15(kfo) vegetables fruits nuts seeds
+      / rapeseed, sunflower, others /
+  EAT_pulses15_old(kfo) pulses
+      / soybean, puls_pro, groundnut /
+  EAT_pulses15(kfo) pulses
+      / soybean, puls_pro /
+  EAT_sugar15(kfo) sugar
+      / sugr_cane, sugr_beet, sugar, molasses /
 
-   EAT_staples(kfo) All staple food products according to EAT Lancet definition
-       / tece,maiz,trce,rice_pro,potato,cassav_sp /
-   EAT_nonstaples(kfo) All non-staple food products according to EAT Lancet definition
-       / soybean,rapeseed,groundnut,sunflower,puls_pro,
-         sugr_cane,sugr_beet,
-         oils,sugar,molasses,alcohol,brans,scp,
-         livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish,
+  EAT_staples_old(kfo) All staple food products according to EAT Lancet definition
+       / tece, maiz, trce, rice_pro, potato, cassav_sp /
+
+  EAT_staples(kfo) All staple food products according to EAT Lancet definition
+       / tece, maiz, trce, rice_pro /
+
+  EAT_nonstaples_old(kfo) All non-staple food products according to EAT Lancet definition
+       / soybean, rapeseed, groundnut, sunflower, puls_pro,
+         sugr_cane, sugr_beet,
+         oils, sugar, molasses, alcohol, brans, scp,
+         livst_rum, livst_pig, livst_chick, livst_egg, livst_milk, fish,
          others /
+   EAT_nonstaples(kfo) All non-staple food products according to EAT Lancet definition
+        / soybean, rapeseed, groundnut, sunflower, puls_pro, potato, cassav_sp,
+          sugr_cane, sugr_beet,
+          oils, sugar, molasses, alcohol, brans, scp,
+          livst_rum, livst_pig, livst_chick, livst_egg, livst_milk, fish,
+          others /
+
+EAT_targettype15 Minimum or maximum target type of the EAT Lancet recommendations
+    / min, max /
+
+EAT_targets15 Food groups as well as individual foods for which EAT Lancet targets are defined
+     / t_nutseeds, t_fruitveg, t_fruitstarch,
+       t_roots, t_redmeat,
+       t_legumes, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+
+EAT_mtargets15(EAT_targets15) EAT Lancet food targets mapping to MAgPIE categories
+     / t_redmeat, t_legumes, t_nutseeds, t_roots, t_fish, t_livst_chick, t_livst_egg, t_livst_milk, t_sugar, t_oils /
+
+EAT_special MAgPIE food groups that need special treatment with respect to fruit ratio
+     / cassav_sp, others /
+
+* Note: It is not a 1 to 1 mapping. For certain groups (e.g., others, cassav_sp,
+* there are special rules in exodietmacro.gms)
+EATtar_kfo15(EAT_mtargets15,kfo) Mapping between EAT Lancet food targets and MAgPIE categories
+    / t_redmeat           . (livst_rum, livst_pig)
+      t_legumes           . (puls_pro, soybean)
+      t_nutseeds          . (rapeseed, sunflower, groundnut)
+      t_roots             . (cassav_sp, potato)
+      t_fish              . (fish)
+      t_livst_chick       . (livst_chick)
+      t_livst_egg         . (livst_egg)
+      t_livst_milk        . (livst_milk)
+      t_sugar             . (sugar)
+      t_oils              . (oils)
+    /
 
 ;
 
-alias(kst,kst2);
-alias(bmi_group15,bmi_group15_2);
-alias(kfo,kfo2);
-alias(kfo_ap,kfo_ap2);
-alias(kfo_st,kfo_st2);
-alias(kfo_pf,kfo_pf2);
-alias(iso,iso2);
-alias(reproductive,reproductive2);
-alias(EAT_staples,EAT_staples2);
+alias(kst, kst2);
+alias(bmi_group15, bmi_group15_2);
+alias(kfo, kfo2);
+alias(kfo_ap, kfo_ap2);
+alias(kfo_st, kfo_st2);
+alias(kfo_pf, kfo_pf2);
+alias(kfo_ns, kfo_ns2);
+alias(iso, iso2);
+alias(reproductive, reproductive2);
+alias(EAT_staples, EAT_staples2);
+alias(EAT_nonstaples, EAT_nonstaples2);
+alias(EAT_staples_old, EAT_staples2_old);
+alias(EAT_nonstaples_old, EAT_nonstaples2_old);
+alias(EAT_pulses15, EAT_pulses15_2);
+alias(EAT_pulses15_old, EAT_pulses15_2_old);
+alias(EAT_redmeat15, EAT_redmeat15_2);
+alias(EATtar_kfo15, EATtar_kfo15_2);
+alias(EAT_mtargets15, EAT_mtargets15_2);

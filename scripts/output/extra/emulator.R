@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -121,61 +121,36 @@ collect_data_and_make_emulator <- function(outputdir,name_of_fit="linear") {
     # Prices|Bioenergy (US$05/GJ)
 
     # Clean data
+    "Demand|Bioenergy|2nd generation|++|Bioenergy crops (EJ/yr)"
+    "Prices|Bioenergy (US$05/GJ)"
     # 1. Exclude points with zero production (there are cases where production is zero but there is a price)
-    x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"][x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"]==0] <- NA
-    x[,,"Prices|Bioenergy (US$05/GJ)"][is.na(x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"])] <- NA
+    x[,,"Demand|Bioenergy|2nd generation|++|Bioenergy crops (EJ/yr)"][x[,,"Demand|Bioenergy|2nd generation|++|Bioenergy crops (EJ/yr)"]==0] <- NA
+    x[,,"Prices|Bioenergy (US$05/GJ)"][is.na(x[,,"Demand|Bioenergy|2nd generation|++|Bioenergy crops (EJ/yr)"])] <- NA
 
     # 2. Normally, where production (x) is zero resulting prices (y) are NA -> set production to NA where prices are NA
-    x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"][is.na(x[,,"Prices|Bioenergy (US$05/GJ)"])] <- NA
+    x[,,"Demand|Bioenergy|2nd generation|++|Bioenergy crops (EJ/yr)"][is.na(x[,,"Prices|Bioenergy (US$05/GJ)"])] <- NA
 
     x[,,"Modelstatus (-)"] <- x["GLO",,"Modelstatus (-)"]
 
     # Convert units to REMIND units
     TWa_2_EJ <- 365.25*24*3600/1E6
-    tmp1 <- x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"] / TWa_2_EJ      # EJ   -> TWa
+    tmp1 <- x[,,"Demand|Bioenergy|2nd generation|++|Bioenergy crops (EJ/yr)"] / TWa_2_EJ      # EJ   -> TWa
     tmp2 <- x[,,"Prices|Bioenergy (US$05/GJ)"]                * TWa_2_EJ/1000 # $/GJ -> T$/TWa
     getNames(tmp1,dim=4) <- gsub("EJ/yr","TWa/yr",   getNames(tmp1,dim=4),fixed=TRUE)
     getNames(tmp2,dim=4) <- gsub("US$05/GJ","T$/TWa",getNames(tmp2,dim=4),fixed=TRUE)
     x <- mbind(x,tmp1,tmp2)
+    
+    # transfer regionscode from mag_res to x since it was erased above everywhere where x was 'mbind'ed
+    regionscode <- attributes(mag_res)$regionscode
+    attributes(x)$regionscode <- regionscode
 
     ###############################################################
     ############# C A L C U L A T E   E M U L A T O R #############
     ###############################################################
 
-    # vars <- c("Demand|Bioenergy|++|2nd generation (EJ/yr)",
-    #           "Prices|Bioenergy (US$05/GJ)",
-    #           "Modelstatus (-)")
-    #
-    # y <- x[,,vars]
-    #
-    # # Make up model data for fitting: If in current year not enough data is availalbe copy it from other years
-    # # Criteria for "enough" data available:
-    # # number of
-    # #  1. non-zero and
-    # #  2. feasible and
-    # #  3. unique and
-    # #  4. non-NA elements
-    # # > n
-    #
-    # # 1. non-zero: set zero elements to NA
-    # # has been done before -> does not have to be checked here
-    #
-    # # 2. feasible: set data to NA in infeasible years and the years after
-    # y <- mute_infes(data = y, name="Modelstatus (-)", infeasible = 5)
-    #
-    # # 3. unique elements: set duplicated samples to NA
-    # y <- mute_duplicated(y)
-    #
-    # # 4. non-NA: find number of non-NA elements
-    # n_exist <- as.magpie(apply(unwrap(y),c(1,2,3,5,6),function(x)sum(!is.na(x))))
-    # nodata <- n_exist[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"]<1
-    #
-    # # Finally: Copy data from other years where data is not availalbe
-    # z <- fill_missing_years(y,nodata)
-
     # Calculate emulator
     fc <- emulator(data=x,
-             name_x="Demand|Bioenergy|++|2nd generation (TWa/yr)",
+             name_x="Demand|Bioenergy|2nd generation|++|Bioenergy crops (TWa/yr)",
              name_y="Prices|Bioenergy (T$/TWa)",
              name_modelstat="Modelstatus (-)",
              userfun=function(param,x)return(param[[1]] + param[[2]] * x),
@@ -189,8 +164,6 @@ collect_data_and_make_emulator <- function(outputdir,name_of_fit="linear") {
              lower=c(0,0))
     print(fc)
     print(attributes(fc))
-
-    regionscode <- attributes(mag_res)$regionscode
 
     # write fit coefficients to REMIND input file
     for (scen in getNames(fc,dim="scenario")) {

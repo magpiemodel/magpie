@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -35,7 +35,8 @@ library(gms)
 runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   choose_folder <- function(title="Please choose a folder") {
     # try to use find because it is significantly quicker than list.dirs
-    tmp <- try(system("find ./output -name 'full.gms'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
+    tmp <- try(system("find ./output -path './output/*/renv' -prune -o -name 'full.gms'",
+                      intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
     if("try-error" %in% class(tmp) || length(tmp)==0) {
       tmp <- base::list.dirs("./output/",recursive=TRUE)
       dirs <- NULL
@@ -43,6 +44,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
         if (file.exists(file.path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
       }
     } else {
+      tmp <- grep("/full.gms$", tmp, value = TRUE)
       dirs <- sub("full.gms","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
     }
     dirs <- sort(dirs)
@@ -62,7 +64,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     }
     identifier <- tmp
     # PATTERN
-    if(length(identifier==1) && identifier==(length(dirs)+1)){
+    if(length(identifier) == 1 && identifier == length(dirs) + 1) {
       cat("\nInsert the search pattern or the regular expression: ")
       pattern <- gms::getLine()
       id <- grep(pattern=pattern, dirs[-1], perl=TRUE)
@@ -197,11 +199,17 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     freshLockfile <- withr::local_tempfile()
 
     message("Generating lockfile... ", appendLF = FALSE)
-    utils::capture.output({
-      utils::capture.output({
-        renv::snapshot(lockfile = freshLockfile, prompt = FALSE)
+    errorMessage1 <- utils::capture.output({
+      errorMessage2 <- utils::capture.output({
+        snapshotSuccess <- tryCatch({
+          renv::snapshot(lockfile = freshLockfile, prompt = FALSE)
+          TRUE
+        }, error = function(error) FALSE)
       }, type = "message")
     })
+    if (!snapshotSuccess) {
+      stop(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
+    }
     message("done.")
 
     datetime <- format(Sys.time(), "%Y-%m-%dT%H%M%S")

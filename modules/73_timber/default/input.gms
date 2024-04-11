@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,7 +17,7 @@ scalars
 * https://unece.org/forests/prices
   s73_timber_prod_cost_wood            Cost for producing one unit of wood (USD per tDM) / 120 /
   s73_timber_prod_cost_woodfuel        Cost for prodcing one unit of woodfuel (USD per tDM) / 60 /
-  s73_free_prod_cost                   Very high cost for using non existing land for plantation establishment (USD per tDM) /1000000/
+  s73_free_prod_cost                   Very high cost for settling demand without production (USD per tDM) /20000/
   s73_timber_demand_switch             Logical switch to turn on or off timber demand 1=on 0=off (1) / 0 /
   s73_foresight                        Boolean switch for establishment demand assumption 1=forward looking 0=myopic (1) / 0 /
   s73_increase_ceiling                 Limiter for not allowing a demand jump between time steps beyond a certain limit (1) /1.025/

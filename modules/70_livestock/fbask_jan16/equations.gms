@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -34,16 +34,12 @@ q70_feed(i2,kap,kall) ..
 *' labor costs and the related productivity gain from [36_employment].
 
 q70_cost_prod_liv_labor(i2) ..
- vm_cost_prod_livst(i2,"labor") =e= sum(kli, vm_prod_reg(i2,kli)
-     *(i70_cost_regr(i2,kli,"cost_regr_a") + i70_cost_regr(i2,kli,"cost_regr_b")
-     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)))) 
+ vm_cost_prod_livst(i2,"labor") =e= sum(kli, vm_prod_reg(i2,kli) * sum(ct, i70_fac_req_livst(ct,i2,kli))) 
      *sum(ct, p70_cost_share_livst(ct,i2,"labor")) 
      *sum(ct, (1/pm_productivity_gain_from_wages(ct,i2)) * (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
-
+  
 q70_cost_prod_liv_capital(i2) ..
- vm_cost_prod_livst(i2,"capital") =e= sum(kli, vm_prod_reg(i2,kli)
-     *(i70_cost_regr(i2,kli,"cost_regr_a") + i70_cost_regr(i2,kli,"cost_regr_b")
-     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)))) 
+ vm_cost_prod_livst(i2,"capital") =e= sum(kli, vm_prod_reg(i2,kli) * sum(ct, i70_fac_req_livst(ct,i2,kli))) 
      *sum(ct, p70_cost_share_livst(ct,i2,"capital"));
 
 q70_cost_prod_fish(i2) ..

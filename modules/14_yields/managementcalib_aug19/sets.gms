@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -25,8 +25,13 @@ sets
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, cottn_pro, begr, betr /
 
-   knbe14(kcr) Cropping activities excluding bioenergy plants
+  knbe14(kcr) Cropping activities excluding bioenergy plants
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, cottn_pro /
+
+  ncp_type14 natures contributions to people (NCP) relevant for agricultural yields
+       / soil_intact, poll_suff /
+
 ;
+
