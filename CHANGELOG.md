@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **14_yields** added minimum threshold for wood yields. Below this threshold, wood yields are set to zero.
 - **56_ghg_policy** added NDC scenarios
 - **60_bioenergy** added NDC scenarios 
+- **scripts** start script for EAT2p0 Deep Dive project
 
 ### removed
 -
@@ -30,6 +31,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **52_carbon** removing jump of carbon content into fully grown forest when a forest changes from second-last age class to last age-class.
 - **80_optimization** duplicated solve statement in all instances to avoid non-matchting left- and right-hand sides of equations
 - **58_peatland** Equation `q58_scalingFactorExp` revised to avoid division by zero. 
+- **15_food** Small number rather 0 in condition checking calorie balancing
+- **34_urban** `static` realization was not working because `vm_carbon_stock` was referenced without the set `stockType`
 
 
 ## [4.7.2] - 2024-04-02
