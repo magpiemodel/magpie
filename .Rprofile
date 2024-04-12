@@ -16,18 +16,9 @@ if (Sys.info()[["sysname"]] == "Windows") {
 options(renv.config.synchronized.check = FALSE,
         renv.config.user.profile = TRUE) # load user specific settings from ~/.Rprofile
 
-source("renv/activate.R")
+# the text "renvVersion" is required for a check in a coupling script, will be removed soon
 
-renvVersion <- package_version("1.0.7")
-if (packageVersion("renv") != renvVersion) {
-  renvLockExisted <- file.exists(renv::paths$lockfile())
-  renv::install(paste0("renv@", renvVersion), prompt = FALSE)
-  if (!renvLockExisted) {
-    unlink(renv::paths$lockfile())
-  }
-  message("Installed renv version ", renvVersion, ". Please restart R.")
-  q(status = 10)
-}
+source("renv/activate.R")
 
 if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
   options(repos = c(getOption("repos"), pik = "https://rse.pik-potsdam.de/r/packages"))
