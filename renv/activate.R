@@ -2,7 +2,7 @@
 local({
 
   # the requested version of renv
-  version <- "1.0.6"
+  version <- "1.0.7"
   attr(version, "sha") <- NULL
 
   # the project directory
@@ -128,6 +128,21 @@ local({
   
     tail <- paste(rep.int(suffix, n), collapse = "")
     paste0(prefix, " ", label, " ", tail)
+  
+  }
+  
+  heredoc <- function(text, leave = 0) {
+  
+    # remove leading, trailing whitespace
+    trimmed <- gsub("^\\s*\\n|\\n\\s*$", "", text)
+  
+    # split into lines
+    lines <- strsplit(trimmed, "\n", fixed = TRUE)[[1L]]
+  
+    # compute common indent
+    indent <- regexpr("[^[:space:]]", lines)
+    common <- min(setdiff(indent, -1L)) - leave
+    paste(substring(lines, common), collapse = "\n")
   
   }
   
@@ -839,7 +854,7 @@ local({
       sha     = if (dev) description[["RemoteSha"]]
     )
   
-    fmt <- renv:::heredoc("
+    fmt <- heredoc("
       renv %1$s was loaded from project library, but this project is configured to use renv %2$s.
       - Use `renv::record(\"%3$s\")` to record renv %1$s in the lockfile.
       - Use `renv::restore(packages = \"renv\")` to install renv %2$s into the project library.
