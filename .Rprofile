@@ -16,9 +16,18 @@ if (Sys.info()[["sysname"]] == "Windows") {
 options(renv.config.synchronized.check = FALSE,
         renv.config.user.profile = TRUE) # load user specific settings from ~/.Rprofile
 
-# the text "renvVersion" is required for a check in a coupling script, will be removed soon
-
 source("renv/activate.R")
+
+renvVersion <- package_version("1.0.7")
+if (packageVersion("renv") != renvVersion) {
+  renvLockExisted <- file.exists(renv::paths$lockfile())
+  renv::install(paste0("renv@", renvVersion), prompt = FALSE)
+  if (!renvLockExisted) {
+    unlink(renv::paths$lockfile())
+  }
+  message("Installed renv version ", renvVersion, ". Please restart R.")
+  q(status = 10)
+}
 
 if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
   options(repos = c(getOption("repos"), pik = "https://rse.pik-potsdam.de/r/packages"))
@@ -27,7 +36,7 @@ if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
 # bootstrapping, will only run once after this repo is freshly cloned
 if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
   message("R package dependencies are not installed in this renv, installing now...")
-  renv::hydrate() # auto-detect and install all dependencies
+  renv::hydrate(prompt = FALSE, report = FALSE) # auto-detect and install all dependencies
   message("Finished installing R package dependencies.")
   if (!("upstream" %in% gert::git_remote_list()$name)) {
     gert::git_remote_add("https://github.com/magpiemodel/magpie.git", "upstream")
@@ -36,6 +45,7 @@ if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
 }
 
 # in case bootstrapping fails halfway, install piamenv and rely on requirement auto-fixing
-if (!requireNamespace("piamenv", quietly = TRUE)) {
+if (tryCatch(packageVersion("piamenv"),
+             error = function(e) package_version("0.0")) < package_version("0.3.4")) {
   renv::install("piamenv", prompt = FALSE)
 }
