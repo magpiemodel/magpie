@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **14_yields** added minimum threshold for wood yields. Below this threshold, wood yields are set to zero.
 - **56_ghg_policy** added NDC scenarios
 - **60_bioenergy** added NDC scenarios
-- **scripts** start script for EAT2p0 Deep Dive projec
+- **scripts** start script for EAT2p0 Deep Dive project
 ### fixed
 - **15_food** Small number rather 0 in condition checking calorie balancing
 - **34_urban** `static` realization was not working because `vm_carbon_stock` was referenced without the set `stockType`
