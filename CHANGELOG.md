@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **21_trade** Revision of trade module. Replaced `cfg$gms$s21_trade_bal_damper` in favour of `cfg$gms$k_import21`, which allows for additional imports to maintain feasibility
-- **21_trade** v21_import_for_feasibility now available for all coutnries, not just for importers
+- **21_trade** v21_import_for_feasibility now available for all countries, not just for importers
 - **70_livestock** if `c70_fac_req_regr` is set to `reg`: use of USDA/FAO values for historic factor requirements for livestock instead of using regression values and change of calibration year from 2005 to 2010 for regional factor requirements regression
 - **config** added switch for minimum timber yields
 - **config** updated FSEC scenario config for revision and included new calibration file (after cost fix in preprocessing)
