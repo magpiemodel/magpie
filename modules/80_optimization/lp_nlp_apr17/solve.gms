@@ -63,7 +63,10 @@ $batinclude "./modules/include.gms" nl_fix
 *' linear optimization if no non-linearities remain in the model (Please note
 *' that the solve statement still declares a nonlinear / nlp problem even
 *' though we expect it to be linear!).
+*' Solve statement is put twice for improved model results, 
+*' in particular for matching LHS and RHS of equations.
 
+    solve magpie USING nlp MINIMIZING vm_cost_glo;
     solve magpie USING nlp MINIMIZING vm_cost_glo;
 
 *' A second optimization makes sure that in case of a flat optimum that solution
@@ -74,6 +77,7 @@ $batinclude "./modules/include.gms" nl_fix
 
     if ((magpie.modelstat=1 or magpie.modelstat = 7),
       vm_cost_glo.up = vm_cost_glo.l;
+      solve magpie USING nlp MINIMIZING vm_landdiff;
       solve magpie USING nlp MINIMIZING vm_landdiff;
       vm_cost_glo.up = Inf;
     );
@@ -128,6 +132,7 @@ $batinclude "./modules/include.gms" nl_relax
 *' the nonlinear optimization of the model in its full complexity.
 
   solve magpie USING nlp MINIMIZING vm_cost_glo;
+  solve magpie USING nlp MINIMIZING vm_cost_glo;
 
 *' @stop
 
@@ -135,6 +140,7 @@ $batinclude "./modules/include.gms" nl_relax
     if((s80_add_conopt3 = 1),
       display "Additional solve with CONOPT3!";
       option nlp = conopt;
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       option nlp = conopt4;
     );
@@ -144,6 +150,7 @@ $batinclude "./modules/include.gms" nl_relax
       display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
     magpie.optfile = 2
       solve magpie USING nlp MINIMIZING vm_cost_glo;
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
       magpie.optfile   = s80_optfile ;
     );
 
@@ -151,6 +158,7 @@ $batinclude "./modules/include.gms" nl_relax
   if ((magpie.modelstat = 13),
     display "WARNING: Modelstat 13 | retry with CONOPT3!";
     option nlp = conopt;
+    solve magpie USING nlp MINIMIZING vm_cost_glo;
     solve magpie USING nlp MINIMIZING vm_cost_glo;
     option nlp = conopt4;
   );
@@ -181,6 +189,7 @@ magpie.trylinear = 1;
 
 $batinclude "./modules/include.gms" nl_fix
 
+solve magpie USING nlp MINIMIZING vm_cost_glo;
 solve magpie USING nlp MINIMIZING vm_cost_glo;
 
 $batinclude "./modules/include.gms" nl_release

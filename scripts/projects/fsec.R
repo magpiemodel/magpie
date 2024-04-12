@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v39_FSEC"
+  v <- "v39k_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "RCP60")),
@@ -28,7 +28,7 @@ fsecScenario <- function(scenario) {
             d_SSP3bau        = list(standard = c("cc", "SSP3", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP3", "RCP70")),
             d_SSP4bau        = list(standard = c("cc", "SSP4", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "SSP4", "RCP45")),
+                                  fsec = c("FSEC", "SSP4", "RCP60")),
             d_SSP5bau        = list(standard = c("cc", "SSP5", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP5", "RCP85")),
             # FSDP (all transformations active)
@@ -196,7 +196,7 @@ fsecScenario <- function(scenario) {
             b_Protection          = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "landSparing", "peatland", "RCP60")),
             b_NatureSparing       = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland", "biodiversity", "REDDaff", "RCP45"))
+                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland", "biodiversity", "REDDaff", "RCP60"))
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
@@ -207,7 +207,7 @@ fsecScenario <- function(scenario) {
                        targetdir = "./input",
                        repositories = cfg$repositories)
   # Download gridded RCP temperature data
-  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.mz",
+  gms::download_unpack(input = "FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.tgz",
                        targetdir = "./input",
                        repositories = cfg$repositories)
 
@@ -225,7 +225,8 @@ fsecScenario <- function(scenario) {
                        "rds_report_iso",
                        "rds_report")
   cfg$force_download  <- TRUE
-  cfg$gms$s80_optfile <- 1
+  cfg$gms$s80_optfile <- 0
+  cfg$gms$s80_maxiter <- 100
 
   return(cfg)
 }

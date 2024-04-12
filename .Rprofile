@@ -27,11 +27,16 @@ if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
 # bootstrapping, will only run once after this repo is freshly cloned
 if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
   message("R package dependencies are not installed in this renv, installing now...")
-  renv::hydrate() # auto-detect and install all dependencies
+  renv::hydrate(prompt = FALSE, report = FALSE) # auto-detect and install all dependencies
   message("Finished installing R package dependencies.")
+  if (!("upstream" %in% gert::git_remote_list()$name)) {
+    gert::git_remote_add("https://github.com/magpiemodel/magpie.git", "upstream")
+    message("Added upstream git remote pointing to magpiemodel/magpie.")
+  }
 }
 
 # in case bootstrapping fails halfway, install piamenv and rely on requirement auto-fixing
-if (!requireNamespace("piamenv", quietly = TRUE)) {
+if (tryCatch(packageVersion("piamenv"),
+             error = function(e) package_version("0.0")) < package_version("0.3.4")) {
   renv::install("piamenv", prompt = FALSE)
 }

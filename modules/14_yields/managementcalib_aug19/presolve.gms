@@ -49,5 +49,7 @@ p14_growing_stock(t,j,ac,"forestry","plantations") = p14_growing_stock(t,j,ac,"f
 pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growing_stock(t,j,ac,"forestry","plantations") ;
 ** Natveg yields are unchanged and doesn't depend on plantation yield switch
 pm_timber_yield(t,j,ac,land_natveg) = p14_growing_stock(t,j,ac,land_natveg,"natveg");
+** Put yields to 0 where they dont exceed a minimum yield for harvest
+pm_timber_yield(t,j,ac,land_natveg)$(pm_timber_yield(t,j,ac,land_natveg) < s14_minimum_wood_yield) = 0;
 ** If the plantation yield switch is off, then the forestry yields are given the same values as secdforest yields,
 pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 0) = pm_timber_yield(t,j,ac,"secdforest");

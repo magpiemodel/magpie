@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Collect reg, iso and grid level data from multiple FSDP runs (requires LR or HR runs)
+# description: Collect reg, iso and grid level data from multiple FSDP runs (requires LR and HR runs)
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
@@ -30,6 +30,10 @@ if(!exists("source_include")) {
 }
 ###############################################################################
 
+# Report biophyiscal indicators from HR runs and economic indicators from LR runs
+
+split_resolutions = TRUE
+
 # For case of sub-folder structure write to the respective folder
 title     <- basename(outputdir)
 
@@ -39,6 +43,7 @@ outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe
 
 # Get revision number
 x <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[1]))
+x <- sub("HRc1000","",x)
 if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
 
 ##########
@@ -131,19 +136,19 @@ missing <- NULL
 
 saveRDS(outputdir,"outputdir.rds")
 
-indicators_main <- getVariables()
-names(indicators_main) <- NULL
-var_reg <- c(indicators_main,
-             ### Validation
-             "Biodiversity|Agricultural landscape intactness",
-             "Biodiversity|Biodiversity hotspot intactness",
-             "Biodiversity|BII in areas outside Biodiversity Hotspots, Intact Forest & Cropland Landscapes",
-             "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
-             "Biodiversity|Biodiversity Hotspot BII",
-             "Biodiversity|BII in 30x30 Landscapes",
-             "Biodiversity|Cropland Landscapes BII",
-             "Biodiversity|Key Biodiversity Area BII",
-             "Biodiversity|Inverted Simpson crop area diversity index",
+var_reg_LR <- c(
+            # main indicators
+             "SDG|SDG02|Prevalence of underweight",                                
+             "SDG|SDG03|Prevalence of obesity",                                    
+             "Health|Years of life lost|Disease",                          
+             "Household Expenditure|Food|Expenditure",                             
+             "Income|Number of People Below 3p20 USDppp11/day",                    
+             "Labor|Employment|Agricultural employment",                           
+             "Agricultural employment|Crop and livestock products",                
+             "Labor|Wages|Hourly labor costs relative to 2010",                    
+             "Value|Bioeconomy Demand",                                            
+             "Costs Without Incentives",            
+            #further indicators
              "Population",
              "Income",
              "Nutrition|Calorie Supply|+|Crops",
@@ -158,6 +163,15 @@ var_reg <- c(indicators_main,
              "Demand|Material|+|Crops",
              "Demand|Processing|+|Crops",
              "Demand|++|Livestock products",
+             "Demand|+|Agricultural Supply Chain Loss",
+             "Demand|+|Bioenergy",
+             "Demand|+|Feed",
+             "Demand|+|Food",
+             "Demand|+|Material",
+             "Demand|+|Processing",
+             "Demand|+|Seed",
+             "Demand|+|Roundwood",
+             "Demand|+|Domestic Balanceflow",
              "Production|+|Crops",
              "Production|Crops|+|Cereals",
              "Production|Crops|+|Oil crops",
@@ -168,75 +182,10 @@ var_reg <- c(indicators_main,
              "Production|+|Pasture",
              "Production|+|Bioenergy crops",
              "Timber|Volumetric|Production|Roundwood",
-             "Resources|Land Cover",
-             "Resources|Land Cover|+|Cropland",
-             "Resources|Land Cover|+|Pastures and Rangelands",
-             "Resources|Land Cover|+|Forest",
-             "Resources|Land Cover|Forest|+|Managed Forest",
-             "Resources|Land Cover|Forest|Natural Forest|+|Primary Forest",
-             "Resources|Land Cover|Forest|Natural Forest|+|Secondary Forest",
-             "Resources|Land Cover|+|Other Land",
-             "Resources|Land Cover|+|Urban Area",
-             "Resources|Land Cover|Cropland|+|Croparea",
-             "Resources|Land Cover|Cropland|+|Fallow Cropland",
-             "Resources|Land Cover|Cropland|Croparea|Crops|+|Cereals",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Maize",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Rice",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Temperate cereals",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Tropical cereals",
-             "Resources|Land Cover|Cropland|Croparea|Crops|+|Oil crops",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Cotton seed",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Groundnuts",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Oilpalms",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Other oil crops incl rapeseed",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Soybean",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Sunflower",
-             "Resources|Land Cover|Cropland|Croparea|Crops|+|Sugar crops",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Sugar crops|+|Sugar beet",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Sugar crops|+|Sugar cane",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Fruits Vegetables Nuts",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Potatoes",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Pulses",
-             "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Tropical roots",
-             "Resources|Land Cover|Cropland|Croparea|+|Bioenergy crops",
-             "Productivity|Landuse Intensity Indicator Tau",
-             "Productivity|Feed conversion",
-             "Productivity|Feed conversion|Ruminant meat and dairy",
-             "Productivity|Feed conversion|Poultry meat and eggs",
-             "Productivity|Feed conversion|Monogastric meat",
-             "Productivity|Feed conversion|+|Cereal Intensity",
-             "Productivity|Feed conversion|+|Oilcrop intensity",
-             "Productivity|Feed conversion|+|Pasture intensity",
-             "Productivity|Roughage share|Ruminant meat and dairy",
-             "Productivity|Pasture share|Ruminant meat and dairy",
-             "Productivity|Yield by physical area|Crops",
-             "Productivity|Yield by physical area|Crops|Cereals",
-             "Productivity|Yield by physical area|Crops|Oil crops",
-             "Productivity|Yield by physical area|Crops|Sugar crops",
-             "Productivity|Yield by physical area|Crops|Other crops",
-             "Productivity|Yield by physical area|Crops|Other crops|Fruits Vegetables Nuts",
-             "Productivity|Yield by physical area|Pasture",
-             "Productivity|Yield by physical area|Bioenergy crops",
-             "Productivity|Yield by physical area|Forage",
-             "Resources|Nitrogen|Cropland Budget|Inputs",
-             "Resources|Nitrogen|Cropland Budget|Inputs|+|Fertilizer",
-             "Resources|Nitrogen|Cropland Budget|Inputs|+|Biological Fixation Symbiotic Crops",
-             "Resources|Nitrogen|Cropland Budget|Inputs|+|Manure Recycled from Confinements",
-             "Resources|Nitrogen|Cropland Budget|Inputs|+|Recycled Aboveground Crop Residues",
-             "Resources|Nitrogen|Cropland Budget|Withdrawals|+|Harvested Crops",
-             "Resources|Nitrogen|Cropland Budget|Withdrawals|+|Aboveground Crop Residues",
-             "Resources|Nitrogen|Cropland Budget|Balance|+|Nutrient Surplus",
-             "Resources|Nitrogen|Cropland Budget|Balance|+|Soil Organic Matter",
-             "Resources|Nitrogen|Pollution|Surplus|+|Cropland",
-             "Resources|Nitrogen|Pollution|Surplus|+|Pasture",
-             "Resources|Nitrogen|Pollution|Surplus|+|Animal Waste Management",
-             "Resources|Nitrogen|Pollution|Surplus|+|Non-agricultural land",
-             "Resources|Water|Withdrawal|Agriculture",
-             "Resources|Land Cover|Cropland|Area equipped for irrigation",
-             "Value|Bioeconomy Demand",
              "Production|Bioenergy|2nd generation|++|Bioenergy crops",
-             ### Maps
+
              "Costs",
+             "Value|Bioeconomy Demand",
              "Population",
              "Labor|Employment|Share of working age population employed in agriculture",
              "Labor|Wages|Hourly labor costs",
@@ -245,7 +194,6 @@ var_reg <- c(indicators_main,
              "Prices|Index2020|Agriculture|Food products",
              "Prices|Index2020|Agriculture|Food products|Livestock",
              "Prices|Index2020|Agriculture|Food products|Plant-based",
-             "SDG|SDG02|Investment in AgR&D",
              "Household Expenditure|Food|Expenditure|Crops",
              "Household Expenditure|Food|Expenditure|Crops|Cereals",
              "Household Expenditure|Food|Expenditure|Crops|Oil crops",
@@ -325,15 +273,6 @@ var_reg <- c(indicators_main,
              "Nutrition|Calorie Supply|Secondary products|+|Molasses",
              "Nutrition|Calorie Supply|Secondary products|+|Oils",
              "Nutrition|Calorie Supply|Secondary products|+|Sugar",
-             "Demand|+|Agricultural Supply Chain Loss",
-             "Demand|+|Bioenergy",
-             "Demand|+|Feed",
-             "Demand|+|Food",
-             "Demand|+|Material",
-             "Demand|+|Processing",
-             "Demand|+|Seed",
-             "Demand|+|Roundwood",
-             "Demand|+|Domestic Balanceflow",
              "Trade|+|Net-Trade",
              "Trade|Net-Trade|+|Crops",
              "Trade|Net-Trade|+|Fish",
@@ -396,6 +335,121 @@ var_reg <- c(indicators_main,
              "Trade|Self-sufficiency|Secondary products|Oilcakes",
              "Trade|Self-sufficiency|Secondary products|Oils",
              "Trade|Self-sufficiency|Secondary products|Sugar",
+             
+             "Nutrition|Anthropometrics|People normalweight",
+             "Nutrition|Anthropometrics|People obese",
+             "Nutrition|Anthropometrics|People overweight",
+             "Nutrition|Anthropometrics|People underweight",
+             "Labor|Employment|Agricultural employment",
+             "Labor|Employment|Agricultural employment|+|Crop products",
+             "Labor|Employment|Agricultural employment|+|Livestock products",
+             "Labor|Employment|Agricultural employment|+|MACCS",
+             "Labor|Wages|Hourly labor costs",
+             "Labor|Total Hours Worked",
+             "Income|Gini Coefficient",
+             "Income|Average Income of Lower 40% of Population",
+             "Income|Fraction of Population below half of Median Income",
+             "Income|Number of People Below 1p90 USDppp11/day",
+             "Income|Number of People Below 3p20 USDppp11/day",
+             "Income|Number of People Below 5p50 USDppp11/day",
+             "Health|Years of life lost|Disease",
+             "Health|Years of life lost|Disease|+|Congenital Heart Disease",
+             "Health|Years of life lost|Disease|+|Stroke",
+             "Health|Years of life lost|Disease|+|Cancer",
+             "Health|Years of life lost|Disease|+|Type-2 Diabetes",
+             "Health|Years of life lost|Disease|+|Respiratory Disease",
+             "Health|Attributable deaths|Disease"
+)
+
+var_reg_HR <- c(
+            # main indicators
+             "Biodiversity|BII",
+             "Biodiversity|BII in 30x30 Landscapes",
+             "Biodiversity|Cropland Landscapes BII",
+             "Biodiversity|Biodiversity Hotspot BII",
+             "Biodiversity|Shannon crop area diversity index",
+             "Resources|Nitrogen|Nutrient surplus from land and manure management",
+             "Water|Environmental flow violation volume",
+             "Emissions|GWP100AR6|Land",
+             "Global Surface Temperature",
+             # further indicators
+             "Biodiversity|Agricultural landscape intactness",
+             "Biodiversity|Biodiversity hotspot intactness",
+             "Biodiversity|Biodiversity hotspot intactness (unitless)",
+             "Biodiversity|BII in areas outside Biodiversity Hotspots, Intact Forest & Cropland Landscapes",
+             "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
+             "Biodiversity|Biodiversity Hotspot BII",
+             "Biodiversity|Cropland Landscapes BII",
+             "Biodiversity|Key Biodiversity Area BII",
+             "Biodiversity|Inverted Simpson crop area diversity index",
+             "Resources|Land Cover",
+             "Resources|Land Cover|+|Cropland",
+             "Resources|Land Cover|+|Pastures and Rangelands",
+             "Resources|Land Cover|+|Forest",
+             "Resources|Land Cover|Forest|+|Managed Forest",
+             "Resources|Land Cover|Forest|Natural Forest|+|Primary Forest",
+             "Resources|Land Cover|Forest|Natural Forest|+|Secondary Forest",
+             "Resources|Land Cover|+|Other Land",
+             "Resources|Land Cover|+|Urban Area",
+             "Resources|Land Cover|Cropland|+|Croparea",
+             "Resources|Land Cover|Cropland|+|Fallow Cropland",
+             "Resources|Land Cover|Cropland|Croparea|Crops|+|Cereals",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Maize",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Rice",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Temperate cereals",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Tropical cereals",
+             "Resources|Land Cover|Cropland|Croparea|Crops|+|Oil crops",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Cotton seed",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Groundnuts",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Oilpalms",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Other oil crops incl rapeseed",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Soybean",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Oil crops|+|Sunflower",
+             "Resources|Land Cover|Cropland|Croparea|Crops|+|Sugar crops",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Sugar crops|+|Sugar beet",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Sugar crops|+|Sugar cane",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Fruits Vegetables Nuts",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Potatoes",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Pulses",
+             "Resources|Land Cover|Cropland|Croparea|Crops|Other crops|+|Tropical roots",
+             "Resources|Land Cover|Cropland|Croparea|+|Bioenergy crops",             
+             "Productivity|Landuse Intensity Indicator Tau",
+             "Productivity|Feed conversion",
+             "Productivity|Feed conversion|Ruminant meat and dairy",
+             "Productivity|Feed conversion|Poultry meat and eggs",
+             "Productivity|Feed conversion|Monogastric meat",
+             "Productivity|Feed conversion|+|Cereal Intensity",
+             "Productivity|Feed conversion|+|Oilcrop intensity",
+             "Productivity|Feed conversion|+|Pasture intensity",
+             "Productivity|Roughage share|Ruminant meat and dairy",
+             "Productivity|Pasture share|Ruminant meat and dairy",
+             "Productivity|Yield by physical area|Crops",
+             "Productivity|Yield by physical area|Crops|Cereals",
+             "Productivity|Yield by physical area|Crops|Oil crops",
+             "Productivity|Yield by physical area|Crops|Sugar crops",
+             "Productivity|Yield by physical area|Crops|Other crops",
+             "Productivity|Yield by physical area|Crops|Other crops|Fruits Vegetables Nuts",
+             "Productivity|Yield by physical area|Pasture",
+             "Productivity|Yield by physical area|Bioenergy crops",
+             "Productivity|Yield by physical area|Forage",
+             "Resources|Nitrogen|Cropland Budget|Inputs",
+             "Resources|Nitrogen|Cropland Budget|Inputs|+|Fertilizer",
+             "Resources|Nitrogen|Cropland Budget|Inputs|+|Biological Fixation Symbiotic Crops",
+             "Resources|Nitrogen|Cropland Budget|Inputs|+|Manure Recycled from Confinements",
+             "Resources|Nitrogen|Cropland Budget|Inputs|+|Recycled Aboveground Crop Residues",
+             "Resources|Nitrogen|Cropland Budget|Withdrawals|+|Harvested Crops",
+             "Resources|Nitrogen|Cropland Budget|Withdrawals|+|Aboveground Crop Residues",
+             "Resources|Nitrogen|Cropland Budget|Balance|+|Nutrient Surplus",
+             "Resources|Nitrogen|Cropland Budget|Balance|+|Soil Organic Matter",
+             "Resources|Nitrogen|Pollution|Surplus|+|Cropland",
+             "Resources|Nitrogen|Pollution|Surplus|+|Pasture",
+             "Resources|Nitrogen|Pollution|Surplus|+|Animal Waste Management",
+             "Resources|Nitrogen|Pollution|Surplus|+|Non-agricultural land",
+             "Resources|Nitrogen|Cropland Budget|Soil Nitrogen Uptake Efficiency",
+             "Resources|Water|Withdrawal|Agriculture",
+             "Resources|Land Cover|Cropland|Area equipped for irrigation",
+             "SDG|SDG02|Investment in AgR&D",
+             
              "Emissions|CO2|Land|+|Land-use Change",
              "Emissions|CH4|Land|+|Agriculture",
              "Emissions|N2O|Land|+|Agriculture",
@@ -467,14 +521,13 @@ var_reg <- c(indicators_main,
              "SDG|SDG15|Biological nitrogen fixation on cropland",
              "SDG|SDG15|Non-agricultural land share",
              "SDG|SDG15|Other natural land share",
+             "SDG|SDG15|Afforestation",
 
              "Resources|Nitrogen|Pollution|Surplus|+|Cropland",
              "Resources|Nitrogen|Pollution|Surplus|+|Pasture",
              "Resources|Nitrogen|Pollution|Surplus|+|Animal Waste Management",
              "Resources|Nitrogen|Pollution|Surplus|+|Non-agricultural land",
              "Resources|Water|Withdrawal|Agriculture",
-
-             "Resources|Nitrogen|Cropland Budget|Soil Nitrogen Uptake Efficiency",
 
              "Emissions|CH4_GWP*AR6|Land",
              "Emissions|CH4_GWP*AR6|Land|+|Agriculture",
@@ -628,36 +681,14 @@ var_reg <- c(indicators_main,
              "Emissions|NO3-|Land|Agriculture|Agricultural Soils|+|Soil Organic Matter Loss",
              "Emissions|NO3-|Land|Agriculture|Agricultural Soils|Inorganic Fertilizers|+|Cropland",
              "Emissions|NO3-|Land|Agriculture|Agricultural Soils|Inorganic Fertilizers|+|Pasture",
-             "Emissions|NO3-|Land|Biomass Burning|+|Burning of Crop Residues",
-
-             "SDG|SDG15|Afforestation",
-
-
-             "Nutrition|Anthropometrics|People normalweight",
-             "Nutrition|Anthropometrics|People obese",
-             "Nutrition|Anthropometrics|People overweight",
-             "Nutrition|Anthropometrics|People underweight",
-             "Labor|Employment|Agricultural employment",
-             "Labor|Employment|Agricultural employment|+|Crop products",
-             "Labor|Employment|Agricultural employment|+|Livestock products",
-             "Labor|Employment|Agricultural employment|+|MACCS",
-             "Labor|Wages|Hourly labor costs",
-             "Labor|Total Hours Worked",
-             "Income|Gini Coefficient",
-             "Income|Average Income of Lower 40% of Population",
-             "Income|Fraction of Population below half of Median Income",
-             "Income|Number of People Below 1p90 USDppp11/day",
-             "Income|Number of People Below 3p20 USDppp11/day",
-             "Income|Number of People Below 5p50 USDppp11/day",
-             "Health|Years of life lost|Disease",
-             "Health|Years of life lost|Disease|+|Congenital Heart Disease",
-             "Health|Years of life lost|Disease|+|Stroke",
-             "Health|Years of life lost|Disease|+|Cancer",
-             "Health|Years of life lost|Disease|+|Type-2 Diabetes",
-             "Health|Years of life lost|Disease|+|Respiratory Disease",
-             "Health|Attributable deaths|Disease"
+             "Emissions|NO3-|Land|Biomass Burning|+|Burning of Crop Residues"
 )
-var_reg <- unique(var_reg)
+
+# make sure there are no duplicates
+var_reg_LR <- unique(var_reg_LR)
+var_reg_HR <- unique(var_reg_HR)
+var_reg_HR <- setdiff(var_reg_HR, var_reg_LR)
+var_reg_LR <- setdiff(var_reg_LR, var_reg_HR)
 
 var_iso <- c("Population",
              "Health|Years of life lost|Disease",
@@ -669,18 +700,50 @@ var_iso <- c("Population",
              "Income|Gini Coefficient")
 var_iso <- unique(var_iso)
 
-for (i in 1:length(outputdir)) {
-  print(paste("Processing",outputdir[i]))
-  cfg <- gms::loadConfig(file.path(outputdir[i], "config.yml"))
+if(split_resolutions){
+    outputdirHR <- outputdir[grep(pattern = "HRc1000", x=outputdir)]
+    outputdirLR <- setdiff(outputdir, outputdirHR)
+} else {
+    outputdirLR <- outputdir
+}
+
+for (i in 1:length(outputdirLR)) {
+  print(paste("Processing",outputdirLR[i]))
+  cfg <- gms::loadConfig(file.path(outputdirLR[i], "config.yml"))
+  
+  if (split_resolutions){
+    this_outputdirHR <- outputdirHR[grep(cfg$title, gsub(pattern="HRc1000",replacement="", x=outputdirHR))]
+    if(length(this_outputdirHR)==1){
+        print(paste("Found HR folder",this_outputdirHR))
+    } else {
+        warning(paste("HR folder",this_outputdirHR, "not found. using LR folder"))
+        missing <- c(missing,this_outputdirHR)
+        this_outputdirHR <- outputdirLR[i]
+    } 
+  } else {
+    this_outputdirHR <- outputdirLR[i]
+  }
+  
+  cfgHR <- gms::loadConfig(file.path(this_outputdirHR, "config.yml"))
 
   ### regional level outputs
-  rep <- file.path(outputdir[i], "report.rds")
-  if(file.exists(rep)) {
-    a <- as.data.table(readRDS(rep))
-    a <- a[variable %in% var_reg,]
+  ## read in from LR runs
+  repLR <- file.path(outputdirLR[i], "report.rds")
+  if(file.exists(repLR)) {
+    a <- as.data.table(readRDS(repLR))
+    a <- a[variable %in% var_reg_LR,]
     a <- droplevels(a)
     reg <- rbind(reg, a)
-  } else missing <- c(missing,rep)
+  } else missing <- c(missing,repLR)
+  ### read in from HR runs
+  repHR <- file.path(this_outputdirHR, "report.rds")
+  if(file.exists(repHR)) {
+    a <- as.data.table(readRDS(repHR))
+    a <- a[variable %in% var_reg_HR,]
+    a <- droplevels(a)
+    levels(a$scenario) <- cfg$title
+    reg <- rbind(reg, a)
+  } else missing <- c(missing,repHR)
 
   ### ISO and Grid level outputs
   ## only for BAU and SDP in 2020 and 2050 to save time and storage
@@ -688,26 +751,22 @@ for (i in 1:length(outputdir)) {
   scen <- c("BAU", "FSDP", "SSP2fsdp")
   thisScen <- unlist(strsplit(cfg$title, "_"))[3]
   if (thisScen %in% scen) {
+    print(paste("grid level processing for run",outputdirLR[i]))
 
     ### ISO level outputs
-    rep <- file.path(outputdir[i], "report_iso.rds")
+    rep <- file.path(outputdirLR[i], "report_iso.rds")
     if(file.exists(rep)) {
       a <- as.data.table(readRDS(rep))
       a <- a[variable %in% var_iso & period %in% years,]
       a <- droplevels(a)
       iso <- rbind(iso, a)
     } else missing <- c(missing,rep)
-  }
 
-  scen <- c("BAU", "FSDP", "SSP2fsdp")
-  #scen <- c("ERROR")
-  thisScen <- unlist(strsplit(cfg$title, "_"))[3]
-  if (thisScen %in% scen) {
     ###Grid level outputs
     y     <- NULL
 
     ## BII
-    nc_file <- file.path(outputdir[i], "cell.bii_0.5.mz") #Note the "_" instead of "-"
+    nc_file <- file.path(this_outputdirHR, "cell.bii_0.5.mz") #Note the "_" instead of "-"
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "BII (index)"
@@ -722,9 +781,7 @@ for (i in 1:length(outputdir)) {
                   "SSP2fsdp" = "ssp245",
                   "Invalid case")
 
-
     nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24/FSEC_GlobalSurfaceTempPerRCP_v4_19-03-24.mz"
-
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, rcp]
       getNames(a) <- "Global Surface Temperature (C)"
@@ -733,7 +790,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing, nc_file)
 
     ## Crop diversity
-    nc_file <- file.path(outputdir[i], paste0(cfg$title, "-CropDiversityGridded.mz"))
+    nc_file <- file.path(this_outputdirHR, paste0(cfgHR$title, "-CropDiversityGridded.mz"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
       getNames(a) <- "Shannon crop diversity (index)"
@@ -742,7 +799,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,nc_file)
 
     ## land patterns Mha
-    nc_file <- file.path(outputdir[i], "cell.land_0.5.mz")
+    nc_file <- file.path(this_outputdirHR, "cell.land_0.5.mz")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- paste0(getNames(a)," (Mha)")
@@ -751,7 +808,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,nc_file)
 
     ## land patterns share
-    nc_file <- file.path(outputdir[i], "cell.land_0.5_share.mz")
+    nc_file <- file.path(this_outputdirHR, "cell.land_0.5_share.mz")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       land_hr_shr <- a #needed for croparea shares
@@ -761,7 +818,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,nc_file)
 
     ## croparea shares
-    nc_file <- file.path(outputdir[i], "cell.croparea_0.5_share.mz")
+    nc_file <- file.path(this_outputdirHR, "cell.croparea_0.5_share.mz")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       a <- dimSums(a,dim = "w")
@@ -774,7 +831,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,nc_file)
 
     ## Nitrogen
-    nc_file <- file.path(outputdir[i], paste(cfg$title, "nutrientSurplus_intensity.mz", sep = "-"))
+    nc_file <- file.path(this_outputdirHR, paste(cfgHR$title, "nutrientSurplus_intensity.mz", sep = "-"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "nutrientSurplus (kg N per ha)"
@@ -783,7 +840,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing, nc_file)
 
     ## Water
-    nc_file <- file.path(outputdir[i], "watStressViolations.mz")
+    nc_file <- file.path(this_outputdirHR, "watStressViolations.mz")
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water stress and violations"
@@ -791,7 +848,7 @@ for (i in 1:length(outputdir)) {
       y <- mbind(y, a)
     } else missing <- c(missing, nc_file)
 
-    nc_file <- file.path(outputdir[i], "efvVolume.mz")
+    nc_file <- file.path(this_outputdirHR, "efvVolume.mz")
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water environmental flow violations volume (km3)"
@@ -799,7 +856,7 @@ for (i in 1:length(outputdir)) {
       y <- mbind(y, a)
     } else missing <- c(missing, nc_file)
 
-    nc_file <- file.path(outputdir[i], "efvVolume_ha.mz")
+    nc_file <- file.path(this_outputdirHR, "efvVolume_ha.mz")
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water environmental flow violations volume (m3/ha)"
@@ -842,13 +899,11 @@ reg  <- renameScenario(reg)
 saveRDS(reg,  file = file.path("output", paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
 iso  <- renameScenario(iso)
 saveRDS(iso,  file = file.path("output", paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
-if(!is.null(grid)){
-  grid <- renameScenario(grid)
-  saveRDS(grid, file = file.path("output", paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
-}
+grid <- renameScenario(grid)
+saveRDS(grid, file = file.path("output", paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
 
 # save i_to_iso mapping
-gdx     <- file.path(outputdir[1], "fulldata.gdx")
+gdx     <- file.path(outputdirLR[1], "fulldata.gdx")
 reg2iso <- readGDX(gdx, "i_to_iso")
 names(reg2iso) <- c("region", "iso_a3")
 write.csv(reg2iso, file.path("output", "reg2iso.csv"))
