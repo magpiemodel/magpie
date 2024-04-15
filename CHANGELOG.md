@@ -17,7 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **44_biodiversity** avoid division by zero
+- **scenario_config.csv** same revision for input files as in default.cfg
+- **scenario_fsec.csv** scenario settings
+- **start/projects/fsec.R** scenario settings
 
 
 ## [4.7.3] - 2024-04-12
