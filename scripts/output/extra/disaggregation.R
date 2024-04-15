@@ -109,7 +109,7 @@ if (length(map_file) > 1) {
       )
       iso <- readGDX(gdx, "iso")
       consv_iso <- readGDX(gdx, "policy_countries22")
-      consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.1)]
+      consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.3)]
       consv_select <- cfg$gms$c22_protect_scenario
       consv_noselect <- cfg$gms$c22_protect_scenario_noselect
 
