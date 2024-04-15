@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
+- **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
 - **44_biodiversity** avoid division by zero
 - **scenario_config.csv** same revision for input files as in default.cfg
 - **scenario_fsec.csv** scenario settings
