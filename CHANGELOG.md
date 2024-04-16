@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+## [Unreleased]
+
+### changed
+-
+
+### added
+-
+
+### removed
+-
+
+### fixed
+-
+
+
 ## [4.7.3] - 2024-04-12
 
 ### changed
@@ -23,6 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **56_ghg_policy** added NDC scenarios
 - **60_bioenergy** added NDC scenarios
 - **scripts** start script for EAT2p0 Deep Dive project
+
 ### fixed
 - **15_food** Small number rather 0 in condition checking calorie balancing
 - **34_urban** `static` realization was not working because `vm_carbon_stock` was referenced without the set `stockType`
