@@ -127,7 +127,6 @@ if (length(map_file) > 1) {
         names = getNames(consv_prio_all, dim = 2), fill = 0,
         sets = c("x.y.iso", "year", "data")
       )
-
       consv_select <- cfg$gms$c22_protect_scenario
       consv_noselect <- cfg$gms$c22_protect_scenario_noselect
 
