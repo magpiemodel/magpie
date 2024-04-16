@@ -7,18 +7,22 @@ if (tryCatch(utils::packageVersion("gms") < gmsRequiredVersion, error = function
 }
 
 message("Checking files for tabs... ", appendLF = FALSE)
-gms::checkNoTabs(pattern = "\\.(R|Rprofile|gms|cfg|bib)$", excludeFolders = c("output", "renv", ".git"))
+gms::checkNoTabs(pattern = "\\.(R|Rprofile|gms|cfg|bib)$",
+                 excludeFolders = c("output", "renv", ".git"))
 message("done.")
 
-# run codeCheck
-invisible(gms::codeCheck(strict = TRUE))
-message("")
+stagedFiles <- system("git diff --cached --name-only", intern = TRUE)
+
+# run codeCheck only if .gms file is staged
+if (any(endsWith(stagedFiles, ".gms"))) {
+  invisible(gms::codeCheck(strict = TRUE))
+  message("")
+}
 
 
 # make sure that files are not too big
 maxfilesize <- function(max) {
-  files <- union(system("git ls-tree -r HEAD --name-only", intern = TRUE),
-                 system("git diff --cached --name-only", intern = TRUE))
+  files <- union(system("git ls-tree -r HEAD --name-only", intern = TRUE), stagedFiles)
   out <- data.frame(files = files, size = round(file.size(files) / 1024, 2))
   out <- out[!is.na(out$size), ]
   out <- out[out$size > max, ]
