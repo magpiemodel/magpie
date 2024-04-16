@@ -48,44 +48,36 @@
 
  q29_carbon(j2,ag_pools,stockType) ..
   vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
-  vm_carbon_stock_crop(j2,ag_pools) 
+  vm_carbon_stock_croparea(j2,ag_pools) 
   + vm_fallow(j2) * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools))
-  + m_carbon_stock_ac(v29_treecover,p31_carbon_density_ac,"ac","ac_sub");
+  + m_carbon_stock_ac(v29_treecover,p29_carbon_density_ac,"ac","ac_sub");
 
-
-*' Total agroforestry cost. 
-*' Cost for bioenergy trees are accounted for in the [30_crop] module. 
-q61_cost_cropland(j2) ..
+q29_cost_cropland(j2) ..
  vm_cost_cropland(j2) =e= 
- v61_cost_treecover_est(j2) + v61_cost_treecover_recur(j2);
+ v29_cost_treecover_est(j2) + v29_cost_treecover_recur(j2);
 
 *' Tree cover establishment cost
-q61_cost_treecover_est(j2) ..
- v61_cost_treecover_est(j2) =e= 
- sum(ac_est, v61_treecover(j2,ac_est)) * s61_cost_treecover_est * 
+q29_cost_treecover_est(j2) ..
+ v29_cost_treecover_est(j2) =e= 
+ sum(ac_est, v29_treecover(j2,ac_est)) * s29_cost_treecover_est * 
  sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
 *' Tree cover recurring cost
-q61_cost_treecover_recur(j2) ..
- v61_cost_treecover_recur(j2) =e= 
- sum(ac_sub, v61_treecover(j2,ac_sub)) * s61_cost_treecover_recur;
+q29_cost_treecover_recur(j2) ..
+ v29_cost_treecover_recur(j2) =e= 
+ sum(ac_sub, v29_treecover(j2,ac_sub)) * s29_cost_treecover_recur;
 
 *' Tree cover minimum share
-q61_treecover_shr(j2) ..
-  sum(ac, v61_treecover(j2,ac)) =g= 
-  sum(ct, p61_treecover_min_shr(ct,j2)) * vm_land(j2,"crop");
-
-*' Bioenergy tree minimum share
-q61_betr_shr(j2) ..
-  sum(w, vm_area(j2,"betr",w)) =g=
-  sum(ct, p61_betr_min_shr(ct,j2)) * vm_land(j2,"crop");
+q29_treecover_shr(j2) ..
+  sum(ac, v29_treecover(j2,ac)) =g= 
+  sum(ct, p29_treecover_min_shr(ct,j2)) * vm_land(j2,"crop");
 
 *' Tree cover establishment
-q61_treecover_est(j2,ac_est) ..
-  v61_treecover(j2,ac_est) =e= sum(ac_est2, v61_treecover(j2,ac_est2))/card(ac_est2);
+q29_treecover_est(j2,ac_est) ..
+  v29_treecover(j2,ac_est) =e= sum(ac_est2, v29_treecover(j2,ac_est2))/card(ac_est2);
 
 *' Tree cover biodiversity value
-q61_treecover_bv(j2,potnatveg) .. 
+q29_treecover_bv(j2,potnatveg) .. 
   vm_bv(j2,"crop_tree",potnatveg) =e=
-  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v61_treecover(j2,ac)) * 
-  p61_treecover_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v29_treecover(j2,ac)) * 
+  p29_treecover_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);

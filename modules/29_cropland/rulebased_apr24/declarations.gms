@@ -24,9 +24,7 @@ parameters
 
 
  p29_treecover_min_shr(t,j)           Minimum share of treecover on cropland (1)
- p29_betr_min_shr(t,j)                Minimum share of bioenergy trees on cropland (1)
  p29_treecover_scenario_fader(t_all)  Cropland treecover scenario fader (1)
- p29_betr_scenario_fader(t_all)       Bioenergy trees scenario fader (1)
  p29_treecover_bii_coeff(bii_class_secd,potnatveg)  BII coefficient for cropland treecover (1)
  p29_carbon_density_ac(t,j,ac,ag_pools) Carbon density for ac and ag_pools (tC per ha)
  p29_treecover(t,j,ac)                  Cropland tree cover per age class (mio. ha)
@@ -36,17 +34,43 @@ parameters
 positive variables
  vm_fallow(j)                       Fallow land is temporarily fallow cropland (mio. ha)
  v29_treecover(j,ac)                Cropland tree cover per age class (mio. ha)
+ vm_cost_cropland(j)
+ v29_cost_treecover_est(j)        Establishment cost for cropland tree cover (mio. USD05MER per yr)
+ v29_cost_treecover_recur(j)      Recurring cost for cropland tree cover (mio. USD05MER per yr)
 ;
 
 equations
  q29_cropland(j)                    Total cropland calculation (mio. ha)
  q29_avl_cropland(j)                Available cropland constraint (mio. ha)
- q29_rotation_max(j,crp29,w)        Local maximum rotational constraints (mio. ha)
- q29_rotation_min(j,crp29,w)        Local minimum rotational constraints (mio. ha)
- q29_prod(j,kcr)                    Production of cropped products (mio. tDM)
  q29_carbon(j,ag_pools,stockType)   Cropland above ground carbon content calculation (mio. tC)
- q29_bv_ann(j,potnatveg)            Biodiversity value of annual cropland (mio. ha)
- q29_bv_per(j,potnatveg)            Biodiversity value of perennial cropland (mio. ha)
  q29_land_snv(j)                    Land constraint for the SNV policy in cropland areas (mio. ha)
  q29_land_snv_trans(j)              Land transition constraint for SNV policy in cropland areas (mio. ha)
+ q29_cost_cropland(j)          Costs and benefits related to agroforestry (mio. USD05MER per yr)
+ q29_cost_treecover_est(j)         Establishment cost for cropland tree cover (mio. USD05MER per yr)
+ q29_cost_treecover_recur(j)       Recurring cost for cropland tree cover (mio. USD05MER per yr)
+ q29_treecover_shr(j)              Cropland treecover minimum share (mio. ha)
+ q29_treecover_est(j,ac)           Cropland treecover establishment (mio. ha)
+ q29_treecover_bv(j,potnatveg)     Biodiversity value for cropland treecover (Mha)
 ;
+
+*#################### R SECTION START (OUTPUT DECLARATIONS) ####################
+parameters
+ ov_fallow(t,j,type)                      Fallow land is temporarily fallow cropland (mio. ha)
+ ov29_treecover(t,j,ac,type)              Cropland tree cover per age class (mio. ha)
+ ov_cost_cropland(t,j,type)               
+ ov29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD05MER per yr)
+ ov29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD05MER per yr)
+ oq29_cropland(t,j,type)                  Total cropland calculation (mio. ha)
+ oq29_avl_cropland(t,j,type)              Available cropland constraint (mio. ha)
+ oq29_carbon(t,j,ag_pools,stockType,type) Cropland above ground carbon content calculation (mio. tC)
+ oq29_land_snv(t,j,type)                  Land constraint for the SNV policy in cropland areas (mio. ha)
+ oq29_land_snv_trans(t,j,type)            Land transition constraint for SNV policy in cropland areas (mio. ha)
+ oq29_cost_cropland(t,j,type)             Costs and benefits related to agroforestry (mio. USD05MER per yr)
+ oq29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD05MER per yr)
+ oq29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD05MER per yr)
+ oq29_treecover_shr(t,j,type)             Cropland treecover minimum share (mio. ha)
+ oq29_treecover_est(t,j,ac,type)          Cropland treecover establishment (mio. ha)
+ oq29_treecover_bv(t,j,potnatveg,type)    Biodiversity value for cropland treecover (Mha)
+;
+*##################### R SECTION END (OUTPUT DECLARATIONS) #####################
+

@@ -14,6 +14,7 @@
  q30_prod(j2,kcr) ..
   vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
 
+
 *' Rotational constraints prevent over-specialization. In this module realization,
 *' they are implemented via a penalty payment if the constraints are violated.
 
@@ -25,6 +26,7 @@ q30_rotation_penalty(i2) ..
     + sum(rotamax_red30, v30_penalty_max_irrig(j2,rotamax_red30) * sum(ct, i30_rotation_incentives(ct,rotamax_red30)))
   );
 
+
 *' The penalty applies to the areas which exceed a certain maximum
 *' share of the land. Below this share, negative benefits are
 *' avoided by defining the penalty to be positive.
@@ -34,6 +36,7 @@ q30_rotation_penalty(i2) ..
    =g=
    sum((rota_kcr30(rotamax_red30,kcr),w),vm_area(j2,kcr,w))
    - vm_land(j2,"crop") * f30_rotation_rules(rotamax_red30);
+
 
 *' Minimum constraints apply penalties when a certain mimimum
 *' share of a group is not achieved. This is used to guarantee a minimum
@@ -45,6 +48,7 @@ q30_rotation_penalty(i2) ..
     vm_land(j2,"crop") * f30_rotation_rules(rotamin_red30)
     - sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w));
 
+
 *' The following maximum constraint avoids over-specialization in irrigated systems.
 *' No minimum constraint is included for irrigated areas for computational
 *' reasons. Minimum constraints just need to be met on total areas.
@@ -55,21 +59,21 @@ q30_rotation_penalty(i2) ..
    sum((rota_kcr30(rotamax_red30,kcr)), vm_area(j2,kcr,"irrigated"))
    - vm_AEI(j2) * f30_rotation_rules(rotamax_red30);
 
+
 *' The carbon stocks of the above ground carbon pools are calculated based on croparea and related carbon density.
 
  q30_carbon(j2,ag_pools) ..
   vm_carbon_stock_croparea(j2,ag_pools) =e=
             sum((kcr,w), vm_area(j2,kcr,w)) * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools));
 
+
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
+
  q30_bv_ann(j2,potnatveg) ..
           vm_bv(j2,"crop_ann",potnatveg)
           =e=
           sum((crop_ann30,w), vm_area(j2,crop_ann30,w)) * fm_bii_coeff("crop_ann",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
-*' perennial crops are calculated as difference, as they shall also include fallow land
- q30_bv_per(j2,potnatveg) ..
-        vm_bv(j2,"crop_per",potnatveg)
-        =e=
-        (vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
-        * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+ q30_bv_per(j2,potnatveg) .. vm_bv(j2,"crop_per",potnatveg)
+          =e=
+          sum((crop_per30,w), vm_area(j2,crop_per30,w)) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);

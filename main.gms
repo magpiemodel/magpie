@@ -249,6 +249,7 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
 
+$setglobal cropland  rulebased_apr24
 $setglobal crop  endo_apr21
 $setglobal past  endo_jun13
 
@@ -281,7 +282,6 @@ $setglobal peatland  v2
 $setglobal som  static_jan19
 
 $setglobal bioenergy  1stgen_priced_dec18
-$setglobal agroforestry  off
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 

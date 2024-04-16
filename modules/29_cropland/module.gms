@@ -14,5 +14,5 @@
 *' @authors Florian Humpenöder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%ageclass%" == "feb21" $include "./modules/28_ageclass/feb21/realization.gms"
+$Ifi "%cropland%" == "rulebased_apr24" $include "./modules/29_cropland/rulebased_apr24/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

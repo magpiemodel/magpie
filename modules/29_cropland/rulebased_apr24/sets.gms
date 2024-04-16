@@ -7,13 +7,13 @@
 
 sets
 
-   marginal_land30 Marginal land scenarios
+   marginal_land29 Marginal land scenarios
     / all_marginal, q33_marginal, no_marginal  /
 
-   policy_target30 Target year for cropland policy
-   / none, by2030, by2050 /
+   policy_target29 Target year for cropland policy
+   / none, by2029, by2050 /
 
-   relocation_target30 Cropland requiring relocation based on different SNV targets
+   relocation_target29 Cropland requiring relocation based on different SNV targets
    / SNV20TargetCropland, SNV50TargetCropland /
 
 ;

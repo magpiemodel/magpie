@@ -33,7 +33,8 @@
      sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_min_shr(crpmin30);
 
 
-*' Bioenergy tree minimum share
+*' Bioenergy tree minimum share on cropland
+
 q30_betr_shr(j2) ..
   sum(w, vm_area(j2,"betr",w)) =g=
   sum(ct, p30_betr_min_shr(ct,j2)) * vm_land(j2,"crop");
