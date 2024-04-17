@@ -43,9 +43,9 @@ scalars
   s60_2ndgen_bioenergy_dem_min_post_fix Minimum dedicated 2nd generation bioenergy demand assumed in each region after SSP2-fix  (mio. GJ per yr) / 1 /
 ;
 
-$setglobal c60_price_implementation  lin
-$setglobal c60_2ndgen_biodem  R32M46-SSP2EU-NPi
-$setglobal c60_2ndgen_biodem_noselect  R32M46-SSP2EU-NPi
+$setglobal c60_price_implementation  exp
+$setglobal c60_2ndgen_biodem  R21M42-SSP2-Npi-PhaseOut50
+$setglobal c60_2ndgen_biodem_noselect  R21M42-SSP2-NPi
 
 
 $if "%c60_2ndgen_biodem%" == "coupling" table f60_bioenergy_dem_coupling(t_all,i) Bioenergy demand (regional) (mio. GJ per yr)
