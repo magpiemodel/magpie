@@ -28,7 +28,7 @@ fsecScenario <- function(scenario) {
             d_SSP3bau        = list(standard = c("cc", "SSP3", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP3", "RCP70")),
             d_SSP4bau        = list(standard = c("cc", "SSP4", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "SSP4", "RCP45")),
+                                  fsec = c("FSEC", "SSP4", "RCP60")),
             d_SSP5bau        = list(standard = c("cc", "SSP5", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP5", "RCP85")),
             # FSDP (all transformations active)
@@ -37,13 +37,13 @@ fsecScenario <- function(scenario) {
                                   "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
                                   "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19")),
+                                  "soil", "allDietAndWaste", "allEnvPrice", "SDPenergy", "RCP19")),
             f_FSDPlabor1p9 = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC",
                                   "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
                                   "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19", "labor1p9")),
+                                  "soil", "allDietAndWaste", "allEnvPrice", "SDPenergy", "RCP19", "labor1p9")),
             # FSDPs (without external)
             d_SSP1fsdp       = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
@@ -135,7 +135,7 @@ fsecScenario <- function(scenario) {
                                         fsec = c("FSEC", "soil", "RCP60")),
             # Scenarios (combinations of transformation clusters)
             b_ExternalPressures   = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics", "timberCities", "SSP1energy", "RCP26")),
+                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics", "timberCities", "SDPenergy", "RCP26")),
             b_WaterSoil           = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "soil", "RCP60")),
             b_REDDaffRuminants    = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
@@ -196,7 +196,7 @@ fsecScenario <- function(scenario) {
             b_Protection          = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "landSparing", "peatland", "RCP60")),
             b_NatureSparing       = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland", "biodiversity", "REDDaff", "RCP45"))
+                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland", "biodiversity", "REDDaff", "RCP60"))
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
