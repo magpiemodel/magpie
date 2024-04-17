@@ -32,7 +32,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core** added `coup2110`timesteps
 - **15_food** added additional sigmoid food substition scenarios `sigmoid_75pc_25_50`, `sigmoid_50pc_25_50` and `sigmoid_25pc_25_50`
 - **30_crop** added regional cropland equation `q30_crop_reg` and presolve growth constraint
-- **32_forestry** added cluster-level new afforestation area constraint for 2025
 - **44_biodiversity** added new realization `bii_target_apr24`, taking into account `f44_rr_layer`
 - **60_bioenergy** added new realization `1st2ndgen_priced_feb24` to enable price-driven 2nd gen bioenergy production
 - **scripts** added automatic set writer for new bioenergy realization to `start_functions`
