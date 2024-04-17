@@ -388,7 +388,7 @@ if ((s15_exo_diet = 1 or s15_exo_diet = 2),
              i15_intake_scen_target(t,iso) * p15_intake_detailed_scen_target(t,iso,EAT_nonstaples_old) / sum(EAT_nonstaples2_old, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2_old))
                     ;
 
-    if (smin((iso,kfo), p15_intake_detailed_scen_target(t,iso,kfo)) < 0,
+    if (smin((iso,kfo), p15_intake_detailed_scen_target(t,iso,kfo)) < (-1e-10),
        abort "The parameter p15_intake_detailed_scen_target became negative after calorie balancing.";
     );
 
@@ -616,10 +616,14 @@ elseif s15_exo_diet = 3,
          i15_intake_scen_target(t,iso) * p15_intake_detailed_scen_target(t,iso,EAT_nonstaples) /
          sum(EAT_nonstaples2, p15_intake_detailed_scen_target(t,iso,EAT_nonstaples2));
 
-  if (smin((iso,kfo), p15_intake_detailed_scen_target(t,iso,kfo)) < 0,
+  if (smin((iso,kfo), p15_intake_detailed_scen_target(t,iso,kfo)) < (-1e-10),
      display p15_intake_detailed_scen_target;
      abort "The parameter p15_intake_detailed_scen_target became negative after calorie balancing.";
      );
+
+* Correction of very small values
+  p15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_detailed_scen_target(t,iso,kfo) < 0) = 0;
+
 
 );
 *** End of MAgPIE-specific realization of the EAT Lancet diet

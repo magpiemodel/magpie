@@ -39,5 +39,7 @@ Imports:
 Suggests:
     goxygen,
     languageserver,
-    qgraph
+    qgraph,
+    shinyresults,
+    XML
 Encoding: UTF-8
