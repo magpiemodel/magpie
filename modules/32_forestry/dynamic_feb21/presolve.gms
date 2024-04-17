@@ -158,10 +158,6 @@ else
   v32_land.up(j,"aff",ac_est) = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 );
 
-if(m_year(t) = 2025,
-  v32_land.up(j,"aff","ac0") = s32_max_aff_cell_2025;
-);
-
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
