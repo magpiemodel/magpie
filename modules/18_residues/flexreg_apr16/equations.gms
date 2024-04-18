@@ -15,7 +15,7 @@
                  vm_res_biomass_ag(i2,kcr,w,attributes)
                  =e=
                  (sum(cell(i2,j2), vm_area(j2,kcr,w)) * sum(ct,f18_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
-                 + vm_prod_reg(i2,kcr) * f18_cgf("slope",kcr))
+                 + sum(cell(i2,j2), vm_prod_kcr_w(j2,kcr,w)) * f18_cgf("slope",kcr))
                  * f18_attributes_residue_ag(attributes,kcr);
 
 *' The BG crop residue biomass `vm_res_biomass_bg` is calculated as a function of

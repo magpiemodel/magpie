@@ -15,7 +15,7 @@
                  v18_res_biomass_ag_clust(j2,kcr,w,attributes)
                  =e=
                  vm_area(j2,kcr,w) * sum((ct, cell(i2,j2)), f18_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
-                 + vm_prod(j2,kcr) * f18_cgf("slope",kcr)
+                 + vm_prod_kcr_w(j2,kcr,w) * f18_cgf("slope",kcr)
                  * f18_attributes_residue_ag(attributes,kcr);
 
  q18_sumreg_res_biomass_ag(i2,kcr,w,attributes) ..
