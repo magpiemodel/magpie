@@ -50,7 +50,8 @@ equations
  q29_cost_treecover_recur(j)       Recurring cost for cropland tree cover (mio. USD05MER per yr)
  q29_treecover_shr(j)              Cropland treecover minimum share (mio. ha)
  q29_treecover_est(j,ac)           Cropland treecover establishment (mio. ha)
- q29_treecover_bv(j,potnatveg)     Biodiversity value for cropland treecover (Mha)
+ q29_treecover_bv(j,potnatveg)     Biodiversity value for cropland treecover (mio. ha)
+ q29_fallow_bv(j,potnatveg)       Biodiversity value for fallow land (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -70,7 +71,8 @@ parameters
  oq29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD05MER per yr)
  oq29_treecover_shr(t,j,type)             Cropland treecover minimum share (mio. ha)
  oq29_treecover_est(t,j,ac,type)          Cropland treecover establishment (mio. ha)
- oq29_treecover_bv(t,j,potnatveg,type)    Biodiversity value for cropland treecover (Mha)
+ oq29_treecover_bv(t,j,potnatveg,type)    Biodiversity value for cropland treecover (mio. ha)
+ oq29_fallow_bv(t,j,potnatveg,type)       Biodiversity value for fallow land (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
