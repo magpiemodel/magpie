@@ -11,7 +11,7 @@ sets
     / crop_ann, crop_per, crop_tree, manpast, rangeland, urban, aff_ndc, aff_co2p, primforest, secdforest, other, plant /
 
   bii_class44 bii coefficent land cover classes
-    / crop_ann, crop_per, crop_tree, manpast, rangeland, urban, primary, secd_mature, secd_young, timber /
+    / crop_ann, crop_per, crop_tree, crop_fallow, manpast, rangeland, urban, primary, secd_mature, secd_young, timber /
 
   bii_class_secd(bii_class44) bii coefficent land cover classes secondary vegetation
     / secd_mature, secd_young /

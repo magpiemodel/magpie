@@ -81,3 +81,8 @@ q29_treecover_bv(j2,potnatveg) ..
   vm_bv(j2,"crop_tree",potnatveg) =e=
   sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v29_treecover(j2,ac)) * 
   p29_treecover_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
+
+*' Tree cover biodiversity value
+q29_fallow_bv(j2,potnatveg) .. 
+  vm_bv(j2,"crop_fallow",potnatveg) =e=
+  vm_fallow(j2) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);

@@ -19,7 +19,7 @@ scalars
  s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
  s30_betr_min_shr                Minimum share of bioenergy trees on cropland (1) / 0 /
  s30_betr_scenario_start         Bioenergy trees scenario start year       / 2020 /
- s30_betr_scenario_target        Bioenergy trees scenario target year      / 2050 /
+ s30_betr_scenario_target        Bioenergy trees scenario target year      / 2040 /
 ;
 
 $ifthen "%c30_bioen_type%" == "all" bioen_type_30(kbe30) = yes;

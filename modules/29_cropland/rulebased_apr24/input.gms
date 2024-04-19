@@ -5,9 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* $setglobal c29_snv_target  none
-* options: none, by2030, by2020
-
 $setglobal c29_marginal_land  q33_marginal
 * options: all_marginal, q33_marginal, no_marginal
 
@@ -24,8 +21,8 @@ s29_snv_relocation_data_x2      Second reference value in SNV target cropland da
  s29_treecover_bii_coeff         BII coefficent to be used for tree cover on cropland 0=secondary vegetation 1=timber plantations (1) / 0 /
  s29_treecover_decrease          Cropland treecover can decrease (1) or not (0) / 0 /
  s29_treecover_scenario_start    Cropland treecover scenario start year       / 2020 /
- s29_treecover_scenario_target   Cropland treecover scenario target year      / 2050 /
- s29_treecover_min_shr           Share of treecover on cropland (1) / 0.2 /
+ s29_treecover_scenario_target   Cropland treecover scenario target year      / 2040 /
+ s29_treecover_min_shr           Share of treecover on cropland (1) / 0 /
 ;
 
 
