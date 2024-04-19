@@ -24,5 +24,3 @@ rotamax_red30(rotamax30) = yes$(i30_rotation_max_shr(t,rotamax30) < 1);
 rotamin_red30(rotamin30) = yes$(i30_rotation_min_shr(t,rotamin30) > 0);
 
 vm_rotation_penalty.fx(i)=0;
-
-p30_betr_min_shr(t,j) = p30_betr_scenario_fader(t) * s30_betr_min_shr;

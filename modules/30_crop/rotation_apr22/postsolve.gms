@@ -14,7 +14,6 @@
  oq30_rotation_max(t,j,rotamax30,"marginal")       = q30_rotation_max.m(j,rotamax30);
  oq30_rotation_min(t,j,rotamin30,"marginal")       = q30_rotation_min.m(j,rotamin30);
  oq30_rotation_max_irrig(t,j,rotamax30,"marginal") = q30_rotation_max_irrig.m(j,rotamax30);
- oq30_betr_shr(t,j,"marginal")                     = q30_betr_shr.m(j);
  oq30_carbon(t,j,ag_pools,"marginal")              = q30_carbon.m(j,ag_pools);
  oq30_bv_ann(t,j,potnatveg,"marginal")             = q30_bv_ann.m(j,potnatveg);
  oq30_bv_per(t,j,potnatveg,"marginal")             = q30_bv_per.m(j,potnatveg);
@@ -25,7 +24,6 @@
  oq30_rotation_max(t,j,rotamax30,"level")          = q30_rotation_max.l(j,rotamax30);
  oq30_rotation_min(t,j,rotamin30,"level")          = q30_rotation_min.l(j,rotamin30);
  oq30_rotation_max_irrig(t,j,rotamax30,"level")    = q30_rotation_max_irrig.l(j,rotamax30);
- oq30_betr_shr(t,j,"level")                        = q30_betr_shr.l(j);
  oq30_carbon(t,j,ag_pools,"level")                 = q30_carbon.l(j,ag_pools);
  oq30_bv_ann(t,j,potnatveg,"level")                = q30_bv_ann.l(j,potnatveg);
  oq30_bv_per(t,j,potnatveg,"level")                = q30_bv_per.l(j,potnatveg);
@@ -36,7 +34,6 @@
  oq30_rotation_max(t,j,rotamax30,"upper")          = q30_rotation_max.up(j,rotamax30);
  oq30_rotation_min(t,j,rotamin30,"upper")          = q30_rotation_min.up(j,rotamin30);
  oq30_rotation_max_irrig(t,j,rotamax30,"upper")    = q30_rotation_max_irrig.up(j,rotamax30);
- oq30_betr_shr(t,j,"upper")                        = q30_betr_shr.up(j);
  oq30_carbon(t,j,ag_pools,"upper")                 = q30_carbon.up(j,ag_pools);
  oq30_bv_ann(t,j,potnatveg,"upper")                = q30_bv_ann.up(j,potnatveg);
  oq30_bv_per(t,j,potnatveg,"upper")                = q30_bv_per.up(j,potnatveg);
@@ -47,7 +44,6 @@
  oq30_rotation_max(t,j,rotamax30,"lower")          = q30_rotation_max.lo(j,rotamax30);
  oq30_rotation_min(t,j,rotamin30,"lower")          = q30_rotation_min.lo(j,rotamin30);
  oq30_rotation_max_irrig(t,j,rotamax30,"lower")    = q30_rotation_max_irrig.lo(j,rotamax30);
- oq30_betr_shr(t,j,"lower")                        = q30_betr_shr.lo(j);
  oq30_carbon(t,j,ag_pools,"lower")                 = q30_carbon.lo(j,ag_pools);
  oq30_bv_ann(t,j,potnatveg,"lower")                = q30_bv_ann.lo(j,potnatveg);
  oq30_bv_per(t,j,potnatveg,"lower")                = q30_bv_per.lo(j,potnatveg);

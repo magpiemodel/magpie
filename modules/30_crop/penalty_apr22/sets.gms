@@ -7,22 +7,20 @@
 
 sets
   rotascen30 rotation constraint scenarios
-  /none,  default,  fallow, legumes,  agroforestry, agroecology/
+  /none,default,legumes,betr500,betr1000,agroecology/
 
   rota30 rotational rules
-  /all1_max, all2_max,
-   cereals1_max, cereals2_max,
+  /cereals1_max, cereals2_max,
    resistant_max, oilcrops_max,
    legumes_max, rootsrape_max,
    rice_pro_max, tece_max
    trce_max, maiz_max,
    biomass_min, legumes_min,
-   minor_min, cereals_min/
+   minor_min, cereals_min, betr_min/
 
 
   rotamax30(rota30) rotational maximum rules
-  /all1_max, all2_max,
-   cereals1_max, cereals2_max,
+  /cereals1_max, cereals2_max,
    resistant_max, oilcrops_max,
    legumes_max, rootsrape_max,
    rice_pro_max, tece_max
@@ -30,7 +28,7 @@ sets
    /
 
    rotamin30(rota30) rotational minimum rules
-   /biomass_min, legumes_min, minor_min, cereals_min/
+   /biomass_min, legumes_min, minor_min, cereals_min, betr_min/
 
    rotamax_red30(rotamax30) Maximum crop rotation reduced set
    rotamin_red30(rotamin30) Minimum crop rotation reduced set
@@ -49,13 +47,7 @@ sets
 * one percent fruits and vegs in each cell for regional demand
 
   rota_kcr30(rota30, kcr) Mapping of crop types into crop rotation types
-       / all1_max       . (tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
-         oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
-         foddr, cottn_pro, begr, betr)
-         all2_max       . (tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
-           oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
-           foddr, cottn_pro, begr, betr)
-         cereals1_max   . (tece, maiz, trce, rice_pro)
+       / cereals1_max   . (tece, maiz, trce, rice_pro)
          cereals2_max   . (tece, maiz, trce, rice_pro)
          resistant_max  . (begr,betr,foddr,sugr_cane,cottn_pro,oilpalm,others)
          oilcrops_max   . (sunflower, rapeseed)
@@ -69,8 +61,8 @@ sets
          legumes_min    . (soybean, groundnut, puls_pro, foddr)
          minor_min . (sunflower, rapeseed, sugr_beet, cassav_sp, potato, others)
          cereals_min . (tece, maiz, trce, rice_pro)
+         betr_min   . (betr)
  /
-
 
    kbe30(kcr) bio energy activities
         / betr, begr /

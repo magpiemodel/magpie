@@ -21,8 +21,11 @@ scalars
  s29_treecover_bii_coeff         BII coefficent to be used for tree cover on cropland 0=secondary vegetation 1=timber plantations (1) / 0 /
  s29_treecover_decrease          Cropland treecover can decrease (1) or not (0) / 0 /
  s29_treecover_scenario_start    Cropland treecover scenario start year       / 2020 /
- s29_treecover_scenario_target   Cropland treecover scenario target year      / 2040 /
+ s29_treecover_scenario_target   Cropland treecover scenario target year      / 2050 /
  s29_treecover_min_shr           Share of treecover on cropland (1) / 0 /
+ s29_fallow_scenario_start       Fallow land scenario start year       / 2020 /
+ s29_fallow_scenario_target      Fallow land scenario target year      / 2050 /
+ s29_fallow_min_shr              Share of fallow land (1) / 0 /
 ;
 
 

@@ -15,7 +15,8 @@ $setglobal c30_rotation_constraints  on
 *options: on, off
 
 $setglobal c30_rotation_scenario  default
-*options: min,default,good,good_20div,setaside,legumes,agroforestry,sixfoldrotation,agroecology
+*options: min,default,good,good_20div,setaside,legumes,betr0,betr10,betr20,betr25,betr30,
+*         betr40,betr50,sixfoldrotation,agroecology
 
 $setglobal c30_rotation_scenario_speed  by2050
 * options: none, by2030, by2020
@@ -23,9 +24,6 @@ $setglobal c30_rotation_scenario_speed  by2050
 scalars
  s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
  s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
- s30_betr_min_shr                Minimum share of bioenergy trees on cropland (1) / 0 /
- s30_betr_scenario_start         Bioenergy trees scenario start year       / 2020 /
- s30_betr_scenario_target        Bioenergy trees scenario target year      / 2050 /
 ;
 
 

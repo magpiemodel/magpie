@@ -38,13 +38,6 @@
       vm_AEI(j2) * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
 
 
-*' Bioenergy tree minimum share on cropland
-
-q30_betr_shr(j2) ..
-  sum(w, vm_area(j2,"betr",w)) =g=
-  sum(ct, p30_betr_min_shr(ct,j2)) * vm_land(j2,"crop");
-
-
 *' The carbon stocks of the above ground carbon pools are calculated based on croparea and related carbon density.
 
  q30_carbon(j2,ag_pools) ..

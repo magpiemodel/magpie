@@ -7,7 +7,9 @@
 
 sets
   rotascen30 rotation constraint scenarios
-  /min,default,good,good_20div,setaside,legumes,agroforestry,sixfoldrotation,agroecology/
+  /min,default,good,good_20div,setaside,legumes,
+  betr0,betr10,betr20,betr25,betr30,betr40,betr50,
+  sixfoldrotation,agroecology/
 
   rotamax30 Maximum crop rotation categories
   / all_max, cereals_excl_rice_max, stalk_max,
@@ -22,7 +24,7 @@ sets
   rotamin30 Minimum crop rotation categories
   /
     all_min, stalk_min, biomass_min,
-    legume_min, others_min
+    legume_min, others_min, betr_min
   /
 
   rotamax_red30(rotamax30) Maximum crop rotation reduced set
@@ -81,8 +83,8 @@ sets
         biomass_min   . (sugr_cane, oilpalm, begr, betr)
         legume_min    . (soybean, groundnut, puls_pro, foddr)
         others_min     . (others)
+        betr_min       . (betr)
       /
-
 
    kbe30(kcr) bio energy activities
         / betr, begr /

@@ -25,5 +25,3 @@ vm_rotation_penalty.fx(i)=0;
 
 crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
 crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
-
-p30_betr_min_shr(t,j) = p30_betr_scenario_fader(t) * s30_betr_min_shr;

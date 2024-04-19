@@ -8,7 +8,6 @@
 ** Trajectory for cropland scenarios
 * sigmoidal interpolation between start year and target year
 m_sigmoid_time_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
-m_sigmoid_time_interpol(p30_betr_scenario_fader,s30_betr_scenario_start,s30_betr_scenario_target,0,1);
 
 *due to some rounding errors the input data currently may contain in some cases
 *very small, negative numbers. These numbers have to be set to 0 as area

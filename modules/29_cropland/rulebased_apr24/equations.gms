@@ -34,7 +34,6 @@
             sum(ct, p29_snv_shr(ct,j2)) * vm_land(j2,"crop")
           + sum((ct,land_snv,consv_type), pm_land_conservation(ct,j2,land_snv,consv_type));
 
-
 *' The semi-natural vegetation constraint for cropland areas has been suggested at the per square
 *' kilometer scale. The amount of cropland requiring relocation has therefore been derived from
 *' exogeneous high-resolution land cover information from the Copernicus Global Land Service
@@ -52,9 +51,18 @@
   + vm_fallow(j2) * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools))
   + m_carbon_stock_ac(v29_treecover,p29_carbon_density_ac,"ac","ac_sub");
 
+
+*' Total cost
 q29_cost_cropland(j2) ..
  vm_cost_cropland(j2) =e= 
  v29_cost_treecover_est(j2) + v29_cost_treecover_recur(j2);
+
+
+*' Fallow land minimum share
+q29_fallow_shr(j2) ..
+  vm_fallow(j2) =g= 
+  sum(ct, p29_fallow_min_shr(ct,j2)) * vm_land(j2,"crop");
+
 
 *' Tree cover establishment cost
 q29_cost_treecover_est(j2) ..

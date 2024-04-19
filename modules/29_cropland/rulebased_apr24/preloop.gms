@@ -25,6 +25,7 @@ m_linear_cell_data_interpol(i29_snv_relocation_target, s29_snv_shr,s29_snv_reloc
 
 
 m_sigmoid_time_interpol(p29_treecover_scenario_fader,s29_treecover_scenario_start,s29_treecover_scenario_target,0,1);
+m_sigmoid_time_interpol(p29_fallow_scenario_fader,s29_fallow_scenario_start,s29_fallow_scenario_target,0,1);
 
 
 * Initial tree cover on cropland is assumed to be equally distributed among all age-classes

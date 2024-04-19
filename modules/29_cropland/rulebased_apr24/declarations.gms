@@ -25,6 +25,9 @@ parameters
 
  p29_treecover_min_shr(t,j)             Minimum share of treecover on cropland (1)
  p29_treecover_scenario_fader(t_all)    Cropland treecover scenario fader (1)
+ p29_fallow_min_shr(t,j)                Minimum share of fallow land (1)
+ p29_fallow_scenario_fader(t_all)       Fallow land scenario fader (1)
+
  p29_treecover_bii_coeff(bii_class_secd,potnatveg)  BII coefficient for cropland treecover (1)
  p29_carbon_density_ac(t,j,ac,ag_pools) Carbon density for ac and ag_pools (tC per ha)
  p29_treecover(t,j,ac)                  Cropland tree cover per age class (mio. ha)
@@ -48,10 +51,11 @@ equations
  q29_cost_cropland(j)              Costs and benefits related to agroforestry (mio. USD05MER per yr)
  q29_cost_treecover_est(j)         Establishment cost for cropland tree cover (mio. USD05MER per yr)
  q29_cost_treecover_recur(j)       Recurring cost for cropland tree cover (mio. USD05MER per yr)
+ q29_fallow_shr(j)                 Fallow land share (mio. ha)
  q29_treecover_shr(j)              Cropland treecover minimum share (mio. ha)
  q29_treecover_est(j,ac)           Cropland treecover establishment (mio. ha)
  q29_treecover_bv(j,potnatveg)     Biodiversity value for cropland treecover (mio. ha)
- q29_fallow_bv(j,potnatveg)       Biodiversity value for fallow land (mio. ha)
+ q29_fallow_bv(j,potnatveg)        Biodiversity value for fallow land (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -69,6 +73,7 @@ parameters
  oq29_cost_cropland(t,j,type)             Costs and benefits related to agroforestry (mio. USD05MER per yr)
  oq29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD05MER per yr)
  oq29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD05MER per yr)
+ oq29_fallow_shr(t,j,type)                Fallow land share (mio. ha)
  oq29_treecover_shr(t,j,type)             Cropland treecover minimum share (mio. ha)
  oq29_treecover_est(t,j,ac,type)          Cropland treecover establishment (mio. ha)
  oq29_treecover_bv(t,j,potnatveg,type)    Biodiversity value for cropland treecover (mio. ha)

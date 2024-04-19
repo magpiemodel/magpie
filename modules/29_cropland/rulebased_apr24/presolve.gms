@@ -58,4 +58,6 @@ p29_treecover_min_shr(t,j) =
  ((1-p29_treecover_scenario_fader(t)) * sum(ac, pc29_treecover(j,ac))/pcm_land(j,"crop"))$(pcm_land(j,"crop") > 1e-10) +
  (p29_treecover_scenario_fader(t) * s29_treecover_min_shr);
 
+p29_fallow_min_shr(t,j) = p29_fallow_scenario_fader(t) * s29_fallow_min_shr;
+
 

@@ -7,8 +7,6 @@
 
 parameters
  p30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
- p30_betr_scenario_fader(t_all)       Bioenergy trees scenario fader (1)
- p30_betr_min_shr(t,j)                Minimum share of bioenergy trees on cropland (1)
 ;
 
 positive variables
@@ -21,7 +19,6 @@ equations
  q30_prod(j,kcr)                    Production of cropped products (mio. tDM)
  q30_rotation_max(j,crp30,w)        Local maximum rotational constraints (mio. ha)
  q30_rotation_min(j,crp30,w)        Local minimum rotational constraints (mio. ha)
- q30_betr_shr(j)                    Bioenergy trees minimum share (mio. ha)
  q30_carbon(j,ag_pools)             Croplarea above ground carbon content calculation (mio. tC)
  q30_bv_ann(j,potnatveg)            Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)            Biodiversity value of perennial cropland (mio. ha)
@@ -35,7 +32,6 @@ parameters
  oq30_prod(t,j,kcr,type)                     Production of cropped products (mio. tDM)
  oq30_rotation_max(t,j,crp30,w,type)         Local maximum rotational constraints (mio. ha)
  oq30_rotation_min(t,j,crp30,w,type)         Local minimum rotational constraints (mio. ha)
- oq30_betr_shr(t,j,type)                     Bioenergy trees minimum share (mio. ha)
  oq30_carbon(t,j,ag_pools,type)              Croplarea above ground carbon content calculation (mio. tC)
  oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (mio. ha)
  oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (mio. ha)
