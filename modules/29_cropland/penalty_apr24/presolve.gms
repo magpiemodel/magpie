@@ -54,10 +54,13 @@ else
  );
 );
 
+
 * create treecover target and penalty scenario
 i29_treecover_target(t,j) = 
  ((1-i29_treecover_scenario_fader(t)) * sum(ac, pc29_treecover(j,ac))/pcm_land(j,"crop"))$(pcm_land(j,"crop") > 1e-10) +
  (i29_treecover_scenario_fader(t) * s29_treecover_target);
+i29_treecover_penalty(t_all) = s29_treecover_penalty * i29_treecover_scenario_fader(t_all);
 
 * create fallow land target and penalty scenario
 i29_fallow_target(t_all) = s29_fallow_target * i29_fallow_scenario_fader(t_all);
+i29_fallow_penalty(t_all) = s29_fallow_penalty * i29_fallow_scenario_fader(t_all);

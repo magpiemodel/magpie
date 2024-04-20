@@ -21,6 +21,7 @@ elseif s29_snv_shr > s29_snv_relocation_data_x1,
   m_linear_cell_data_interpol(i29_snv_relocation_target, s29_snv_shr,s29_snv_relocation_data_x1, s29_snv_relocation_data_x2,f29_snv_target_cropland(j, "SNV20TargetCropland"), f29_snv_target_cropland(j, "SNV50TargetCropland"));
 );
 
+
 * Initial tree cover on cropland is assumed to be equally distributed among all age-classes
 pc29_treecover(j,ac) = 0;
 pc29_treecover(j,ac)$(pm_land_hist("y2015",j,"crop") > 1e-10) = 

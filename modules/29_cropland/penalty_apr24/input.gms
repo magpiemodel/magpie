@@ -23,9 +23,11 @@ scalars
  s29_treecover_scenario_start    Cropland treecover scenario start year       / 2020 /
  s29_treecover_scenario_target   Cropland treecover scenario target year      / 2050 /
  s29_treecover_target            Target share of treecover on total cropland (1) / 0.3 /
+ s29_treecover_penalty           Penalty for violation of treecover target (USD05MER per ha) / 500 /
  s29_fallow_scenario_start       Fallow land scenario start year       / 2020 /
  s29_fallow_scenario_target      Fallow land scenario target year      / 2050 /
  s29_fallow_target               Target share of fallow land on total cropland (1) / 0.3 /
+ s29_fallow_penalty              Penalty for violation of fallow target (USD05MER per ha) / 500 /
 ;
 
 

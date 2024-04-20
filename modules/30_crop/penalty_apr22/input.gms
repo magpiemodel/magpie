@@ -15,7 +15,7 @@ $setglobal c30_rotation_constraints  on
 *options: on, off
 
 $setglobal c30_rotation_scenario  default
-*options: none, default,  fallow, legumes,  agroforestry, agroecology
+*options: none, default, legumes, betr500, betr1000, agroecology
 
 $setglobal c30_rotation_scenario_speed  by2050
 * options: none, by2030, by2020

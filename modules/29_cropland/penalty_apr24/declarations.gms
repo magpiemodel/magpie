@@ -23,6 +23,7 @@ parameters
 
  i29_treecover_scenario_fader(t_all)   Cropland treecover scenario fader (1)
  i29_treecover_target(t,j)             Target share for treecover on total cropland (1)
+ i29_treecover_penalty(t_all)          Penalty for violation of treecover target (USD05MER per ha)
 
  p29_treecover_bii_coeff(bii_class_secd,potnatveg)  BII coefficient for cropland treecover (1)
  p29_carbon_density_ac(t,j,ac,ag_pools) Carbon density for ac and ag_pools (tC per ha)
@@ -31,6 +32,7 @@ parameters
 
  i29_fallow_scenario_fader(t_all)      Fallow land scenario fader (1)
  i29_fallow_target(t_all)              Target share for fallow land on total cropland (1)
+ i29_fallow_penalty(t_all)             Penalty for violation of fallow target (USD05MER per ha)
 ;
 
 positive variables
@@ -39,6 +41,10 @@ positive variables
  vm_cost_cropland(j)                Cost for total cropland (mio. USD05MER per yr)
  v29_cost_treecover_est(j)          Establishment cost for cropland tree cover (mio. USD05MER per yr)
  v29_cost_treecover_recur(j)        Recurring cost for cropland tree cover (mio. USD05MER per yr)
+ v29_treecover_penalty(j)           Penalty for violation of treecover target (mio. USD05MER per yr)
+ v29_treecover_missing(j)           Missing treecover area towards target (mio. ha)
+ v29_fallow_penalty(j)              Penalty for violation of fallow target (mio. USD05MER per yr)
+ v29_fallow_missing(j)              Missing fallow land towards target (mio. ha)
 ;
 
 equations
@@ -50,11 +56,13 @@ equations
  q29_cost_cropland(j)              Costs and benefits related to agroforestry (mio. USD05MER per yr)
  q29_cost_treecover_est(j)         Establishment cost for cropland tree cover (mio. USD05MER per yr)
  q29_cost_treecover_recur(j)       Recurring cost for cropland tree cover (mio. USD05MER per yr)
- q29_fallow_shr(j)                 Fallow land minimum share (mio. ha)
- q29_treecover_shr(j)              Cropland treecover minimum share (mio. ha)
+ q29_treecover_penalty(j)          Penalty for violation of treecover target (mio. USD05MER per yr)
+ q29_treecover_missing(j)          Missing treecover area towards target (mio. ha)
  q29_treecover_est(j,ac)           Cropland treecover establishment (mio. ha)
  q29_treecover_bv(j,potnatveg)     Biodiversity value for cropland treecover (mio. ha)
  q29_fallow_bv(j,potnatveg)        Biodiversity value for fallow land (mio. ha)
+ q29_fallow_penalty(j)             Penalty for violation of fallow target (mio. USD05MER per yr)
+ q29_fallow_missing(j)             Missing fallow land towards target (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -64,6 +72,10 @@ parameters
  ov_cost_cropland(t,j,type)               Cost for total cropland (mio. USD05MER per yr)
  ov29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD05MER per yr)
  ov29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD05MER per yr)
+ ov29_treecover_penalty(t,j,type)         Penalty for violation of treecover target (mio. USD05MER per yr)
+ ov29_treecover_missing(t,j,type)         Missing treecover area towards target (mio. ha)
+ ov29_fallow_penalty(t,j,type)            Penalty for violation of fallow target (mio. USD05MER per yr)
+ ov29_fallow_missing(t,j,type)            Missing fallow land towards target (mio. ha)
  oq29_cropland(t,j,type)                  Total cropland calculation (mio. ha)
  oq29_avl_cropland(t,j,type)              Available cropland constraint (mio. ha)
  oq29_carbon(t,j,ag_pools,stockType,type) Cropland above ground carbon content calculation (mio. tC)
@@ -72,11 +84,13 @@ parameters
  oq29_cost_cropland(t,j,type)             Costs and benefits related to agroforestry (mio. USD05MER per yr)
  oq29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD05MER per yr)
  oq29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD05MER per yr)
- oq29_fallow_shr(t,j,type)                Fallow land minimum share (mio. ha)
- oq29_treecover_shr(t,j,type)             Cropland treecover minimum share (mio. ha)
+ oq29_treecover_penalty(t,j,type)         Penalty for violation of treecover target (mio. USD05MER per yr)
+ oq29_treecover_missing(t,j,type)         Missing treecover area towards target (mio. ha)
  oq29_treecover_est(t,j,ac,type)          Cropland treecover establishment (mio. ha)
  oq29_treecover_bv(t,j,potnatveg,type)    Biodiversity value for cropland treecover (mio. ha)
  oq29_fallow_bv(t,j,potnatveg,type)       Biodiversity value for fallow land (mio. ha)
+ oq29_fallow_penalty(t,j,type)            Penalty for violation of fallow target (mio. USD05MER per yr)
+ oq29_fallow_missing(t,j,type)            Missing fallow land towards target (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
