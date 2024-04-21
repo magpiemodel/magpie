@@ -21,16 +21,16 @@ parameters
  i29_snv_scenario_fader(t_all)      SNV scenario fader (1)
 
  i29_treecover_scenario_fader(t_all)    Cropland treecover scenario fader (1)
- i29_treecover_target(t,j)              Target share for treecover on total cropland (1)
- i29_treecover_penalty(t_all)           Penalty for violation of treecover target (USD05MER per ha)
+ i29_treecover_target(t)                Target share for treecover on total cropland (1)
+ i29_treecover_penalty(t)               Penalty for violation of treecover target (USD05MER per ha)
  p29_treecover_bii_coeff(bii_class_secd,potnatveg)  BII coefficient for cropland treecover (1)
  p29_carbon_density_ac(t,j,ac,ag_pools) Carbon density for ac and ag_pools (tC per ha)
  p29_treecover(t,j,ac)                  Cropland tree cover per age class (mio. ha)
  pc29_treecover(j,ac)                   Cropland tree cover per age class in current time step (mio. ha)
 
  i29_fallow_scenario_fader(t_all)      Fallow land scenario fader (1)
- i29_fallow_target(t_all)              Target share for fallow land on total cropland (1)
- i29_fallow_penalty(t_all)             Penalty for violation of fallow target (USD05MER per ha)
+ i29_fallow_target(t)                  Target share for fallow land on total cropland (1)
+ i29_fallow_penalty(t)                 Penalty for violation of fallow target (USD05MER per ha)
 ;
 
 positive variables
