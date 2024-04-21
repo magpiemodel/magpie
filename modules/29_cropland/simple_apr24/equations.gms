@@ -1,0 +1,32 @@
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
+
+*' @equations
+*' Total cropland equals croparea, because fallow land is fixed to zero 
+*' and tree cover on cropland does not exist in this realization. 
+
+ q29_cropland(j2)  ..
+   vm_land(j2,"crop") =e= sum((kcr,w), vm_area(j2,kcr,w));
+
+*' We assume that crop production can only take place on suitable cropland area.
+*' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
+*' from cropland production that have a low suitability, e.g. due to steep slopes,
+*' to estimate the available cropland area. The cultivated area therefore has
+*' to be smaller than the available cropland area. Moreover, the available cropland
+*' can be reduced by constraining the cropland area in favour of other land types,
+*' in order to increase compositional heterogeneity of land types at the cell level.
+
+ q29_avl_cropland(j2) ..
+   vm_land(j2,"crop") =l= sum(ct, p29_avl_cropland(ct,j2));
+
+
+*' The carbon stocks of total cropland are calculated as the sum of carbon stocks in 
+*' cropland, fallow land and tree cover area.
+
+  q29_carbon(j2,ag_pools,stockType) ..
+    vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
+      vm_carbon_stock_croparea(j2,ag_pools);
