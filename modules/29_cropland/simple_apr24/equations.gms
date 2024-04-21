@@ -16,9 +16,7 @@
 *' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
 *' from cropland production that have a low suitability, e.g. due to steep slopes,
 *' to estimate the available cropland area. The cultivated area therefore has
-*' to be smaller than the available cropland area. Moreover, the available cropland
-*' can be reduced by constraining the cropland area in favour of other land types,
-*' in order to increase compositional heterogeneity of land types at the cell level.
+*' to be smaller than the available cropland area.
 
  q29_avl_cropland(j2) ..
    vm_land(j2,"crop") =l= sum(ct, p29_avl_cropland(ct,j2));
