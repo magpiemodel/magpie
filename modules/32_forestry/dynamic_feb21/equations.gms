@@ -24,7 +24,7 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                    v32_cost_recur(i2)
                    + v32_cost_establishment(i2)
                    + v32_cost_hvarea(i2)
-                   + sum(cell(i2,j2), v32_land_missing(j2)) * s32_free_land_cost
+                   + sum(cell(i2,j2), v32_land_missing(j2) + v32_land_missing_ndc(j2)) * s32_free_land_cost
                    ;
 
 *-----------------------------------------------
@@ -68,7 +68,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
- sum(ac_est, v32_land(j2,"ndc",ac_est)) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
+ sum(ac_est, v32_land(j2,"ndc",ac_est)) =e= sum(ct, p32_aff_pol_timestep(ct,j2)) + v32_land_missing_ndc(j2);
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global endogenous 
 *' afforestation defined in `i32_max_aff_area_glo`. 
