@@ -17,6 +17,10 @@ $setglobal c30_rotation_constraints  on
 scalars
  s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
  s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
+ s30_betr_scenario_start         Bioenergy land scenario start year       / 2020 /
+ s30_betr_scenario_target        Bioenergy land scenario target year      / 2050 /
+ s30_betr_target                 Target share of bioenergy land on total cropland (1) / 0 /
+ s30_betr_penalty                Penalty for violation of betr target (USD05MER per ha) / 500 /
 ;
 
 $ifthen "%c30_bioen_type%" == "all" bioen_type_30(kbe30) = yes;

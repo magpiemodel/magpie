@@ -24,3 +24,7 @@ else
 * only activate constraints which are binding
 rotamax_red30(rotamax30) = yes$(i30_rotation_rules(t,rotamax30) < 1);
 rotamin_red30(rotamin30) = yes$(i30_rotation_rules(t,rotamin30) > 0);
+
+* create betr target and penalty scenario
+i30_betr_target(t) = s30_betr_target * i30_betr_scenario_fader(t);
+i30_betr_penalty(t) = s30_betr_penalty * i30_betr_scenario_fader(t);

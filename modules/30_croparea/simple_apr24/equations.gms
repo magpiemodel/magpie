@@ -14,6 +14,17 @@
  q30_prod(j2,kcr) ..
   vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
 
+*' A penalty is applied for the violation of bioenergy tree (betr) rules.
+*' The penalty applies to the missing bioenergy tree land, i.e. where bioenergy tree land 
+*' is lower than a certain fraction of total cropland.
+
+  q30_betr_missing(j2) ..
+    v30_betr_missing(j2) =g=
+      vm_land(j2,"crop") * sum(ct, i30_betr_target(ct)) - vm_area(j2,"betr","rainfed");
+
+  q30_cost(i2) ..
+    vm_rotation_penalty(i2) =g=
+      sum(cell(i2,j2), v30_betr_missing(j2) * sum(ct, i30_betr_penalty(ct)));
 
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect

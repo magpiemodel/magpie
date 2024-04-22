@@ -25,3 +25,7 @@ vm_rotation_penalty.fx(i)=0;
 
 crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
 crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
+
+* create betr target and penalty scenario
+i30_betr_target(t) = s30_betr_target * i30_betr_scenario_fader(t);
+i30_betr_penalty(t) = s30_betr_penalty * i30_betr_scenario_fader(t);

@@ -28,7 +28,8 @@
   q29_cost_cropland(j2) ..
     vm_cost_cropland(j2) =e= 
       v29_cost_treecover_est(j2) + v29_cost_treecover_recur(j2)
-      + v29_fallow_penalty(j2) + v29_treecover_penalty(j2);
+      + v29_fallow_missing(j2) * sum(ct, i29_fallow_penalty(ct))
+      + v29_treecover_missing(j2) * sum(ct, i29_treecover_penalty(ct));
 
 
 *' The carbon stocks of total cropland are calculated as the sum of carbon stocks in 
@@ -59,24 +60,13 @@
     sum(land_snv, vm_lu_transitions(j2,"crop",land_snv)) =g= sum(ct, p29_snv_relocation(ct,j2));
 
 
-*' In case of no penalty, fallow land is greater or equal a certain fraction of total cropland:
-
-  q29_fallow_shr(j2)$(s29_implementation = 1) ..
-    vm_fallow(j2) =g= 
-      sum(ct, i29_fallow_target(ct)) * vm_land(j2,"crop");
-
-*' Otherwise, a penalty is applied for the violation of fallow land rules.
+*' A penalty is applied for the violation of fallow land rules.
 *' The penalty applies to the missing fallow land, i.e. where fallow land 
 *' is lower than a certain fraction of total cropland.
 
-  q29_fallow_missing(j2)$(s29_implementation = 0) ..
+  q29_fallow_missing(j2) ..
     v29_fallow_missing(j2) =g=
       vm_land(j2,"crop") * sum(ct, i29_fallow_target(ct)) - vm_fallow(j2);
-
-  q29_fallow_penalty(j2) ..
-    v29_fallow_penalty(j2) =e=
-      v29_fallow_missing(j2) * sum(ct, i29_fallow_penalty(ct));
-
 
 *' Fallow land biodiversity value is based on perennial crops. 
 
@@ -85,24 +75,13 @@
       vm_fallow(j2) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
 
-*' In case of no penalty, tree cover is greater or equal a certain fraction of total cropland.
-
-  q29_treecover_shr(j2)$(s29_implementation = 1) ..
-    sum(ac, v29_treecover(j2,ac)) =g= 
-      sum(ct, i29_treecover_target(ct,j2)) * vm_land(j2,"crop");
-
-*' Otherwise, a penalty is applied for the violation of treecover rules.
+*' A penalty is applied for the violation of treecover rules.
 *' The penalty applies to the missing treecover area, i.e. where treecover area 
 *' is lower than a certain fraction of total cropland.
 
-  q29_treecover_missing(j2)$(s29_implementation = 0) ..
+  q29_treecover_missing(j2) ..
     v29_treecover_missing(j2) =g=
       vm_land(j2,"crop") * sum(ct, i29_treecover_target(ct,j2)) - sum(ac, v29_treecover(j2,ac));
-
-  q29_treecover_penalty(j2) ..
-    v29_treecover_penalty(j2) =e=
-      v29_treecover_missing(j2) * sum(ct, i29_treecover_penalty(ct));
-
 
 *' Depending on `s29_treecover_bii_coeff`, tree cover biodiversity value 
 *' is based on natural vegetation or plantation BII coefficients. 

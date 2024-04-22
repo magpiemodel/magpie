@@ -6,17 +6,23 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
+ i30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
+ i30_betr_scenario_fader(t_all)         Bioenergy land scenario fader (1)
+ i30_betr_target(t)                     Target share for bioenergy land on total cropland (1)
+ i30_betr_penalty(t)                    Penalty for violation of betr target (USD05MER per ha)
 ;
 
 positive variables
  vm_area(j,kcr,w)                       Agricultural production area (mio. ha)
- vm_rotation_penalty(i)                 Penalty for violating rotational constraints (USD05MER)
+ vm_rotation_penalty(i)                 Penalty for violating rotational constraints (mio. USD05MER)
  vm_carbon_stock_croparea(j,ag_pools)   Carbon stock in croparea (tC)
+ v30_betr_missing(j)                    Missing bioenergy tree land towards target (mio. ha)
 ;
 
 equations
  q30_prod(j,kcr)                    Production of cropped products (mio. tDM)
+ q30_betr_missing(j)                Missing bioenergy tree land towards target (mio. ha)
+ q30_cost(i)                        Cost (mio. USD05MER)
  q30_rotation_max(j,crp30,w)        Local maximum rotational constraints (mio. ha)
  q30_rotation_min(j,crp30,w)        Local minimum rotational constraints (mio. ha)
  q30_carbon(j,ag_pools)             Croplarea above ground carbon content calculation (mio. tC)
@@ -27,9 +33,12 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_area(t,j,kcr,w,type)                     Agricultural production area (mio. ha)
- ov_rotation_penalty(t,i,type)               Penalty for violating rotational constraints (USD05MER)
+ ov_rotation_penalty(t,i,type)               Penalty for violating rotational constraints (mio. USD05MER)
  ov_carbon_stock_croparea(t,j,ag_pools,type) Carbon stock in croparea (tC)
+ ov30_betr_missing(t,j,type)                 Missing bioenergy tree land towards target (mio. ha)
  oq30_prod(t,j,kcr,type)                     Production of cropped products (mio. tDM)
+ oq30_betr_missing(t,j,type)                 Missing bioenergy tree land towards target (mio. ha)
+ oq30_cost(t,i,type)                         Cost (mio. USD05MER)
  oq30_rotation_max(t,j,crp30,w,type)         Local maximum rotational constraints (mio. ha)
  oq30_rotation_min(t,j,crp30,w,type)         Local minimum rotational constraints (mio. ha)
  oq30_carbon(t,j,ag_pools,type)              Croplarea above ground carbon content calculation (mio. tC)

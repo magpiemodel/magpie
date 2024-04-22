@@ -7,17 +7,18 @@
 
 ** Trajectory for cropland scenarios
 * sigmoidal interpolation between start year and target year
-m_sigmoid_time_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
+m_sigmoid_time_interpol(i30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
+m_sigmoid_time_interpol(i30_betr_scenario_fader,s30_betr_scenario_start,s30_betr_scenario_target,0,1);
 
 ** create crop rotation scenario
 i30_rotation_rules(t_all,rota30) =
-  f30_rotation_rules(rota30,"default") * (1-p30_rotation_scenario_fader(t_all)) +
-  f30_rotation_rules(rota30,"%c30_rotation_rules%") * (p30_rotation_scenario_fader(t_all));
+  f30_rotation_rules(rota30,"default") * (1-i30_rotation_scenario_fader(t_all)) +
+  f30_rotation_rules(rota30,"%c30_rotation_rules%") * (i30_rotation_scenario_fader(t_all));
 
 ** create crop rotation scenario
 i30_rotation_incentives(t_all,rota30) =
-  f30_rotation_incentives(rota30,"default") * (1-p30_rotation_scenario_fader(t_all)) +
-  f30_rotation_incentives(rota30,"%c30_rotation_incentives%") * (p30_rotation_scenario_fader(t_all));
+  f30_rotation_incentives(rota30,"default") * (1-i30_rotation_scenario_fader(t_all)) +
+  f30_rotation_incentives(rota30,"%c30_rotation_incentives%") * (i30_rotation_scenario_fader(t_all));
 
 
 *due to some rounding errors the input data currently may contain in some cases

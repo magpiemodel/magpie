@@ -94,7 +94,7 @@ sets
          legumes_min    . (soybean, groundnut, puls_pro, foddr)
          minor_min      . (sunflower, rapeseed, sugr_beet, cassav_sp, potato, others)
          cereals_min    . (tece, maiz, trce, rice_pro)
-         stalk_min     . (tece, maiz, trce, rice_pro, sugr_cane, foddr)
+         stalk_min      . (tece, maiz, trce, rice_pro, sugr_cane, foddr)
          others_min     . (others)
          betr_min       . (betr)
  /

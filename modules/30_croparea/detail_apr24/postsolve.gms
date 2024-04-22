@@ -12,7 +12,9 @@
  ov_carbon_stock_croparea(t,j,ag_pools,"marginal") = vm_carbon_stock_croparea.m(j,ag_pools);
  ov30_penalty_max_irrig(t,j,rotamax30,"marginal")  = v30_penalty_max_irrig.m(j,rotamax30);
  ov30_penalty(t,j,rota30,"marginal")               = v30_penalty.m(j,rota30);
+ ov30_betr_missing(t,j,"marginal")                 = v30_betr_missing.m(j);
  oq30_prod(t,j,kcr,"marginal")                     = q30_prod.m(j,kcr);
+ oq30_betr_missing(t,j,"marginal")                 = q30_betr_missing.m(j);
  oq30_rotation_penalty(t,i,"marginal")             = q30_rotation_penalty.m(i);
  oq30_rotation_max(t,j,rotamax30,"marginal")       = q30_rotation_max.m(j,rotamax30);
  oq30_rotation_min(t,j,rotamin30,"marginal")       = q30_rotation_min.m(j,rotamin30);
@@ -27,7 +29,9 @@
  ov_carbon_stock_croparea(t,j,ag_pools,"level")    = vm_carbon_stock_croparea.l(j,ag_pools);
  ov30_penalty_max_irrig(t,j,rotamax30,"level")     = v30_penalty_max_irrig.l(j,rotamax30);
  ov30_penalty(t,j,rota30,"level")                  = v30_penalty.l(j,rota30);
+ ov30_betr_missing(t,j,"level")                    = v30_betr_missing.l(j);
  oq30_prod(t,j,kcr,"level")                        = q30_prod.l(j,kcr);
+ oq30_betr_missing(t,j,"level")                    = q30_betr_missing.l(j);
  oq30_rotation_penalty(t,i,"level")                = q30_rotation_penalty.l(i);
  oq30_rotation_max(t,j,rotamax30,"level")          = q30_rotation_max.l(j,rotamax30);
  oq30_rotation_min(t,j,rotamin30,"level")          = q30_rotation_min.l(j,rotamin30);
@@ -42,7 +46,9 @@
  ov_carbon_stock_croparea(t,j,ag_pools,"upper")    = vm_carbon_stock_croparea.up(j,ag_pools);
  ov30_penalty_max_irrig(t,j,rotamax30,"upper")     = v30_penalty_max_irrig.up(j,rotamax30);
  ov30_penalty(t,j,rota30,"upper")                  = v30_penalty.up(j,rota30);
+ ov30_betr_missing(t,j,"upper")                    = v30_betr_missing.up(j);
  oq30_prod(t,j,kcr,"upper")                        = q30_prod.up(j,kcr);
+ oq30_betr_missing(t,j,"upper")                    = q30_betr_missing.up(j);
  oq30_rotation_penalty(t,i,"upper")                = q30_rotation_penalty.up(i);
  oq30_rotation_max(t,j,rotamax30,"upper")          = q30_rotation_max.up(j,rotamax30);
  oq30_rotation_min(t,j,rotamin30,"upper")          = q30_rotation_min.up(j,rotamin30);
@@ -57,7 +63,9 @@
  ov_carbon_stock_croparea(t,j,ag_pools,"lower")    = vm_carbon_stock_croparea.lo(j,ag_pools);
  ov30_penalty_max_irrig(t,j,rotamax30,"lower")     = v30_penalty_max_irrig.lo(j,rotamax30);
  ov30_penalty(t,j,rota30,"lower")                  = v30_penalty.lo(j,rota30);
+ ov30_betr_missing(t,j,"lower")                    = v30_betr_missing.lo(j);
  oq30_prod(t,j,kcr,"lower")                        = q30_prod.lo(j,kcr);
+ oq30_betr_missing(t,j,"lower")                    = q30_betr_missing.lo(j);
  oq30_rotation_penalty(t,i,"lower")                = q30_rotation_penalty.lo(i);
  oq30_rotation_max(t,j,rotamax30,"lower")          = q30_rotation_max.lo(j,rotamax30);
  oq30_rotation_min(t,j,rotamin30,"lower")          = q30_rotation_min.lo(j,rotamin30);
