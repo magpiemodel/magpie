@@ -89,7 +89,7 @@
 
   q29_treecover_shr(j2)$(s29_implementation = 1) ..
     sum(ac, v29_treecover(j2,ac)) =g= 
-      sum(ct, i29_treecover_target(ct)) * vm_land(j2,"crop");
+      sum(ct, i29_treecover_target(ct,j2)) * vm_land(j2,"crop");
 
 *' Otherwise, a penalty is applied for the violation of treecover rules.
 *' The penalty applies to the missing treecover area, i.e. where treecover area 
@@ -97,7 +97,7 @@
 
   q29_treecover_missing(j2)$(s29_implementation = 0) ..
     v29_treecover_missing(j2) =g=
-      vm_land(j2,"crop") * sum(ct, i29_treecover_target(ct)) - sum(ac, v29_treecover(j2,ac));
+      vm_land(j2,"crop") * sum(ct, i29_treecover_target(ct,j2)) - sum(ac, v29_treecover(j2,ac));
 
   q29_treecover_penalty(j2) ..
     v29_treecover_penalty(j2) =e=

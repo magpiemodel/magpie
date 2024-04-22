@@ -22,7 +22,8 @@ p29_snv_relocation(t,j) = (i29_snv_scenario_fader(t) - i29_snv_scenario_fader(t-
 *' data (derived from satellite imagery from the Copernicus
 *' Global Land Service (@buchhorn_copernicus_2020)) and in
 *' cases of cropland reduction
-p29_max_snv_relocation(t,j) = p29_snv_shr(t,j) * (i29_snv_scenario_fader(t) - i29_snv_scenario_fader(t-1)) * pcm_land(j,"crop");
+p29_max_snv_relocation(t,j) = p29_snv_shr(t,j) * (i29_snv_scenario_fader(t) - i29_snv_scenario_fader(t-1)) * pcm_land(j,"crop")
+                              - sum(ac, pc29_treecover(j,ac));
 p29_snv_relocation(t,j)$(p29_snv_relocation(t, j) > p29_max_snv_relocation(t,j)) = p29_max_snv_relocation(t,j);
 
 *' Area potentially available for cropping
@@ -41,23 +42,24 @@ s29_shift = m_timestep_length_forestry/5;
 pc29_treecover(j,ac) = p29_treecover(t,j,ac);
 v29_treecover.l(j,ac) = p29_treecover(t,j,ac);
 
+* create treecover target and penalty scenario
+i29_treecover_target(t,j) = s29_treecover_target * i29_treecover_scenario_fader(t);
+i29_treecover_penalty(t) = s29_treecover_penalty * i29_treecover_scenario_fader(t);
+
 if(m_year(t) <= s29_treecover_scenario_start,
  v29_treecover.fx(j,ac) = pc29_treecover(j,ac);
 else
  v29_treecover.lo(j,ac_est) = 0;
  v29_treecover.up(j,ac_est) = Inf;
- if(s29_treecover_decrease = 1,
-  v29_treecover.lo(j,ac_sub) = 0;
-  v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
- else
-  v29_treecover.fx(j,ac_sub) = pc29_treecover(j,ac_sub);  
- );
+ v29_treecover.lo(j,ac_sub) = 0;
+ v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
 );
 
-
-* create treecover target and penalty scenario
-i29_treecover_target(t) = s29_treecover_target * i29_treecover_scenario_fader(t);
-i29_treecover_penalty(t) = s29_treecover_penalty * i29_treecover_scenario_fader(t);
+p29_treecover_share(t,j) = 0;
+p29_treecover_share(t,j)$(pcm_land(j,"crop") > 1e-10) = sum(ac, pc29_treecover(j,ac)) / pcm_land(j,"crop"); 
+if (s29_treecover_keep = 1,
+ i29_treecover_target(t,j)$(i29_treecover_target(t,j) < p29_treecover_share(t,j)) = p29_treecover_share(t,j);
+);
 
 * create fallow land target and penalty scenario
 i29_fallow_target(t) = s29_fallow_target * i29_fallow_scenario_fader(t);
