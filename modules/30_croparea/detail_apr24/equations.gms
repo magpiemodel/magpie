@@ -28,11 +28,11 @@
 
   q30_rotation_max(j2,rotamax_red30)$(i30_implementation = 1) ..
     sum((rota_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) =l=
-      vm_land(j2,"crop") * sum(ct,i30_rotation_rules(ct,rotamax_red30));
+      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamax_red30));
 
   q30_rotation_min(j2,rotamin_red30)$(i30_implementation = 1) ..
     sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
-      vm_land(j2,"crop") * sum(ct,i30_rotation_rules(ct,rotamin_red30));
+      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamin_red30));
 
 *' The penalty applies to the areas which exceed a certain maximum
 *' share of the land. Below this share, negative benefits are
@@ -41,7 +41,7 @@
   q30_rotation_max2(j2,rotamax_red30)$(i30_implementation = 0) ..
     v30_penalty(j2,rotamax_red30) =g=
       sum((rota_kcr30(rotamax_red30,kcr),w),vm_area(j2,kcr,w))
-      - vm_land(j2,"crop") * sum(ct,i30_rotation_rules(ct,rotamax_red30));
+      - sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamax_red30));
 
 
 *' Minimum constraints apply penalties when a certain mimimum
@@ -50,7 +50,7 @@
 
   q30_rotation_min2(j2,rotamin_red30)$(i30_implementation = 0) ..
     v30_penalty(j2,rotamin_red30) =g=
-      vm_land(j2,"crop") * sum(ct,i30_rotation_rules(ct,rotamin_red30))
+      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamin_red30))
       - sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w));
 
 
