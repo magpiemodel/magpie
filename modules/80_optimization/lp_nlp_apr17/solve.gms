@@ -23,9 +23,7 @@ $onecho > cplex.opt
 $offecho
 
 * non-linear solver
-$ifthen "%c80_nlp_solver%" == "conopt3"
-  option nlp        = conopt ;
-$elseif "%c80_nlp_solver%" == "conopt4"
+$ifthen "%c80_nlp_solver%" == "conopt4"
   option nlp        = conopt4;
 $elseif "%c80_nlp_solver%" == "conopt4+cplex"
   option nlp        = conopt4;
