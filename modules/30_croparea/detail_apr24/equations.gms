@@ -15,8 +15,8 @@
     vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
 
 *' Rotational constraints prevent over-specialization. In this realization,
-*' they are either implemented via a rules (s30_implementation = 1) or 
-*' a penalty payment if the constraints are violated (s30_implementation = 0).
+*' they are either implemented via a rules (i30_implementation = 1) or 
+*' a penalty payment if the constraints are violated (i30_implementation = 0).
 
   q30_rotation_penalty(i2) ..
     vm_rotation_penalty(i2) =g=
@@ -26,31 +26,31 @@
       * sum(ct, i30_rotation_incentives(ct,rotamax_red30)))
       );
 
-  q30_rotation_max(j2,rotamax_red30)$(s30_implementation = 1) ..
+  q30_rotation_max(j2,rotamax_red30)$(i30_implementation = 1) ..
     sum((rota_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) =l=
-      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamax_red30));
+      vm_land(j2,"crop") * sum(ct,i30_rotation_rules(ct,rotamax_red30));
 
-  q30_rotation_min(j2,rotamin_red30)$(s30_implementation = 1) ..
+  q30_rotation_min(j2,rotamin_red30)$(i30_implementation = 1) ..
     sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
-      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamin_red30));
+      vm_land(j2,"crop") * sum(ct,i30_rotation_rules(ct,rotamin_red30));
 
 *' The penalty applies to the areas which exceed a certain maximum
 *' share of the land. Below this share, negative benefits are
 *' avoided by defining the penalty to be positive.
 
-  q30_rotation_max2(j2,rotamax_red30)$(s30_implementation = 0) ..
+  q30_rotation_max2(j2,rotamax_red30)$(i30_implementation = 0) ..
     v30_penalty(j2,rotamax_red30) =g=
       sum((rota_kcr30(rotamax_red30,kcr),w),vm_area(j2,kcr,w))
-      - sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamax_red30));
+      - vm_land(j2,"crop") * sum(ct,i30_rotation_rules(ct,rotamax_red30));
 
 
 *' Minimum constraints apply penalties when a certain mimimum
 *' share of a group is not achieved. This is used to guarantee a minimum
 *' crop group diversity withing cells.
 
-  q30_rotation_min2(j2,rotamin_red30)$(s30_implementation = 0) ..
+  q30_rotation_min2(j2,rotamin_red30)$(i30_implementation = 0) ..
     v30_penalty(j2,rotamin_red30) =g=
-      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamin_red30))
+      vm_land(j2,"crop") * sum(ct,i30_rotation_rules(ct,rotamin_red30))
       - sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w));
 
 

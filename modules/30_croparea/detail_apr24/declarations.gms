@@ -9,6 +9,7 @@ parameters
  i30_rotation_rules(t_all,rota30)       Rotational constraints (1)
  i30_rotation_incentives(t_all,rota30)  Penalty for violating rotational constraints (USD05MER per ha)
  p30_rotation_scenario_fader(t_all)     Crop rotation scenario fader (1)
+ i30_implementation              Switch for rule-based (1) or penalty-based (0) implementation of rotation scenarios
 ;
 
 positive variables

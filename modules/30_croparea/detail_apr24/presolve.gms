@@ -14,11 +14,13 @@ vm_area.fx(j,kbe30,w)=0;
 *' SSP2 default settings are used for the historic period.
 if(m_year(t) <= sm_fix_SSP2,
   vm_area.up(j,kbe30,"rainfed") = Inf;
+  i30_implementation = 1;
 else
   vm_area.up(j,bioen_type_30,bioen_water_30) = Inf;
+  i30_implementation = s30_implementation;
 );
 *' @stop
 
 * only activate constraints which are binding
-rotamax_red30(rotamax30) = yes$(i30_rotation_incentives(t,rotamax30) > 0);
-rotamin_red30(rotamin30) = yes$(i30_rotation_incentives(t,rotamin30) > 0);
+rotamax_red30(rotamax30) = yes$(i30_rotation_rules(t,rotamax30) < 1);
+rotamin_red30(rotamin30) = yes$(i30_rotation_rules(t,rotamin30) > 0);
