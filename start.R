@@ -97,13 +97,13 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
         log <- format(Sys.time(), paste0("logs/", rout_name, "-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
       } else if(submit=="slurmpriority") {
-        system(paste(sbatch_command,"--qos=priority"))
+        system(paste(sbatch_command,"--qos=priority --cpus-per-task=3"))
         Sys.sleep(1)
       } else if(submit=="slurmstandby") {
-        system(paste(sbatch_command,"--qos=standby"))
+        system(paste(sbatch_command,"--qos=standby --cpus-per-task=3"))
         Sys.sleep(1)
       } else if(submit=="slurmmedium") {
-        system(paste(sbatch_command,"--qos=medium"))
+        system(paste(sbatch_command,"--qos=medium --cpus-per-task=3"))
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
