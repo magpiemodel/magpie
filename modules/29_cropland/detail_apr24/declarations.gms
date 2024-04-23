@@ -42,6 +42,7 @@ positive variables
  v29_cost_treecover_recur(j)        Recurring cost for cropland tree cover (mio. USD05MER per yr)
  vm_fallow(j)                       Fallow land is temporarily fallow cropland (mio. ha)
  v29_fallow_missing(j)              Missing fallow land towards target (mio. ha)
+ v29_relocation_missing(j)          Missing fallow land towards target (mio. ha)
 ;
 
 equations
@@ -69,6 +70,7 @@ parameters
  ov29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD05MER per yr)
  ov_fallow(t,j,type)                      Fallow land is temporarily fallow cropland (mio. ha)
  ov29_fallow_missing(t,j,type)            Missing fallow land towards target (mio. ha)
+ ov29_relocation_missing(t,j,type)        Missing fallow land towards target (mio. ha)
  oq29_cropland(t,j,type)                  Total cropland calculation (mio. ha)
  oq29_avl_cropland(t,j,type)              Available cropland constraint (mio. ha)
  oq29_cost_cropland(t,j,type)             Costs and benefits related to agroforestry (mio. USD05MER per yr)

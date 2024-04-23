@@ -85,7 +85,7 @@ repeat
         p80_handle(h) = 0;
       );
 
-      if (s80_debug = 1,
+      if (s80_extra_solve = 1,
        if (s80_resolve = 1,
         display "Resolve"
         if (p80_modelstat(t,h) ne s80_modelstat_previter,

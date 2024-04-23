@@ -143,7 +143,7 @@ $batinclude "./modules/include.gms" nl_relax
       option nlp = conopt4;
     );
 
-if (s80_debug = 1,
+if (s80_extra_solve = 1,
 * if solve stopped with an error, try it again without pre-processing
     if((magpie.modelstat = 13),
       display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
