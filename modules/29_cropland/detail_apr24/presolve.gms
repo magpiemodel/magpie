@@ -44,16 +44,6 @@ v29_treecover.l(j,ac) = p29_treecover(t,j,ac);
 
 * create treecover target and penalty scenario
 i29_treecover_target(t,j) = s29_treecover_target * i29_treecover_scenario_fader(t);
-i29_treecover_penalty(t) = s29_treecover_penalty * i29_treecover_scenario_fader(t);
-
-if(m_year(t) <= s29_treecover_scenario_start,
- v29_treecover.fx(j,ac) = pc29_treecover(j,ac);
-else
- v29_treecover.lo(j,ac_est) = 0;
- v29_treecover.up(j,ac_est) = Inf;
- v29_treecover.lo(j,ac_sub) = 0;
- v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
-);
 
 p29_treecover_share(t,j) = 0;
 p29_treecover_share(t,j)$(pcm_land(j,"crop") > 1e-10) = sum(ac, pc29_treecover(j,ac)) / pcm_land(j,"crop"); 
@@ -61,6 +51,22 @@ if (s29_treecover_keep = 1,
  i29_treecover_target(t,j)$(i29_treecover_target(t,j) < p29_treecover_share(t,j)) = p29_treecover_share(t,j);
 );
 
+if(m_year(t) <= s29_treecover_scenario_start,
+ v29_treecover.fx(j,ac) = pc29_treecover(j,ac);
+ i29_treecover_penalty(t) = 0;
+else
+ v29_treecover.lo(j,ac_est) = 0;
+ v29_treecover.up(j,ac_est) = Inf;
+ v29_treecover.lo(j,ac_sub) = 0;
+ v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
+ i29_treecover_penalty(t) = s29_treecover_penalty;
+);
+
 * create fallow land target and penalty scenario
 i29_fallow_target(t) = s29_fallow_target * i29_fallow_scenario_fader(t);
-i29_fallow_penalty(t) = s29_fallow_penalty * i29_fallow_scenario_fader(t);
+
+if(m_year(t) <= s29_fallow_scenario_start,
+ i29_fallow_penalty(t) = 0;
+else
+ i29_fallow_penalty(t) = s29_fallow_penalty;
+);

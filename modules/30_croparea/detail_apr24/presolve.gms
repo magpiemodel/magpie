@@ -27,4 +27,9 @@ rotamin_red30(rotamin30) = yes$(i30_rotation_rules(t,rotamin30) > 0);
 
 * create betr target and penalty scenario
 i30_betr_target(t) = s30_betr_target * i30_betr_scenario_fader(t);
-i30_betr_penalty(t) = s30_betr_penalty * i30_betr_scenario_fader(t);
+
+if(m_year(t) <= s30_betr_scenario_start,
+ i30_betr_penalty(t) = 0;
+else
+ i30_betr_penalty(t) = s30_betr_penalty;
+);

@@ -7,39 +7,35 @@
 
 sets
   incentscen30 rotation inventive scenarios
-  /none,default,legumes,betr500,betr1000,agroecology/
+  / none, default, legumes, agroecology /
 
   rotascen30 rotation constraint scenarios
-  /min,default,good,good_20div,setaside,legumes,
-  betr0,betr10,betr20,betr25,betr30,betr40,betr50,
-  sixfoldrotation,agroecology,FSEC/
+  / min, default, good,good_20div, setaside, legumes, sixfoldrotation, agroecology, FSEC /
 
   rota30 rotational rules
-  /cereals1_max, cereals2_max, cereals_excl_rice_max, stalk_max, 
-   resistant_max, oilcrops_max,
-   legumes_max, rootsrape_max, roots_max, rape_sugr_max, biomass_max, 
-   tece_max, maiz_max, trce_max, rice_max,
-   rapeseed_max, soybean_max, sunflower_max, groundnut_max,
-   oilpalm_max, puls_max, potato_max, cassava_max,
-   sugr_cane_max, sugr_beet_max, others_max, foddr_max,
-   fiber_max, begr_max, betr_max
-   biomass_min, legumes_min, stalk_min, others_min, 
-   minor_min, cereals_min, betr_min/
-
+  / cereals1_max, cereals2_max, cereals_excl_rice_max, stalk_max, 
+    resistant_max, oilcrops_max,
+    legumes_max, rootsrape_max, roots_max, rape_sugr_max, biomass_max, 
+    tece_max, maiz_max, trce_max, rice_max,
+    rapeseed_max, soybean_max, sunflower_max, groundnut_max,
+    oilpalm_max, puls_max, potato_max, cassava_max,
+    sugr_cane_max, sugr_beet_max, others_max, foddr_max,
+    fiber_max, begr_max, betr_max
+    biomass_min, legumes_min, stalk_min, others_min, 
+    minor_min, cereals_min /
 
   rotamax30(rota30) rotational maximum rules
-  /cereals1_max, cereals2_max, cereals_excl_rice_max, stalk_max, 
-   resistant_max, oilcrops_max,
-   legumes_max, rootsrape_max, roots_max, rape_sugr_max, biomass_max, 
-   tece_max, maiz_max, trce_max, rice_max,
-   rapeseed_max, soybean_max, sunflower_max, groundnut_max,
-   oilpalm_max, puls_max, potato_max, cassava_max,
-   sugr_cane_max, sugr_beet_max, others_max, foddr_max,
-   fiber_max, begr_max, betr_max/
+  / cereals1_max, cereals2_max, cereals_excl_rice_max, stalk_max, 
+    resistant_max, oilcrops_max,
+    legumes_max, rootsrape_max, roots_max, rape_sugr_max, biomass_max, 
+    tece_max, maiz_max, trce_max, rice_max,
+    rapeseed_max, soybean_max, sunflower_max, groundnut_max,
+    oilpalm_max, puls_max, potato_max, cassava_max,
+    sugr_cane_max, sugr_beet_max, others_max, foddr_max,
+    fiber_max, begr_max, betr_max /
 
   rotamin30(rota30) rotational minimum rules
-  /biomass_min, legumes_min, stalk_min, others_min, 
-  minor_min, cereals_min, betr_min/
+  / biomass_min, legumes_min, stalk_min, others_min, minor_min, cereals_min /
 
   rotamax_red30(rotamax30) Maximum crop rotation reduced set
   rotamin_red30(rotamin30) Minimum crop rotation reduced set
@@ -96,7 +92,6 @@ sets
          cereals_min    . (tece, maiz, trce, rice_pro)
          stalk_min      . (tece, maiz, trce, rice_pro, sugr_cane, foddr)
          others_min     . (others)
-         betr_min       . (betr)
  /
 
    kbe30(kcr) bio energy activities
