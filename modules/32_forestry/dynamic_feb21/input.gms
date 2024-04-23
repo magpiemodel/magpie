@@ -38,7 +38,7 @@ scalars
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
   s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution 2=FAO distribution 3=Poulter distribution 4=Manual distribution (1) / 0 /
   s32_price                       Price for timber (USD)      / 45 /
-  s32_free_land_cost              Penalty for technial area balance term (USD per ha) /1000000/
+  s32_free_land_cost              Penalty for technial area balance term (USD per ha) / 1e+06 /
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
   s32_tcre_local                  Switch for local (1) or global (0) TRCE factors (1) / 1 /

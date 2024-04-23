@@ -28,7 +28,7 @@ scalars
  s29_fallow_scenario_target      Fallow land scenario target year      / 2050 /
  s29_fallow_target               Target share of fallow land on total cropland (1) / 0 /
  s29_fallow_penalty              Penalty for violation of fallow target (USD05MER per ha) / 500 /
- s29_relocation_penalty          Penalty for violation of cropland relocation target (USD05MER per ha) / 1000000 /
+ s29_relocation_penalty          Penalty for violation of cropland relocation target (USD05MER per ha) / 1e+06 /
 ;
 
 

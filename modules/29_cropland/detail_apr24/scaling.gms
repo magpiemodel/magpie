@@ -5,8 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
-    s80_maxiter         maximal solve iterations if modelstat is > 2 (1)  / 30 /
-    s80_optfile         switch to use specfied solver settings (1)        / 0 /
-    s80_extra_solve     switch to use alternative solver settings (1)     / 0 /
-;
+v29_fallow_missing.scale(j) = 10e-6;
+v29_relocation_missing.scale(j) = 10e-6;
