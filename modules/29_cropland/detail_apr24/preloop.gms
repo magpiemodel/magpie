@@ -23,10 +23,10 @@ elseif s29_snv_shr > s29_snv_relocation_data_x1,
 
 
 * Initial tree cover on cropland is assumed to be equally distributed among all age-classes
-pc29_treecover(j,ac) = 0;
-pc29_treecover(j,ac)$(pm_land_hist("y2015",j,"crop") > 1e-10) = 
- (f29_treecover(j) / pm_land_hist("y2015",j,"crop") * pm_land_hist("y1995",j,"crop")) / card(ac);
-
+pc29_treecover_share(j) = 0;
+pc29_treecover_share(j)$(pm_land_hist("y2015",j,"crop") > 1e-10) = f29_treecover(j) / pm_land_hist("y2015",j,"crop");
+pc29_treecover_share(j)$(pc29_treecover_share(j) > s29_treecover_max) = s29_treecover_max;
+pc29_treecover(j,ac) = (pc29_treecover_share(j) * pm_land_hist("y1995",j,"crop")) / card(ac);
 
 *' Switch for tree cover on cropland:
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation

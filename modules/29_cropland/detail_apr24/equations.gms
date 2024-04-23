@@ -82,6 +82,10 @@
     v29_treecover_missing(j2) =g=
       vm_land(j2,"crop") * sum(ct, i29_treecover_target(ct,j2)) - sum(ac, v29_treecover(j2,ac));
 
+  q29_treecover_max(j2) ..
+    sum(ac, v29_treecover(j2,ac)) =l=
+      vm_land(j2,"crop") * s29_treecover_max;
+
 *' Depending on `s29_treecover_bii_coeff`, tree cover biodiversity value 
 *' is based on natural vegetation or plantation BII coefficients. 
 

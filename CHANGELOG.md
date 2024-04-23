@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### added
 - **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` (default) and `simple_apr24`.
 - **10_land** added interface `pm_land_hist` with historic land use patterns
+- **32_forestry** added technical balance term `v32_land_missing_ndc`
 
 ### removed
 -
