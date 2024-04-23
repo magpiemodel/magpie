@@ -59,6 +59,7 @@ else
  v29_treecover.up(j,ac_est) = Inf;
  v29_treecover.lo(j,ac_sub) = 0;
  v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
+ m_boundfix(v29_treecover,(j,ac_sub),l,10e-5);
  i29_treecover_penalty(t) = s29_treecover_penalty;
 );
 
