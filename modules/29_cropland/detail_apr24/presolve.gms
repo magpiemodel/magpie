@@ -48,6 +48,7 @@ i29_treecover_target(t,j) = s29_treecover_target * i29_treecover_scenario_fader(
 
 p29_treecover_share(t,j) = 0;
 p29_treecover_share(t,j)$(pcm_land(j,"crop") > 1e-10) = sum(ac, pc29_treecover(j,ac)) / pcm_land(j,"crop"); 
+p29_treecover_share(t,j)$(p29_treecover_share(t,j) > s29_treecover_max) = s29_treecover_max;
 if (s29_treecover_keep = 1,
  i29_treecover_target(t,j)$(i29_treecover_target(t,j) < p29_treecover_share(t,j)) = p29_treecover_share(t,j);
 );

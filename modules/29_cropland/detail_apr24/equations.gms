@@ -28,7 +28,6 @@
   q29_cost_cropland(j2) ..
     vm_cost_cropland(j2) =e= 
       v29_cost_treecover_est(j2) + v29_cost_treecover_recur(j2)
-      + v29_relocation_missing(j2) * s29_relocation_penalty
       + v29_fallow_missing(j2) * sum(ct, i29_fallow_penalty(ct))
       + v29_treecover_missing(j2) * sum(ct, i29_treecover_penalty(ct));
 
@@ -58,7 +57,7 @@
 *' (@buchhorn_copernicus_2020).
 
   q29_land_snv_trans(j2) ..
-    v29_relocation_missing(j2) =g= sum(ct, p29_snv_relocation(ct,j2)) - sum(land_snv, vm_lu_transitions(j2,"crop",land_snv));
+    sum(land_snv, vm_lu_transitions(j2,"crop",land_snv)) =g= sum(ct, p29_snv_relocation(ct,j2));
 
 *' A penalty is applied for the violation of fallow land rules.
 *' The penalty applies to the missing fallow land, i.e. where fallow land 
