@@ -24,6 +24,7 @@ p29_snv_relocation(t,j) = (i29_snv_scenario_fader(t) - i29_snv_scenario_fader(t-
 *' cases of cropland reduction
 p29_max_snv_relocation(t,j) = p29_snv_shr(t,j) * (i29_snv_scenario_fader(t) - i29_snv_scenario_fader(t-1)) * pcm_land(j,"crop")
                               - sum(ac, pc29_treecover(j,ac));
+p29_max_snv_relocation(t,j)$(p29_max_snv_relocation(t,j) < 0) = 0;  
 p29_snv_relocation(t,j)$(p29_snv_relocation(t, j) > p29_max_snv_relocation(t,j)) = p29_max_snv_relocation(t,j);
 
 *' Area potentially available for cropping
