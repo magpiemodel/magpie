@@ -20,7 +20,7 @@
 *' in order to increase compositional heterogeneity of land types at the cell level.
 
  q29_avl_cropland(j2) ..
-   vm_land(j2,"crop") =l= sum(ct, p29_avl_cropland(ct,j2));
+  v29_avl_crop_exceed(j2) =g= vm_land(j2,"crop") - sum(ct, p29_avl_cropland(ct,j2));
 
 
 *' Total cost for the cropland module.
@@ -28,6 +28,7 @@
   q29_cost_cropland(j2) ..
     vm_cost_cropland(j2) =e= 
       v29_cost_treecover_est(j2) + v29_cost_treecover_recur(j2)
+      + v29_avl_crop_exceed(j2) * s29_avl_crop_exceed_penalty
       + v29_fallow_missing(j2) * sum(ct, i29_fallow_penalty(ct))
       + v29_treecover_missing(j2) * sum(ct, i29_treecover_penalty(ct));
 
@@ -63,9 +64,13 @@
 *' The penalty applies to the missing fallow land, i.e. where fallow land 
 *' is lower than a certain fraction of total cropland.
 
-  q29_fallow_missing(j2) ..
+  q29_fallow_min(j2) ..
     v29_fallow_missing(j2) =g=
       vm_land(j2,"crop") * sum(ct, i29_fallow_target(ct)) - vm_fallow(j2);
+
+  q29_fallow_max(j2) ..
+    vm_fallow(j2) =l=
+      vm_land(j2,"crop") * s29_fallow_max;
 
 *' Fallow land biodiversity value is based on perennial crops. 
 
@@ -78,7 +83,7 @@
 *' The penalty applies to the missing treecover area, i.e. where treecover area 
 *' is lower than a certain fraction of total cropland.
 
-  q29_treecover_missing(j2) ..
+  q29_treecover_min(j2) ..
     v29_treecover_missing(j2) =g=
       vm_land(j2,"crop") * sum(ct, i29_treecover_target(ct,j2)) - sum(ac, v29_treecover(j2,ac));
 
