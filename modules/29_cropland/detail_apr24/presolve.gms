@@ -57,7 +57,7 @@ v29_treecover.lo(j,ac_est) = 0;
 v29_treecover.up(j,ac_est) = Inf;
 v29_treecover.lo(j,ac_sub) = 0;
 v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
-m_boundfix(v29_treecover,(j,ac_sub),l,1e-10);
+m_boundfix(v29_treecover,(j,ac_sub),l,1e-6);
 
 if (m_year(t) <= s29_treecover_scenario_start,
   i29_treecover_penalty(t) = 0;
@@ -90,4 +90,4 @@ else
 
 vm_fallow.lo(j) = 0;
 vm_fallow.up(j) = p29_avl_cropland(t,j);
-m_boundfix(vm_fallow,(j),l,1e-10);
+m_boundfix(vm_fallow,(j),l,1e-6);

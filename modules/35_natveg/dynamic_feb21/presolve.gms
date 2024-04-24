@@ -125,7 +125,7 @@ v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j
 );
 * upper bound
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
-m_boundfix(v35_secdforest,(j,ac_sub),l,1e-10);
+m_boundfix(v35_secdforest,(j,ac_sub),l,1e-6);
 
 * Secondary forest conservation
 * protection bound fix
@@ -145,7 +145,7 @@ v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set upper bound
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
-m_boundfix(v35_other,(j,ac_sub),l,1e-10);
+m_boundfix(v35_other,(j,ac_sub),l,1e-6);
 
 * Other land conservation
 * protection bound fix
