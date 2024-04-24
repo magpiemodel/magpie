@@ -17,7 +17,6 @@ scalars
  s29_snv_relocation_data_x2      Second reference value in SNV target cropland data (1) / 0.5 /
  s29_cost_treecover_est          Tree cover establishment cost (USD05MER per ha) / 2000 /
  s29_cost_treecover_recur        Tree cover recurring cost (USD05MER per ha) / 500 /
- s29_avl_crop_exceed_penalty     Penalty for transgression of available cropland (USD05MER per ha) / 1e+06 /
  s29_treecover_plantation        Growth curve switch for tree cover on cropland 0=natveg 1=plantations (1) / 0 /
  s29_treecover_bii_coeff         BII coefficent to be used for tree cover on cropland 0=secondary vegetation 1=timber plantations (1) / 0 /
  s29_treecover_scenario_start    Cropland treecover scenario start year       / 2020 /

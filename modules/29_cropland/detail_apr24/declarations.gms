@@ -36,7 +36,6 @@ parameters
 
 positive variables
  vm_cost_cropland(j)                Cost for total cropland (mio. USD05MER per yr)
- v29_avl_crop_exceed(j)             Transgression of availabe cropland land (mio. ha)
  v29_treecover(j,ac)                Cropland tree cover per age class (mio. ha)
  v29_treecover_missing(j)           Missing treecover area towards target (mio. ha)
  v29_cost_treecover_est(j)          Establishment cost for cropland tree cover (mio. USD05MER per yr)
@@ -66,7 +65,6 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_cropland(t,j,type)               Cost for total cropland (mio. USD05MER per yr)
- ov29_avl_crop_exceed(t,j,type)           Transgression of availabe cropland land (mio. ha)
  ov29_treecover(t,j,ac,type)              Cropland tree cover per age class (mio. ha)
  ov29_treecover_missing(t,j,type)         Missing treecover area towards target (mio. ha)
  ov29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD05MER per yr)

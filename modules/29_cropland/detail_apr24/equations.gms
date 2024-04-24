@@ -20,7 +20,7 @@
 *' in order to increase compositional heterogeneity of land types at the cell level.
 
  q29_avl_cropland(j2) ..
-  v29_avl_crop_exceed(j2) =g= vm_land(j2,"crop") - sum(ct, p29_avl_cropland(ct,j2));
+  vm_land(j2,"crop") =l= sum(ct, p29_avl_cropland(ct,j2));
 
 
 *' Total cost for the cropland module.
@@ -28,7 +28,6 @@
   q29_cost_cropland(j2) ..
     vm_cost_cropland(j2) =e= 
       v29_cost_treecover_est(j2) + v29_cost_treecover_recur(j2)
-      + v29_avl_crop_exceed(j2) * s29_avl_crop_exceed_penalty
       + v29_fallow_missing(j2) * sum(ct, i29_fallow_penalty(ct))
       + v29_treecover_missing(j2) * sum(ct, i29_treecover_penalty(ct));
 
