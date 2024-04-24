@@ -5,4 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v29_treecover.scale(j,ac) = 1e6;
+v29_treecover.scale(j,ac) = 1e-6;
