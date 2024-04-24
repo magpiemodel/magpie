@@ -8,13 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **scripts** start_functions no longer support reading spam files
 
 ### added
 -
 
 ### removed
--
+- **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
 
 ### fixed
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
