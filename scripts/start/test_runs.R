@@ -79,6 +79,16 @@ cfg <- fsecScenario(scenario = "c_BAU")
 cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
+### NatureSparing
+cfg <- fsecScenario(scenario = "b_NatureSparing")
+cfg$results_folder_highres <- "output"
+start_run(cfg = cfg, codeCheck = codeCheck)
+
+### LandscapeElements
+cfg <- fsecScenario(scenario = "a_LandscapeElements")
+cfg$results_folder_highres <- "output"
+start_run(cfg = cfg, codeCheck = codeCheck)
+
 ### FSDP Scenario
 cfg <- fsecScenario(scenario = "e_FSDP")
 cfg$results_folder_highres <- "output"
