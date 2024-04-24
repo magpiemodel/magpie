@@ -125,11 +125,11 @@ v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j
 );
 * upper bound
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
-m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
+m_boundfix(v35_secdforest,(j,ac_sub),l,1e-10);
 
 * Secondary forest conservation
 * protection bound fix
-*pm_land_conservation(t,j,"secdforest","protect")$(abs(pm_land_conservation(t,j,"secdforest","protect") - sum(ac_sub, pc35_secdforest(j,ac_sub))) < 10e-5) = sum(ac_sub, pc35_secdforest(j,ac_sub));
+pm_land_conservation(t,j,"secdforest","protect")$(abs(pm_land_conservation(t,j,"secdforest","protect") - sum(ac_sub, pc35_secdforest(j,ac_sub))) < 1e-10) = sum(ac_sub, pc35_secdforest(j,ac_sub));
 * set restoration target
 p35_land_restoration(j,"secdforest") = pm_land_conservation(t,j,"secdforest","restore");
 * Do not restore secdforest in areas where total natural
@@ -145,11 +145,11 @@ v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set upper bound
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
-m_boundfix(v35_other,(j,ac_sub),l,10e-5);
+m_boundfix(v35_other,(j,ac_sub),l,1e-10);
 
 * Other land conservation
 * protection bound fix
-*pm_land_conservation(t,j,"other","protect")$(abs(pm_land_conservation(t,j,"other","protect") - sum(ac_sub, pc35_other(j,ac_sub))) < 10e-5) = sum(ac_sub, pc35_other(j,ac_sub));
+pm_land_conservation(t,j,"other","protect")$(abs(pm_land_conservation(t,j,"other","protect") - sum(ac_sub, pc35_other(j,ac_sub))) < 1e-10) = sum(ac_sub, pc35_other(j,ac_sub));
 * set restoration target
 p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
 * Do not restore other land in areas where total natural

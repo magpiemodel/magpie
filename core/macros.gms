@@ -9,8 +9,8 @@
 
 * Macro for fixing a variable in the case that lower and upper bound are too
 * close to each other (closer than argument "sens")
-* EXAMPLE: ma_boundfix(vm_land,(j,"ifft"),up,10e-5);
-$macro m_boundfix(x,arg,sufx,sens) x.l arg$(x.up arg-x.lo arg<sens) = x.sufx arg;
+* EXAMPLE: ma_boundfix(vm_land,(j,"ifft"),up,1e-10);
+$macro m_boundfix(x,arg,sufx,sens) x.fx arg$(x.up arg-x.lo arg<sens) = x.sufx arg;
 
 $macro m_weightedmean(x,w,s) (sum(s,x*w)/sum(s,w))$(sum(s,w)>0) + 0$(sum(s,w)<=0);
 

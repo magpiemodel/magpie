@@ -153,7 +153,7 @@ else
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
-m_boundfix(v32_land,(j,type32,ac_sub),up,10e-5);
+m_boundfix(v32_land,(j,type32,ac_sub),up,1e-10);
 
 ** Calculate future yield based on rotation length
 if((ord(t)=1),
