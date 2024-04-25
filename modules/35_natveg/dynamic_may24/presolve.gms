@@ -67,7 +67,7 @@ s35_shift = m_timestep_length_forestry/5;
 * --------------------------------------
 
 * Forest recovery is constrained by the potential forest area in each cluster
-p35_max_forest_recovery(j) = fm_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
+p35_max_forest_recovery(j) = f35_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
 p35_max_forest_recovery(j)$(p35_max_forest_recovery(j) < 0) = 0;
 
 * -------------------------------------
