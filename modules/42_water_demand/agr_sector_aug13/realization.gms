@@ -33,6 +33,7 @@
 *'   efficiency times management factor") from @PIK_report104_2007.
 *'   Here, irrigated area from @siebert_FAO_2007 has been used as aggregation
 *'   weight.
+*'   Contraction of AEI happens if a depreciation rate is set in the switch `s41_AEI_depreciation`. 
 *'
 *' * A regression of country values of the "conveyance efficiency times
 *'   management factor" from @PIK_report104_2007 on GDP.

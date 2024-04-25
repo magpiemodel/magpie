@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **41_area_equipped_for_irrigation** updated (non-default) AEI data (from Mehta2022 to Mehta2024)
 
 ### added
 -

@@ -10,5 +10,5 @@ sets
        / y1995, y2000, y2005, y2010, y2015 /
 
   aei41    Data source for area equipped for irrigation
-       / LUH2v2, Mehta2022 /
+       / LUH2v2, Mehta2024_Siebert2013, Mehta2024_Meier2018 /
 ;

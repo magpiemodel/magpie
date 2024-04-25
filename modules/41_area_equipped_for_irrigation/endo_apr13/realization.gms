@@ -7,8 +7,9 @@
 
 
 *' @description This realization allows the model to endogenously decide on investments to deploy additional
-*' irrigation infrastructure, i.e. to increase the area equipped for irrigation (AEI). Initial values for AEI
-*' in 1995 are taken from @siebert_FAO_2007. Contraction of AEI is not possible.
+*' irrigation infrastructure, i.e. to increase the area equipped for irrigation (AEI).
+*' Initial values for AEI are areas that are irrigated in the initial time step in LUH2v2.
+*' Contraction of AEI is not possible.
 *' Irrigated crop production can only take place where irrigation infrastructure is present.
 *'
 *' Unit costs per hectare for AEI expansion are derived from a World Bank study (@worldbank_irrigation_1995)
