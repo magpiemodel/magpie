@@ -47,6 +47,20 @@ pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - p35_disturbance_loss_sec
 pcm_land(j,"primforest") = pcm_land(j,"primforest") - p35_disturbance_loss_primf(t,j);
 vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 
+* --------------------------------------
+* Carbon threshold for secondary forest
+* --------------------------------------
+
+*' @code
+*' If the vegetation carbon density in a simulation unit due to regrowth
+*' exceeds a threshold of 20 tC/ha the respective area is shifted from other natural land to secondary forest.
+p35_recovered_forest(t,j,ac)$(not sameas(ac,"acx")) =
+      p35_other(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
+p35_other(t,j,ac) = p35_other(t,j,ac) - p35_recovered_forest(t,j,ac);
+p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
+*' @stop
+
+
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_timestep_length_forestry/5;
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
@@ -62,18 +76,6 @@ s35_shift = m_timestep_length_forestry/5;
     p35_secdforest(t,j,"acx") = p35_secdforest(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_secdforest(j,ac));
 
-* --------------------------------------
-* Carbon threshold for secondary forest
-* --------------------------------------
-
-*' @code
-*' If the vegetation carbon density in a simulation unit due to regrowth
-*' exceeds a threshold of 20 tC/ha the respective area is shifted from other natural land to secondary forest.
-p35_recovered_forest(t,j,ac)$(not sameas(ac,"acx")) =
-      p35_other(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
-p35_other(t,j,ac) = p35_other(t,j,ac) - p35_recovered_forest(t,j,ac);
-p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
-*' @stop
 
 pc35_secdforest(j,ac) = p35_secdforest(t,j,ac);
 v35_secdforest.l(j,ac) = pc35_secdforest(j,ac);
