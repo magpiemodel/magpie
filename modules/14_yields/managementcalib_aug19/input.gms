@@ -77,7 +77,7 @@ $include "./modules/14_yields/input/f14_ipcc_bce.cs3"
 $offdelim
 ;
 
-parameter f14_aboveground_fraction(forest_land) Root to shoot ratio (1)
+parameter f14_aboveground_fraction(land_timber) Root to shoot ratio (1)
 /
 $ondelim
 $include "./modules/14_yields/input/f14_aboveground_fraction.csv"

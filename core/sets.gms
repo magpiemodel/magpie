@@ -247,10 +247,13 @@ sets
   land_ag(land) Agricultural land pools
                   / crop, past /
 
-  forest_land(land) land from which timber can be taken away
+  land_timber(land) land from which timber can be taken away
   / forestry, primforest, secdforest,other /
 
-  land_natveg(forest_land) Natural vegetation land pools
+  land_forest(land) Forested land pools
+  / forestry, primforest, secdforest /
+
+  land_natveg(land_timber) Natural vegetation land pools
         / primforest, secdforest, other /
 
   forest_type forest type
