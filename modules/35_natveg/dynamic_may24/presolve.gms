@@ -63,7 +63,7 @@ s35_shift = m_timestep_length_forestry/5;
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_secdforest(j,ac));
 
 * --------------------------------------
-*Secondary forest recovery
+* Secondary forest recovery
 * --------------------------------------
 
 * Forest recovery is constrained by the potential forest area in each cluster
@@ -156,6 +156,7 @@ p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools
 * ------------------
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
+p35_min_forest(t,j)$(p35_min_forest(t,j) > f35_pot_forest_area(j)) = f35_pot_forest_area(j);
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
 ** Display
