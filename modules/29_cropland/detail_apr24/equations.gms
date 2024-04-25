@@ -63,7 +63,7 @@
 *' The penalty applies to the missing fallow land, i.e. where fallow land 
 *' is lower than a certain fraction of total cropland.
 
-  q29_fallow_min(j2) ..
+  q29_fallow_min(j2)$(sum(ct, i29_fallow_penalty(ct)) > 0) ..
     v29_fallow_missing(j2) =g=
       vm_land(j2,"crop") * sum(ct, i29_fallow_target(ct)) - vm_fallow(j2);
 
@@ -82,7 +82,7 @@
 *' The penalty applies to the missing treecover area, i.e. where treecover area 
 *' is lower than a certain fraction of total cropland.
 
-  q29_treecover_min(j2) ..
+  q29_treecover_min(j2)$(sum(ct, i29_treecover_penalty(ct)) > 0) ..
     v29_treecover_missing(j2) =g=
       vm_land(j2,"crop") * sum(ct, i29_treecover_target(ct,j2)) - sum(ac, v29_treecover(j2,ac));
 
