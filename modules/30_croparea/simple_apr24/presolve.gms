@@ -20,9 +20,6 @@ else
 
 *' @stop
 
-*' No penalties exist in this realization
-vm_rotation_penalty.fx(i)=0;
-
 crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
 crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
 
