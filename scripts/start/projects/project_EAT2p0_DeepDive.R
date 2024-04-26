@@ -195,7 +195,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "BAU_Bioenergy"
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
-cfg <- bioenergy(cfg = cfg) # NDC or not?
+cfg <- bioenergy(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # BAU + pricing of CO2 in land sector #
