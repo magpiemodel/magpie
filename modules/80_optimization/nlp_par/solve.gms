@@ -116,7 +116,7 @@ repeat
     j2(j) = no;
     );
   );
-display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
+*display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,

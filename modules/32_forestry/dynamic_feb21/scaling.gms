@@ -10,4 +10,4 @@ v32_cost_recur.scale(i) = 10e4;
 vm_cost_fore.scale(i) = 10e4;
 v32_cost_hvarea.scale(i)$(s32_hvarea = 1 OR s32_hvarea = 2) = 10e3;
 vm_cdr_aff.scale(j,ac,aff_effect) = 10e-4;
-v32_land.scale(j,type32,ac) = 1e-6;
+v32_land.scale(j,type32,ac) = 1e-3;

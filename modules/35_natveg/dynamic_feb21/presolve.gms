@@ -55,9 +55,9 @@ vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 *' If the vegetation carbon density in a simulation unit due to regrowth
 *' exceeds a threshold of 20 tC/ha the respective area is shifted from other natural land to secondary forest.
 p35_recovered_forest(t,j,ac)$(not sameas(ac,"acx")) =
-      p35_other(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
-p35_other(t,j,ac) = p35_other(t,j,ac) - p35_recovered_forest(t,j,ac);
-p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
+      pc35_other(j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
+pc35_other(j,ac) = pc35_other(j,ac) - p35_recovered_forest(t,j,ac);
+pc35_secdforest(j,ac) = pc35_secdforest(j,ac) + p35_recovered_forest(t,j,ac);
 *' @stop
 
 
