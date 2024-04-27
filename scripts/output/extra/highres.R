@@ -102,7 +102,6 @@ highres <- function(cfg) {
   cfg$files2export$start <- c(cfg$files2export$start,
                               paste0(cfg$results_folder, "/", "magpie_y1995.gdx"))
   cfg$gms$s_use_gdx   <- 1
-  cfg$gms$s80_optfile <- 1
 
   #max resources for parallel runs
   cfg$qos <- "standby_maxMem_dayMax"
