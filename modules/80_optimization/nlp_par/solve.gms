@@ -39,6 +39,7 @@ loop(h,
   i2(i)$supreg(h,i) = yes;
   loop(i2, j2(j)$cell(i2,j) = yes);
   solve magpie USING nlp MINIMIZING vm_cost_glo;
+  solve magpie USING nlp MINIMIZING vm_cost_glo;
   h2(h) = no;
   i2(i) = no;
   j2(j) = no;
@@ -50,7 +51,7 @@ repeat
   loop(h$p80_handle(h),
     if(handleStatus(p80_handle(h)) = 2,
       p80_counter(h) = p80_counter(h) + 1;
-      s80_resolve = 1;
+      p80_resolve(h) = 1;
 
       magpie.handle = p80_handle(h);
       execute_loadhandle magpie;
@@ -74,19 +75,19 @@ repeat
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
           option AsyncSolLst=0;
-          s80_resolve = 0;
+          p80_resolve(h) = 0;
       );
 
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
       if (p80_modelstat(t,h) <= 2,
         display "Model status <= 2. Handle cleared.";
-        s80_resolve = 0;
+        p80_resolve(h) = 0;
         p80_handle(h) = 0;
       );
 
       if (s80_extra_solve = 1,
-       if (s80_resolve = 1,
+       if (p80_resolve(h) = 1,
         display "Resolve"
         if (p80_modelstat(t,h) ne s80_modelstat_previter,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
@@ -116,6 +117,7 @@ repeat
     j2(j) = no;
     );
   );
+display$sleep(card(p80_handle)*60) 'sleep some time';
 *display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
