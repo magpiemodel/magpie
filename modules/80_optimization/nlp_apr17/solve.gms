@@ -41,8 +41,7 @@ display vm_cost_glo.l;
 display magpie.modelstat;
 
 * in case of problems try different solvers and optfile settings
-if (s80_extra_solve = 1,
- if (magpie.modelstat > 2,
+if (magpie.modelstat > 2,
   repeat(
     s80_counter = s80_counter + 1 ;
 
@@ -83,7 +82,6 @@ if (s80_extra_solve = 1,
 
     until (magpie.modelstat <= 2 or s80_counter >= s80_maxiter)
   );
- );
 );
 
 p80_modelstat(t) = magpie.modelstat;

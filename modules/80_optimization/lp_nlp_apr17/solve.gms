@@ -143,25 +143,24 @@ $batinclude "./modules/include.gms" nl_relax
       option nlp = conopt4;
     );
 
-if (s80_extra_solve = 1,
 * if solve stopped with an error, try it again without pre-processing
     if((magpie.modelstat = 13),
       display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
-    magpie.optfile = 2
+      magpie.optfile = 2
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       magpie.optfile   = s80_optfile ;
     );
 
 * if solve stopped with an error, try it again with conopt3
-  if ((magpie.modelstat = 13),
-    display "WARNING: Modelstat 13 | retry with CONOPT3!";
-    option nlp = conopt;
-    solve magpie USING nlp MINIMIZING vm_cost_glo;
-    solve magpie USING nlp MINIMIZING vm_cost_glo;
-    option nlp = conopt4;
-  );
-);
+    if ((magpie.modelstat = 13),
+      display "WARNING: Modelstat 13 | retry with CONOPT3!";
+      option nlp = conopt;
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      option nlp = conopt4;
+    );
+
   p80_modelstat(t) = magpie.modelstat;
   p80_num_nonopt(t) = magpie.numNOpt;
 
