@@ -14,7 +14,7 @@ p80_modelstat(t,h) = 14;
 option nlp = conopt4;
 magpie.solvelink = 3;
 magpie.optfile   = s80_optfile ;
-magpie.scaleopt  = 1 ;
+magpie.scaleopt  = s80_scaleopt ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
 
