@@ -92,14 +92,17 @@ repeat
         if (p80_modelstat(t,h) ne s80_modelstat_previter,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
           solve magpie USING nlp MINIMIZING vm_cost_glo;
+          solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_modelstat(t,h) = s80_modelstat_previter,
           if(magpie.optfile = s80_optfile_previter,
             display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
             magpie.optfile = 2;
             solve magpie USING nlp MINIMIZING vm_cost_glo;
+            solve magpie USING nlp MINIMIZING vm_cost_glo;
           else
             display "Modelstat > 2 | Retry solve with CONOPT3";
             option nlp = conopt;
+            solve magpie USING nlp MINIMIZING vm_cost_glo;
             solve magpie USING nlp MINIMIZING vm_cost_glo;
             option nlp = conopt4;
           );
