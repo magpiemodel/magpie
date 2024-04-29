@@ -215,8 +215,8 @@ cfg$title <- "BAU_MITI"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
 # scenario settings
-cfg <- miti(cfg = cfg)
 cfg <- bau(cfg = cfg)
+cfg <- miti(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # EL2 #
@@ -237,8 +237,8 @@ cfg$title <- "ELM"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
 # scenario settings
-cfg <- miti(cfg = cfg)
 cfg <- bau(cfg = cfg)
+cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
@@ -251,8 +251,8 @@ cfg$title <- "ELM_DIET"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
 # scenario settings
-cfg <- miti(cfg = cfg)
 cfg <- bau(cfg = cfg)
+cfg <- miti(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 cfg <- rcp26(cfg = cfg)
@@ -264,8 +264,8 @@ cfg$title <- "ELM_PROD"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
 # scenario settings
-cfg <- miti(cfg = cfg)
 cfg <- bau(cfg = cfg)
+cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- waste(cfg = cfg)
 cfg <- rcp26(cfg = cfg)
@@ -277,8 +277,8 @@ cfg$title <- "ELM_WAST"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
 # scenario settings
-cfg <- miti(cfg = cfg)
 cfg <- bau(cfg = cfg)
+cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- rcp26(cfg = cfg)
@@ -290,8 +290,8 @@ cfg$title <- "ELM_RCP70"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
 # scenario settings
-cfg <- miti(cfg = cfg)
 cfg <- bau(cfg = cfg)
+cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
@@ -303,8 +303,8 @@ cfg$title <- "ELM_NoCC"
 # standard setting, but with NDC activated (for miti) and without CC
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 # scenario settings
-cfg <- miti(cfg = cfg)
 cfg <- bau(cfg = cfg)
+cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
