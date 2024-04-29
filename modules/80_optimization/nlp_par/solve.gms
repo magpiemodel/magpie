@@ -39,7 +39,6 @@ loop(h,
   i2(i)$supreg(h,i) = yes;
   loop(i2, j2(j)$cell(i2,j) = yes);
   solve magpie USING nlp MINIMIZING vm_cost_glo;
-  solve magpie USING nlp MINIMIZING vm_cost_glo;
   h2(h) = no;
   i2(i) = no;
   j2(j) = no;
@@ -51,7 +50,7 @@ repeat
   loop(h$p80_handle(h),
     if(handleStatus(p80_handle(h)) = 2,
       p80_counter(h) = p80_counter(h) + 1;
-      p80_resolve(h) = 1;
+      p80_extra_solve(h) = 1;
 
       magpie.handle = p80_handle(h);
       execute_loadhandle magpie;
@@ -75,33 +74,37 @@ repeat
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
           option AsyncSolLst=0;
-          p80_resolve(h) = 0;
+          p80_extra_solve(h) = 0;
       );
 
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
       if (p80_modelstat(t,h) <= 2,
-        display "Model status <= 2. Handle cleared.";
-        p80_resolve(h) = 0;
-        p80_handle(h) = 0;
+        if (p80_counter(h) < 2,
+          display "Model status <= 2. Starting second solve";
+          solve magpie USING nlp MINIMIZING vm_cost_glo;
+          p80_handle(h) = magpie.handle;
+          p80_extra_solve(h) = 0;
+        else
+          display "Model status <= 2. Handle cleared.";
+          p80_extra_solve(h) = 0;
+          p80_handle(h) = 0;
+        );
       );
 
-      if (p80_resolve(h) = 1,
+      if (p80_extra_solve(h) = 1,
         display "Resolve"
         if (p80_modelstat(t,h) ne s80_modelstat_previter,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
-          solve magpie USING nlp MINIMIZING vm_cost_glo;
           solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_modelstat(t,h) = s80_modelstat_previter,
           if(magpie.optfile = s80_optfile_previter,
             display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
             magpie.optfile = 2;
             solve magpie USING nlp MINIMIZING vm_cost_glo;
-            solve magpie USING nlp MINIMIZING vm_cost_glo;
           else
             display "Modelstat > 2 | Retry solve with CONOPT3";
             option nlp = conopt;
-            solve magpie USING nlp MINIMIZING vm_cost_glo;
             solve magpie USING nlp MINIMIZING vm_cost_glo;
             option nlp = conopt4;
           );

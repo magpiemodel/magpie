@@ -9,7 +9,7 @@ parameters
   p80_modelstat(t,h)  modelstat indicator (1)
   p80_counter(h)      counter (1)
   p80_handle(h)       parallel mode handle parameter (1)
-  p80_resolve(h)      indicator for restarting solve (1)
+  p80_extra_solve(h)  indicator for extra solve (1)
 ;
 
 scalars
