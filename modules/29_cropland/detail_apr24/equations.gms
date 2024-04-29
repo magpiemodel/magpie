@@ -78,6 +78,11 @@
       vm_fallow(j2) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
 
+*' Interface vm_treecover for other modules.
+
+  q29_treecover(j2) ..
+    vm_treecover(j2) =e= sum(ac, v29_treecover(j2,ac));
+
 *' A penalty is applied for the violation of treecover rules.
 *' The penalty applies to the missing treecover area, i.e. where treecover area 
 *' is lower than a certain fraction of total cropland.

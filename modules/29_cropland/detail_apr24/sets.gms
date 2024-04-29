@@ -16,7 +16,4 @@ sets
    relocation_target29 Cropland requiring relocation based on different SNV targets
    / SNV20TargetCropland, SNV50TargetCropland /
 
-   fallow29 fallow rules
-   / fallow20, fallow80 /
-
 ;

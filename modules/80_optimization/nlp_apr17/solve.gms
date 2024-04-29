@@ -14,7 +14,7 @@ s80_optfile_previter = s80_optfile;
 *** solver settings
 option nlp = conopt4;
 magpie.optfile   = s80_optfile;
-magpie.scaleopt  = s80_scaleopt ;
+magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
 

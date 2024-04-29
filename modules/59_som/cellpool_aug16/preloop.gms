@@ -73,6 +73,9 @@ i59_cratio_fallow(j) = sum(climate59,
                 * f59_cratio_landuse(climate59,"maiz")
                 * f59_cratio_tillage(climate59,"reduced_tillage")
                 * f59_cratio_inputs(climate59,"low_input"));
+
+i59_cratio_treecover = 1;
+
 *' @stop
 
 p59_carbon_density(t,j,land) = 0;

@@ -36,6 +36,7 @@ parameters
 
 positive variables
  vm_cost_cropland(j)                Cost for total cropland (mio. USD05MER per yr)
+ vm_treecover(j)                    Cropland tree cover (mio. ha)
  v29_treecover(j,ac)                Cropland tree cover per age class (mio. ha)
  v29_treecover_missing(j)           Missing treecover area towards target (mio. ha)
  v29_cost_treecover_est(j)          Establishment cost for cropland tree cover (mio. USD05MER per yr)
@@ -54,6 +55,7 @@ equations
  q29_fallow_min(j)                 Missing fallow land towards target (mio. ha)
  q29_fallow_max(j)                 Maximum fallow land towards target (mio. ha)
  q29_fallow_bv(j,potnatveg)        Biodiversity value for fallow land (mio. ha)
+ q29_treecover(j)                  Cropland tree cover (mio. ha)
  q29_treecover_min(j)              Missing treecover area towards target (mio. ha)
  q29_treecover_max(j)              Maximum treecover area (mio. ha)
  q29_treecover_bv(j,potnatveg)     Biodiversity value for cropland treecover (mio. ha)
@@ -65,6 +67,7 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_cropland(t,j,type)               Cost for total cropland (mio. USD05MER per yr)
+ ov_treecover(t,j,type)                   Cropland tree cover (mio. ha)
  ov29_treecover(t,j,ac,type)              Cropland tree cover per age class (mio. ha)
  ov29_treecover_missing(t,j,type)         Missing treecover area towards target (mio. ha)
  ov29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD05MER per yr)
@@ -80,6 +83,7 @@ parameters
  oq29_fallow_min(t,j,type)                Missing fallow land towards target (mio. ha)
  oq29_fallow_max(t,j,type)                Maximum fallow land towards target (mio. ha)
  oq29_fallow_bv(t,j,potnatveg,type)       Biodiversity value for fallow land (mio. ha)
+ oq29_treecover(t,j,type)                 Cropland tree cover (mio. ha)
  oq29_treecover_min(t,j,type)             Missing treecover area towards target (mio. ha)
  oq29_treecover_max(t,j,type)             Maximum treecover area (mio. ha)
  oq29_treecover_bv(t,j,potnatveg,type)    Biodiversity value for cropland treecover (mio. ha)

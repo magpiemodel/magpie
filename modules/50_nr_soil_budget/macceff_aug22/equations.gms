@@ -24,6 +24,8 @@ q50_nr_inputs(i2) ..
                 vm_res_recycling(i2,"nr")
                   + sum((cell(i2,j2),kcr,w), vm_area(j2,kcr,w) * f50_nr_fix_area(kcr))
                   + sum(cell(i2,j2),vm_fallow(j2) * f50_nr_fix_area("tece"))
+*                 Commented out for consistency with q50_nr_surplus_nonagland
+*                 + sum(cell(i2,j2),vm_treecover(j2)) * sum(ct,f50_nr_fixation_rates_nonagland(ct,i2))
                   + vm_manure_recycling(i2,"nr")
                   + sum(kli, vm_manure(i2, kli, "stubble_grazing","nr"))
                   + vm_nr_inorg_fert_reg(i2,"crop")

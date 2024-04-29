@@ -8,5 +8,4 @@
 scalars
     s80_maxiter         maximal solve iterations if modelstat is > 2 (1)  / 10 /
     s80_optfile         switch to use specfied solver settings (1)        / 0 /
-    s80_scaleopt        switch to for scaling (1=on 0=off)                / 1 /
 ;

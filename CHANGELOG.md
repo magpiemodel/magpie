@@ -9,13 +9,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **29_ageclass** module 29_ageclass has been renamed to 28_ageclass to make space for `29_cropland` just before `30_croparea`
 - **30_crop** module `30_crop` renamed to `30_croparea`, which now only accounts for crop area.
-- **30_crop** SNV implementation has been moved from `30_crop` to `29_cropland/detail_apr24` 
+- **30_crop** SNV implementation has been moved from `30_crop` to `29_cropland` 
 - **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
 - **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
-- **80_optimization** added option `s80_extra_solve`, which is deactivated by default to shorten the run time of infeasible model runs
+- **default.cfg** cfg$gms$s80_maxiter reduced from 30 to 10
 
 ### added
-- **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` (default) and `simple_apr24`.
+- **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
 - **10_land** added interface `pm_land_hist` with historic land use patterns
 - **32_forestry** added technical balance term `v32_land_missing_ndc`
 

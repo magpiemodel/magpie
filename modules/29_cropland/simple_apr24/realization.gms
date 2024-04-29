@@ -6,13 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description In this realization, total cropland equals croparea because 
-*' fallow land is fixed to zero and tree cover on cropland does not exist. 
+*' fallow land and tree cover on cropland are fixed to zero. 
 *' Therefore, also cropland carbon stocks consist only of croparea carbon stocks.
 *' Biodiversity BII values are fixed to zero. 
 *' Costs are fixed to zero. 
-*' No options for semi-natural land in cropland landscapes exist. 
 
-*' @limitations Fallow land is fixed to zero and tree cover on cropland does not exist
+*' @limitations Fallow land and tree cover on cropland are fixed to zero 
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/29_cropland/simple_apr24/sets.gms"

@@ -10,7 +10,6 @@ scalars
     s80_optfile     switch to use specfied solver settings (1)          / 0 /
     s80_add_cplex   add cplex optimization after conopt4 (1)            / 0 /
     s80_add_conopt3 add conopt3 optimization after conopt4 (1)          / 0 /
-    s80_scaleopt        switch to for scaling (1=on 0=off)              / 1 /
 ;
 
 

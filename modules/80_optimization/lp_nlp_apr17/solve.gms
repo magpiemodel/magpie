@@ -12,7 +12,7 @@ p80_modelstat(t) = 1;
 *** solver settings
 
 magpie.optfile   = s80_optfile ;
-magpie.scaleopt  = s80_scaleopt ;
+magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
 
