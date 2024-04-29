@@ -8,6 +8,7 @@
 
 p80_counter(h) = 0;
 p80_modelstat(t,h) = 14;
+p80_counter_modelstat(h) = 0;
 
 *** solver settings
 
@@ -80,7 +81,8 @@ repeat
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
       if (p80_modelstat(t,h) <= 2,
-        if (p80_counter(h) < 2,
+        p80_counter_modelstat(h) = p80_counter_modelstat(h) + 1;
+        if (p80_counter_modelstat(h) < 2,
           display "Model status <= 2. Starting second solve";
           solve magpie USING nlp MINIMIZING vm_cost_glo;
           p80_handle(h) = magpie.handle;
