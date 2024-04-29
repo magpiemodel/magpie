@@ -19,7 +19,7 @@ parameters
  p35_min_forest(t,j)                              Minimum forest and other stock based on NPI or NDC targets (mio. ha)
  p35_min_other(t,j)                               Minimum forest and other stock based on NPI or NDC targets (mio. ha)
  p35_damage_fader(t_all)                          Fader for forest damage (1)
- p35_max_forest_recovery(j)                     Forest recovery potential (mio. ha)
+ p35_max_forest_recovery(j)                       Forest recovery potential (mio. ha)
  p35_carbon_density_secdforest(t,j,ac,ag_pools)   Carbon density secdforest (tC per ha)
  p35_carbon_density_other(t,j,ac,ag_pools)        Carbon density other land (tC per ha)
  p35_disturbance_loss_secdf(t,j,ac)               Loss due to disturbances in secondary forest (mio. ha)
@@ -31,6 +31,7 @@ parameters
  p35_land_start_ac(j,ac,land_natveg)              Initial Natural vegetation area (mio. ha)
  p35_protection_dist(j,ac)                        Distribution of secondary forest protection (1)
  p35_land_restoration(j,land_natveg)              Actual secondary forest and other land restoration area (mio. ha)
+ p35_restoration_shift(j)                         Restoration of other land instead of secdforest (mio. ha)
 ;
 
 equations
@@ -48,7 +49,7 @@ equations
  q35_secdforest_reduction(j,ac)                Secdforest reduction (mio. ha)
  q35_primforest_reduction(j)                   Primforest reduction (mio. ha)
  q35_secdforest_regeneration(j)                Secondary forest remains secondary forest (mio. ha)
- q35_max_secdforest_regeneration(j)            Secondary  (mio. ha)
+ q35_max_secdforest_regeneration(j)            Maximum forest regeneration (mio. ha)
  q35_other_regeneration(j)                     Other land remains other land (mio. ha)
  q35_other_est(j,ac)                           Distribution of other land additions over ac_est (mio. ha)
  q35_secdforest_est(j,ac)                      Distribution of secdforest additions over ac_est (mio. ha)

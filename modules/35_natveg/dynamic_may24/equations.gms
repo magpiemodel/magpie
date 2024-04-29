@@ -185,9 +185,11 @@ q35_secdforest_regeneration(j2)..
 
 q35_max_secdforest_regeneration(j2)..
                           sum(ac_est, v35_secdforest(j2,ac_est))
-                       +  sum(type32, vm_landexpansion_forestry(j2,type32))
+                        + sum(type32, vm_landexpansion_forestry(j2,type32))
                           =l=
-                          p35_max_forest_recovery(j2)
+                        + sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
+                        + v35_hvarea_primforest(j2)
+                        + p35_max_forest_recovery(j2)
                           ;
 
 *' Harvested other land is still considered other land
