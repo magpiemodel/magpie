@@ -123,7 +123,7 @@ p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) 
 
 
 p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - p35_max_forest_recovery(j);
-p35_restoration_shift(j)$(p35_restoration_shift(j) < 0) = 0
+p35_restoration_shift(j)$(p35_restoration_shift(j) < 0) = 0;
 p35_land_restoration(j,"secdforest") = p35_land_restoration(j,"secdforest") - p35_restoration_shift(j);
 
 
