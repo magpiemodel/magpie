@@ -82,7 +82,7 @@
 
  q35_other_expansion(j2) ..
   v35_other_expansion(j2) =e=
-    sum(ac_est, v35_other(j2,ac_est) + v35_secdforest(j2,ac_est));
+    sum(ac_est, v35_other(j2,ac_est));
 
  q35_other_reduction(j2,ac_sub) ..
   v35_other_reduction(j2,ac_sub) =e=
@@ -183,14 +183,25 @@ q35_secdforest_regeneration(j2)..
                         + p35_land_restoration(j2,"secdforest")
                           ;
 
+*' The upper bound for the new establishment of forested areas is given
+*' by the harvested area plus the remaining potential forest area, which is derived
+*' from the potential natural forest area in each cluster.
+
 q35_max_secdforest_regeneration(j2)..
                           sum(ac_est, v35_secdforest(j2,ac_est))
-                        + sum(type32, vm_landexpansion_forestry(j2,type32))
                           =l=
                         + sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
                         + v35_hvarea_primforest(j2)
                         + p35_max_forest_recovery(j2)
                           ;
+
+*' Forestry establishment is also constrained by the remaining potential forest area.
+q35_max_foresty_expansion(j2)..
+                          sum(type32, vm_landexpansion_forestry(j2,type32))
+                          =l=
+                          p35_max_forest_recovery(j2)
+                          ;
+
 
 *' Harvested other land is still considered other land
 
