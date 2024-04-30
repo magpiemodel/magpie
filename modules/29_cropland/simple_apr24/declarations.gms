@@ -39,6 +39,8 @@ parameters
  oq29_cropland(t,j,type)                  Total cropland calculation (mio. ha)
  oq29_avl_cropland(t,j,type)              Available cropland constraint (mio. ha)
  oq29_carbon(t,j,ag_pools,stockType,type) Cropland above ground carbon content calculation (mio. tC)
+ oq29_land_snv(t,j,type)                  Land constraint for the SNV policy in cropland areas (mio. ha)
+ oq29_land_snv_trans(t,j,type)            Land transition constraint for SNV policy in cropland areas (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
