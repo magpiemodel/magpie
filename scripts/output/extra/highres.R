@@ -100,8 +100,8 @@ highres <- function(cfg) {
   #copy gdx file for 1st time step from low resolution run for better starting point
   #note: using gdx files for more than the 1st time step sometimes pushes the model into corner solutions, which might result in infeasibilites.
   cfg$files2export$start <- c(cfg$files2export$start,
-                              paste0(cfg$results_folder, "/", "magpie_y1995.gdx"))
-  cfg$gms$s_use_gdx   <- 1
+                              paste0(cfg$results_folder, "/", "magpie_y*.gdx"))
+  cfg$gms$s_use_gdx   <- 2
 
   #max resources for parallel runs
   cfg$qos <- "standby_maxMem_dayMax"

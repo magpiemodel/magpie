@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_fsec.csv** scenario settings
 - **start/projects/fsec.R** scenario settings
 - **80_optimization** fixed a bug in nlp_apr17; cycling through CONOPT4, CONOPT4 without preprocessing and CONOPT3 was not working
+- **80_optimization** bugfix in nlp_par. Double solve statement was not working
 - **58_peatland** Added balance variable to avoid random infeasibilites
 
 
