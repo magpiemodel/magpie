@@ -248,7 +248,7 @@ sets
                   / crop, past /
 
   land_timber(land) land from which timber can be taken away
-  / forestry, primforest, secdforest,other /
+  / forestry, primforest, secdforest, other /
 
   land_forest(land) Forested land pools
   / forestry, primforest, secdforest /

@@ -80,7 +80,7 @@ pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 * Forest recovery is constrained by the potential forest area in each cluster.
 * Hence, the potential area for forest recovery is given by the potential forest
 * area minus all forest areas in the previous time step.
-p35_max_forest_recovery(j) = f35_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
+p35_max_forest_recovery(j) = fm_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
 p35_max_forest_recovery(j)$(p35_max_forest_recovery(j) < 0) = 0;
 
 * -------------------------------------

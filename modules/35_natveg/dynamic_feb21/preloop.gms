@@ -43,6 +43,9 @@ p35_secdforest(t,j,ac) = 0;
 p35_disturbance_loss_secdf(t,j,ac) = 0;
 p35_disturbance_loss_primf(t,j) = 0;
 
+* In this realisation, the potential forest area is not applied
+fm_pot_forest_area(j) = Inf;
+
 * -----------------------------------------
 * Land conservation for climate mitigation
 * -----------------------------------------
