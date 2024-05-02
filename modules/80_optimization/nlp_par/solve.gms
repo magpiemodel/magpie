@@ -9,9 +9,9 @@
 p80_counter(h) = 0;
 p80_modelstat(t,h) = 14;
 p80_counter_modelstat(h) = 0;
+p80_resolve_option(h) = 1;
 
 *** solver settings
-
 option nlp = conopt4;
 magpie.solvelink = 3;
 magpie.optfile   = s80_optfile ;
@@ -63,23 +63,12 @@ repeat
       s80_counter = sum(h2,p80_counter(h2));
       display s80_counter;
       display magpie.modelStat;
+      display vm_cost_glo.l;
       magpie.modelStat$(magpie.modelStat=NA) = 13;
       
-      if (magpie.modelStat > 2 AND ord(t) > 1,
-        if (p80_counter_modelstat(h) <= 5,
-          display "No feasible solution or Execution error. Loading solution from last feasible timestep for retry.";
-          Execute_Loadpoint "magpie_p_last_timestep.gdx";
-        else
-          display "No feasible solution or Execution error. Loading solution from first feasible timestep for retry.";
-          Execute_Loadpoint "magpie_y1995.gdx";
-        );
-      );
-      execerror = 0;
-
       s80_modelstat_previter = p80_modelstat(t,h);
       p80_modelstat(t,h) = magpie.modelStat;
       s80_optfile_previter = magpie.optfile;
-      magpie.optfile = s80_optfile;
 
       if ((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2),
           display "No feasible solution found. Writing LST file.";
@@ -107,32 +96,53 @@ repeat
 
       if (p80_extra_solve(h) = 1,
         display "Resolve"
-        if (p80_modelstat(t,h) ne s80_modelstat_previter,
-          display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
-          solve magpie USING nlp MINIMIZING vm_cost_glo;
-        elseif p80_modelstat(t,h) = s80_modelstat_previter,
-          if(magpie.optfile = s80_optfile_previter,
-            display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
-            magpie.optfile = 2;
-            solve magpie USING nlp MINIMIZING vm_cost_glo;
+        if (ord(t) > 1,
+          if (p80_counter(h) <= s80_maxiter/2,
+            display "No feasible solution or Execution error. Loading solution from last feasible timestep for retry.";
+            Execute_Loadpoint "magpie_p_last_timestep.gdx";
           else
-            display "Modelstat > 2 | Retry solve with CONOPT3";
-            option nlp = conopt;
-            solve magpie USING nlp MINIMIZING vm_cost_glo;
-            option nlp = conopt4;
+            display "No feasible solution or Execution error. Loading solution from first feasible timestep for retry.";
+            Execute_Loadpoint "magpie_y1995.gdx";
           );
         );
-        if (magpie.handle = 0,
-          display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
-          magpie.handle = 1;
+        display vm_cost_glo.l;
+        execerror$(execerror > 0) = 0;
+        if (p80_resolve_option(h) = 1,
+          display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
+          solve magpie USING nlp MINIMIZING vm_cost_glo;
+        else if (p80_resolve_option(h) = 2) 
+          display "Modelstat > 2 | Retry solve with CONOPT4 and OPTFILE";
+          magpie.optfile = 1;
+          solve magpie USING nlp MINIMIZING vm_cost_glo;
+          magpie.optfile = s80_optfile;          
+        else if (p80_resolve_option(h) = 3) 
+          display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
+          magpie.optfile = 2;
+          solve magpie USING nlp MINIMIZING vm_cost_glo;
+          magpie.optfile = s80_optfile;
+        else if (p80_resolve_option(h) = 4)
+          display "Modelstat > 2 | Retry solve with CONOPT3";
+          option nlp = conopt;
+          solve magpie USING nlp MINIMIZING vm_cost_glo;
+          option nlp = conopt4;
         );
-        p80_handle(h) = magpie.handle;
+        if (p80_resolve_option(h) < 4,
+          p80_resolve_option(h) = p80_resolve_option(h) + 1;
+        else 
+          p80_resolve_option(h) = 1;
+        );
       );
+      if (magpie.handle = 0,
+        display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
+        magpie.handle = 1;
+      );
+      p80_handle(h) = magpie.handle;
+    );
     h2(h) = no;
     i2(i) = no;
     j2(j) = no;
-    );
   );
+);
 display$sleep(card(p80_handle)*0.2) 'sleep some time';
 display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
