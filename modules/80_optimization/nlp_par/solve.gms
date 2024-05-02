@@ -71,19 +71,19 @@ repeat
       p80_modelstat(t,h) = magpie.modelStat;
       s80_optfile_previter = magpie.optfile;
 
-      if ((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2),
+      if(p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2,
           display "No feasible solution found. Writing LST file.";
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
           option AsyncSolLst=0;
           p80_extra_solve(h) = 0;
-      );
+         );
 
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
-      if (p80_modelstat(t,h) <= 2,
+      if(p80_modelstat(t,h) <= 2,
         p80_counter_modelstat(h) = p80_counter_modelstat(h) + 1;
-        if (p80_counter_modelstat(h) < 2,
+        if(p80_counter_modelstat(h) < 2,
           display "Model status <= 2. Starting second solve";
           solve magpie USING nlp MINIMIZING vm_cost_glo;
           p80_handle(h) = magpie.handle;
@@ -92,24 +92,24 @@ repeat
           display "Model status <= 2. Handle cleared.";
           p80_extra_solve(h) = 0;
           p80_handle(h) = 0;
-        );
-      );
+         );
+       );
 
-      if (p80_extra_solve(h) = 1,
+      if(p80_extra_solve(h) = 1,
         display "Resolve"
-        if (ord(t) > 1,
-          if (p80_counter(h) <= s80_maxiter/2,
+        if(ord(t) > 1,
+          if(p80_counter(h) <= s80_maxiter/2,
             display "No feasible solution or Execution error. Loading solution from last feasible timestep for retry.";
             Execute_Loadpoint "magpie_p_last_timestep.gdx";
           else
             display "No feasible solution or Execution error. Loading solution from first feasible timestep for retry.";
             Execute_Loadpoint "magpie_y1995.gdx";
-          );
-        );
+           );
+         );
         display "vm_cost_glo.l";
         display vm_cost_glo.l;
         execerror$(execerror > 0) = 0;
-        if (p80_resolve_option(h) = 1,
+        if(p80_resolve_option(h) = 1,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
           solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_resolve_option(h) = 2, 
@@ -127,23 +127,23 @@ repeat
           option nlp = conopt;
           solve magpie USING nlp MINIMIZING vm_cost_glo;
           option nlp = conopt4;
-        );
+         );
         if (p80_resolve_option(h) < 4,
           p80_resolve_option(h) = p80_resolve_option(h) + 1;
         else 
           p80_resolve_option(h) = 1;
-        );
-      );
-      if (magpie.handle = 0,
-        display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
-        magpie.handle = 1;
-      );
-      p80_handle(h) = magpie.handle;
-    );
+         );
+        if(magpie.handle = 0,
+          display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
+          magpie.handle = 1;
+         );
+        p80_handle(h) = magpie.handle;
+       );
     h2(h) = no;
     i2(i) = no;
     j2(j) = no;
-  );
+   );
+ );
 display$sleep(card(p80_handle)*0.2) 'sleep some time';
 display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
