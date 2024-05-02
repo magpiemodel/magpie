@@ -33,9 +33,9 @@ cfg$output <- c("output_check",
                 "extra/disaggregation",
                # "projects/FSEC_nitrogenPollution", # do manually on last (high-res) magpie run
                # "projects/FSEC_water", # do manually on last (high-res) magpie run
-                "agmip_report",
                 # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
-                "rds_report")
+                "rds_report",
+                "agmip_report")
 
 #######################
 # SCENARIO DEFINITION #
