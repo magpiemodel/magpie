@@ -66,8 +66,13 @@ repeat
       magpie.modelStat$(magpie.modelStat=NA) = 13;
       
       if (magpie.modelStat > 2 AND ord(t) > 1,
-        display "No feasible solution or Execution error. Loading solution from last feasible timestep for retry.";
-        Execute_Loadpoint "magpie_p_last_timestep.gdx";
+        if (p80_counter_modelstat(h) <= 5,
+          display "No feasible solution or Execution error. Loading solution from last feasible timestep for retry.";
+          Execute_Loadpoint "magpie_p_last_timestep.gdx";
+        else
+          display "No feasible solution or Execution error. Loading solution from first feasible timestep for retry.";
+          Execute_Loadpoint "magpie_y1995.gdx";
+        );
       );
       execerror = 0;
 
