@@ -111,6 +111,9 @@ repeat
             option nlp = conopt4;
           );
         );
+        if (execerror > 0 AND ord(t) > 1,
+          Execute_Loadpoint "magpie_p.gdx";
+        );
         execerror = 0;
         if (magpie.handle = 0,
           display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
@@ -127,12 +130,18 @@ display$sleep(card(p80_handle)*0.2) 'sleep some time';
 display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
+* Save results to gdx files after historical period.
+* Historical period is excluded to avoid diversion of results compared to other model runs if restarted with s_use_gdx = 2.
+if (smax(h,p80_modelstat(t,h)) <= 2 AND m_year(t) > sm_fix_SSP2,
+  put_utility 'shell' / 'cp -f magpie_p.gdx magpie_' t.tl:0'.gdx';
+);
+
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
     Execute_Unload "fulldata.gdx";
     abort "No feasible solution found!";
 );
 
-* handleSubmit does not work as expected. Does not restart from saved state.
+* handleSubmit does not work because it requires the script `gmsrerun.cmd` or `gmsrerun.run` in the grid directory.
 * Therefore, solve statements are used.
 * display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
 
