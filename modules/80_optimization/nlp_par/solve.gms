@@ -144,7 +144,7 @@ if (smax(h,p80_modelstat(t,h)) <= 2,
   if (m_year(t) > sm_fix_SSP2,
     put_utility 'shell' / 'cp -f magpie_p.gdx magpie_' t.tl:0'.gdx';
   );
-  put_utility 'shell' / 'rm -f magpie_p.gdx;
+  put_utility 'shell' / 'rm -f magpie_p.gdx';
 );
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
