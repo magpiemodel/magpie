@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the dynamic_may24 realization, land and carbon stock dynamics
+*' @description In the pot_forest_may24 realization, land and carbon stock dynamics
 *' of natural vegetation are modeled endogenously.
 *' The initial spatial distribution of the sub-land-types primary forest,
 *' secondary forest and other natural land is based on the
@@ -33,12 +33,12 @@
 *' secondary forest and harvested primary forest is reclassified as secondary forest.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/35_natveg/dynamic_may24/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/35_natveg/dynamic_may24/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/35_natveg/dynamic_may24/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/35_natveg/dynamic_may24/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/35_natveg/dynamic_may24/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/35_natveg/dynamic_may24/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/35_natveg/dynamic_may24/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/35_natveg/dynamic_may24/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/35_natveg/pot_forest_may24/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/35_natveg/pot_forest_may24/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/35_natveg/pot_forest_may24/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/35_natveg/pot_forest_may24/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/35_natveg/pot_forest_may24/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/35_natveg/pot_forest_may24/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/35_natveg/pot_forest_may24/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/35_natveg/pot_forest_may24/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

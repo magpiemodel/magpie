@@ -18,5 +18,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%natveg%" == "dynamic_feb21" $include "./modules/35_natveg/dynamic_feb21/realization.gms"
-$Ifi "%natveg%" == "dynamic_may24" $include "./modules/35_natveg/dynamic_may24/realization.gms"
+$Ifi "%natveg%" == "pot_forest_may24" $include "./modules/35_natveg/pot_forest_may24/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
