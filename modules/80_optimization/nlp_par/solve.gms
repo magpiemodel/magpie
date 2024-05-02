@@ -49,18 +49,12 @@ loop(h,
 *collection loop
 repeat
   loop(h$p80_handle(h),
-    if(handleStatus(p80_handle(h)) = 2,
+    if(handleStatus(p80_handle(h)) = 2,   // process solutions which are ready
       p80_counter(h) = p80_counter(h) + 1;
       p80_extra_solve(h) = 1;
 
-      magpie.handle = p80_handle(h);
-      execute_loadhandle magpie;
-      magpie.modelStat$(magpie.modelStat=NA) = 13;
-
-      s80_modelstat_previter = p80_modelstat(t,h);
-      p80_modelstat(t,h) = magpie.modelStat;
-      s80_optfile_previter = magpie.optfile;
-      magpie.optfile = s80_optfile;
+      magpie.handle = p80_handle(h);  // assign handle to extract solution
+      execute_loadhandle magpie;  // load point
 
       h2(h) = yes;
       i2(i)$supreg(h,i) = yes;
@@ -69,6 +63,18 @@ repeat
       s80_counter = sum(h2,p80_counter(h2));
       display s80_counter;
       display magpie.modelStat;
+      magpie.modelStat$(magpie.modelStat=NA) = 13;
+      
+      if (magpie.modelStat > 2 AND ord(t) > 1,
+        display "No feasible solution or Execution error. Loading solution from last feasible timestep for retry.";
+        Execute_Loadpoint "magpie_p_last_timestep.gdx";
+      );
+      execerror = 0;
+
+      s80_modelstat_previter = p80_modelstat(t,h);
+      p80_modelstat(t,h) = magpie.modelStat;
+      s80_optfile_previter = magpie.optfile;
+      magpie.optfile = s80_optfile;
 
       if ((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2),
           display "No feasible solution found. Writing LST file.";
@@ -111,11 +117,6 @@ repeat
             option nlp = conopt4;
           );
         );
-        if (execerror > 0 AND ord(t) > 1,
-          display "Execution error. Loading solution from last feasible timestep for retry.";
-          Execute_Loadpoint "magpie_p_last_timestep.gdx";
-        );
-        execerror = 0;
         if (magpie.handle = 0,
           display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
           magpie.handle = 1;
@@ -131,11 +132,14 @@ display$sleep(card(p80_handle)*0.2) 'sleep some time';
 display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
-* Save results to gdx files after historical period.
-* Historical period is excluded to avoid diversion of results compared to other model runs if restarted with s_use_gdx = 2.
-if (smax(h,p80_modelstat(t,h)) <= 2 AND m_year(t) > sm_fix_SSP2,
+* Save results to gdx point files
+* Historical period for magpie_p_y[XXXX].gdx files is excluded to avoid diversion of results compared to other model runs if restarted with s_use_gdx = 2.
+if (smax(h,p80_modelstat(t,h)) <= 2,
   put_utility 'shell' / 'cp -f magpie_p.gdx magpie_p_last_timestep.gdx';
-  put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
+  if (m_year(t) > sm_fix_SSP2,
+    put_utility 'shell' / 'cp -f magpie_p.gdx magpie_' t.tl:0'.gdx';
+  );
+  put_utility 'shell' / 'rm -f magpie_p.gdx;
 );
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
