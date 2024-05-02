@@ -63,6 +63,7 @@ repeat
       s80_counter = sum(h2,p80_counter(h2));
       display s80_counter;
       display magpie.modelStat;
+      display "vm_cost_glo.l";
       display vm_cost_glo.l;
       magpie.modelStat$(magpie.modelStat=NA) = 13;
       
@@ -105,22 +106,23 @@ repeat
             Execute_Loadpoint "magpie_y1995.gdx";
           );
         );
+        display "vm_cost_glo.l";
         display vm_cost_glo.l;
         execerror$(execerror > 0) = 0;
         if (p80_resolve_option(h) = 1,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
           solve magpie USING nlp MINIMIZING vm_cost_glo;
-        else if (p80_resolve_option(h) = 2) 
+        elseif p80_resolve_option(h) = 2, 
           display "Modelstat > 2 | Retry solve with CONOPT4 and OPTFILE";
           magpie.optfile = 1;
           solve magpie USING nlp MINIMIZING vm_cost_glo;
           magpie.optfile = s80_optfile;          
-        else if (p80_resolve_option(h) = 3) 
+        elseif p80_resolve_option(h) = 3,
           display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
           magpie.optfile = 2;
           solve magpie USING nlp MINIMIZING vm_cost_glo;
           magpie.optfile = s80_optfile;
-        else if (p80_resolve_option(h) = 4)
+        elseif p80_resolve_option(h) = 4,
           display "Modelstat > 2 | Retry solve with CONOPT3";
           option nlp = conopt;
           solve magpie USING nlp MINIMIZING vm_cost_glo;
