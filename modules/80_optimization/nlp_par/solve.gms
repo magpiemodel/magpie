@@ -112,7 +112,8 @@ repeat
           );
         );
         if (execerror > 0 AND ord(t) > 1,
-          Execute_Loadpoint "magpie_p.gdx";
+          display "Execution error. Loading solution from last feasible timestep for retry.";
+          Execute_Loadpoint "magpie_p_last_timestep.gdx";
         );
         execerror = 0;
         if (magpie.handle = 0,
@@ -133,7 +134,8 @@ until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 * Save results to gdx files after historical period.
 * Historical period is excluded to avoid diversion of results compared to other model runs if restarted with s_use_gdx = 2.
 if (smax(h,p80_modelstat(t,h)) <= 2 AND m_year(t) > sm_fix_SSP2,
-  put_utility 'shell' / 'cp -f magpie_p.gdx magpie_' t.tl:0'.gdx';
+  put_utility 'shell' / 'cp -f magpie_p.gdx magpie_p_last_timestep.gdx';
+  put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
 );
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
