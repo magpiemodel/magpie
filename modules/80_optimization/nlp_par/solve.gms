@@ -49,12 +49,12 @@ loop(h,
 *collection loop
 repeat
   loop(h$p80_handle(h),
-    if(handleStatus(p80_handle(h)) = 2,   // process solutions which are ready
+    if(handleStatus(p80_handle(h)) = 2,
       p80_counter(h) = p80_counter(h) + 1;
       p80_extra_solve(h) = 1;
 
-      magpie.handle = p80_handle(h);  // assign handle to extract solution
-      execute_loadhandle magpie;  // load point
+      magpie.handle = p80_handle(h);
+      execute_loadhandle magpie;
 
       h2(h) = yes;
       i2(i)$supreg(h,i) = yes;
