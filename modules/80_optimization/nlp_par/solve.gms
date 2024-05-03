@@ -101,42 +101,33 @@ repeat
 
       if(p80_extra_solve(h) = 1,
         display "Resolve"
-        execerror$(execerror > 0) = 0;
         if(p80_resolve_option(h) = 1,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
           magpie.optfile = 0;         
-          solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_resolve_option(h) = 2, 
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting and magpie_p_last_timestep.gdx";
           magpie.optfile = 0;         
           Execute_Loadpoint "magpie_p_last_timestep.gdx";
-          execerror$(execerror > 0) = 0;
-          solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_resolve_option(h) = 3, 
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting and magpie_y2020.gdx";
           magpie.optfile = 0;          
           Execute_Loadpoint "magpie_y2020.gdx";
-          execerror$(execerror > 0) = 0;
-          solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_resolve_option(h) = 4,
           display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE";
           magpie.optfile = 1;          
-          solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_resolve_option(h) = 5,
           display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE and magpie_p_last_timestep.gdx";
           magpie.optfile = 1;          
           Execute_Loadpoint "magpie_p_last_timestep.gdx";
-          execerror$(execerror > 0) = 0;
-          solve magpie USING nlp MINIMIZING vm_cost_glo;
         elseif p80_resolve_option(h) = 6,
           display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE and magpie_y2020.gdx";
           magpie.optfile = 1;          
           Execute_Loadpoint "magpie_y2020.gdx";
-          execerror$(execerror > 0) = 0;
-          solve magpie USING nlp MINIMIZING vm_cost_glo;
          );
+        if(execerror > 0, execerror = 0);
         s80_objective = sum(i2,v11_cost_reg.l(i2));
         display s80_objective;
+        solve magpie USING nlp MINIMIZING vm_cost_glo;
         if (p80_resolve_option(h) < 6,
           p80_resolve_option(h) = p80_resolve_option(h) + 1;
         else 
