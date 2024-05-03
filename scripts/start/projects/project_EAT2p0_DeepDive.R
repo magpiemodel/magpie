@@ -35,15 +35,16 @@ cfg$output <- c(
   "projects/FSEC_nitrogenPollution",
   "projects/FSEC_water",
   "agmip_report",
-  # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
   "rds_report",
   "runBlackmagicc"
+  # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
+
 )
 
 #######################
 # SCENARIO DEFINITION #
 #######################
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_lessSus")) # To Do: Choose whether EL2_default or EL2_lessSus should be used!
 # Note: The climate change impacts setting differs from the global AgMIP model comparision set-up.
 #       We do not include climate change impacts in the coupled REMIND-MAgPIE runs for the PB Deep Dive
 #       because we focus exclusively on the mitigation aspect without climate change impacts.
