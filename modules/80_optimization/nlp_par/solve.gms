@@ -61,10 +61,10 @@ repeat
       loop(i2, j2(j)$cell(i2,j) = yes);
       display h2;
       s80_counter = sum(h2,p80_counter(h2));
+      s80_objective = sum(h2,v11_cost_reg.l(h2));
       display s80_counter;
       display magpie.modelStat;
-      display "v11_cost_reg.l";
-      display v11_cost_reg.l;
+      display s80_objective;
       magpie.modelStat$(magpie.modelStat=NA) = 13;
       
       s80_modelstat_previter = p80_modelstat(t,h);
@@ -101,8 +101,6 @@ repeat
 
       if(p80_extra_solve(h) = 1,
         display "Resolve"
-        display "v11_cost_reg.l";
-        display v11_cost_reg.l;
         execerror$(execerror > 0) = 0;
         if(p80_resolve_option(h) = 1,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
@@ -137,6 +135,8 @@ repeat
           execerror$(execerror > 0) = 0;
           solve magpie USING nlp MINIMIZING vm_cost_glo;
          );
+        s80_objective = sum(h2,v11_cost_reg.l(h2));
+        display s80_objective;
         if (p80_resolve_option(h) < 6,
           p80_resolve_option(h) = p80_resolve_option(h) + 1;
         else 
