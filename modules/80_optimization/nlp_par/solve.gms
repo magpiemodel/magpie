@@ -61,7 +61,7 @@ repeat
       loop(i2, j2(j)$cell(i2,j) = yes);
       display h2;
       s80_counter = sum(h2,p80_counter(h2));
-      s80_objective = sum(h2,v11_cost_reg.l(h2));
+      s80_objective = sum(i2,v11_cost_reg.l(i2));
       display s80_counter;
       display magpie.modelStat;
       display s80_objective;
@@ -135,7 +135,7 @@ repeat
           execerror$(execerror > 0) = 0;
           solve magpie USING nlp MINIMIZING vm_cost_glo;
          );
-        s80_objective = sum(h2,v11_cost_reg.l(h2));
+        s80_objective = sum(i2,v11_cost_reg.l(i2));
         display s80_objective;
         if (p80_resolve_option(h) < 6,
           p80_resolve_option(h) = p80_resolve_option(h) + 1;
