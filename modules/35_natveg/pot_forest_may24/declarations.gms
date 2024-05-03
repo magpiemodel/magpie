@@ -20,6 +20,7 @@ parameters
  p35_min_other(t,j)                               Minimum forest and other stock based on NPI or NDC targets (mio. ha)
  p35_damage_fader(t_all)                          Fader for forest damage (1)
  p35_max_forest_recovery(j)                       Forest recovery potential (mio. ha)
+ p35_forest_recovery_shr(j)                       Forest share in the regeneration of natural vegetation (1)
  p35_carbon_density_secdforest(t,j,ac,ag_pools)   Carbon density secdforest (tC per ha)
  p35_carbon_density_other(t,j,ac,ag_pools)        Carbon density other land (tC per ha)
  p35_disturbance_loss_secdf(t,j,ac)               Loss due to disturbances in secondary forest (mio. ha)

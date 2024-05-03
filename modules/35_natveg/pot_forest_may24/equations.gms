@@ -177,31 +177,23 @@ q35_hvarea_other(j2,ac_sub)..
 
 q35_secdforest_regeneration(j2)..
                           sum(ac_est, v35_secdforest(j2,ac_est))
-                          =g=
+                          =e=
                           sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
                         + v35_hvarea_primforest(j2)
                         + p35_land_restoration(j2,"secdforest")
+                        + sum(land_ag, vm_lu_transitions(j2,land_ag,"other")) * p35_forest_recovery_shr(j2)
+                        + vm_lu_transitions(j2,"forestry","secdforest")
                           ;
 
-*' The upper bound for the new establishment of forested areas is given
-*' by the harvested area plus the remaining potential forest area, which is derived
-*' from the potential natural forest area in each cluster.
+*' The constraint for forest establishment is given by the
+*' remaining potential forest area, which was calculated based
+*' on the potential natural forest area in each cluster.
 
-q35_max_secdforest_regeneration(j2)..
-                          sum(ac_est, v35_secdforest(j2,ac_est))
-                          =l=
-                        + sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
-                        + v35_hvarea_primforest(j2)
-                        + p35_max_forest_recovery(j2)
-                          ;
-
-*' Forestry establishment is also constrained by the remaining potential forest area.
 q35_max_foresty_expansion(j2)..
-                          sum(type32, vm_landexpansion_forestry(j2,type32))
+                          sum(land_forest, vm_landexpansion(j2,land_forest))
                           =l=
                           p35_max_forest_recovery(j2)
                           ;
-
 
 *' Harvested other land is still considered other land
 
@@ -209,6 +201,7 @@ q35_other_regeneration(j2)..
                           sum(ac_est, v35_other(j2,ac_est))
                           =g=
                           sum(ac_sub,v35_hvarea_other(j2,ac_sub))
+                        + sum(land_ag, vm_lu_transitions(j2,land_ag,"other")) * (1 - p35_forest_recovery_shr(j2))
                           ;
 
 *' The following two constraints distribute additions to secdforest and other land

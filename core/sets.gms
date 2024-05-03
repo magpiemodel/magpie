@@ -247,6 +247,9 @@ sets
   land_ag(land) Agricultural land pools
                   / crop, past /
 
+  land_agfo(land) Agricultural and forestry land
+                  / crop, past, forestry /
+
   land_timber(land) land from which timber can be taken away
   / forestry, primforest, secdforest, other /
 
