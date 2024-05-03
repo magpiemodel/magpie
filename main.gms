@@ -255,7 +255,7 @@ $setglobal past  endo_jun13
 $setglobal forestry  dynamic_feb21
 
 $setglobal urban  exo_nov21
-$setglobal natveg  dynamic_feb21
+$setglobal natveg  pot_forest_may24
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off

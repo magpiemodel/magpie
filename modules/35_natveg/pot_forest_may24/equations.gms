@@ -189,7 +189,7 @@ q35_secdforest_regeneration(j2)..
 *' remaining potential forest area, which was calculated based
 *' on the potential natural forest area in each cluster.
 
-q35_max_foresty_expansion(j2)..
+q35_max_forest_expansion(j2)..
                           sum(land_forest, vm_landexpansion(j2,land_forest))
                           =l=
                           p35_max_forest_recovery(j2)
