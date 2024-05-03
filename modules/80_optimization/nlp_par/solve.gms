@@ -72,7 +72,10 @@ repeat
       s80_optfile_previter = magpie.optfile;
 
       if(p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2,
-          if (p80_modelstat(t,h) = 13, execute 'gmszip -r magpie_problem_' h.tl:0'_' t.tl:0'.zip "%gams.scrdir%"');
+          if(p80_modelstat(t,h) = 13, 
+          execute 'gmszip -r magpie_problem.zip "%gams.scrdir%"'
+          put_utility 'shell' / 'mv -f magpie_problem.zip magpie_problem_' h.tl:0'_' t.tl:0'.zip';
+           );
           display "No feasible solution found. Writing LST file.";
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
