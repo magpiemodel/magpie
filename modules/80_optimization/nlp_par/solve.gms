@@ -9,7 +9,7 @@
 p80_counter(h) = 0;
 p80_modelstat(t,h) = 14;
 p80_counter_modelstat(h) = 0;
-p80_resolve_option(h) = 1;
+p80_resolve_option(h) = 0;
 
 *** solver settings
 option nlp = conopt4;
@@ -18,7 +18,7 @@ magpie.optfile   = s80_optfile ;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
-magpie.savepoint = 2;
+magpie.savepoint = 3;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
@@ -100,6 +100,7 @@ repeat
 
       if(p80_extra_solve(h) = 1,
         display "Resolve"
+        p80_resolve_option(h) = p80_resolve_option(h) + 1;
         execute_loadpoint 'fulldata.gdx';
         s80_resolve_option = sum(h2,p80_resolve_option(h2));
         display s80_resolve_option;
@@ -128,8 +129,7 @@ repeat
         option nlp = conopt4;
         magpie.optfile = s80_optfile; 
         
-        p80_resolve_option(h)$(p80_resolve_option(h) < 4) = p80_resolve_option(h) + 1;
-        p80_resolve_option(h)$(p80_resolve_option(h) >= 4) = 1;
+        p80_resolve_option(h)$(p80_resolve_option(h) >= 4) = 0;
        );
     h2(h) = no;
     i2(i) = no;
