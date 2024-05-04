@@ -8,7 +8,7 @@
 
 s80_counter = 0;
 p80_modelstat(t) = 14;
-s80_resolve_option = 1;
+s80_resolve_option = 0;
 
 *** solver settings
 option nlp = conopt4;
@@ -42,6 +42,8 @@ display magpie.modelstat;
 if (magpie.modelstat > 2,
   repeat(
     s80_counter = s80_counter + 1 ;
+    s80_resolve_option = s80_resolve_option + 1;
+
     if(s80_resolve_option = 1,
       display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
       option nlp = conopt4;
@@ -51,6 +53,10 @@ if (magpie.modelstat > 2,
       option nlp = conopt4;
       magpie.optfile = 1;         
     elseif s80_resolve_option = 3, 
+      display "Modelstat > 2 | Retry solve with CONOPT4 w/o preprocessing";
+      option nlp = conopt4;
+      magpie.optfile = 2;         
+    elseif s80_resolve_option = 4, 
       display "Modelstat > 2 | Retry solve with CONOPT3";
       option nlp = conopt;
       magpie.optfile = 0;         
@@ -72,8 +78,7 @@ if (magpie.modelstat > 2,
     display s80_counter;
     display magpie.modelstat;
     
-    s80_resolve_option$(s80_resolve_option < 3) = s80_resolve_option + 1;
-    s80_resolve_option$(s80_resolve_option >= 3) = 1;
+    s80_resolve_option$(s80_resolve_option >= 4) = 0;
 
     until (magpie.modelstat <= 2 or s80_counter >= s80_maxiter)
   );

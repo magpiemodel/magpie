@@ -55,14 +55,12 @@ repeat
       p80_extra_solve(h) = 1;
 
       magpie.handle = p80_handle(h);
-      display  magpie.handle;
       execute_loadhandle magpie;
 
       h2(h) = yes;
       i2(i)$supreg(h,i) = yes;
       loop(i2, j2(j)$cell(i2,j) = yes);
       display h2;
-      display i2;
       s80_counter = sum(h2,p80_counter(h2));
       s80_objective = sum(i2,v11_cost_reg.l(i2));
       display s80_counter;
@@ -115,7 +113,7 @@ repeat
         elseif p80_resolve_option(h) = 3, 
           display "Modelstat > 2 | Retry solve with CONOPT4 w/o preprocessing";
           option nlp = conopt4;
-          magpie.optfile = 0;         
+          magpie.optfile = 2;         
         elseif p80_resolve_option(h) = 4, 
           display "Modelstat > 2 | Retry solve with CONOPT3";
           option nlp = conopt;

@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_crop** SNV implementation has been moved from `30_crop` to `29_cropland` 
 - **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
 - **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
-- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE and CONOPT3. REMOVED CONOPT4 without preprocessing, which usually only increases run time without feasbile solution.
+- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3. 
 
 ### added
 - **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
