@@ -60,6 +60,7 @@ repeat
       i2(i)$supreg(h,i) = yes;
       loop(i2, j2(j)$cell(i2,j) = yes);
       display h2;
+      display i2;
       s80_counter = sum(h2,p80_counter(h2));
       s80_objective = sum(i2,v11_cost_reg.l(i2));
       display s80_counter;
@@ -70,10 +71,8 @@ repeat
       p80_modelstat(t,h) = magpie.modelStat;
 
       if(p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2,
-          if(p80_modelstat(t,h) = 13, 
           execute 'gmszip -r magpie_problem.zip "%gams.scrdir%"'
           put_utility 'shell' / 'mv -f magpie_problem.zip magpie_problem_' h.tl:0'_' t.tl:0'.zip';
-           );
           display "No feasible solution found. Writing LST file.";
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
@@ -99,6 +98,9 @@ repeat
 
       if(p80_extra_solve(h) = 1,
         display "Resolve"
+        execute_loadpoint 'fulldata.gdx';
+        s80_resolve_option = sum(h2,p80_resolve_option(h2));
+        display s80_resolve_option;
         if(p80_resolve_option(h) = 1,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
           option nlp = conopt4;
@@ -108,6 +110,10 @@ repeat
           option nlp = conopt4;
           magpie.optfile = 1;         
         elseif p80_resolve_option(h) = 3, 
+          display "Modelstat > 2 | Retry solve with CONOPT4 w/o preprocessing";
+          option nlp = conopt4;
+          magpie.optfile = 2;         
+        elseif p80_resolve_option(h) = 4, 
           display "Modelstat > 2 | Retry solve with CONOPT3";
           option nlp = conopt;
           magpie.optfile = 0;         
@@ -120,8 +126,8 @@ repeat
         option nlp = conopt4;
         magpie.optfile = s80_optfile; 
         
-        p80_resolve_option(h)$(p80_resolve_option(h) < 3) = p80_resolve_option(h) + 1;
-        p80_resolve_option(h)$(p80_resolve_option(h) >= 3) = 1;
+        p80_resolve_option(h)$(p80_resolve_option(h) < 4) = p80_resolve_option(h) + 1;
+        p80_resolve_option(h)$(p80_resolve_option(h) >= 4) = 1;
        );
     h2(h) = no;
     i2(i) = no;

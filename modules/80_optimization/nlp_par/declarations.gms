@@ -17,4 +17,5 @@ parameters
 scalars
   s80_counter             counter (1)
   s80_objective           objective function value (mio. USD05MER per yr)
+  s80_resolve_option      option for resolve (1)
 ;
