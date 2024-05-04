@@ -18,6 +18,7 @@ magpie.optfile   = s80_optfile ;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
+magpie.savepoint = 2;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
@@ -54,6 +55,7 @@ repeat
       p80_extra_solve(h) = 1;
 
       magpie.handle = p80_handle(h);
+      display  magpie.handle;
       execute_loadhandle magpie;
 
       h2(h) = yes;
@@ -112,7 +114,7 @@ repeat
         elseif p80_resolve_option(h) = 3, 
           display "Modelstat > 2 | Retry solve with CONOPT4 w/o preprocessing";
           option nlp = conopt4;
-          magpie.optfile = 2;         
+          magpie.optfile = 0;         
         elseif p80_resolve_option(h) = 4, 
           display "Modelstat > 2 | Retry solve with CONOPT3";
           option nlp = conopt;
