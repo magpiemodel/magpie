@@ -87,6 +87,8 @@ if ((p80_modelstat(t) <= 2),
 );
 
 if ((p80_modelstat(t) > 2 and p80_modelstat(t) ne 7),
+  execute 'gmszip -r magpie_problem.zip "%gams.scrdir%"'
+  put_utility 'shell' / 'mv -f magpie_problem.zip magpie_problem_' t.tl:0'.zip';
   Execute_Unload "fulldata.gdx";
   abort "no feasible solution found!";
 );
