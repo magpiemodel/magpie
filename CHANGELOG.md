@@ -12,12 +12,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_crop** SNV implementation has been moved from `30_crop` to `29_cropland` 
 - **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
 - **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
-- **default.cfg** cfg$gms$s80_maxiter reduced from 30 to 10
+- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE and CONOPT3. REMOVED CONOPT4 without preprocessing, which usually only increases run time without feasbile solution.
 
 ### added
 - **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
 - **10_land** added interface `pm_land_hist` with historic land use patterns
 - **32_forestry** added technical balance term `v32_land_missing_ndc`
+- **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
 
 ### removed
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
@@ -29,7 +30,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** same revision for input files as in default.cfg
 - **scenario_fsec.csv** scenario settings
 - **start/projects/fsec.R** scenario settings
-- **80_optimization** fixed a bug in nlp_apr17; cycling through CONOPT4, CONOPT4 without preprocessing and CONOPT3 was not working
 - **80_optimization** bugfix in nlp_par. Double solve statement was not working
 - **58_peatland** Added balance variable to avoid random infeasibilites
 

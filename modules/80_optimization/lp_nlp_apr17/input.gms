@@ -6,10 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-    s80_maxiter   maximal solve iterations if modelstat is > 2 (1)    / 10 /
+    s80_maxiter   maximal solve iterations if modelstat is > 2 (1)      / 30 /
     s80_optfile     switch to use specfied solver settings (1)          / 0 /
     s80_add_cplex   add cplex optimization after conopt4 (1)            / 0 /
     s80_add_conopt3 add conopt3 optimization after conopt4 (1)          / 0 /
+    s80_secondsolve     second solve statement (binary)                 / 0 / 
 ;
 
 

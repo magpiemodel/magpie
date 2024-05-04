@@ -8,8 +8,7 @@
 
 s80_counter = 0;
 p80_modelstat(t) = 14;
-s80_modelstat_previter = 14;
-s80_optfile_previter = s80_optfile;
+s80_resolve_option = 1;
 
 *** solver settings
 option nlp = conopt4;
@@ -30,10 +29,9 @@ Flg_Prep = FALSE
 $offecho
 
 *' @code
-*' Solve statement is put twice for improved model results, 
-*' in particular for matching LHS and RHS of equations.
 solve magpie USING nlp MINIMIZING vm_cost_glo;
-solve magpie USING nlp MINIMIZING vm_cost_glo;
+*' Optional second solve statement
+if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
 *' @stop
 
 display "vm_cost_glo.l";
@@ -44,30 +42,24 @@ display magpie.modelstat;
 if (magpie.modelstat > 2,
   repeat(
     s80_counter = s80_counter + 1 ;
-
-    if (magpie.modelstat ne s80_modelstat_previter,
+    if(s80_resolve_option = 1,
       display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
-    elseif magpie.modelstat = s80_modelstat_previter,
-      if (magpie.optfile = s80_optfile_previter,
-        display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
-        magpie.optfile = 2;
-        solve magpie USING nlp MINIMIZING vm_cost_glo;
-        solve magpie USING nlp MINIMIZING vm_cost_glo;
-      else
-        display "Modelstat > 2 | Retry solve with CONOPT3";
-        option nlp = conopt;
-        solve magpie USING nlp MINIMIZING vm_cost_glo;
-        solve magpie USING nlp MINIMIZING vm_cost_glo;
-        option nlp = conopt4;
-      );
-    );
+      option nlp = conopt4;
+      magpie.optfile = 0;         
+    elseif s80_resolve_option = 2, 
+      display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE";
+      option nlp = conopt4;
+      magpie.optfile = 1;         
+    elseif s80_resolve_option = 3, 
+      display "Modelstat > 2 | Retry solve with CONOPT3";
+      option nlp = conopt;
+      magpie.optfile = 0;         
+     );
 
-    s80_modelstat_previter = magpie.modelstat;
-    s80_optfile_previter = magpie.optfile;
-* reset `magpie.optfile` to default after saving value to `s80_optfile_previter`
-    magpie.optfile = s80_optfile;
+    solve magpie USING nlp MINIMIZING vm_cost_glo;
+    if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
+    option nlp = conopt4;
+    magpie.optfile = s80_optfile; 
 
     display "vm_cost_glo.l";
     display vm_cost_glo.l;
@@ -79,6 +71,9 @@ if (magpie.modelstat > 2,
 
     display s80_counter;
     display magpie.modelstat;
+    
+    s80_resolve_option$(s80_resolve_option < 3) = s80_resolve_option + 1;
+    s80_resolve_option$(s80_resolve_option >= 3) = 1;
 
     until (magpie.modelstat <= 2 or s80_counter >= s80_maxiter)
   );

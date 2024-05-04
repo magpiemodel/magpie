@@ -67,9 +67,7 @@ repeat
       display s80_objective;
       magpie.modelStat$(magpie.modelStat=NA) = 13;
       
-      s80_modelstat_previter = p80_modelstat(t,h);
       p80_modelstat(t,h) = magpie.modelStat;
-      s80_optfile_previter = magpie.optfile;
 
       if(p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2,
           if(p80_modelstat(t,h) = 13, 
@@ -87,7 +85,7 @@ repeat
 
       if(p80_modelstat(t,h) <= 2,
         p80_counter_modelstat(h) = p80_counter_modelstat(h) + 1;
-        if(p80_counter_modelstat(h) < 2,
+        if(p80_counter_modelstat(h) < 2 AND s80_secondsolve = 1,
           display "Model status <= 2. Starting second solve";
           solve magpie USING nlp MINIMIZING vm_cost_glo;
           p80_handle(h) = magpie.handle;
@@ -103,41 +101,27 @@ repeat
         display "Resolve"
         if(p80_resolve_option(h) = 1,
           display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
+          option nlp = conopt4;
           magpie.optfile = 0;         
         elseif p80_resolve_option(h) = 2, 
-          display "Modelstat > 2 | Retry solve with CONOPT4 default setting and magpie_p_last_timestep.gdx";
-          magpie.optfile = 0;         
-          Execute_Loadpoint "magpie_p_last_timestep.gdx";
-        elseif p80_resolve_option(h) = 3, 
-          display "Modelstat > 2 | Retry solve with CONOPT4 default setting and magpie_y2020.gdx";
-          magpie.optfile = 0;          
-          Execute_Loadpoint "magpie_y2020.gdx";
-        elseif p80_resolve_option(h) = 4,
           display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE";
-          magpie.optfile = 1;          
-        elseif p80_resolve_option(h) = 5,
-          display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE and magpie_p_last_timestep.gdx";
-          magpie.optfile = 1;          
-          Execute_Loadpoint "magpie_p_last_timestep.gdx";
-        elseif p80_resolve_option(h) = 6,
-          display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE and magpie_y2020.gdx";
-          magpie.optfile = 1;          
-          Execute_Loadpoint "magpie_y2020.gdx";
+          option nlp = conopt4;
+          magpie.optfile = 1;         
+        elseif p80_resolve_option(h) = 3, 
+          display "Modelstat > 2 | Retry solve with CONOPT3";
+          option nlp = conopt;
+          magpie.optfile = 0;         
          );
         if(execerror > 0, execerror = 0);
-        s80_objective = sum(i2,v11_cost_reg.l(i2));
-        display s80_objective;
+
         solve magpie USING nlp MINIMIZING vm_cost_glo;
-        if (p80_resolve_option(h) < 6,
-          p80_resolve_option(h) = p80_resolve_option(h) + 1;
-        else 
-          p80_resolve_option(h) = 1;
-         );
-        if(magpie.handle = 0,
-          display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
-          magpie.handle = 1;
-         );
+        magpie.handle$(magpie.handle = 0) = 1;
         p80_handle(h) = magpie.handle;
+        option nlp = conopt4;
+        magpie.optfile = s80_optfile; 
+        
+        p80_resolve_option(h)$(p80_resolve_option(h) < 3) = p80_resolve_option(h) + 1;
+        p80_resolve_option(h)$(p80_resolve_option(h) >= 3) = 1;
        );
     h2(h) = no;
     i2(i) = no;
@@ -147,16 +131,6 @@ repeat
 display$sleep(card(p80_handle)*0.2) 'sleep some time';
 display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
-
-* Save results to gdx point files
-* Historical period for magpie_p_y[XXXX].gdx files is excluded to avoid diversion of results compared to other model runs if restarted with s_use_gdx = 2.
-if (smax(h,p80_modelstat(t,h)) <= 2,
-  put_utility 'shell' / 'cp -f magpie_p.gdx magpie_p_last_timestep.gdx';
-  if (m_year(t) > sm_fix_SSP2,
-    put_utility 'shell' / 'cp -f magpie_p.gdx magpie_' t.tl:0'.gdx';
-  );
-  put_utility 'shell' / 'rm -f magpie_p.gdx';
-);
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
     Execute_Unload "fulldata.gdx";
