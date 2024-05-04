@@ -18,7 +18,7 @@ magpie.optfile   = s80_optfile ;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
-magpie.savepoint = 3;
+magpie.savepoint = 0;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
