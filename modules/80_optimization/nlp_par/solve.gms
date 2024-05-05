@@ -99,6 +99,7 @@ repeat
       if(p80_extra_solve(h) = 1,
         display "Resolve";
         p80_resolve_option(h) = p80_resolve_option(h) + 1;
+        display "Load solution from last time step as starting point";
         execute_loadpoint 'fulldata.gdx';
         s80_resolve_option = sum(h2,p80_resolve_option(h2));
         display s80_resolve_option;
