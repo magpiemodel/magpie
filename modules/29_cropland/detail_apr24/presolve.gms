@@ -53,15 +53,10 @@ if (s29_treecover_keep = 1,
  i29_treecover_target(t,j)$(i29_treecover_target(t,j) < pc29_treecover_share(j)) = pc29_treecover_share(j);
 );
 
-v29_treecover.lo(j,ac_est) = 0;
-v29_treecover.up(j,ac_est) = Inf;
-v29_treecover.lo(j,ac_sub) = 0;
-v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
-m_boundfix(v29_treecover,(j,ac_sub),l,1e-6);
-
 if (m_year(t) <= s29_treecover_scenario_start,
   i29_treecover_penalty(t) = 0;
   v29_treecover_missing.fx(j) = 0;
+  v29_treecover.fx(j,ac) = pc29_treecover(j,ac);
 else
   i29_treecover_penalty(t) = s29_treecover_penalty;
   if (i29_treecover_penalty(t) > 0,
@@ -70,6 +65,11 @@ else
   else
     v29_treecover_missing.fx(j) = 0;
   );
+  v29_treecover.lo(j,ac_est) = 0;
+  v29_treecover.up(j,ac_est) = Inf;
+  v29_treecover.lo(j,ac_sub) = 0;
+  v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
+  m_boundfix(v29_treecover,(j,ac_sub),l,1e-6);
 );
 
 * create fallow land target and penalty scenario
