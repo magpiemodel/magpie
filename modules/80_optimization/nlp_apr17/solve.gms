@@ -38,6 +38,9 @@ display "vm_cost_glo.l";
 display vm_cost_glo.l;
 display magpie.modelstat;
 
+* set modelstat to 13 in case of NA for continuation
+magpie.modelStat$(magpie.modelStat=NA) = 13;
+
 * in case of problems try different solvers and optfile settings
 if (magpie.modelstat > 2,
   repeat(
@@ -70,13 +73,16 @@ if (magpie.modelstat > 2,
     display "vm_cost_glo.l";
     display vm_cost_glo.l;
 
-* write extended run information in list file in the case that the final solution is infeasible
+*   write extended run information in list file in the case that the final solution is infeasible
     if ((s80_counter >= (s80_maxiter-1) and magpie.modelstat > 2),
       magpie.solprint = 1
     );
 
     display s80_counter;
     display magpie.modelstat;
+*   Set modelstat to 13 in case of NA for the `until` check of the repeat loop.
+*   Otherwise, the repeat loop will never end. 
+    magpie.modelStat$(magpie.modelStat=NA) = 13;
     
     s80_resolve_option$(s80_resolve_option >= 4) = 0;
 
