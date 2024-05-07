@@ -73,6 +73,16 @@
 
 .update_sets_modules <- function() {
   require(gms)
+  ### 15_food
+  fadeoutscen15 <- magclass::read.magpie("modules/15_food/input/f15_food_substitution_fader.csv")
+  fadeoutscen15 <- magclass::getNames(fadeoutscen15,dim=1)
+
+  sets <- list(list(name = "fadeoutscen15",
+                    desc = "Food substitution scenarios including functional forms with targets and transition periods",
+                    items = fadeoutscen15))
+
+  gms::writeSets(sets , "modules/15_food/anthropometrics_jan18/sets.gms")
+  gms::writeSets(sets , "modules/15_food/anthro_iso_jun22/sets.gms")
 
   ### 56_ghg_policy
   ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
@@ -99,6 +109,16 @@
                     items = scen2nd60))
 
   gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
+
+  ### 70_livestock
+  fadeoutscen70 <- magclass::read.magpie("modules/70_livestock/fbask_jan16/input/f70_feed_substitution_fader.csv")
+  fadeoutscen70 <- magclass::getNames(fadeoutscen70,dim=1)
+
+  sets <- list(list(name = "fadeoutscen70",
+                    desc = "Feed substitution scenarios including functional forms with targets and transition periods",
+                    items = fadeoutscen70))
+
+  gms::writeSets(sets , "modules/70_livestock/fbask_jan16/sets.gms")
 }
 
 # Function to extract information from info.txt

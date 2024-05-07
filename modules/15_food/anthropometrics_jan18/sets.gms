@@ -5,6 +5,46 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+*###############################################################################
+*######################## R SECTION START (SETS) ###############################
+* THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY
+* ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT AUTOMATIC UPDATE!
+
+sets
+
+  fadeoutscen15 Food substitution scenarios including functional forms with targets and transition periods
+    / constant,
+      lin_zero_10_50,
+      lin_50pc_10_50_extend90,
+      lin_75pc_10_50_extend90,
+      lin_zero_20_50,
+      lin_zero_20_30,
+      lin_zero_20_70,
+      lin_50pc_20_50,
+      lin_50pc_20_50_extend65,
+      lin_50pc_20_50_extend80,
+      lin_80pc_20_50,
+      lin_80pc_20_50_extend95,
+      lin_90pc_20_50_extend95,
+      lin_99-98-90pc_20_50-60-100,
+      lin_zero_25_50,
+      lin_zero_25_30,
+      lin_zero_25_70,
+      lin_zero_25_75,
+      lin_50pc_25_50,
+      lin_50pc_25_50_extend65,
+      lin_50pc_25_50_extend75,
+      sigmoid_20pc_20_50,
+      sigmoid_50pc_20_50,
+      sigmoid_80pc_20_50,
+      sigmoid_25pc_25_50,
+      sigmoid_50pc_25_50,
+      sigmoid_75pc_25_50 /
+
+;
+*######################### R SECTION END (SETS) ################################
+*###############################################################################
+
 sets
 
    iter15 iterations between food demand model and magpie
@@ -148,12 +188,6 @@ sets
 * The set kfo_rd can be defined in default.cfg and is used in the food substitution scenarios c15_rumdairy_scp_scen and c15_rumdairyscen
   kfo_rd(kfo) Ruminant meat and dairy food products
        / livst_rum,livst_milk /
-
-  fadeoutscen15  Food substitution scenarios including functional forms with targets and transition periods
-       / constant,
-         lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_zero_20_70, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
-         lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
-   lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50, sigmoid_50pc_20_50, sigmoid_80pc_20_50 /
 
   t_scen15(t_all) Target years for transition to exogenous scenario diets
        / y2010, y2030, y2050 /
