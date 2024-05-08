@@ -191,13 +191,32 @@ start_run(cfg, codeCheck = FALSE)
 # BAU + EL2-Diet #
 # Decomposition scenario.
 # Globally achieves EL2 (Diet+Waste+Prod) by 2050
-cfg$title <- "BAU_Diet"
+cfg$title <- "BAU_PHD"
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_lessSus"))
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
+
+cfg$title <- "BAU_Diet"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_lessSus"))
+cfg <- bau(cfg = cfg)
+cfg <- diet(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
+cfg$title <- "BAU_Prod"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_lessSus"))
+cfg <- bau(cfg = cfg)
+cfg <- prod(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
+cfg$title <- "BAU_Waste"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_lessSus"))
+cfg <- bau(cfg = cfg)
+cfg <- waste(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
 
 # BAU + Bioenergy #
 # Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
