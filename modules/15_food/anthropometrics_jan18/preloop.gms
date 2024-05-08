@@ -61,14 +61,11 @@ Elseif s15_milk_share_fadeout_india = 1,
 * historical reference period:
 p15_demand2intake_ratio_ref(i) = 0;
 
-
-
 * Switch to determine countries for which  exogenous food scenarios (EAT Lancet diet and
 * food waste scenarios), and food substitution scenarios shall be applied.
 * In the default case, the food scenario affects all countries when activated.
 p15_country_dummy(iso) = 0;
 p15_country_dummy(scen_countries15) = 1;
-
 
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
@@ -76,20 +73,61 @@ p15_country_dummy(scen_countries15) = 1;
 p15_foodscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p15_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 
-* Food substitution scenarios including functional forms, targets and transition periods
-* Note: p15_foodscen_region_shr(t,i) is 1 in the default case)
-i15_ruminant_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumscen%"));
-i15_fish_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_fishscen%"));
-i15_alcohol_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_alcscen%"));
-i15_livestock_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen%"));
-i15_rumdairy_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairyscen%"));
-i15_rumdairy_scp_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairy_scp_scen%"));
-i15_livestock_fadeout_threshold(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen_target%"));
+** The following lines define scenario faders for substituting different food groups
+* If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
+* If s15_exo_foodscen_functional_form = 2, the exogenous food scenario is faded in applying a sigmoid trajectory.
+if (s15_subst_functional_form = 1,
 
+  m_linear_time_interpol(p15_ruminant_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_ruminant_substitution);
+  m_linear_time_interpol(p15_fish_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_fish_substitution);
+  m_linear_time_interpol(p15_alcohol_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_alcohol_substitution);
+  m_linear_time_interpol(p15_livestock_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_livestock_substitution);
+  m_linear_time_interpol(p15_rumdairy_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_rumdairy_substitution);
+  m_linear_time_interpol(p15_rumdairy_scp_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,    s15_rumdairy_scp_substitution);
+  if(s15_livescen_target = 1,
+    m_linear_time_interpol(p15_livestock_threshold_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,1);
+  else
+    p15_livestock_threshold_subst_fader(t) = 0;
+  );
 
-* Exogenous food intake and waste scenarios including functional forms, targets and transition periods
-* Note: p15_foodscen_region_shr(t,i) is 1 in the default case)
-i15_exo_foodscen_fader(t,i) = (1-f15_food_substitution_fader(t,"%c15_exo_foodscen%")) * p15_foodscen_region_shr(t,i);
+elseif s15_subst_functional_form = 2,
+
+  m_sigmoid_time_interpol(p15_ruminant_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_ruminant_substitution);
+  m_sigmoid_time_interpol(p15_fish_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_fish_substitution);
+  m_sigmoid_time_interpol(p15_alcohol_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_alcohol_substitution);
+  m_sigmoid_time_interpol(p15_livestock_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_livestock_substitution);
+  m_sigmoid_time_interpol(p15_rumdairy_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_rumdairy_substitution);
+  m_sigmoid_time_interpol(p15_rumdairy_scp_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,  s15_rumdairy_scp_substitution);
+  if(s15_livescen_target = 1,
+   m_sigmoid_time_interpol(p15_livestock_threshold_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,1);
+  else
+   p15_livestock_threshold_subst_fader(t) = 0;
+  );
+
+);
+
+* Food substitution scenarios based on scenario faders
+i15_ruminant_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*p15_ruminant_subst_fader(t);
+i15_fish_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*p15_fish_subst_fader(t);
+i15_alcohol_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*p15_alcohol_subst_fader(t);
+i15_livestock_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*p15_livestock_subst_fader(t);
+i15_rumdairy_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*p15_rumdairy_subst_fader(t);
+i15_rumdairy_scp_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*p15_rumdairy_scp_subst_fader(t);
+i15_livestock_fadeout_threshold(t,i) = 1 - p15_foodscen_region_shr(t,i)*p15_livestock_threshold_subst_fader(t);
+
+** The following lines define the scenario fader for the exogeneous food scenario
+* If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
+* If s15_exo_foodscen_functional_form = 2, the exogenous food scenario is faded in applying a sigmoid trajectory.
+if (s15_exo_foodscen_functional_form = 1,
+  m_linear_time_interpol(p15_exo_food_scenario_fader,s15_exo_food_scenario_start,s15_exo_food_scenario_target,0,s15_exo_foodscen_convergence);
+
+elseif s15_exo_foodscen_functional_form = 2,
+  m_sigmoid_time_interpol(p15_exo_food_scenario_fader,s15_exo_food_scenario_start,s15_exo_food_scenario_target,0,s15_exo_foodscen_convergence);
+
+);
+
+* Multiply regional share of countries (see above) with the scenario fader
+i15_exo_foodscen_fader(t,i) = p15_exo_food_scenario_fader(t) * p15_foodscen_region_shr(t,i);
 
 
 * initial prices in $US per Kcal

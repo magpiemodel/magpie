@@ -61,34 +61,79 @@ Elseif s15_milk_share_fadeout_india = 1,
 p15_country_dummy(iso) = 0;
 p15_country_dummy(scen_countries15) = 1;
 
-* Food substitution scenarios including functional forms, targets and transition periods
-i15_ruminant_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_rumscen%"));
-i15_fish_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_fishscen%"));
-i15_alcohol_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_alcscen%"));
-i15_livestock_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_livescen%"));
-i15_rumdairy_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_rumdairyscen%"));
-i15_rumdairy_scp_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_rumdairy_scp_scen%"));
-i15_livestock_fadeout_threshold(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_livescen_target%"));
+** The following lines define scenario faders for substituting different food groups
+* If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
+* If s15_exo_foodscen_functional_form = 2, the exogenous food scenario is faded in applying a sigmoid trajectory.
+if (s15_subst_functional_form = 1,
 
+  m_linear_time_interpol(p15_ruminant_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_ruminant_substitution);
+  m_linear_time_interpol(p15_fish_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_fish_substitution);
+  m_linear_time_interpol(p15_alcohol_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_alcohol_substitution);
+  m_linear_time_interpol(p15_livestock_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_livestock_substitution);
+  m_linear_time_interpol(p15_rumdairy_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_rumdairy_substitution);
+  m_linear_time_interpol(p15_rumdairy_scp_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,    s15_rumdairy_scp_substitution);
+  if(s15_livescen_target = 1,
+    m_linear_time_interpol(p15_livestock_threshold_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,1);
+  else
+    p15_livestock_threshold_subst_fader(t) = 0;
+  );
+
+elseif s15_subst_functional_form = 2,
+
+  m_sigmoid_time_interpol(p15_ruminant_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_ruminant_substitution);
+  m_sigmoid_time_interpol(p15_fish_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_fish_substitution);
+  m_sigmoid_time_interpol(p15_alcohol_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_alcohol_substitution);
+  m_sigmoid_time_interpol(p15_livestock_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_livestock_substitution);
+  m_sigmoid_time_interpol(p15_rumdairy_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_rumdairy_substitution);
+  m_sigmoid_time_interpol(p15_rumdairy_scp_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,  s15_rumdairy_scp_substitution);
+  if(s15_livescen_target = 1,
+   m_sigmoid_time_interpol(p15_livestock_threshold_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,1);
+  else
+   p15_livestock_threshold_subst_fader(t) = 0;
+  );
+
+);
+
+
+* Food substitution scenarios including functional forms, targets and transition periods
+i15_ruminant_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_ruminant_subst_fader(t);
+i15_fish_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_fish_subst_fader(t);
+i15_alcohol_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_alcohol_subst_fader(t);
+i15_livestock_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_livestock_subst_fader(t);
+i15_rumdairy_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_rumdairy_subst_fader(t);
+i15_rumdairy_scp_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_rumdairy_scp_subst_fader(t);
+i15_livestock_fadeout_threshold(t,iso) = 1 - p15_country_dummy(iso)*p15_livestock_threshold_subst_fader(t);
+
+
+** The following lines define the scenario fader for the exogeneous food scenario
+* If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
+* If s15_exo_foodscen_functional_form = 2, the exogenous food scenario is faded in applying a sigmoid trajectory.
+if (s15_exo_foodscen_functional_form = 1,
+  m_linear_time_interpol(p15_exo_food_scenario_fader,s15_exo_food_scenario_start,s15_exo_food_scenario_target,0,s15_exo_foodscen_convergence);
+
+elseif s15_exo_foodscen_functional_form = 2,
+  m_sigmoid_time_interpol(p15_exo_food_scenario_fader,s15_exo_food_scenario_start,s15_exo_food_scenario_target,0,s15_exo_foodscen_convergence);
+
+);
 
 * Exogenous food intake and waste scenarios including functional forms, targets and transition periods
-i15_exo_foodscen_fader(t,iso) = (1-f15_food_substitution_fader(t,"%c15_exo_foodscen%")) * p15_country_dummy(iso);
+i15_exo_foodscen_fader(t,iso) = p15_exo_food_scenario_fader(t) * p15_country_dummy(iso);
 
 * Select from the data set of EAT Lancet scenarios the target years that are
 * consistent with the target year of the fader:
 
-$ifthen "%c15_exo_foodscen%" == "lin_zero_20_30"
+if(s15_exo_food_scenario_target = 2030,
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",iso,kcal_scen15,EAT_scen15,kfo);
 *extra condition to see if India diet scenario has been selected
   if (s15_exo_diet = 2,
     i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2030",iso,kcal_scen15,EAT_scen15,kfo);
   );
-$else
+else
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2050",iso,kcal_scen15,EAT_scen15,kfo);
   if (s15_exo_diet = 2,
     i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2050",iso,kcal_scen15,EAT_scen15,kfo);
   );
-$endif
+);
 
 * initial prices in $US per Kcal
 i15_prices_initial_kcal(iso,kfo)$(fm_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
