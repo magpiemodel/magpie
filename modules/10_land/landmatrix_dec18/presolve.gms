@@ -20,9 +20,6 @@ vm_lu_transitions.fx(j,"secdforest","other") = 0;
 vm_lu_transitions.fx(j,land_from,"primforest") = 0;
 vm_lu_transitions.up(j,"primforest","primforest") = Inf;
 
-*' Forestry can only be converted into secdforest but not other
-vm_lu_transitions.fx(j,"forestry","other") = 0;
-
 *' @stop
 
 m_boundfix(vm_land,(j,land),up,10e-5);

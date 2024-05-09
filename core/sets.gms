@@ -245,19 +245,22 @@ sets
         / crop, past, forestry, primforest, secdforest, urban, other /
 
   land_ag(land) Agricultural land pools
-                  / crop, past /
-
-  land_timber(land) land from which timber can be taken away
-  / forestry, primforest, secdforest, other /
+        / crop, past /
 
   land_forest(land) Forested land pools
-  / forestry, primforest, secdforest /
+        / forestry, primforest, secdforest /
+
+  land_noforest(land) Non-forest land pools
+        / crop, past, urban, other /
+
+  land_timber(land) land from which timber can be taken away
+        / forestry, primforest, secdforest, other /
 
   land_natveg(land_timber) Natural vegetation land pools
         / primforest, secdforest, other /
 
   forest_type forest type
-         / plantations, natveg /
+        / plantations, natveg /
 
 ***Forestry**
   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,

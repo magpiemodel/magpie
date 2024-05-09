@@ -30,7 +30,7 @@ Flg_Prep = FALSE
 $offecho
 
 *' @code
-*' Solve statement is put twice for improved model results, 
+*' Solve statement is put twice for improved model results,
 *' in particular for matching LHS and RHS of equations.
 solve magpie USING nlp MINIMIZING vm_cost_glo;
 solve magpie USING nlp MINIMIZING vm_cost_glo;
@@ -39,6 +39,9 @@ solve magpie USING nlp MINIMIZING vm_cost_glo;
 display "vm_cost_glo.l";
 display vm_cost_glo.l;
 display magpie.modelstat;
+
+* set modelstat to 13 in case of NA for continuation
+magpie.modelStat$(magpie.modelStat=NA) = 13;
 
 * in case of problems try different solvers and optfile settings
 if (magpie.modelstat > 2,

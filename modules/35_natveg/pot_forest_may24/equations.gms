@@ -21,6 +21,17 @@
             =g=
             sum((ct,land_natveg,consv_type), pm_land_conservation(ct,j2,land_natveg,consv_type));
 
+ q35_secdforest_restoration(j2) ..
+            sum(land_ag, vm_lu_transitions(j2,land_ag,"secdforest"))
+          + vm_lu_transitions(j2,"forestry","secdforest")
+            =g=
+            p35_land_restoration(j2,"secdforest");
+
+ q35_other_restoration(j2) ..
+            sum(land_ag, vm_lu_transitions(j2,land_ag,"other"))
+            =g=
+            p35_land_restoration(j2,"other");
+
 *' Carbon stocks for primary forest, secondary forest or other natural land are calculated
 *' as the product of respective area and carbon density.
 *' Carbon stocks decline if the area decreases
@@ -181,9 +192,15 @@ q35_secdforest_regeneration(j2)..
                           sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
                         + v35_hvarea_primforest(j2)
                         + p35_land_restoration(j2,"secdforest")
-                        + sum(land_ag, vm_lu_transitions(j2,land_ag,"other")) * p35_forest_recovery_shr(j2)
-                        + vm_lu_transitions(j2,"forestry","secdforest")
+                        + v35_secdforest_recovery_area(j2)
                           ;
+
+q35_secdforest_recovery_area(j2)..
+                         v35_secdforest_recovery_area(j2)
+                         =e=
+                       + (p35_max_forest_recovery(j2) - p35_land_restoration(j2,"secdforest"))
+                       * (sum(land_noforest,vm_landreduction(j2,land_noforest))/(sum(land_noforest,vm_land(j2,land_noforest))+1e-10))
+                       + vm_landreduction(j2,"forestry");
 
 *' The constraint for forest establishment is given by the
 *' remaining potential forest area, which was calculated based
@@ -201,7 +218,6 @@ q35_other_regeneration(j2)..
                           sum(ac_est, v35_other(j2,ac_est))
                           =g=
                           sum(ac_sub,v35_hvarea_other(j2,ac_sub))
-                        + sum(land_ag, vm_lu_transitions(j2,land_ag,"other")) * (1 - p35_forest_recovery_shr(j2))
                           ;
 
 *' The following two constraints distribute additions to secdforest and other land

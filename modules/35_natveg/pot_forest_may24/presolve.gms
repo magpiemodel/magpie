@@ -83,11 +83,6 @@ pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 p35_max_forest_recovery(j) = fm_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
 p35_max_forest_recovery(j)$(p35_max_forest_recovery(j) < 0) = 0;
 
-* The forest recovery share is given by the relation between the forest recovery potential
-* and the agricultural land area of the previous time step.
-p35_forest_recovery_shr(j) = p35_max_forest_recovery(j) / sum(land_ag, pcm_land(j,land_ag));
-p35_forest_recovery_shr(j)$(p35_forest_recovery_shr(j) > 1) = 1;
-
 * -------------------------------------
 * Set bounds based on land conservation
 * -------------------------------------
@@ -138,7 +133,6 @@ p35_land_restoration(j,"secdforest") = pm_land_conservation(t,j,"secdforest","re
 * Do not restore secdforest in areas where total natural
 * land area meets the total natural land conservation target
 p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
-
 
 * Since forest restoration cannot be bigger than the maximum area for forest recovery,
 * any remaining restoration area is substracted and shifted to other land restoration.
