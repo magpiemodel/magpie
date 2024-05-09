@@ -19,7 +19,7 @@ scalars
   s73_timber_prod_cost_woodfuel        Cost for prodcing one unit of woodfuel (USD per tDM) / 60 /
   s73_free_prod_cost                   Very high cost for settling demand without production (USD per tDM) /20000/
   s73_timber_demand_switch             Logical switch to turn on or off timber demand 1=on 0=off (1) / 0 /
-  s73_foresight                        Boolean switch for establishment demand assumption 1=forward looking 0=myopic (1) / 0 /
+  s73_foresight                        Boolean switch for establishment demand assumption 1=forward looking 0=myopic (1) / 1 /
   s73_increase_ceiling                 Limiter for not allowing a demand jump between time steps beyond a certain limit (1) /1.025/
   s73_residue_ratio                    Proportion of overall industrial roundwood production which ends up as residue during harvest (1) / 0.15/
   sm_wood_density                      Representative wood density based on IPCC (tDM per m3) /0.6/

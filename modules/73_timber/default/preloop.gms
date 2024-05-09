@@ -91,10 +91,8 @@ pm_demand_ext(t_all,i,kforestry)$(m_year(t_all)>2100) = pm_demand_ext("y2100",i,
 ** Calculate global demand
 p73_glo_wood(t_all,kforestry) = sum(i,pm_demand_ext(t_all,i,kforestry));
 
-vm_prod_forestry.l(j,"wood") = 0;
-vm_prod.l(j,"wood") = 0;
-
 im_timber_prod_cost("wood") = s73_timber_prod_cost_wood;
 im_timber_prod_cost("woodfuel") = s73_timber_prod_cost_woodfuel;
 
+* initialize values for presolve of other modules
 pm_demand_forestry_future(t,i,kforestry) = pm_demand_ext(t,i,kforestry) * 1.2;

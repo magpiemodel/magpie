@@ -164,7 +164,8 @@ pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular_estb(t,j)
 * Fader for plantation share in establishment decision
 if(ord(t) = 1,
   pc32_prod_forestry_ini(i) = sum(cell(i,j), sum(ac$(ac.off = p32_rotation_cellular_harvesting(t,j)), pm_timber_yield(t,j,ac,"forestry") * p32_land(t,j,"plant",ac))) / m_timestep_length_forestry;
-  pc32_plant_contr_ini(i) = pc32_prod_forestry_ini(i) / sum(kforestry, pm_demand_ext(t,i,kforestry));
+  pc32_plant_contr_ini(i)$(sum(kforestry, pm_demand_ext(t,i,kforestry)) > 0) = pc32_prod_forestry_ini(i) / sum(kforestry, pm_demand_ext(t,i,kforestry));
+  pc32_plant_contr_ini(i)$(sum(kforestry, pm_demand_ext(t,i,kforestry)) = 0) = 0;
   p32_plant_contr(t,i) = pc32_plant_contr_ini(i);
 else
   p32_plant_contr(t,i) = p32_plant_contr(t-1,i) * (1+i32_plant_contr_growth_fader(t))**m_timestep_length_forestry;
@@ -174,7 +175,8 @@ p32_plant_contr(t,i)$(p32_plant_contr(t,i) > s32_plant_contr_max) = s32_plant_co
 p32_forestry_product_dist(t,i,kforestry)$(pm_demand_forestry_future(t,i,kforestry) > 0) = pm_demand_forestry_future(t,i,kforestry) / sum(kforestry2, pm_demand_forestry_future(t,i,kforestry2));
 p32_forestry_product_dist(t,i,kforestry)$(pm_demand_forestry_future(t,i,kforestry) = 0) = 1/card(kforestry);
 
-p32_future_to_current_demand_ratio(t,i) = sum(kforestry, pm_demand_forestry_future(t,i,kforestry)) / sum(kforestry, pm_demand_ext(t,i,kforestry));
+p32_future_to_current_demand_ratio(t,i)$(sum(kforestry, pm_demand_ext(t,i,kforestry)) > 0) = sum(kforestry, pm_demand_forestry_future(t,i,kforestry)) / sum(kforestry, pm_demand_ext(t,i,kforestry));
+p32_future_to_current_demand_ratio(t,i)$(sum(kforestry, pm_demand_ext(t,i,kforestry)) = 0) = 0;
 
 * Avoid conflict between afforestation for carbon uptake on land and secdforest restoration
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + v32_land.lo(j,"plant",ac) + p32_land(t,j,"aff",ac))+ p32_aff_pol_timestep(t,j))
