@@ -29,16 +29,16 @@ $setglobal c32_shock_scenario  none
 
 
 scalars
-  s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous) / 0 /
+  s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous) / 2 /
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
   s32_harvesting_cost             Harvesting cost (USD per ha) / 1000 /
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
-  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution 2=FAO distribution 3=Poulter distribution 4=Manual distribution (1) / 0 /
+  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 1=equal distribution (1) / 1 /
   s32_price                       Price for timber (USD)      / 45 /
-  s32_free_land_cost              Very high cost for using non existing land for plantation establishment (USD per ha) /1000000/
+  s32_free_land_cost              Penalty for technial area balance term (USD per ha) / 1e+06 /
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
   s32_tcre_local                  Switch for local (1) or global (0) TRCE factors (1) / 1 /
@@ -47,6 +47,11 @@ scalars
   s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
   s32_max_aff_area_glo            Switch for global or regional afforestation constraint (1) / 1 /
   s32_aff_prot                    Switch for protection of afforested areas (0=until end of planning horizon 1=forever) / 1 /
+  s32_plant_contr_growth_startyear  Start year for plantation contribution growth fader (year) / 2020 /
+  s32_plant_contr_growth_endyear    End year for plantation contribution growth fader (year) / 2050 /
+  s32_plant_contr_growth_startvalue Start value for plantation contribution growth fader (percent per year) / 0.05 /
+  s32_plant_contr_growth_endvalue   End value for plantation contribution growth fader (percent per year) / 0 /
+  s32_plant_contr_max               Maximum plantation contribution for establishment decision (percent) / 0.5 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
@@ -71,14 +76,6 @@ table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wr
 $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim
-;
-
-parameter f32_plant_prod_share(t_all) Share of overall production coming from plantations (1)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_plant_prod_share.csv"
-$offdelim
-/
 ;
 
 table f32_aff_bgp(j,bgp32) Biogeophysical temperature change of afforestation (degree C)
@@ -107,23 +104,10 @@ $include "./modules/32_forestry/input/f32_gs_relativetarget.cs4"
 $offdelim
 /;
 
-table f32_plantation_contribution(t_ext,i,inter32,scen32) Share of roundwood production coming from timber plantations (percent)
-$ondelim
-$include "./modules/32_forestry/input/f32_plantation_contribution.cs3"
-$ondelim
-;
-
 parameter f32_plantedforest(i) Share of plantation forest in planted forest (1)
 /
 $ondelim
 $include "./modules/32_forestry/input/f32_plantedforest.cs4"
-$offdelim
-/;
-
-parameter f32_estb_calib(i) Calibration factor for plantation forest establishment (1)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_estb_calib.cs4"
 $offdelim
 /;
 

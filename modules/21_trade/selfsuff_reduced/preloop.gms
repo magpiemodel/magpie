@@ -16,6 +16,9 @@ elseif (s21_trade_tariff=0),
     i21_trade_tariff(h,k_trade) = 0;
 );
 
+i21_trade_margin(h,"wood")$(i21_trade_margin(h,"wood") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
+i21_trade_margin(h,"woodfuel")$(i21_trade_margin(h,"woodfuel") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
+
 pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);
 pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);
 *Implausible jumps in selfsuff for wood in some regions.

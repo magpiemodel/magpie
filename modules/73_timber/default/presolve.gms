@@ -9,13 +9,12 @@
 ** s73_foresight=1 forward looking (establishment based on future demand),
 ** s73_foresight=0 myopic (establishment based on current demand)
 
-if(m_year(t) <= sm_fix_SSP2,
-*    pm_demand_forestry_future(i,kforestry)    = pm_demand_ext("y2010",i,kforestry)*1.5;
-    pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry);
+if(s73_foresight=1,
+  if(m_year(t) <= sm_fix_SSP2,
+    pm_demand_forestry_future(t,i,kforestry) = pm_demand_ext(t,i,kforestry) * 1.2;
+  else
+    pm_demand_forestry_future(t,i,kforestry) = sum(t_ext$(t_ext.pos = t.pos + pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
+   );
 else
- if(s73_foresight=1,
-    pm_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos =  t.pos + pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
- else
-  pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry);
+  pm_demand_forestry_future(t,i,kforestry) = pm_demand_ext(t,i,kforestry); 
  );
-);

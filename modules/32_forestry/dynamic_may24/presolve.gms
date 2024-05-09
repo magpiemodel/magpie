@@ -21,7 +21,7 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
    p32_aff_pol_timestep("y1995",j) = 0;
    p32_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
 * Suitable area (`p32_aff_pot`) for NPI/NDC afforestation
-   p32_aff_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - vm_land.lo(j,"past")) - pm_land_conservation(t,j,"other","restore");
+   p32_aff_pot(t,j) = sum((kcr,w),vm_area.l(j,kcr,w) - vm_area.lo(j,kcr,w)) + (vm_land.l(j,"past") - vm_land.lo(j,"past")) - pm_land_conservation(t,j,"other","restore");
 * suitable area `p32_aff_pot` can be negative, if land restoration is switched on (level smaller than lower bound), therefore set negative values to 0
    p32_aff_pot(t,j)$(p32_aff_pot(t,j) < 0) = 0;
 * Limit prescribed NPI/NDC afforestation in `p32_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
@@ -36,7 +36,7 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
 if(s32_aff_plantation = 0,
  p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 elseif s32_aff_plantation = 1,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = p32_c_density_ac_fast_forestry(t,j,ac);
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,"vegc");
 );
 
 *' Timber plantations carbon densities:
@@ -82,10 +82,6 @@ p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card
 p32_land(t,j,type32,ac_est) = 0;
 *' @stop
 
-
-
-
-
 ** Calculate v32_land.l
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
 pc32_land(j,type32,ac) = v32_land.l(j,type32,ac);
@@ -123,7 +119,7 @@ elseif s32_hvarea = 2,
 ** The offset is needed because the first element of ac is ac0, which is not included in p32_rotation_cellular_harvesting.
   v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
 ** After the rotation period, plantations are free for harvesting
-  v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+  v32_land.fx(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
   s32_establishment_static = 0;
   s32_establishment_dynamic = 1;
 );
@@ -160,19 +156,25 @@ else
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
-m_boundfix(v32_land,(j,type32,ac_sub),up,10e-5);
+m_boundfix(v32_land,(j,type32,ac_sub),up,1e-6);
 
 ** Calculate future yield based on rotation length
-if((ord(t)=1),
-pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), pm_timber_yield(t,j,ac,"forestry"));
-pc32_area_rotation(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), p32_land(t,j,"plant",ac));
-);
-pc32_yield_forestry_future_reg(i) = m_weightedmean(pc32_yield_forestry_future(j),pc32_area_rotation(j),(cell(i,j)));
-pc32_yield_forestry_future_reg(i)$(pc32_yield_forestry_future_reg(i) = 0) =  smax(cell(i,j),pc32_yield_forestry_future(j));
+pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
 
-** Display
-p32_updated_gs_reg(t,i) = 1;
-p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0) = (sum((cell(i,j),ac_sub),(pm_timber_yield(t,j,ac_sub,"forestry") / sm_wood_density) * p32_land(t,j,"plant",ac_sub))/ sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub)));
+* Fader for plantation share in establishment decision
+if(ord(t) = 1,
+  pc32_prod_forestry_ini(i) = sum(cell(i,j), sum(ac$(ac.off = p32_rotation_cellular_harvesting(t,j)), pm_timber_yield(t,j,ac,"forestry") * p32_land(t,j,"plant",ac))) / m_timestep_length_forestry;
+  pc32_plant_contr_ini(i) = pc32_prod_forestry_ini(i) / sum(kforestry, pm_demand_ext(t,i,kforestry));
+  p32_plant_contr(t,i) = pc32_plant_contr_ini(i);
+else
+  p32_plant_contr(t,i) = p32_plant_contr(t-1,i) * (1+i32_plant_contr_growth_fader(t))**m_timestep_length_forestry;
+);
+p32_plant_contr(t,i)$(p32_plant_contr(t,i) > s32_plant_contr_max) = s32_plant_contr_max; 
+
+p32_forestry_product_dist(t,i,kforestry)$(pm_demand_forestry_future(t,i,kforestry) > 0) = pm_demand_forestry_future(t,i,kforestry) / sum(kforestry2, pm_demand_forestry_future(t,i,kforestry2));
+p32_forestry_product_dist(t,i,kforestry)$(pm_demand_forestry_future(t,i,kforestry) = 0) = 1/card(kforestry);
+
+p32_future_to_current_demand_ratio(t,i) = sum(kforestry, pm_demand_forestry_future(t,i,kforestry)) / sum(kforestry, pm_demand_ext(t,i,kforestry));
 
 * Avoid conflict between afforestation for carbon uptake on land and secdforest restoration
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + v32_land.lo(j,"plant",ac) + p32_land(t,j,"aff",ac))+ p32_aff_pol_timestep(t,j))
