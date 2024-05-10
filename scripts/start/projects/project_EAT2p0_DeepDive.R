@@ -242,6 +242,19 @@ cfg <- bau(cfg = cfg)
 cfg <- priceNonCO2(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
+
+# BAU_MIT #
+# All production-side land-based mitigation measures
+cfg$title <- "BAU_MIT"
+# standard setting, but with NDC for miti
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_lessSus"))
+# BAU settings
+cfg <- bau(cfg = cfg)
+# Mitigation (CO2, non-CO2, bioenergy)
+cfg <- miti(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
+
 # MITI_Diet (mitigation - PHD) #
 # All production-side land-based mitigation measures, but no demand-side mitigation (diet change)
 cfg$title <- "MITI_Diet"
