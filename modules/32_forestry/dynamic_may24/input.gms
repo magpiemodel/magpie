@@ -36,7 +36,7 @@ scalars
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
-  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 1=equal distribution (1) / 1 /
+  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution 2=FAO distribution 3=Poulter distribution 4=Manual distribution (1) / 0 /
   s32_price                       Price for timber (USD)      / 45 /
   s32_free_land_cost              Penalty for technial area balance term (USD per ha) / 1e+06 /
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /

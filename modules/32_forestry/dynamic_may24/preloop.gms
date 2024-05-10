@@ -146,12 +146,73 @@ ini32(j,ac) = no;
 ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off < p32_rotation_cellular_harvesting("y1995",j));
 
 ** divide initial forestry area by number of age classes within ini32
-if(s32_initial_distribution = 1,
+** divide initial forestry area by number of age classes within ini32
+if(s32_initial_distribution = 0,
+** Initialize with highest age class
+  p32_land_start_ac(j,"plant","acx") = pcm_land(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
+  p32_land_start_ac(j,"ndc","acx")   = pcm_land(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i));
+
+elseif s32_initial_distribution = 1,
 ** Initialize with equal distribution among rotation age classes
 ** Plantated forest area is divided into ndcs (other planted forest) and plantations
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
     p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
     p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+
+elseif s32_initial_distribution = 2,
+** Initialize with distribution based on FAO data (but this distribution is applied to all cells globally)
+** Plantated forest area is divided into ndcs (other planted forest) and plantations
+    p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
+    p32_land_start_ac(j,"plant",ac) = p32_plant_ini_ac(j) * f32_ac_dist(ac);
+    p32_land_start_ac(j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * f32_ac_dist(ac);
+
+elseif s32_initial_distribution = 3,
+** Initialize with Poulter distribution among rotation age classes
+** Plantated forest area is divided into ndcs (other planted forest) and plantations
+    p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
+    p32_rotation_dist(j,ac) =  (im_plantedclass_ac(j,ac)$(ini32(j,ac))/sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))))$(sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))));
+    p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j) * p32_rotation_dist(j,ac);
+    p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_rotation_dist(j,ac);
+
+*use residual approach to avoid distributional errors i.e., poulter set with no plantations but luh reporting plantations in a cell
+    loop (j,
+      if(sum(ac,p32_land_start_ac(j,"plant",ac)$(ini32(j,ac))) = 0,
+      p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) =  pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+      p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   =  pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+       );
+    );
+
+elseif s32_initial_distribution = 4,
+** Initialize with Manual distribution among rotation age classes
+** Plantated forest area is divided into ndcs (other planted forest) and plantations
+    loop(j,
+** Set all acs to 0
+    p32_ac_dist_flag(j,ac) = 0;
+** Calculate reverse of age-classes, if rotation is 11acs, then ac0 should get a value of 11, 11th ac should get value of 1
+    p32_ac_dist_flag(j,ac) = (10*p32_rotation_cellular_harvesting("y1995",j)-((ord(ac)-1))*5)$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+** Calculate the weights, youngest age-class will have highest weight
+    p32_ac_dist(j,ac) = (p32_ac_dist_flag(j,ac) / (sum(ac2,p32_ac_dist_flag(j,ac2)) + ord(ac)))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+** there can be isntances where this distribution is not summing up to 1, in that case we take the excess and remove it evenly from all age-classes
+** In case the sum of distribution is > 1 : Remove the excess from ac0
+    p32_ac_dist(j,"ac0")$(sum(ac2, p32_ac_dist(j,ac2))>1) = p32_ac_dist(j,"ac0") - (sum(ac2, p32_ac_dist(j,ac2))-1);
+** In case the sum of distribution is < 1 : Add the shortage to ac0
+    p32_ac_dist(j,"ac0")$(sum(ac2, p32_ac_dist(j,ac2))<1) = p32_ac_dist(j,"ac0") + (1-sum(ac2, p32_ac_dist(j,ac2)));
+    );
+** Isolate plantations from planted forest (forestry)
+    p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
+** Divide plantations according to distribution
+    p32_land_start_ac(j,"plant",ac) = p32_plant_ini_ac(j) * p32_ac_dist(j,ac);
+** Divide NDCs according to same distribution
+    p32_land_start_ac(j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_ac_dist(j,ac);
+
+*use residual approach to avoid distributional errors i.e., poulter set with no plantations but luh reporting plantations in a cell
+    loop (j,
+      if(sum(ac,p32_land_start_ac(j,"plant",ac)$(ini32(j,ac))) = 0,
+      p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) =  pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+      p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   =  pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+       );
+    );
+
 );
 
 ** Redistribute to youngest age class in case the distribution to plantations and

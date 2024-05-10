@@ -74,7 +74,7 @@ gms$c42_watdem_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;;;cc;cc;cc;cc;cc;;;
 gms$c43_watavail_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;;;cc;cc;cc;cc;cc;;;;;;;;;;;;;;;;;;;
 gms$c52_carbon_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;;;cc;cc;cc;cc;cc;;;;;;;;;;;;;;;;;;;
 gms$c59_som_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;;;cc;cc;cc;cc;cc;;;;;;;;;;;;;;;;;;;
-gms$s32_initial_distribution;;;;;;;;;;;;;;;;;;;;;;;;;1;1;1;1;1;;;;;1;1;0;;;;;;;;;;;;
+gms$s32_initial_distribution;;;;;;;;;;;;;;;;;;;;;;;;;4;4;4;4;4;;;;;4;4;0;;;;;;;;;;;;
 gms$s32_hvarea;;;;;;;;;;;;;;;;;;;;;;;;;2;2;2;2;2;;;;;2;1;0;;;;;;;;;;;;
 gms$s35_secdf_distribution;;;;;;;;;;;;;;;;;;;;;;;;;0;0;0;0;0;;;;;0;0;0;;;;;;;;;;;;
 gms$s35_hvarea;;;;;;;;;;;;;;;;;;;;;;;;;2;2;2;2;2;;;;;2;2;0;;;;;;;;;;;;
