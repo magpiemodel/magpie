@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -57,7 +57,7 @@ else
 );
 
 p32_disturbance_loss_ftype32(t,j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) * f32_forest_shock(t,"%c32_shock_scenario%") * m_timestep_length;
-pc32_land(j,"aff",ac_est) = pc32_land(j,"aff",ac_est) + sum(ac_sub,p32_disturbance_loss_ftype32(t,j,"aff",ac_sub))/card(ac_est);
+pc32_land(j,"aff",ac_est) = pc32_land(j,"aff",ac_est) + sum(ac_sub,p32_disturbance_loss_ftype32(t,j,"aff",ac_sub))/card(ac_est2);
 
 pc32_land(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) - p32_disturbance_loss_ftype32(t,j,"aff",ac_sub);
 
@@ -92,6 +92,7 @@ pc32_land(j,type32,ac) = v32_land.l(j,type32,ac);
 p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
+pcm_land_forestry(j,type32) =  sum(ac, v32_land.l(j,type32,ac));
 
 ** reset all bounds
 v32_land.lo(j,type32,ac) = 0;

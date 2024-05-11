@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -126,8 +126,7 @@ parameters
 
 * before shock
  o15_kcal_regr_initial(t,iso,kfo)             Uncalibrated per capita demand before price shock (kcal per capita per day)
- p15_kcal_pc_initial(t,i,kfo)                 Per capita consumption in food demand model before price shock on regional level (kcal per capita per day)
- pm_kcal_pc_initial(t,i,kfo)                  Per capita consumption in food demand model before price shock (kcal per capita per day)
+ pm_kcal_pc_initial(t,i,kall)                  Per capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_initial_iso(t,iso,kfo)           Per capita consumption in food demand model before price shock on country level (kcal per capita per day)
 
 * after price shock
@@ -155,7 +154,7 @@ parameters
  i15_intake_scen_target(t,i)                  Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
  i15_intake_EATLancet_all(i,kcal_scen15,EAT_scen15,kfo)       Food-specific per capita calorie intake according to various EAT Lancet diet scenarios (kcal per capita per day)
  i15_intake_EATLancet(i,kfo)                  Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
- i15_intake_detailed_scen_target(t,i,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ p15_intake_detailed_scen_target(t,i,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
  p15_intake_detailed_regr(t,i,kfo)            Food-specific per capita calorie intake according to regression-based projections (kcal per capita per day)
 
  p15_demand2intake_ratio_ref(i)               Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)

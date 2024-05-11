@@ -1,0 +1,6 @@
+capitalExclusionList:
+  - land
+  - iso
+  - type
+  - age
+  - k

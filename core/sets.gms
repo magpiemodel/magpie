@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -55,32 +55,32 @@ sets
       VEN, VGB, VIR, VNM, VUT, WLF, WSM, YEM, ZAF, ZMB, ZWE /
 
   j number of LPJ cells
-    / CAZ_1*CAZ_6,
-      CHA_7*CHA_23,
-      EUR_24*EUR_32,
-      IND_33*IND_40,
-      JPN_41,
-      LAM_42*LAM_85,
-      MEA_86*MEA_111,
-      NEU_112*NEU_118,
-      OAS_119*OAS_128,
-      REF_129*REF_141,
-      SSA_142*SSA_179,
-      USA_180*USA_200 /
+    / CAZ_1*CAZ_14,
+      CHA_15*CHA_37,
+      EUR_38*EUR_47,
+      IND_48*IND_54,
+      JPN_55*JPN_58,
+      LAM_59*LAM_84,
+      MEA_85*MEA_105,
+      NEU_106*NEU_114,
+      OAS_115*OAS_130,
+      REF_131*REF_153,
+      SSA_154*SSA_185,
+      USA_186*USA_200 /
 
   cell(i,j) number of LPJ cells per region i
-    / CAZ . (CAZ_1*CAZ_6)
-      CHA . (CHA_7*CHA_23)
-      EUR . (EUR_24*EUR_32)
-      IND . (IND_33*IND_40)
-      JPN . (JPN_41)
-      LAM . (LAM_42*LAM_85)
-      MEA . (MEA_86*MEA_111)
-      NEU . (NEU_112*NEU_118)
-      OAS . (OAS_119*OAS_128)
-      REF . (REF_129*REF_141)
-      SSA . (SSA_142*SSA_179)
-      USA . (USA_180*USA_200) /
+    / CAZ . (CAZ_1*CAZ_14)
+      CHA . (CHA_15*CHA_37)
+      EUR . (EUR_38*EUR_47)
+      IND . (IND_48*IND_54)
+      JPN . (JPN_55*JPN_58)
+      LAM . (LAM_59*LAM_84)
+      MEA . (MEA_85*MEA_105)
+      NEU . (NEU_106*NEU_114)
+      OAS . (OAS_115*OAS_130)
+      REF . (REF_131*REF_153)
+      SSA . (SSA_154*SSA_185)
+      USA . (USA_186*USA_200) /
 
   i_to_iso(i,iso) mapping regions to iso countries
     / CAZ . (AUS, CAN, HMD, NZL, SPM)
@@ -255,9 +255,6 @@ sets
 
   forest_type forest type
          / plantations, natveg /
-
-   si Suitability classes
-        / si0, nsi0 /
 
 ***Forestry**
   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -42,16 +42,16 @@ scalars
   s56_ghgprice_devstate_scaling Switch for scaling GHG price with development state (1=on 0=off) / 0 /
   s56_c_price_induced_aff Switch for C price driven afforestation (1=on 0=off) / 1 /
   s56_c_price_exp_aff c price expectation for afforestation (years) / 50 /
-  s56_buffer_aff share of carbon credits for afforestation projects pooled in a buffer (1) / 0.2 /
+  s56_buffer_aff share of carbon credits for afforestation projects pooled in a buffer (1) / 0.5 /
   s56_counter counter for C price interpolation (1) / 0 /
   s56_timesteps number of time steps for C price interpolation (1) / 0 /
   s56_offset helper for C price interpolation (1) / 0 /
 ;
 
-$setglobal c56_pollutant_prices  R21M42-SSP2-NPi
-$setglobal c56_pollutant_prices_noselect  R21M42-SSP2-NPi
-$setglobal c56_emis_policy  redd+natveg_nosoil
-$setglobal c56_cprice_aff  forestry_vegc
+$setglobal c56_pollutant_prices  R32M46-SSP2EU-NPi
+$setglobal c56_pollutant_prices_noselect  R32M46-SSP2EU-NPi
+$setglobal c56_emis_policy  reddnatveg_nosoil
+$setglobal c56_cprice_aff  secdforest_vegc
 $setglobal c56_mute_ghgprices_until  y2030
 
 $setglobal c56_carbon_stock_pricing  actualNoAcEst

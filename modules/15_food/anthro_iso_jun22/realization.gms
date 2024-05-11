@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -45,4 +45,4 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' diet scenarios, most importantly the shift to the Planetary Health diet
 *' [@willett_food_2019].
 *'
-*' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Jan Philipp Dietrich
+*' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Felicitas Beier, Jan Philipp Dietrich

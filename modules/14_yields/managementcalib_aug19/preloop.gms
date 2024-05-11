@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -144,21 +144,47 @@ if ((s14_calib_ir2rf = 1),
 ***YIELD CALIBRATION***********************************************************************
 
 *' @code
-*' Calibrated yields are additionally adjusted by calibration factors 'f14_yld_calib'
+*' Calibrated yields can additionally be adjusted by calibration factors 'f14_yld_calib'
 *' determined in a calibration run. As MAgPIE optimizes yield patterns and FAO regional
-*' yields are outlier corrected, historical production and croparea can only be reproduced
-*' with this additional step of correction:
+*' yields are outlier corrected, historical production and croparea can in some cases 
+*' be better represented with this additional correction:
 
-* set default values in case of missing input file
-if(sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
+* set yield calib factors to 1 in case of no use of yield calibration factors (s14_use_yield_calib = 0) 
+* or missing input file 
+if(s14_use_yield_calib = 0 OR sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
   f14_yld_calib(i,ltype14) = 1;
 );
 
 
-i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)      *sum(cell(i,j),f14_yld_calib(i,"crop"));
-i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)*sum(cell(i,j),f14_yld_calib(i,"past"));
+i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)
+                                    * sum(cell(i,j),f14_yld_calib(i,"crop"));
+i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)
+                                    * sum(cell(i,j),f14_yld_calib(i,"past"));
 
 *' @stop
+
+*' @code
+*' Land degradation can negatively affect yields. Soil loss for example can
+*' notably affect land productivity. Similarly, the yield of pollinator-dependent crops
+*' is reduced when there is a lack of pollinators. To account for the impacts of degradation,
+*' calibrated yields are multiplied by the share of land with intact NCP in each cell and specific
+*' yield reduction coefficients that represent yield loss due to soil erosion and pollination
+*' deficiency on non-intact land.
+
+* set default values in case of missing input file.
+if(sum((t,j,ncp_type14),f14_yld_ncp_report(t,j,ncp_type14)) = 0,
+  f14_yld_ncp_report(t,j,ncp_type14) = 1;
+);
+
+if ((s14_degradation = 1),
+  i14_yields_calib(t,j,kcr,w) = i14_yields_calib(t,j,kcr,w) * (1 - s14_yld_reduction_soil_loss)
+                                + i14_yields_calib(t,j,kcr,w) * s14_yld_reduction_soil_loss * f14_yld_ncp_report(t,j,"soil_intact");
+  i14_yields_calib(t,j,kcr,w) = i14_yields_calib(t,j,kcr,w) * (1 - f14_kcr_pollinator_dependence(kcr))
+                                + i14_yields_calib(t,j,kcr,w) * f14_kcr_pollinator_dependence(kcr) * f14_yld_ncp_report(t,j,"poll_suff");
+);
+
+*' @stop
+
 
 ****
 ****

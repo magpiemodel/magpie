@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,8 +14,15 @@ scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pur
 
 scalar s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /;
 
+scalar s14_degradation   Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /;
+
+scalar s14_use_yield_calib  Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /;
+
+scalar s14_minimum_wood_yield Minimum wood yield for timber harvest in natural vegetation (tDM per ha per yr) / 20 /;
+
 scalars
   s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
+  s14_yld_reduction_soil_loss  Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
 ;
 
 scalars
@@ -74,6 +81,22 @@ parameter f14_aboveground_fraction(forest_land) Root to shoot ratio (1)
 /
 $ondelim
 $include "./modules/14_yields/input/f14_aboveground_fraction.csv"
+$offdelim
+/
+;
+
+$onEmpty
+table f14_yld_ncp_report(t_all,j,ncp_type14) Share of land with intact natures contributions to people (NCP) (1)
+$ondelim
+$if exist "./modules/14_yields/input/f14_yld_ncp_report.cs3" $include "./modules/14_yields/input/f14_yld_ncp_report.cs3"
+$offdelim
+;
+$offEmpty
+
+parameter f14_kcr_pollinator_dependence(kcr) Share of total yield dependent on biotic pollination (1)
+/
+$ondelim
+$include "./modules/14_yields/input/f14_kcr_pollinator_dependence.csv"
 $offdelim
 /
 ;

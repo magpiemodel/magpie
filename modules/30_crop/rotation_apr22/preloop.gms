@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,9 +8,20 @@
 
 ** Trajectory for cropland scenarios
 * sigmoidal interpolation between start year and target year
-m_sigmoid_interpol(p30_snv_scenario_fader,s30_snv_scenario_start,s30_snv_scenario_target,0,1);
-m_sigmoid_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
+m_sigmoid_time_interpol(p30_snv_scenario_fader,s30_snv_scenario_start,s30_snv_scenario_target,0,1);
+m_sigmoid_time_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
 
+* linear interpolation to estimate the cropland that
+* requires relocation due to SNV policy
+if (s30_snv_shr = 0,
+i30_snv_relocation_target(j) = 0;
+
+elseif s30_snv_shr <= s30_snv_relocation_data_x1,
+m_linear_cell_data_interpol(i30_snv_relocation_target, s30_snv_shr,0,s30_snv_relocation_data_x1,0, f30_snv_target_cropland(j, "SNV20TargetCropland"));
+
+elseif s30_snv_shr > s30_snv_relocation_data_x1,
+m_linear_cell_data_interpol(i30_snv_relocation_target, s30_snv_shr,s30_snv_relocation_data_x1, s30_snv_relocation_data_x2,f30_snv_target_cropland(j, "SNV20TargetCropland"), f30_snv_target_cropland(j, "SNV50TargetCropland"));
+);
 
 ** create crop rotation scenario
 i30_rotation_max_shr(t_all,rotamax30)=

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -56,6 +56,15 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  q32_land(j2) ..
  vm_land(j2,"forestry") =e= sum((type32,ac), v32_land(j2,type32,ac));
 
+ q32_land_type32(j2,type32) ..
+ vm_land_forestry(j2,type32) =e= sum(ac, v32_land(j2,type32,ac));
+
+ q32_land_expansion_forestry(j2,type32) ..
+ vm_landexpansion_forestry(j2,type32) =e= v32_land_expansion(j2,type32);
+
+ q32_land_reduction_forestry(j2,type32) ..
+ vm_landreduction_forestry(j2,type32) =e= sum(ac_sub, v32_land_reduction(j2,type32,ac_sub));
+
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
@@ -86,12 +95,13 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 
 *' Forestry land expansion and reduction is calculated as follows:
 
- q32_land_diff .. vm_landdiff_forestry =e= sum((j2,type32,ac),
-            v32_land_expansion(j2,type32,ac)
-          + v32_land_reduction(j2,type32,ac));
+ q32_land_diff .. vm_landdiff_forestry =e= sum((j2,type32),
+            v32_land_expansion(j2,type32)
+          + sum(ac_sub, v32_land_reduction(j2,type32,ac_sub)));
 
- q32_land_expansion(j2,type32,ac_est) ..
-    v32_land_expansion(j2,type32,ac_est) =e= v32_land(j2,type32,ac_est) - pc32_land(j2,type32,ac_est);
+ q32_land_expansion(j2,type32) ..
+    v32_land_expansion(j2,type32) =e= 
+    sum(ac_est, v32_land(j2,type32,ac_est));
 
  q32_land_reduction(j2,type32,ac_sub) ..
   v32_land_reduction(j2,type32,ac_sub) =e= pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub);

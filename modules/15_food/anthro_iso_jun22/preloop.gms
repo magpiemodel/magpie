@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,7 +9,7 @@
  i15_bmi_saturation(sex,agegroup15,bmi_tree15) = f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"saturation");
  i15_bmi_halfsat(sex,agegroup15,bmi_tree15)    = f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"halfsaturation");
 
-p15_bodyheight(t,iso,sex,age,estimates15) = f15_bodyheight(t,iso,sex,age);
+ p15_bodyheight(t,iso,sex,age,estimates15) = f15_bodyheight(t,iso,sex,age);
 
 * calculating growth food for historical period
 
@@ -55,8 +55,7 @@ Elseif s15_milk_share_fadeout_india = 1,
 
 * ###### Exogenous food waste and diet scenarios as well as food substitution scenarios
 
-
-* Switch to determine countries for which  exogenous food scenarios (EAT Lancet diet and
+* Switch to determine countries for which exogenous food scenarios (EAT Lancet diet and
 * food waste scenarios), and food substitution scenarios shall be applied.
 * In the default case, the exogenous food scenarios affect all countries.
 p15_country_dummy(iso) = 0;
@@ -81,18 +80,18 @@ i15_exo_foodscen_fader(t,iso) = (1-f15_food_substitution_fader(t,"%c15_exo_foods
 $ifthen "%c15_exo_foodscen%" == "lin_zero_20_30"
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",iso,kcal_scen15,EAT_scen15,kfo);
 *extra condition to see if India diet scenario has been selected
-  if(s15_exo_diet = 2,
-  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2030",iso,kcal_scen15,EAT_scen15,kfo);
+  if (s15_exo_diet = 2,
+    i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2030",iso,kcal_scen15,EAT_scen15,kfo);
   );
 $else
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2050",iso,kcal_scen15,EAT_scen15,kfo);
-  if(s15_exo_diet = 2,
-  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2050",iso,kcal_scen15,EAT_scen15,kfo);
+  if (s15_exo_diet = 2,
+    i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_NIN("y2050",iso,kcal_scen15,EAT_scen15,kfo);
   );
 $endif
 
 * initial prices in $US per Kcal
-i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
-                                                                                  / (f15_nutrition_attributes("y1995",kfo,"kcal")*10**6);
-p15_prices_kcal(t,iso,kfo,"iter1")=i15_prices_initial_kcal(iso,kfo);
-p15_convergence_measure(t,iter15)=NA;
+i15_prices_initial_kcal(iso,kfo)$(fm_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
+                                                                                    / (fm_nutrition_attributes("y1995",kfo,"kcal")*10**6);
+p15_prices_kcal(t,iso,kfo,"iter1") = i15_prices_initial_kcal(iso,kfo);
+p15_convergence_measure(t,iter15) = NA;

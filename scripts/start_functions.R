@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,7 +9,24 @@
 # Define internal functions
 ################################################################################
 
-.update_sets_core <- function(cpr,map) {
+.calcClusterCells <- function(x) {
+  cells <- noCells <- NULL
+  for (i in magclass::getItems(x, dim = 1.1)) {
+    max   <- max(as.numeric(magclass::getItems(x[i, , ], dim = 1.2)))
+    min   <- min(as.numeric(magclass::getItems(x[i, , ], dim = 1.2)))
+    count <- length(magclass::getItems(x[i, , ], dim = 1.2))
+
+    tmp     <- paste0(paste(i, min, sep = "_"), "*" , paste(i, max, sep = "_"))
+    cells   <- c(cells, tmp)
+    noCells <- c(noCells, count)
+  }
+  out <- data.frame(i = magclass::getItems(x, dim = 1.1),
+                    j = cells,
+                    n = noCells)
+  return(out)
+}
+
+.update_sets_core <- function(x, map) {
   require(gms)
 
   if (!("region" %in% names(map)))      map$region <- map$RegionCode
@@ -17,25 +34,14 @@
   if (!("superregion" %in% names(map))) map$superregion <- map$region
 
   reg1 <- unique(as.character(map$region))
-  reg2 <- names(cpr)
-  if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
+  reg2 <- magclass::getItems(x, dim = 1.1)
+  if (!all(union(reg1,reg2) %in% intersect(reg1, reg2))) {
     stop("Inconsistent region information!",
-         "\n cpr info: ",paste(reg2,collapse=", "),
-         "\n spatial header info: ", paste(reg1,collapse=", "))
+         "\n cpr info: ", paste(reg2, collapse = ", "),
+         "\n spatial header info: ", paste(reg1, collapse = ", "))
   }
 
-
-  j <- 0; cells <- NULL
-  for (i in 1:length(cpr)) {
-    if (cpr[i] == 1) {
-      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1))
-    } else {
-      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1, "*",
-                               names(cpr)[i], "_", j + cpr[i]))
-    }
-    j <- j + cpr[i]
-  }
-  ij <- data.frame(i = names(cpr), j = cells)
+  ij <- .calcClusterCells(x = x)[c("i", "j")]
 
   hi <- unique(map[c("superregion", "region")])
   hi <- hi[order(hi$superregion),]
@@ -45,7 +51,7 @@
                     items = sort(unique(as.character(map$superregion)))),
                list(name = "i",
                     desc = "all economic regions",
-                    items = names(cpr)),
+                    items = ij[["i"]]),
                list(name = "supreg(h,i)",
                     desc = "mapping of superregions to its regions",
                     items = hi),
@@ -54,7 +60,7 @@
                     items = as.character(map$country)),
                list(name = "j",
                     desc = "number of LPJ cells",
-                    items = cells),
+                    items = ij[["j"]]),
                list(name = "cell(i,j)",
                     desc = "number of LPJ cells per region i",
                     items = ij),
@@ -96,36 +102,39 @@
 }
 
 # Function to extract information from info.txt
-.get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
+.get_info <- function(file, grep_expression, sep, pattern = "", replacement = "") {
   if(!file.exists(file)) return("#MISSING#")
   file <- readLines(file, warn=FALSE)
   tmp <- grep(grep_expression, file, value=TRUE)
   tmp <- strsplit(tmp, sep)
   tmp <- sapply(tmp, "[[", 2)
-  tmp <- gsub(pattern, replacement ,tmp)
+  tmp <- gsub(pattern, replacement, tmp)
   if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
-  if (all(!(regexpr("[a-zA-Z]",tmp) > 0))) {
+  if (all(!(regexpr("[a-zA-Z]", tmp) > 0))) {
     tmp <- as.numeric(tmp)
   }
   return(tmp)
 }
 
-#Define routine to update info file in input folder and info in main.gms
-.update_info <- function(datasets, cpr, regionscode, reg_revision, warnings=NULL) {
+# Define routine to update info file in input folder and info in main.gms
+.update_info <- function(datasets, x, regionscode, reg_revision, warnings = NULL) {
 
-  low_res  <- .get_info("input/info.txt","^\\* Output ?resolution:",": ")
-  high_res <- .get_info("input/info.txt","^\\* Input ?resolution:",": ")
+  # extract cluster information from file:
+  ijn <- .calcClusterCells(x = x)
 
-  info <- readLines('input/info.txt')
+  low_res  <- .get_info("input/info.txt", "^\\* Output ?resolution:", ": ")
+  high_res <- .get_info("input/info.txt", "^\\* Input ?resolution:", ": ")
+
+  info    <- readLines('input/info.txt')
   subject <- 'VERSION INFO'
 
   useddata <- NULL
   for(dataset in rownames(datasets)) {
     useddata <- c(useddata,
                   '',
-                  paste('Used data set:',dataset),
-                  paste('md5sum:',datasets[dataset,"md5"]),
-                  paste('Repository:',datasets[dataset,"repo"]))
+                  paste('Used data set:', dataset),
+                  paste('md5sum:', datasets[dataset, "md5"]),
+                  paste('Repository:', datasets[dataset, "repo"]))
   }
 
   warnings <- attr(datasets,"warnings")
@@ -135,18 +144,18 @@
 
   content <- c(useddata,
                '',
-               paste('Low resolution:',low_res),
-               paste('High resolution:',high_res),
+               paste('Low resolution:', low_res),
+               paste('High resolution:', high_res),
                '',
-               paste('Total number of cells:',sum(cpr)),
+               paste('Total number of cells:', sum(ijn["n"])),
                '',
                'Number of cells per region:',
-               paste(format(names(cpr),width=5,justify="right"),collapse=""),
-               paste(format(cpr,width=5),collapse=""),
+               paste(format(ijn[["i"]], width = 5, justify = "right"), collapse = ""),
+               paste(format(ijn[["n"]], width = 5), collapse = ""),
                '',
-               paste('Regionscode:',regionscode),
+               paste('Regionscode:', regionscode),
                '',
-               paste('Regions data revision:',reg_revision),
+               paste('Regions data revision:', reg_revision),
                '',
                info,
                '',
@@ -166,10 +175,10 @@
   sp  <- luscale::read.spam(spamfile)
   a   <- apply(sp, 2, function(x) return(which(x == 1)))
   out <- data.frame(cell = cells_tmp, region = sub("\\..*$","",spatial_header),
-                    country = sub("\\..*$","",cells_tmp), global = "GLO")
-  out$cluster <- paste0(out$region,".",a)
-  out <- out[,c("cell", "cluster","region","country","global")]
-  saveRDS(out, paste0("input/",outfile), version = 2)
+                    country = sub("\\..*$", "", cells_tmp), global = "GLO")
+  out$cluster <- paste0(out$region,".", a)
+  out <- out[,c("cell", "cluster", "region", "country", "global")]
+  saveRDS(out, paste0("input/", outfile), version = 2)
 }
 
 
@@ -197,15 +206,14 @@ download_and_update <- function(cfg) {
   # and .update_sets, which is updating the resolution- and region-depending
   # sets in core/sets.gms
   tmp  <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
-  cpr  <- magclass::getCPR(tmp)
   tmp2 <- magclass::read.magpie("modules/10_land/input/avl_land_t_0.5.mz")
-  cel  <- magclass::getItems(tmp2,1)
+  cel  <- magclass::getItems(tmp2, dim = 1)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
-  rds <- any(grepl(pattern = "clustermap_rev.*.rds", x=list.files("input")))
-  if(!rds) .spam2rds(spatial_header, cel, "clustermap_rev0_dummy.rds")
-  .update_info(filemap,cpr,regionscode,reg_revision, warnings)
-  .update_sets_core(cpr,map)
+  rds <- any(grepl(pattern = "clustermap_rev.*.rds", x = list.files("input")))
+  if (!rds) .spam2rds(spatial_header, cel, "clustermap_rev0_dummy.rds")
+  .update_info(filemap, x = tmp, regionscode, reg_revision, warnings)
+  .update_sets_core(x = tmp, map = map)
   .update_sets_modules()
 }
 
@@ -225,18 +233,18 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   checkNamespace("gms", "lucode2", "magclass")
 
-  Sys.setlocale(locale="C")
+  Sys.setlocale(locale = "C")
   maindir <- getwd()
   withr::defer(setwd(maindir))
 
   if(lock_model) {
-    lock_id <- gms::model_lock(timeout1=1)
+    lock_id <- gms::model_lock(timeout1 = 1)
     withr::defer(gms::model_unlock(lock_id))
   }
 
   # Apply scenario settings ans check configuration file for consistency
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg, extras = c("info", "repositories"), saveCheck = TRUE)
+  cfg <- gms::check_config(cfg, extras = c("info", "repositories", "gms$c_input_gdx_path"), saveCheck = TRUE)
 
   # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
@@ -264,12 +272,16 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   if (is.null(renv::project())) {
     message("No active renv project found, not using renv.")
   } else {
-    # this script always runs in repo root, so we can check whether the main renv is loaded with:
-    if (normalizePath(renv::project()) == normalizePath(".")) {
+    if (!is.null(cfg$renv_lock)) {
+      message("Copying cfg$renv_lock (= '", normalizePath(cfg$renv_lock, mustWork = TRUE), "') into '",
+              cfg$results_folder, "'")
+      file.copy(cfg$renv_lock, file.path(cfg$results_folder, "_renv.lock"))
+    } else if (normalizePath(renv::project()) == normalizePath(".")) {
+      # the main renv is loaded
       message("Generating lockfile in '", cfg$results_folder, "'... ", appendLF = FALSE)
       # suppress output of renv::snapshot
-      utils::capture.output({
-        errorMessage <- utils::capture.output({
+      errorMessage1 <- utils::capture.output({
+        errorMessage2 <- utils::capture.output({
           snapshotSuccess <- tryCatch({
             # snapshot current main renv into run folder
             renv::snapshot(lockfile = file.path(cfg$results_folder, "_renv.lock"), prompt = FALSE)
@@ -278,11 +290,11 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
         }, type = "message")
       })
       if (!snapshotSuccess) {
-        stop(paste(errorMessage, collapse = "\n"))
+        stop(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
       }
       message("done.")
     } else {
-      # a run renv is loaded, we are presumably starting a HR follow up run
+      # a run renv is loaded
       message("Copying lockfile into '", cfg$results_folder, "'")
       file.copy(renv::paths$lockfile(), file.path(cfg$results_folder, "_renv.lock"))
     }
@@ -403,9 +415,9 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
                          user = Sys.info()[["user"]],
                          date = rundate,
                          version_management = "git",
-                         revision = try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
-                         revision_date = try(as.POSIXct(system("git show -s --format=%ci", intern=TRUE), silent=TRUE)),
-                         status = try(system("git status", intern=TRUE), silent=TRUE))
+                         revision = try(system("git rev-parse HEAD", intern = TRUE), silent=TRUE),
+                         revision_date = try(as.POSIXct(system("git show -s --format=%ci", intern = TRUE), silent = TRUE)),
+                         status = try(system("git status", intern = TRUE), silent = TRUE))
 
 
   ##############################################################################
@@ -421,6 +433,18 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   }
 
   # Yield calibration
+
+  # check for inconsistent settings
+  if((cfg$recalibrate == TRUE || cfg$recalibrate == "ifneeded")
+      && cfg$gms$s14_use_yield_calib == 0) {
+    stop("The combination of the switch configurations `cfg$recalibrate <- TRUE/ifneeded`
+          and `cfg$gms$s14_use_yield_calib <- 0` is inconsistent.
+          Please check the config and set `cfg$gms$s14_use_yield_calib <- 1` 
+          if yield calibration is desired, or `cfg$recalibrate <- FALSE` if not.
+          Note that the current default is to not use yield calibration.")
+  }
+
+  # decide if calibration is needed if "ifneeded" is specified
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
   if(cfg$recalibrate=="ifneeded") {
     if(!file.exists(calib_file)) {
@@ -462,7 +486,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
                      restart = cfg$restart_landconversion_cost,
                      calib_accuracy = cfg$calib_accuracy_landconversion_cost,
-                     damping_factor = cfg$damping_factor_landconversion_cost,
+                     lowpass_filter = cfg$lowpass_filter_landconversion_cost,
                      cost_max = cfg$cost_calib_max_landconversion_cost,
                      cost_min = cfg$cost_calib_min_landconversion_cost,
                      calib_file = land_calib_file,
@@ -475,12 +499,12 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   # copy important files into output_folder (before MAgPIE execution)
   for(file in cfg$files2export$start) {
-    try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))
+    try(file.copy(Sys.glob(file), cfg$results_folder, overwrite = TRUE))
   }
 
   cfg$magpie_folder <- getwd()
   # only store repository paths, not their credentials
-  cfg$repositories <- sapply(names(cfg$repositories),function(x) NULL)
+  cfg$repositories <- sapply(names(cfg$repositories), function(x) NULL)
   # store config in human and machine readable form
   gms::saveConfig(cfg, file.path(cfg$results_folder, "config.yml"))
 
@@ -504,7 +528,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   if(is.na(cfg$sequential)) cfg$sequential <- !slurm
 
-  if(slurm & !cfg$sequential) {
+  if(slurm && !cfg$sequential) {
     if(is.null(cfg$qos)) {
       # try to select best QOS based on available resources
       # and available information

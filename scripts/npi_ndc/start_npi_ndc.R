@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -258,7 +258,11 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   #set stock to zero or Inf for countries without policies
   # (representing no constraint for min and max constraints)
   if(pol_type=="ad"){
-    stock[!(sub("\\..*$","",getCells(stock)) %in% policy_countries),,] <- 0
+    if(dim(stock)[1] == 59199) {
+      stock[!(sub("\\..*$","",getCells(stock)) %in% policy_countries),,] <- 0
+    } else {
+      stock[!(getItems(stock, "iso", full = TRUE) %in% policy_countries),,] <- 0
+    }
     #calculate flows
     flow <- calc_flows(stock)
     #account only for positive flows, i.e. deforestation

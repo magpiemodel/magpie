@@ -1,12 +1,11 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i31_manpast_suit(t_all,j) = f31_pastr_suitability(t_all,j,"%c31_past_suit_scen%");
-i31_manpast_suit(t_all,j)$(m_year(t_all) <= sm_fix_SSP2) = f31_pastr_suitability(t_all,j,"ssp245");
+
 pc31_grass(j,grassland) = f31_LUH2v2("y1995",j,grassland);
 
 

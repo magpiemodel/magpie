@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,6 +17,7 @@
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%residues%" == "flexcluster_jul23" $include "./modules/18_residues/flexcluster_jul23/realization.gms"
 $Ifi "%residues%" == "flexreg_apr16" $include "./modules/18_residues/flexreg_apr16/realization.gms"
 $Ifi "%residues%" == "off" $include "./modules/18_residues/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

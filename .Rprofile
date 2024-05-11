@@ -1,10 +1,22 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 Sys.setenv(RENV_PATHS_LIBRARY = "renv/library")
+if (Sys.info()[["sysname"]] == "Windows") {
+  # make renv use R's default download function to prevent
+  # curl: (35) schannel: next InitializeSecurityContext failed: Unknown error
+  # (0x80092012) - The revocation function was unable to check revocation for the certificate.
+  options(renv.download.override = utils::download.file)
+}
+
+# do not check if library and renv.lock are in sync, because normally renv.lock does not exist
+options(renv.config.synchronized.check = FALSE,
+        renv.config.user.profile = TRUE) # load user specific settings from ~/.Rprofile
+
+# the text "renvVersion" is required for a check in a coupling script, will be removed soon
 
 source("renv/activate.R")
 
@@ -15,11 +27,16 @@ if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
 # bootstrapping, will only run once after this repo is freshly cloned
 if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
   message("R package dependencies are not installed in this renv, installing now...")
-  renv::hydrate() # auto-detect and install all dependencies
+  renv::hydrate(prompt = FALSE, report = FALSE) # auto-detect and install all dependencies
   message("Finished installing R package dependencies.")
+  if (!("upstream" %in% gert::git_remote_list()$name)) {
+    gert::git_remote_add("https://github.com/magpiemodel/magpie.git", "upstream")
+    message("Added upstream git remote pointing to magpiemodel/magpie.")
+  }
 }
 
-# source global .Rprofile (very important to load user specific settings)
-if (file.exists("~/.Rprofile")) {
-  source("~/.Rprofile")
+# in case bootstrapping fails halfway, install piamenv and rely on requirement auto-fixing
+if (tryCatch(packageVersion("piamenv"),
+             error = function(e) package_version("0.0")) < package_version("0.3.4")) {
+  renv::install("piamenv", prompt = FALSE)
 }

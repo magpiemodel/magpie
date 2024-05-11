@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,7 +9,7 @@
 
 q15_food_demand(i2,kfo) ..
                 (vm_dem_food(i2,kfo) + sum(ct, f15_household_balanceflow(ct,i2,kfo,"dm")))
-                * sum(ct,(f15_nutrition_attributes(ct,kfo,"kcal") * 10**6)) =g=
+                * sum(ct,(fm_nutrition_attributes(ct,kfo,"kcal") * 10**6)) =g=
                 sum(ct,im_pop(ct,i2) * p15_kcal_pc_calibrated(ct,i2,kfo)) * 365
                 ;
 

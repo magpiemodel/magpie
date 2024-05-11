@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -7,35 +7,17 @@
 
 sets
  
-  man58 State of managed peatland
-    / degrad, unused, rewet /
+  land58 Peatland categories
+    / intact, crop, past, forestry, peatExtract, unused, rewetted /
 
-  degrad58(man58) State of degraded peatland
-    / degrad, unused /
-  
-  ef58(man58) Peatland emissions factors
-    / degrad, rewet /
+  drained58(land58) Drained peatland categories
+    / crop, past, forestry, unused /
 
-  land58(land) Managed land types
+  manPeat58(land58) Drained and managed peatland categories
     / crop, past, forestry /
 
-  stat58 Peatland status
-    / intact, 
-    degrad_crop, degrad_past, degrad_forestry, 
-    unused_crop, unused_past, unused_forestry, 
-    rewet_crop, rewet_past, rewet_forestry /
-
-  stat_man58(stat58) Peatland status managed land
-    / degrad_crop, degrad_past, degrad_forestry, 
-    unused_crop, unused_past, unused_forestry, 
-    rewet_crop, rewet_past, rewet_forestry /
-
-  stat_degrad58(stat58) Peatland status degrad
-    / degrad_crop, degrad_past, degrad_forestry,
-      unused_crop, unused_past, unused_forestry /
-
-  stat_rewet58(stat58) Peatland status rewet
-    / rewet_crop, rewet_past, rewet_forestry /
+  cost58 annunity cost categories
+    / drain_intact, drain_rewetted, rewet /
 
   emis58 Wetland emission types
   / co2, doc, ch4, n2o /
@@ -91,4 +73,4 @@ sets
 
 ;
 
-alias (stat58, from58, to58);
+alias (manPeat58,manPeat58_alias);

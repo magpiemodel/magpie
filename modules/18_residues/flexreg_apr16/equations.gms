@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -71,6 +71,13 @@
                   sum(kres_kcr(kres,kcr), v18_res_ag_removal(i2,kcr,attributes))
                   =e=
                   vm_prod_reg(i2,kres) * fm_attributes(attributes,kres);
+
+*' Amount produced at cellular level is flexible, can be distributed as it wants 
+ q18_prod_res_cell(j2,kres)..
+                  sum(cell(i2,j2), vm_prod_reg(i2,kres))
+                  =e=
+                  v18_prod_res(j2,kres) ;
+
 
 *' Residues recycled to croplands in nutrients `vm_res_recycling(i2,"nr")` are
 *' calcualted based on the amount of AG residues left on field for recycling, the
