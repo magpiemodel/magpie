@@ -181,10 +181,28 @@ q35_hvarea_other(j2,ac_sub)..
                           v35_other_reduction(j2,ac_sub);
 
 
+*' The constraint for overall forest establishment is given by the
+*' remaining potential forest area, which is derived from
+*' the potential natural forest area in each cluster.
+
+q35_max_forest_expansion(j2)..
+                          sum(land_forest, vm_landexpansion(j2,land_forest))
+                          =l=
+                          p35_max_forest_establishment(j2)
+                          ;
+
 *' Harvested secondary forest is still considered secondary forests due to
 *' restrictive NPI definitions. Also primary forest harvested will be considered
 *' to be secondary forest i.e., harvested primary forest gets reclassified as
 *' secondary forest and ends up in the youngest age-class (and follows regrowth)
+
+q35_secdforest_recovery_area(j2)..
+                          v35_secdforest_recovery_area(j2)
+                          =e=
+                        + p35_max_secdforest_recovery(j2)
+                        * (sum(land_recovery35,vm_landreduction(j2,land_recovery35))/
+                           (sum(land_recovery35,pcm_land(j2,land_recovery35))+1e-10))
+                          ;
 
 q35_secdforest_regeneration(j2)..
                           sum(ac_est, v35_secdforest(j2,ac_est))
@@ -193,23 +211,6 @@ q35_secdforest_regeneration(j2)..
                         + v35_hvarea_primforest(j2)
                         + p35_land_restoration(j2,"secdforest")
                         + v35_secdforest_recovery_area(j2)
-                          ;
-
-q35_secdforest_recovery_area(j2)..
-                         v35_secdforest_recovery_area(j2)
-                         =e=
-                       + (p35_max_forest_recovery(j2) - p35_land_restoration(j2,"secdforest"))
-                       * (sum(land_noforest,vm_landreduction(j2,land_noforest))/(sum(land_noforest,vm_land(j2,land_noforest))+1e-10))
-                       + vm_landreduction(j2,"forestry");
-
-*' The constraint for forest establishment is given by the
-*' remaining potential forest area, which was calculated based
-*' on the potential natural forest area in each cluster.
-
-q35_max_forest_expansion(j2)..
-                          sum(land_forest, vm_landexpansion(j2,land_forest))
-                          =l=
-                          p35_max_forest_recovery(j2)
                           ;
 
 *' Harvested other land is still considered other land

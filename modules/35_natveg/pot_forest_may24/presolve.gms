@@ -74,14 +74,19 @@ vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
 pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
 * --------------------------------------
-* Secondary forest recovery bound
+* Secondary forest establishment bound
 * --------------------------------------
 
-* Forest recovery is constrained by the potential forest area in each cluster.
-* Hence, the potential area for forest recovery is given by the potential forest
+* Overall forest establishment is constrained by the potential forest area in each cluster.
+* Hence, the potential area for any forest expansion is given by the potential forest
 * area minus all forest areas in the previous time step.
-p35_max_forest_recovery(j) = fm_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
-p35_max_forest_recovery(j)$(p35_max_forest_recovery(j) < 0) = 0;
+p35_max_forest_establishment(j) = fm_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
+p35_max_forest_establishment(j)$(p35_max_forest_establishment(j) < 0) = 0;
+
+* The secondary forest recovery potential also includes forestry areas.
+* Therefore they are not substracted.
+p35_max_secdforest_recovery(j) = fm_pot_forest_area(j)-pcm_land(j,"primforest")-pcm_land(j,"secdforest");
+p35_max_secdforest_recovery(j)$(p35_max_secdforest_recovery(j) < 0) = 0;
 
 * -------------------------------------
 * Set bounds based on land conservation
@@ -134,12 +139,15 @@ p35_land_restoration(j,"secdforest") = pm_land_conservation(t,j,"secdforest","re
 * land area meets the total natural land conservation target
 p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
 
-* Since forest restoration cannot be bigger than the maximum area for forest recovery,
+* Since forest restoration cannot be bigger than the potential area for secdforest recovery,
 * any remaining restoration area is substracted and shifted to other land restoration.
-p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - p35_max_forest_recovery(j);
+p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - p35_max_secdforest_recovery(j);
 p35_restoration_shift(j)$(p35_restoration_shift(j) < 0) = 0;
 p35_land_restoration(j,"secdforest") = p35_land_restoration(j,"secdforest") - p35_restoration_shift(j);
 pm_land_conservation(t,j,"other","restore") = pm_land_conservation(t,j,"other","restore") + p35_restoration_shift(j);
+* Substract forest restoration area from secondary forest recovery potential
+p35_max_secdforest_recovery(j) = p35_max_secdforest_recovery(j) - p35_land_restoration(j,"secdforest");
+
 
 * set conservation bound
 vm_land.lo(j,"secdforest") = pm_land_conservation(t,j,"secdforest","protect") + p35_land_restoration(j,"secdforest");

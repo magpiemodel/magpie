@@ -250,9 +250,6 @@ sets
   land_forest(land) Forested land pools
         / forestry, primforest, secdforest /
 
-  land_noforest(land) Non-forest land pools
-        / crop, past, urban, other /
-
   land_timber(land) land from which timber can be taken away
         / forestry, primforest, secdforest, other /
 
