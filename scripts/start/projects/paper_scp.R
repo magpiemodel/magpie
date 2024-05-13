@@ -31,10 +31,6 @@ cfg$results_folder <- "output/:title:"
 # output scripts
 cfg$output <- c("rds_report","extra/disaggregation")
 
-#GAMS OptFile
-cfg$gms$s80_optfile <- 1
-cfg$gms$s80_maxiter <- 30
-
 ### Scenario setup
 # SSP2 as basis
 cfg <- setScenario(cfg,c("SSP2","NPI"))
@@ -47,14 +43,16 @@ cfg$gms$kfo_rd <- "livst_rum"
 for (MP in c(0,20,50,80)) {
   cfg$title <- paste(prefix,paste0("SSP2-Ref-MP",MP),sep="_")
   if (MP == 0) {
-    scp_scen <- "constant" 
+    cfg$gms$s15_rumdairy_scp_substitution <- 0
   } else if (MP == 20) {
-    scp_scen <- "sigmoid_80pc_20_50" 
+    cfg$gms$s15_rumdairy_scp_substitution <- 0.2
   } else if (MP == 50) {
-    scp_scen <- "sigmoid_50pc_20_50" 
+    cfg$gms$s15_rumdairy_scp_substitution <- 0.5
   }else if (MP == 80) {
-    scp_scen <- "sigmoid_20pc_20_50"
+    cfg$gms$s15_rumdairy_scp_substitution <- 0.8
   }
-  cfg$gms$c15_rumdairy_scp_scen <- scp_scen
+  cfg$gms$s15_food_substitution_start <- 2020
+  cfg$gms$s15_food_substitution_target <- 2050
+  cfg$gms$s15_subst_functional_form <- 2
   start_run(cfg,codeCheck=FALSE)
 }
