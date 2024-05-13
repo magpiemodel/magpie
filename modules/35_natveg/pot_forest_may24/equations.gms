@@ -200,8 +200,9 @@ q35_secdforest_recovery_area(j2)..
                           v35_secdforest_recovery_area(j2)
                           =e=
                         + p35_max_secdforest_recovery(j2)
-                        * (sum((land_recovery35,land_natveg),vm_lu_transitions(j2,land_recovery35,land_natveg))/
-                           (sum(land_recovery35,pcm_land(j2,land_recovery35))+1e-10))
+                        * (sum(land_natveg,vm_landexpansion(j2,land_natveg))
+                            -sum(land_natveg,p35_land_restoration(j2,land_natveg)))/
+                          (sum(land_recovery35,pcm_land(j2,land_recovery35))+1e-10)
                           ;
 
 q35_secdforest_regeneration(j2)..
