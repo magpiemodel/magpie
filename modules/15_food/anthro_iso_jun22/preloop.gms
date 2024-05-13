@@ -116,7 +116,7 @@ elseif s15_exo_foodscen_functional_form = 2,
 
 );
 
-* Exogenous food intake and waste scenarios including functional forms, targets and transition periods
+* Fade in scenarios at country level
 i15_exo_foodscen_fader(t,iso) = p15_exo_food_scenario_fader(t) * p15_country_dummy(iso);
 
 * Select from the data set of EAT Lancet scenarios the target years that are

@@ -149,24 +149,24 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 *
 * Used data set: rev4.104_h12_magpie.tgz
-* md5sum: 533c0a589c7f5d5cf40bab6ec2297640
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
 * Used data set: rev4.104_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: c2036af336688758ffd4cb03c2d1a05c
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
 * Used data set: rev4.104_h12_validation.tgz
-* md5sum: 4b222cbca5f2134ce378e3838f7cd0d5
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
 * Used data set: additional_data_rev4.48.tgz
-* md5sum: 0788a1d39cab12f89a9411c2636bffc7
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 *
 * Used data set: calibration_H12_26Mar24.tgz
-* md5sum: d295e7ff0c65d97c1e0b84c440d0056b
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
 * Low resolution: c200
 * High resolution: 0.5
