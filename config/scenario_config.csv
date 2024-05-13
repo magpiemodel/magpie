@@ -7,7 +7,10 @@ gms$s12_interest_hic;;;;;;;;;;;;;;;;;;;;;;0.04;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c15_food_scenario;;;;SSP1;SSP2;SSP2;SSP3;SSP4;SSP5;SSP1;SSP2;SSP1;SSP1;;;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;;;;;;;;;;;SSP2
 gms$c15_food_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;;;;;;;;;;;SSP2
 gms$s15_elastic_demand;;;;0;0;0;0;0;0;0;0;0;0;;;;;;;0;0;0;;;0;0;0;0;0;;;;;;;;;;;;;;;;;;;
-gms$c15_rumdairy_scp_scen;;;;constant;constant;constant;constant;constant;constant;constant;sigmoid_50pc_20_50;constant;constant;;;;;;;constant;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+gms$s15_rumdairy_scp_substitution;;;;0;0;0;0;0;0;0;0.5;0;0;;;;;;;0;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+gms$s15_subst_functional_form;;;;;;;;;;;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+"gms$s15_food_substitution_start ";;;;;;;;;;;2020;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+gms$s15_food_substitution_target;;;;;;;;;;;2050;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$kfo_rd;;;;;;;;;;;livst_rum;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s15_exo_foodscen_convergence;;;;;;;;;;1;1;1;1;;;;;;;1;1;1;;;;1;;;1;;;;;;;;;;;;;;;;;;;1
 "gms$s15_exo_foodscen_functional_form  ";;;;;;;;;;1;1;1;1;;;;;;;1;1;1;;;;1;;;1;;;;;;;;;;;;;;;;;;;1
