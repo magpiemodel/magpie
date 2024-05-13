@@ -21,14 +21,14 @@ scalars
  s29_treecover_bii_coeff         BII coefficent to be used for tree cover on cropland 0=secondary vegetation 1=timber plantations (1) / 0 /
  s29_treecover_scenario_start    Cropland treecover scenario start year       / 2020 /
  s29_treecover_scenario_target   Cropland treecover scenario target year      / 2050 /
- s29_treecover_target            Target share of treecover on total cropland (1) / 0 /
+ s29_treecover_target            Minimum share of treecover on total cropland in target year (1) / 0 /
  s29_treecover_keep              Avoid loss of existing treecover (1=yes 0=no) / 1 /
  s29_treecover_max               Maximum share of treecover on total cropland (1) / 0.4 /
  s29_treecover_penalty_before    Penalty for violation of treecover target before scenario start (USD05MER per ha) / 2000 /
  s29_treecover_penalty           Penalty for violation of treecover target after sceanrio start (USD05MER per ha) / 2000 /
  s29_fallow_scenario_start       Fallow land scenario start year       / 2020 /
  s29_fallow_scenario_target      Fallow land scenario target year      / 2050 /
- s29_fallow_target               Target share of fallow land on total cropland (1) / 0 /
+ s29_fallow_target               Minimum share of fallow land on total cropland in target year (1) / 0 /
  s29_fallow_max                  Maximum share of fallow land on total cropland (1) / 0.4 /
  s29_fallow_penalty              Penalty for violation of fallow target (USD05MER per ha) / 500 /
 ;

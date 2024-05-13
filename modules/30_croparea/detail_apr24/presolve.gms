@@ -31,7 +31,8 @@ else
 );
 
 * create betr target and penalty scenario
-i30_betr_target(t) = s30_betr_target * i30_betr_scenario_fader(t);
+i30_betr_target(t) = s30_betr_start * (1-i30_betr_scenario_fader(t)) 
+                     + s30_betr_target * i30_betr_scenario_fader(t);
 
 if (m_year(t) <= s30_betr_scenario_start,
   i30_betr_penalty(t) = 0;
