@@ -53,6 +53,6 @@ for (MP in c(0,20,50,80)) {
   }
   cfg$gms$s15_food_substitution_start <- 2020
   cfg$gms$s15_food_substitution_target <- 2050
-  cfg$gms$s15_subst_functional_form <- 2
+  cfg$gms$s15_food_subst_functional_form <- 2
   start_run(cfg,codeCheck=FALSE)
 }
