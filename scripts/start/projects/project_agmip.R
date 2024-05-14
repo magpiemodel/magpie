@@ -143,7 +143,11 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 
 cfg$title <- "SSP2_NoMt_NoCC_HalfRDoM_DEV"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$c15_livescen <- "lin_50pc_20_50"
+cfg$gms$s15_livestock_substitution <- 0.5
+cfg$gms$s15_food_substitution_start <- 2020
+cfg$gms$s15_food_substitution_target <- 2050
+cfg$gms$s15_subst_functional_form <- 1
+
 #region: CAZ, EUR, NEU, USA
 cfg$gms$scen_countries15  <- "AUS,CAN,HMD,NZL,SPM,
   ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST,
@@ -155,12 +159,15 @@ cfg$gms$scen_countries15  <- "AUS,CAN,HMD,NZL,SPM,
   USA"
 start_run(cfg,codeCheck=FALSE)
 #reset:
-cfg$gms$c15_livescen <- "constant"
+cfg$gms$s15_livestock_substitution <- 0
 
 
 cfg$title <- "SSP2_NoMt_NoCC_HalfRD_DEV"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$c15_rumdairyscen <- "lin_50pc_20_50"
+cfg$gms$s15_rumdairy_substitution <- 0.5
+cfg$gms$s15_food_substitution_start <- 2020
+cfg$gms$s15_food_substitution_target <- 2050
+cfg$gms$s15_subst_functional_form <- 1
 #region: CAZ, EUR, NEU, USA
 cfg$gms$scen_countries15  <- "AUS,CAN,HMD,NZL,SPM,
   ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST,
@@ -172,7 +179,7 @@ cfg$gms$scen_countries15  <- "AUS,CAN,HMD,NZL,SPM,
   USA"
 start_run(cfg,codeCheck=FALSE)
 #reset:
-cfg$gms$c15_rumdairyscen <- "constant"
+cfg$gms$s15_livestock_substitution <- 0
 
 
 
