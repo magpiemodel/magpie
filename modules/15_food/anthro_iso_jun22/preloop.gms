@@ -64,7 +64,7 @@ p15_country_dummy(scen_countries15) = 1;
 ** The following lines define scenario faders for substituting different food groups
 * If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
 * If s15_exo_foodscen_functional_form = 2, the exogenous food scenario is faded in applying a sigmoid trajectory.
-if (s15_subst_functional_form = 1,
+if (s15_food_subst_functional_form = 1,
 
   m_linear_time_interpol(p15_ruminant_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_ruminant_substitution);
   m_linear_time_interpol(p15_fish_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_fish_substitution);
@@ -78,7 +78,7 @@ if (s15_subst_functional_form = 1,
     p15_livestock_threshold_subst_fader(t) = 0;
   );
 
-elseif s15_subst_functional_form = 2,
+elseif s15_food_subst_functional_form = 2,
 
   m_sigmoid_time_interpol(p15_ruminant_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_ruminant_substitution);
   m_sigmoid_time_interpol(p15_fish_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_fish_substitution);
@@ -109,10 +109,10 @@ i15_livestock_fadeout_threshold(t,iso) = 1 - p15_country_dummy(iso)*p15_livestoc
 * If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
 * If s15_exo_foodscen_functional_form = 2, the exogenous food scenario is faded in applying a sigmoid trajectory.
 if (s15_exo_foodscen_functional_form = 1,
-  m_linear_time_interpol(p15_exo_food_scenario_fader,s15_exo_food_scenario_start,s15_exo_food_scenario_target,0,s15_exo_foodscen_convergence);
+  m_linear_time_interpol(p15_exo_food_scenario_fader,s15_exo_foodscen_start,s15_exo_foodscen_target,0,s15_exo_foodscen_convergence);
 
 elseif s15_exo_foodscen_functional_form = 2,
-  m_sigmoid_time_interpol(p15_exo_food_scenario_fader,s15_exo_food_scenario_start,s15_exo_food_scenario_target,0,s15_exo_foodscen_convergence);
+  m_sigmoid_time_interpol(p15_exo_food_scenario_fader,s15_exo_foodscen_start,s15_exo_foodscen_target,0,s15_exo_foodscen_convergence);
 
 );
 
@@ -122,7 +122,7 @@ i15_exo_foodscen_fader(t,iso) = p15_exo_food_scenario_fader(t) * p15_country_dum
 * Select from the data set of EAT Lancet scenarios the target years that are
 * consistent with the target year of the fader:
 
-if(s15_exo_food_scenario_target = 2030,
+if(s15_exo_foodscen_target = 2030,
   i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",iso,kcal_scen15,EAT_scen15,kfo);
 *extra condition to see if India diet scenario has been selected
   if (s15_exo_diet = 2,

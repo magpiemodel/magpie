@@ -18,21 +18,6 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rum_share  mixed
 *   options:   constant, halving2050, mixed
 
-* Fader for food substitution scenarios and exogenous food intake and waste
-* scenarios including functional forms, targets and transition periods
-*   options:   constant,
-*              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
-*              lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
-*              lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50, sigmoid_50pc_20_50, sigmoid_80pc_20_50
-$setglobal c15_rumscen  constant
-$setglobal c15_fishscen  constant
-$setglobal c15_alcscen  constant
-$setglobal c15_livescen  constant
-$setglobal c15_rumdairyscen  constant
-$setglobal c15_rumdairy_scp_scen  constant
-$setglobal c15_livescen_target  constant
-$setglobal c15_exo_foodscen  lin_zero_20_50
-
 $setglobal c15_kcal_scen  healthy_BMI
 *   options:    healthy_BMI, 2100kcal, 2500kcal,
 *              endo, no_underweight, no_overweight
@@ -108,9 +93,9 @@ s15_exo_alcohol                     Exogenous alcohol target on (1) / 1 /
 s15_alc_scen                        Scenario target for the inclusion of alcohol in the EAT-Lancet diet (1)  / 0 /
 s15_rum_share_fadeout_india_strong  Switch for stronger ruminant fadeout in India (binary) / 1 /
 s15_milk_share_fadeout_india        Switch for milk fadeout in India (binary) / 1 /
-s15_kcal_pc_livestock_intake_target Target for livestock intake (kcal per cap per day) / 430 /
+s15_kcal_pc_livestock_supply_target Target for livestock calorie supply (kcal per cap per day) / 430 /
 s15_livescen_target_subst           Fade-out of livestock products (0) or substitution of livestock products with plant-based products (1) / 1 /
-s15_subst_functional_form           Switch for functional form of substitution fader (1) / 1 /
+s15_food_subst_functional_form      Switch for functional form of substitution fader (1) / 1 /
 s15_food_substitution_start         Food substitution start year / 2025 /
 s15_food_substitution_target        Food substitution target year / 2050 /
 s15_ruminant_substitution           Ruminant substitution share (1) / 0 /
@@ -121,8 +106,8 @@ s15_rumdairy_substitution           Ruminant meat and dairy substitution share (
 s15_rumdairy_scp_substitution       Ruminant meat and dairy substitution with SCP share (1) / 0 /
 s15_livescen_target                 Switch for livestock intake target (1) / 0 /
 s15_exo_foodscen_functional_form    Switch for functional form of exogenous food scenario fader (1) / 1 /
-s15_exo_food_scenario_start         Food substitution start year        / 2025 /
-s15_exo_food_scenario_target        Food substitution target year       / 2050 /
+s15_exo_foodscen_start              Food substitution start year        / 2025 /
+s15_exo_foodscen_target               Food substitution target year       / 2050 /
 s15_exo_foodscen_convergence        Convergence to exogenous food scenario (1) / 1 /
 ;
 

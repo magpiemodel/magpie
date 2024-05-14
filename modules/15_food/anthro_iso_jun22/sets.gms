@@ -151,7 +151,7 @@ sets
   livst_fadeoutscen15 Scenarios for changed composition of livestock products
        / halving2050, constant /
 
-* The set kfo_rd can be defined in default.cfg and is used in the food substitution scenarios c15_rumdairy_scp_scen and c15_rumdairyscen
+* The set kfo_rd can be defined in default.cfg and is used in the food substitution scenarios s15_rumdairy_scp_substitution and c15_rumdairyscen
   kfo_rd(kfo) Ruminant meat and dairy food products
        / livst_rum,livst_milk /
 

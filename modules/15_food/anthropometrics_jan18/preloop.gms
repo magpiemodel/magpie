@@ -76,7 +76,7 @@ p15_foodscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p15_country_dummy(iso) *
 ** The following lines define scenario faders for substituting different food groups
 * If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
 * If s15_exo_foodscen_functional_form = 2, the exogenous food scenario is faded in applying a sigmoid trajectory.
-if (s15_subst_functional_form = 1,
+if (s15_food_subst_functional_form = 1,
 
   m_linear_time_interpol(p15_ruminant_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_ruminant_substitution);
   m_linear_time_interpol(p15_fish_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_fish_substitution);
@@ -90,7 +90,7 @@ if (s15_subst_functional_form = 1,
     p15_livestock_threshold_subst_fader(t) = 0;
   );
 
-elseif s15_subst_functional_form = 2,
+elseif s15_food_subst_functional_form = 2,
 
   m_sigmoid_time_interpol(p15_ruminant_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_ruminant_substitution);
   m_sigmoid_time_interpol(p15_fish_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_fish_substitution);
@@ -119,10 +119,10 @@ i15_livestock_fadeout_threshold(t,i) = 1 - p15_foodscen_region_shr(t,i)*p15_live
 * If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
 * If s15_exo_foodscen_functional_form = 2, the exogenous food scenario is faded in applying a sigmoid trajectory.
 if (s15_exo_foodscen_functional_form = 1,
-  m_linear_time_interpol(p15_exo_food_scenario_fader,s15_exo_food_scenario_start,s15_exo_food_scenario_target,0,s15_exo_foodscen_convergence);
+  m_linear_time_interpol(p15_exo_food_scenario_fader,s15_exo_foodscen_start,s15_exo_foodscen_target,0,s15_exo_foodscen_convergence);
 
 elseif s15_exo_foodscen_functional_form = 2,
-  m_sigmoid_time_interpol(p15_exo_food_scenario_fader,s15_exo_food_scenario_start,s15_exo_food_scenario_target,0,s15_exo_foodscen_convergence);
+  m_sigmoid_time_interpol(p15_exo_food_scenario_fader,s15_exo_foodscen_start,s15_exo_foodscen_target,0,s15_exo_foodscen_convergence);
 
 );
 
