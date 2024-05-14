@@ -74,9 +74,9 @@ bau <- function(cfg) {
   cfg$gms$c70_feed_scen <- "ssp2" # default
   # Mitigation: no mitigation beyond NPi
   cfg$gms$c56_emis_policy      <- "none"
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-Npi-rem-5/REMIND_generic_C_SSP2EU-Npi-rem-5.mif"
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-Npi-rem-5/REMIND_generic_C_SSP2EU-Npi-rem-5.mif"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   # Setting REMIND scenario for blackmagicc
@@ -279,7 +279,7 @@ cfg <- bau(cfg = cfg)
 # Mitigation
 cfg <- miti(cfg = cfg)
 cfg$gms$c60_2ndgen_biodem <- "coupling"
-cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-Npi-rem-5/REMIND_generic_C_SSP2EU-Npi-rem-5.mif"
+cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
 # PHD
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
