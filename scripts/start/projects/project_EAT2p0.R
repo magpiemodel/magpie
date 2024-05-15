@@ -90,8 +90,11 @@ bau <- function(cfg) {
 ### Diet component ##
 # Globally achieves EL2 diet by 2050
 diet <- function(cfg) {
+  # Transition towards EL2 food intake recommendations until 2050
   cfg$gms$s15_exo_diet  <- 3
-  
+  # Physical inactivity levels are reduced to 0 from 2020 to 2050
+  cfg$gms$c09_pal_scenario <- "SDP"
+
   return(cfg)
 }
 
