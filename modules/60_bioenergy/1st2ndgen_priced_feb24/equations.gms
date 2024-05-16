@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,7 +8,7 @@
 *' @equations
 *' Total demand for bioenergy comes from different origins
 *' 1st generation bioenergy demand is a fixed trajectory of minimum production
-*' requirements. Second generation bioenergy splits into a Demand
+*' requirements. Second generation bioenergy splits into a demand
 *' for dedicated bioenergy crops, which are fully substitutable based on their
 *' energy content, and residues which are also fully substitutable based on
 *' their energy content.
@@ -63,10 +63,14 @@ q60_res_2ndgenBE(i2) ..
   =g=
   sum(ct,i60_res_2ndgenBE_dem(ct,i2));
 
-*' Finally, an incentive is provided for the production of 1st generation
-*' bioenergy from oils and ethanol even beyond the exogeneous minimum demand.
-*' The incentive is kept low, but should provide a more realistic
-*' overproduction from couple products.
+*' Finally, an incentive is provided for the production of 1st and 2nd generation
+*' bioenergy beyond the exogeneous minimum demand. 1st generation bioenergy can be incentivized
+*' mass- or energy-based.  For comparability, the former is in line with other realizations and constant over time. 
+*' The energy-based incentive can take different forms and is applied to both 1st and 2nd generation. 
+*' Combined with low or fade-out exogenous demands, this is useful to assess bioenergy production potentials, however
+*' the endogenous technological change in [13_tc] may react very strongly and create a positive feedback loop.
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
-          =e= sum(k1st60, vm_dem_bioen(i2,k1st60) * (-c60_bioenergy_subsidy));
+  =e= sum((ct,k1st60), vm_dem_bioen(i2,k1st60) * (-i60_1stgen_bioenergy_subsidy_tdm(ct)))
+  + sum((ct,k1st60), vm_dem_bioen(i2,k1st60) * fm_attributes("ge",k1st60) * (-i60_1stgen_bioenergy_subsidy_gj(ct)))
+  + sum((ct,kbe60), vm_dem_bioen(i2,kbe60) * fm_attributes("ge",kbe60) * (-i60_2ndgen_bioenergy_subsidy(ct)));
