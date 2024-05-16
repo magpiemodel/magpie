@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** update additional data to rev4.50
 - **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
 - **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3. 
+- **scripts** start/test_runs.R added 2 more test runs from FSEC
 
 ### added
 - **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth` 
