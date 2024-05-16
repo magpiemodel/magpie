@@ -11,7 +11,7 @@ if((ord(t) = 1),
   pc35_other(j,ac) = i35_other(j,ac);
 else
   pc35_secdforest(j,ac) = p35_secdforest(t-1,j,ac);
-  pc35_youngsecdf(j,ac) = p35_youngsecdf(j,ac);
+  pc35_youngsecdf(j,ac) = p35_youngsecdf(t-1,j,ac);
   pc35_other(j,ac) = p35_other(t-1,j,ac);
 );
 
@@ -51,35 +51,42 @@ vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 
 
 * --------------------------------------
-* Secondary forest recovery bound
+* Forest establishment bound
 * --------------------------------------
 
-* Forest recovery is constrained by the potential forest area in each cluster.
-* Hence, the potential area for forest recovery is given by the potential forest
+* Forest establishment is constrained by the potential forest area in each cluster.
+* Hence, the area for potential forest establishments is given by the potential forest
 * area minus all forest areas in the previous time step.
-p35_max_forest_recovery(j) = fm_pot_forest_area(j)
-                           - sum(land_forest, pcm_land(j,land_forest))
-                           - sum(ac, pc35_youngsecdf(j,ac));
-p35_max_forest_recovery(j)$(p35_max_forest_recovery(j) < 0) = 0;
+p35_max_forest_est(j) = fm_pot_forest_area(j)
+                                - sum(land_forest, pcm_land(j,land_forest))
+                                - sum(ac_sub, pc35_youngsecdf(j,ac_sub));
+p35_max_forest_est(j)$(p35_max_forest_est(j) < 0) = 0;
 
-p35_forest_recovery_shr(j) = p35_max_forest_recovery(j) / sum(land_ag, pcm_land(j,land_ag));
+* --------------------------------------
+* Secondary forest recovery
+* --------------------------------------
+
+* Distribute forestry abandonement
+pc35_youngsecdf(j,ac_est) = vm_lu_transitions.l(j,"forestry","other")/card(ac_est2);
+pc35_youngsecdf(j,ac_est)$(p35_max_forest_est(j)<pc35_youngsecdf(j,ac_est)) = p35_max_forest_est(j)/card(ac_est2);
+p35_max_forest_est(j) = p35_max_forest_est(j) - sum(ac_est, pc35_youngsecdf(j,ac_est));
+
+* Forest recovery is distributed proportionally based on the remaining
+* potential forest share in each cluster.
+p35_forest_recovery_shr(j) = p35_max_forest_est(j) / (sum(land_ag, pcm_land(j,land_ag)) + pcm_land(j,"urban"));
 p35_forest_recovery_shr(j)$(p35_forest_recovery_shr(j) > 1) = 1;
+* Abandoned land pc35_other(j,ac_est) is then distributed propotionally using the forest recovery share.
+p35_recovered_forest(t,j,ac_est) = pc35_other(j,ac_est) * p35_forest_recovery_shr(j);
+p35_recovered_forest(t,j,ac_est)$(sum(ac_est2,p35_recovered_forest(t,j,ac_est)) > p35_max_forest_est(j)) = p35_max_forest_est(j)/card(ac_est2);
+pc35_other(j,ac_est) = pc35_other(j,ac_est) - p35_recovered_forest(t,j,ac_est);
+pc35_youngsecdf(j,ac_est) = pc35_youngsecdf(j,ac_est) + p35_recovered_forest(t,j,ac_est);
 
-* --------------------------------------
-* Secondary forest regeneration
-* --------------------------------------
+* Substract the actual recovered forest area from the forest recovery potential.
+p35_max_forest_est(j) = p35_max_forest_est(j) - sum(ac_est,p35_recovered_forest(t,j,ac_est));
 
-*' @code
-*' Forest recovery is distributed proportionally based on the remaining
-*' potential forest share in each cluster.
-p35_recovered_forest(t,j,ac_est) = pc35_other(t,j,ac_est) * p35_forest_recovery_shr(j);
-p35_recovered_forest(t,j,ac_est)$(p35_recovered_forest(t,j,ac_est) > p35_max_forest_recovery(j)) = p35_max_forest_recovery(j);
-pc35_other(t,j,ac_est) = pc35_other(t,j,ac_est) - pc35_recovered_forest(t,j,ac_est);
-pc35_secdforest(t,j,ac_est) = pc35_secdforest(t,j,ac_est) + pc35_recovered_forest(t,j,ac_est);
-
-*' Substract recovered forest area from the forest recovery potential.
-p35_max_forest_recovery(j) = p35_max_forest_recovery(j) - p35_recovered_forest(t,j,ac_est);
-*' @stop
+* ------------------------------------------------
+* Natural vegetation growth (age-class shift)
+* ------------------------------------------------
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_timestep_length_forestry/5;
@@ -89,6 +96,12 @@ s35_shift = m_timestep_length_forestry/5;
     p35_other(t,j,"acx") = p35_other(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_other(j,ac));
 
+* example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
+    p35_youngsecdf(t,j,ac)$(ord(ac) > s35_shift) = pc35_youngsecdf(j,ac-s35_shift);
+* account for cases at the end of the age class set (s35_shift > 1) which are not shifted by the above calculation
+    p35_youngsecdf(t,j,"acx") = p35_youngsecdf(t,j,"acx")
+                  + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_youngsecdf(j,ac));
+
 * Usual shift
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
     p35_secdforest(t,j,ac)$(ord(ac) > s35_shift) = pc35_secdforest(j,ac-s35_shift);
@@ -97,6 +110,20 @@ s35_shift = m_timestep_length_forestry/5;
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_secdforest(j,ac));
 
 
+* -------------------------------------------------------
+* Carbon threshold for secondary forest maturation
+* -------------------------------------------------------
+
+*' @code
+*' If the vegetation carbon density in a simulation unit due to regrowth
+*' exceeds a threshold of 20 tC/ha the respective area is shifted from young secondary
+*' forest, which is still considered other land, to secondary forest land.
+p35_maturesecdf(t,j,ac)$(not sameas(ac,"acx")) =
+      p35_youngsecdf(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
+p35_youngsecdf(t,j,ac) = p35_youngsecdf(t,j,ac) - p35_maturesecdf(t,j,ac);
+p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_maturesecdf(t,j,ac);
+*' @stop
+
 pc35_secdforest(j,ac) = p35_secdforest(t,j,ac);
 v35_secdforest.l(j,ac) = pc35_secdforest(j,ac);
 vm_land.l(j,"secdforest") = sum(ac, pc35_secdforest(j,ac));
@@ -104,23 +131,10 @@ pcm_land(j,"secdforest") = sum(ac, pc35_secdforest(j,ac));
 
 pc35_other(j,ac) = p35_other(t,j,ac);
 v35_other.l(j,ac) = pc35_other(j,ac);
-vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
-pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
-
-* * --------------------------------------
-* * Secondary forest establishment bound
-* * --------------------------------------
-
-* * Overall forest establishment is constrained by the potential forest area in each cluster.
-* * Hence, the potential area for any forest expansion is given by the potential forest
-* * area minus all forest areas in the previous time step.
-* p35_max_forest_establishment(j) = fm_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
-* p35_max_forest_establishment(j)$(p35_max_forest_establishment(j) < 0) = 0;
-
-* * The secondary forest recovery potential also includes forestry areas.
-* * Therefore they are not substracted.
-* p35_max_secdforest_recovery(j) = fm_pot_forest_area(j)-pcm_land(j,"primforest")-pcm_land(j,"secdforest");
-* p35_max_secdforest_recovery(j)$(p35_max_secdforest_recovery(j) < 0) = 0;
+pc35_youngsecdf(j,ac) = p35_youngsecdf(t,j,ac);
+v35_youngsecdf.l(j,ac) = pc35_youngsecdf(j,ac);
+vm_land.l(j,"other") = sum(ac, pc35_other(j,ac)) + sum(ac, pc35_youngsecdf(j,ac));
+pcm_land(j,"other") = sum(ac, pc35_other(j,ac)) + sum(ac, pc35_youngsecdf(j,ac));
 
 * -------------------------------------
 * Set bounds based on land conservation
@@ -175,26 +189,25 @@ p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) 
 
 * Since forest restoration cannot be bigger than the potential area for secdforest recovery,
 * any remaining restoration area is substracted and shifted to other land restoration.
-p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - p35_max_secdforest_recovery(j);
+p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - p35_max_forest_est(j);
 p35_restoration_shift(j)$(p35_restoration_shift(j) < 0) = 0;
 p35_land_restoration(j,"secdforest") = p35_land_restoration(j,"secdforest") - p35_restoration_shift(j);
 pm_land_conservation(t,j,"other","restore") = pm_land_conservation(t,j,"other","restore") + p35_restoration_shift(j);
 * Substract forest restoration area from secondary forest recovery potential
-p35_max_secdforest_recovery(j) = p35_max_secdforest_recovery(j) - p35_land_restoration(j,"secdforest");
+p35_max_forest_est(j) = p35_max_forest_est(j) - p35_land_restoration(j,"secdforest");
 
 
 * set conservation bound
 vm_land.lo(j,"secdforest") = pm_land_conservation(t,j,"secdforest","protect") + p35_land_restoration(j,"secdforest");
 
 ** Other land
-***************** vm_lu_transitions.l(j,"forestry","other")
 
 *reset bounds
 v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set upper bound
-v35_other.up(j,ac_sub) = pc35_other(j,ac_sub)
-v35_youngsecdf.up(j,ac_sub) = pc35_youngsecdf.up(j,ac_sub);
+v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
+v35_youngsecdf.up(j,ac_sub) = pc35_youngsecdf(j,ac_sub);
 v35_youngsecdf.fx(j,ac_est) = 0;
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 

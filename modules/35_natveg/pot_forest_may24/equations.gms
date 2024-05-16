@@ -50,7 +50,7 @@
  q35_carbon_other(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
       m_carbon_stock_ac(v35_other,pm_carbon_density_ac,"ac","ac_sub")
-    + m_carbon_stock_ac(v35_younsecdf,pm_carbon_density_ac,"ac","ac_sub")  ;
+    + m_carbon_stock_ac(v35_youngsecdf,pm_carbon_density_ac,"ac","ac_sub");
 
 *' The biodiversity value (BV) of primary forest, secondary forest and other land is computed by multiplying their respective land area with bii coefficients, which depend on the age class and whether the potential natural vegetation forest or non-forest (luh2 side layers).
 
@@ -186,10 +186,10 @@ q35_hvarea_other(j2,ac_sub)..
 *' remaining potential forest area, which is derived from
 *' the potential natural forest area in each cluster.
 
-q35_max_forest_expansion(j2)..
+q35_max_forest_establishment(j2)..
                           sum(land_forest, vm_landexpansion(j2,land_forest))
                           =l=
-                          p35_max_forest_establishment(j2)
+                          p35_max_forest_est(j2)
                           ;
 
 *' Harvested secondary forest is still considered secondary forests due to
