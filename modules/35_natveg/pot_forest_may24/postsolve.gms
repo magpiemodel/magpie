@@ -10,6 +10,7 @@ p35_secdforest(t,j,ac) = v35_secdforest.l(j,ac);
 
 *other land age class calculation
 p35_other(t,j,ac) = v35_other.l(j,ac);
+p35_youngsecdf(t,j,ac) = v35_youngsecdf.l(j,ac);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov35_secdforest(t,j,ac,"marginal")                        = v35_secdforest.m(j,ac);

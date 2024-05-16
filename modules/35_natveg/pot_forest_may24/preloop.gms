@@ -7,6 +7,7 @@
 
 ** initialize other land
 i35_other(j,ac) = 0;
+i35_youngsecdf(j,ac) = 0;
 i35_other(j,"acx") = pcm_land(j,"other");
 
 ** initialize secdforest area depending on switch.
@@ -34,6 +35,7 @@ i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - 
 
 *initialize parameter
 p35_other(t,j,ac) = 0;
+p35_youngsecdf(t,j,ac) = 0;
 p35_secdforest(t,j,ac) = 0;
 
 * initialize forest disturbance losses

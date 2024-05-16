@@ -10,7 +10,7 @@
 
  q35_land_secdforest(j2) .. vm_land(j2,"secdforest") =e= sum(ac, v35_secdforest(j2,ac));
 
- q35_land_other(j2) .. vm_land(j2,"other") =e= sum(ac, v35_other(j2,ac));
+ q35_land_other(j2) .. vm_land(j2,"other") =e= sum(ac, v35_other(j2,ac)) + sum(ac, v35_youngsecdf(j2,ac));
 
 *' The total natural land area cannot be smaller than the total natural land conservation target.
 *' Area requirements for natural land conservation are derived from WDPA and formulated based on
@@ -49,7 +49,8 @@
 
  q35_carbon_other(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
-      m_carbon_stock_ac(v35_other,pm_carbon_density_ac,"ac","ac_sub");
+      m_carbon_stock_ac(v35_other,pm_carbon_density_ac,"ac","ac_sub")
+    + m_carbon_stock_ac(v35_younsecdf,pm_carbon_density_ac,"ac","ac_sub")  ;
 
 *' The biodiversity value (BV) of primary forest, secondary forest and other land is computed by multiplying their respective land area with bii coefficients, which depend on the age class and whether the potential natural vegetation forest or non-forest (luh2 side layers).
 
@@ -196,22 +197,12 @@ q35_max_forest_expansion(j2)..
 *' to be secondary forest i.e., harvested primary forest gets reclassified as
 *' secondary forest and ends up in the youngest age-class (and follows regrowth)
 
-q35_secdforest_recovery_area(j2)..
-                          v35_secdforest_recovery_area(j2)
-                          =e=
-                        + p35_max_secdforest_recovery(j2)
-                        * (sum(land_natveg,vm_landexpansion(j2,land_natveg))
-                            -sum(land_natveg,p35_land_restoration(j2,land_natveg)))/
-                          (sum(land_recovery35,pcm_land(j2,land_recovery35))+1e-10)
-                          ;
-
 q35_secdforest_regeneration(j2)..
                           sum(ac_est, v35_secdforest(j2,ac_est))
                           =e=
                           sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
                         + v35_hvarea_primforest(j2)
                         + p35_land_restoration(j2,"secdforest")
-                        + v35_secdforest_recovery_area(j2)
                           ;
 
 *' Harvested other land is still considered other land
