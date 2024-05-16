@@ -104,9 +104,10 @@ if (length(map_file) > 1) {
     warning("No countries selected in land conservation disaggregation. Results may be erroneous")
   }
 
-  if (!all(c(cfg$gms$c22_base_protect, cfg$gms$c22_base_protect_noselect) %in% "none")) {
-    base_protect_select <- cfg$gms$c22_base_protect
-    base_protect_noselect <- cfg$gms$c22_base_protect_noselect
+  base_protect_select <- cfg$gms$c22_base_protect
+  base_protect_noselect <- cfg$gms$c22_base_protect_noselect
+
+  if (!all(c(base_protect_select, base_protect_noselect) %in% "none")) {
 
     if (base_protect_noselect != "none") {
       land_consv_hr[, getYears(land_consv_hr), ] <- collapseDim(wdpa_hr[, nyears(wdpa_hr), base_protect_noselect], dim = 3.1)
@@ -114,12 +115,15 @@ if (length(map_file) > 1) {
     }
     if (base_protect_select != "none") {
       land_consv_hr[consv_iso, , ] <- collapseDim(wdpa_hr[consv_iso, nyears(wdpa_hr), base_protect_select], dim = 3.1)
-    } else if (base_protect_select == "none") {
+    } else {
       land_consv_hr[consv_iso, , ] <- 0
     }
   }
 
-  if (!all(c(cfg$gms$c22_protect_scenario, cfg$gms$c22_protect_scenario_noselect) %in% "none")) {
+  consv_select <- cfg$gms$c22_protect_scenario
+  consv_noselect <- cfg$gms$c22_protect_scenario_noselect
+
+  if (!all(c(consv_select, consv_noselect) %in% "none")) {
     if (file.exists(consv_prio_hr_file)) {
       consv_prio_all <- read.magpie(consv_prio_hr_file)
       consv_prio_hr <- new.magpie(
@@ -127,15 +131,13 @@ if (length(map_file) > 1) {
         names = getNames(consv_prio_all, dim = 2), fill = 0,
         sets = c("x.y.iso", "year", "data")
       )
-      consv_select <- cfg$gms$c22_protect_scenario
-      consv_noselect <- cfg$gms$c22_protect_scenario_noselect
 
       if (consv_noselect != "none") {
         consv_prio_hr <- collapseDim(consv_prio_all[, , consv_noselect], dim = 3.1)
       }
       if (consv_select != "none") {
         consv_prio_hr[consv_iso, , ] <- collapseDim(consv_prio_all[consv_iso, , consv_select], dim = 3.1)
-      } else if (consv_select == "none") {
+      } else {
         consv_prio_hr[consv_iso, , ] <- 0
       }
       # future conservation only pertains to natveg
