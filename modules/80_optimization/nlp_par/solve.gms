@@ -59,10 +59,9 @@ repeat
       loop(i2, j2(j)$cell(i2,j) = yes);
       display h2;
       s80_counter = sum(h2,p80_counter(h2));
-      s80_objective = sum(i2,v11_cost_reg.l(i2));
       display s80_counter;
       display magpie.modelStat;
-      display s80_objective;
+      display vm_cost_glo.l;
       magpie.modelStat$(magpie.modelStat=NA) = 13;
       
       p80_modelstat(t,h) = magpie.modelStat;

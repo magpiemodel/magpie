@@ -1,3 +1,2 @@
 name,type,reason
 vm_landdiff,input,questionnaire
-sm_fix_SSP2,input,not needed
