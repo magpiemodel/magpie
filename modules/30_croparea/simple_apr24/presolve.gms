@@ -39,3 +39,10 @@ else
     v30_betr_missing.fx(j) = 0;
   );
 );
+
+*' Cropland growth constraint after SSP2 fix
+if(m_year(t) <= sm_fix_SSP2,
+  v30_crop_area.up(i) = Inf;
+else
+  v30_crop_area.up(i) = v30_crop_area.l(i) * (1 + s30_annual_max_growth) ** m_yeardiff(t);
+);

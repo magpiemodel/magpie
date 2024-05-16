@@ -22,6 +22,7 @@ scalars
  s30_betr_start                  Share of bioenergy land on total cropland in start year (1) / 0 /
  s30_betr_target                 Share of bioenergy land on total cropland in target year (1) / 0 /
  s30_betr_penalty                Penalty for violation of betr target (USD05MER per ha) / 2000 /
+ s30_annual_max_growth Max annual cropland growth as share of previous cropland (1) / Inf /
 ;
 
 $ifthen "%c30_bioen_type%" == "all" bioen_type_30(kbe30) = yes;

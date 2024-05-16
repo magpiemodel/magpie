@@ -17,6 +17,7 @@ positive variables
  vm_rotation_penalty(i)                 Penalty for violating rotational constraints (mio. USD05MER)
  vm_carbon_stock_croparea(j,ag_pools)   Carbon stock in croparea (tC)
  v30_betr_missing(j)                    Missing bioenergy tree land towards target (mio. ha)
+ v30_crop_area(i)                       Total regional crop production area (mio. ha)
 ;
 
 equations
@@ -28,6 +29,7 @@ equations
  q30_carbon(j,ag_pools)             Croplarea above ground carbon content calculation (mio. tC)
  q30_bv_ann(j,potnatveg)            Biodiversity value of annual cropland (mio. ha)
  q30_bv_per(j,potnatveg)            Biodiversity value of perennial cropland (mio. ha)
+ q30_crop_reg(i)                    Total regional crop production area (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -36,6 +38,7 @@ parameters
  ov_rotation_penalty(t,i,type)               Penalty for violating rotational constraints (mio. USD05MER)
  ov_carbon_stock_croparea(t,j,ag_pools,type) Carbon stock in croparea (tC)
  ov30_betr_missing(t,j,type)                 Missing bioenergy tree land towards target (mio. ha)
+ ov30_crop_area(t,i,type)                    Total regional crop production area (mio. ha)
  oq30_prod(t,j,kcr,type)                     Production of cropped products (mio. tDM)
  oq30_betr_missing(t,j,type)                 Missing bioenergy tree land towards target (mio. ha)
  oq30_cost(t,i,type)                         Cost (mio. USD05MER)
@@ -44,6 +47,7 @@ parameters
  oq30_carbon(t,j,ag_pools,type)              Croplarea above ground carbon content calculation (mio. tC)
  oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (mio. ha)
  oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (mio. ha)
+ oq30_crop_reg(t,i,type)                     Total regional crop production area (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_crop** SNV implementation has been moved from `30_crop` to `29_cropland` 
 - **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
 - **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
+- **default.cfg** update additional data to rev4.51
+- **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
 - **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3. 
 - **scripts** start/test_runs.R added 2 more test runs from FSEC
 
@@ -19,6 +21,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
 - **10_land** added interface `pm_land_hist` with historic land use patterns
 - **32_forestry** added technical balance term `v32_land_missing_ndc`
+- **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth` 
+- **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing` 
+- **default.cfg** added settings for new price-driven bioenergy realization `1st2ndgen_priced_feb24`: `cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix`, `cfg$gms$c60_bioenergy_subsidy_fix_SSP2`, `s60_bioenergy_gj_price_1st`,
+`s60_bioenergy_price_2nd`, `c60_price_implementation`
+- **core** added `coup2110`timesteps
+- **15_food** added additional sigmoid food substition scenarios `sigmoid_75pc_25_50`, `sigmoid_50pc_25_50` and `sigmoid_25pc_25_50`
+- **30_crop** added regional cropland equation `q30_crop_reg` and presolve growth constraint
+- **44_biodiversity** added new realization `bii_target_apr24`, taking into account `f44_rr_layer`
+- **60_bioenergy** added new realization `1st2ndgen_priced_feb24` to enable price-driven 2nd gen bioenergy production
+- **scripts** added automatic set writer for new bioenergy realization to `start_functions`
+- **scripts** added start scripts for the GENIE project
+- **scenario_config.csv** added preset for GENIE project
 - **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
 
 ### removed
