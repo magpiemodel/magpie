@@ -146,11 +146,11 @@ if ((s14_calib_ir2rf = 1),
 *' @code
 *' Calibrated yields can additionally be adjusted by calibration factors 'f14_yld_calib'
 *' determined in a calibration run. As MAgPIE optimizes yield patterns and FAO regional
-*' yields are outlier corrected, historical production and croparea can in some cases 
+*' yields are outlier corrected, historical production and croparea can in some cases
 *' be better represented with this additional correction:
 
-* set yield calib factors to 1 in case of no use of yield calibration factors (s14_use_yield_calib = 0) 
-* or missing input file 
+* set yield calib factors to 1 in case of no use of yield calibration factors (s14_use_yield_calib = 0)
+* or missing input file
 if(s14_use_yield_calib = 0 OR sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
   f14_yld_calib(i,ltype14) = 1;
 );
@@ -189,23 +189,34 @@ if ((s14_degradation = 1),
 ****
 ****
 ****
+
 p14_growing_stock_initial(j,ac,"forestry","plantations") =
     (
-      pm_carbon_density_ac_forestry("y1995",j,ac,"vegc")
+      pm_carbon_density_ac_plantation("y1995",j,ac,"vegc")
       / s14_carbon_fraction
       * f14_aboveground_fraction("forestry")
       / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations"))
      )
     ;
 
-p14_growing_stock_initial(j,ac,land_natveg,"natveg") =
+p14_growing_stock_initial(j,ac,land_forest,"natveg") =
     (
-       pm_carbon_density_ac("y1995",j,ac,"vegc")
+       pm_carbon_density_secdforest_ac("y1995",j,ac,"vegc")
       / s14_carbon_fraction
-      * f14_aboveground_fraction(land_natveg)
+      * f14_aboveground_fraction(land_forest)
       / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
      )
     ;
+
+p14_growing_stock_initial(j,ac,"other","natveg") =
+    (
+       pm_carbon_density_other_ac("y1995",j,ac,"vegc")
+      / s14_carbon_fraction
+      * f14_aboveground_fraction("other")
+      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
+     )
+    ;
+
 **** Hard constraint to always have a positive number in p14_growing_stock
 p14_growing_stock_initial(j,ac,land_natveg,"natveg") = p14_growing_stock_initial(j,ac,land_natveg,"natveg")$(p14_growing_stock_initial(j,ac,land_natveg,"natveg")>0)+0.0001$(p14_growing_stock_initial(j,ac,land_natveg,"natveg")=0);
 p14_growing_stock_initial(j,ac,"forestry","plantations") = p14_growing_stock_initial(j,ac,"forestry","plantations")$(p14_growing_stock_initial(j,ac,"forestry","plantations")>0)+0.0001$(p14_growing_stock_initial(j,ac,"forestry","plantations")=0);

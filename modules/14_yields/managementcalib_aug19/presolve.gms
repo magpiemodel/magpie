@@ -11,7 +11,7 @@
 
 *** YIELDS
 
-*` `pm_carbon_density_ac_forestry` for vegetation Carbon is above- and belowground
+*` `pm_carbon_density_ac_plantation` for vegetation Carbon is above- and belowground
 *' carbon density. We convert Carbon density in tC/ha to tDM/ha by using carbon
 *' fraction of `s14_carbon_fraction` in tC/tDM. For assessing wood harvesting
 *' we need only aboveground biomass information, therefore we multiply with
@@ -22,18 +22,27 @@
 *` @code
 p14_growing_stock(t,j,ac,"forestry","plantations") =
     (
-      pm_carbon_density_ac_forestry(t,j,ac,"vegc")
+      pm_carbon_density_ac_plantation(t,j,ac,"vegc")
       / s14_carbon_fraction
       * f14_aboveground_fraction("forestry")
       / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations"))
      )
     ;
 
-p14_growing_stock(t,j,ac,land_natveg,"natveg") =
+p14_growing_stock(t,j,ac,land_forest,"natveg") =
     (
-     pm_carbon_density_ac(t,j,ac,"vegc")
+     pm_carbon_density_secdforest_ac(t,j,ac,"vegc")
      / s14_carbon_fraction
-     * f14_aboveground_fraction(land_natveg)
+     * f14_aboveground_fraction(land_forest)
+     / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
+    )
+    ;
+
+p14_growing_stock(t,j,ac,"other","natveg") =
+    (
+     pm_carbon_density_other_ac(t,j,ac,"vegc")
+     / s14_carbon_fraction
+     * f14_aboveground_fraction("other")
      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
     )
     ;

@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 ** Calculation of Single rotation model rotation lengths
 ** Using forestry carbon densitiy here via carbon density data exchange from carbon module.
-p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
+p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_plantation(t_all,j,ac,"vegc");
 
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
@@ -44,7 +44,7 @@ $ifthen "%c32_rot_calc_type%" == "current_annual_increment"
 $endif
 
 $ifthen "%c32_rot_calc_type%" == "mean_annual_increment"
-  p32_avg_increment(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") / ((ord(ac)+1)*5);
+  p32_avg_increment(t_all,j,ac) = pm_carbon_density_ac_plantation(t_all,j,ac,"vegc") / ((ord(ac)+1)*5);
   p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) >  0)
                           + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) <= 0);
   display "Rotation lengths are calculated based on maximizing mean annual increment in this run.";
@@ -280,14 +280,14 @@ p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0) = 
 ** Calibration factors lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 
-** Save pm_carbon_density_ac_forestry in a parameter before upscaling to FAO growing stocks.
+** Save pm_carbon_density_ac_plantation in a parameter before upscaling to FAO growing stocks.
 ** This allows to use plantation growth curves for CO2 price driven afforestation.
-p32_c_density_ac_fast_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
+p32_c_density_ac_fast_forestry(t_all,j,ac) = pm_carbon_density_ac_plantation(t_all,j,ac,"vegc");
 
 ** Update c-density for timber plantations based on calibration factor to match FAO growing stocks
-pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+pm_carbon_density_ac_plantation(t_all,j,ac,"vegc") = pm_carbon_density_ac_plantation(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
 ** keep c-density for timber plantations constant after rotation length to avoid unrealistic carbon sequestration in unharvested timber plantations
-pm_carbon_density_ac_forestry(t_all,j,ac,"vegc")$(ac.off >= p32_rotation_cellular_harvesting(t_all,j)) = sum(ac2$(ac2.off = p32_rotation_cellular_harvesting(t_all,j)), pm_carbon_density_ac_forestry(t_all,j,ac2,"vegc"));
+pm_carbon_density_ac_plantation(t_all,j,ac,"vegc")$(ac.off >= p32_rotation_cellular_harvesting(t_all,j)) = sum(ac2$(ac2.off = p32_rotation_cellular_harvesting(t_all,j)), pm_carbon_density_ac_plantation(t_all,j,ac2,"vegc"));
 
 ** set bii coefficients
 p32_bii_coeff(type32,bii_class_secd,potnatveg) = 0;

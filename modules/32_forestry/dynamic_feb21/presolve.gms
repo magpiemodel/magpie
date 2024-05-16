@@ -38,16 +38,16 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation
 *' 1 = Use plantation growth curve (faster than natveg) towards LPJmL natural vegetation
 if(s32_aff_plantation = 0,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 elseif s32_aff_plantation = 1,
  p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = p32_c_density_ac_fast_forestry(t,j,ac);
 );
 
 *' Timber plantations carbon densities:
-p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_ac_plantation(t,j,ac,ag_pools);
 
 *' NDC carbon densities are natveg carbon densities.
-p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 
 *' CDR from afforestation for each age-class, depending on planning horizon.
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)

@@ -119,7 +119,7 @@ s35_shift = m_timestep_length_forestry/5;
 *' exceeds a threshold of 20 tC/ha the respective area is shifted from young secondary
 *' forest, which is still considered other land, to secondary forest land.
 p35_maturesecdf(t,j,ac)$(not sameas(ac,"acx")) =
-      p35_youngsecdf(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
+      p35_youngsecdf(t,j,ac)$(pm_carbon_density_secdforest_ac(t,j,ac,"vegc") > 20);
 p35_youngsecdf(t,j,ac) = p35_youngsecdf(t,j,ac) - p35_maturesecdf(t,j,ac);
 p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_maturesecdf(t,j,ac);
 *' @stop
@@ -221,14 +221,6 @@ p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
 p35_land_restoration(j,"other")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
 * set conservation bound
 vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
-
-* ------------------------------
-* Calculate carbon density
-* ------------------------------
-
-* highest carbon density 1st time step to account for reshuffling
-p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
-p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 
 * ------------------
 * NPI/NDC policy
