@@ -47,7 +47,7 @@ for(ssp in c("SSP1","SSP2","SSP5")) {
   cfg$title <- .title(cfg, paste(ssp,"Ref",sep="-"))
   cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
   cfg$gms$c56_mute_ghgprices_until <- "y2150"
-  cfg$gms$c56_pollutant_prices <- paste0("R32M46-",ifelse(ssp=="SSP2",paste0(ssp,"EU"),ssp),"-NPi")
+  cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NPi")
   cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-",ifelse(ssp=="SSP2",paste0(ssp,"EU"),ssp),"-NPi")
   start_run(cfg, codeCheck = FALSE)
 
