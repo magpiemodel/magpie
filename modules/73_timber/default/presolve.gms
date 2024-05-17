@@ -18,3 +18,6 @@ if(s73_foresight=1,
 else
   pm_demand_forestry_future(t,i,kforestry) = pm_demand_ext(t,i,kforestry); 
  );
+
+* tbd: remove after successful testing?
+v73_prod_heaven_timber.fx(j,kforestry) = 0;

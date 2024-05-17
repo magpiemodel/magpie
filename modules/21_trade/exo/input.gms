@@ -5,10 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
- s21_manna_from_heaven  v21_manna_from_heaven fixed to zero (0) or available at high cost (1) (binary) / 0 /
-;
-
 table f21_trade_balance(t_all,h,kall) trade balance of positive exports and negative imports (mio. tDM per yr)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_balance.cs3"

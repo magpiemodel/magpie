@@ -5,10 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
-
 *set vm_cost_trade zero in order to avoid a free variable
 vm_cost_trade.fx(i)               = 0;
-
-pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);
-pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);

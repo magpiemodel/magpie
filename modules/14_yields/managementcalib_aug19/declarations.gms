@@ -17,7 +17,6 @@ parameters
  p14_growing_stock(t,j,ac,forest_land,forest_type)       Forest growing stock (tDM per ha per yr)
  pm_timber_yield(t,j,ac,forest_land)                     Forest growing stock (tDM per ha per yr)
  p14_growing_stock_initial(j,ac,forest_land,forest_type) Initial Forest growing stock (tDM per ha per yr)
- pm_timber_yield_initial(j,ac,forest_land)               Initial Forest yield (tDM per ha per yr)
  pm_yields_semi_calib(j,kve,w)                           Potential yields calibrated to FAO regional levels (tDM per ha per yr)
  i14_calib_yields_hist(i,w)                              Calibrated yields average over region and crop type at the historical reference year (tDM per ha per yr)
  i14_calib_yields_ratio(i)                               Irrigated to rainfed yield ratio for calibrated yields (1)
