@@ -11,7 +11,6 @@ parameters
 ;
 
 scalars
-  s80_counter             counter (1)
-  s80_modelstat_previter  modelstat of previous iteration (1)
-  s80_optfile_previter    optfile used in previous iteration (1)
+  s80_counter          counter (1)
+  s80_resolve_option   option for resolve (1)
 ;
