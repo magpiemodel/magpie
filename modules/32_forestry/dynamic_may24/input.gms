@@ -90,13 +90,6 @@ $include "./modules/32_forestry/input/f32_localTCRE.cs3"
 $ondelim
 ;
 
-parameter f32_gs_relativetarget(i) Relative growing stock target in each region (m3 per ha)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_gs_relativetarget.cs4"
-$offdelim
-/;
-
 parameter f32_plantedforest(i) Share of plantation forest in planted forest (1)
 /
 $ondelim
