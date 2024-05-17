@@ -70,7 +70,7 @@ pc35_youngsecdf(j,ac_est)$(sum(ac_est2,pc35_youngsecdf(j,ac_est2)) > pm_max_fore
 
 * The proportion of secondary forest recovery in total natveg recovery is derived
 * from the remaining forest recovery area
-p35_max_forest_recovery(j) = pm_max_forest_est(j) - sum(ac pc35_youngsecdf(j,ac));
+p35_max_forest_recovery(j) = pm_max_forest_est(j) - sum(ac, pc35_youngsecdf(j,ac));
 p35_forest_recovery_shr(j) = p35_max_forest_recovery(j) / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")+1e-10);
 p35_forest_recovery_shr(j)$(p35_forest_recovery_shr(j) > 1) = 1;
 * Abandoned land pc35_other(j,ac_est) is then distributed propotionally using the forest recovery share.
