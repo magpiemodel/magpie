@@ -20,15 +20,24 @@ p22_add_consv(t,j,"BH_IFL","primforest") = pcm_land(j,"primforest") * p22_conser
 if(m_year(t) <= sm_fix_SSP2,
 * from 1995 to 2020 land conservation is based on
 * historic trends as derived from WDPA
- p22_conservation_area(t,j,land) = f22_wdpa_baseline(t,j,land);
+ p22_conservation_area(t,j,land) = sum(cell(i,j),
+      p22_wdpa_baseline(t,j,"%c22_base_protect%",land) * p22_country_weight(i)
+      + p22_wdpa_baseline(t,j,"%c22_base_protect_noselect%",land) * (1-p22_country_weight(i))
+      );
 
 else
 
 ** Future land conservation only pertains to natural vegetation classes (land_natveg)
-p22_conservation_area(t,j,land) = f22_wdpa_baseline(t,j,land);
+p22_conservation_area(t,j,land) = sum(cell(i,j),
+      p22_wdpa_baseline(t,j,"%c22_base_protect%",land) * p22_country_weight(i)
+      + p22_wdpa_baseline(t,j,"%c22_base_protect_noselect%",land) * (1-p22_country_weight(i))
+      );
 * future options for land conservation are added to the WDPA baseline
 p22_conservation_area(t,j,land_natveg) =
-    f22_wdpa_baseline(t,j,land_natveg)
+    sum(cell(i,j),
+      p22_wdpa_baseline(t,j,"%c22_base_protect%",land_natveg) * p22_country_weight(i)
+      + p22_wdpa_baseline(t,j,"%c22_base_protect_noselect%",land_natveg) * (1-p22_country_weight(i))
+      )
     + sum(cell(i,j),
       p22_add_consv(t,j,"%c22_protect_scenario%",land_natveg) * p22_country_weight(i)
       + p22_add_consv(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i))

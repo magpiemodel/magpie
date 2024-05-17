@@ -440,7 +440,7 @@ p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") +
 p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_rumdairy_scp_fadeout(t,i);
 
 
-* Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_intake_target.
+* Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_supply_target.
 * Optional substitution with plant-based products depending on s15_livescen_target_subst.
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated_livestock_orig(t,i) = sum(kfo_lp,p15_kcal_pc_calibrated(t,i,kfo_lp));
@@ -454,7 +454,7 @@ p15_plant_kcal_structure_orig(t,i,kfo_pp)$(p15_kcal_pc_calibrated_plant_orig(t,i
                                p15_kcal_pc_calibrated(t,i,kfo_pp)
                                /p15_kcal_pc_calibrated_plant_orig(t,i);
 
-p15_kcal_pc_livestock_supply_target(i) = s15_kcal_pc_livestock_intake_target * f15_overcons_FAOwaste(i,"livst_rum");
+p15_kcal_pc_livestock_supply_target(i) = s15_kcal_pc_livestock_supply_target * f15_overcons_FAOwaste(i,"livst_rum");
 
 loop(i$(p15_kcal_pc_calibrated_livestock_orig(t,i) > p15_kcal_pc_livestock_supply_target(i)),
 p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_lp)

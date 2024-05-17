@@ -8,9 +8,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **41_area_equipped_for_irrigation** updated (non-default) AEI data (from Mehta2022 to Mehta2024)
+- **22_land_conservation and default.cfg** Added options for baseline protection
+- **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
+- **70_livestock, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
+- **default.cfg** update additional data to rev4.50
+- **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
+- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3.
+- **scripts** start/test_runs.R added 2 more test runs from FSEC
 
 ### added
--
+- **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth`
+- **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing`
+- **default.cfg** added settings for new price-driven bioenergy realization `1st2ndgen_priced_feb24`: `cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix`, `cfg$gms$c60_bioenergy_subsidy_fix_SSP2`, `s60_bioenergy_gj_price_1st`,
+`s60_bioenergy_price_2nd`, `c60_price_implementation`
+- **core** added `coup2110`timesteps
+- **15_food** added additional sigmoid food substition scenarios `sigmoid_75pc_25_50`, `sigmoid_50pc_25_50` and `sigmoid_25pc_25_50`
+- **30_crop** added regional cropland equation `q30_crop_reg` and presolve growth constraint
+- **44_biodiversity** added new realization `bii_target_apr24`, taking into account `f44_rr_layer`
+- **60_bioenergy** added new realization `1st2ndgen_priced_feb24` to enable price-driven 2nd gen bioenergy production
+- **scripts** added automatic set writer for new bioenergy realization to `start_functions`
+- **scripts** added start scripts for the GENIE project
+- **scenario_config.csv** added preset for GENIE project
+- **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
 
 ### removed
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
