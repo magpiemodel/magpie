@@ -7,14 +7,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
+- **70_livestock, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
 - **default.cfg** update additional data to rev4.50
 - **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
-- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3. 
+- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3.
 - **scripts** start/test_runs.R added 2 more test runs from FSEC
 
 ### added
-- **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth` 
-- **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing` 
+- **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth`
+- **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing`
 - **default.cfg** added settings for new price-driven bioenergy realization `1st2ndgen_priced_feb24`: `cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix`, `cfg$gms$c60_bioenergy_subsidy_fix_SSP2`, `s60_bioenergy_gj_price_1st`,
 `s60_bioenergy_price_2nd`, `c60_price_implementation`
 - **core** added `coup2110`timesteps
