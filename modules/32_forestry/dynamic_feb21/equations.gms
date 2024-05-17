@@ -68,19 +68,19 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
- sum(ac_est, v32_land(j2,"ndc",ac_est)) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
+ sum(ac_est, v32_land(j2,"ndc",ac_est)) =e= sum(ct, pm_aff_pol_timestep(ct,j2));
 
-*' The constraint `q32_max_aff` accounts for the allowed maximum global endogenous 
-*' afforestation defined in `i32_max_aff_area_glo`. 
-*' The constraint `q32_max_aff_reg` accounts for the allowed maximum regional endogenous 
-*' afforestation defined in `i32_max_aff_area_reg`. 
+*' The constraint `q32_max_aff` accounts for the allowed maximum global endogenous
+*' afforestation defined in `i32_max_aff_area_glo`.
+*' The constraint `q32_max_aff_reg` accounts for the allowed maximum regional endogenous
+*' afforestation defined in `i32_max_aff_area_reg`.
 *' Only one of the two constraints is active, depending on `s32_max_aff_area_glo`.
 
- q32_max_aff$(s32_max_aff_area_glo=1) .. 
+ q32_max_aff$(s32_max_aff_area_glo=1) ..
   sum((j2,ac), v32_land(j2,"aff",ac))
       =l= sum(ct, i32_max_aff_area_glo(ct));
 
- q32_max_aff_reg(i2)$(s32_max_aff_area_glo=0) .. 
+ q32_max_aff_reg(i2)$(s32_max_aff_area_glo=0) ..
   sum((cell(i2,j2),ac), v32_land(j2,"aff",ac))
         =l= sum(ct, i32_max_aff_area_reg(ct,i2));
 
@@ -100,7 +100,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
           + sum(ac_sub, v32_land_reduction(j2,type32,ac_sub)));
 
  q32_land_expansion(j2,type32) ..
-    v32_land_expansion(j2,type32) =e= 
+    v32_land_expansion(j2,type32) =e=
     sum(ac_est, v32_land(j2,type32,ac_est));
 
  q32_land_reduction(j2,type32,ac_sub) ..
@@ -112,17 +112,17 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 
 q32_bv_aff(j2,potnatveg) .. vm_bv(j2,"aff_co2p",potnatveg)
           =e=
-          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"aff",ac)) * 
+          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"aff",ac)) *
           p32_bii_coeff("aff",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 q32_bv_ndc(j2,potnatveg) .. vm_bv(j2,"aff_ndc",potnatveg)
           =e=
-          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"ndc",ac)) * 
+          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"ndc",ac)) *
           p32_bii_coeff("ndc",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 q32_bv_plant(j2,potnatveg) .. vm_bv(j2,"plant",potnatveg)
           =e=
-          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"plant",ac)) * 
+          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"plant",ac)) *
           p32_bii_coeff("plant",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 

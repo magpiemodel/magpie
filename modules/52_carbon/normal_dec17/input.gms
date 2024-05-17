@@ -27,7 +27,7 @@ m_fillmissingyears(fm_carbon_density,"j,land,c_pools");
 * forest area is zero, use the carbon density of other land instead.
 * This affects areas, where the land use intialisation reports some
 * forest, although the forest potential is zero. Forest expansion in
-* these cells is constrained by fm_pot_forest_area.
+* these cells is constrained by f35_pot_forest_area.
 fm_carbon_density(t_all,j,land_forest,c_pools)$(fm_carbon_density(t_all,j,land_forest,c_pools) = 0) = fm_carbon_density(t_all,j,"other",c_pools);
 
 * Fix urban area soilc to natural land soilc as long as preprocessed
