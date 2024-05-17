@@ -72,9 +72,9 @@ s15_exo_diet                               Switch for transition towards exogeno
 s15_alc_scen                               Scenario target for the inclusion of alcohol in the EAT-Lancet diet (1)  / 0 /
 s15_rum_share_fadeout_india_strong         Switch for stronger ruminant fadeout in India (binary) / 1 /
 s15_milk_share_fadeout_india               Switch for milk fadeout in India (binary) / 1 /
-s15_kcal_pc_livestock_supply_target        Target for livestock intake (kcal per cap per day) / 430 /
+s15_kcal_pc_livestock_supply_target        Target for livestock food calorie supply (kcal per cap per day) / 430 /
 s15_livescen_target_subst                  Fade-out of livestock products (0) or substitution of livestock products with plant-based products (1) / 1 /
-s15_food_subst_functional_form                  Switch for functional form of substitution fader (1) / 1 /
+s15_food_subst_functional_form             Switch for functional form of substitution fader (1) / 1 /
 s15_food_substitution_start                Food substitution start year / 2025 /
 s15_food_substitution_target               Food substitution target year / 2050 /
 s15_ruminant_substitution                  Ruminant substitution share (1) / 0 /
@@ -83,10 +83,10 @@ s15_alcohol_substitution                   Alcohol substitution share (1) / 0 /
 s15_livestock_substitution                 Livestock substitution share (1) / 0 /
 s15_rumdairy_substitution                  Ruminant meat and dairy substitution share (1) / 0 /
 s15_rumdairy_scp_substitution              Ruminant meat and dairy substitution with SCP share (1) / 0 /
-s15_livescen_target                        Switch for livestock intake target (1) / 0 /
+s15_livescen_target                        Switch for livestock food calorie supply target (1) / 0 /
 s15_exo_foodscen_functional_form           Switch for functional form of exogenous food scenario fader (1) / 1 /
-s15_exo_foodscen_start                Food substitution start year        / 2025 /
-s15_exo_foodscen_target               Food substitution target year       / 2050 /
+s15_exo_foodscen_start                     Food substitution start year        / 2025 /
+s15_exo_foodscen_target                    Food substitution target year       / 2050 /
 s15_exo_foodscen_convergence               Convergence to exogenous food scenario (1) / 1 /
 ;
 
