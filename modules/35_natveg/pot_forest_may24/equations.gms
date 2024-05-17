@@ -184,12 +184,14 @@ q35_hvarea_other(j2,ac_sub)..
 
 *' The constraint for overall forest establishment is given by the
 *' remaining potential forest area, which is derived from
-*' the potential natural forest area in each cluster.
+*' the potential natural forest area minus the recovering secondary
+*' forest area.
 
 q35_max_forest_establishment(j2)..
                           sum(land_forest, vm_landexpansion(j2,land_forest))
                           =l=
-                          p35_max_forest_est(j2)
+                          pm_max_forest_est(j2)
+                        - sum(ac, v35_youngsecdf(j2,ac))
                           ;
 
 *' Harvested secondary forest is still considered secondary forests due to

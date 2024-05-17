@@ -18,20 +18,21 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
 
 ** START ndc **
 * calc NPI/NDC afforestation per time step based on forest stock change
-   pm_aff_pol_timestep("y1995",j) = 0;
-   pm_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
+   p32_aff_pol_timestep("y1995",j) = 0;
+   p32_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
 * Suitable area (`p32_aff_pot`) for NPI/NDC afforestation
    p32_aff_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
                     + (vm_land.l(j,"past") - vm_land.lo(j,"past"))
                     - pm_land_conservation(t,j,"other","restore");
+*** NDC/NPI re/afforesation is further constrained by the remaining forest establishment potential
+   p32_aff_pot(t,j)$(p32_aff_pot(t,j) > pm_max_forest_est(j)) = pm_max_forest_est(j);
 * suitable area `p32_aff_pot` can be negative, if land restoration is switched on (level smaller than lower bound), therefore set negative values to 0
    p32_aff_pot(t,j)$(p32_aff_pot(t,j) < 0) = 0;
-* Limit prescribed NPI/NDC afforestation in `pm_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
-   pm_aff_pol_timestep(t,j)$(pm_aff_pol_timestep(t,j) > p32_aff_pot(t,j)) = p32_aff_pot(t,j);
+* Limit prescribed NPI/NDC afforestation in `p32_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
+   p32_aff_pol_timestep(t,j)$(p32_aff_pol_timestep(t,j) > p32_aff_pot(t,j)) = p32_aff_pot(t,j);
 ** END ndc **
 
 *' @code
-
 *' Afforestation switch:
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation
 *' 1 = Use plantation growth curve (faster than natveg) towards LPJmL natural vegetation
@@ -178,8 +179,8 @@ p32_updated_gs_reg(t,i) = 1;
 p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0) = (sum((cell(i,j),ac_sub),(pm_timber_yield(t,j,ac_sub,"forestry") / sm_wood_density) * p32_land(t,j,"plant",ac_sub))/ sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub)));
 
 * Avoid conflict between afforestation for carbon uptake on land and secdforest restoration
-pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + v32_land.lo(j,"plant",ac) + p32_land(t,j,"aff",ac))+ pm_aff_pol_timestep(t,j))
-        = pm_land_conservation(t,j,"secdforest","restore") - (sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + pm_aff_pol_timestep(t,j));
-pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") <= sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + pm_aff_pol_timestep(t,j)) = 0;
+pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + v32_land.lo(j,"plant",ac) + p32_land(t,j,"aff",ac))+ p32_aff_pol_timestep(t,j))
+        = pm_land_conservation(t,j,"secdforest","restore") - (sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + p32_aff_pol_timestep(t,j));
+pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") <= sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + p32_aff_pol_timestep(t,j)) = 0;
 
 *** EOF presolve.gms ***

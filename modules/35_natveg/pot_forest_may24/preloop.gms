@@ -42,6 +42,10 @@ p35_secdforest(t,j,ac) = 0;
 p35_disturbance_loss_secdf(t,j,ac) = 0;
 p35_disturbance_loss_primf(t,j) = 0;
 
+* initialize remaining potential forest establishment area
+pm_max_forest_est(j) = f35_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
+pm_max_forest_est(j)$(pm_max_forest_est(j) < 0) = 0;
+
 * -----------------------------------------
 * Land conservation for climate mitigation
 * -----------------------------------------
