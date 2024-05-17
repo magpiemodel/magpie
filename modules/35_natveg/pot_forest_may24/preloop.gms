@@ -42,7 +42,13 @@ p35_secdforest(t,j,ac) = 0;
 p35_disturbance_loss_secdf(t,j,ac) = 0;
 p35_disturbance_loss_primf(t,j) = 0;
 
-* initialize remaining potential forest establishment area
+* -------------------------------------------------------------
+* Initialize remaining potential forest establishment area
+* -------------------------------------------------------------
+
+* Forest establishment is constrained by the potential forest area in each cluster.
+* Hence, the area for potential forest establishments is given by the potential forest
+* area minus all forest areas in the previous time step.
 pm_max_forest_est(j) = f35_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
 pm_max_forest_est(j)$(pm_max_forest_est(j) < 0) = 0;
 
