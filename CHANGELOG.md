@@ -13,8 +13,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
 - **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
 - **default.cfg** update additional data to rev4.51
+- **22_land_conservation and default.cfg** Added options for baseline protection
+- **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
+- **70_livestock, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
 - **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
-- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3. 
+- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3.
 - **scripts** start/test_runs.R added 2 more test runs from FSEC
 
 ### added
