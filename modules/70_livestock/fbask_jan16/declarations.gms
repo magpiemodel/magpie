@@ -36,6 +36,8 @@ parameters
  p70_cost_share_calibration(i)                    Summation factor used to calibrate calculated capital shares with historical values (1)
  i70_cost_regr(i,kap,cost_regr)                   Regression coefficients for livestock factor requirements (1)
  i70_fac_req_livst(t_all,i,kli)                   Factor requirements (USD05MER per tDM)
+ p70_cereal_subst_fader(t_all)                    Cereal feed substitution with SCP fader (1)
+ p70_foddr_subst_fader(t_all)                     Foddr substitution with SCP fader (1)
 ;
 
 

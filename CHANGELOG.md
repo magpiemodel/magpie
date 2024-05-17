@@ -8,8 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **22_land_conservation and default.cfg** Added options for baseline protection
+- **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
+- **70_livestock, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
 - **default.cfg** update additional data to rev4.50
 - **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
+- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3.
+- **scripts** start/test_runs.R added 2 more test runs from FSEC
 
 ### added
 - **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth`
@@ -24,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** added automatic set writer for new bioenergy realization to `start_functions`
 - **scripts** added start scripts for the GENIE project
 - **scenario_config.csv** added preset for GENIE project
+- **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
 
 ### removed
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
