@@ -95,4 +95,4 @@ im_timber_prod_cost("wood") = s73_timber_prod_cost_wood;
 im_timber_prod_cost("woodfuel") = s73_timber_prod_cost_woodfuel;
 
 * initialize values for presolve of other modules
-pm_demand_forestry_future(t,i,kforestry) = pm_demand_ext(t,i,kforestry) * s73_foresight_multiplier_hist;
+pm_demand_forestry_future(t,i,kforestry) = pm_demand_ext(t,i,kforestry) * s73_demand_multiplier_hist;

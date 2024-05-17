@@ -11,7 +11,7 @@
 
 if(s73_foresight=1,
   if(m_year(t) <= sm_fix_SSP2,
-    pm_demand_forestry_future(t,i,kforestry) = pm_demand_ext(t,i,kforestry) * s73_foresight_multiplier_hist;
+    pm_demand_forestry_future(t,i,kforestry) = pm_demand_ext(t,i,kforestry) * s73_demand_multiplier_hist;
   else
     pm_demand_forestry_future(t,i,kforestry) = sum(t_ext$(t_ext.pos = t.pos + pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
    );

@@ -90,13 +90,6 @@ $include "./modules/32_forestry/input/f32_localTCRE.cs3"
 $ondelim
 ;
 
-parameter f32_ac_dist(ac) Age class distribution share (1)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_ac_dist.csv"
-$offdelim
-/;
-
 parameter f32_gs_relativetarget(i) Relative growing stock target in each region (m3 per ha)
 /
 $ondelim
