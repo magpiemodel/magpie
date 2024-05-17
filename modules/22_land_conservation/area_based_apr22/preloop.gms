@@ -21,8 +21,15 @@ i22_land_iso(iso) = sum(land, fm_land_iso("y1995",iso,land));
 p22_country_weight(i) = sum(i_to_iso(i,iso), p22_country_dummy(iso) * i22_land_iso(iso)) / sum(i_to_iso(i,iso), i22_land_iso(iso));
 
 * ---------------------------------------------------------------------
-* Initialise addtional land protection in conservation priority areas
+* Initialise baseline protection and conservation priority areas
 * ---------------------------------------------------------------------
+
+** Initialise baseline protection area
+p22_wdpa_baseline(t,j,base22,land) = 0;
+
+* Get baseline protection in based on WDPA data
+p22_wdpa_baseline(t,j,wdpa_cat22,land) = f22_wdpa_baseline(t,j,wdpa_cat22,land);
+
 
 ** Trajectory for implementation of land conservation
 * sigmoidal interpolation between 2020 and target year
