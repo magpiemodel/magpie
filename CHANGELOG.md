@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **22_land_conservation and default.cfg** Added options for baseline protection
 - **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
 - **70_livestock, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
 - **default.cfg** update additional data to rev4.50
