@@ -25,7 +25,7 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
                     + (vm_land.l(j,"past") - vm_land.lo(j,"past"))
                     - pm_land_conservation(t,j,"other","restore");
 *** NDC/NPI re/afforesation is further constrained by the remaining forest establishment potential
-   p32_aff_pot(t,j)$(p32_aff_pot(t,j) > pm_max_forest_est(j)) = pm_max_forest_est(j);
+   p32_aff_pot(t,j)$(p32_aff_pot(t,j) > pcm_max_forest_est(j)) = pcm_max_forest_est(j);
 * suitable area `p32_aff_pot` can be negative, if land restoration is switched on (level smaller than lower bound), therefore set negative values to 0
    p32_aff_pot(t,j)$(p32_aff_pot(t,j) < 0) = 0;
 * Limit prescribed NPI/NDC afforestation in `p32_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
