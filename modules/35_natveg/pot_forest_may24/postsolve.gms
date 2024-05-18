@@ -12,9 +12,9 @@ p35_secdforest(t,j,ac) = v35_secdforest.l(j,ac);
 p35_other(t,j,ac) = v35_other.l(j,ac);
 p35_youngsecdf(t,j,ac) = v35_youngsecdf.l(j,ac);
 
-* Forest establishment bound
-pm_max_forest_est(j) = f35_pot_forest_area(j) - sum(land_forest, vm_land.l(j,land_forest));
-pm_max_forest_est(j)$(pm_max_forest_est(j) < 0) = 0;
+* Reset forest establishment bound
+pcm_max_forest_est(j) = f35_pot_forest_area(j) - sum(land_forest, vm_land.l(j,land_forest));
+pcm_max_forest_est(j)$(pcm_max_forest_est(j) < 0) = 0;
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov35_secdforest(t,j,ac,"marginal")                        = v35_secdforest.m(j,ac);

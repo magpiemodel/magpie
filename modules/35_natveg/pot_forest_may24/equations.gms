@@ -190,7 +190,7 @@ q35_hvarea_other(j2,ac_sub)..
 q35_max_forest_establishment(j2)..
                           sum(land_forest, vm_landexpansion(j2,land_forest))
                           =l=
-                          pm_max_forest_est(j2)
+                          pcm_max_forest_est(j2)
                         - sum(ac, v35_youngsecdf(j2,ac))
                           ;
 
