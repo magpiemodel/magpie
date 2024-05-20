@@ -8,6 +8,10 @@
 *m_sigmoid_time_interpol(i32_plant_contr_fader,2020,2050,0.05,0);
 m_sigmoid_time_interpol(i32_plant_contr_growth_fader,s32_plant_contr_growth_startyear,s32_plant_contr_growth_endyear,s32_plant_contr_growth_startvalue,s32_plant_contr_growth_endvalue);
 
+p32_est_cost("plant") = s32_est_cost_plant; 
+p32_est_cost("ndc") = s32_est_cost_natveg;
+p32_est_cost("aff") = s32_est_cost_natveg$(s32_aff_plantation = 0) + s32_est_cost_plant$(s32_aff_plantation = 1);
+
 ** Calculation of Single rotation model rotation lengths
 ** Using forestry carbon densitiy here via carbon density data exchange from carbon module.
 p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");

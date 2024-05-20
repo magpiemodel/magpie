@@ -22,7 +22,7 @@ parameters
  p32_carbon_density_ac_marg(t_all,j,ac)             Marginal above ground carbon density for age classes and carbon pools (tC per ha)
  p32_land(t,j,type32,ac)                            Forestry land for each cell wood type and age class before and after optimization (mio. ha)
  pc32_land(j,type32,ac)                             Forestry land per forestry land type initialization of the optimization (mio. ha)
- pc32_yield_forestry_future(j)                      Cellular timber yield expected in the future (m3 per ha per year)
+ p32_yield_forestry_future(t,j)                     Cellular timber yield expected in the future (m3 per ha per year)
  p32_IGR(t_all,j,ac)                                Instantaneous growth rate or periodic annual increment of forest growth (1)
  p32_rot_flg(t_all,j,ac)                            Identifier flag when calculating rotation length (1)
  p32_rotation_regional(t_all,i)                     Regional average rotation length of plantations translated to age class equivalent for future (1)
@@ -55,6 +55,7 @@ parameters
  p32_forestry_product_dist(t,i,kforestry)           Distribution of wood products (1)
  p32_future_to_current_demand_ratio(t,i)            Ratio of future and current timber demand (1)
  p32_demand_forestry_future(t,i,kforestry)          Future forestry demand in current time step (tDM per yr)
+ p32_est_cost(type32)                               Establishment cost (USD per ha)
 ;
 
 positive variables

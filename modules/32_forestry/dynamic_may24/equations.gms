@@ -143,7 +143,7 @@ q32_bv_plant(j2,potnatveg) .. vm_bv(j2,"plant",potnatveg)
 q32_cost_establishment(i2)..
   v32_cost_establishment(i2)
   =e=
-   (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * s32_reESTBcost))
+   (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * p32_est_cost(type32)))
      * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
    + sum((ct,kforestry), v32_prod_forestry_future(i2) * p32_forestry_product_dist(ct,i2,kforestry) * im_timber_prod_cost(kforestry))
      / ((1+sum(ct,pm_interest(ct,i2))**sum(ct, p32_rotation_regional(ct,i2)*5)));
@@ -165,7 +165,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' As plantation establishment decisions should 
 *' also know some indication of expected future yields, we calculate how much yield
 *' newly established plantation can realize based on rotation lengths. This is defined as
-*' the expected future yield (`pc32_yield_forestry_future`) at harvest.
+*' the expected future yield (`p32_yield_forestry_future`) at harvest.
 
 *' Future expected production is calculated for the establishment decision below and the costs above 
 *' based on newly established areas and expected future yields. 
@@ -173,7 +173,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_prod_forestry_future(i2) ..
               v32_prod_forestry_future(i2)
               =e=
-              sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) * pc32_yield_forestry_future(j2)) / m_timestep_length_forestry 
+              sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) * sum(ct, p32_yield_forestry_future(ct,j2))) / m_timestep_length_forestry 
               ;
 
 *' Future expected production has to be equal or larger than future demand multiplied with the plantation contribution factor.

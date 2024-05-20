@@ -4,8 +4,6 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
-$setglobal c32_timber_plantations  plantations
-* option: natveg, plantations
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  npi
@@ -16,10 +14,6 @@ $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
 $setglobal c32_interest_rate  regional
 * options regional, global
-$setglobal c32_dev_scen  abare
-* options abare, brown
-$setglobal c32_incr_rate  h5s2l1
-* options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
 $setglobal c32_rot_calc_type  current_annual_increment
 * option  max_increment, max_npv
 $setglobal c32_rot_calc_type  current_annual_increment
@@ -30,9 +24,10 @@ $setglobal c32_shock_scenario  none
 
 scalars
   s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous) / 2 /
-  s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
+  s32_est_cost_plant              Establishment cost for plantations (USD per ha) / 10000 /
+  s32_est_cost_natveg             Establishment cost for natural vegetation (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
-  s32_harvesting_cost             Harvesting cost (USD per ha) / 1000 /
+  s32_harvesting_cost             Harvesting cost (USD per ha) / 2000 /
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
