@@ -33,14 +33,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** added start scripts for the GENIE project
 - **scenario_config.csv** added preset for GENIE project
 - **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
+- **21_trade** Minimum trade margin for forestry products `s21_min_trade_margin_forestry`
 
 ### removed
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
 - **scripts** removed support for spam files in start_functions
-- **14_yields** removed interface `pm_timber_yield_initial`, no longer needed
-- **21_trade** removed interface `pm_selfsuff_ext`, no longer needed
-- **32_forestry** removed interface `pm_representative_rotation`, no longer needed
-- **73_timber** removed interface `pm_demand_forestry_future`, no longer needed
+- **14_yields** removed interface `pm_timber_yield_initial`
+- **21_trade** removed interface `pm_selfsuff_ext`, removed `v21_manna_from_heaven`
+- **32_forestry** removed interface `pm_representative_rotation`
+- **73_timber** removed interface `pm_demand_forestry_future`
 
 ### fixed
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs

@@ -26,6 +26,9 @@ i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_tar
 );
 );
 
+i21_trade_margin(h,"wood")$(i21_trade_margin(h,"wood") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
+i21_trade_margin(h,"woodfuel")$(i21_trade_margin(h,"woodfuel") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
+
 v21_import_for_feasibility.fx(h,k_trade) = 0;
 v21_import_for_feasibility.lo(h,k_import21) = 0;
 v21_import_for_feasibility.up(h,k_import21) = Inf;
