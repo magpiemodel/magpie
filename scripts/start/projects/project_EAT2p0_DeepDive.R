@@ -177,15 +177,16 @@ start_run(cfg, codeCheck = FALSE)
 ### Composition ###
 # Mitigation components:
 # (1a) Nationally Determined Contributions (NDCs)
-cfg$title <- "BAU_NDC"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
-cfg <- bau(cfg = cfg)
+#cfg$title <- "BAU_NDC"
+#cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+#cfg <- bau(cfg = cfg)
 # set path to bioenergy and prices to NDC run
-cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NDC-rem-5/REMIND_generic_C_SSP2EU-NDC-rem-5.mif"
-cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NDC-rem-5/REMIND_generic_C_SSP2EU-NDC-rem-5.mif"
-cfg$gms$c60_2ndgen_biodem <- "coupling"
-start_run(cfg, codeCheck = FALSE)
+#cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NDC-rem-5/REMIND_generic_C_SSP2EU-NDC-rem-5.mif"
+#cfg$gms$c56_pollutant_prices <- "coupling"
+#cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NDC-rem-5/REMIND_generic_C_SSP2EU-NDC-rem-5.mif"
+#cfg$gms$c60_2ndgen_biodem <- "coupling"
+#start_run(cfg, codeCheck = FALSE)
+# Note: Exclude NDC run for now. Starting point is NPi and we do not look at policies, but only mitigation measures (demand side vs. supply side)
 
 # (1b) BAU + Bioenergy #
 # Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
@@ -224,12 +225,12 @@ start_run(cfg, codeCheck = FALSE)
 
 # BAU + EL2-Diet #
 # PHD components:
-# (1e) Productivity 
-cfg$title <- "BAU_Prod"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
-cfg <- bau(cfg = cfg)
-cfg <- prod(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
+# (1e) Productivity
+#cfg$title <- "BAU_Prod"
+#cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+#cfg <- bau(cfg = cfg)
+#cfg <- prod(cfg = cfg)
+#start_run(cfg, codeCheck = FALSE)
 
 # (1f) Waste
 cfg$title <- "BAU_Waste"
@@ -245,12 +246,12 @@ cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
-# (1e,f,g) All Globally achieves EL2 (Diet+Waste+Prod) by 2050
-cfg$title <- "BAU_PHD"
+# (1e,f,g) Demand-side options (Diet+Waste) by 2050
+cfg$title <- "BAU_Dem"
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
+#cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
@@ -258,18 +259,18 @@ start_run(cfg, codeCheck = FALSE)
 ### Single measure Decomposition ###
 # (2a) MITI_NDC #
 # All production-side land-based mitigation measures and demand-side mitigation (diet change), but no NDCs
-cfg$title <- "MITI_NDC"
+#cfg$title <- "MITI_NDC"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+#cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
-cfg <- bau(cfg = cfg)
+#cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
-cfg <- miti(cfg = cfg)
+#cfg <- miti(cfg = cfg)
 # PHD (diet, prod, waste)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
+#cfg <- diet(cfg = cfg)
+#cfg <- prod(cfg = cfg)
+#cfg <- waste(cfg = cfg)
+#start_run(cfg, codeCheck = FALSE)
 
 # MITI_Bioenergy (mitigation - bioenergy) #
 # (2b) CO2 and non-CO2 pricing and demand-side mitigation (diet change), but no bioenergy demand from REMIND
@@ -284,7 +285,7 @@ cfg$gms$c60_2ndgen_biodem <- "coupling"
 cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
 # PHD
 cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
+#cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
@@ -301,7 +302,7 @@ cfg <- miti(cfg = cfg)
 cfg$gms$c56_emis_policy <- "ecoSysProtAll_agMgmtOff"
 # PHD
 cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
+#cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
@@ -318,7 +319,7 @@ cfg <- miti(cfg = cfg)
 cfg$gms$c56_emis_policy <- "ecoSysProtOff"
 # PHD
 cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
+#cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
@@ -331,25 +332,25 @@ cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
 # PHD (diet, prod, waste)
 cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
+#cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 
 # MITI_Prod #
 # (2e) All production-side land-based mitigation measures and demand-side mitigation without Prod
-cfg$title <- "MITI_Prod"
+#cfg$title <- "MITI_Prod"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+#cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 # BAU settings
-cfg <- bau(cfg = cfg)
+#cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
-cfg <- miti(cfg = cfg)
+#cfg <- miti(cfg = cfg)
 # PHD (diet, prod, waste)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
+#cfg <- diet(cfg = cfg)
+#cfg <- prod(cfg = cfg)
+#cfg <- waste(cfg = cfg)
+#start_run(cfg, codeCheck = FALSE)
 
 # MITI_Waste #
 # (2f) All production-side land-based mitigation measures and demand-side mitigation without Waste
@@ -362,7 +363,7 @@ cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
 # PHD (diet, prod, waste)
 cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
+#cfg <- prod(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # MITI_Diet #
@@ -375,13 +376,13 @@ cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
 cfg <- miti(cfg = cfg)
 # PHD (diet, prod, waste)
-cfg <- prod(cfg = cfg)
+#cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # MITI_PHD (mitigation - PHD) #
-# (2e,f,g) All production-side land-based mitigation measures, but no demand-side mitigation (PHD)
-cfg$title <- "MITI_PHD"
+# (2e,f,g) All production-side land-based mitigation measures, but no demand-side mitigation
+cfg$title <- "MITI_Dem"
 # standard setting, but with NDC for miti
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 # BAU settings
@@ -390,68 +391,42 @@ cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
-### Stacked Decomposition ###
-# (3a) Stacked 0: BAU_NPi (see above)
-
-# (3b) Stacked 1: BAU_NDC (see above)
-
-# (3c) Stacked 2: BAU_NDC_Bioenergy
-cfg$title <- "Stacked2"
-# standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
-# BAU settings
+### Combining demand-side changes with single mitigation measures ###
+# (3b) Demand-side change + Bioenergy #
+# Decomposition Scenario with demand-side changes. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "DEM_Bioenergy"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
-# Mitigation (bioenergy)
 cfg <- bioenergy(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-# (3d) Stacked 3: BAU_NDC_Bioenergy_nCO2
-cfg$title <- "Stacked3"
-# standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
-# BAU settings
-cfg <- bau(cfg = cfg)
-# Mitigation (non-CO2, bioenergy)
-cfg <- bioenergy(cfg = cfg)
-cfg <- priceNonCO2(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-# (3e) Stacked 4: BAU_NDC_Bioenergy_nCO2_CO2
-cfg$title <- "Stacked4"
-# standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
-# BAU settings
-cfg <- bau(cfg = cfg)
-# Mitigation (CO2, non-CO2, bioenergy)
-cfg <- miti(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-# (3f) Stacked 5: BAU_NDC_Bioenergy_nCO2_CO2_prod
-cfg$title <- "Stacked5"
-# standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
-# BAU settings
-cfg <- bau(cfg = cfg)
-# Mitigation (CO2, non-CO2, bioenergy)
-cfg <- miti(cfg = cfg)
-# PHD (diet, prod, waste)
-cfg <- prod(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-# (3g) Stacked 6: BAU_NDC_Bioenergy_nCO2_CO2_prod_waste
-cfg$title <- "Stacked6"
-# standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
-# BAU settings
-cfg <- bau(cfg = cfg)
-# Mitigation (CO2, non-CO2, bioenergy)
-cfg <- miti(cfg = cfg)
-# PHD (diet, prod, waste)
-cfg <- prod(cfg = cfg)
+# Demand-side change (diet, waste)
+cfg <- diet(cfg = cfg)
+# cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
-# (3h) Stacked 7: BAU_NDC_Bioenergy_nCO2_CO2_prod_waste_diet (same as MITI_All, see below)
+# (3c) Demand-side + NonCO2 pricing in land sector #
+# Decomposition Scenario with demand-side changes. Adds non-CO2 pricing with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "DEM_NonCO2"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- bau(cfg = cfg)
+cfg <- priceNonCO2(cfg = cfg)
+# Demand-side change (diet, waste)
+cfg <- diet(cfg = cfg)
+# cfg <- prod(cfg = cfg)
+cfg <- waste(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
+# (3d) Demand-side + pricing of CO2 in land sector #
+# Decomposition Scenario with demand-side changes. Adds CO2 pricing on land-use change emissions with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "DEM_CO2"
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- bau(cfg = cfg)
+cfg <- priceCO2(cfg = cfg)
+# Demand-side change (diet, waste)
+cfg <- diet(cfg = cfg)
+# cfg <- prod(cfg = cfg)
+cfg <- waste(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
 
 ### All measures ###
 # MITI_All #
@@ -465,6 +440,6 @@ cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
 # PHD (diet, prod, waste)
 cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
+#cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
