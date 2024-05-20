@@ -52,6 +52,7 @@ scalars
   s32_plant_contr_growth_startvalue Start value for plantation contribution growth fader (percent per year) / 0.05 /
   s32_plant_contr_growth_endvalue   End value for plantation contribution growth fader (percent per year) / 0 /
   s32_plant_contr_max               Maximum plantation contribution for establishment decision (percent) / 0.5 /
+  s32_demand_establishment          Boolean switch for establishment demand assumption 1=forward looking 0=static (1) / 1 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

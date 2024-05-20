@@ -93,6 +93,3 @@ p73_glo_wood(t_all,kforestry) = sum(i,pm_demand_forestry(t_all,i,kforestry));
 
 im_timber_prod_cost("wood") = s73_timber_prod_cost_wood;
 im_timber_prod_cost("woodfuel") = s73_timber_prod_cost_woodfuel;
-
-* initialize values for presolve of other modules
-pm_demand_forestry_future(t,i,kforestry) = pm_demand_forestry(t,i,kforestry) * s73_demand_multiplier_hist;

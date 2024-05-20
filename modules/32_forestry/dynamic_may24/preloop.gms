@@ -100,8 +100,6 @@ p32_ncells(i) = sum(cell(i,j),1);
 **** Representative regional rotation
 loop(t_all,
   p32_rotation_regional(t_all,i) = ceil(sum(cell(i,j), p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
-*  pm_representative_rotation(t_all,i) = ord(t_all) + ceil(sum(cell(i,j),p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
-  pm_representative_rotation(t_all,i) = ceil(sum(cell(i,j),p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
   );
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion

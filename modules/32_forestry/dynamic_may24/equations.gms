@@ -146,7 +146,7 @@ q32_cost_establishment(i2)..
    (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * s32_reESTBcost))
      * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
    + sum((ct,kforestry), v32_prod_forestry_future(i2) * p32_forestry_product_dist(ct,i2,kforestry) * im_timber_prod_cost(kforestry))
-     / ((1+sum(ct,pm_interest(ct,i2))**sum(ct, pm_representative_rotation(ct,i2)*5)));
+     / ((1+sum(ct,pm_interest(ct,i2))**sum(ct, p32_rotation_regional(ct,i2)*5)));
 
 
 *' Recurring costs are paid for plantations where the trees have to be regularly monitored
@@ -161,7 +161,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 **** New establishment decision
 *------------------------------
 *' New plantations are established in the optimization step based on a certain
-*' percentage (`p32_plant_contr`) of expected future demand (`pm_demand_forestry_future`).
+*' percentage (`p32_plant_contr`) of expected future demand (`p32_demand_forestry_future`).
 *' As plantation establishment decisions should 
 *' also know some indication of expected future yields, we calculate how much yield
 *' newly established plantation can realize based on rotation lengths. This is defined as
@@ -181,7 +181,7 @@ q32_prod_forestry_future(i2) ..
 q32_establishment_demand(i2)$s32_establishment_dynamic ..
               v32_prod_forestry_future(i2)
               =g=
-              sum((ct,kforestry), pm_demand_forestry_future(ct,i2,kforestry)) * sum(ct, p32_plant_contr(ct,i2))
+              sum((ct,kforestry), p32_demand_forestry_future(ct,i2,kforestry)) * sum(ct, p32_plant_contr(ct,i2))
               ;
 
 *' Harvested areas are fully re-established at cell level, unless the ratio of future and current demand drops below 1.

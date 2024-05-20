@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3.
 - **scripts** start/test_runs.R added 2 more test runs from FSEC
 - **32_forestry** revision and simplification of forestry implementation, renamed realization from `dynamic_feb21` to `dynamic_may24`. Renamed `pm_demand_ext` to `pm_demand_forestry`
+- **32_forestry** renamed interface `pm_demand_ext` to `pm_demand_forestry`
 - **default.cfg** ForestryEndo as default setting
 
 ### added
@@ -37,6 +38,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** removed support for spam files in start_functions
 - **14_yields** removed interface `pm_timber_yield_initial`, no longer needed
 - **21_trade** removed interface `pm_selfsuff_ext`, no longer needed
+- **32_forestry** removed interface `pm_representative_rotation`, no longer needed
+- **73_timber** removed interface `pm_demand_forestry_future`, no longer needed
 
 ### fixed
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs

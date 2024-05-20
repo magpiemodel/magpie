@@ -173,10 +173,23 @@ else
 );
 p32_plant_contr(t,i)$(p32_plant_contr(t,i) > s32_plant_contr_max) = s32_plant_contr_max; 
 
-p32_forestry_product_dist(t,i,kforestry)$(pm_demand_forestry_future(t,i,kforestry) > 0) = pm_demand_forestry_future(t,i,kforestry) / sum(kforestry2, pm_demand_forestry_future(t,i,kforestry2));
-p32_forestry_product_dist(t,i,kforestry)$(pm_demand_forestry_future(t,i,kforestry) = 0) = 1/card(kforestry);
+** demand for establishment decision depends on s32_demand_establishment:
+** s32_demand_establishment = 0 static (establishment based on current demand)
+** s32_demand_establishment = 1 forward looking (establishment based on future demand according to rotation length)
+if(s32_demand_establishment = 1,
+  if(m_year(t) <= sm_fix_SSP2,
+    p32_demand_forestry_future(t,i,kforestry) = sum(t2$(m_year(t2) = sm_fix_SSP2), pm_demand_forestry(t2,i,kforestry));
+  else
+    p32_demand_forestry_future(t,i,kforestry) = sum(t_ext$(t_ext.pos = t.pos + p32_rotation_regional(t,i)),pm_demand_forestry(t_ext,i,kforestry));
+   );
+else
+  p32_demand_forestry_future(t,i,kforestry) = pm_demand_forestry(t,i,kforestry); 
+ );
 
-p32_future_to_current_demand_ratio(t,i)$(sum(kforestry, pm_demand_forestry(t,i,kforestry)) > 0) = sum(kforestry, pm_demand_forestry_future(t,i,kforestry)) / sum(kforestry, pm_demand_forestry(t,i,kforestry));
+p32_forestry_product_dist(t,i,kforestry)$(p32_demand_forestry_future(t,i,kforestry) > 0) = p32_demand_forestry_future(t,i,kforestry) / sum(kforestry2, p32_demand_forestry_future(t,i,kforestry2));
+p32_forestry_product_dist(t,i,kforestry)$(p32_demand_forestry_future(t,i,kforestry) = 0) = 1/card(kforestry);
+
+p32_future_to_current_demand_ratio(t,i)$(sum(kforestry, pm_demand_forestry(t,i,kforestry)) > 0) = sum(kforestry, p32_demand_forestry_future(t,i,kforestry)) / sum(kforestry, pm_demand_forestry(t,i,kforestry));
 p32_future_to_current_demand_ratio(t,i)$(sum(kforestry, pm_demand_forestry(t,i,kforestry)) = 0) = 0;
 
 * Avoid conflict between afforestation for carbon uptake on land and secdforest restoration

@@ -42,7 +42,6 @@ parameters
  p32_rot_flg_faustmann(t_all,j,ac)                  Identifier flag when calculating faustmann rotation length (1)
  p32_rot_length_faustmann(t_all,j)                  Cellular Faustmann rotation length of plantations translated to age class equivalent (1)
  p32_ncells(i)                                      Number of cells in each region (1)
- pm_representative_rotation(t_all,i)                Representative regional rotation (1)
  p32_aff_bgp(j,ac)                                  Biophysical impact of afforestation (tCeq per ha)
  p32_tcre_glo(j)                                    Global mean Transient Climate Response to cumulative Emissions (degree C per tC per ha)
  p32_avg_increment(t_all,j,ac)                      Mean annual increment (tC per ha per year)
@@ -55,6 +54,7 @@ parameters
  p32_plant_contr(t,i)                               Share of roundwood production coming from timber plantations (percent)
  p32_forestry_product_dist(t,i,kforestry)           Distribution of wood products (1)
  p32_future_to_current_demand_ratio(t,i)            Ratio of future and current timber demand (1)
+ p32_demand_forestry_future(t,i,kforestry)          Future forestry demand in current time step (tDM per yr)
 ;
 
 positive variables
