@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** revision and simplification of forestry implementation, renamed realization from `dynamic_feb21` to `dynamic_may24`. Renamed `pm_demand_ext` to `pm_demand_forestry`
 - **32_forestry** renamed interface `pm_demand_ext` to `pm_demand_forestry`
 - **default.cfg** ForestryEndo as default setting
+- **14_yields** revised timber yield calculations
 
 ### added
 - **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth`
