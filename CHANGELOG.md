@@ -29,6 +29,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** added start scripts for the GENIE project
 - **scenario_config.csv** added preset for GENIE project
 - **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
+- **scripts** added "checkSummation" output script for consistency checking a report.mif
+- **citation** added abstract
 
 ### removed
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
