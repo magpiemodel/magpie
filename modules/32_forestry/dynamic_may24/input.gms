@@ -24,7 +24,7 @@ $setglobal c32_shock_scenario  none
 
 scalars
   s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous) / 2 /
-  s32_est_cost_plant              Establishment cost for plantations (USD per ha) / 10000 /
+  s32_est_cost_plant              Establishment cost for plantations (USD per ha) / 2000 /
   s32_est_cost_natveg             Establishment cost for natural vegetation (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
   s32_harvesting_cost             Harvesting cost (USD per ha) / 2000 /

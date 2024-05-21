@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** renamed interface `pm_demand_ext` to `pm_demand_forestry`
 - **default.cfg** Forestry sector included by default by using the `ForestryEndo` settings from `scenario_config.csv`: `s32_initial_distribution = 1`, `s32_demand_establishment = 1`, `s32_hvarea = 2`, `s35_secdf_distribution = 2`, `s35_hvarea = 2`, `s73_timber_demand_switch = 1`
 - **14_yields** revised timber yield calculations
+- **35_natveg**  `vm_land(j2,"forestry")` included in NPI/NDC constraint `q35_min_forest`
 
 ### added
 - **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth`

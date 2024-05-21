@@ -170,7 +170,8 @@ p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools
 * NPI/NDC policy
 * ------------------
 
-p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
+p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest") + pcm_land(j,"forestry")) 
+  = pcm_land(j,"primforest") + pcm_land(j,"secdforest") + pcm_land(j,"forestry");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
 ** Youngest age classes are not allowed to be harvested
