@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
 - **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3.
 - **scripts** start/test_runs.R added 2 more test runs from FSEC
-- **32_forestry** revision and simplification of forestry implementation, renamed realization from `dynamic_feb21` to `dynamic_may24`. Renamed `pm_demand_ext` to `pm_demand_forestry`
+- **32_forestry** revision and simplification of forestry implementation, renamed realization from `dynamic_feb21` to `dynamic_may24`. 
 - **32_forestry** renamed interface `pm_demand_ext` to `pm_demand_forestry`
 - **default.cfg** ForestryEndo as default setting
 - **14_yields** revised timber yield calculations
