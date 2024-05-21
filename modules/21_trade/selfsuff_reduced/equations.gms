@@ -12,19 +12,21 @@
  q21_trade_glo(k_trade)..
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
   sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
+  
 *'
-*' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
+*' For non-tradable commodites, the superregional supply should be larger or equal to the superregional demand.
  q21_notrade(h2,k_notrade)..
   sum(supreg(h2,i2),vm_prod_reg(i2,k_notrade)) =g= sum(supreg(h2,i2), vm_supply(i2,k_notrade));
 
-*' The following equation indicates the regional trade constraint for the self-sufficiency pool.
-*' The share of regional demand that has to be fulfilled through the self-sufficiency pool is
+*' The following equations indicate the superregional trade constraint for the self-sufficiency pool.
+*' The share of superregional demand that has to be fulfilled through the self-sufficiency pool is
 *' determined by a trade balance reduction factor for each commodity  `i21_trade_bal_reduction(ct,k_trade)`
 *' according to the following equations [@schmitz_trading_2012].
 *' If the trade balance reduction equals 1 (`f21_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
-*' Baseline value for a corridor in which the superregional production
+*'
+*' The below equation defines the baseline value for a corridor in which the superregional production
 *' can move freely based on comparative advantage.
 
  q21_prod_baseline(h2,k_trade).. 
@@ -34,7 +36,7 @@
  + (sum(supreg(h2,i2),vm_supply(i2,k_trade)) * sum(ct,f21_self_suff(ct,h2,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1));
 
-*' Lower bound for production.
+*' Lower bound of corridor for production.
 
  q21_trade_reg(h2,k_trade)..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =g=
@@ -42,7 +44,7 @@
  * sum(ct,i21_trade_bal_reduction(ct,k_trade))
  - v21_import_for_feasibility(h2,k_trade);
 
-*' Upper bound for production.
+*' Upper bound of corridor for production.
 
  q21_trade_reg_up(h2,k_trade) ..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =l=
