@@ -44,6 +44,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** removed interface `pm_representative_rotation`
 - **73_timber** removed interfaces `pm_demand_forestry_future` and `sm_wood_density`
 - **62_material/16_demand** Removed double structure for forestry products. `pm_demand_foresty` is now used in `62_material`
+- **35_natveg** removed growing stock calculation and calibration, which is no longer needed.
 
 ### fixed
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
