@@ -1,5 +1,6 @@
 cff-version: 1.0.3
 message: If you use this model, please cite it as below.
+type: software
 authors:
   - family-names: Dietrich
     given-names: Jan Philipp
@@ -156,6 +157,7 @@ repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse
   - modeling
+  - model
   - nlp
   - partial equilibrium
 doi: 10.5281/zenodo.1418752
