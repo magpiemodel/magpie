@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** start/test_runs.R added 2 more test runs from FSEC
 - **32_forestry** revision and simplification of forestry implementation, renamed realization from `dynamic_feb21` to `dynamic_may24`. 
 - **32_forestry** renamed interface `pm_demand_ext` to `pm_demand_forestry`
-- **default.cfg** ForestryEndo as default setting
+- **default.cfg** Forestry sector included by default by using the `ForestryEndo` settings from `scenario_config.csv`: `s32_initial_distribution = 1`, `s32_demand_establishment = 1`, `s32_hvarea = 2`, `s35_secdf_distribution = 2`, `s35_hvarea = 2`, `s73_timber_demand_switch = 1`
 - **14_yields** revised timber yield calculations
 
 ### added
@@ -42,6 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **21_trade** removed interface `pm_selfsuff_ext`, removed `v21_manna_from_heaven`
 - **32_forestry** removed interface `pm_representative_rotation`
 - **73_timber** removed interface `pm_demand_forestry_future`
+- **62_material/16_demand** Removed double structure for forestry products. `pm_demand_foresty` is now used in `62_material`
 
 ### fixed
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
@@ -51,7 +52,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **start/projects/fsec.R** scenario settings
 - **80_optimization** fixed a bug in nlp_apr17; cycling through CONOPT4, CONOPT4 without preprocessing and CONOPT3 was not working
 - **58_peatland** Added balance variable to avoid random infeasibilites
-- **62_material/16_demand** Removed double structure for forestry products. `pm_demand_foresty` is now used in `62_material`
 
 ## [4.7.3] - 2024-04-12
 
