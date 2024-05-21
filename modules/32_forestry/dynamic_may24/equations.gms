@@ -150,15 +150,15 @@ q32_cost_establishment(i2)..
 
 
 *' Recurring costs are paid for plantations where the trees have to be regularly monitored
-*' and maintained. These costs are only calculated becuase we see active human intervention
+*' and maintained. These costs are only calculated because we see active human intervention
 *' in commercial plantations. These costs are paid for trees used for timber production or
-*' trees established for afforestation purposes.
+*' trees established for re/afforestation purposes.
 
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
                     sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * s32_recurring_cost;
 
 
-**** New establishment decision
+**** Plantation establishment decision
 *------------------------------
 *' New plantations are established in the optimization step based on a certain
 *' percentage (`p32_plant_contr`) of expected future demand (`p32_demand_forestry_future`).

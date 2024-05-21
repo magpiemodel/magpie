@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** added preset for GENIE project
 - **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
 - **21_trade** Minimum trade margin for forestry products `s21_min_trade_margin_forestry`
+- **73_timber** added interface `im_timber_prod_cost`
 
 ### removed
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
@@ -41,7 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **14_yields** removed interface `pm_timber_yield_initial`
 - **21_trade** removed interface `pm_selfsuff_ext`, removed `v21_manna_from_heaven`
 - **32_forestry** removed interface `pm_representative_rotation`
-- **73_timber** removed interface `pm_demand_forestry_future`
+- **73_timber** removed interfaces `pm_demand_forestry_future` and `sm_wood_density`
 - **62_material/16_demand** Removed double structure for forestry products. `pm_demand_foresty` is now used in `62_material`
 
 ### fixed

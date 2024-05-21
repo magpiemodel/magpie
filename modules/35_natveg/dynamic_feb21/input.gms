@@ -47,10 +47,3 @@ $ondelim
 $include "./modules/35_natveg/input/f35_forest_disturbance_share.cs4"
 $offdelim
 /;
-
-parameter f35_gs_relativetarget(i) Relative growing stock target in each region (m3 per ha)
-/
-$ondelim
-$include "./modules/35_natveg/input/f35_gs_relativetarget.cs4"
-$offdelim
-/;

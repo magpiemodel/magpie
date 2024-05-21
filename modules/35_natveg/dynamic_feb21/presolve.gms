@@ -173,14 +173,6 @@ p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools
 p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
-** Display
-p35_land(t,j,land_natveg,ac) = 0;
-p35_land(t,j,"primforest","acx") = pcm_land(j,"primforest");
-p35_land(t,j,"secdforest",ac) = p35_secdforest(t,j,ac);
-*p35_land(t,j,"other",ac) = p35_other(t,j,ac):
-p35_updated_gs_natfor(t,i) = 0;
-p35_updated_gs_natfor(t,i)$(sum((cell(i,j),ac,land_natveg), p35_land(t,j,land_natveg,ac))>0) = (sum((cell(i,j),ac,land_natveg),(pm_timber_yield(t,j,ac,land_natveg) / sm_wood_density) * p35_land(t,j,land_natveg,ac))/ sum((cell(i,j),ac,land_natveg), p35_land(t,j,land_natveg,ac)));
-
 ** Youngest age classes are not allowed to be harvested
 v35_hvarea_secdforest.fx(j,ac_est) = 0;
 v35_hvarea_other.fx(j,ac_est) = 0;

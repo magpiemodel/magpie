@@ -5,15 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The main feature of the this realization is afforestation for CDR
-*' and timber production. Afforestation can be modelled exogenously (prescribed
+*' @description The main features of the this realization are re/afforestation for CDR
+*' and timber production. Re/afforestation can be modelled exogenously (prescribed
 *' by NPI/NDC policies) and/or endogenously (incentivized by a reward for CDR).
 *' National policies implemented (NPI) and nationally determined contributions to
-*' the Paris agreement (NDC) for afforestation are based on country reports. The
+*' the Paris agreement (NDC) for re/afforestation are based on country reports. The
 *' interface `vm_cdr_aff` includes the expected CDR and local bph effects from
-*' afforestation depending on the planning horizon `s32_planing_horizon`. The
-*' reward for CDR and local bph effects from afforestation is calculated in the
-*' [56_ghg_policy] module. In this realization, afforestation is modeled by default
+*' re/afforestation depending on the planning horizon `s32_planing_horizon`. The
+*' reward for CDR and local bph effects from re/afforestation is calculated in the
+*' [56_ghg_policy] module. In this realization, re/afforestation is modeled by default
 *' as regrowth of natural vegetation (see @humpenoder_investigating_2014 for details on the implemenation).
 *' The regrowth of natural vegetation follows S-shaped growth curves, which are
 *' parametrized based on @braakhekke_modelling_2019. Additionally this module
