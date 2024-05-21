@@ -24,26 +24,30 @@
 *' If the trade balance reduction equals 1 (`f21_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
+*' Baseline value for a corridor in which the superregional production
+*' can move freely based on comparative advantage.
+
+ q21_prod_baseline(h2,k_trade).. 
+ v21_prod_baseline(h2,k_trade) =e= 
+ (sum(supreg(h2,i2),vm_supply(i2,k_trade)) + v21_excess_prod(h2,k_trade))
+ $(sum(ct,f21_self_suff(ct,h2,k_trade) >= 1))
+ + (sum(supreg(h2,i2),vm_supply(i2,k_trade)) * sum(ct,f21_self_suff(ct,h2,k_trade)))
+ $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1));
+
 *' Lower bound for production.
 
  q21_trade_reg(h2,k_trade)..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =g=
- ((sum(supreg(h2,i2),vm_supply(i2,k_trade)) + v21_excess_prod(h2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
- $(sum(ct,f21_self_suff(ct,h2,k_trade) >= 1))
- + (sum(supreg(h2,i2),vm_supply(i2,k_trade))*sum(ct,f21_self_suff(ct,h2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
- $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1))
+ v21_prod_baseline(h2,k_trade)
+ * sum(ct,i21_trade_bal_reduction(ct,k_trade))
  - v21_import_for_feasibility(h2,k_trade);
 
 *' Upper bound for production.
 
  q21_trade_reg_up(h2,k_trade) ..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =l=
- ((sum(supreg(h2,i2),vm_supply(i2,k_trade)) + v21_excess_prod(h2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
- $(sum(ct,f21_self_suff(ct,h2,k_trade) >= 1))
- + (sum(supreg(h2,i2),vm_supply(i2,k_trade))*sum(ct,f21_self_suff(ct,h2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
- $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1));
+ v21_prod_baseline(h2,k_trade)
+ / sum(ct,i21_trade_bal_reduction(ct,k_trade));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to
 *' the sum over all the imports of importing regions.

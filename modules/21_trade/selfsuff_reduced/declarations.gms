@@ -15,6 +15,7 @@ parameters
 positive variables
  v21_excess_dem(k_trade)                 Global excess demand (mio. tDM per yr)
  v21_excess_prod(h,k_trade)              Superregional excess production (mio. tDM per yr)
+ v21_prod_baseline(h,k_trade)            Superregional production baseline value (mio. tDM per yr)
  vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER per yr)
  v21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
  v21_import_for_feasibility(h,k_trade)   Additional imports to maintain feasibility (mio. tDM per yr)
@@ -23,6 +24,7 @@ positive variables
 equations
  q21_trade_glo(k_trade)                  Global production constraint (mio. tDM per yr)
  q21_notrade(h,k_notrade)                Superregional production constraint of non-tradable commodities (mio. tDM per yr)
+ q21_prod_baseline(h,k_trade)            Superregional production baseline value (mio. tDM per yr)
  q21_trade_reg(h,k_trade)                Superregional trade balances i.e. minimum self-sufficiency ratio (1)
  q21_trade_reg_up(h,k_trade)             Superregional trade balances i.e. maximum self-sufficiency ratio (1)
  q21_excess_dem(k_trade)                 Global excess demand (mio. tDM per yr)
