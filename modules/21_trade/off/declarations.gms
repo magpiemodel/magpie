@@ -5,10 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-parameters
-pm_selfsuff_ext(t_ext,h,kforestry)            Self sufficiency for timber products in extended time frame (1)
-;
-
 positive variables
  vm_cost_trade(i)                            Regional  trade costs (mio. USD05MER per yr)
 ;

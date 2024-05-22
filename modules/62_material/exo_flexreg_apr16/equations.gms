@@ -19,14 +19,20 @@
 *' For historic years it is assumed that this demand is already part of the
 *' general material demand, therefore the double-counted demand is subtracted.
 
- q62_dem_material(i2,kall) ..
-                      vm_dem_material(i2,kall)
+ q62_dem_material(i2,kall_excl_kforestry) ..
+                      vm_dem_material(i2,kall_excl_kforestry)
                       =e=
-                      sum(ct,f62_dem_material(ct,i2,kall))*s62_historical
+                      sum(ct,f62_dem_material(ct,i2,kall_excl_kforestry))*s62_historical
                       +
-                      (p62_dem_material_lastcalibyear(i2,kall) * p62_scaling_factor(i2))
-                      *(1-s62_historical) + sum(ct, p62_bioplastic_substrate(ct, i2, kall)) -
-                      sum(ct, p62_bioplastic_substrate_double_counted(ct,i2,kall))
+                      (p62_dem_material_lastcalibyear(i2,kall_excl_kforestry) * p62_scaling_factor(i2))
+                      *(1-s62_historical) + sum(ct, p62_bioplastic_substrate(ct, i2, kall_excl_kforestry)) -
+                      sum(ct, p62_bioplastic_substrate_double_counted(ct,i2,kall_excl_kforestry))
                       ;
 
+*' Demand for forestry products (wood and woodfuel) is provided by the timber module.
 
+ q62_dem_material_forestry(i2,kforestry) ..
+                      vm_dem_material(i2,kforestry)
+                      =e=
+                      sum(ct, pm_demand_forestry(ct,i2,kforestry));
+                      ;

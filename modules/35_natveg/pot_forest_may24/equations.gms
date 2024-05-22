@@ -73,7 +73,7 @@
 *' the natural land conservation constraint) and specifically formulated for forest and
 *' other land stocks.
 
- q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest")
+ q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") + vm_land(j2,"forestry")
                        =g=
                        sum(ct, p35_min_forest(ct,j2));
 

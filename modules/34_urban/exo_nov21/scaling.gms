@@ -5,5 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*set vm_cost_trade zero in order to avoid a free variable
-vm_cost_trade.fx(i)               = 0;
+vm_cost_urban.scale(j) = 10e4;

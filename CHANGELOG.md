@@ -9,11 +9,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **22_land_conservation and default.cfg** Added options for baseline protection
 - **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
-- **70_livestock, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
+- **70_livestock** default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
 - **default.cfg** update additional data to rev4.50
 - **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
 - **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3.
 - **scripts** start/test_runs.R added 2 more test runs from FSEC
+- **32_forestry** revision and simplification of forestry implementation, renamed realization from `dynamic_feb21` to `dynamic_may24`.
+- **32_forestry** renamed interface `pm_demand_ext` to `pm_demand_forestry`
+- **default.cfg** Forestry sector included by default by using the `ForestryEndo` settings from `scenario_config.csv`: `s32_initial_distribution = 1`, `s32_demand_establishment = 1`, `s32_hvarea = 2`, `s35_secdf_distribution = 2`, `s35_hvarea = 2`, `s73_timber_demand_switch = 1`
+- **14_yields** revised timber yield calculations
+- **35_natveg**  `vm_land(j2,"forestry")` included in NPI/NDC constraint `q35_min_forest`
+- **35_natveg** replaced the realisation `dynamic_feb21` with realisation `pot_forest_may24`. The new realisation provides additional information on the potential forest area, which is now used to constrain forest and forestry expansion. The remaining area for forest establishment is provided to the forestry module via the new interface parameter `pcm_max_forest_est`.
+- **52_carbon** Separate carbon densities for forest and other land. Before there was only a single carbon density for natural vegetation land.
 
 ### added
 - **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth`
@@ -29,10 +36,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** added start scripts for the GENIE project
 - **scenario_config.csv** added preset for GENIE project
 - **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
+- **21_trade** Minimum trade margin for forestry products `s21_min_trade_margin_forestry`
+- **73_timber** added interface `im_timber_prod_cost`
+- **scripts** added "checkSummation" output script for consistency checking a report.mif
+- **citation** added abstract
 
 ### removed
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
 - **scripts** removed support for spam files in start_functions
+- **14_yields** removed interface `pm_timber_yield_initial`
+- **21_trade** removed interface `pm_selfsuff_ext`, removed `v21_manna_from_heaven`
+- **32_forestry** removed interface `pm_representative_rotation`
+- **73_timber** removed interfaces `pm_demand_forestry_future` and `sm_wood_density`
+- **62_material/16_demand** Removed double structure for forestry products. `pm_demand_foresty` is now used in `62_material`
+- **35_natveg** removed growing stock calculation and calibration, which is no longer needed.
 
 ### fixed
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
@@ -42,7 +59,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **start/projects/fsec.R** scenario settings
 - **80_optimization** fixed a bug in nlp_apr17; cycling through CONOPT4, CONOPT4 without preprocessing and CONOPT3 was not working
 - **58_peatland** Added balance variable to avoid random infeasibilites
-
 
 ## [4.7.3] - 2024-04-12
 

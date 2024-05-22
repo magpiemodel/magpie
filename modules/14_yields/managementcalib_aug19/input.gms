@@ -18,7 +18,7 @@ scalar s14_degradation   Switch to include yield impacts of land degradation(0=n
 
 scalar s14_use_yield_calib  Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /;
 
-scalar s14_minimum_wood_yield Minimum wood yield for timber harvest in natural vegetation (tDM per ha per yr) / 20 /;
+scalar s14_minimum_wood_yield Minimum wood yield for timber harvest in natural vegetation (tDM per ha per yr) / 10 /;
 
 scalars
   s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
@@ -26,7 +26,6 @@ scalars
 ;
 
 scalars
-  s14_timber_plantation_yield Plantation yield switch (0=natveg yields 1=plantation yields) (1) / 1 /
   s14_carbon_fraction Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
 ;
 

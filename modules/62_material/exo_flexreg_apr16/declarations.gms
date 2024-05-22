@@ -26,12 +26,14 @@ positive variables
 ;
 
 equations
-  q62_dem_material(i,kall)       Estimating material demand (mio. tDM per yr)
+  q62_dem_material(i,kall_excl_kforestry) Estimating material demand (mio. tDM per yr)
+  q62_dem_material_forestry(i,kforestry)  Demand for forestry products (mio. tDM per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_material(t,i,kall,type)   Demand for material usage (mio. tDM per yr)
- oq62_dem_material(t,i,kall,type) Estimating material demand (mio. tDM per yr)
+ ov_dem_material(t,i,kall,type)                  Demand for material usage (mio. tDM per yr)
+ oq62_dem_material(t,i,kall_excl_kforestry,type) Estimating material demand (mio. tDM per yr)
+ oq62_dem_material_forestry(t,i,kforestry,type)  Demand for forestry products (mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

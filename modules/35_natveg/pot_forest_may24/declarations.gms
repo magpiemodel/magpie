@@ -33,8 +33,6 @@ parameters
  p35_disturbance_loss_primf(t,j)                  Loss due to disturbances in primary forest (mio. ha)
  i35_plantedclass_ac(j,ac)                        Area of age-classes in secondary forest (1)
  p35_poulter_dist(j,ac)                           Share of age-classes in secondary forest (1)
- p35_land(t,j,land_natveg,ac)                     Natural vegetation area (mio. ha)
- p35_updated_gs_natfor(t,i)                       Updated growing stock in natural forests after calibration (m3 per ha)
  p35_land_start_ac(j,ac,land_natveg)              Initial Natural vegetation area (mio. ha)
  p35_protection_dist(j,ac)                        Distribution of secondary forest protection (1)
  p35_land_restoration(j,land_natveg)              Actual secondary forest and other land restoration area (mio. ha)

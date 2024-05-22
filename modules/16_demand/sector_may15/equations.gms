@@ -84,5 +84,5 @@ q16_seed_demand(i2,kcr) ..
 
 q16_supply_forestry(i2,kforestry) ..  vm_supply(i2,kforestry)
                                        =e=
-                                       sum(ct,pm_demand_ext(ct,i2,kforestry))
+                                       vm_dem_material(i2,kforestry)
                                        ;

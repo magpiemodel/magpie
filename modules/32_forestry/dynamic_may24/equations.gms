@@ -24,7 +24,7 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                    v32_cost_recur(i2)
                    + v32_cost_establishment(i2)
                    + v32_cost_hvarea(i2)
-                   + sum(cell(i2,j2), v32_land_missing(j2)) * s32_free_land_cost
+                   + sum(cell(i2,j2), v32_land_missing(j2) + v32_land_missing_ndc(j2)) * s32_free_land_cost
                    ;
 
 *-----------------------------------------------
@@ -68,7 +68,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
- sum(ac_est, v32_land(j2,"ndc",ac_est)) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
+ sum(ac_est, v32_land(j2,"ndc",ac_est)) + v32_land_missing_ndc(j2) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global endogenous
 *' afforestation defined in `i32_max_aff_area_glo`.
@@ -141,51 +141,58 @@ q32_bv_plant(j2,potnatveg) .. vm_bv(j2,"plant",potnatveg)
 *' investment over time.
 
 q32_cost_establishment(i2)..
-            v32_cost_establishment(i2)
-            =e=
-            (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * s32_reESTBcost)
-              )
-            * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
+  v32_cost_establishment(i2)
+  =e=
+   (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * p32_est_cost(type32)))
+     * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
+   + sum((ct,kforestry), v32_prod_forestry_future(i2) * p32_forestry_product_dist(ct,i2,kforestry) * im_timber_prod_cost(kforestry))
+     / ((1+sum(ct,pm_interest(ct,i2))**sum(ct, p32_rotation_regional(ct,i2)*5)));
 
 
 *' Recurring costs are paid for plantations where the trees have to be regularly monitored
-*' and maintained. These costs are only calculated becuase we see active human intervention
+*' and maintained. These costs are only calculated because we see active human intervention
 *' in commercial plantations. These costs are paid for trees used for timber production or
-*' trees established for afforestation purposes.
+*' trees established for re/afforestation purposes.
 
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
                     sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * s32_recurring_cost;
 
 
-**** New establishment decision
+**** Plantation establishment decision
 *------------------------------
-*' New plantations are already established in the optimization step based on a certain
-*' percentage (`p32_plantation_contribution`) of current demand (`pm_demand_forestry_future`).
-*' Its called `pm_demand_forestry_future` because the model also has a foresight switch which
-*' give the model an ability to account for future changes in demand. By default `pm_demand_forestry_future`
-*' is set to existing roundwood demand. As plantation establishment decisions should
+*' New plantations are established in the optimization step based on a certain
+*' percentage (`p32_plant_contr`) of expected future demand (`p32_demand_forestry_future`).
+*' As plantation establishment decisions should 
 *' also know some indication of expected future yields, we calculate how much yield
 *' newly established plantation can realize based on rotation lengths. This is defined as
-*' the expected future yield (`pc32_yield_forestry_future`) at harvest (year in time
-*' step are accounted for).
+*' the expected future yield (`p32_yield_forestry_future`) at harvest.
 
-*' Area constraint for plantation establishment based on expected average regional timber yield at rotation age
-*' (`pc32_yield_forestry_future_reg`) to ovoid overspecialization of plantation establishment towards highly productive cells.
+*' Future expected production is calculated for the establishment decision below and the costs above 
+*' based on newly established areas and expected future yields. 
 
-q32_establishment_dynamic(i2)$s32_establishment_dynamic ..
-              sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future_reg(i2))
+q32_prod_forestry_future(i2) ..
+              v32_prod_forestry_future(i2)
               =e=
-              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, sum(supreg(h2,i2),pm_selfsuff_ext(ct,h2,kforestry))) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2))
+              sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) * sum(ct, p32_yield_forestry_future(ct,j2))) / m_timestep_length_forestry 
               ;
 
-*' Constraint to maintain the average regional timber yield at rotation age, accounting for the cellular timber yield (`pc32_yield_forestry_future`).
+*' Future expected production has to be equal or larger than future demand multiplied with the plantation contribution factor.
 
-q32_establishment_dynamic_yield(i2)$s32_establishment_dynamic ..
-      sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
-      =e=
-      pc32_yield_forestry_future_reg(i2) * (sum(cell(i2,j2), sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)));
+q32_establishment_demand(i2)$s32_establishment_dynamic ..
+              v32_prod_forestry_future(i2)
+              =g=
+              sum((ct,kforestry), p32_demand_forestry_future(ct,i2,kforestry)) * sum(ct, p32_plant_contr(ct,i2))
+              ;
 
-*' If plantations have to be static (defined by `s32_establishment_static`) then
+*' Harvested areas are fully re-established at cell level, unless the ratio of future and current demand drops below 1.
+
+q32_establishment_hvarea(j2)$s32_establishment_dynamic ..
+              sum(ac_est, v32_land(j2,"plant",ac_est))
+              =g=
+              sum(ac_sub, v32_hvarea_forestry(j2,ac_sub)) * sum(cell(i2,j2), min(1, sum(ct, p32_future_to_current_demand_ratio(ct,i2))))
+              ;
+
+*' If plantations should be static (defined by `s32_establishment_static`) then
 *' the model simply establishes the amount of plantations which are harvested.
 *' this keeps the plantation area static but accounts for age-class changes and
 *' regrowth during every time step.
@@ -205,7 +212,7 @@ v32_land(j2,type32,ac_est) =e= sum(ac_est2, v32_land(j2,type32,ac_est2))/card(ac
 
 q32_hvarea_forestry(j2,ac_sub) ..
                           v32_hvarea_forestry(j2,ac_sub)
-                          =l=
+                          =e=
                           v32_land_reduction(j2,"plant",ac_sub);
 
 ** Timber plantation

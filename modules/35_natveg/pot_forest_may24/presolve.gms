@@ -55,6 +55,8 @@ vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 * -------------------------------------------------
 
 *** Distribute forestry abandonement
+* Abandoned forestry is directly shifted into pc35_youngsecdf because it is
+* assumed that forestry was located in areas suitable to grow forests.
 pc35_youngsecdf(j,ac_est) = vm_lu_transitions.l(j,"forestry","other")/card(ac_est2);
 pc35_youngsecdf(j,ac_est)$(sum(ac_est2,pc35_youngsecdf(j,ac_est2)) > pcm_max_forest_est(j)) = pcm_max_forest_est(j)/card(ac_est2);
 
@@ -210,16 +212,9 @@ vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_r
 * NPI/NDC protection policy
 * ----------------------------
 
-p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
+p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest") + pcm_land(j,"forestry"))
+  = pcm_land(j,"primforest") + pcm_land(j,"secdforest") + pcm_land(j,"forestry");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
-
-** Display
-p35_land(t,j,land_natveg,ac) = 0;
-p35_land(t,j,"primforest","acx") = pcm_land(j,"primforest");
-p35_land(t,j,"secdforest",ac) = p35_secdforest(t,j,ac);
-*p35_land(t,j,"other",ac) = p35_other(t,j,ac):
-p35_updated_gs_natfor(t,i) = 0;
-p35_updated_gs_natfor(t,i)$(sum((cell(i,j),ac,land_natveg), p35_land(t,j,land_natveg,ac))>0) = (sum((cell(i,j),ac,land_natveg),(pm_timber_yield(t,j,ac,land_natveg) / sm_wood_density) * p35_land(t,j,land_natveg,ac))/ sum((cell(i,j),ac,land_natveg), p35_land(t,j,land_natveg,ac)));
 
 ** Youngest age classes are not allowed to be harvested
 v35_hvarea_secdforest.fx(j,ac_est) = 0;
