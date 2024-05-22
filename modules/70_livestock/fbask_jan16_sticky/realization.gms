@@ -80,17 +80,17 @@
 *'
 *' In this realization the capital share of livestock production cost does not have 
 *' to be paid every timestep, but is fulfilled by having a corresponding capital stock,
-*' which mostly persists across timesteps.
+*' which mostly persists across timesteps. (See `s70_depreciation_rate`)
 *' This means that the production becomes cheaper in regions with
 *' higher capital shares and existing corresponding capital stocks,
-*' wich makes the livestock production "stick" to some degree to existing levels. 
-*' Another effect is that production increases are more likely to occure regions
-*' of more capital intensive livestock systems with established stocks.
+*' which makes the livestock production "stick" to some degree to existing levels. 
+*' Another effect is that production increases are more likely to occur in regions
+*' of more capital intensive livestock systems with already established stocks.
 *'
 *' The realization is based on the `sticky_feb18` factor cost realization, but
 *' also differs from it in some ways. At the creation time the main differences where: 
 *' 1. capital stocks are on the regional level not on cluster level
-*' 2. no differentiation of mobile and immobile captital - all captital stocks are immobile
+*' 2. no differentiation of mobile and immobile capital - all capital stocks are immobile
 *'  
 *' @limitations Intensification of livestock production and related changes in
 *' livestock feeding are modelled exogenously. Therefore, the livestock sector
