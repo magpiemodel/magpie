@@ -35,7 +35,7 @@ cfg$output <- c("output_check",
                # "projects/FSEC_water", # do manually on last (high-res) magpie run
                 # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
                 "rds_report",
-                "agmip_report")
+                "projects/agmip_report")
 
 #######################
 # SCENARIO DEFINITION #
@@ -83,7 +83,7 @@ bau <- function(cfg) {
 
   # Climate Change
   cfg$input['cellular'] <- "rev4.99_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
-  
+
   return(cfg)
 }
 

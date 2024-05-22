@@ -34,7 +34,7 @@ cfg$output <- c(
   "extra/disaggregation",
   "projects/FSEC_nitrogenPollution",
   "projects/FSEC_water",
-  "agmip_report",
+  "projects/agmip_report",
   "rds_report",
   "runBlackmagicc"
   # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
