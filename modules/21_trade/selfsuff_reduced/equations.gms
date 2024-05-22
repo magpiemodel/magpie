@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' In the comparative advantage pool, the only active constraint is that the global supply is larger or equal to demand.
+*' In the comparative advantage pool, the main constraint is that the global supply is larger or equal to demand.
 *' This means that production can be freely allocated globally based on comparative advantages.
 
  q21_trade_glo(k_trade)..
@@ -18,16 +18,15 @@
  q21_notrade(h2,k_notrade)..
   sum(supreg(h2,i2),vm_prod_reg(i2,k_notrade)) =g= sum(supreg(h2,i2), vm_supply(i2,k_notrade));
 
-*' The following equations indicate the superregional trade constraint for the self-sufficiency pool.
-*' The share of superregional demand that has to be fulfilled through the self-sufficiency pool is
+*'
+*' The following equations define the production band.
+*' The share of demand that has to be fulfilled through the self-sufficiency pool is
 *' determined by a trade balance reduction factor for each commodity  `i21_trade_bal_reduction(ct,k_trade)`
-*' according to the following equations [@schmitz_trading_2012].
-*' If the trade balance reduction equals 1 (`f21_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
+*' [@schmitz_trading_2012]. If the trade balance reduction equals 1, all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
 *'
-*' The below equation defines the baseline value for a corridor in which the superregional production
-*' can move freely based on comparative advantage.
+*' The below equation defines the baseline value for the production band.
 
  q21_prod_baseline(h2,k_trade).. 
  v21_prod_baseline(h2,k_trade) =e= 
@@ -36,7 +35,7 @@
  + (sum(supreg(h2,i2),vm_supply(i2,k_trade)) * sum(ct,f21_self_suff(ct,h2,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1));
 
-*' Lower bound of corridor for production.
+*' Lower bound for production.
 
  q21_trade_reg(h2,k_trade)..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =g=
@@ -44,7 +43,7 @@
  * sum(ct,i21_trade_bal_reduction(ct,k_trade))
  - v21_import_for_feasibility(h2,k_trade);
 
-*' Upper bound of corridor for production.
+*' Upper bound for production.
 
  q21_trade_reg_up(h2,k_trade) ..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =l=
@@ -52,7 +51,7 @@
  / sum(ct,i21_trade_bal_reduction(ct,k_trade));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to
-*' the sum over all the imports of importing regions.
+*' the sum over all the imports of importing superregions.
 
  q21_excess_dem(k_trade)..
  v21_excess_dem(k_trade) =g=
@@ -60,20 +59,22 @@
  $(sum(ct,f21_self_suff(ct,h2,k_trade)) < 1))
  + sum(ct,f21_trade_balanceflow(ct,k_trade)) + sum(h2, v21_import_for_feasibility(h2,k_trade));
 
-*' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].
+*' Distributing the global excess demand to exporting superregions is based on export shares [@schmitz_trading_2012].
 *' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.
 
  q21_excess_supply(h2,k_trade)..
  v21_excess_prod(h2,k_trade) =e=
  v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,h2,k_trade));
 
-* Trade costs are associated with exporting regions. They are dependent on net exports, trade margin, and tariffs.
+* Trade costs are associated with exporting superregions. They are dependent on net exports, trade margin, and tariffs.
+
  q21_cost_trade_reg(h2,k_trade)..
  v21_cost_trade_reg(h2,k_trade) =g=
  (i21_trade_margin(h2,k_trade) + i21_trade_tariff(h2,k_trade))
  *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade)) 
  + v21_import_for_feasibility(h2,k_trade) * s21_cost_import;
 
-* Regional trade costs are the costs for each region aggregated over all the tradable commodities.
+* Superregional trade costs are the costs for each region aggregated over all the tradable commodities.
+
  q21_cost_trade(h2)..
  sum(supreg(h2,i2),vm_cost_trade(i2)) =e= sum(k_trade,v21_cost_trade_reg(h2,k_trade));

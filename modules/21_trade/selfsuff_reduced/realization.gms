@@ -5,16 +5,27 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description Within this realization, there are two ways for a region to fulfill
-*' its demand for agricultural products: a self-sufficiency pool based on
-*' historical region specific trade patterns, and a comparative advantage pool
-*' based on most cost-efficient production.
-
-*' In the self-sufficiency pool, regional self-sufficiency ratios `f21_self_suff` defines
-*' how much of the demand of each region `i` for each traded goods `k_trade` has to be met by domestic production.
-*' Self sufficiency ratios smaller than one indicate that the region imports from the world market,
-*' while self-sufficiencies greater than one indicate that the region produces for export. Trade costs,
-*' inlucding trade margins and tariffs, are considered.
+*' @description In this realization trade patterns defined by self-sufficiency ratios and export shares, 
+*' together with regional demands, establish a baseline value for the production of each product in the superregions. 
+*' Production is then allowed to fluctuate freely within a band around this baseline value, 
+*' only being enforced to maintain the condition of global production exceeding global demand.
+*' The width of the production band is determined by the `i21_trade_bal_reduction` (ptb) factor.
+*'
+*' Effectively, this factor splits the global demand into two pools: The `ptb` share of demand goes 
+*' into a pool for which the origin of products is fixed by the self-sufficiency ratios and export shares.
+*' This "self-sufficiency" pool thus implies minimum production levels in superregions, which are enforced by the 
+*' lower bounds of the production band. 
+*' The remaining part of the demand can be allocated more freely based on comparative advantage 
+*' in production of different superregions, though still being constrained a bit by the upper bounds of the production band.
+*'
+*' The superregional self-sufficiency ratios `f21_self_suff` define
+*' how much of the demand of each superregion `h` for each traded goods `k_trade` is met by domestic production.
+*' Self-sufficiency ratios smaller than one indicate that the superregion imports from the world market,
+*' while self-sufficiencies greater than one indicate that the superregion produces for export. 
+*' The superregional export shares `f21_exp_shr` distribute the total excess demand of the importing superregions 
+*' to the exporting superregions.
+*' 
+*' Trade costs, including trade margins and tariffs, are considered.
 *'
 *' ![Implementation of trade.](trade_pools.png){ width=100% }
 
