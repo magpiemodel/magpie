@@ -36,6 +36,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
 - **21_trade** Minimum trade margin for forestry products `s21_min_trade_margin_forestry`
 - **73_timber** added interface `im_timber_prod_cost`
+- **scripts** added "checkSummation" output script for consistency checking a report.mif
+- **citation** added abstract
 
 ### removed
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
