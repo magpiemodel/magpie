@@ -5,9 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** Save self sufficiency values as a interface parameter needed in forestry module
-pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);
-pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);
-
-** fix to zero by default
-v21_manna_from_heaven.fx(h,kall)$(s21_manna_from_heaven = 0) = 0;
+vm_cost_trade.fx(i) = 0;

@@ -20,16 +20,17 @@
 *' biomass in tDM/ha.
 
 *` @code
-p14_growing_stock(t,j,ac,"forestry","plantations") =
+
+pm_timber_yield(t,j,ac,"forestry") =
     (
-      pm_carbon_density_ac_forestry(t,j,ac,"vegc")
-      / s14_carbon_fraction
-      * f14_aboveground_fraction("forestry")
-      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations"))
-     )
+     pm_carbon_density_ac_forestry(t,j,ac,"vegc")
+     / s14_carbon_fraction
+     * f14_aboveground_fraction("forestry")
+     / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations"))
+    )
     ;
 
-p14_growing_stock(t,j,ac,land_natveg,"natveg") =
+pm_timber_yield(t,j,ac,land_natveg) =
     (
      pm_carbon_density_ac(t,j,ac,"vegc")
      / s14_carbon_fraction
@@ -37,19 +38,10 @@ p14_growing_stock(t,j,ac,land_natveg,"natveg") =
      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
     )
     ;
+
 *` @stop
 
-**** Hard constraint to always have a positive number in p14_growing_stock
-p14_growing_stock(t,j,ac,land_natveg,"natveg") = p14_growing_stock(t,j,ac,land_natveg,"natveg")$(p14_growing_stock(t,j,ac,land_natveg,"natveg")>0)+0.0001$(p14_growing_stock(t,j,ac,land_natveg,"natveg")=0);
-p14_growing_stock(t,j,ac,"forestry","plantations") = p14_growing_stock(t,j,ac,"forestry","plantations")$(p14_growing_stock(t,j,ac,"forestry","plantations")>0)+0.0001$(p14_growing_stock(t,j,ac,"forestry","plantations")=0);
-
-** Used in equations -- Annual value hence division by timestep
-***************************************************************
-** If the plantation yield switch is on, forestry yields are treated as plantation yields
-pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growing_stock(t,j,ac,"forestry","plantations") ;
-** Natveg yields are unchanged and doesn't depend on plantation yield switch
-pm_timber_yield(t,j,ac,land_natveg) = p14_growing_stock(t,j,ac,land_natveg,"natveg");
+** Hard constraint to always have a positive number in pm_timber_yield
+pm_timber_yield(t,j,ac,forest_land) = pm_timber_yield(t,j,ac,forest_land)$(pm_timber_yield(t,j,ac,forest_land) > 0) + 0.0001$(pm_timber_yield(t,j,ac,forest_land) = 0);
 ** Put yields to 0 where they dont exceed a minimum yield for harvest
 pm_timber_yield(t,j,ac,land_natveg)$(pm_timber_yield(t,j,ac,land_natveg) < s14_minimum_wood_yield) = 0;
-** If the plantation yield switch is off, then the forestry yields are given the same values as secdforest yields,
-pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 0) = pm_timber_yield(t,j,ac,"secdforest");
