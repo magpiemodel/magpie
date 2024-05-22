@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** Forestry sector included by default by using the `ForestryEndo` settings from `scenario_config.csv`: `s32_initial_distribution = 1`, `s32_demand_establishment = 1`, `s32_hvarea = 2`, `s35_secdf_distribution = 2`, `s35_hvarea = 2`, `s73_timber_demand_switch = 1`
 - **14_yields** revised timber yield calculations
 - **35_natveg**  `vm_land(j2,"forestry")` included in NPI/NDC constraint `q35_min_forest`
-- **35_natveg** replaced the realisation `dynamic_feb21` with realisation `pot_forest_may24`. The new realisation provides additional information on the potential forest area, which is now used to constrain forest and forestry expansion. The remaining area for forest establishment is provided to the forestry module via the new interface parameter `pcm_max_forest_est`.
+- **35_natveg** replaced the realisation `dynamic_feb21` with realisation `pot_forest_may24`. The new realisation provides additional information on the potential forest area, which is now used to constrain forest and forestry expansion and recovery. The remaining area for forest establishment is provided to the forestry module via the new interface parameter `pcm_max_forest_est`.
 - **52_carbon** Separate carbon densities for forest and other land. Before there was only a single carbon density for natural vegetation land.
 
 ### added
