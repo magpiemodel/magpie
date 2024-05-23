@@ -119,7 +119,7 @@ pcm_land(j,"other") = sum(ac, pc35_other(j,ac)) + sum(ac, pc35_youngsecdf(j,ac))
 
 * Within the optimization, primary forests can only decrease
 * (e.g. due to cropland expansion).
-* In contrast, other natural land and secdforest can decrease and increase within the optimization.
+* In contrast, other natural land can decrease and increase within the optimization.
 * For instance, other natural land increases if agricultural land is abandoned.
 
 * Correct land conservation for damage

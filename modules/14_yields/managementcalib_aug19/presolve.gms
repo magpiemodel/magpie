@@ -30,11 +30,20 @@ pm_timber_yield(t,j,ac,"forestry") =
     )
     ;
 
-pm_timber_yield(t,j,ac,land_forest) =
+pm_timber_yield(t,j,ac,"primforest") =
+    (
+     fm_carbon_density(t,j,"primforest","vegc")
+     / s14_carbon_fraction
+     * f14_aboveground_fraction("primforest")
+     / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
+    )
+    ;
+
+pm_timber_yield(t,j,ac,"secdforest") =
     (
      pm_carbon_density_secdforest_ac(t,j,ac,"vegc")
      / s14_carbon_fraction
-     * f14_aboveground_fraction(land_forest)
+     * f14_aboveground_fraction("secdforest")
      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
     )
     ;
