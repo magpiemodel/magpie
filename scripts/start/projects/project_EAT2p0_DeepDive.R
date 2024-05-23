@@ -148,7 +148,7 @@ priceCO2 <- function(cfg) {
   # Mitigation: only price land CO2
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-DSPkB650-DS_betax-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif"
-  cfg$gms$c56_emis_policy <- "ecoSysProtAll_agMgmtOff" #### double-check Florian
+  cfg$gms$c56_emis_policy <- "ecoSysProtAll_agMgmtOff" #### double-check Florian or Leon
 
   return(cfg)
 }
@@ -158,7 +158,7 @@ priceNonCO2 <- function(cfg) {
   # Mitigation: only CH4 and N2O price
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-DSPkB650-DS_betax-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif"
-  cfg$gms$c56_emis_policy <- "ecoSysProtOff" ### double-check Florian
+  cfg$gms$c56_emis_policy <- "ecoSysProtOff" ### double-check Florian or Leon
 
   return(cfg)
 }
@@ -216,12 +216,52 @@ start_run(cfg, codeCheck = FALSE)
 # All production-side land-based mitigation measures
 cfg$title <- "BAU_Miti"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
 cfg <- miti(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
+
+# BAU_MITI - bioenergy #
+# (1e) CO2 and non-CO2 pricing, but no bioenergy demand from REMIND
+cfg$title <- "BAUMITI_Bioenergy"
+# standard setting, but with NDC for miti
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+# BAU settings
+cfg <- bau(cfg = cfg)
+# Mitigation
+cfg <- miti(cfg = cfg)
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
+start_run(cfg, codeCheck = FALSE)
+
+# BAU_MITI - non-CO2 #
+# (1f) CO2 pricing and bioenergy demand from REMIND, but no non-CO2 pricing in land-system
+cfg$title <- "BAUMITI_nonCO2"
+# standard setting, but with NDC for miti
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+# BAU settings
+cfg <- bau(cfg = cfg)
+# Mitigation
+cfg <- miti(cfg = cfg)
+# ecoSysProtAll_agMgmtOff:     (Above ground CO2 emis from LUC in forest, forestry, natveg; All types of emis from peatland; No further CH4/N2O/other emis related to ag. management)
+cfg$gms$c56_emis_policy <- "ecoSysProtAll_agMgmtOff"
+start_run(cfg, codeCheck = FALSE)
+
+# MITI_CO2 (mitigation - CO2) #
+# (1g) non-CO2 pricing and bioenergy demand from REMIND, but no CO2 pricing in land-system
+cfg$title <- "BAUMITI_CO2"
+# standard setting, but with NDC for miti
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+# BAU settings
+cfg <- bau(cfg = cfg)
+# Mitigation
+cfg <- miti(cfg = cfg)
+# ecoSysProtOff:               (All CH4 and N2O emis except peatland),
+cfg$gms$c56_emis_policy <- "ecoSysProtOff"
+start_run(cfg, codeCheck = FALSE)
+
 
 # BAU + EL2-Diet #
 # PHD components:
@@ -261,7 +301,7 @@ start_run(cfg, codeCheck = FALSE)
 # All production-side land-based mitigation measures and demand-side mitigation (diet change), but no NDCs
 #cfg$title <- "MITI_NDC"
 # standard setting, but with NDC for miti
-#cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+#cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
 # BAU settings
 #cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
@@ -276,7 +316,7 @@ start_run(cfg, codeCheck = FALSE)
 # (2b) CO2 and non-CO2 pricing and demand-side mitigation (diet change), but no bioenergy demand from REMIND
 cfg$title <- "MITI_Bioenergy"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -293,7 +333,7 @@ start_run(cfg, codeCheck = FALSE)
 # (2c) CO2 pricing and bioenergy demand from REMIND and demand-side mitigation (diet change), but no non-CO2 pricing in land-system
 cfg$title <- "MITI_nonCO2"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -310,7 +350,7 @@ start_run(cfg, codeCheck = FALSE)
 # (2d) non-CO2 pricing and bioenergy demand from REMIND and demand-side mitigation (diet change), but no CO2 pricing in land-system
 cfg$title <- "MITI_CO2"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -336,27 +376,11 @@ cfg <- diet(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
-
-# MITI_Prod #
-# (2e) All production-side land-based mitigation measures and demand-side mitigation without Prod
-#cfg$title <- "MITI_Prod"
-# standard setting, but with NDC for miti
-#cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
-# BAU settings
-#cfg <- bau(cfg = cfg)
-# Mitigation (CO2, non-CO2, bioenergy)
-#cfg <- miti(cfg = cfg)
-# PHD (diet, prod, waste)
-#cfg <- diet(cfg = cfg)
-#cfg <- prod(cfg = cfg)
-#cfg <- waste(cfg = cfg)
-#start_run(cfg, codeCheck = FALSE)
-
 # MITI_Waste #
 # (2f) All production-side land-based mitigation measures and demand-side mitigation without Waste
 cfg$title <- "MITI_Waste"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
@@ -370,7 +394,7 @@ start_run(cfg, codeCheck = FALSE)
 # (2g) All production-side land-based mitigation measures and demand-side mitigation without Diet
 cfg$title <- "MITI_Diet"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
@@ -384,7 +408,7 @@ start_run(cfg, codeCheck = FALSE)
 # (2e,f,g) All production-side land-based mitigation measures, but no demand-side mitigation
 cfg$title <- "MITI_Dem"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -433,7 +457,7 @@ start_run(cfg, codeCheck = FALSE)
 # All production-side land-based mitigation measures and demand-side mitigation (diet change)
 cfg$title <- "MITI_All"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
