@@ -51,6 +51,6 @@ $offdelim
 parameter f35_pot_forest_area(j) Potential forest area (mio. ha)
 /
 $ondelim
-$include "./modules/35_natveg/input/pot_forest_area.cs3"
+$include "./modules/35_natveg/input/pot_forest_area.cs2"
 $offdelim
 /;

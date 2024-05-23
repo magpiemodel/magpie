@@ -6,11 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *secdforest age class calculation
-p35_secdforest(t,j,ac) = v35_secdforest.l(j,ac);
+pc35_secdforest(j,ac) = v35_secdforest.l(j,ac);
 
 *other land age class calculation
-p35_other(t,j,ac) = v35_other.l(j,ac);
-p35_youngsecdf(t,j,ac) = v35_youngsecdf.l(j,ac);
+pc35_other(j,ac) = v35_other.l(j,ac);
+pc35_youngsecdf(j,ac) = v35_youngsecdf.l(j,ac);
 
 * Reset forest establishment bound
 pcm_max_forest_est(j) = f35_pot_forest_area(j) - sum(land_forest, vm_land.l(j,land_forest));

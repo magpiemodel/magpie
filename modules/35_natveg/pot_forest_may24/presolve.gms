@@ -5,16 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-if((ord(t) = 1),
-  pc35_secdforest(j,ac) = i35_secdforest(j,ac);
-  pc35_youngsecdf(j,ac) = i35_youngsecdf(j,ac);
-  pc35_other(j,ac) = i35_other(j,ac);
-else
-  pc35_secdforest(j,ac) = p35_secdforest(t-1,j,ac);
-  pc35_youngsecdf(j,ac) = p35_youngsecdf(t-1,j,ac);
-  pc35_other(j,ac) = p35_other(t-1,j,ac);
-);
-
 * ----------------------------------------------------
 * Shift ageclasses due to shifting agriculture fires
 * ----------------------------------------------------
