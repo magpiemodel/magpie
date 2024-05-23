@@ -129,7 +129,8 @@ if ((s14_calib_ir2rf = 1),
    = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
       sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))>0.00001)
    + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * f14_yields("y1995",j,knbe14,w)) /
-      sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))<0.00001);
+      sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))
+      $(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))<0.00001 and sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))>=0);
 
   i14_yields_calib(t,j,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) /
                                                       i14_modeled_yields_hist2(i,knbe14)) *
