@@ -73,7 +73,7 @@
 *' the natural land conservation constraint) and specifically formulated for forest and
 *' other land stocks.
 
- q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") + vm_land(j2,"forestry")
+ q35_min_forest(j2) .. sum(land_forest, vm_land(j2,land_forest))
                        =g=
                        sum(ct, p35_min_forest(ct,j2));
 
@@ -182,10 +182,9 @@ q35_hvarea_other(j2,ac_sub)..
                           v35_other_reduction(j2,ac_sub);
 
 
-*' The constraint for overall forest establishment is given by the
-*' remaining potential forest area, which is derived from
-*' the potential natural forest area minus the recovering secondary
-*' forest area.
+*' The constraint for overall forest establishment, including forestry, is given
+*' by the remaining potential forest area, which is derived from the potential
+*' natural forestarea minus the recovering secondary forest area.
 
 q35_max_forest_establishment(j2)..
                           sum(land_forest, vm_landexpansion(j2,land_forest))
