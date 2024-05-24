@@ -7,7 +7,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **14_yields** fix division by zero in preloop of managementcalib_aug19
 - **22_land_conservation and default.cfg** Added options for baseline protection
 - **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
 - **70_livestock, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
@@ -38,6 +37,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** removed support for spam files in start_functions
 
 ### fixed
+- **14_yields** fix division by zero in preloop of managementcalib_aug19
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
 - **44_biodiversity** avoid division by zero
 - **scenario_config.csv** same revision for input files as in default.cfg
