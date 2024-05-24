@@ -10,7 +10,7 @@
 
  q35_land_secdforest(j2) .. vm_land(j2,"secdforest") =e= sum(ac, v35_secdforest(j2,ac));
 
- q35_land_other(j2) .. vm_land(j2,"other") =e= sum(ac, v35_other(j2,ac)) + sum(ac, v35_youngsecdf(j2,ac));
+ q35_land_other(j2) .. vm_land(j2,"other") =e= sum((ac,othertype35), vm_land_other(j2,ac,othertype35));
 
 *' The total natural land area cannot be smaller than the total natural land conservation target.
 *' Area requirements for natural land conservation are derived from WDPA and formulated based on
@@ -49,8 +49,7 @@
 
  q35_carbon_other(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
-      m_carbon_stock_ac(v35_other,pm_carbon_density_other_ac,"ac","ac_sub")
-    + m_carbon_stock_ac(v35_youngsecdf,pm_carbon_density_secdforest_ac,"ac","ac_sub");
+      m_carbon_stock_ac(vm_land_other,p35_carbon_density_other,"ac,othertype35","ac_sub,othertype35");
 
 *' The biodiversity value (BV) of primary forest, secondary forest and other land is computed by multiplying their respective land area with bii coefficients, which depend on the age class and whether the potential natural vegetation forest or non-forest (luh2 side layers).
 
@@ -65,7 +64,7 @@
 
  q35_bv_other(j2,potnatveg) .. vm_bv(j2,"other",potnatveg)
           =e=
-          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v35_other(j2,ac)) *
+          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), sum(othertype35, vm_land_other(j2,ac,othertype35))) *
           fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 *' NPI/NDC land protection policies based on country reports are implemented as
@@ -86,19 +85,19 @@
 
  q35_landdiff .. vm_landdiff_natveg =e=
           sum(j2,
-              v35_other_expansion(j2)
-              + sum(ac_sub, v35_other_reduction(j2,ac_sub))
+              sum(othertype35,v35_other_expansion(j2,othertype35))
+              + sum((ac_sub,othertype35), v35_other_reduction(j2,ac_sub,othertype35))
               + v35_secdforest_expansion(j2)
-              + sum(ac_sub, v35_secdforest_reduction(j2,ac_sub))
+              + sum((ac_sub), v35_secdforest_reduction(j2,ac_sub))
               + v35_primforest_reduction(j2));
 
- q35_other_expansion(j2) ..
-  v35_other_expansion(j2) =e=
-    sum(ac_est, v35_other(j2,ac_est));
+ q35_other_expansion(j2,othertype35) ..
+  v35_other_expansion(j2,othertype35) =e=
+    sum(ac_est, vm_land_other(j2,ac_est,othertype35));
 
- q35_other_reduction(j2,ac_sub) ..
-  v35_other_reduction(j2,ac_sub) =e=
-    pc35_other(j2,ac_sub) - v35_other(j2,ac_sub);
+ q35_other_reduction(j2,ac_sub,othertype35) ..
+  v35_other_reduction(j2,ac_sub,othertype35) =e=
+    pc35_land_other(j2,ac_sub,othertype35) - vm_land_other(j2,ac_sub,othertype35);
 
  q35_secdforest_expansion(j2) ..
   v35_secdforest_expansion(j2) =e=
@@ -127,8 +126,8 @@ q35_cost_hvarea(i2)..
                     vm_cost_hvarea_natveg(i2)
                     =e=
                    sum((ct,cell(i2,j2),ac_sub), v35_hvarea_secdforest(j2,ac_sub)) * s35_timber_harvest_cost_secdforest
-                  + sum((ct,cell(i2,j2),ac_sub), v35_hvarea_other(j2, ac_sub))     * s35_timber_harvest_cost_other
-                  + sum((ct,cell(i2,j2)),        v35_hvarea_primforest(j2))        * s35_timber_harvest_cost_primforest
+                 + sum((ct,cell(i2,j2),ac_sub,othertype35), v35_hvarea_other(j2,ac_sub,othertype35)) * s35_timber_harvest_cost_other
+                 + sum((ct,cell(i2,j2)), v35_hvarea_primforest(j2)) * s35_timber_harvest_cost_primforest
                     ;
 
 ** Secondary forest
@@ -136,8 +135,8 @@ q35_cost_hvarea(i2)..
 *' area under production with corresponding yields of secondary forests, divided by the timestep length.
 
 q35_prod_secdforest(j2)..
-                           sum(kforestry, vm_prod_natveg(j2,"secdforest",kforestry))
-                           =e=
+               sum(kforestry, vm_prod_natveg(j2,"secdforest",kforestry))
+               =e=
                sum(ac_sub, v35_hvarea_secdforest(j2,ac_sub) * sum(ct,pm_timber_yield(ct,j2,ac_sub,"secdforest"))) / m_timestep_length_forestry;
 
 ** Primary forest
@@ -145,9 +144,9 @@ q35_prod_secdforest(j2)..
 *' area under production with corresponding yields of primary forests, divided by the timestep length.
 
 q35_prod_primforest(j2)..
-                           sum(kforestry, vm_prod_natveg(j2,"primforest",kforestry))
-                           =e=
-                           v35_hvarea_primforest(j2) * sum(ct, pm_timber_yield(ct,j2,"acx","primforest")) / m_timestep_length_forestry;
+              sum(kforestry, vm_prod_natveg(j2,"primforest",kforestry))
+              =e=
+              v35_hvarea_primforest(j2) * sum(ct, pm_timber_yield(ct,j2,"acx","primforest")) / m_timestep_length_forestry;
 
 ** Other land
 *' Wood-fuel production from other land is calculated by multiplying the area under
@@ -155,10 +154,12 @@ q35_prod_primforest(j2)..
 *' Wood production from other landis not allowed.
 
 q35_prod_other(j2)..
-                          vm_prod_natveg(j2,"other","woodfuel")
-                          =e=
-                          sum(ac_sub, v35_hvarea_other(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other"))) / m_timestep_length_forestry
-                          ;
+               vm_prod_natveg(j2,"other","woodfuel")
+               =e=
+               (sum(ac_sub, v35_hvarea_other(j2,ac_sub,"othernat") * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other")))
+              + sum(ac_sub, v35_hvarea_other(j2,ac_sub,"youngsecdf") * sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"))))
+              / m_timestep_length_forestry
+                ;
 
 *' Following equations show the harvested area from natural vegetation i.e. primary
 *' forests, secondary forests and other land. Important to note here that no wood
@@ -167,19 +168,19 @@ q35_prod_other(j2)..
 *' not all lost area is (or should be) used for production.
 
 q35_hvarea_secdforest(j2,ac_sub)..
-                           v35_hvarea_secdforest(j2,ac_sub)
-                           =l=
-                           v35_secdforest_reduction(j2,ac_sub);
+                v35_hvarea_secdforest(j2,ac_sub)
+                =l=
+                v35_secdforest_reduction(j2,ac_sub);
 
 q35_hvarea_primforest(j2)..
-                           v35_hvarea_primforest(j2)
-                           =l=
-                           v35_primforest_reduction(j2);
+                v35_hvarea_primforest(j2)
+                =l=
+                v35_primforest_reduction(j2);
 
-q35_hvarea_other(j2,ac_sub)..
-                          v35_hvarea_other(j2,ac_sub)
-                          =l=
-                          v35_other_reduction(j2,ac_sub);
+q35_hvarea_other(j2,ac_sub,othertype35)..
+                v35_hvarea_other(j2,ac_sub,othertype35)
+                =l=
+                v35_other_reduction(j2,ac_sub,othertype35);
 
 
 *' The constraint for overall forest establishment, including forestry, is given
@@ -187,11 +188,11 @@ q35_hvarea_other(j2,ac_sub)..
 *' natural forestarea minus the recovering secondary forest area.
 
 q35_max_forest_establishment(j2)..
-                          sum(land_forest, vm_landexpansion(j2,land_forest))
-                          =l=
-                          pcm_max_forest_est(j2)
-                        - sum(ac, v35_youngsecdf(j2,ac))
-                          ;
+                sum(land_forest, vm_landexpansion(j2,land_forest))
+                =l=
+                pcm_max_forest_est(j2)
+              - sum(ac, vm_land_other(j2,ac,"youngsecdf"))
+                ;
 
 *' Harvested secondary forest is still considered secondary forests due to
 *' restrictive NPI definitions. Also primary forest harvested will be considered
@@ -199,20 +200,20 @@ q35_max_forest_establishment(j2)..
 *' secondary forest and ends up in the youngest age-class (and follows regrowth)
 
 q35_secdforest_regeneration(j2)..
-                          sum(ac_est, v35_secdforest(j2,ac_est))
-                          =e=
-                          sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
-                        + v35_hvarea_primforest(j2)
-                        + p35_land_restoration(j2,"secdforest")
-                          ;
+                 sum(ac_est, v35_secdforest(j2,ac_est))
+                 =e=
+                 sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
+               + v35_hvarea_primforest(j2)
+               + p35_land_restoration(j2,"secdforest")
+                 ;
 
 *' Harvested other land is still considered other land
 
 q35_other_regeneration(j2)..
-                          sum(ac_est, v35_other(j2,ac_est))
-                          =g=
-                          sum(ac_sub,v35_hvarea_other(j2,ac_sub))
-                          ;
+                 sum(ac_est, vm_land_other(j2,ac_est,"othernat"))
+                 =g=
+                 sum((ac_sub,othertype35),v35_hvarea_other(j2,ac_sub,othertype35))
+                 ;
 
 *' The following two constraints distribute additions to secdforest and other land
 *' over ac_est, which depends on the time step length (e.g. ac0 and ac5 for a 10 year time step).
@@ -221,5 +222,5 @@ q35_secdforest_est(j2,ac_est) ..
 v35_secdforest(j2,ac_est) =e= sum(ac_est2, v35_secdforest(j2,ac_est2))/card(ac_est2);
 
 q35_other_est(j2,ac_est) ..
-v35_other(j2,ac_est) =e= sum(ac_est2, v35_other(j2,ac_est2))/card(ac_est2);
+vm_land_other(j2,ac_est,"othernat") =e= sum(ac_est2, vm_land_other(j2,ac_est2,"othernat"))/card(ac_est2);
 

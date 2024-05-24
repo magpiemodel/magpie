@@ -6,9 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** initialize other land
-i35_other(j,ac) = 0;
-i35_youngsecdf(j,ac) = 0;
-i35_other(j,"acx") = pcm_land(j,"other");
+i35_land_other(j,ac,othertype35) = 0;
+i35_land_other(j,"acx","othernat") = pcm_land(j,"other");
 
 ** initialize secdforest area depending on switch.
 if(s35_secdf_distribution = 0,
@@ -34,8 +33,7 @@ elseif s35_secdf_distribution = 2,
 i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac)));
 
 *initialize parameter
-p35_other(t,j,ac) = 0;
-p35_youngsecdf(t,j,ac) = 0;
+p35_land_other(t,j,ac,othertype35) = 0;
 p35_secdforest(t,j,ac) = 0;
 
 * initialize forest disturbance losses
@@ -81,5 +79,4 @@ m_sigmoid_time_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);
 * ---------------------------------------
 
   pc35_secdforest(j,ac) = i35_secdforest(j,ac);
-  pc35_youngsecdf(j,ac) = i35_youngsecdf(j,ac);
-  pc35_other(j,ac) = i35_other(j,ac);
+  pc35_land_other(j,ac,othertype35) = i35_land_other(j,ac,othertype35);
