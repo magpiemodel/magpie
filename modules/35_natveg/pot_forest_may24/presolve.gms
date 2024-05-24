@@ -189,7 +189,7 @@ p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
 * land area meets the total natural land conservation target
 p35_land_restoration(j,"other")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
 * set conservation bound
-vm_land_other.lo(j,ac,"othernat") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
+vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
 
 * ----------------------------
 * Calculate carbon density
