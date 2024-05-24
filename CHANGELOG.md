@@ -50,6 +50,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg** removed growing stock calculation and calibration, which is no longer needed.
 
 ### fixed
+- **14_yields** fix division by zero in preloop of managementcalib_aug19
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
 - **44_biodiversity** avoid division by zero
 - **scenario_config.csv** same revision for input files as in default.cfg
