@@ -24,6 +24,7 @@
 *' determined by a trade balance reduction factor for each commodity  `i21_trade_bal_reduction(ct,k_trade)`
 *' [@schmitz_trading_2012]. If the trade balance reduction equals 1, all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
+*' Note that `baseline_production` is a macro defined in core/macros.gms.
 
 *' Lower bound for production.
 
@@ -50,7 +51,7 @@
  + sum(ct,f21_trade_balanceflow(ct,k_trade)) + sum(h2, v21_import_for_feasibility(h2,k_trade));
 
 *' Distributing the global excess demand to exporting superregions is based on export shares [@schmitz_trading_2012].
-*' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.
+*' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing superregions.
 
  q21_excess_supply(h2,k_trade)..
  v21_excess_prod(h2,k_trade) =e=
@@ -64,7 +65,7 @@
  *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade)) 
  + v21_import_for_feasibility(h2,k_trade) * s21_cost_import;
 
-* Superregional trade costs are the costs for each region aggregated over all the tradable commodities.
+* Superregional trade costs are the costs for each superregion aggregated over all the tradable commodities.
 
  q21_cost_trade(h2)..
  sum(supreg(h2,i2),vm_cost_trade(i2)) =e= sum(k_trade,v21_cost_trade_reg(h2,k_trade));
