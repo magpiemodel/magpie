@@ -45,21 +45,21 @@ vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 * -------------------------------------------------
 
 *** Distribute forestry abandonement
-* Abandoned forestry is directly shifted into pc35_land_other(j,ac_est,"youngsecdf") because it is
+* Abandoned forestry is directly shifted into pc35_land_other(j,"youngsecdf",ac_est) because it is
 * assumed that forestry was located in areas suitable to grow forests.
-pc35_land_other(j,ac_est,"youngsecdf") = vm_lu_transitions.l(j,"forestry","other")/card(ac_est2);
-pc35_land_other(j,ac_est,"youngsecdf")$(sum(ac_est2,pc35_land_other(j,ac_est2,"youngsecdf")) > pcm_max_forest_est(j)) = pcm_max_forest_est(j)/card(ac_est2);
+pc35_land_other(j,"youngsecdf",ac_est) = vm_lu_transitions.l(j,"forestry","other")/card(ac_est2);
+pc35_land_other(j,"youngsecdf",ac_est)$(sum(ac_est2,pc35_land_other(j,"youngsecdf",ac_est2)) > pcm_max_forest_est(j)) = pcm_max_forest_est(j)/card(ac_est2);
 
 * The proportion of secondary forest recovery in total natveg recovery is derived
 * from the remaining forest recovery area
-p35_max_forest_recovery(j) = pcm_max_forest_est(j) - sum(ac, pc35_land_other(j,ac,"youngsecdf"));
+p35_max_forest_recovery(j) = pcm_max_forest_est(j) - sum(ac, pc35_land_other(j,"youngsecdf",ac));
 p35_forest_recovery_shr(j) = p35_max_forest_recovery(j) / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")+1e-10);
 p35_forest_recovery_shr(j)$(p35_forest_recovery_shr(j) > 1) = 1;
-* Abandoned land pc35_land_other(j,ac_est,"othernat") is then distributed proportionally using the forest recovery share.
-p35_forest_recovery_area(t,j,ac_est) = pc35_land_other(j,ac_est,"othernat") * p35_forest_recovery_shr(j);
+* Abandoned land pc35_land_other(j,"othernat",ac_est) is then distributed proportionally using the forest recovery share.
+p35_forest_recovery_area(t,j,ac_est) = pc35_land_other(j,"othernat",ac_est) * p35_forest_recovery_shr(j);
 p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2,p35_forest_recovery_area(t,j,ac_est2)) > p35_max_forest_recovery(j)) = p35_max_forest_recovery(j)/card(ac_est2);
-pc35_land_other(j,ac_est,"othernat") = pc35_land_other(j,ac_est,"othernat") - p35_forest_recovery_area(t,j,ac_est);
-pc35_land_other(j,ac_est,"youngsecdf") = pc35_land_other(j,ac_est,"youngsecdf") + p35_forest_recovery_area(t,j,ac_est);
+pc35_land_other(j,"othernat",ac_est) = pc35_land_other(j,"othernat",ac_est) - p35_forest_recovery_area(t,j,ac_est);
+pc35_land_other(j,"youngsecdf",ac_est) = pc35_land_other(j,"youngsecdf",ac_est) + p35_forest_recovery_area(t,j,ac_est);
 
 * ------------------------------------------------
 * Natural vegetation growth (age-class shift)
@@ -68,10 +68,10 @@ pc35_land_other(j,ac_est,"youngsecdf") = pc35_land_other(j,ac_est,"youngsecdf") 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_timestep_length_forestry/5;
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
-    p35_land_other(t,j,ac,othertype35)$(ord(ac) > s35_shift) = pc35_land_other(j,ac-s35_shift,othertype35);
+    p35_land_other(t,j,othertype35,ac)$(ord(ac) > s35_shift) = pc35_land_other(j,othertype35,ac-s35_shift);
 * account for cases at the end of the age class set (s35_shift > 1) which are not shifted by the above calculation
-    p35_land_other(t,j,"acx",othertype35) = p35_land_other(t,j,"acx",othertype35)
-                  + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_land_other(j,ac,othertype35));
+    p35_land_other(t,j,othertype35,"acx") = p35_land_other(t,j,othertype35,"acx")
+                  + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_land_other(j,othertype35,ac));
 
 * Usual shift
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
@@ -90,8 +90,8 @@ s35_shift = m_timestep_length_forestry/5;
 *' exceeds a threshold of 20 tC/ha the respective area is shifted from young secondary
 *' forest, which is still considered other land, to secondary forest land.
 p35_maturesecdf(t,j,ac)$(not sameas(ac,"acx")) =
-      p35_land_other(t,j,ac,"youngsecdf")$(pm_carbon_density_secdforest_ac(t,j,ac,"vegc") > 20);
-p35_land_other(t,j,ac,"youngsecdf") = p35_land_other(t,j,ac,"youngsecdf") - p35_maturesecdf(t,j,ac);
+      p35_land_other(t,j,"youngsecdf",ac)$(pm_carbon_density_secdforest_ac(t,j,ac,"vegc") > 20);
+p35_land_other(t,j,"youngsecdf",ac) = p35_land_other(t,j,"youngsecdf",ac) - p35_maturesecdf(t,j,ac);
 p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_maturesecdf(t,j,ac);
 *' @stop
 
@@ -100,11 +100,11 @@ v35_secdforest.l(j,ac) = pc35_secdforest(j,ac);
 vm_land.l(j,"secdforest") = sum(ac, pc35_secdforest(j,ac));
 pcm_land(j,"secdforest") = sum(ac, pc35_secdforest(j,ac));
 
-pc35_land_other(j,ac,othertype35) = p35_land_other(t,j,ac,othertype35);
-vm_land_other.l(j,ac,othertype35) = pc35_land_other(j,ac,othertype35);
+pc35_land_other(j,othertype35,ac) = p35_land_other(t,j,othertype35,ac);
+vm_land_other.l(j,othertype35,ac) = pc35_land_other(j,othertype35,ac);
 
-vm_land.l(j,"other") = sum((ac,othertype35), pc35_land_other(j,ac,othertype35));
-pcm_land(j,"other") = sum((ac,othertype35), pc35_land_other(j,ac,othertype35));
+vm_land.l(j,"other") = sum((othertype35,ac), pc35_land_other(j,othertype35,ac));
+pcm_land(j,"other") = sum((othertype35,ac), pc35_land_other(j,othertype35,ac));
 
 * -------------------------------------
 * Set bounds based on land conservation
@@ -170,19 +170,19 @@ vm_land.lo(j,"secdforest") = pm_land_conservation(t,j,"secdforest","protect") + 
 ** Other land
 
 *reset bounds
-vm_land_other.lo(j,ac,"othernat") = 0;
-vm_land_other.up(j,ac,"othernat") = Inf;
-vm_land_other.lo(j,ac,"youngsecdf") = 0;
+vm_land_other.lo(j,"othernat",ac) = 0;
+vm_land_other.up(j,"othernat",ac) = Inf;
+vm_land_other.lo(j,"youngsecdf",ac) = 0;
 *set upper bound
-vm_land_other.up(j,ac_sub,"othernat") = pc35_land_other(j,ac_sub,"othernat");
-vm_land_other.up(j,ac_sub,"youngsecdf") = pc35_land_other(j,ac_sub,"youngsecdf");
-vm_land_other.fx(j,ac_est,"youngsecdf") = 0;
-m_boundfix(vm_land_other,(j,ac_sub,othertype35),l,1e-6);
+vm_land_other.up(j,"othernat",ac_sub) = pc35_land_other(j,"othernat",ac_sub);
+vm_land_other.up(j,"youngsecdf",ac_sub) = pc35_land_other(j,"youngsecdf",ac_sub);
+vm_land_other.fx(j,"youngsecdf",ac_est) = 0;
+m_boundfix(vm_land_other,(j,othertype35,ac_sub),l,1e-6);
 
 
 * Other land conservation
 * protection bound fix
-pm_land_conservation(t,j,"other","protect")$(abs(pm_land_conservation(t,j,"other","protect") - sum(ac_sub, pc35_land_other(j,ac_sub,"othernat"))) < 1e-6) = sum(ac_sub, pc35_land_other(j,ac_sub,"othernat"));
+pm_land_conservation(t,j,"other","protect")$(abs(pm_land_conservation(t,j,"other","protect") - sum(ac_sub, pc35_land_other(j,"othernat",ac_sub))) < 1e-6) = sum(ac_sub, pc35_land_other(j,"othernat",ac_sub));
 * set restoration target
 p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
 * Do not restore other land in areas where total natural
@@ -195,8 +195,8 @@ vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_r
 * Calculate carbon density
 * ------------------------------
 
-p35_carbon_density_other(t,j,ac,"othernat",ag_pools) = pm_carbon_density_other_ac(t,j,ac,ag_pools);
-p35_carbon_density_other(t,j,ac,"youngsecdf",ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
+p35_carbon_density_other(t,j,"othernat",ac,ag_pools) = pm_carbon_density_other_ac(t,j,ac,ag_pools);
+p35_carbon_density_other(t,j,"youngsecdf",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 
 * ----------------------------
 * NPI/NDC protection policy
@@ -208,18 +208,18 @@ p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"othe
 
 ** Youngest age classes are not allowed to be harvested
 v35_hvarea_secdforest.fx(j,ac_est) = 0;
-v35_hvarea_other.fx(j,ac_est,othertype35) = 0;
+v35_hvarea_other.fx(j,othertype35,ac_est) = 0;
 v35_secdforest_reduction.fx(j,ac_est) = 0;
-v35_other_reduction.fx(j,ac_est,othertype35) = 0;
+v35_other_reduction.fx(j,othertype35,ac_est) = 0;
 
 vm_prod_natveg.fx(j,"other","wood") = 0;
 
 if(s35_hvarea = 0,
  v35_hvarea_secdforest.fx(j,ac_sub) = 0;
  v35_hvarea_primforest.fx(j) = 0;
- v35_hvarea_other.fx(j,ac_sub,othertype35) = 0;
+ v35_hvarea_other.fx(j,othertype35,ac_sub) = 0;
 elseif s35_hvarea = 1,
  v35_hvarea_secdforest.fx(j,ac_sub) = (v35_secdforest.l(j,ac_sub) - v35_secdforest.lo(j,ac_sub))*s35_hvarea_secdforest*m_timestep_length_forestry;
  v35_hvarea_primforest.fx(j) = (vm_land.l(j,"primforest") - vm_land.lo(j,"primforest"))*s35_hvarea_primforest*m_timestep_length_forestry;
- v35_hvarea_other.fx(j,ac_sub,othertype35) = (vm_land_other.l(j,ac_sub,othertype35) - vm_land_other.lo(j,ac_sub,othertype35))*s35_hvarea_other*m_timestep_length_forestry;
+ v35_hvarea_other.fx(j,othertype35,ac_sub) = (vm_land_other.l(j,othertype35,ac_sub) - vm_land_other.lo(j,othertype35,ac_sub))*s35_hvarea_other*m_timestep_length_forestry;
 );

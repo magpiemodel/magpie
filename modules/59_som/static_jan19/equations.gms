@@ -19,8 +19,8 @@
 
 q59_soilcarbon_other(j2,stockType) ..
  vm_carbon_stock(j2,"other","soilc",stockType) =e=
-      sum((ct,ac), vm_land_other(j2,ac,"othernat") * fm_carbon_density(ct,j2,"other","soilc"))
-    + sum((ct,ac), vm_land_other(j2,ac,"youngsecdf") * fm_carbon_density(ct,j2,"secdforest","soilc")) ;
+      sum((ct,ac), vm_land_other(j2,"othernat",ac) * fm_carbon_density(ct,j2,"other","soilc"))
+    + sum((ct,ac), vm_land_other(j2,"youngsecdf",ac) * fm_carbon_density(ct,j2,"secdforest","soilc")) ;
 
 
 
