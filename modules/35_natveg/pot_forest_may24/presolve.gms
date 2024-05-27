@@ -45,7 +45,7 @@ vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 * -------------------------------------------------
 
 *** Calculate the upper boundary for secondary forest recovery
-pc35_max_forest_recovery(j) = pcm_max_forest_est(j) - sum(ac_sub, pc35_land_other(j,"youngsecdf",ac_sub));
+pc35_max_forest_recovery(j) = pcm_max_forest_est(j) - sum(ac, pc35_land_other(j,"youngsecdf",ac));
 
 *** Distribute forestry abandonement
 * Abandoned forestry is directly shifted into p35_forest_recovery_area(t,j,ac_est) because it is
@@ -55,14 +55,15 @@ p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2, p35_forest_recovery_area(t,j,
 
 * The proportion of secondary forest recovery in total natveg
 * recovery is derived from the remaining forest recovery area
-pc35_max_forest_recovery(j) = pc35_max_forest_recovery(j) - sum(ac_est, p35_forest_recovery_area(t,j,ac_est));
-pc35_forest_recovery_shr(j) = pc35_max_forest_recovery(j) / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")+1e-10);
+pc35_forest_recovery_shr(j) = (pc35_max_forest_recovery(j) - sum(ac_est, p35_forest_recovery_area(t,j,ac_est)))
+                            / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")+1e-10);
 pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) > 1) = 1;
 * Abandoned land pc35_land_other(j,"othernat",ac_est) that has not yet been allocated to
 * p35_forest_recovery_area(t,j,ac_est) is then distributed proportionally using the forest recovery share.
 p35_forest_recovery_area(t,j,ac_est) = p35_forest_recovery_area(t,j,ac_est)
                                      + (pc35_land_other(j,"othernat",ac_est) - p35_forest_recovery_area(t,j,ac_est))
                                      * pc35_forest_recovery_shr(j);
+p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2, p35_forest_recovery_area(t,j,ac_est2)) > pc35_max_forest_recovery(j)) = pc35_max_forest_recovery(j)/card(ac_est2);
 pc35_land_other(j,"othernat",ac_est) = pc35_land_other(j,"othernat",ac_est) - p35_forest_recovery_area(t,j,ac_est);
 pc35_land_other(j,"youngsecdf",ac_est) = pc35_land_other(j,"youngsecdf",ac_est) + p35_forest_recovery_area(t,j,ac_est);
 
