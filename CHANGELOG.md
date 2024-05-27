@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg**  `vm_land(j2,"forestry")` included in NPI/NDC constraint `q35_min_forest`
 
 ### added
-- **scripts** added Magpie EU report `EU_report.R` that uses `EU_report.Rmd`
+- **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
 - **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth`
 - **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing`
 - **default.cfg** added settings for new price-driven bioenergy realization `1st2ndgen_priced_feb24`: `cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix`, `cfg$gms$c60_bioenergy_subsidy_fix_SSP2`, `s60_bioenergy_gj_price_1st`,
