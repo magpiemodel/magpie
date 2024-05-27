@@ -44,20 +44,25 @@ vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 * Calculate area of secondary forest recovery
 * -------------------------------------------------
 
-*** Distribute forestry abandonement
-* Abandoned forestry is directly shifted into pc35_land_other(j,"youngsecdf",ac_est) because it is
-* assumed that forestry was located in areas suitable to grow forests.
-pc35_land_other(j,"youngsecdf",ac_est) = vm_lu_transitions.l(j,"forestry","other")/card(ac_est2);
-pc35_land_other(j,"youngsecdf",ac_est)$(sum(ac_est2,pc35_land_other(j,"youngsecdf",ac_est2)) > pcm_max_forest_est(j)) = pcm_max_forest_est(j)/card(ac_est2);
+*** Calculate the upper boundary for secondary forest recovery
+pc35_max_forest_recovery(j) = pcm_max_forest_est(j) - sum(ac_sub, pc35_land_other(j,"youngsecdf",ac_sub));
 
-* The proportion of secondary forest recovery in total natveg recovery is derived
-* from the remaining forest recovery area
-p35_max_forest_recovery(j) = pcm_max_forest_est(j) - sum(ac, pc35_land_other(j,"youngsecdf",ac));
-p35_forest_recovery_shr(j) = p35_max_forest_recovery(j) / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")+1e-10);
-p35_forest_recovery_shr(j)$(p35_forest_recovery_shr(j) > 1) = 1;
-* Abandoned land pc35_land_other(j,"othernat",ac_est) is then distributed proportionally using the forest recovery share.
-p35_forest_recovery_area(t,j,ac_est) = pc35_land_other(j,"othernat",ac_est) * p35_forest_recovery_shr(j);
-p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2,p35_forest_recovery_area(t,j,ac_est2)) > p35_max_forest_recovery(j)) = p35_max_forest_recovery(j)/card(ac_est2);
+*** Distribute forestry abandonement
+* Abandoned forestry is directly shifted into p35_forest_recovery_area(t,j,ac_est) because it is
+* assumed that forestry was located in areas suitable to grow forests.
+p35_forest_recovery_area(t,j,ac_est) = vm_lu_transitions.l(j,"forestry","other")/card(ac_est2);
+p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2, p35_forest_recovery_area(t,j,ac_est2)) > pc35_max_forest_recovery(j)) = pc35_max_forest_recovery(j)/card(ac_est2);
+
+* The proportion of secondary forest recovery in total natveg
+* recovery is derived from the remaining forest recovery area
+pc35_max_forest_recovery(j) = pc35_max_forest_recovery(j) - sum(ac_est, p35_forest_recovery_area(t,j,ac_est));
+pc35_forest_recovery_shr(j) = pc35_max_forest_recovery(j) / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")+1e-10);
+pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) > 1) = 1;
+* Abandoned land pc35_land_other(j,"othernat",ac_est) that has not yet been allocated to
+* p35_forest_recovery_area(t,j,ac_est) is then distributed proportionally using the forest recovery share.
+p35_forest_recovery_area(t,j,ac_est) = p35_forest_recovery_area(t,j,ac_est)
+                                     + (pc35_land_other(j,"othernat",ac_est) - p35_forest_recovery_area(t,j,ac_est))
+                                     * pc35_forest_recovery_shr(j);
 pc35_land_other(j,"othernat",ac_est) = pc35_land_other(j,"othernat",ac_est) - p35_forest_recovery_area(t,j,ac_est);
 pc35_land_other(j,"youngsecdf",ac_est) = pc35_land_other(j,"youngsecdf",ac_est) + p35_forest_recovery_area(t,j,ac_est);
 
@@ -159,7 +164,7 @@ p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) 
 
 * Since forest restoration cannot be bigger than the potential area for secdforest recovery,
 * any remaining restoration area is substracted and shifted to other land restoration.
-p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - p35_max_forest_recovery(j);
+p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - pc35_max_forest_recovery(j);
 p35_restoration_shift(j)$(p35_restoration_shift(j) < 0) = 0;
 p35_land_restoration(j,"secdforest") = p35_land_restoration(j,"secdforest") - p35_restoration_shift(j);
 pm_land_conservation(t,j,"other","restore") = pm_land_conservation(t,j,"other","restore") + p35_restoration_shift(j);
