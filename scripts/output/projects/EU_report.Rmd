@@ -6,7 +6,7 @@ output:
     code_folding: hide
 ---
 <!---
-The following code is to have a wider output pdf with less margins to tisplay larges plots.
+The following code is to have a wider output pdf with less margins to display larger plots.
 -->
 <style type="text/css">
 .main-container {
