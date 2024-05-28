@@ -7,11 +7,10 @@
 
 *' @title Timber
 *'
-*' @description This module handles the production of timber using plantations [32_forestry]
-*' and natural vegetation [35_natveg]. Timber can be produced from both commercial plantations
-*' and natural forests. The module feeds `vm_prod` at cluster level to [17_production] and
-*' [21_trade] modules. This module also calculates the "real" harvested area in natural
-*' forests i.e. `v35_hvarea_primforest`,`v35_hvarea_secdforest` and `v73_hvarea_other`.
+*' @description This module provides demand for forestry products via the interface `pm_demand_forestry` 
+*' to the modules [32_forestry] and [62_material], and merges production of timber from 
+*' different sources into the interface `vm_prod`, which is used in the [17_production] and
+*' [21_trade] modules. 
 *'
 *' @authors Abhijeet Mishra, Florian Humpenöder
 
