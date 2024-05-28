@@ -88,7 +88,7 @@ pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secd
 * Grassland restoration is limited by grassland restoration potential
 p22_past_restore_pot(t,j) = sum(land, pcm_land(j, land))
               - pcm_land(j, "urban")
-              - sum(forest_land, pcm_land(j, forest_land))
+              - sum(land_timber, pcm_land(j, land_timber))
               - pm_land_conservation(t,j,"past","protect")
               - pm_land_conservation(t,j,"secdforest","restore");
 p22_past_restore_pot(t,j)$(p22_past_restore_pot(t,j) < 0) = 0;
@@ -97,7 +97,7 @@ pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","res
 * Other land restoration is limited by other land restoration potential
 p22_other_restore_pot(t,j) = sum(land, pcm_land(j, land))
                - pcm_land(j, "urban")
-               - sum(forest_land, pcm_land(j, forest_land))
+               - sum(land_timber, pcm_land(j, land_timber))
                - sum(consv_type, pm_land_conservation(t,j,"past",consv_type))
                - pm_land_conservation(t,j,"secdforest","restore");
 p22_other_restore_pot(t,j)$(p22_other_restore_pot(t,j) < 0) = 0;

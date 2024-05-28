@@ -8,13 +8,13 @@
 *m_sigmoid_time_interpol(i32_plant_contr_fader,2020,2050,0.05,0);
 m_sigmoid_time_interpol(i32_plant_contr_growth_fader,s32_plant_contr_growth_startyear,s32_plant_contr_growth_endyear,s32_plant_contr_growth_startvalue,s32_plant_contr_growth_endvalue);
 
-p32_est_cost("plant") = s32_est_cost_plant; 
+p32_est_cost("plant") = s32_est_cost_plant;
 p32_est_cost("ndc") = s32_est_cost_natveg;
 p32_est_cost("aff") = s32_est_cost_natveg$(s32_aff_plantation = 0) + s32_est_cost_plant$(s32_aff_plantation = 1);
 
 ** Calculation of Single rotation model rotation lengths
 ** Using forestry carbon densitiy here via carbon density data exchange from carbon module.
-p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
+p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_plantation_ac(t_all,j,ac,"vegc");
 
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
@@ -52,7 +52,7 @@ $ifthen "%c32_rot_calc_type%" == "current_annual_increment"
 $endif
 
 $ifthen "%c32_rot_calc_type%" == "mean_annual_increment"
-  p32_avg_increment(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") / ((ord(ac)+1)*5);
+  p32_avg_increment(t_all,j,ac) = pm_carbon_density_plantation_ac(t_all,j,ac,"vegc") / ((ord(ac)+1)*5);
   p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) >  0)
                           + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) <= 0);
   display "Rotation lengths are calculated based on maximizing mean annual increment in this run.";

@@ -5,11 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the dynamic_feb21 realization, land and carbon stock dynamics
+*' @description In the pot_forest_may24 realization, land and carbon stock dynamics
 *' of natural vegetation are modeled endogenously.
 *' The initial spatial distribution of the sub-land-types primary forest,
 *' secondary forest and other natural land is based on the
 *' LUH2 data set [@hurtt2018luh2].
+*' Forest establishment is constrained by the potential forest area, which is defined by
+*' areas with a potential carbon density of >20 tC/ha. The remaining forest establishment
+*' area in the current time step is provided to the [32_forestry] module via the
+*' interface parameter `pcm_max_forest_est`.
 *' This realization also includes national policies implemented (NPI) and nationally
 *' determined contributions to the Paris agreement (NDC) with regard to forest and other
 *' land protection. The NPI/NDC polices ramp up until 2030 and are assumed constant
@@ -33,12 +37,12 @@
 *' secondary forest and harvested primary forest is reclassified as secondary forest.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/35_natveg/dynamic_feb21/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/35_natveg/dynamic_feb21/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/35_natveg/dynamic_feb21/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/35_natveg/dynamic_feb21/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/35_natveg/dynamic_feb21/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/35_natveg/dynamic_feb21/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/35_natveg/dynamic_feb21/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/35_natveg/dynamic_feb21/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/35_natveg/pot_forest_may24/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/35_natveg/pot_forest_may24/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/35_natveg/pot_forest_may24/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/35_natveg/pot_forest_may24/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/35_natveg/pot_forest_may24/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/35_natveg/pot_forest_may24/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/35_natveg/pot_forest_may24/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/35_natveg/pot_forest_may24/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
