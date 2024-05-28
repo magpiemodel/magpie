@@ -88,7 +88,7 @@
 *' of more capital intensive livestock systems with already established stocks.
 *'
 *' The realization is based on the `sticky_feb18` factor cost realization, but
-*' also differs from it in some ways. At the creation time the main differences where: 
+*' also differs from it in some ways. At the creation time the main differences were: 
 *' 1. capital stocks are on the regional level not on cluster level
 *' 2. no differentiation of mobile and immobile capital - all capital stocks are immobile
 *'  
