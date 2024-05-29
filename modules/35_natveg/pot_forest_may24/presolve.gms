@@ -156,11 +156,7 @@ m_boundfix(v35_secdforest,(j,ac_sub),l,1e-6);
 
 * Secondary forest conservation
 * protection bound fix
-<<<<<<< HEAD:modules/35_natveg/dynamic_feb21/presolve.gms
-pm_land_conservation(t,j,"secdforest","protect")$(abs(pm_land_conservation(t,j,"secdforest","protect") - sum(ac_sub, pc35_secdforest(j,ac_sub))) < 1e-10) = sum(ac_sub, pc35_secdforest(j,ac_sub));
-=======
 pm_land_conservation(t,j,"secdforest","protect")$(abs(pm_land_conservation(t,j,"secdforest","protect") - sum(ac_sub, pc35_secdforest(j,ac_sub))) < 1e-6) = sum(ac_sub, pc35_secdforest(j,ac_sub));
->>>>>>> 77d5df1d3bc91c04600d105414d2bbfcd4f01714:modules/35_natveg/pot_forest_may24/presolve.gms
 * set restoration target
 p35_land_restoration(j,"secdforest") = pm_land_conservation(t,j,"secdforest","restore");
 * Do not restore secdforest in areas where total natural
