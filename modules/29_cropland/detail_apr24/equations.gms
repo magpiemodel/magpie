@@ -116,7 +116,8 @@
     v29_cost_treecover_recur(j2) =e= 
       sum(ac_sub, v29_treecover(j2,ac_sub)) * s29_cost_treecover_recur;
 
-*' Cropland tree cover establishment rules.
+*' Cropland tree cover establishment rules for distributing areas equally to age-classes.
+*' For a 5-year time step ac_est includes only ac0. But for a 10-year time step ac_est includes ac0 and ac5. 
 
   q29_treecover_est(j2,ac_est) ..
     v29_treecover(j2,ac_est) =e= sum(ac_est2, v29_treecover(j2,ac_est2))/card(ac_est2);

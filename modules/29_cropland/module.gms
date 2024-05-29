@@ -12,7 +12,7 @@
 *' Area and carbon stocks for fallow land and tree cover are defined in this module.
 
 
-*' @authors Florian Humpenöder
+*' @authors Florian Humpenöder, Benjamin Bodirsky, Patrick v. Jeetze
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%cropland%" == "detail_apr24" $include "./modules/29_cropland/detail_apr24/realization.gms"

@@ -24,8 +24,6 @@ q50_nr_inputs(i2) ..
                 vm_res_recycling(i2,"nr")
                   + sum((cell(i2,j2),kcr,w), vm_area(j2,kcr,w) * f50_nr_fix_area(kcr))
                   + sum(cell(i2,j2),vm_fallow(j2) * f50_nr_fix_area("tece"))
-*                 Commented out for consistency with q50_nr_surplus_nonagland
-*                 + sum(cell(i2,j2),vm_treecover(j2)) * sum(ct,f50_nr_fixation_rates_nonagland(ct,i2))
                   + vm_manure_recycling(i2,"nr")
                   + sum(kli, vm_manure(i2, kli, "stubble_grazing","nr"))
                   + vm_nr_inorg_fert_reg(i2,"crop")
@@ -85,14 +83,6 @@ q50_nr_surplus_pasture(i2) ..
  q50_nr_withdrawals_pasture(i2) ..
             v50_nr_withdrawals_pasture(i2) =e=
             vm_prod_reg(i2,"pasture") * fm_attributes("nr","pasture");
-
-* Calculating Budget surplus for non-agricultural land
-
-* q50_nr_surplus_nonagland(i2) ..
-*            vm_nr_surplus_nonagland(i2)
-*            =e=
-*            sum((cell(i2,j2),nonagland50), vm_land(j2,nonagland50)) * sum(ct,f50_nr_fixation_rates_nonagland(ct,i2))
-*            + sum(nonagland50, v50_nr_deposition(i2,nonagland50));
 
 *' For both crop land and pasture land, this equation gives the amount of nitrogen deposited from the atmosphere.
  q50_nr_deposition(i2,land) ..

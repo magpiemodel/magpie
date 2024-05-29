@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* -------------------------------------------------------
+* Semi-Natural Vegetation (SNV)
+* ------------------------------------------------------- 
+
 *' @code
 *' Minimum semi-natural vegetation (SNV) share is fading in after 2020
 p29_snv_shr(t,j) = i29_snv_scenario_fader(t) *
@@ -32,6 +36,10 @@ p29_avl_cropland(t,j) = f29_avl_cropland(j,"%c29_marginal_land%") * (1 - p29_snv
 *' @stop
 
 
+* -------------------------------------------------------
+* Tree cover on cropland
+* ------------------------------------------------------- 
+
 * Growth of trees on cropland is modelled by shifting age-classes according to time step length.
 s29_shift = m_timestep_length_forestry/5;
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s29_shift = 1)
@@ -46,6 +54,7 @@ v29_treecover.l(j,ac) = p29_treecover(t,j,ac);
 * create treecover target and penalty scenario
 i29_treecover_target(t,j) = s29_treecover_target * i29_treecover_scenario_fader(t);
 
+* calculate treecover share 
 pc29_treecover_share(j) = 0;
 pc29_treecover_share(j)$(pcm_land(j,"crop") > 1e-10) = sum(ac, pc29_treecover(j,ac)) / pcm_land(j,"crop"); 
 pc29_treecover_share(j)$(pc29_treecover_share(j) > s29_treecover_max) = s29_treecover_max;
@@ -53,24 +62,31 @@ if (s29_treecover_keep = 1,
  i29_treecover_target(t,j)$(i29_treecover_target(t,j) < pc29_treecover_share(j)) = pc29_treecover_share(j);
 );
 
+* Bounds for treecover. Only ac_est can increase in optimization. ac_sub can only decrease.
 v29_treecover.lo(j,ac_est) = 0;
 v29_treecover.up(j,ac_est) = Inf;
 v29_treecover.lo(j,ac_sub) = 0;
 v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
 m_boundfix(v29_treecover,(j,ac_sub),l,1e-6);
 
+* set treecover penalty
 if (m_year(t) <= s29_treecover_scenario_start,
   i29_treecover_penalty(t) = s29_treecover_penalty_before;
 else
   i29_treecover_penalty(t) = s29_treecover_penalty;
 );
 
+* fix missing tree cover variable to zero in case of no penalty
 if (i29_treecover_penalty(t) > 0,
   v29_treecover_missing.lo(j) = 0;
   v29_treecover_missing.up(j) = Inf;
 else
   v29_treecover_missing.fx(j) = 0;
 );
+
+* -------------------------------------------------------
+* Fallow land
+* ------------------------------------------------------- 
 
 * create fallow land target and penalty scenario
 i29_fallow_target(t) = s29_fallow_target * i29_fallow_scenario_fader(t);
@@ -88,6 +104,7 @@ else
   );
 );
 
+* Bounds for fallow land
 vm_fallow.lo(j) = 0;
 vm_fallow.up(j) = p29_avl_cropland(t,j);
 m_boundfix(vm_fallow,(j),l,1e-6);

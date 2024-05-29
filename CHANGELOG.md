@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **29_ageclass** module 29_ageclass has been renamed to 28_ageclass to make space for `29_cropland` just before `30_croparea`
 - **30_crop** module `30_crop` renamed to `30_croparea`, which now only accounts for crop area.
-- **30_crop** SNV implementation has been moved from `30_crop` to `29_cropland` 
+- **30_crop** Semi-Natural Vegetation (SNV) implementation has been moved from `30_crop` to `29_cropland` 
 - **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
 - **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
 - **default.cfg** update additional data to rev4.51

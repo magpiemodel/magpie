@@ -23,8 +23,25 @@
       vm_land(j2,"crop") * sum(ct, i30_betr_target(ct)) - vm_area(j2,"betr","rainfed");
 
 *' Rotational constraints prevent over-specialization. In this realization,
-*' they are either implemented via a rules (i30_implementation = 1) or 
+*' they are either implemented via rules (i30_implementation = 1) or 
 *' a penalty payment if the constraints are violated (i30_implementation = 0).
+
+*' Rule-based rotational constraints (i30_implementation = 1):
+
+*' Minimum and maximum rotational constraints limit
+*' the placing of crops. These rotational constraints reflect
+*' crop rotations limiting the share a specific crop can cover of the total area
+*' of a cluster.
+
+  q30_rotation_max(j2,rotamax_red30)$(i30_implementation = 1) ..
+    sum((rota_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) =l=
+      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamax_red30));
+
+  q30_rotation_min(j2,rotamin_red30)$(i30_implementation = 1) ..
+    sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
+      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamin_red30));
+
+* 'Penalty-based rotational constraints (i30_implementation = 0):
 
   q30_rotation_penalty(i2) ..
     vm_rotation_penalty(i2) =g=
@@ -34,14 +51,6 @@
       * sum(ct, i30_rotation_incentives(ct,rotamax_red30)))
       + v30_betr_missing(j2) * sum(ct, i30_betr_penalty(ct))
       );
-
-  q30_rotation_max(j2,rotamax_red30)$(i30_implementation = 1) ..
-    sum((rota_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) =l=
-      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamax_red30));
-
-  q30_rotation_min(j2,rotamin_red30)$(i30_implementation = 1) ..
-    sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
-      sum((kcr,w),vm_area(j2,kcr,w)) * sum(ct,i30_rotation_rules(ct,rotamin_red30));
 
 *' The penalty applies to the areas which exceed a certain maximum
 *' share of the land. Below this share, negative benefits are

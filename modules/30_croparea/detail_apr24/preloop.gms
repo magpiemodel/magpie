@@ -10,12 +10,12 @@
 m_sigmoid_time_interpol(i30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
 m_sigmoid_time_interpol(i30_betr_scenario_fader,s30_betr_scenario_start,s30_betr_scenario_target,0,1);
 
-** create crop rotation scenario
+** Fader for rotational constraints
 i30_rotation_rules(t_all,rota30) =
   f30_rotation_rules(rota30,"default") * (1-i30_rotation_scenario_fader(t_all)) +
   f30_rotation_rules(rota30,"%c30_rotation_rules%") * (i30_rotation_scenario_fader(t_all));
 
-** create crop rotation scenario
+** Fader for penalty for violating rotational constraints
 i30_rotation_incentives(t_all,rota30) =
   f30_rotation_incentives(rota30,"default") * (1-i30_rotation_scenario_fader(t_all)) +
   f30_rotation_incentives(rota30,"%c30_rotation_incentives%") * (i30_rotation_scenario_fader(t_all));
@@ -26,6 +26,7 @@ i30_rotation_incentives(t_all,rota30) =
 *cannot be smaller than 0!
 fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 
+* fix penalty to zero in case of rule-based rotational contraints
 if(s30_implementation = 1,
   v30_penalty.fx(j,rota30) = 0;
 );

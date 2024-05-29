@@ -12,6 +12,8 @@ vm_area.fx(j,kbe30,w)=0;
 *' Second, the bounds for 2nd generation bioenergy area are released depending on
 *' the dynamic sets bioen_type_30 and bioen_water_30.
 *' SSP2 default settings are used for the historic period.
+*' In addition, rule-based rotational constraints (i30_implementation = 1) 
+*' are assumed for the historic period.
 if(m_year(t) <= sm_fix_SSP2,
   vm_area.up(j,kbe30,"rainfed") = Inf;
   i30_implementation = 1;

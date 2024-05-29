@@ -8,8 +8,9 @@
 *****************************Technical macros***********************************
 
 * Macro for fixing a variable in the case that lower and upper bound are too
-* close to each other (closer than argument "sens")
-* EXAMPLE: ma_boundfix(vm_land,(j,"ifft"),up,1e-6);
+* close to each other (closer than argument "sens"). 
+* "arg" specifies the set for fixing. "sufx" specifies to what value the variable should be fixed ("l","lo","up").
+* EXAMPLE: m_boundfix(vm_land,(j,"ifft"),up,1e-6);
 $macro m_boundfix(x,arg,sufx,sens) x.fx arg$(x.up arg-x.lo arg<sens) = x.sufx arg;
 
 $macro m_weightedmean(x,w,s) (sum(s,x*w)/sum(s,w))$(sum(s,w)>0) + 0$(sum(s,w)<=0);

@@ -11,6 +11,12 @@
 *' Biodiversity BII values are fixed to zero. 
 *' Costs are fixed to zero. 
 
+*' This realisation also includes the option to reserve a minimum semi-natural
+*' vegetation share within the total available cropland for other land cover
+*' classes, including grassland, forest, and other land (by a given target year),
+*' in order to provide species habitats and to benefit from ecosystem ervices in
+*' agricultural landscapes.
+
 *' @limitations Fallow land and tree cover on cropland are fixed to zero 
 
 *####################### R SECTION START (PHASES) ##############################
