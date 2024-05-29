@@ -48,12 +48,12 @@ $endif
 
 ** Convert to tDM from mio m3
 ** p73_timber_demand_gdp_pop is in mio m^3
-** pm_demand_ext in mio ton DM
+** pm_demand_forestry in mio ton DM
 ** Hold constraint beyond 2150 - First every time step gets 2150 values
 **** Extend for Churkina et al 2020 demand scenarios
-pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * f73_volumetric_conversion(kforestry),3);
+pm_demand_forestry(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * f73_volumetric_conversion(kforestry),3);
 ** overwrite timesteps below 2150 with actual values
-pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
+pm_demand_forestry(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
 
 ** Initialize fraction
 p73_fraction(t_all)    = s73_expansion/(m_year("y2100") - sm_fix_SSP2);
@@ -81,12 +81,15 @@ if(s73_expansion = 0,
 
 ** In case using simple assumption for construction wood demand (based on industrial_roundwood demand)
 if(s73_expansion > 0,
-  p73_demand_constr_wood(t_all,i) = pm_demand_ext(t_all,i,"wood") * p73_fraction(t_all);
+  p73_demand_constr_wood(t_all,i) = pm_demand_forestry(t_all,i,"wood") * p73_fraction(t_all);
   );
 
 ** Adjust industrial roundwood demand (construction wood demand is added on top)
-pm_demand_ext(t_all,i,"wood") = pm_demand_ext(t_all,i,"wood") + p73_demand_constr_wood(t_all,i);
+pm_demand_forestry(t_all,i,"wood") = pm_demand_forestry(t_all,i,"wood") + p73_demand_constr_wood(t_all,i);
 ** Keep demand after 2100 constant
-pm_demand_ext(t_all,i,kforestry)$(m_year(t_all)>2100) = pm_demand_ext("y2100",i,kforestry);
+pm_demand_forestry(t_all,i,kforestry)$(m_year(t_all)>2100) = pm_demand_forestry("y2100",i,kforestry);
 ** Calculate global demand
-p73_glo_wood(t_all,kforestry) = sum(i,pm_demand_ext(t_all,i,kforestry));
+p73_glo_wood(t_all,kforestry) = sum(i,pm_demand_forestry(t_all,i,kforestry));
+
+im_timber_prod_cost("wood") = s73_timber_prod_cost_wood;
+im_timber_prod_cost("woodfuel") = s73_timber_prod_cost_woodfuel;

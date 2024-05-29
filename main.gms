@@ -148,19 +148,19 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 *
-* Used data set: rev4.104_h12_magpie.tgz
+* Used data set: rev4.106_h12_magpie.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
-* Used data set: rev4.104_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* Used data set: rev4.106_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
-* Used data set: rev4.104_h12_validation.tgz
+* Used data set: rev4.106_h12_validation.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
-* Used data set: additional_data_rev4.48.tgz
+* Used data set: additional_data_rev4.50.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 *
@@ -179,11 +179,11 @@ $title magpie
 *
 * Regionscode: 62eff8f7
 *
-* Regions data revision: 4.104
+* Regions data revision: 4.106
 *
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.104
+* * Revision: 4.106
 *
 * aggregation settings:
 * * Input resolution: 0.5
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 *
 *
-* Last modification (input data): Wed May  8 14:54:42 2024
+* Last modification (input data): Thu May 23 11:16:51 2024
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -253,10 +253,10 @@ $setglobal cropland  simple_apr24
 $setglobal croparea  simple_apr24
 $setglobal past  endo_jun13
 
-$setglobal forestry  dynamic_feb21
+$setglobal forestry  dynamic_may24
 
 $setglobal urban  exo_nov21
-$setglobal natveg  dynamic_feb21
+$setglobal natveg  pot_forest_may24
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off

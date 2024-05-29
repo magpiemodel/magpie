@@ -30,3 +30,4 @@ sets
  ;
 
 alias(kap,kap4);
+alias(kforestry,kforestry2);

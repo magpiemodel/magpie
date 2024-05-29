@@ -37,8 +37,9 @@ q21_trade_bilat(h2,k_trade)..
  *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade) >= 1))
  + (sum(supreg(h2,i2),vm_supply(i2,k_trade))*sum(ct,f21_self_suff(ct,h2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade)) - v21_import_for_feasibility(h2,k_trade))
- $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1));
+ *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ $(sum(ct,f21_self_suff(ct,h2,k_trade) < 1))
+ - v21_import_for_feasibility(h2,k_trade);
 
 *' Upper bound for production.
 

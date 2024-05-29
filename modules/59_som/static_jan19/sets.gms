@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-noncropland59(land) Soil carbon conserving landuse types
-/past, forestry, primforest, secdforest, other, urban/
+regularland59(land) Soil carbon conserving landuse types
+/ past, forestry, primforest, secdforest, urban /
 
 exo_scen59 exogenous scenarios for soil organic matter loss
 /constant, fadeout_2050/
