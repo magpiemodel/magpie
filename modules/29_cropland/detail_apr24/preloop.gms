@@ -32,9 +32,9 @@ pc29_treecover(j,ac) = (pc29_treecover_share(j) * pm_land_hist("y1995",j,"crop")
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation
 *' 1 = Use plantation growth curve (faster than natveg) towards LPJmL natural vegetation
 if(s29_treecover_plantation = 0,
- p29_carbon_density_ac(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+ p29_carbon_density_ac(t,j,ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 elseif s29_treecover_plantation = 1,
- p29_carbon_density_ac(t,j,ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+ p29_carbon_density_ac(t,j,ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,ag_pools);
 );
 
 ** set bii coefficients
