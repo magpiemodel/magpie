@@ -170,6 +170,9 @@ loop(j,
     );
 );
 
+** Initialize forestry land types 
+pc32_land(j,type32,ac) = p32_land_start_ac(j,type32,ac);
+
 *** NPI/NDC policies BEGIN
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);

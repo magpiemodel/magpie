@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 *' @code
 *' Exchange land information after optimization
-p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
+pc32_land(j,type32,ac) = v32_land.l(j,type32,ac);
 *' @stop
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
