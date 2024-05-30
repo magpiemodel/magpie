@@ -55,8 +55,11 @@ p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2, p35_forest_recovery_area(t,j,
 
 * The proportion of secondary forest recovery in total natveg
 * recovery is derived from the remaining forest recovery area
-pc35_forest_recovery_shr(j) = (pc35_max_forest_recovery(j) - sum(ac_est, p35_forest_recovery_area(t,j,ac_est)))
-                            / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")+1e-10);
+pc35_forest_recovery_shr(j) = 0;
+pc35_forest_recovery_shr(j)$((sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")) > +1e-10) = 
+             (pc35_max_forest_recovery(j) - sum(ac_est, p35_forest_recovery_area(t,j,ac_est)))
+            / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban"));
+pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) < 0) = 0;
 pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) > 1) = 1;
 * Abandoned land pc35_land_other(j,"othernat",ac_est) that has not yet been allocated to
 * p35_forest_recovery_area(t,j,ac_est) is then distributed proportionally using the forest recovery share.
