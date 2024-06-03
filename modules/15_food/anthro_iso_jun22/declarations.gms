@@ -63,13 +63,21 @@ scalars
 
 parameters
 * technical
- p15_modelstat(t)                       Model solver status (1)
- p15_iteration_counter(t)               Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
- p15_convergence_measure(t,iter15)      Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
- i15_dem_intercept(iso,regr15)          Food regression parameters intercept in kcal or as share (X)
- i15_dem_saturation(iso,regr15)         Food regression parameters saturation in kcal or as share (X)
- i15_dem_halfsat(iso,regr15)            Food regression parameters halfsaturation (USD05PPP per cap)
- i15_dem_nonsat(iso,regr15)             Food regression parameters nonsaturation (1)
+ p15_modelstat(t)                              Model solver status (1)
+ p15_iteration_counter(t)                      Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
+ p15_convergence_measure(t,iter15)             Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
+ i15_dem_intercept(iso,regr15)                 Food regression parameters intercept in kcal or as share (X)
+ i15_dem_saturation(iso,regr15)                Food regression parameters saturation in kcal or as share (X)
+ i15_dem_halfsat(iso,regr15)                   Food regression parameters halfsaturation (USD05PPP per cap)
+ i15_dem_nonsat(iso,regr15)                    Food regression parameters nonsaturation (1)
+ p15_ruminant_subst_fader(t_all)               Ruminant meat substitution fader (1)
+ p15_fish_subst_fader(t_all)                   Fish substitution fader (1)
+ p15_alcohol_subst_fader(t_all)                Alcohol substitution fader (1)
+ p15_livestock_subst_fader(t_all)              Livestock substitution fader (1)
+ p15_rumdairy_subst_fader(t_all)               Ruminant and dairy substitution fader (1)
+ p15_rumdairy_scp_subst_fader(t_all)           Ruminant and dairy substitution with SCP fader (1)
+ p15_livestock_threshold_subst_fader(t_all)    Fader for livestock threshold target (1)
+ p15_exo_food_scenario_fader(t_all)            Exogenous diet scenario fader (1)
 
 *prices
  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)

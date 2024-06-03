@@ -6,9 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-
-
-*' @code
 *' Total demand for bioenergy comes from different origins
 *' 1st generation bioenergy demand is a fixed trajectory of minimum production
 *' requirements. Second generation bioenergy splits into a Demand

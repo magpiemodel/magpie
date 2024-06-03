@@ -8,21 +8,20 @@
 
 p80_counter(h) = 0;
 p80_modelstat(t,h) = 14;
+p80_counter_modelstat(h) = 0;
+p80_resolve_option(h) = 0;
 
 *** solver settings
-
 option nlp = conopt4;
 magpie.solvelink = 3;
 magpie.optfile   = s80_optfile ;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
+magpie.savepoint = 0;
 
 $onecho > conopt4.opt
-Tol_Obj_Change = 3.0e-6
-Tol_Feas_Min = 4.0e-10
-Tol_Feas_Max = 4.0e-6
-Tol_Feas_Tria = 4.0e-6
+Lim_Variable = 1.e25
 $offecho
 
 $onecho > conopt4.op2
@@ -50,16 +49,10 @@ repeat
   loop(h$p80_handle(h),
     if(handleStatus(p80_handle(h)) = 2,
       p80_counter(h) = p80_counter(h) + 1;
-      s80_resolve = 1;
+      p80_extra_solve(h) = 1;
 
       magpie.handle = p80_handle(h);
       execute_loadhandle magpie;
-      magpie.modelStat$(magpie.modelStat=NA) = 13;
-
-      s80_modelstat_previter = p80_modelstat(t,h);
-      p80_modelstat(t,h) = magpie.modelStat;
-      s80_optfile_previter = magpie.optfile;
-      magpie.optfile = s80_optfile;
 
       h2(h) = yes;
       i2(i)$supreg(h,i) = yes;
@@ -68,52 +61,77 @@ repeat
       s80_counter = sum(h2,p80_counter(h2));
       display s80_counter;
       display magpie.modelStat;
+      display vm_cost_glo.l;
+      magpie.modelStat$(magpie.modelStat=NA) = 13;
+      
+      p80_modelstat(t,h) = magpie.modelStat;
 
-      if ((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2),
+      if(p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2,
+          execute 'gmszip -r magpie_problem.zip "%gams.scrdir%"'
+          put_utility 'shell' / 'mv -f magpie_problem.zip magpie_problem_' h.tl:0'_' t.tl:0'.zip';
           display "No feasible solution found. Writing LST file.";
           option AsyncSolLst=1;
           display$handlecollect(p80_handle(h)) 're-collect';
           option AsyncSolLst=0;
-          s80_resolve = 0;
-      );
+          p80_extra_solve(h) = 0;
+         );
 
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
-      if (p80_modelstat(t,h) <= 2,
-        display "Model status <= 2. Handle cleared.";
-        s80_resolve = 0;
-        p80_handle(h) = 0;
-      );
-
-      if (s80_resolve = 1,
-        display "Resolve"
-        if (p80_modelstat(t,h) ne s80_modelstat_previter,
-          display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
+      if(p80_modelstat(t,h) <= 2,
+        p80_counter_modelstat(h) = p80_counter_modelstat(h) + 1;
+        if(p80_counter_modelstat(h) < 2 AND s80_secondsolve = 1,
+          display "Model status <= 2. Starting second solve";
           solve magpie USING nlp MINIMIZING vm_cost_glo;
-        elseif p80_modelstat(t,h) = s80_modelstat_previter,
-          if(magpie.optfile = s80_optfile_previter,
-            display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
-            magpie.optfile = 2;
-            solve magpie USING nlp MINIMIZING vm_cost_glo;
-          else
-            display "Modelstat > 2 | Retry solve with CONOPT3";
-            option nlp = conopt;
-            solve magpie USING nlp MINIMIZING vm_cost_glo;
-            option nlp = conopt4;
-          );
-        );
-        execerror = 0;
-        if (magpie.handle = 0,
-          display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
-          magpie.handle = 1;
-        );
+          p80_handle(h) = magpie.handle;
+          p80_extra_solve(h) = 0;
+        else
+          display "Model status <= 2. Handle cleared.";
+          p80_extra_solve(h) = 0;
+          p80_handle(h) = 0;
+         );
+       );
+
+      if(p80_extra_solve(h) = 1,
+        display "Resolve";
+        p80_resolve_option(h) = p80_resolve_option(h) + 1;
+        display "Load solution from last time step as starting point";
+        execute_loadpoint 'fulldata.gdx';
+        s80_resolve_option = sum(h2,p80_resolve_option(h2));
+        display s80_resolve_option;
+        if(p80_resolve_option(h) = 1,
+          display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
+          option nlp = conopt4;
+          magpie.optfile = 0;         
+        elseif p80_resolve_option(h) = 2, 
+          display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE";
+          option nlp = conopt4;
+          magpie.optfile = 1;         
+        elseif p80_resolve_option(h) = 3, 
+          display "Modelstat > 2 | Retry solve with CONOPT4 w/o preprocessing";
+          option nlp = conopt4;
+          magpie.optfile = 2;         
+        elseif p80_resolve_option(h) = 4, 
+          display "Modelstat > 2 | Retry solve with CONOPT3";
+          option nlp = conopt;
+          magpie.optfile = 0;         
+         );
+        if(execerror > 0, execerror = 0);
+
+        solve magpie USING nlp MINIMIZING vm_cost_glo;
+        magpie.handle$(magpie.handle = 0) = 1;
         p80_handle(h) = magpie.handle;
-      );
+        option nlp = conopt4;
+        magpie.optfile = s80_optfile; 
+        
+        p80_resolve_option(h)$(p80_resolve_option(h) >= 4) = 0;
+       );
     h2(h) = no;
     i2(i) = no;
     j2(j) = no;
-    );
-  );
+   );
+ );
+display$sleep(card(p80_handle)*0.2) 'sleep some time';
 display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
@@ -122,7 +140,7 @@ if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
     abort "No feasible solution found!";
 );
 
-* handleSubmit does not work as expected. Does not restart from saved state.
+* handleSubmit does not work because it requires the script `gmsrerun.cmd` or `gmsrerun.run` in the grid directory.
 * Therefore, solve statements are used.
 * display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
 

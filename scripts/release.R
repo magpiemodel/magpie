@@ -1,3 +1,18 @@
+checkInputDataRevs <- function() {
+  source("config/default.cfg")
+  targetRev <- sub("_.+$", "", cfg$input["regional"])
+  if (!startsWith(cfg$input["cellular"], targetRev) || !startsWith(cfg$input["validation"], targetRev)) {
+    stop("in 'config/default.cfg' cellular/validation input data rev does not match regional input data rev")
+  }
+
+  scenarioConfig <- read.csv2("config/scenario_config.csv", row.names = 1)
+  rcps <- paste0("rcp", c("1p9", "2p6", "4p5", "6p0", "7p0", "8p5"))
+  rcpInput <- t(scenarioConfig)[rcps, "input['cellular']"]
+  if (!all(startsWith(rcpInput, targetRev))) {
+    stop("config/scenario_config.csv rcps do not use same input data revision as default.cfg")
+  }
+}
+
 release <- function(newVersion) {
   if (Sys.which("sbatch") == "") {
     stop("release must be created on cluster")
@@ -31,7 +46,9 @@ release <- function(newVersion) {
   message("creating documentation using goxygen...")
   goxygen::goxygen()
   message("uploading documentation to RSE server")
-  system(paste0("rsync -e ssh -avz doc/html/* rse:/webservice/doc/magpie/", newVersion))
+  exitCode <- system(paste0("rsync -e ssh -avz doc/html/* ",
+                            "rse@rse.pik-potsdam.de:/webservice/doc/magpie/", newVersion))
+  stopifnot(exitCode == 0)
 
   message("uploading input data to RSE server")
   sys.source("scripts/start/extra/publish_data.R", envir = new.env()) # only works on cluster
@@ -51,6 +68,8 @@ arguments <- commandArgs(TRUE)
 if (length(arguments) != 1) {
   stop("Please pass the new version number, e.g. `Rscript scripts/release.R 4.6.2`")
 }
+
+checkInputDataRevs()
 release(arguments)
 message("warnings:")
 print(warnings())

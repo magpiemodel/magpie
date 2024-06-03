@@ -54,7 +54,6 @@ if (length(map_file) > 1) {
   map_file <- map_file[1]
 }
 
-
 # -----------------------------------------
 #  Output functions
 # -----------------------------------------
@@ -89,17 +88,42 @@ if (length(map_file) > 1) {
 }
 
 .dissagLandConsv <- function(gdx, cfg, map_file, wdpa_hr_file, consv_prio_hr_file) {
-  land_consv_lr <- readGDX(gdx, "pm_land_conservation", react = "silent")
+  land_consv_lr <- readGDX(gdx, "p22_conservation_area", react = "silent")
   wdpa_hr <- read.magpie(wdpa_hr_file)
   map <- readRDS(map_file)
 
   # create full time series
-  land_consv_hr <- new.magpie(map[, "cell"], getYears(land_consv_lr), getNames(wdpa_hr),
-                             sets = c("x.y.iso", "year", getSets(wdpa_hr, fulldim = FALSE)[3]))
-  land_consv_hr[, getYears(land_consv_hr), ] <- wdpa_hr[, nyears(wdpa_hr), ]
-  land_consv_hr[, getYears(wdpa_hr), ] <- wdpa_hr
+  land_consv_hr <- new.magpie(map[, "cell"], getYears(land_consv_lr), getItems(wdpa_hr, dim = 3.2),
+    fill = 0, sets = c("x.y.iso", "year", "data")
+  )
 
-  if (!all(c(cfg$gms$c22_protect_scenario, cfg$gms$c22_protect_scenario_noselect) %in% "none")) {
+  iso <- readGDX(gdx, "iso")
+  consv_iso <- readGDX(gdx, "policy_countries22")
+  consv_iso <- consv_iso[consv_iso %in% getItems(wdpa_hr, dim = 1.3)]
+  if (length(consv_iso) == 0) {
+    warning("No countries selected in land conservation disaggregation. Results may be erroneous")
+  }
+
+  base_protect_select <- cfg$gms$c22_base_protect
+  base_protect_noselect <- cfg$gms$c22_base_protect_noselect
+
+  if (!all(c(base_protect_select, base_protect_noselect) %in% "none")) {
+
+    if (base_protect_noselect != "none") {
+      land_consv_hr[, getYears(land_consv_hr), ] <- collapseDim(wdpa_hr[, nyears(wdpa_hr), base_protect_noselect], dim = 3.1)
+      land_consv_hr[, getYears(wdpa_hr), ] <- collapseDim(wdpa_hr[, , base_protect_noselect], dim = 3.1)
+    }
+    if (base_protect_select != "none") {
+      land_consv_hr[consv_iso, , ] <- collapseDim(wdpa_hr[consv_iso, nyears(wdpa_hr), base_protect_select], dim = 3.1)
+    } else {
+      land_consv_hr[consv_iso, , ] <- 0
+    }
+  }
+
+  consv_select <- cfg$gms$c22_protect_scenario
+  consv_noselect <- cfg$gms$c22_protect_scenario_noselect
+
+  if (!all(c(consv_select, consv_noselect) %in% "none")) {
     if (file.exists(consv_prio_hr_file)) {
       consv_prio_all <- read.magpie(consv_prio_hr_file)
       consv_prio_hr <- new.magpie(
@@ -107,21 +131,13 @@ if (length(map_file) > 1) {
         names = getNames(consv_prio_all, dim = 2), fill = 0,
         sets = c("x.y.iso", "year", "data")
       )
-      iso <- readGDX(gdx, "iso")
-      consv_iso <- readGDX(gdx, "policy_countries22")
-      consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.3)]
-      if (length(consv_iso) == 0) {
-        warning("No countries selected in land conservation disaggregation. Results may be erroneous")
-      }
-      consv_select <- cfg$gms$c22_protect_scenario
-      consv_noselect <- cfg$gms$c22_protect_scenario_noselect
 
       if (consv_noselect != "none") {
         consv_prio_hr <- collapseDim(consv_prio_all[, , consv_noselect], dim = 3.1)
       }
       if (consv_select != "none") {
         consv_prio_hr[consv_iso, , ] <- collapseDim(consv_prio_all[consv_iso, , consv_select], dim = 3.1)
-      } else if (consv_select == "none") {
+      } else {
         consv_prio_hr[consv_iso, , ] <- 0
       }
       # future conservation only pertains to natveg
@@ -515,39 +531,40 @@ gc()
 
 message("Disaggregating peatland")
 
-#check for peatland version
-if(cfg$gms$peatland  == "v2") {
-  peat_lr <- PeatlandArea(gdx,level="cell",sum=FALSE)
+# check for peatland version
+if (cfg$gms$peatland == "v2") {
+  peat_lr <- PeatlandArea(gdx, level = "cell", sum = FALSE)
   peat_ini_hr <- read.magpie(peatland_v2_hr_file)
-  peat_ini_hr <- add_columns(peat_ini_hr,addnm = "rewetted",dim = "d3",fill = 0)
-  peat_ini_hr <- add_columns(peat_ini_hr,addnm = "unused",dim = "d3",fill = 0)
-  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr,peat_ini_hr,map_file))
-  peat_hr <- peat_hr[,getYears(peat_hr,as.integer = T) >= cfg$gms$s58_fix_peatland,]
-
-} else if (cfg$gms$peatland  == "on") {
-  peat_lr <- PeatlandArea(gdx,level="cell",sum=TRUE)
-  peat_ini_hr <- mbind(setNames(read.magpie(peatland_on_intact_hr_file),"intact"),setNames(read.magpie(peatland_on_degrad_hr_file),"degrad"))
-  peat_ini_hr <- add_columns(peat_ini_hr,addnm = "rewet",dim = "d3",fill = 0)
-  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr,peat_ini_hr,map_file))
-  peat_hr <- peat_hr[,getYears(peat_hr,as.integer = T) >= cfg$gms$s58_fix_peatland,]
+  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "rewetted", dim = "d3", fill = 0)
+  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "unused", dim = "d3", fill = 0)
+  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr, peat_ini_hr, map_file))
+  peat_hr <- peat_hr[, getYears(peat_hr, as.integer = T) >= cfg$gms$s58_fix_peatland, ]
+} else if (cfg$gms$peatland == "on") {
+  peat_lr <- PeatlandArea(gdx, level = "cell", sum = TRUE)
+  peat_ini_hr <- mbind(setNames(read.magpie(peatland_on_intact_hr_file), "intact"), setNames(read.magpie(peatland_on_degrad_hr_file), "degrad"))
+  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "rewet", dim = "d3", fill = 0)
+  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr, peat_ini_hr, map_file))
+  peat_hr <- peat_hr[, getYears(peat_hr, as.integer = T) >= cfg$gms$s58_fix_peatland, ]
 }
 peat_hr <- .fixCoords(peat_hr)
 
 # Write output
 .writeDisagg(peat_hr, peatland_hr_out_file,
-             comment = "unit: Mha per grid-cell",
-             message = "Write outputs peatland Mha")
+  comment = "unit: Mha per grid-cell",
+  message = "Write outputs peatland Mha"
+)
 gc()
 
-out <- peat_hr / dimSums(land_hr[,getYears(peat_hr),], dim = 3)
+out <- peat_hr / dimSums(land_hr[, getYears(peat_hr), ], dim = 3)
 out[is.nan(out)] <- 0
 out[is.infinite(out)] <- 0
 
 rm(land_hr, peat_hr)
 
 .writeDisagg(out, peatland_hr_share_out_file,
-             comment = "unit: grid-cell land area fraction",
-             message = "Write outputs peatland share")
+  comment = "unit: grid-cell land area fraction",
+  message = "Write outputs peatland share"
+)
 gc()
 
 message("Finished disaggregation")

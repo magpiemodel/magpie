@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
- rcp37 climate change impact sceanrios
+ rcp37 climate change impact scenarios
     / rcp119, rcp585 /
 
  metric37 labor productivity impact metric
