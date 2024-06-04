@@ -194,7 +194,9 @@ m_boundfix(vm_land_other,(j,othertype35,ac_sub),l,1e-6);
 
 * Other land conservation
 * protection bound fix
-pm_land_conservation(t,j,"other","protect")$(pm_land_conservation(t,j,"other","protect") > sum(ac_sub, pc35_land_other(j,"othernat",ac_sub))) = sum(ac_sub, pc35_land_other(j,"othernat",ac_sub));
+pm_land_conservation(t,j,"other","protect")$(pm_land_conservation(t,j,"other","protect") > 
+   sum((othertype35,ac_sub), pc35_land_other(j,othertype35,ac_sub))) = 
+      sum((othertype35,ac_sub), pc35_land_other(j,othertype35,ac_sub));
 * set restoration target
 p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
 * Do not restore other land in areas where total natural
@@ -204,7 +206,7 @@ p35_land_restoration(j,"other")$(sum(land_natveg, pcm_land(j,land_natveg)) >= su
 vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
 
 * boundfix for land_natveg
-m_boundfix(vm_land,(j,land),up,1e-6);
+m_boundfix(vm_land,(j,land_natveg),up,1e-6);
 
 * ----------------------------
 * Calculate carbon density
