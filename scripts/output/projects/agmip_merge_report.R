@@ -70,7 +70,7 @@ if (file.exists("output/agmip_report_full.csv")) {
     mapping = "AgMIP",
     model = "MAgPIE",
     outputFilename = NULL,
-    timesteps = c(seq(1900, 2100, 1)),
+    timesteps = c(seq(1995, 2100, 1)),
     naAction = "na.pass"
   )
   submission <- submission %>%
