@@ -45,7 +45,7 @@ vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 * -------------------------------------------------
 
 *** Calculate the upper boundary for secondary forest recovery
-pc35_max_forest_recovery(j) = pcm_max_forest_est(j) - sum(ac, pc35_land_other(j,"youngsecdf",ac));
+pc35_max_forest_recovery(j) = pcm_max_forest_est(t,j) - sum(ac, pc35_land_other(j,"youngsecdf",ac));
 
 *** Distribute forestry abandonement
 * Abandoned forestry is directly shifted into p35_forest_recovery_area(t,j,ac_est) because it is
