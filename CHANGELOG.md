@@ -61,6 +61,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **start/projects/fsec.R** scenario settings
 - **80_optimization** fixed a bug in nlp_apr17; cycling through CONOPT4, CONOPT4 without preprocessing and CONOPT3 was not working
 - **58_peatland** Added balance variable to avoid random infeasibilites
+- **scripts/start/test_runs.R** include all default output script, in particular disaggregation.R, which is needed for BII
 
 ## [4.7.3] - 2024-04-12
 
