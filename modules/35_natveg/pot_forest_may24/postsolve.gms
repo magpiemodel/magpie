@@ -12,9 +12,13 @@ pc35_secdforest(j,ac) = v35_secdforest.l(j,ac);
 pc35_land_other(j,othertype35,ac) = vm_land_other.l(j,othertype35,ac);
 
 * Reset forest establishment bound
-pcm_max_forest_est(j) = f35_pot_forest_area(j) - sum(land_forest, vm_land.l(j,land_forest));
-pcm_max_forest_est(j)$(pcm_max_forest_est(j) < 0) = 0;
-
+if(m_year(t) <= sm_fix_SSP2,
+  pcm_max_forest_est(t,j) = 0;
+  pcm_max_forest_est(t,j)$(fm_carbon_density(t,j,"secdforest","vegc") > 20) = sum(land, vm_land.l(j,land)) - sum(land_forest, vm_land.l(j,land_forest));
+else
+  pcm_max_forest_est(t,j) = f35_pot_forest_area(j) - sum(land_forest, vm_land.l(j,land_forest));
+  pcm_max_forest_est(t,j)$(pcm_max_forest_est(t,j) < 0) = 0;
+);
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov35_secdforest(t,j,ac,"marginal")                        = v35_secdforest.m(j,ac);
  ov_land_other(t,j,othertype35,ac,"marginal")              = vm_land_other.m(j,othertype35,ac);

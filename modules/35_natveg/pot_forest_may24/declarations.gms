@@ -22,7 +22,7 @@ parameters
  pc35_forest_recovery_shr(j)                             Forest share in natveg recovery (1)
  p35_forest_recovery_area(t,j,ac)                        Recovered forest (mio. ha)
  p35_maturesecdf(t,j,ac)                                 Matured secondary forest (mio. ha)
- pcm_max_forest_est(j)                                   Overall forest establishment potential in current time step (mio. ha)
+ pcm_max_forest_est(t,j)                                 Overall forest establishment potential in current time step (mio. ha)
  pc35_max_forest_recovery(j)                             Maximum forest recovery potential after land abandonement (mio. ha)
  p35_carbon_density_other(t,j,othertype35,ac,ag_pools)   Carbon density other land (tC per ha)
  p35_disturbance_loss_secdf(t,j,ac)                      Loss due to disturbances in secondary forest (mio. ha)
