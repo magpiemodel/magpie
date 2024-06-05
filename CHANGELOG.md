@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **41_area_equipped_for_irrigation** updated (non-default) AEI data (from Mehta2022 to Mehta2024)
 - **22_land_conservation and default.cfg** Added options for baseline protection
 - **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
 - **70_livestock** default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
@@ -52,6 +53,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg** removed growing stock calculation and calibration, which is no longer needed.
 
 ### fixed
+- **14_yields** fix division by zero in preloop of managementcalib_aug19
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
 - **44_biodiversity** avoid division by zero
 - **scenario_config.csv** same revision for input files as in default.cfg
@@ -59,6 +61,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **start/projects/fsec.R** scenario settings
 - **80_optimization** fixed a bug in nlp_apr17; cycling through CONOPT4, CONOPT4 without preprocessing and CONOPT3 was not working
 - **58_peatland** Added balance variable to avoid random infeasibilites
+- **scripts/start/test_runs.R** include all default output script, in particular disaggregation.R, which is needed for BII
 
 ## [4.7.3] - 2024-04-12
 

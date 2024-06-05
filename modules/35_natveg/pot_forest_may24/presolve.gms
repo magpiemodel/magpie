@@ -55,8 +55,11 @@ p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2, p35_forest_recovery_area(t,j,
 
 * The proportion of secondary forest recovery in total natveg
 * recovery is derived from the remaining forest recovery area
-pc35_forest_recovery_shr(j) = (pc35_max_forest_recovery(j) - sum(ac_est, p35_forest_recovery_area(t,j,ac_est)))
-                            / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")+1e-10);
+pc35_forest_recovery_shr(j) = 0;
+pc35_forest_recovery_shr(j)$((sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")) > 0) = 
+             (pc35_max_forest_recovery(j) - sum(ac_est, p35_forest_recovery_area(t,j,ac_est)))
+            / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban"));
+pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) < 0) = 0;
 pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) > 1) = 1;
 * Abandoned land pc35_land_other(j,"othernat",ac_est) that has not yet been allocated to
 * p35_forest_recovery_area(t,j,ac_est) is then distributed proportionally using the forest recovery share.
@@ -64,6 +67,8 @@ p35_forest_recovery_area(t,j,ac_est) = p35_forest_recovery_area(t,j,ac_est)
                                      + (pc35_land_other(j,"othernat",ac_est) - p35_forest_recovery_area(t,j,ac_est))
                                      * pc35_forest_recovery_shr(j);
 p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2, p35_forest_recovery_area(t,j,ac_est2)) > pc35_max_forest_recovery(j)) = pc35_max_forest_recovery(j)/card(ac_est2);
+p35_forest_recovery_area(t,j,ac_est)$(p35_forest_recovery_area(t,j,ac_est) > pc35_land_other(j,"othernat",ac_est)) = pc35_land_other(j,"othernat",ac_est);
+p35_forest_recovery_area(t,j,ac_est)$(p35_forest_recovery_area(t,j,ac_est) < 0) = 0;
 pc35_land_other(j,"othernat",ac_est) = pc35_land_other(j,"othernat",ac_est) - p35_forest_recovery_area(t,j,ac_est);
 pc35_land_other(j,"youngsecdf",ac_est) = pc35_land_other(j,"youngsecdf",ac_est) + p35_forest_recovery_area(t,j,ac_est);
 
@@ -144,7 +149,10 @@ vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 v35_secdforest.lo(j,ac) = 0;
 v35_secdforest.up(j,ac) = Inf;
 
-p35_protection_dist(j,ac_sub) = (pc35_secdforest(j,ac_sub)/sum(ac_sub2,pc35_secdforest(j,ac_sub2)))$(sum(ac_sub2,pc35_secdforest(j,ac_sub2))>0);
+* Secondary forest conservation
+p35_protection_dist(j,ac_sub) = 0;
+p35_protection_dist(j,ac_sub)$(sum(ac_sub2,pc35_secdforest(j,ac_sub2)) > 0) = pc35_secdforest(j,ac_sub) / sum(ac_sub2,pc35_secdforest(j,ac_sub2));
+pm_land_conservation(t,j,"secdforest","protect")$(pm_land_conservation(t,j,"secdforest","protect") > sum(ac_sub, pc35_secdforest(j,ac_sub))) = sum(ac_sub, pc35_secdforest(j,ac_sub));
 if (sum(sameas(t_past,t),1) = 1,
 v35_secdforest.lo(j,ac_sub) = pm_land_conservation(t,j,"secdforest","protect") * p35_protection_dist(j,ac_sub);
 else
@@ -154,9 +162,6 @@ v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,1e-6);
 
-* Secondary forest conservation
-* protection bound fix
-pm_land_conservation(t,j,"secdforest","protect")$(abs(pm_land_conservation(t,j,"secdforest","protect") - sum(ac_sub, pc35_secdforest(j,ac_sub))) < 1e-6) = sum(ac_sub, pc35_secdforest(j,ac_sub));
 * set restoration target
 p35_land_restoration(j,"secdforest") = pm_land_conservation(t,j,"secdforest","restore");
 * Do not restore secdforest in areas where total natural
@@ -167,6 +172,7 @@ p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) 
 * any remaining restoration area is substracted and shifted to other land restoration.
 p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - pc35_max_forest_recovery(j);
 p35_restoration_shift(j)$(p35_restoration_shift(j) < 0) = 0;
+p35_restoration_shift(j)$(p35_restoration_shift(j) > p35_land_restoration(j,"secdforest")) = p35_land_restoration(j,"secdforest");
 p35_land_restoration(j,"secdforest") = p35_land_restoration(j,"secdforest") - p35_restoration_shift(j);
 pm_land_conservation(t,j,"other","restore") = pm_land_conservation(t,j,"other","restore") + p35_restoration_shift(j);
 
@@ -188,7 +194,9 @@ m_boundfix(vm_land_other,(j,othertype35,ac_sub),l,1e-6);
 
 * Other land conservation
 * protection bound fix
-pm_land_conservation(t,j,"other","protect")$(abs(pm_land_conservation(t,j,"other","protect") - sum(ac_sub, pc35_land_other(j,"othernat",ac_sub))) < 1e-6) = sum(ac_sub, pc35_land_other(j,"othernat",ac_sub));
+pm_land_conservation(t,j,"other","protect")$(pm_land_conservation(t,j,"other","protect") > 
+   sum((othertype35,ac_sub), pc35_land_other(j,othertype35,ac_sub))) = 
+      sum((othertype35,ac_sub), pc35_land_other(j,othertype35,ac_sub));
 * set restoration target
 p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
 * Do not restore other land in areas where total natural
@@ -196,6 +204,9 @@ p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
 p35_land_restoration(j,"other")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
 * set conservation bound
 vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
+
+* boundfix for land_natveg
+m_boundfix(vm_land,(j,land_natveg),up,1e-6);
 
 * ----------------------------
 * Calculate carbon density
