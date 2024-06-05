@@ -50,6 +50,7 @@ gms$c32_aff_policy;;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;
 gms$s32_planing_horizon;;;;50;50;50;50;50;50;50;30;50;50;;;;;;;50;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c35_ad_policy;;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;;;;;;;;;;;;
 gms$c35_aolc_policy;;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;;;;;;;;;;;;
+gms$c35_pot_forest_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;;;cc;cc;cc;cc;cc;;;;;;;;;;;;;;;;;;;;
 gms$s35_forest_damage_end;;;;2030;2050;2050;2050;2050;2030;2030;2030;2030;2030;;;;;;;2030;;;;;2030;2030;2030;2030;2030;;;;;;;;;;;;;;;;;;;;
 gms$s42_watdem_nonagr_scenario;;;;1;2;2;3;2;1;1;1;3;1;;;;;;;;;;;;2;1;2;2;1;;;;;;;;;;;;;;;;;;;;
 gms$s42_irrig_eff_scenario;;;;2;2;2;2;2;2;3;3;3;3;;;;;;;3;;;;;3;3;3;3;3;;;;;;;;;;;;;;;;;;;;

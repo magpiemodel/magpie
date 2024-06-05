@@ -13,7 +13,7 @@
 *' Forest establishment is constrained by the potential forest area, which is defined by
 *' areas with a potential carbon density of >20 tC/ha. The remaining forest establishment
 *' area in the current time step is provided to the [32_forestry] module via the
-*' interface parameter `pcm_max_forest_est`.
+*' interface parameter `pm_max_forest_est`.
 *' This realization also includes national policies implemented (NPI) and nationally
 *' determined contributions to the Paris agreement (NDC) with regard to forest and other
 *' land protection. The NPI/NDC polices ramp up until 2030 and are assumed constant

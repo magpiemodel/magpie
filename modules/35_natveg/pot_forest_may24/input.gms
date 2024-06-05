@@ -9,6 +9,11 @@ $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
 $setglobal c35_shock_scenario  none
 
+$setglobal c35_pot_forest_scenario  cc
+*   options:  cc        (climate change)
+*             nocc      (no climate change)
+*             nocc_hist (no climate change after year defined by sm_fix_cc)
+
 scalars
 s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous) / 2 /
 s35_hvarea_secdforest annual secdforest harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
@@ -48,9 +53,13 @@ $include "./modules/35_natveg/input/f35_forest_disturbance_share.cs4"
 $offdelim
 /;
 
-parameter f35_pot_forest_area(j) Potential forest area (mio. ha)
+parameter f35_pot_forest_area(t_all,j) Potential forest area (mio. ha)
 /
 $ondelim
 $include "./modules/35_natveg/input/pot_forest_area.cs2"
 $offdelim
 /;
+
+$if "%c35_pot_forest_scenario%" == "nocc" f35_pot_forest_area(t_all,j) = f35_pot_forest_area("y1995",j);
+$if "%c35_pot_forest_scenario%" == "nocc_hist" f35_pot_forest_area(t_all,j)$(m_year(t_all) > sm_fix_cc) = f35_pot_forest_area(t_all,j)$(m_year(t_all) = sm_fix_cc);
+m_fillmissingyears(f35_pot_forest_area,"j");
