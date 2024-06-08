@@ -43,7 +43,7 @@ cfg$output <- c(
 
 # Set path to own coupled runs:
 path2NPIrun <- "/p/projects/magpie/users/beier/EL2_DeepDive_default/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
-path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_default/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
+path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_default/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5.mif"
 
 #######################
 # SCENARIO DEFINITION #
