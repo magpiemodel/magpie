@@ -191,6 +191,8 @@ vm_land_other.up(j,"youngsecdf",ac_sub) = pc35_land_other(j,"youngsecdf",ac_sub)
 vm_land_other.fx(j,"youngsecdf",ac_est) = 0;
 m_boundfix(vm_land_other,(j,othertype35,ac_sub),l,1e-6);
 
+pm_max_forest_est(t,j)$(pm_max_forest_est(t,j) < sum(ac, pc35_land_other(j,"youngsecdf",ac))) = 
+  sum(ac, pc35_land_other(j,"youngsecdf",ac));
 
 * Other land conservation
 * protection bound fix
