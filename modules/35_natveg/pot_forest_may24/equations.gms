@@ -19,7 +19,7 @@
  q35_natveg_conservation(j2) ..
             sum(land_natveg, vm_land(j2,land_natveg))
             =g=
-            sum((ct,land_natveg,consv_type), pm_land_conservation(ct,j2,land_natveg,consv_type));
+            sum((ct,land_natveg), pm_land_conservation(ct,j2,land_natveg,"protect"));
 
  q35_secdforest_restoration(j2) ..
             sum(land_ag, vm_lu_transitions(j2,land_ag,"secdforest"))
