@@ -19,7 +19,7 @@
  q35_natveg_conservation(j2) ..
             sum(land_natveg, vm_land(j2,land_natveg))
             =g=
-            sum((ct,land_natveg,consv_type), pm_land_conservation(ct,j2,land_natveg,consv_type));
+            sum((ct,land_natveg), pm_land_conservation(ct,j2,land_natveg,"protect"));
 
  q35_secdforest_restoration(j2) ..
             sum(land_ag, vm_lu_transitions(j2,land_ag,"secdforest"))
@@ -190,7 +190,7 @@ q35_hvarea_other(j2,othertype35,ac_sub)..
 q35_max_forest_establishment(j2)..
                 sum(land_forest, vm_landexpansion(j2,land_forest))
                 =l=
-                pcm_max_forest_est(j2)
+                sum(ct,pm_max_forest_est(ct,j2))
               - sum(ac, vm_land_other(j2,"youngsecdf",ac) )
                 ;
 
@@ -211,8 +211,9 @@ q35_secdforest_regeneration(j2)..
 
 q35_other_regeneration(j2)..
                  sum(ac_est, vm_land_other(j2,"othernat",ac_est))
-                 =g=
+                 =e=
                  sum((othertype35,ac_sub),v35_hvarea_other(j2,othertype35,ac_sub))
+                 + vm_landexpansion(j2,"other")
                  ;
 
 *' The following two constraints distribute additions to secdforest and other land

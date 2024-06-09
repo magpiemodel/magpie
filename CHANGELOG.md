@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg** replaced the realisation `dynamic_feb21` with realisation `pot_forest_may24`. The new realisation provides additional information on the potential forest area, which is now used to constrain forest and forestry expansion and recovery. The remaining area for forest establishment is provided to the forestry module via the new interface parameter `pcm_max_forest_est`.
 - **52_carbon** Separate carbon densities for forest and other land. Before there was only a single carbon density for natural vegetation land.
 - **scripts** modified agmip_merge_report to use piamInterfaces
+- **default.cfg** defaults for `cfg$gms$sm_fix_SSP2`, `cfg$gms$sm_fix_cc` and other switches changed from 2020 to 2025
 
 ### added
 - **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
@@ -73,6 +74,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **start/projects/fsec.R** scenario settings
 - **80_optimization** bugfix in nlp_par. Double solve statement was not working
 - **58_peatland** Added balance variable to avoid random infeasibilites
+- **scripts/start/test_runs.R** include all default output script, in particular disaggregation.R, which is needed for BII
 
 ## [4.7.3] - 2024-04-12
 
