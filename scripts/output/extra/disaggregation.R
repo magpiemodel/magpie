@@ -160,7 +160,7 @@ if (length(map_file) > 1) {
   # for grassland and natural vegetation
   natveg <- c("primforest", "secdforest", "other")
   consv_sum_lr <- mbind(
-    dimSums(land_consv_lr[, , "past"], 3.2),
+    land_consv_lr[, , "past"],
     setNames(dimSums(land_consv_lr[, , natveg], dim = 3), "natveg")
   )
   consv_sum_hr_agg <- mbind(
