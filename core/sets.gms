@@ -181,6 +181,7 @@ $If "%c_past%"== "till_1995" /y1965, y1970, y1975, y1980, y1985, y1990, y1995/;
 set t(t_all) Simulated time periods
 $If "%c_timesteps%"== "less_TS" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
 $If "%c_timesteps%"== "coup2100" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
+$If "%c_timesteps%"== "coup2110" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110/;
 $If "%c_timesteps%"== "test_TS" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2070,y2090,y2110,y2130,y2150/;
 $If "%c_timesteps%"== "TS_benni" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050/;
 $If "%c_timesteps%"== "TS_WB" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080/;
@@ -241,20 +242,23 @@ sets
    wat_dem Water demand sectors / agriculture, domestic, manufacturing, electricity, ecosystem /
 
 ***LAND POOLS***
-   land Land pools
+  land Land pools
         / crop, past, forestry, primforest, secdforest, urban, other /
 
   land_ag(land) Agricultural land pools
-                  / crop, past /
+        / crop, past /
 
-  forest_land(land) land from which timber can be taken away
-  / forestry, primforest, secdforest,other /
+  land_timber(land) land from which timber can be taken away
+        / forestry, primforest, secdforest, other /
 
-  land_natveg(forest_land) Natural vegetation land pools
+  land_forest(land_timber) Forested land pools
+        / forestry, primforest, secdforest /
+
+  land_natveg(land_timber) Natural vegetation land pools
         / primforest, secdforest, other /
 
   forest_type forest type
-         / plantations, natveg /
+        / plantations, natveg /
 
 ***Forestry**
   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,

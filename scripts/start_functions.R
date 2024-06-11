@@ -99,6 +99,7 @@
                     items = scen2nd60))
 
   gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
+  gms::writeSets(sets , "modules/60_bioenergy/1st2ndgen_priced_feb24/sets.gms")
 }
 
 # Function to extract information from info.txt
@@ -167,21 +168,6 @@
   gms::replace_in_file("main.gms",paste('*',content),subject)
 }
 
-
-.spam2rds <- function(spatial_header, cells_tmp,
-                      outfile  = "clustermap_rev0_dummy.rds",
-                      spamfile = Sys.glob("input/0.5-to-*_sum.spam")) {
-
-  sp  <- luscale::read.spam(spamfile)
-  a   <- apply(sp, 2, function(x) return(which(x == 1)))
-  out <- data.frame(cell = cells_tmp, region = sub("\\..*$","",spatial_header),
-                    country = sub("\\..*$", "", cells_tmp), global = "GLO")
-  out$cluster <- paste0(out$region,".", a)
-  out <- out[,c("cell", "cluster", "region", "country", "global")]
-  saveRDS(out, paste0("input/", outfile), version = 2)
-}
-
-
 ################################################################################
 ######################### MAIN FUNCTIONS #######################################
 ################################################################################
@@ -210,8 +196,6 @@ download_and_update <- function(cfg) {
   cel  <- magclass::getItems(tmp2, dim = 1)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
-  rds <- any(grepl(pattern = "clustermap_rev.*.rds", x = list.files("input")))
-  if (!rds) .spam2rds(spatial_header, cel, "clustermap_rev0_dummy.rds")
   .update_info(filemap, x = tmp, regionscode, reg_revision, warnings)
   .update_sets_core(x = tmp, map = map)
   .update_sets_modules()

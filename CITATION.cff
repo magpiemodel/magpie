@@ -1,5 +1,6 @@
 cff-version: 1.0.3
 message: If you use this model, please cite it as below.
+type: software
 authors:
   - family-names: Dietrich
     given-names: Jan Philipp
@@ -118,6 +119,12 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: alexkob@pik-potsdam.de
 
+  - family-names: Steinhauser
+    given-names: Jan
+    orcid: https://orcid.org/0000-0002-5989-6855
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: janstein@pik-potsdam.de
+
   - family-names: Lotze-Campen
     given-names: Hermann
     orcid: https://orcid.org/0000-0002-0003-5508
@@ -131,12 +138,26 @@ authors:
     email: popp@pik-potsdam.de
 
 title: MAgPIE - An Open Source land-use modeling framework
-version: 4.7.3
-date-released: 2024-04-12
+abstract: The *Model of Agricultural Production and its Impact on the Environment* (MAgPIE)
+  is a modular open source framework for modeling global land-systems, which is
+  coupled to the grid-based dynamic vegetation model LPJmL, with a spatial resolution
+  of 0.5degx0.5deg. It takes regional economic conditions such as demand for agricultural
+  commodities, technological development and production costs as well as spatially
+  explicit data on potential crop yields, land and water constraints (from LPJmL) into
+  account. Based on these, the model derives specific land use patterns, yields and
+  total costs of agricultural production for each grid cell. The objective function of
+  the land use model is to minimize total cost of production for a given amount of
+  regional food and bioenergy demand. Regional food energy demand is defined for an
+  exogenously given population in 10 food energy categories, based on regional diets.
+  Future trends in food demand are derived from a cross-country regression analysis,
+  based on future scenarios on GDP and population growth.
+version: 4.8.0
+date-released: 2024-06-10
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse
   - modeling
+  - model
   - nlp
   - partial equilibrium
 doi: 10.5281/zenodo.1418752

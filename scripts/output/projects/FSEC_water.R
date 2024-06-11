@@ -59,3 +59,7 @@ watStressViolations <- watStress
 # mark violations in different color
 watStressViolations[efvViolation == 1] <- 100
 write.magpie(watStressViolations, file_name = file.path(outputdir, "watStressViolations.mz"))
+
+# Water EFV ratio (EFV to EFR)
+watEFVratio <- waterEFVratio(gdx, level = "grid", dir = outputdir)
+write.magpie(watEFVratio, file_name = file.path(outputdir, "watEFVratio.mz"))

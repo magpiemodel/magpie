@@ -16,9 +16,10 @@ sets
 scalars
   s21_trade_tariff Trade tariff switch (1=on 0=off)  (1)                           / 1 /
   s21_trade_tariff_fadeout fadeout scenario setting for trade tariffs              / 0 / 
-  s21_trade_tariff_startyear year to start fading out trade tariffs                / 2020 /
+  s21_trade_tariff_startyear year to start fading out trade tariffs                / 2025 /
   s21_trade_tariff_targetyear year to finish fading out trade tariffs              / 2050 /
   s21_cost_import Cost for additional imports to maintain feasibility (USD05MER per tDM) / 10000 /
+  s21_min_trade_margin_forestry Minimum trade margin for forestry products (USD05MER per tDM) / 50 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)

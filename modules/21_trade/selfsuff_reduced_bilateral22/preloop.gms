@@ -26,10 +26,8 @@ i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_tar
 );
 );
 
-pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);
-pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);
-*Implausible jumps in selfsuff for wood in some regions.
-pm_selfsuff_ext(tstart21,h,kforestry) = f21_self_suff("y2010",h,kforestry);
+i21_trade_margin(h,"wood")$(i21_trade_margin(h,"wood") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
+i21_trade_margin(h,"woodfuel")$(i21_trade_margin(h,"woodfuel") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
 
 v21_import_for_feasibility.fx(h,k_trade) = 0;
 v21_import_for_feasibility.lo(h,k_import21) = 0;

@@ -50,3 +50,10 @@ p30_snv_relocation(t,j)$(p30_snv_relocation(t, j) > p30_max_snv_relocation(t,j))
 *' Area potentially available for cropping
 p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") * (1 - p30_snv_shr(t,j));
 *' @stop
+
+*' Cropland growth constraint after SSP2 fix
+if(m_year(t) <= sm_fix_SSP2,
+  v30_crop_area.up(i) = Inf;
+else
+  v30_crop_area.up(i) = v30_crop_area.l(i) * (1 + s30_annual_max_growth) ** m_yeardiff(t);
+);

@@ -29,10 +29,11 @@ $setglobal c30_rotation_scenario_speed  by2050
 scalars
 s30_snv_shr                     Share of available cropland that is witheld for other land cover types (1) / 0 /
 s30_snv_shr_noselect            Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_snv_scenario_start          SNV scenario start year     / 2020 /
-s30_snv_scenario_target         SNV scenario target year      / 2030 /
-s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
+s30_snv_scenario_start          SNV scenario start year     / 2025 /
+s30_snv_scenario_target         SNV scenario target year      / 2050 /
+s30_rotation_scenario_start     Rotation scenario start year      / 2025 /
 s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
+s30_annual_max_growth Max annual cropland growth as share of previous cropland (1) / Inf /
 s30_snv_relocation_data_x1      First reference value in SNV target cropland data (1) / 0.2 /
 s30_snv_relocation_data_x2      Second reference value in SNV target cropland data (1) / 0.5 /
 ;

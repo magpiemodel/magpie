@@ -43,6 +43,7 @@ positive variables
  v58_manLandExp(j,manPeat58)       Managed land area expansion (mio. ha)
  v58_manLandRed(j,manPeat58)       Managed land area reduction (mio. ha)
  v58_scalingFactorExp(j,manPeat58) Scaling factor for peatland expansion (1)
+ v58_balance(j,manPeat58)          Technical balance term for peatland scaling factor (1)
  v58_peatland_cost_annuity(j,cost58) Annuity costs for peatland conversion in the current timestep (mio. USD05MER per yr)
 ;
 
@@ -56,6 +57,7 @@ parameters
  ov58_manLandExp(t,j,manPeat58,type)               Managed land area expansion (mio. ha)
  ov58_manLandRed(t,j,manPeat58,type)               Managed land area reduction (mio. ha)
  ov58_scalingFactorExp(t,j,manPeat58,type)         Scaling factor for peatland expansion (1)
+ ov58_balance(t,j,manPeat58,type)                  Technical balance term for peatland scaling factor (1)
  ov58_peatland_cost_annuity(t,j,cost58,type)       Annuity costs for peatland conversion in the current timestep (mio. USD05MER per yr)
  oq58_peatland(t,j,type)                           Constraint for total peatland area (mio. ha)
  oq58_peatlandChange(t,j,land58,type)              Peatland area change (mio. ha)

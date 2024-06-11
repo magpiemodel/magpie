@@ -10,14 +10,14 @@
 *' The Biodiversity Intactness Index (BII) is calculated at the level of 71 biomes.
 *' The regional layer is needed for compatibility with the high resolution parallel optimization output script (scripts/output/extra/highres.R)
 
- q44_bii(i2,biome44)$(sum(cell(i2,j2), f44_biome(j2,biome44)) > 0) .. v44_bii(i2,biome44)
+ q44_bii(i2,biome44)$(sum(cell(i2,j2), f44_biome(j2,biome44)) > 1e-10) .. v44_bii(i2,biome44) * sum((cell(i2,j2),land), pcm_land(j2,land) * f44_biome(j2,biome44))
           =e=
-          (sum((cell(i2,j2),potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg) * f44_biome(j2,biome44)) / sum((cell(i2,j2),land), pcm_land(j2,land) * f44_biome(j2,biome44)));
+          sum((cell(i2,j2),potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg) * f44_biome(j2,biome44));
 
 *' For each of the 71 biomes, the BII has to meet a minium level based on `s44_bii_lower_bound`.
 *' `v44_bii_missing` is a technical variable to maintain feasibility in case `v44_bii` cannot be increased.
           
- q44_bii_target(i2,biome44)$(sum(cell(i2,j2), f44_biome(j2,biome44)) > 0) ..          
+ q44_bii_target(i2,biome44)$(sum(cell(i2,j2), f44_biome(j2,biome44)) > 1e-10) ..          
           v44_bii(i2,biome44) + v44_bii_missing(i2,biome44) =g= sum(ct, p44_bii_lower_bound(ct,i2,biome44));
 
 *' Costs accrue only for `v44_bii_missing`. In the best case costs should be zero or close to zero.
