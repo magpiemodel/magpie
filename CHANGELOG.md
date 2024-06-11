@@ -84,12 +84,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
 - **scenario_config.csv** same revision for input files as in default.cfg
 - **scenario_fsec.csv** scenario settings
-<<<<<<< HEAD
-- **start/projects/fsec.R** scenario settings
 - **80_optimization** bugfix in nlp_par. Double solve statement was not working
 - **58_peatland** Added balance variable to avoid random infeasibilites
-=======
->>>>>>> dc38aad92521933a64ae0860240a1c5859589590
 - **scripts/start/test_runs.R** include all default output script, in particular disaggregation.R, which is needed for BII
 - **start/projects/fsec.R** scenario settings
 
