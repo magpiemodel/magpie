@@ -32,35 +32,9 @@ if (!is.null(renv::project())) {
 library(lucode2)
 library(gms)
 library(yaml)
+source("scripts/helper.R")
 
 runOutputs <- function(runscripts=NULL, submit=NULL) {
-  chooseSubmit <- function(title="Please choose run submission type",
-                            slurmModes="scripts/slurmStart.yml") {
-    modes <- c("Direct execution",
-               "Background execution",
-               "Debug mode")
-
-    #Is SLURM available?
-    slurm <- lucode2::SystemCommandAvailable("srun")
-    if(slurm) {
-      slurmModes <- yaml::read_yaml(slurmModes)$slurmjobs
-      modes <- c(names(slurmModes), modes)
-      if(lucode2::SystemCommandAvailable("sclass")) {
-        cat("\nCurrent cluster utilization:\n")
-        system("sclass")
-        cat("\n")
-      }
-    }
-    
-    cat("\n",title,":\n", sep="")
-    cat(paste(seq_along(modes), modes, sep=": " ),sep="\n")
-    cat("Number: ")
-    identifier <- gms::getLine()
-    identifier <- as.integer(strsplit(identifier,",")[[1]])
-    comp <- modes[identifier]
-    if(is.null(comp) || is.na(comp)) stop("This type is invalid. Please choose a valid type")
-    return(comp)
-  }
 
   runSubmit <- function(runscripts, submit,
                         slurmModes="scripts/slurmStart.yml") {
@@ -110,7 +84,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     message("No start script selected! Stop here.")
     return(invisible(NULL))
   }
-  if(is.null(submit)) submit <- chooseSubmit("Choose submission type")
+  if(is.null(submit)) submit <- chooseSubmit("Choose submission type",
+                                             slurmModes = "scripts/slurmStart.yml")
   runSubmit(runscripts, submit)
 }
 

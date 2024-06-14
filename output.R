@@ -33,7 +33,7 @@ library(lucode2)
 library(gms)
 
 runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
-  choose_folder <- function(title="Please choose a folder") {
+  chooseFolder <- function(title="Please choose a folder") {
     dirs <- c(Sys.glob("./output/*/full.gms"), Sys.glob("./output/HR*/*/full.gms"))
     dirs <- sub("^\\./output/", "", dirs)
     dirs <- sub("/full\\.gms$", "", dirs)
@@ -66,7 +66,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       if(answer=="y"){
         return(paste0("./output/",dirs[id+1]))
       } else {
-        choose_folder(title)
+        chooseFolder(title)
       }
     } else if(any(dirs[identifier] == "all")){
       identifier <- 2:length(dirs)
@@ -172,7 +172,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     }
   }
 
-  if (is.null(outputdir)) outputdir <- choose_folder("Choose runs")
+  if (is.null(outputdir)) outputdir <- chooseFolder("Choose runs")
   if (is.null(output))     output   <- gms::selectScript("./scripts/output")
   if (is.null(submit))     submit   <- choose_submit("Choose submission type")
   if (is.null(output)) {
