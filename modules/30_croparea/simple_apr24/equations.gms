@@ -20,7 +20,7 @@
 
   q30_betr_missing(j2)$(sum(ct, i30_betr_penalty(ct)) > 0) ..
     v30_betr_missing(j2) =g=
-      vm_land(j2,"crop") * sum(ct, i30_betr_target(ct)) - vm_area(j2,"betr","rainfed");
+      vm_land(j2,"crop") * sum(ct, i30_betr_target(ct,j2)) - vm_area(j2,"betr","rainfed");
 
   q30_cost(i2) ..
     vm_rotation_penalty(i2) =g=

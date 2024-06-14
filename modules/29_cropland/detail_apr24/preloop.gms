@@ -28,6 +28,8 @@ pc29_treecover_share(j)$(pm_land_hist("y2015",j,"crop") > 1e-10) = f29_treecover
 pc29_treecover_share(j)$(pc29_treecover_share(j) > s29_treecover_max) = s29_treecover_max;
 pc29_treecover(j,ac) = (pc29_treecover_share(j) * pm_land_hist("y1995",j,"crop")) / card(ac);
 
+vm_treecover.l(j) = sum(ac, pc29_treecover(j,ac));
+
 *' Switch for tree cover on cropland:
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation
 *' 1 = Use plantation growth curve (faster than natveg) towards LPJmL natural vegetation
@@ -46,13 +48,12 @@ elseif s29_treecover_bii_coeff = 1,
 );
 
 
-****** Regional share of semi-natural vegetation (SNV) in cropland areas for selective countries:
-* Country switch to determine countries for which a SNV policy shall be applied.
-* In the default case, the SNV policy affects all countries when activated.
+* Country switch to determine countries for which certain policies shall be applied.
+* In the default case, the policy affects all countries when activated.
 p29_country_dummy(iso) = 0;
 p29_country_dummy(policy_countries29) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by available cropland area.
-i29_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
-p29_country_snv_weight(i) = sum(i_to_iso(i,iso), p29_country_dummy(iso) * i29_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), i29_avl_cropland_iso(iso));
+pm_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
+p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_dummy(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));

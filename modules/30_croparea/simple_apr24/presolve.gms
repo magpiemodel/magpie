@@ -24,8 +24,12 @@ crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
 crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
 
 * create betr target and penalty scenario
-i30_betr_target(t) = s30_betr_start * (1-i30_betr_scenario_fader(t)) 
-                     + s30_betr_target * i30_betr_scenario_fader(t);
+i30_betr_target(t,j) = (1-i30_betr_scenario_fader(t)) * 
+  (s30_betr_start * sum(cell(i,j), p29_country_weight(i))
+  + s30_betr_start_noselect * sum(cell(i,j), 1-p29_country_weight(i)))
+ + i30_betr_scenario_fader(t)  * 
+  (s30_betr_target * sum(cell(i,j), p29_country_weight(i))
+  + s30_betr_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)));
 
 if (m_year(t) <= s30_betr_scenario_start,
   i30_betr_penalty(t) = 0;

@@ -80,8 +80,10 @@ pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") 
 * Secondary forest restoration is limited by secondary forest restoration potential
 p22_secdforest_restore_pot(t,j) = sum(land, pcm_land(j, land))
                 - pcm_land(j, "urban")
-                - sum(land_natveg, pcm_land(j, land_natveg))
-                - pm_land_conservation(t,j,"past","protect");
+                - sum(land_timber, pcm_land(j, land_timber))
+                - pm_land_conservation(t,j,"past","protect")
+                - vm_land.lo(j,"crop")
+                - vm_treecover.l(j);
 p22_secdforest_restore_pot(t,j)$(p22_secdforest_restore_pot(t,j) < 1e-6) = 0;
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > p22_secdforest_restore_pot(t,j)) = p22_secdforest_restore_pot(t,j);
 
@@ -90,7 +92,9 @@ p22_past_restore_pot(t,j) = sum(land, pcm_land(j, land))
               - pcm_land(j, "urban")
               - sum(land_timber, pcm_land(j, land_timber))
               - pm_land_conservation(t,j,"past","protect")
-              - pm_land_conservation(t,j,"secdforest","restore");
+              - pm_land_conservation(t,j,"secdforest","restore")
+              - vm_land.lo(j,"crop")
+              - vm_treecover.l(j);
 p22_past_restore_pot(t,j)$(p22_past_restore_pot(t,j) < 1e-6) = 0;
 pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","restore") > p22_past_restore_pot(t,j)) = p22_past_restore_pot(t,j);
 
@@ -99,7 +103,9 @@ p22_other_restore_pot(t,j) = sum(land, pcm_land(j, land))
                - pcm_land(j, "urban")
                - sum(land_timber, pcm_land(j, land_timber))
                - sum(consv_type, pm_land_conservation(t,j,"past",consv_type))
-               - pm_land_conservation(t,j,"secdforest","restore");
+               - pm_land_conservation(t,j,"secdforest","restore")
+               - vm_land.lo(j,"crop")
+               - vm_treecover.l(j);
 p22_other_restore_pot(t,j)$(p22_other_restore_pot(t,j) < 1e-6) = 0;
 pm_land_conservation(t,j,"other","restore")$(pm_land_conservation(t,j,"other","restore") > p22_other_restore_pot(t,j)) = p22_other_restore_pot(t,j);
 

@@ -8,8 +8,10 @@
 parameters
  i30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
  i30_betr_scenario_fader(t_all)         Bioenergy land scenario fader (1)
- i30_betr_target(t)                     Target share for bioenergy land on total cropland (1)
+ i30_betr_target(t,j)                   Target share for bioenergy land on total cropland (1)
  i30_betr_penalty(t)                    Penalty for violation of betr target (USD05MER per ha)
+ p30_country_weight(i)                  Policy country weight per region (1)
+ p30_country_dummy(iso)                 Dummy parameter indicating whether country is affected by selected policy (1)
 ;
 
 positive variables

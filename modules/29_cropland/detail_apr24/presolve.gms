@@ -12,16 +12,16 @@
 *' @code
 *' Minimum semi-natural vegetation (SNV) share is fading in after 2020
 p29_snv_shr(t,j) = i29_snv_scenario_fader(t) *
-  (s29_snv_shr * sum(cell(i,j), p29_country_snv_weight(i))
-  + s29_snv_shr_noselect * sum(cell(i,j), 1-p29_country_snv_weight(i)));
+  (s29_snv_shr * sum(cell(i,j), p29_country_weight(i))
+  + s29_snv_shr_noselect * sum(cell(i,j), 1-p29_country_weight(i)));
 
 *' Cropland relocation in response to SNV policy is based on exogeneous land
 *' cover information from the Copernicus Global Land Service (@buchhorn_copernicus_2020).
 *' The rate of the policy implementation is derived based
 *' on the difference of scenario fader values in consecutive time steps
 p29_snv_relocation(t,j) = (i29_snv_scenario_fader(t) - i29_snv_scenario_fader(t-1)) *
-  (i29_snv_relocation_target(j) * sum(cell(i,j), p29_country_snv_weight(i))
-  + s29_snv_shr_noselect * sum(cell(i,j), 1-p29_country_snv_weight(i)));
+  (i29_snv_relocation_target(j) * sum(cell(i,j), p29_country_weight(i))
+  + s29_snv_shr_noselect * sum(cell(i,j), 1-p29_country_weight(i)));
 *' The following lines take care of mismatches in the input
 *' data (derived from satellite imagery from the Copernicus
 *' Global Land Service (@buchhorn_copernicus_2020)) and in
@@ -52,7 +52,9 @@ pc29_treecover(j,ac) = p29_treecover(t,j,ac);
 v29_treecover.l(j,ac) = p29_treecover(t,j,ac);
 
 * create treecover target and penalty scenario
-i29_treecover_target(t,j) = s29_treecover_target * i29_treecover_scenario_fader(t);
+i29_treecover_target(t,j) = i29_treecover_scenario_fader(t) * 
+  (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
+  + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)));
 
 * calculate treecover share 
 pc29_treecover_share(j) = 0;

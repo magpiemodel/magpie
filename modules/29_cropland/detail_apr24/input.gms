@@ -22,6 +22,7 @@ scalars
  s29_treecover_scenario_start    Cropland treecover scenario start year       / 2025 /
  s29_treecover_scenario_target   Cropland treecover scenario target year      / 2050 /
  s29_treecover_target            Minimum share of treecover on total cropland in target year (1) / 0 /
+ s29_treecover_target_noselect   Minimum share of treecover on total cropland in target year (1) / 0 /
  s29_treecover_keep              Avoid loss of existing treecover (1=yes 0=no) / 1 /
  s29_treecover_max               Maximum share of treecover on total cropland (1) / 0.4 /
  s29_treecover_penalty_before    Penalty for violation of treecover target before scenario start (USD05MER per ha) / 2000 /
@@ -34,10 +35,11 @@ scalars
 ;
 
 
-* Set-switch for countries affected by regional SNV policy
+* Set-switch for countries affected by certain policies
 * Default: all iso countries selected
 sets
-  policy_countries29(iso) countries to be affected by SNV policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  policy_countries29(iso) countries to be affected by SNV policy 
+                    / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                       ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                       BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                       BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,

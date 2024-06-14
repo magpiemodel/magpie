@@ -25,14 +25,12 @@ elseif s29_snv_shr > s29_snv_relocation_data_x1,
   m_linear_cell_data_interpol(i29_snv_relocation_target, s29_snv_shr,s29_snv_relocation_data_x1, s29_snv_relocation_data_x2,f29_snv_target_cropland(j, "SNV20TargetCropland"), f29_snv_target_cropland(j, "SNV50TargetCropland"));
 );
 
-****** Regional share of semi-natural vegetation (SNV) in cropland areas for selective countries:
-* Country switch to determine countries for which a SNV policy shall be applied.
-* In the default case, the SNV policy affects all countries when activated.
+* Country switch to determine countries for which certain policies shall be applied.
+* In the default case, the policy affects all countries when activated.
 p29_country_dummy(iso) = 0;
 p29_country_dummy(policy_countries29) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by available cropland area.
-i29_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
-p29_country_snv_weight(i) = sum(i_to_iso(i,iso), p29_country_dummy(iso) * i29_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), i29_avl_cropland_iso(iso));
-
+pm_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
+p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_dummy(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
