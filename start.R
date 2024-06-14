@@ -70,6 +70,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
           command <- slurmModes[submit]
           command <- gsub("%NAME", name, command)
           command <- gsub("%SCRIPT", script, command)
+          message(command)
           system(command)
           Sys.sleep(1)
         } else {

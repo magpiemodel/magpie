@@ -9,7 +9,7 @@ chooseSubmit <- function(title, slurmModes) {
   slurm <- lucode2::SystemCommandAvailable("srun")
   if(slurm) {
     slurmModes <- yaml::read_yaml(slurmModes)$slurmjobs
-    modes <- c(names(slurmModes), modes)
+    modes <- c(modes, names(slurmModes))
     if(lucode2::SystemCommandAvailable("sclass")) {
       cat("\nCurrent cluster utilization:\n")
       system("sclass")

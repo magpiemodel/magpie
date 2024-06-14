@@ -120,6 +120,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
             command <- slurmModes[submit]
             command <- gsub("%NAME", rout_name, command)
             command <- gsub("%SCRIPT", rCommand, command)
+            message(command)
             system(command)
           } else {
             stop("Unknown submission type")
