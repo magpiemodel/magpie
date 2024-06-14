@@ -44,7 +44,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     slurm <- lucode2::SystemCommandAvailable("srun")
     if(slurm) {
       slurmModes <- yaml::read_yaml(slurmModes)$slurmjobs
-      modes <- c(names(slurmModes, modes))
+      modes <- c(names(slurmModes), modes)
       if(lucode2::SystemCommandAvailable("sclass")) {
         cat("\nCurrent cluster utilization:\n")
         system("sclass")
