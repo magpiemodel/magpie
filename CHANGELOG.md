@@ -23,6 +23,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **22_land_conservation** avoid infeasibilities due to very small numbers, account for cropland tree cover and lower bound of cropland
+- **32_forestry** avoid infeasibilities due to very small numbers
+- **35_natveg** avoid infeasibilities due to very small numbers
 
 
 
