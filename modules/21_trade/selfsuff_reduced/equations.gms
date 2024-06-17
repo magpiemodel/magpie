@@ -24,13 +24,13 @@
 *' determined by a trade balance reduction factor for each commodity  `i21_trade_bal_reduction(ct,k_trade)`
 *' [@schmitz_trading_2012]. If the trade balance reduction equals 1, all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
-*' Note that `baseline_production` is a macro defined in core/macros.gms.
+*' Note that `m21_baseline_production` is a macro defined in core/macros.gms.
 
 *' Lower bound for production.
 
  q21_trade_reg(h2,k_trade)..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =g=
-  baseline_production(vm_supply, v21_excess_prod, f21_self_suff)
+  m21_baseline_production(vm_supply, v21_excess_prod, f21_self_suff)
   * sum(ct,i21_trade_bal_reduction(ct,k_trade))
   - v21_import_for_feasibility(h2,k_trade);
 
@@ -38,7 +38,7 @@
 
  q21_trade_reg_up(h2,k_trade) ..
  sum(supreg(h2,i2),vm_prod_reg(i2,k_trade)) =l=
-  baseline_production(vm_supply, v21_excess_prod, f21_self_suff)
+  m21_baseline_production(vm_supply, v21_excess_prod, f21_self_suff)
   / sum(ct,i21_trade_bal_reduction(ct,k_trade));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to
