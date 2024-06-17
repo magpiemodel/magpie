@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description In this realization trade patterns defined by self-sufficiency ratios and export shares, 
-*' together with regional demands, establish a baseline value for the production of each product in the superregions. 
+*' together with regional demands, establish a baseline value for the production of traded products in the superregions. 
 *' Production is then allowed to fluctuate freely within a band around this baseline value, 
 *' only being enforced to maintain the condition of global production exceeding global demand.
 *' The width of the production band is determined by the `i21_trade_bal_reduction` (ptb) factor.
@@ -16,7 +16,7 @@
 *' This "self-sufficiency" pool thus implies minimum production levels in superregions, which are enforced by the 
 *' lower bound of the production band. 
 *' The remaining part of the demand can be allocated more freely based on comparative advantage 
-*' in production of different superregions, though still being constrained a bit by the upper bounds of the production band.
+*' in production of different superregions, though still being constrained by the upper bounds of the production band.
 *'
 *' The superregional self-sufficiency ratios `f21_self_suff` define
 *' how much of the demand of each superregion `h` for each traded good `k_trade` is met by domestic production.
@@ -25,7 +25,7 @@
 *' The superregional export shares `f21_exp_shr` distribute the total excess demand of the importing superregions 
 *' to the exporting superregions.
 *' 
-*' Trade costs, including trade margins and tariffs, are considered.
+*' Trade costs are the sum of trade margins (international transport costs) and trade tariffs.
 *'
 *' ![Implementation of trade.](trade_pools.png){ width=100% }
 
