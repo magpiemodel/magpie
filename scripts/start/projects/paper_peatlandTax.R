@@ -38,8 +38,8 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
                                 "./patch_inputdata"=NULL),
                            getOption("magpie_repos"))
 
-cfg$input['regional'] <- "rev4.108_36f73207_magpie.tgz"
-cfg$input['validation'] <- "rev4.108_36f73207_validation.tgz"
+cfg$input['regional'] <- "rev4.109_36f73207_magpie.tgz"
+cfg$input['validation'] <- "rev4.109_36f73207_validation.tgz"
 cfg$input['calibration'] <- "calibration_H16_14Jun24.tgz"
 cfg$input['zzzpatchGHGprices'] <- "patchGHGprices.tgz"
 
@@ -48,7 +48,7 @@ cfg$gms$c_timesteps <- "5year"
 cfg$output <- c(cfg$output, "extra/highres")
 ssp <- "SSP2"
 cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
-cfg$input['cellular'] <- "rev4.108_36f73207_2ca80312_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+cfg$input['cellular'] <- "rev4.109_36f73207_2ca80312_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NPi")
 cfg$gms$c56_pollutant_prices_noselect <- "T0-CO2"
 cfg$gms$policy_countries56  <- isoCountriesEUR
