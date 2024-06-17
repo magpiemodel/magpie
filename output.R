@@ -31,7 +31,6 @@ if (!is.null(renv::project()) && !exists("source_include") && Sys.getenv("SLURM_
 
 library(lucode2)
 library(gms)
-library(yaml)
 source("scripts/helper.R")
 
 runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {

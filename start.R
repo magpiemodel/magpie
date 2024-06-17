@@ -31,7 +31,6 @@ if (!is.null(renv::project())) {
 
 library(lucode2)
 library(gms)
-library(yaml)
 source("scripts/helper.R")
 
 runOutputs <- function(runscripts=NULL, submit=NULL) {
