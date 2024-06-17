@@ -47,8 +47,8 @@ p35_disturbance_loss_primf(t,j) = 0;
 * Forest establishment is constrained by the potential forest area in each cluster.
 * Hence, the area for forest establishments is given by the potential forest
 * area minus all forest areas in the previous time step.
-pcm_max_forest_est(j) = f35_pot_forest_area(j) - sum(land_forest, pcm_land(j,land_forest));
-pcm_max_forest_est(j)$(pcm_max_forest_est(j) < 0) = 0;
+pm_max_forest_est(t,j) = f35_pot_forest_area(t,j) - sum(land_forest, pcm_land(j,land_forest));
+pm_max_forest_est(t,j)$(pm_max_forest_est(t,j) < 0) = 0;
 
 * -----------------------------------------
 * Land conservation for climate mitigation
