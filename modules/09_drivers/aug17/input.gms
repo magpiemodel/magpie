@@ -17,6 +17,11 @@ $setglobal c09_pal_scenario  SSP2
 *   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5",  "SSP2EU"
 *              SDP: "SDP", "SDP_EI",  "SDP_MC", "SDP_RC"
 
+parameters
+* Years where SSPs and nocc/cc scenarios diverge
+  sm_fix_SSP2               year until which all parameters are fixed to SSP2 values (year) / 2025 /
+  sm_fix_cc                 year until which all parameters affected by cc are fixed to historical values (year) / 2025 /
+;
 
 table f09_gdp_ppp_iso(t_all,iso,pop_gdp_scen09) Income in purchasing power parity (mio. USD05PPP per yr)
 $ondelim

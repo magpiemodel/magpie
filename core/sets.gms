@@ -242,20 +242,23 @@ sets
    wat_dem Water demand sectors / agriculture, domestic, manufacturing, electricity, ecosystem /
 
 ***LAND POOLS***
-   land Land pools
+  land Land pools
         / crop, past, forestry, primforest, secdforest, urban, other /
 
   land_ag(land) Agricultural land pools
-                  / crop, past /
+        / crop, past /
 
-  forest_land(land) land from which timber can be taken away
-  / forestry, primforest, secdforest,other /
+  land_timber(land) land from which timber can be taken away
+        / forestry, primforest, secdforest, other /
 
-  land_natveg(forest_land) Natural vegetation land pools
+  land_forest(land_timber) Forested land pools
+        / forestry, primforest, secdforest /
+
+  land_natveg(land_timber) Natural vegetation land pools
         / primforest, secdforest, other /
 
   forest_type forest type
-         / plantations, natveg /
+        / plantations, natveg /
 
 ***Forestry**
   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,

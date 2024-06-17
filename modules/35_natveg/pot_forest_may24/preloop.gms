@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** initialize other land
-i35_other(j,ac) = 0;
-i35_other(j,"acx") = pcm_land(j,"other");
+i35_land_other(j,othertype35,ac) = 0;
+i35_land_other(j,"othernat","acx") = pcm_land(j,"other");
 
 ** initialize secdforest area depending on switch.
 if(s35_secdf_distribution = 0,
@@ -32,16 +32,23 @@ elseif s35_secdf_distribution = 2,
 *use residual approach to avoid rounding errors
 i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac)));
 
-** Initialize values to be used in presolve
-p35_recovered_forest(t,j,ac) = 0;
-
 *initialize parameter
-p35_other(t,j,ac) = 0;
+p35_land_other(t,j,othertype35,ac) = 0;
 p35_secdforest(t,j,ac) = 0;
 
 * initialize forest disturbance losses
 p35_disturbance_loss_secdf(t,j,ac) = 0;
 p35_disturbance_loss_primf(t,j) = 0;
+
+* -------------------------------------------------------------
+* Initialize remaining potential forest establishment area
+* -------------------------------------------------------------
+
+* Forest establishment is constrained by the potential forest area in each cluster.
+* Hence, the area for forest establishments is given by the potential forest
+* area minus all forest areas in the previous time step.
+pm_max_forest_est(t,j) = f35_pot_forest_area(t,j) - sum(land_forest, pcm_land(j,land_forest));
+pm_max_forest_est(t,j)$(pm_max_forest_est(t,j) < 0) = 0;
 
 * -----------------------------------------
 * Land conservation for climate mitigation
@@ -66,3 +73,10 @@ p35_land_start_ac(j,ac,"secdforest") = i35_secdforest(j,ac);
 * Set forest damage trajectory
 * -----------------------------
 m_sigmoid_time_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);
+
+* ---------------------------------------
+* Initialise natveg in first time step
+* ---------------------------------------
+
+  pc35_secdforest(j,ac) = i35_secdforest(j,ac);
+  pc35_land_other(j,othertype35,ac) = i35_land_other(j,othertype35,ac);
