@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax02H16"
+cfg$info$flag <- "PTax03H16"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -48,7 +48,7 @@ cfg$gms$c_timesteps <- "5year"
 cfg$output <- c(cfg$output, "extra/highres")
 ssp <- "SSP2"
 cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
-cfg$input['cellular'] <- "rev4.109_36f73207_2ca80312_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+cfg$input['cellular'] <- "rev4.109_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NPi")
 cfg$gms$c56_pollutant_prices_noselect <- "T0-CO2"
 cfg$gms$policy_countries56  <- isoCountriesEUR

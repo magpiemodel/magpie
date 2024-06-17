@@ -19,7 +19,7 @@ source("config/default.cfg")
 #download_and_update(cfg)
 
 # create additional information to describe the runs
-cfg$info$flag <- "ABCDR04"
+cfg$info$flag <- "ABCDR05"
 
 cfg$output <- c("rds_report") # Only run rds_report after model run
 cfg$results_folder <- "output/:title:"
@@ -36,7 +36,7 @@ cfg$qos <- "standby_maxMem_dayMax"
 cfg$input['regional'] <- "rev4.109_36f73207_magpie.tgz"
 cfg$input['validation'] <- "rev4.109_36f73207_validation.tgz"
 cfg$input['calibration'] <- "calibration_H16_14Jun24.tgz"
-cfg$input['cellular'] <- "rev4.109_36f73207_2ca80312_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+cfg$input['cellular'] <- "rev4.109_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
 
 ssp <- "SSP2"
 
@@ -58,13 +58,13 @@ for (pol in c("NDC","1p5deg")) {
           cfg$title <- .title(cfg, paste(ssp,pol,diet,paste0(AFS,sprintf("%02d",shr*100)),sep="-"))
           if (pol == "NDC") {
             cfg <- setScenario(cfg,c(ssp,"NDC","rcp4p5"))
-            cfg$input['cellular'] <- "rev4.109_36f73207_3d941455_cellularmagpie_c400_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz"
+            cfg$input['cellular'] <- "rev4.109_36f73207_30c9dc61_cellularmagpie_c400_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
             cfg$gms$c56_mute_ghgprices_until <- "y2150"
             cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NDC")
             cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NDC")
           } else if (pol == "1p5deg") {
             cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-            cfg$input['cellular'] <- "rev4.109_36f73207_6aa915b6_cellularmagpie_c400_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz"
+            cfg$input['cellular'] <- "rev4.109_36f73207_bc624950_cellularmagpie_c400_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
             cfg$gms$c56_mute_ghgprices_until <- "y2030"
             cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
             cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
