@@ -12,11 +12,10 @@ $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
 $setglobal c30_rotation_rules  default
-*options: min, default, good, good_20div, setaside, legumes, sixfoldrotation, agroecology, 
-*         betr0, betr10, betr20, betr25, betr30, betr40, betr50, FSEC
+*options: min, default, good, good_20div, setaside, legumes, sixfoldrotation, agroecology, FSEC
 
 $setglobal c30_rotation_incentives  none
-*options: none, default, legumes, betr500, betr1000, agroecology
+*options: none, default, legumes, agroecology
 
 
 scalars

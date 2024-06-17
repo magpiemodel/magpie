@@ -10,7 +10,7 @@ sets
   / none, default, legumes, agroecology /
 
   rotascen30 rotation constraint scenarios
-  / min, default, good,good_20div, setaside, legumes, sixfoldrotation, agroecology, FSEC /
+  / min, default, good, good_20div, setaside, legumes, sixfoldrotation, agroecology, FSEC /
 
   rota30 rotational rules
   / cereals1_max, cereals2_max, cereals_excl_rice_max, stalk_max, 
