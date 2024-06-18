@@ -41,10 +41,10 @@ gms$c20_scp_type;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;hydrogen
 gms$c21_trade_liberalization;;;;l908080r807070;l909090r808080;l909090r808080;l909595r809090;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l909595r809090;l908080r807070;;;;;;;;;;;;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l908080r807070;;;;;;;;;;;;;;;;;;;;
 gms$c22_protect_scenario;;;;none;none;none;none;none;none;BH;none;BH_IFL;BH;;;;;;;BH;;;;;BH_IFL;BH_IFL;BH_IFL;BH_IFL;BH_IFL;;;;;;;;;;;;;;;;;;;;
 gms$c22_protect_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;;;none;none;BH_IFL;none;BH_IFL;;;;;;;;;;;;;;;;;;;;
-gms$c30_bioen_water;;;;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;all;rainfed;rainfed;;;;;;;rainfed;;;;rainfed;;;;;;;;;;;;;;;;;;;;;;;;;
-gms$s30_snv_shr;;;;0;0;0;0;0;0;0;0;0;0.2;;;;;;;0;;;;;0.2;0.2;0.2;0.2;0.2;;;;;;;;;;;;;;;;;;;;
-gms$s30_snv_shr_noselect;;;;;;;;;;;;;;;;;;;;;;;;;0;0;0.2;0;0.2;;;;;;;;;;;;;;;;;;;;
-gms$s30_snv_scenario_target;;;;;;;;;;;;;2030;;;;;;;;;;;;2030;2030;2030;2030;2030;;;;;;;;;;;;;;;;;;;;
+gms$s29_snv_shr;;;;0;0;0;0;0;0;0;0;0;0.2;;;;;;;0;;;;;0.2;0.2;0.2;0.2;0.2;;;;;;;;;;;;;;;;;;;;
+gms$s29_snv_shr_noselect;;;;;;;;;;;;;;;;;;;;;;;;;0;0;0.2;0;0.2;;;;;;;;;;;;;;;;;;;;
+gms$s29_snv_scenario_target;;;;;;;;;;;;;2030;;;;;;;;;;;;2030;2030;2030;2030;2030;;;;;;;;;;;;;;;;;;;;
+gms$c30_bioen_water;;;;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;all;rainfed;rainfed;;;;;;;rainfed;;;rainfed;all;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s30_annual_max_growth;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0.02
 gms$c31_grassl_yld_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c32_shock_scenario;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;none;002lin2030;004lin2030;008lin2030;016lin2030;;;;;;;;
@@ -101,5 +101,5 @@ gms$c60_bioenergy_subsidy;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c60_res_2ndgenBE_dem;;;;ssp1;ssp2;ssp2;ssp3;ssp4;ssp5;sdp;ssp2;sdp;sdp;;;;;;;sdp;;;;;ssp4;sdp;ssp4;ssp4;sdp;;;;;;;;;;;;;;;;;;;;
 gms$c70_feed_scen;;;;ssp1;ssp2;ssp2;ssp3;ssp4;ssp5;ssp1;ssp5;ssp1;ssp1;;;;;;;ssp1;;ssp1;;;ssp4;ssp1;ssp4;ssp4;ssp1;;;;;;;;;;;;;;;;;;;;
 gms$s73_timber_demand_switch;;;;;;;;;;;;;;;;;;;;;;;;;1;1;1;1;1;;;;;1;1;0;;;;;;;;;;;;;
-input['cellular'];;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.108_h12_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.108_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.108_h12_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.108_h12_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.108_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.108_h12_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz;;
+input['cellular'];;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.109_h12_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.109_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.109_h12_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.109_h12_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.109_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.109_h12_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz;;
 magicc_emis_scen;;;;;;;;;;;;;;;;;;;;;;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif;;;;;;;;;;;;;;;;;;;;;;;;;

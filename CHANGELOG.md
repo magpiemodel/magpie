@@ -7,16 +7,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **29_ageclass** module 29_ageclass has been renamed to 28_ageclass to make space for `29_cropland` just before `30_croparea`
+- **30_crop** module `30_crop` renamed to `30_croparea`, which now only accounts for crop area.
+- **30_crop** Semi-Natural Vegetation (SNV) implementation has been moved from `30_crop` to `29_cropland` 
+- **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
+- **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
+- **default.cfg** update additional data to rev4.51
 - **scripts** adjusted SLURM job handling
 
 ### added
--
+- **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
+- **10_land** added interface `pm_land_hist` with historic land use patterns
 
 ### removed
--
+- **32_forestry** removed technical balance term `v32_land_missing_ndc`
 
 ### fixed
--
+- **22_land_conservation** avoid infeasibilities due to very small numbers, account for cropland tree cover and lower bound of cropland
+- **32_forestry** avoid infeasibilities due to very small numbers
+- **35_natveg** avoid infeasibilities due to very small numbers
+- **44_biodiversity** Fixing to SSP2 parameters until 2025 was not working
+- **config** update to input data rev4.109. In the previous rev4.108, MER GDP was wrong and was identical to PPP GDP
+
 
 
 ## [4.8.0] - 2024-06-10

@@ -7,14 +7,16 @@
 
 parameters
           i59_lossrate(t)                      Rate of loss or recovery of SOM pool per timestep (1)
-          p59_carbon_density(t_all,j,land)  Carbon density of a hectare of land (tC per ha)
+          p59_carbon_density(t_all,j,land)     Soil carbon density of a hectare of land (tC per ha)
+          pc59_carbon_density(j,land)          Soil carbon density of a hectare of land between time steps (tC per ha)
           i59_tillage_share(i,tillage59)       Share of land under tillage class (1)
           i59_input_share(i,inputs59)          Share of land under input class (1)
           i59_cratio(j,kcr,w)                  Ratio of carbon density of land relative to natural vegetaion (1)
           i59_cratio_fallow(j)                 Ratio of carbon density of fallow land relative to natural vegetation (1)
-          p59_som_pool(j,land)              Actual C pool (mio. tC)
+          i59_cratio_treecover                 Ratio of carbon density of tree cover on cropland relative to natural vegetation (1)
+          pc59_som_pool(j,land)                 Actual C pool (mio. tC)
           i59_subsoilc_density(t_all,j)        Subsoil carbon density of a hectare of land (tC per ha)
-          p59_land_before(j,land)              Land area in previous time step (mio. ha)
+          pc59_land_before(j,land)              Land area in previous time step (mio. ha)
 ;
 
 equations
