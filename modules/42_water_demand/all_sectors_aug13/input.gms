@@ -102,7 +102,7 @@ m_fillmissingyears(f42_watdem_ineldo,"j,scen_watdem_nonagr,watdem_ineldo");
 * This input is not used within MAgPIE, but necessary for the postprocessing
 table f42_watdem_ineldo_total(t_all,j,scen_watdem_nonagr,watdem_ineldo) Manufacturing electricity and domestic water demand under different socioeconomic scenarios in the entire year (mio. m^3)
 $ondelim
-$include "./modules/42_water_demand/input/watdem_nonagr_total.cs3"
+$if exist "./modules/42_water_demand/input/watdem_nonagr_total.cs3"  $include "./modules/42_water_demand/input/watdem_nonagr_total.cs3"
 $offdelim
 ;
 m_fillmissingyears(f42_watdem_ineldo_total,"j,scen_watdem_nonagr,watdem_ineldo");
