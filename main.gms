@@ -163,6 +163,7 @@ $title magpie
 * Used data set: additional_data_rev4.50.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
+
 * 
 * Used data set: calibration_H12_26Mar24.tgz
 * md5sum: NA
@@ -196,6 +197,7 @@ $title magpie
 * 
 * 
 * Last modification (input data): Tue Jun 18 09:52:31 2024
+
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -249,7 +251,8 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
 
-$setglobal crop  endo_apr21
+$setglobal cropland  simple_apr24
+$setglobal croparea  simple_apr24
 $setglobal past  endo_jun13
 
 $setglobal forestry  dynamic_may24

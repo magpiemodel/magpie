@@ -59,7 +59,7 @@ pc35_forest_recovery_shr(j) = 0;
 pc35_forest_recovery_shr(j)$((sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban")) > 0) = 
              (pc35_max_forest_recovery(j) - sum(ac_est, p35_forest_recovery_area(t,j,ac_est)))
             / (sum(land_ag, pcm_land(j,land_ag))+pcm_land(j,"urban"));
-pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) < 0) = 0;
+pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) < 1e-6) = 0;
 pc35_forest_recovery_shr(j)$(pc35_forest_recovery_shr(j) > 1) = 1;
 * Abandoned land pc35_land_other(j,"othernat",ac_est) that has not yet been allocated to
 * p35_forest_recovery_area(t,j,ac_est) is then distributed proportionally using the forest recovery share.
@@ -68,7 +68,7 @@ p35_forest_recovery_area(t,j,ac_est) = p35_forest_recovery_area(t,j,ac_est)
                                      * pc35_forest_recovery_shr(j);
 p35_forest_recovery_area(t,j,ac_est)$(sum(ac_est2, p35_forest_recovery_area(t,j,ac_est2)) > pc35_max_forest_recovery(j)) = pc35_max_forest_recovery(j)/card(ac_est2);
 p35_forest_recovery_area(t,j,ac_est)$(p35_forest_recovery_area(t,j,ac_est) > pc35_land_other(j,"othernat",ac_est)) = pc35_land_other(j,"othernat",ac_est);
-p35_forest_recovery_area(t,j,ac_est)$(p35_forest_recovery_area(t,j,ac_est) < 0) = 0;
+p35_forest_recovery_area(t,j,ac_est)$(p35_forest_recovery_area(t,j,ac_est) < 1e-6) = 0;
 pc35_land_other(j,"othernat",ac_est) = pc35_land_other(j,"othernat",ac_est) - p35_forest_recovery_area(t,j,ac_est);
 pc35_land_other(j,"youngsecdf",ac_est) = pc35_land_other(j,"youngsecdf",ac_est) + p35_forest_recovery_area(t,j,ac_est);
 
@@ -171,7 +171,7 @@ p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) 
 * Since forest restoration cannot be bigger than the potential area for secdforest recovery,
 * any remaining restoration area is substracted and shifted to other land restoration.
 p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - pc35_max_forest_recovery(j);
-p35_restoration_shift(j)$(p35_restoration_shift(j) < 0) = 0;
+p35_restoration_shift(j)$(p35_restoration_shift(j) < 1e-6) = 0;
 p35_restoration_shift(j)$(p35_restoration_shift(j) > p35_land_restoration(j,"secdforest")) = p35_land_restoration(j,"secdforest");
 p35_land_restoration(j,"secdforest") = p35_land_restoration(j,"secdforest") - p35_restoration_shift(j);
 pm_land_conservation(t,j,"other","restore") = pm_land_conservation(t,j,"other","restore") + p35_restoration_shift(j);

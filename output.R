@@ -157,7 +157,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       }, type = "message")
     })
     if (!snapshotSuccess) {
-      stop(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
+      warning(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
     }
     message("done.")
 
@@ -172,6 +172,8 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       if (!file.exists(file.path(runFolder, "renv.lock"))) {
         warning(normalizePath(runFolder), "/renv.lock does not exist.")
         message("Lockfile written to ", newLockfile)
+      } else if (!file.exists(newLockfile)) {
+        message("Could not write lockfile, see warning thrown earlier.")
       } else if (identical(readLines(file.path(runFolder, "renv.lock")), readLines(newLockfile))) {
         file.remove(newLockfile)
       } else {
