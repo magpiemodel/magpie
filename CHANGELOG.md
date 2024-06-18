@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** avoid infeasibilities due to very small numbers
 - **35_natveg** avoid infeasibilities due to very small numbers
 - **44_biodiversity** Fixing to SSP2 parameters until 2025 was not working
-- **config** update to input data rev4.109. In the previous rev4.108, GDP had a wrong unit.
+- **config** update to input data rev4.109. In the previous rev4.108, MER GDP was wrong and was identical to PPP GDP
 
 
 
