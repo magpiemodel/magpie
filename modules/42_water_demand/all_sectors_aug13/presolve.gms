@@ -39,13 +39,17 @@ if ((s42_pumping = 1),
 * depends on the socioeconomic scenario
 if (m_year(t) <= sm_fix_SSP2,
   vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp2",watdem_ineldo);
+  i42_watdem_total(t,j,watdem_ineldo) = f42_watdem_ineldo_total(t,j,"ssp2",watdem_ineldo);
 else
   if ((s42_watdem_nonagr_scenario = 1),
     vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp1",watdem_ineldo);
-  Elseif(s42_watdem_nonagr_scenario = 2),
+    i42_watdem_total(t,j,watdem_ineldo) = f42_watdem_ineldo_total(t,j,"ssp1",watdem_ineldo);
+  Elseif (s42_watdem_nonagr_scenario = 2),
     vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp2",watdem_ineldo);
-  Elseif(s42_watdem_nonagr_scenario = 3),
+    i42_watdem_total(t,j,watdem_ineldo) = f42_watdem_ineldo_total(t,j,"ssp2",watdem_ineldo);
+  Elseif (s42_watdem_nonagr_scenario = 3),
     vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp3",watdem_ineldo);
+    i42_watdem_total(t,j,watdem_ineldo) = f42_watdem_ineldo_total(t,j,"ssp3",watdem_ineldo);
   );
 );
 

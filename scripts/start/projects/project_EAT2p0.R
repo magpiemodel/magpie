@@ -82,7 +82,7 @@ bau <- function(cfg) {
   cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi"      # default
 
   # Climate Change
-  cfg$input['cellular'] <- "rev4.99_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input['cellular'] <- "rev4.109_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }
