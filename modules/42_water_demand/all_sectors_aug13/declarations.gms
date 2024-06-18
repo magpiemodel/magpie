@@ -17,7 +17,7 @@ parameters
  p42_country_dummy(iso)                Dummy parameter indicating whether country is affected by EFP (1)
  p42_EFP_region_shr(t_all,i)           Weighted share of region with regards to EFP (1)
  ic42_pumping_cost(i)                  Parameter to capture values for pumping costs in a particular time step (USD05MER per m^3)
- i42_watdem_total(t,j,watdem_ineldo)   Non-agricultural water demand for entire year used in post-processing (m^3)
+ i42_watdem_total(t,j,watdem_ineldo)   Non-agricultural water demand for entire year used in post-processing (mio. m^3 per yr)
 ;
 
 equations
