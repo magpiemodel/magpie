@@ -8,9 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **scripts** adjusted SLURM job handling
+- **scripts** updated EL2p0 start scripts
 
 ### added
--
+- **42_water_demand** added non-agricultural water demand for entire year
 
 ### removed
 -
