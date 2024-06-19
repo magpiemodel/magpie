@@ -15,11 +15,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** update additional data to rev4.51
 - **scripts** adjusted SLURM job handling
 - **scripts** updated EL2p0 start scripts
+- **grassland_apr22** Update in module description
+- **grassland_apr22** grassland expansion cost only apply to the first time step
 
 ### added
 - **42_water_demand** added non-agricultural water demand for entire year
 - **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
 - **10_land** added interface `pm_land_hist` with historic land use patterns
+- **grassland_apr22** Added a calibration step for managed pasture areas to the preloop file
 
 ### removed
 - **32_forestry** removed technical balance term `v32_land_missing_ndc`
@@ -150,7 +153,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **15_food** Added improved EAT Lancet diet implementation (EAT 2p0)
 - **21_trade** s21_trade_bal_damper for roundwood changed from 0.75 to 0.65
-- **31_past** in grasslands_apr22 realization: changed structure of f31_pastr_suitability to align with ssp-rcp specific input data formulation. Changed input filename from cs3 to cs2. Added `cc`, `nocc` and `nocc_hist` options for `i31_manpast_suit` and changed input gams code from table to parameter. Climate scenario assignment moved from preloop.gms to input.gms. Removed pastSuit set in sets.gms as not needed anymore. Adjusted not_used.txt in both grasslands_apr22 and static realizations.
+- **31_past** in grasslands_apr22 realization: changed structure of f31_max_managed_pasture to align with ssp-rcp specific input data formulation. Changed input filename from cs3 to cs2. Added `cc`, `nocc` and `nocc_hist` options for `i31_manpast_suit` and changed input gams code from table to parameter. Climate scenario assignment moved from preloop.gms to input.gms. Removed pastSuit set in sets.gms as not needed anymore. Adjusted not_used.txt in both grasslands_apr22 and static realizations.
 - **default.cfg and scenario_config.csv** Default for cfg$gms$c56_emis_policy changed from `redd+natveg_nosoil` to `reddnatveg_nosoil`,i.e. timber plantations are excluded from carbon pricing by default
 - **default.cfg** changed default for `cfg$gms$s32_aff_prot` from 0 to 1
 - **default.cfg** changed default for `cfg$gms$s56_buffer_aff` from 0.2 to 0.5
@@ -559,7 +562,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
 - **inputs** New input files added:
     f13_pastr_tau_hist.csv -> historical tau for managed pastures.
-    f31_pastr_suitability.cs3 -> Managed pasture suitability
+    f31_max_managed_pasture.cs3 -> Managed pasture suitability
     f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
     f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
     f31_grass_bio_hist.cs3 -> Historical grass biomass demand
