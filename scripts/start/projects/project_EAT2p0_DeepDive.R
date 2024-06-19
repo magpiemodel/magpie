@@ -41,6 +41,10 @@ cfg$output <- c(
 
 )
 
+# Set path to own coupled runs:
+path2NPIrun <- "/p/projects/magpie/users/beier/EL2_DeepDive_default/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
+path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_default/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5.mif"
+
 #######################
 # SCENARIO DEFINITION #
 #######################
@@ -74,13 +78,13 @@ bau <- function(cfg) {
   cfg$gms$c70_feed_scen <- "ssp2" # default
   # Mitigation: no mitigation beyond NPi
   cfg$gms$c56_emis_policy      <- "none"
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
+  cfg$path_to_report_ghgprices <- path2NPIrun
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
+  cfg$path_to_report_bioenergy <- path2NPIrun
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   # Setting REMIND scenario for blackmagicc
-  cfg$magicc_emis_scen <- "REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif"
+  cfg$magicc_emis_scen <- "REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5.mif"
 
   return(cfg)
 }
@@ -124,9 +128,9 @@ waste <- function(cfg) {
 # starting from 2020 and diet shift.
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C considering Diet change
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-DSPkB650-DS_betax-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif"
+  cfg$path_to_report_ghgprices <- path2MitigationRun
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-DSPkB650-DS_betax-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif"
+  cfg$path_to_report_bioenergy <- path2MitigationRun
   cfg$gms$c60_2ndgen_biodem <- "coupling"
   # ecoSysProtAll:               (Above ground CO2 emis from LUC in forest, forestry, natveg; All types of emis from peatland; All CH4 and N2O emis),
   cfg$gms$c56_emis_policy <- "ecoSysProtAll"
@@ -137,7 +141,7 @@ miti <- function(cfg) {
 # Bioenergy demand only. No carbon price on land included.
 bioenergy <- function(cfg) {
   # Mitigation: only Bioenergy demand from coupled REMIND-MAgPIE run where 1.5 is reached with ghg prices on land and considering diet shift
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-DSPkB650-DS_betax-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif"
+  cfg$path_to_report_bioenergy <- path2MitigationRun
   cfg$gms$c60_2ndgen_biodem <- "coupling"
 
   return(cfg)
@@ -147,7 +151,7 @@ bioenergy <- function(cfg) {
 priceCO2 <- function(cfg) {
   # Mitigation: only price land CO2
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-DSPkB650-DS_betax-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif"
+  cfg$path_to_report_ghgprices <- path2MitigationRun
   cfg$gms$c56_emis_policy <- "ecoSysProtAll_agMgmtOff" #### double-check Florian or Leon
 
   return(cfg)
@@ -157,7 +161,7 @@ priceCO2 <- function(cfg) {
 priceNonCO2 <- function(cfg) {
   # Mitigation: only CH4 and N2O price
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-DSPkB650-DS_betax-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax-rem-5.mif"
+  cfg$path_to_report_ghgprices <- path2MitigationRun
   cfg$gms$c56_emis_policy <- "ecoSysProtOff" ### double-check Florian or Leon
 
   return(cfg)
@@ -173,20 +177,6 @@ cfg$title <- "BAU_NPi"
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
-
-### Composition ###
-# Mitigation components:
-# (1a) Nationally Determined Contributions (NDCs)
-#cfg$title <- "BAU_NDC"
-#cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC", "EL2_default"))
-#cfg <- bau(cfg = cfg)
-# set path to bioenergy and prices to NDC run
-#cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NDC-rem-5/REMIND_generic_C_SSP2EU-NDC-rem-5.mif"
-#cfg$gms$c56_pollutant_prices <- "coupling"
-#cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NDC-rem-5/REMIND_generic_C_SSP2EU-NDC-rem-5.mif"
-#cfg$gms$c60_2ndgen_biodem <- "coupling"
-#start_run(cfg, codeCheck = FALSE)
-# Note: Exclude NDC run for now. Starting point is NPi and we do not look at policies, but only mitigation measures (demand side vs. supply side)
 
 # (1b) BAU + Bioenergy #
 # Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
@@ -233,7 +223,7 @@ cfg <- bau(cfg = cfg)
 # Mitigation
 cfg <- miti(cfg = cfg)
 cfg$gms$c60_2ndgen_biodem <- "coupling"
-cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
+cfg$path_to_report_bioenergy <- path2NPIrun
 start_run(cfg, codeCheck = FALSE)
 
 # BAU_MITI - non-CO2 #
@@ -322,7 +312,7 @@ cfg <- bau(cfg = cfg)
 # Mitigation
 cfg <- miti(cfg = cfg)
 cfg$gms$c60_2ndgen_biodem <- "coupling"
-cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_new/remind/output/C_SSP2EU-NPi-rem-5/REMIND_generic_C_SSP2EU-NPi-rem-5.mif"
+cfg$path_to_report_bioenergy <- path2NPIrun
 # PHD
 cfg <- diet(cfg = cfg)
 #cfg <- prod(cfg = cfg)

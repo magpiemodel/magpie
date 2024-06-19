@@ -14,8 +14,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
 - **default.cfg** update additional data to rev4.51
 - **scripts** adjusted SLURM job handling
+- **scripts** updated EL2p0 start scripts
 
 ### added
+- **42_water_demand** added non-agricultural water demand for entire year
 - **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
 - **10_land** added interface `pm_land_hist` with historic land use patterns
 

@@ -2,5 +2,6 @@
 lpj_airrig.cs2
 lpj_envflow_grper.cs2
 watdem_nonagr_grper.cs3
+watdem_nonagr_total.cs3
 f42_wat_req_fao.csv
 f42_pumping_cost.cs4

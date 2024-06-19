@@ -39,6 +39,10 @@ vm_watdem.fx("manufacturing",j) = sum(wat_src, im_wat_avail(t,wat_src,j)) * s42_
 vm_watdem.fx("electricity",j) = 0;
 vm_watdem.fx("domestic",j) = 0;
 
+* Fill non-agricultural water demand parameter of entire year for post-processing 
+i42_watdem_total(t,j,watdem_ineldo) = 0;
+i42_watdem_total(t,j,"manufacturing") = sum(wat_src, im_wat_avail(t,wat_src,j)) * s42_reserved_fraction;
+
 * Country switch to determine countries for which EFP holds.
 * In the default case, the EFP affects all countries when activated.
 p42_country_dummy(iso) = 0;
