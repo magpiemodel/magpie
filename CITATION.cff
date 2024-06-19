@@ -151,8 +151,8 @@ abstract: The *Model of Agricultural Production and its Impact on the Environmen
   exogenously given population in 10 food energy categories, based on regional diets.
   Future trends in food demand are derived from a cross-country regression analysis,
   based on future scenarios on GDP and population growth.
-version: 4.8.0dev
-date-released: 2024-06-10
+version: 4.8.1
+date-released: 2024-06-19
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse
