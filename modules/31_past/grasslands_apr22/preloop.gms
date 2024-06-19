@@ -7,7 +7,14 @@
 
 
 pc31_grass(j,grassland) = f31_LUH2v2("y1995",j,grassland);
+p31_grasslands_expansion_cost(t,j) = 0;
+p31_grasslands_expansion_cost("y1995",j) = s31_expansion_cost;
 
+* This next part calculates max managed pastures areas ("i31_max_managed_pasture") based on expected changes in 
+* aritidy and population density calculated in "f31_max_managed_pasture". 
+
+f31_max_managed_pasture(t_all,j)$(f31_max_managed_pasture(t_all,j) = 0) = f31_LUH2v2("y1995",j,"pastr"); 
+i31_max_managed_pasture(t_all,j) = f31_LUH2v2("y1995",j,"pastr") * ((f31_max_managed_pasture(t_all,j)/f31_max_managed_pasture("y1995",j))$(f31_max_managed_pasture("y1995",j) <> 0));
 
 ***YIELD CORRECTION ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
 
@@ -91,5 +98,6 @@ i31_grass_calib(t,j,grassland) =
 i31_grass_yields(t,j,"range") = i31_grass_yields(t,j,"range") * i31_grass_calib(t,j,"range");
 i31_grass_yields(t,j,"pastr") = i31_grass_yields(t,j,"pastr") * i31_grass_calib(t,j,"pastr");
 
+*i31_grass_yields(t,j,"pastr") = max(i31_grass_yields(t,j,"pastr"), (i31_grass_yields(t,j,"range") + 0.1));
 *' Note that the calculation is split into two parts for better readability.
 *' @stop

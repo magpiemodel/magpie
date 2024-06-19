@@ -28,8 +28,8 @@ q31_pasture_areas(j2)..
 *' in comparison with areas in the previous time step 'pc31_grass'.
 
 q31_expansion_cost(j2,grassland) ..
-  v31_cost_grass_expansion(j2, grassland) =g=
-                          (v31_grass_area(j2, grassland) - pc31_grass(j2,grassland)) * s31_cost_expansion;
+  v31_cost_grass_expansion(j2, grassland) =g= 
+    (v31_grass_area(j2, grassland) - pc31_grass(j2,grassland)) * sum(ct, p31_grasslands_expansion_cost(ct,j2));
 
 *' Cost of production account for the cost of moving animals to grassland areas plus the costs of
 *' expanding aras of production.

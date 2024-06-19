@@ -12,11 +12,4 @@ sets
 
  grassland(f31_luh) Grassland cover types (pastr = managed pastures and range = rangelands)
    / pastr, range /
-
- grass_to31(grassland) pasture management options
-   / pastr,range /
-
- grass_from31(grassland) pasture management options
-   / pastr,range /
-
 ;
