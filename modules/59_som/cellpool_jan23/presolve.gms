@@ -12,18 +12,18 @@
 * Note: This will only account for transitions of primary forest to secondary forest and
 * other land to secondary forest. See current version of 35_natveg to check consistency.
 
-p59_som_pool(j,"secdforest") = p59_som_pool(j,"secdforest") +
-                               (p59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
-                                                p59_carbon_density(t-1,j,"primforest") +
-                               (p59_land_before(j,"other") - pcm_land(j,"other")) *
-                                                p59_carbon_density(t-1,j,"other");
+pc59_som_pool(j,"secdforest") = pc59_som_pool(j,"secdforest") +
+                               (pc59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
+                                                pc59_carbon_density(j,"primforest") +
+                               (pc59_land_before(j,"other") - pcm_land(j,"other")) *
+                                                pc59_carbon_density(j,"other");
 
-p59_som_pool(j,"other") = p59_som_pool(j,"other") -
-                          (p59_land_before(j,"other") - pcm_land(j,"other")) *
-                                             p59_carbon_density(t-1,j,"other");
+pc59_som_pool(j,"other") = pc59_som_pool(j,"other") -
+                          (pc59_land_before(j,"other") - pcm_land(j,"other")) *
+                                             pc59_carbon_density(j,"other");
 
-p59_som_pool(j,"primforest") = p59_som_pool(j,"primforest") -
-                               (p59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
-                                                p59_carbon_density(t-1,j,"primforest");
+pc59_som_pool(j,"primforest") = pc59_som_pool(j,"primforest") -
+                               (pc59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
+                                                pc59_carbon_density(j,"primforest");
 
-p59_carbon_density(t,j,land)$(pcm_land(j,land) > 1e-10) = p59_som_pool(j,land) / pcm_land(j,land);
+p59_carbon_density(t,j,land)$(pcm_land(j,land) > 1e-10) = pc59_som_pool(j,land) / pcm_land(j,land);

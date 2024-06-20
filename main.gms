@@ -147,44 +147,45 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
-* Used data set: rev4.106_h12_magpie.tgz
+* 
+* Used data set: rev4.109_h12_magpie.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.106_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* 
+* Used data set: rev4.109_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.106_h12_validation.tgz
+* 
+* Used data set: rev4.109_h12_validation.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
+* 
 * Used data set: additional_data_rev4.50.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+
+* 
 * Used data set: calibration_H12_26Mar24.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    14   23   10    7    4   26   21    9   16   23   32   15
-*
+* 
 * Regionscode: 62eff8f7
-*
-* Regions data revision: 4.106
-*
+* 
+* Regions data revision: 4.109
+* 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.106
-*
+* * Revision: 4.109
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -193,10 +194,11 @@ $title magpie
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    14   23   10    7    4   26   21    9   16   23   32   15
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-*
-*
-* Last modification (input data): Thu May 23 11:16:51 2024
-*
+* 
+* 
+* Last modification (input data): Tue Jun 18 09:52:31 2024
+
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -249,7 +251,8 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
 
-$setglobal crop  endo_apr21
+$setglobal cropland  simple_apr24
+$setglobal croparea  simple_apr24
 $setglobal past  endo_jun13
 
 $setglobal forestry  dynamic_may24

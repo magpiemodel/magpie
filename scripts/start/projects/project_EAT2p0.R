@@ -82,7 +82,7 @@ bau <- function(cfg) {
   cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi"      # default
 
   # Climate Change
-  cfg$input['cellular'] <- "rev4.99_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input['cellular'] <- "rev4.109_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }
@@ -133,9 +133,9 @@ waste <- function(cfg) {
 # Reference: Humpenöder, F., Popp, A., Merfort, L., Luderer, G., Weindl, I., Bodirsky, B., Stevanović, M., Klein, D., Rodrigues, R., Bauer, N., Dietrich, J., Lotze-Campen, H., & Rockström, J. (2023). Data repository - Dietary shifts increase the feasibility of 1.5°C pathways (Version 1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.8328217
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C considering diet change
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_default/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_default/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)

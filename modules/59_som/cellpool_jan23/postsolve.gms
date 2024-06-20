@@ -5,9 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p59_som_pool(j,land) = v59_som_pool.l(j,land);
-p59_land_before(j,land) = vm_land.l(j,land);
-p59_carbon_density(t,j,land)$(pcm_land(j,land) > 1e-10) = p59_som_pool(j,land) / pcm_land(j,land);
+pc59_som_pool(j,land) = v59_som_pool.l(j,land);
+pc59_land_before(j,land) = vm_land.l(j,land);
+pc59_carbon_density(j,land)$(pc59_land_before(j,land) > 1e-10) = pc59_som_pool(j,land) / pc59_land_before(j,land);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov59_som_target(t,j,land,"marginal")                      = v59_som_target.m(j,land);
