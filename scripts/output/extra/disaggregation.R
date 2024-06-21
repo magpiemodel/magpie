@@ -21,7 +21,7 @@ library(gms)
 # Basic configuration
 # =============================================
 if (!exists("source_include")) {
-  outputdir <- "output/LAMA65_Sustainability/"
+  outputdir <- "output/default_2024-06-01_15.40.24/"
   readArgs("outputdir")
 }
 map_file <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
@@ -75,12 +75,11 @@ if (length(map_file) > 1) {
     level = "cell", products = "kcr",
     product_aggr = FALSE, water_aggr = FALSE
   )
-  fallow <- fallow(gdx, level = "cell")
-  area_shr <- area / (dimSums(area, dim = 3) + setNames(fallow, NULL) + 10^-10)
+  area_shr <- area / (dimSums(area, dim = 3) + 10^-10)
 
   # calculate share of crop land on total cell area
   crop_shr <- land_hr / dimSums(land_hr, dim = 3)
-  crop_shr <- setNames(crop_shr[, getYears(area_shr), "crop"], NULL)
+  crop_shr <- setNames(crop_shr[, getYears(area_shr), "crop_area"], NULL)
 
   # calculate crop area as share of total cell area
   area_shr_hr <- madrat::toolAggregate(area_shr, map_file, to = "cell") * crop_shr
@@ -161,7 +160,7 @@ if (length(map_file) > 1) {
   # for grassland and natural vegetation
   natveg <- c("primforest", "secdforest", "other")
   consv_sum_lr <- mbind(
-    dimSums(land_consv_lr[, , "past"], 3.2),
+    land_consv_lr[, , "past"],
     setNames(dimSums(land_consv_lr[, , natveg], dim = 3), "natveg")
   )
   consv_sum_hr_agg <- mbind(
@@ -291,24 +290,15 @@ if (file.exists(wdpa_hr_file)) {
 # Account for country-specific SNV shares in post-processing
 # -------------------------------------------------------------
 iso <- readGDX(gdx, "iso")
-snv_pol_iso <- readGDX(gdx, "policy_countries30")
-snv_pol_select <- readGDX(gdx, "s30_snv_shr", "s30_set_aside_shr")
-snv_pol_noselect <- readGDX(gdx, "s30_snv_shr_noselect", "s30_set_aside_shr_noselect")
+snv_pol_iso <- readGDX(gdx, "policy_countries29")
+snv_pol_select <- readGDX(gdx, "s29_snv_shr")
+snv_pol_noselect <- readGDX(gdx, "s29_snv_shr_noselect")
 snv_pol_shr <- new.magpie(iso, fill = snv_pol_noselect)
 snv_pol_shr[snv_pol_iso, , ] <- snv_pol_select
 
 avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz") # available cropland (at high resolution)
-marginal_land <- cfg$gms$c30_marginal_land # marginal land scenario
-target_year <- cfg$gms$c30_snv_target # target year of SNV policy (default: "none")
-if (is.null(target_year)) {
-  target_year <- cfg$gms$c30_set_aside_target
-}
-snv_pol_fader <- readGDX(gdx, "f30_scenario_fader", "f30_set_aside_fader",
-  format = "first_found", react = "silent"
-)[, , target_year]
-if (is.null(snv_pol_fader)) {
-  snv_pol_fader <- readGDX(gdx, "p30_snv_scenario_fader", format = "first_found")
-}
+marginal_land <- cfg$gms$c29_marginal_land # marginal land scenario
+snv_pol_fader <- readGDX(gdx, "i29_snv_scenario_fader")
 
 # ============================================
 # Start disaggregation
@@ -346,29 +336,48 @@ land_hr <- .fixCoords(land_hr)
 gc()
 
 # ---------------------------------
+#  Split land pools
+# ---------------------------------
+t <- readGDX(gdx,"t")
+land_split_hr <- land_hr[ ,t , ]
+
+# split "crop" into crop_area, crop_fallow and crop_treecover
+message("Disaggregating cropland")
+carea <- land(gdx, level = "cell", subcategories = c("crop"))[,,c("crop_area","crop_fallow","crop_treecover")]
+carea_shr <- carea / (dimSums(carea, dim = 3) + 10^-10)
+# calculate crop area as share of total cell area
+carea_hr <- madrat::toolAggregate(carea_shr, map_file, to = "cell") * setNames(land_split_hr[, , "crop"], NULL)
+# check
+if (abs(sum(dimSums(carea_hr, dim = 3) - setNames(land_split_hr[, , "crop"], NULL), na.rm = T)) > 0.1) warning("large Difference in crop disaggregation detected!")
+
+# drop crop
+land_split_hr <- land_split_hr[, , "crop", invert = TRUE]
+# combine land_split_hr with carea_hr
+land_split_hr <- mbind(carea_hr, land_split_hr)
+
+rm(carea, carea_shr, carea_hr)
+gc()
+
+# ---------------------------------
 #  Disaggregate MAgPIE crop types
 # ---------------------------------
 
 message("Disaggregating MAgPIE crop types")
-area_shr_hr <- .dissagcrop(gdx, land_hr, map = map_file)
+area_shr_hr <- .dissagcrop(gdx, land_split_hr, map = map_file)
 
 # Write output
 .writeDisagg(area_shr_hr, croparea_hr_share_out_file,
   comment = "unit: croparea fractions of total grid-cell",
-  message = "Write outputs cell.cropara_share"
+  message = "Write outputs cell.croparea_share"
 )
 gc()
 
-# ---------------------------------
-#  Split land pools
-# ---------------------------------
-land_split_hr <- land_hr[, getYears(area_shr_hr), ]
 area_hr <- area_shr_hr * dimSums(land_split_hr, dim = 3)
 
 rm(area_shr_hr)
 gc()
 
-# replace crop in land_hr in with crop_kfo_rf, crop_kfo_ir, crop_kbe_rf
+# replace crop_area in land_hr in with crop_kfo_rf, crop_kfo_ir, crop_kbe_rf
 # and crop_kbe_ir
 kbe <- c("betr", "begr")
 kfo <- setdiff(getNames(area_hr, dim = 1), kbe)
@@ -389,14 +398,12 @@ crop_kbe_ir <- setNames(
   "crop_kbe_ir"
 )
 crop_hr <- mbind(crop_kfo_rf, crop_kfo_ir, crop_kbe_rf, crop_kbe_ir)
-# calculate Fallow
-fallow <- setNames(land_split_hr[, , "crop"] - dimSums(area_hr, dim = 3), "fallow")
-# drop crop
-land_split_hr <- land_split_hr[, , "crop", invert = TRUE]
+# drop crop_area
+land_split_hr <- land_split_hr[, , "crop_area", invert = TRUE]
 # combine land_split_hr with crop_hr.
-land_split_hr <- mbind(crop_hr, fallow, land_split_hr)
+land_split_hr <- mbind(crop_hr, land_split_hr)
 
-rm(crop_kfo_rf, crop_kfo_ir, crop_kbe_rf, crop_kbe_ir, crop_hr, fallow, area_hr)
+rm(crop_kfo_rf, crop_kfo_ir, crop_kbe_rf, crop_kbe_ir, crop_hr, area_hr)
 
 # split "forestry" into timber plantations, pre-scribed afforestation (NPi/NDC) and endogenous afforestation (CO2 price driven)
 message("Disaggregating forestry")
@@ -405,7 +412,7 @@ farea_shr <- farea / (dimSums(farea, dim = 3) + 10^-10)
 # calculate forestry area as share of total cell area
 farea_hr <- madrat::toolAggregate(farea_shr, map_file, to = "cell") * setNames(land_split_hr[, , "forestry"], NULL)
 # check
-if (abs(sum(dimSums(farea_hr, dim = 3) - setNames(land_split_hr[, , "forestry"], NULL), na.rm = T)) > 0.1) warning("large Difference in crop disaggregation detected!")
+if (abs(sum(dimSums(farea_hr, dim = 3) - setNames(land_split_hr[, , "forestry"], NULL), na.rm = T)) > 0.1) warning("large Difference in forestry disaggregation detected!")
 # rename
 df <- data.frame(matrix(nrow = 3, ncol = 2))
 names(df) <- c("internal", "output")
@@ -506,7 +513,7 @@ rm(land_consv_hr, urban_land_hr)
 
 land_bii_hr <- .fixCoords(land_bii_hr)
 
-# Add primary and secondaray other land
+# Add primary and secondary other land
 land_bii_hr <- PrimSecdOtherLand(land_bii_hr, land_hr_file)
 
 # specify potential natural vegetation

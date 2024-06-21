@@ -5,13 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*define ac_est and ac_sub
-ac_est(ac) = no;
-ac_est(ac) = yes$(ord(ac) <= (m_yeardiff_forestry(t)/5));
-
-ac_sub(ac) = no;
-ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
-
 *Reduction of ac_est is not possible.
 v32_hvarea_forestry.fx(j,ac_est) = 0;
 v32_land_reduction.fx(j,type32,ac_est) = 0;
@@ -21,41 +14,39 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
    p32_aff_pol_timestep("y1995",j) = 0;
    p32_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
 * Suitable area (`p32_aff_pot`) for NPI/NDC afforestation
-   p32_aff_pot(t,j) = sum((kcr,w),vm_area.l(j,kcr,w) - vm_area.lo(j,kcr,w)) + (vm_land.l(j,"past") - vm_land.lo(j,"past")) - pm_land_conservation(t,j,"other","restore");
+   p32_aff_pot(t,j) = 0.95 * (sum((kcr,w),vm_area.l(j,kcr,w) - vm_area.lo(j,kcr,w))
+                        + (vm_fallow.l(j) - vm_fallow.lo(j)) 
+                        + (vm_land.l(j,"past") - vm_land.lo(j,"past")) 
+                        - pm_land_conservation(t,j,"other","restore"));
+*** NDC/NPI re/afforesation is further constrained by the remaining forest establishment potential
+   p32_aff_pot(t,j)$(p32_aff_pot(t,j) > pm_max_forest_est(t,j)) = pm_max_forest_est(t,j);
 * suitable area `p32_aff_pot` can be negative, if land restoration is switched on (level smaller than lower bound), therefore set negative values to 0
-   p32_aff_pot(t,j)$(p32_aff_pot(t,j) < 0) = 0;
+   p32_aff_pot(t,j)$(p32_aff_pot(t,j) < 1e-6) = 0;
 * Limit prescribed NPI/NDC afforestation in `p32_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
    p32_aff_pol_timestep(t,j)$(p32_aff_pol_timestep(t,j) > p32_aff_pot(t,j)) = p32_aff_pot(t,j);
 ** END ndc **
 
 *' @code
-
 *' Afforestation switch:
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation
 *' 1 = Use plantation growth curve (faster than natveg) towards LPJmL natural vegetation
 if(s32_aff_plantation = 0,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 elseif s32_aff_plantation = 1,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,"vegc");
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,"vegc");
 );
 
 *' Timber plantations carbon densities:
-p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,ag_pools);
 
 *' NDC carbon densities are natveg carbon densities.
-p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 
 *' CDR from afforestation for each age-class, depending on planning horizon.
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
 = p32_carbon_density_ac(t,j,"aff",ac,"vegc") - p32_carbon_density_ac(t,j,"aff",ac-1,"vegc");
 
 * Disturbance from generic sources to managed and natural forests
-if((ord(t) = 1),
- pc32_land(j,type32,ac) = p32_land_start_ac(j,type32,ac);
-else
- pc32_land(j,type32,ac) = p32_land(t-1,j,type32,ac);
-);
-
 p32_disturbance_loss_ftype32(t,j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) * f32_forest_shock(t,"%c32_shock_scenario%") * m_timestep_length;
 pc32_land(j,"aff",ac_est) = pc32_land(j,"aff",ac_est) + sum(ac_sub,p32_disturbance_loss_ftype32(t,j,"aff",ac_sub))/card(ac_est2);
 
@@ -67,25 +58,20 @@ pc32_land(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) - p32_disturbance_loss_fty
 s32_shift = m_yeardiff_forestry(t)/5;
 *' @stop
 
-*' Shifting of age-classes in land.
+*' Shifting of age-classes
 *` @code
-if((ord(t)=1),
-p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land_start_ac(j,type32,ac-s32_shift);
-p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land_start_ac(j,type32,ac));
-else
 * Example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s32_shift = 1)
 p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = pc32_land(j,type32,ac-s32_shift);
 * Account for cases at the end of the age class set (s32_shift > 1) which are not shifted by the above calculation
 p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card(ac)-s32_shift), pc32_land(j,type32,ac));
-);
+
 * set ac_est to zero
 p32_land(t,j,type32,ac_est) = 0;
 *' @stop
 
 ** Calculate v32_land.l
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
-pc32_land(j,type32,ac) = v32_land.l(j,type32,ac);
-p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
+pc32_land(j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 pcm_land_forestry(j,type32) =  sum(ac, v32_land.l(j,type32,ac));
@@ -139,7 +125,7 @@ if(s32_aff_prot = 0,
   v32_land.fx(j,"aff",ac)$(ac.off <= s32_planing_horizon/5) = pc32_land(j,"aff",ac);
   v32_land.up(j,"aff",ac)$(ac.off > s32_planing_horizon/5) = pc32_land(j,"aff",ac);
 elseif s32_aff_prot = 1,
-  v32_land.fx(j,"aff",ac) = pc32_land(j,"aff",ac);  
+  v32_land.fx(j,"aff",ac) = pc32_land(j,"aff",ac);
 );
 v32_land.lo(j,"aff",ac_est) = 0;
 v32_land.up(j,"aff",ac_est) = Inf;
@@ -171,7 +157,7 @@ if(ord(t) = 1,
 else
   p32_plant_contr(t,i) = p32_plant_contr(t-1,i) * (1+i32_plant_contr_growth_fader(t))**m_timestep_length_forestry;
 );
-p32_plant_contr(t,i)$(p32_plant_contr(t,i) > s32_plant_contr_max) = s32_plant_contr_max; 
+p32_plant_contr(t,i)$(p32_plant_contr(t,i) > s32_plant_contr_max) = s32_plant_contr_max;
 
 ** demand for establishment decision depends on s32_demand_establishment:
 ** s32_demand_establishment = 0 static (establishment based on current demand)
@@ -183,7 +169,7 @@ if(s32_demand_establishment = 1,
     p32_demand_forestry_future(t,i,kforestry) = sum(t_ext$(t_ext.pos = t.pos + p32_rotation_regional(t,i)),pm_demand_forestry(t_ext,i,kforestry));
    );
 else
-  p32_demand_forestry_future(t,i,kforestry) = pm_demand_forestry(t,i,kforestry); 
+  p32_demand_forestry_future(t,i,kforestry) = pm_demand_forestry(t,i,kforestry);
  );
 
 p32_forestry_product_dist(t,i,kforestry)$(p32_demand_forestry_future(t,i,kforestry) > 0) = p32_demand_forestry_future(t,i,kforestry) / sum(kforestry2, p32_demand_forestry_future(t,i,kforestry2));

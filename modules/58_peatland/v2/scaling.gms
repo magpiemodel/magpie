@@ -6,3 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 v58_peatlandChange.scale(j,land58) = 10e-3;
+v58_peatland.scale(j,land58) = 10e-3;

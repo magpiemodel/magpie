@@ -1,0 +1,8 @@
+name,type,reason
+pm_land_hist,input,not needed
+fm_luh2_side_layers,input,not needed
+pm_interest,input,not needed
+fm_bii_coeff,input,not needed
+pm_carbon_density_secdforest_ac,input,not needed
+pm_carbon_density_plantation_ac,input,not needed
+fm_carbon_density,input,not needed

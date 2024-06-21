@@ -31,9 +31,10 @@ if (!is.null(renv::project()) && !exists("source_include") && Sys.getenv("SLURM_
 
 library(lucode2)
 library(gms)
+source("scripts/helper.R")
 
 runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
-  choose_folder <- function(title="Please choose a folder") {
+  chooseFolder <- function(title="Please choose a folder") {
     dirs <- c(Sys.glob("./output/*/full.gms"), Sys.glob("./output/HR*/*/full.gms"))
     dirs <- sub("^\\./output/", "", dirs)
     dirs <- sub("/full\\.gms$", "", dirs)
@@ -66,7 +67,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       if(answer=="y"){
         return(paste0("./output/",dirs[id+1]))
       } else {
-        choose_folder(title)
+        chooseFolder(title)
       }
     } else if(any(dirs[identifier] == "all")){
       identifier <- 2:length(dirs)
@@ -76,51 +77,15 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     }
   }
 
-  choose_submit <- function(title="Please choose run submission type") {
-    slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("SLURM standby", "SLURM standby maxMem", "SLURM priority", "SLURM priority maxMem","Direct execution", "Background execution", "Debug mode")
-    if(slurm) {
-      cat("\nCurrent cluster utilization:\n")
-      system("sclass")
-      cat("\n")
-    } else {
-     modes <- grep("^SLURM", modes, invert = TRUE, value = TRUE)
-    }
-    cat("\n",title,":\n",sep="")
-    cat(paste(seq_along(modes), modes, sep=": " ),sep="\n")
-    cat("Number: ")
-    identifier <- gms::getLine()
-    identifier <- as.numeric(strsplit(identifier,",")[[1]])
-    if(slurm) {
-      system("sclass")
-      comp <- switch(identifier,
-                     "1" = "slurm standby",
-                     "2" = "slurm standby maxMem",
-                     "3" = "slurm priority",
-                     "4" = "slurm priority maxMem",
-                     "5" = "direct",
-                     "6" = "background",
-                     "7" = "debug")
-
-    } else {
-      comp <- switch(identifier,
-                     "1" = "direct",
-                     "2" = "background",
-                     "3" = "debug")
-    }
-    if(is.null(comp)) stop("This type is invalid. Please choose a valid type")
-    return(comp)
-  }
-
-  runsubmit <- function(output, alloutputdirs, submit, script_path) {
+  runsubmit <- function(output, alloutputdirs, submit, scriptPath, slurmModes) {
     if(!dir.exists("logs")) dir.create("logs")
     #Set value source_include so that loaded scripts know, that they are
     #included as source (instead of a load from command line)
     source_include <- TRUE # nolint
     # run output scripts over all choosen folders
     for(rout in output){
-      name <- ifelse(file.exists(paste0(script_path,rout)), rout, paste0(rout,".R"))
-      script <- paste0(script_path,name)
+      name <- ifelse(file.exists(paste0(scriptPath, rout)), rout, paste0(rout, ".R"))
+      script <- paste0(scriptPath, name)
       if(!file.exists(script)) {
         warning("Script ",name, " could not be found. Skip execution!")
         next
@@ -135,45 +100,39 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       rout_name <- sub("\\.R$","",sub("/","_",rout))
       for(outputdir in loop) {
         message("\n# ",name, " -> ", outputdir)
-        r_command <- paste0("output.R outputdir=",paste(outputdir,collapse=","),"  output=",rout," submit=direct")
-        sbatch_command <- paste0("sbatch ",
-                                 "--job-name=scripts-output ",
-                                 "--output=logs/out-", rout_name, "-%j.out ",
-                                 "--error=logs/out-", rout_name, "-%j.err ",
-                                 "--mail-type=END ",
-                                 "--time=200 ",
-                                 "--mem-per-cpu=8000 ",
-                                 "--wrap=\"Rscript ", r_command, "\"")
-        if(submit=="direct") {
+        rCommand <- paste0("output.R outputdir=",paste(outputdir,collapse=","),"  output=",rout," submit=direct")
+        if(submit %in% c("Direct execution", "direct")) {
           tmp.env <- new.env()
           tmp.error <- try(sys.source(script,envir=tmp.env))
           if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
           rm(tmp.env)
-        } else if(submit=="background") {
+        } else if(submit %in% c("Background execution", "background")) {
           log <- format(Sys.time(), paste0("logs/out-",rout_name,"-%Y-%H-%M-%S-%OS3.log"))
-          system2("Rscript", r_command, stderr = log, stdout = log, wait=FALSE)
-        } else if(submit=="slurm standby") {
-          system(paste(sbatch_command, "--qos=standby --time=24:00:00"))
-        } else if(submit=="slurm standby maxMem") {
-          system(paste(sbatch_command, "--qos=standby --time=24:00:00 --mem-per-cpu=0 --cpus-per-task=16"))
-        } else if(submit=="slurm priority") {
-          system(paste(sbatch_command, "--qos=priority"))
-        } else if(submit=="slurm priority maxMem") {
-          system(paste(sbatch_command, "--qos=priority --mem-per-cpu=0 --cpus-per-task=16"))
-        } else if(submit=="debug") {
+          system2("Rscript", rCommand, stderr = log, stdout = log, wait=FALSE)
+        } else if(submit %in% c("Debug mode", "debug")) {
           tmp.env <- new.env()
           sys.source(script,envir=tmp.env)
           rm(tmp.env)
         } else {
-          stop("Unknown submission type")
+          slurmModes <- yaml::read_yaml(slurmModes)$slurmjobs
+          if(submit %in% names(slurmModes)) {
+            command <- slurmModes[submit]
+            command <- gsub("%NAME", rout_name, command)
+            command <- gsub("%SCRIPT", rCommand, command)
+            message(command)
+            system(command)
+          } else {
+            stop("Unknown submission type")
+          }
         }
       }
     }
   }
 
-  if (is.null(outputdir)) outputdir <- choose_folder("Choose runs")
+  if (is.null(outputdir)) outputdir <- chooseFolder("Choose runs")
   if (is.null(output))     output   <- gms::selectScript("./scripts/output")
-  if (is.null(submit))     submit   <- choose_submit("Choose submission type")
+  if (is.null(submit))     submit <- chooseSubmit("Choose submission type",
+                                                  slurmModes = "scripts/slurmOutput.yml")
   if (is.null(output)) {
     message("No output script selected! Stop here.")
     return(invisible(NULL))
@@ -198,7 +157,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       }, type = "message")
     })
     if (!snapshotSuccess) {
-      stop(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
+      warning(paste(errorMessage1, collapse = "\n"), paste(errorMessage2, collapse = "\n"))
     }
     message("done.")
 
@@ -213,6 +172,8 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       if (!file.exists(file.path(runFolder, "renv.lock"))) {
         warning(normalizePath(runFolder), "/renv.lock does not exist.")
         message("Lockfile written to ", newLockfile)
+      } else if (!file.exists(newLockfile)) {
+        message("Could not write lockfile, see warning thrown earlier.")
       } else if (identical(readLines(file.path(runFolder, "renv.lock")), readLines(newLockfile))) {
         file.remove(newLockfile)
       } else {
@@ -221,13 +182,15 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     }
   }
 
-  runsubmit(output, alloutputdirs = outputdir, submit, "scripts/output/")
+  runsubmit(output = output, alloutputdirs = outputdir,
+            submit = submit, scriptPath = "scripts/output/",
+            slurmModes = "scripts/slurmOutput.yml")
   message("")
 }
 
-if(!exists("source_include")) {
+if (!exists("source_include")) {
   output <- outputdir <- submit <- NULL
-  lucode2::readArgs("output","outputdir","submit", .silent=TRUE)
+  lucode2::readArgs("output", "outputdir", "submit", .silent = TRUE)
 }
 
-runOutputs(output=output, outputdir = outputdir, submit=submit)
+runOutputs(output = output, outputdir = outputdir, submit = submit)

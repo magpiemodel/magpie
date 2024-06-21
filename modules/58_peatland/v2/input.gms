@@ -19,7 +19,7 @@ scalars
 *Peatland area based on Global Peatland Map 2.0 and Global Peatland Database
 table f58_peatland_area(j,land58) Peatland area (mio. ha)
 $ondelim
-$include "./modules/58_peatland/input/f58_peatland_area.cs2"
+$include "./modules/58_peatland/input/f58_peatland_area.cs3"
 $offdelim
 ;
 
