@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
+- **70_livestock** added realization `fbask_jan16_sticky`
 
 ### removed
 -
