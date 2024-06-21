@@ -38,7 +38,7 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 
 report <- getReport(gdx, scenario = cfg$title, dir = outputdir)
 
-for (mapping in c("AR6", "NAVIGATE")) {
+for (mapping in c("AR6", "NAVIGATE", "SHAPE")) {
   missingVariables <- sort(setdiff(unique(deletePlus(getMappingVariables(mapping,"M"))),unique(deletePlus(getNames(report,dim="variable")))))
   if (length(missingVariables) > 0) {
     warning("# The following ", length(missingVariables), " variables are expected in the piamInterfaces package ",
