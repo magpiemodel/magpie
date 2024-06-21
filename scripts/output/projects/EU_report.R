@@ -1,3 +1,3 @@
 readArgs("outputdir")
 rmarkdown::render("./scripts/output/projects/EU_report.Rmd",
-                  output_dir = paste0(outputdir, "/validation"))
+                  output_dir = outputdir)
