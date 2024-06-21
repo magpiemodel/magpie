@@ -49,6 +49,7 @@ for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
 
 write.report(report, file = mif)
 q <- as.quitte(report)
+q <- droplevels(q)
 if(all(is.na(q$value))) stop("No values in reporting!")
 
 saveRDS(q, file = rds, version = 2)
