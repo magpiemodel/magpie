@@ -30,6 +30,7 @@ Imports:
     patchwork,
     piamenv (>= 0.3.4),
     piamInterfaces,
+    piamutils,
     quitte,
     raster,
     remulator,
