@@ -1,0 +1,251 @@
+---
+title: "Compare EU results with LUH Data"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+---
+
+<!---
+The following html code configures a wider output pdf with less margins to display larger plots.
+-->
+<style type="text/css">
+.main-container {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+This output report validates spatial pattern of the EU regions against LUH2v2 data.
+
+# Setup data and plot functions
+```{r, setup, include=FALSE}
+knitr::opts_knit$set(root.dir = dirname(dirname(dirname(getwd()))))
+```
+
+```{r load-libraries, echo = T, results = 'hide', message=FALSE, warning=FALSE}
+# setup working dir and packages, read outputdir
+readArgs("outputdir")
+library(madrat)
+library(mrcommons)
+library(magpie4)
+
+library(ggplot2)
+library(plotly)
+library(gridExtra)
+library(patchwork)
+
+library(dplyr)
+library(tidyr)
+library(stringr)
+```
+
+```{r}
+print(paste0("Script started for output directory: ", outputdir))
+```
+
+```{r read-data, echo = T, results = 'hide', message = FALSE, warning = FALSE}
+compareYears <- c(1995, 2000, 2005, 2010)
+# ----- Read and process model output and luh2v2 data; then bind data to a validation object -----
+# load and process reference data to match with model data
+luh2v2 <- calcOutput("LanduseInitialisation", aggregate = FALSE, cellular = TRUE,
+                     nclasses = "seven", cells = "lpjmlcell")
+luh2v2 <- luh2v2[, compareYears, ]
+# add subdimension for reference data
+getNames(luh2v2) <- paste0(getNames(luh2v2), ".ref")
+
+# load and process model data to match with reference data
+path2landoutput <- file.path(outputdir, "cell.land_0.5.mz")
+cellLand <- read.magpie(path2landoutput)
+cellLand <- cellLand[, compareYears, ]
+# add subdimension for model data
+getNames(cellLand) <- paste0(getNames(cellLand), ".mod")
+load(file.path(outputdir, "spatial_header.rda"))
+
+# bind model and reference data
+validationObj <- mbind(cellLand, luh2v2)
+
+# get EU countries
+mapping <- toolGetMapping("regionmappingH12.csv")
+countriesEU <- mapping$CountryCode[mapping$RegionCode == "EUR"]
+```
+
+```{r, load-plot-functions, echo = T, results = 'hide'}
+# ----- Create a plotting functions -----
+# helper function to convert magclass obj to wide dataframe
+convertToWideDataframe <- function(magclassObj) {
+  as.data.frame(magclassObj) %>%
+    pivot_wider(names_from = "Data2", values_from = "Value")
+}
+
+# helper function to subset all cluster of a country
+subsetCountryCluster <- function(magclassObj, countries) {
+  magclassObj[intersect(countries, getItems(magclassObj, split=TRUE)[[1]][[1]]), , ]
+}
+
+# function combines a scatter plot with maps such that facets are aligned
+plotCombined <- function(validationObj) {
+  # create the plots
+  p1 <- plotScatter(validationObj)
+  p2 <- plotMaps(validationObj)
+
+  # combine and align the plots using patchwork
+  combinedPlot <- p1 / p2
+
+  # print the combined plot
+  print(combinedPlot)
+}
+
+# create scatter plot for eu countries faceted by year
+plotScatter <- function(validationObj) {
+  validationObj <- toolCoord2Isocell(validationObj, "lpjcell")
+  validationObj <- subsetCountryCluster(validationObj, countriesEU)
+
+  # create quality measure dataframe with RMSE, MAE a.o.
+  qualityMeasuresDf <- NULL # list of dataframes, one for each year
+  numericYears <- as.numeric(gsub("y", "", getItems(validationObj, 2)))
+  for (year in numericYears) {
+    # get a vector with the quality measures
+    qualityMeasures <- luplot::qualityMeasure(
+      validationObj[, year, "mod"], validationObj[, year, "ref"],
+      measures = c("Willmott", "Willmott refined", "Nash Sutcliffe", "RMSE", "MAE")
+    )
+
+    # create text for the year facet
+    text <- ""
+    for (i in seq_along(qualityMeasures)) {
+      text <- paste0(text, stringr::str_trunc(names(qualityMeasures)[i], 12, ellipsis = "."),
+                     " : ", qualityMeasures[i], "\n")
+    }
+
+    # create dataframe for that year
+    qualityMeasuresDf[[year]] <- data.frame(
+      Year = year,
+      text = text
+    )
+  }
+  qualityMeasBinded <- dplyr::bind_rows(qualityMeasuresDf) # bind all year dataframes
+
+  # create the plot with facets
+  validationDF <- convertToWideDataframe(validationObj)
+
+  p <- ggplot(validationDF,
+              aes(x = mod, y = ref, reg = Region, cell = Cell, relativeErr = (mod - ref) / ref)) +
+    geom_point(size = 0.5) +
+    geom_abline(color = "#663939", size = 1.5) +
+    facet_wrap(~ Year, scales = "free", ncol = 4) + # Create facets based on 'Year'
+    labs(x = "MAgPIE output", y = "luh2v2") +
+    theme(panel.background = element_rect(fill = "gray55"),
+          panel.grid.major = element_line(color = "gray62"),
+          panel.grid.minor = element_line(color = "grey58"))
+
+  # add quality measure text
+  p <- p + geom_text(x = 0, y = Inf, aes(label = text), color = "#ffb5b5", # bright color contrasting dark background
+                     hjust = 0, vjust = 1.1, nudge_x = 10, size = 2.6, family = "sans", fontface = "bold",
+                     data = qualityMeasBinded, inherit.aes = FALSE)
+
+  return(p)
+}
+
+# create EU maps faceted by year
+plotMaps <- function(validationObj) {
+  # create a ggplot object using luplot
+  relErr <- (validationObj[, , paste0("mod")] - validationObj[, , paste0("ref")]) /
+    (validationObj[, , paste0("ref")])
+
+  p <- luplot::plotmap2(relErr,
+    legend_range = c(-2, 2), legendname = "relative\n diff \n to \n LUH2v2", ncol = 4,
+    midcol = "#ffffff", lowcol = "blue", highcol = "red", midpoint = 0,
+    title = ""
+  )
+
+  # adjust the plot
+  p <- p + coord_sf(xlim = c(-10, 40), ylim = c(35, 70)) + facet_wrap(~ Year, ncol = 4) +
+    theme(aspect.ratio = 1, legend.title = element_text(size = 8))
+
+  p <- p + guides(fill = guide_colorbar(barheight = 5, barwidth = 0.2))
+  return(p)
+}
+
+# create an interactive scatterplot for eu countries of a year
+plotInteractiveSub <- function(validationObj, year) {
+  p <- plotScatter(validationObj[, year, ])
+  p <- p + ggtitle(paste0("EU Countries ", year))
+  p <- plotly::ggplotly(p)
+  return(p)
+}
+```
+
+# Plot data
+
+## crop
+```{r crop,message=FALSE, warning=FALSE, out.width="100%"}
+type <- "crop"
+plotCombined(validationObj[, , type])
+```
+
+```{r crop2, message=FALSE, warning=FALSE,   fig.align="center"}
+plotInteractiveSub(validationObj[, , type], 2010)
+```
+
+## pasture
+```{r past,message=FALSE, warning=FALSE, out.width="100%"}
+type <- "past"
+plotCombined(validationObj[, , type])
+```
+
+```{r past2, message=FALSE, warning=FALSE,   fig.align="center"}
+plotInteractiveSub(validationObj[, , type], 2010)
+```
+ 
+## forestry
+```{r forestry,message=FALSE, warning=FALSE, out.width="100%"}
+type <- "forestry"
+plotCombined(validationObj[, , type])
+```
+
+```{r forestry2, message=FALSE, warning=FALSE,   fig.align="center"}
+plotInteractiveSub(validationObj[, , type], 2010)
+```
+ 
+## primforest
+```{r primforest,message=FALSE, warning=FALSE, out.width="100%"}
+type <- "primforest"
+plotCombined(validationObj[, , type])
+```
+
+```{r primforest2, message=FALSE, warning=FALSE,   fig.align="center"}
+plotInteractiveSub(validationObj[, , type], 2010)
+```
+
+## secdforest
+```{r secdforest,message=FALSE, warning=FALSE, out.width="100%"}
+type <- "secdforest"
+plotCombined(validationObj[, , type])
+```
+
+```{r secdforest2, message=FALSE, warning=FALSE,   fig.align="center"}
+plotInteractiveSub(validationObj[, , type], 2010)
+```
+
+## urban
+
+```{r urban,message=FALSE, warning=FALSE, out.width="100%"}
+type <- "urban"
+plotCombined(validationObj[, , type])
+```
+
+```{r urban2, message=FALSE, warning=FALSE,   fig.align="center"}
+plotInteractiveSub(validationObj[, , type], 2010)
+```
+ 
+## other
+```{r other, message=FALSE, warning=FALSE, out.width="100%"}
+type <- "other"
+plotCombined(validationObj[, , type])
+```
+
+```{r other2, message=FALSE, warning=FALSE,   fig.align="center"}
+plotInteractiveSub(validationObj[, , type], 2010)
+```

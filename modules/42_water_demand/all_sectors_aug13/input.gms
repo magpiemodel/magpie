@@ -32,7 +32,7 @@ s42_env_flow_scenario              Environmental flow protection scenario       
 *                                                                          s42_env_flow_fraction has no effect.
 
 * Linear fading in of environmental flow policy between startyear and targetyear
-s42_efp_startyear                  Environmental flow policy start year   / 2020 /
+s42_efp_startyear                  Environmental flow policy start year   / 2025 /
 s42_efp_targetyear                 Environmental flow policy target year  / 2040 /
 s42_env_flow_base_fraction         Fraction of available water that is reserved for the environment if no EFR protection policy is implemented (1)           / 0.05 /
 s42_env_flow_fraction              Fraction of available water that is reserved under protection policies (1) / 0.2 /
@@ -92,12 +92,20 @@ $include "./modules/42_water_demand/input/f42_wat_req_fao.csv"
 $offdelim
 /;
 
-table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) Manufacturing electricity and domestic water demand under different socioeconomic scenarios (mio. m^3)
+table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) Manufacturing electricity and domestic water demand under different socioeconomic scenarios in the growing period (mio. m^3)
 $ondelim
 $include "./modules/42_water_demand/input/watdem_nonagr_grper.cs3"
 $offdelim
 ;
 m_fillmissingyears(f42_watdem_ineldo,"j,scen_watdem_nonagr,watdem_ineldo");
+
+* This input is not used within MAgPIE, but necessary for the postprocessing
+table f42_watdem_ineldo_total(t_all,j,scen_watdem_nonagr,watdem_ineldo) Manufacturing electricity and domestic water demand under different socioeconomic scenarios in the entire year (mio. m^3)
+$ondelim
+$if exist "./modules/42_water_demand/input/watdem_nonagr_total.cs3"  $include "./modules/42_water_demand/input/watdem_nonagr_total.cs3"
+$offdelim
+;
+m_fillmissingyears(f42_watdem_ineldo_total,"j,scen_watdem_nonagr,watdem_ineldo");
 
 parameter
 f42_env_flows(t_all,j) Environmental flow requirements from LPJ and Smakhtin algorithm (mio. m^3)

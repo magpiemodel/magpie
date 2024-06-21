@@ -146,7 +146,7 @@ title: MAgPIE - An Open Source land-use modeling framework
 abstract: The *Model of Agricultural Production and its Impact on the Environment* (MAgPIE)
   is a modular open source framework for modeling global land-systems, which is
   coupled to the grid-based dynamic vegetation model LPJmL, with a spatial resolution
-  of 0.5°x0.5°. It takes regional economic conditions such as demand for agricultural
+  of 0.5degx0.5deg. It takes regional economic conditions such as demand for agricultural
   commodities, technological development and production costs as well as spatially
   explicit data on potential crop yields, land and water constraints (from LPJmL) into
   account. Based on these, the model derives specific land use patterns, yields and
@@ -156,8 +156,8 @@ abstract: The *Model of Agricultural Production and its Impact on the Environmen
   exogenously given population in 10 food energy categories, based on regional diets.
   Future trends in food demand are derived from a cross-country regression analysis,
   based on future scenarios on GDP and population growth.
-version: 4.7.3dev
-date-released: 2024-04-12
+version: 4.8.1dev
+date-released: 2024-06-19
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse

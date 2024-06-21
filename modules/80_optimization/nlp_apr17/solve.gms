@@ -47,25 +47,25 @@ if (magpie.modelstat > 2,
     if(s80_resolve_option = 1,
       display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
       option nlp = conopt4;
-      magpie.optfile = 0;         
-    elseif s80_resolve_option = 2, 
+      magpie.optfile = 0;
+    elseif s80_resolve_option = 2,
       display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE";
       option nlp = conopt4;
-      magpie.optfile = 1;         
-    elseif s80_resolve_option = 3, 
+      magpie.optfile = 1;
+    elseif s80_resolve_option = 3,
       display "Modelstat > 2 | Retry solve with CONOPT4 w/o preprocessing";
       option nlp = conopt4;
-      magpie.optfile = 2;         
-    elseif s80_resolve_option = 4, 
+      magpie.optfile = 2;
+    elseif s80_resolve_option = 4,
       display "Modelstat > 2 | Retry solve with CONOPT3";
       option nlp = conopt;
-      magpie.optfile = 0;         
+      magpie.optfile = 0;
      );
 
     solve magpie USING nlp MINIMIZING vm_cost_glo;
     if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
     option nlp = conopt4;
-    magpie.optfile = s80_optfile; 
+    magpie.optfile = s80_optfile;
 
     display "vm_cost_glo.l";
     display vm_cost_glo.l;
@@ -78,9 +78,9 @@ if (magpie.modelstat > 2,
     display s80_counter;
     display magpie.modelstat;
 *   Set modelstat to 13 in case of NA for the `until` check of the repeat loop.
-*   Otherwise, the repeat loop will never end. 
+*   Otherwise, the repeat loop will never end.
     magpie.modelStat$(magpie.modelStat=NA) = 13;
-    
+
     s80_resolve_option$(s80_resolve_option >= 4) = 0;
 
     until (magpie.modelstat <= 2 or s80_counter >= s80_maxiter)

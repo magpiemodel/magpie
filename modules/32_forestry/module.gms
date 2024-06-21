@@ -22,5 +22,5 @@
 *' @authors Florian Humpenöder, Abhijeet Mishra
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%forestry%" == "dynamic_feb21" $include "./modules/32_forestry/dynamic_feb21/realization.gms"
+$Ifi "%forestry%" == "dynamic_may24" $include "./modules/32_forestry/dynamic_may24/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

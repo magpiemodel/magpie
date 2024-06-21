@@ -521,7 +521,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
         cfg$qos <- "standby"
       } else if(all(load > 80)) {
         cfg$qos <- "priority"
-      } else if(load["priority"] < load["standard"]) {
+      } else if(all(c("priority", "standard") %in% names(load)) && load["priority"] < load["standard"]) {
         cfg$qos <- "standby"
       } else {
         cfg$qos <- "short"

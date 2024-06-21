@@ -100,9 +100,8 @@ highres <- function(cfg) {
   #copy gdx file for 1st time step from low resolution run for better starting point
   #note: using gdx files for more than the 1st time step sometimes pushes the model into corner solutions, which might result in infeasibilites.
   cfg$files2export$start <- c(cfg$files2export$start,
-                              paste0(cfg$results_folder, "/", "magpie_y1995.gdx"))
-  cfg$gms$s_use_gdx   <- 1
-  cfg$gms$s80_optfile <- 1
+                              paste0(cfg$results_folder, "/", "magpie_y*.gdx"))
+  cfg$gms$s_use_gdx   <- 2
 
   #max resources for parallel runs
   cfg$qos <- "standby_maxMem_dayMax"
@@ -129,10 +128,15 @@ highres <- function(cfg) {
   cfg$recalc_npi_ndc <- TRUE
 
   #get trade pattern from low resolution run with c200
-  ov_prod_reg <- readGDX(gdx, "ov_prod_reg", select = list(type = "level"))
-  ov_supply   <- readGDX(gdx, "ov_supply", select = list(type = "level"))
+  k_trade      <- readGDX(gdx, "k_trade")
+  ov_prod_reg <- readGDX(gdx, "ov_prod_reg", select = list(type = "level"))[,,k_trade]
+  ov_supply   <- readGDX(gdx, "ov_supply", select = list(type = "level"))[,,k_trade]
+  import_for_feasibility   <- readGDX(gdx, "ov21_import_for_feasibility", select = list(type = "level"), react = "silent")
+  if(is.null(import_for_feasibility)) {
+    import_for_feasibility <- new.magpie(getCells(ov_supply),getYears(ov_supply),getNames(ov_supply),fill = 0)
+  }
   supreg      <- readGDX(gdx, "supreg")
-  f21_trade_balance <- toolAggregate(ov_prod_reg - ov_supply, supreg)
+  f21_trade_balance <- toolAggregate(ov_prod_reg - (ov_supply + import_for_feasibility), supreg)
   write.magpie(f21_trade_balance, paste0("modules/21_trade/input/f21_trade_balance.cs3"))
 
   #get tau from low resolution run with c200

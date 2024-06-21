@@ -5,12 +5,14 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-if(m_year(t) = s44_start_year,
 * The start value for the linear interpolation is the BII at biome level in the start year.
-  p44_start_value(i,biome44) = v44_bii.l(i,biome44);
+p44_start_value(i,biome44)$(m_year(t) = s44_start_year) = v44_bii.l(i,biome44);
 * The target value for the linear interpolation is the lower bound defined in `s44_bii_lower_bound`.
-  p44_target_value(i,biome44) = s44_bii_lower_bound;
-  
+p44_target_value(i,biome44) = s44_bii_lower_bound;
+
+if (m_year(t) <= sm_fix_SSP2,
+ v44_bii.lo(i,biome44) = 0;
+else
 * Linear increase of BII target values at biome level from start year to target year, and constant values thereafter.
   p44_bii_lower_bound(t2,i,biome44) = p44_start_value(i,biome44) + ((m_year(t2) - s44_start_year) / (s44_target_year - s44_start_year)) * (p44_target_value(i,biome44) - p44_start_value(i,biome44));
   p44_bii_lower_bound(t2,i,biome44)$(m_year(t2) > s44_target_year) = p44_target_value(i,biome44);
@@ -26,4 +28,3 @@ if(m_year(t) = s44_start_year,
   v44_bii.lo(i,biome44) = p44_bii_lower_bound(t,i,biome44);
   display p44_bii_lower_bound;
 );
-

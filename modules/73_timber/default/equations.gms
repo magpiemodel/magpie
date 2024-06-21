@@ -8,8 +8,8 @@
 *' @equations
 
 *' Timber production cost include the cost for producing wood, woodfuel and residues,
-*' as well as additional costs for harvesting (see below) and technical costs for
-*' a slack variable ('v73_prod_heaven_timber'). The slack variable (high costs)
+*' and technical costs for a slack variable ('v73_prod_heaven_timber').
+*' The slack variable (high costs) 
 *' is only used as a last resort when there is no other way to meet the timber
 *' demand. The purpose of the slack variable is to assure technically feasibility
 *' of the model under all conditions and to indicate shortage of wood supply, if any.
@@ -17,15 +17,14 @@
 q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
-                      sum(cell(i2,j2), vm_prod(j2,"wood"))      * s73_timber_prod_cost_wood
-                    + sum(cell(i2,j2), vm_prod(j2,"woodfuel"))  * s73_timber_prod_cost_woodfuel
-                    + sum(cell(i2,j2), v73_prod_residues(j2))   * s73_reisdue_removal_cost
+                      sum((cell(i2,j2),kforestry), vm_prod(j2,kforestry) * im_timber_prod_cost(kforestry))
+                    + sum(cell(i2,j2), v73_prod_residues(j2)) * s73_reisdue_removal_cost
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
                     ;
 
 *' The following equations describes cellular level production (in dry matter) of
-*' woody biomass `vm_prod_reg` as the sum of the cluster level production of
-*' timber coming from 'v73_prod_forestry' and 'v73_prod_natveg'. When production
+*' woody biomass `vm_prod` as the sum of the cluster level production of
+*' timber coming from 'vm_prod_forestry' and 'vm_prod_natveg'. When production
 *' capabilities are exhausted, the model can produce roundwood without using any
 *' land resources but by paying a very high cost ('s73_free_prod_cost').
 *' Timber production equation is split in two parts, one each for industrial roundwood
@@ -57,7 +56,7 @@ q73_prod_woodfuel(j2)..
 *' of industrial roundwood production is assumed to be lost during harvesting processes.
 *' USDA reports that ca. 30% of roundwood harvested are residues (@oswalt2019forest).
 *' Not all of this residue is recoverwed from forest and we assume 50% of residue
-*' removal based on @pokharel2017factors. These numebrs (residue levels and residude
+*' removal based on @pokharel2017factors. These numbers (residue levels and residude
 *' removals vary strongly among different studies, the numbers used here are from
 *' a USDA report on state of forests in USA which has consistent reporting over years)
 
