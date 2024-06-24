@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
 
 
 ## [4.8.1] - 2024-06-19
