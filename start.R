@@ -64,9 +64,9 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
         sys.source(script,envir=tmp.env)
         rm(tmp.env)
       } else {
-        slurmModes <- yaml::read_yaml(slurmModes)$slurmjobs
-        if(submit %in% names(slurmModes)) {
-          command <- slurmModes[submit]
+        slurm <- yaml::read_yaml(slurmModes)$slurmjobs
+        if(submit %in% names(slurm)) {
+          command <- slurm[submit]
           command <- gsub("%NAME", name, command)
           command <- gsub("%SCRIPT", script, command)
           message(command)
