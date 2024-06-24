@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **21_trade** refactor equations for enhanced readablility and improve documentation
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
