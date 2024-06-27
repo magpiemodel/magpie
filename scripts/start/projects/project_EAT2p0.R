@@ -56,8 +56,8 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 bau <- function(cfg) {
   ### General settings ###
   # For impacts of CC on labor:
-  cfg$gms$factor_costs <- "sticky_labor"
-  cfg$gms$labor_prod <- "exo"
+  cfg$gms$factor_costs  <- "sticky_labor"
+  cfg$gms$labor_prod    <- "exo"
   cfg$gms$c37_labor_rcp <- "rcp585"
   # Note: the effect of labor impacts is very low in MAgPIE and we don't have the
   #       Nelson data implemented. We therefore use the existing data from LAMACLIMA
@@ -65,24 +65,24 @@ bau <- function(cfg) {
 
   ### Components for Decomposition ###
   # Diets: exogenous EATLancet diet
-  cfg$gms$s15_exo_diet <- 0 # default
+  cfg$gms$s15_exo_diet     <- 0 # default
   cfg$gms$c09_pal_scenario <- "SSP2" # default
-  cfg$gms$c15_kcal_scen <- "healthy_BMI" # default (but not active b/c of s15_exo_diet = 0)
-  cfg$gms$c15_EAT_scen <- "FLX" # default (but not active b/c of s15_exo_diet = 0)
+  cfg$gms$c15_kcal_scen    <- "healthy_BMI" # default (but not active b/c of s15_exo_diet = 0)
+  cfg$gms$c15_EAT_scen     <- "FLX" # default (but not active b/c of s15_exo_diet = 0)
   # Waste: half food waste
-  cfg$gms$s15_exo_waste <- 0 # default
-  cfg$gms$s15_waste_scen <- 1.2 # default (but not active b/c of s15_exo_waste = 0)
+  cfg$gms$s15_exo_waste    <- 0 # default
+  cfg$gms$s15_waste_scen   <- 1.2 # default (but not active b/c of s15_exo_waste = 0)
   # Default interest rate (for default productivity)
   cfg$gms$s12_interest_lic <- 0.1 # default
   cfg$gms$s12_interest_hic <- 0.04 # default
   # Default livestock productivity
-  cfg$gms$c70_feed_scen <- "ssp2"
+  cfg$gms$c70_feed_scen    <- "ssp2"
   # Mitigation: no mitigation beyond NPI (NPI already set in setScenario)
-  cfg$gms$c56_emis_policy <- "redd+natveg_nosoil" # default
+  cfg$gms$c56_emis_policy  <- "redd+natveg_nosoil" # default
   cfg$path_to_report_ghgprices <- NA
   cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi" # default
   cfg$path_to_report_bioenergy <- NA
-  cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi" # default
+  cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi" # default
 
   # Climate Change
   cfg$input["cellular"] <- "rev4.109_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
@@ -135,7 +135,7 @@ miti <- function(cfg) {
   cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-4/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-4.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-4/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-4.mif"
-  cfg$gms$c60_2ndgen_biodem <- "coupling"
+  cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
 }
