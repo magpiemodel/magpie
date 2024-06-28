@@ -48,8 +48,13 @@ for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
 }
 
 write.report(report, file = mif)
+
 q <- as.quitte(report)
+# as.quitte converts "World" into "GLO". But we want to keep "World" and therefore undo these changes
 q <- droplevels(q)
+levels(q$region)[levels(q$region) == "GLO"] <- "World"
+q$region <- factor(q$region,levels = sort(levels(q$region)))
+
 if(all(is.na(q$value))) stop("No values in reporting!")
 
 saveRDS(q, file = rds, version = 2)
