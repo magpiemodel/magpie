@@ -67,6 +67,7 @@ bau <- function(cfg) {
   cfg$gms$s15_exo_diet <- 0 # default
   cfg$gms$c15_kcal_scen <- "healthy_BMI" # default (but not active b/c of s15_exo_diet = 0)
   cfg$gms$c15_EAT_scen <- "FLX" # default (but not active b/c of s15_exo_diet = 0)
+  cfg$gms$c09_pal_scenario <- "SSP2" # default
   # Waste: half food waste
   cfg$gms$s15_exo_waste <- 0 # default
   cfg$gms$s15_waste_scen <- 1.2 # default (but not active b/c of s15_exo_waste = 0)
