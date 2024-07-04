@@ -41,7 +41,7 @@ cfg$output <- c(
 )
 
 # Set path to own coupled runs:
-path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5.mif"
+path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-8/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-8.mif"
 
 
 #######################
@@ -62,6 +62,10 @@ cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
 # RCP/GCM: 7p0 shocks on crops, livestock, labor
 # Trade: BAU
 bau <- function(cfg) {
+
+  # obtain settings from default config
+  source("config/default.cfg")
+  cfg$gms$factor_costs <- "sticky_labor"
   ### Components for Decomposition ###
   # Diets: exogenous EATLancet diet
   cfg$gms$s15_exo_diet <- 0 # default
@@ -84,7 +88,7 @@ bau <- function(cfg) {
   cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi" # default
 
   # Setting REMIND scenario for blackmagicc
-  cfg$magicc_emis_scen <- "REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-5.mif"
+  cfg$magicc_emis_scen <- "REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif"
 
   return(cfg)
 }

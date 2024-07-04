@@ -54,6 +54,10 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 # RCP/GCM: 7p0 shocks on crops, livestock, labor
 # Trade: BAU
 bau <- function(cfg) {
+
+  # obtain settings from default config
+  source("config/default.cfg")
+
   ### General settings ###
   # For impacts of CC on labor:
   cfg$gms$factor_costs  <- "sticky_labor"
@@ -85,7 +89,7 @@ bau <- function(cfg) {
   cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi" # default
 
   # Climate Change
-  cfg$input["cellular"] <- "rev4.109_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input["cellular"] <- "rev4.111EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }
@@ -132,9 +136,9 @@ waste <- function(cfg) {
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C considering diet change
   # To Do: update to iteration 5!
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-4/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-4.mif"
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-8/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-8.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-4/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-4.mif"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-8/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-8.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
