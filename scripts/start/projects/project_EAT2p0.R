@@ -55,9 +55,6 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 # Trade: BAU
 bau <- function(cfg) {
 
-  # obtain settings from default config
-  source("config/default.cfg")
-
   ### General settings ###
   # For impacts of CC on labor:
   cfg$gms$factor_costs  <- "sticky_labor"
