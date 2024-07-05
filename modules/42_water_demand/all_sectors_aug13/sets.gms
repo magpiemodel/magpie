@@ -21,4 +21,7 @@ sets
   scen42_to_dev(scen42,dev) Mapping between EFP and economic development status
       / off   . (lic, mic)
         on    . (hic) /
+
+  wtype Water abstraction type 
+     / consumption, withdrawal /
 ;
