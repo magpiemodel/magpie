@@ -1,0 +1,11 @@
+;default;EL2_PHD;EL2_Demand;EL2_default
+gms$c09_pal_scenario;SSP2;SDP;SDP;SSP2
+gms$s12_interest_lic;0.1;0.06;0.1;0.1
+gms$s12_interest_hic;0.04;0.04;0.04;0.04
+gms$s15_exo_waste;0;1;1;0
+gms$s15_waste_scen;1.2;1.2;1.2;1.2
+gms$s15_exo_diet;0;3;3;0
+gms$factor_costs;per_ton_fao_may22;sticky_labor;sticky_labor;sticky_labor
+gms$c70_feed_scen;ssp2;ssp1;ssp2;ssp2
+input['cellular'];;rev4.111EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz;;
+magicc_emis_scen;;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif
