@@ -1,0 +1,11 @@
+;NGFS_o_lowdem
+gms$c15_food_scenario;SSP2
+gms$c15_food_scenario_noselect;SSP2
+gms$s15_exo_foodscen_convergence;1
+gms$s15_exo_foodscen_functional_form;1
+gms$s15_exo_foodscen_start;2020
+gms$s15_exo_foodscen_target;2050
+gms$s15_exo_waste;1
+gms$s15_waste_scen;1.2
+gms$s15_exo_diet;1
+gms$c15_kcal_scen;healthy_BMI
