@@ -439,6 +439,10 @@ p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") +
   i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
 p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_rumdairy_scp_fadeout(t,i);
 
+* Add oil and sugar needed as ingredient for MP/scp production as additional demand.
+* Based on the assumption of globally homogenous products.
+p15_kcal_pc_calibrated(t,i,"oils") = p15_kcal_pc_calibrated(t,i,"oils") + p15_kcal_pc_calibrated(t,i,"scp") * s15_unit_of_oil_per_unit_of_scp_in_kcal
+p15_kcal_pc_calibrated(t,i,"sugar") = p15_kcal_pc_calibrated(t,i,"sugar") + p15_kcal_pc_calibrated(t,i,"scp") * s15_unit_of_sugar_per_unit_of_scp_in_kcal
 
 * Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_supply_target.
 * Optional substitution with plant-based products depending on s15_livescen_target_subst.
