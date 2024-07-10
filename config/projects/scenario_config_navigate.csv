@@ -1,9 +1,0 @@
-;NAVIGATE_AllOff;NAVIGATE_LandSup;NAVIGATE_LandDem;NAVIGATE_AllOn
-gms$s15_exo_waste;0;0;1;1
-gms$s15_waste_scen;1.2;1.2;1.2;1.2
-gms$s15_exo_diet;0;0;1;1
-gms$c15_kcal_scen;healthy_BMI;healthy_BMI;healthy_BMI;healthy_BMI
-gms$c15_EAT_scen;FLX;FLX;FLX;FLX
-gms$c57_macc_version;PBL_2022;PBL_2022;PBL_2022;PBL_2022
-gms$c57_macc_scenario;Default;Optimistic;Default;Optimistic
-gms$s58_rewetting_switch;0;1;0;1
