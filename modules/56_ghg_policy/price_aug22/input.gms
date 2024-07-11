@@ -8,7 +8,8 @@
 * Set-switch for countries affected by regional ghg policy
 * Default: all iso countries selected
 sets
-  policy_countries56(iso) countries to be affected by ghg policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  policy_countries56(iso) countries to be affected by ghg policy / 
+                      ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                       ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                       BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                       BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
@@ -33,6 +34,34 @@ sets
                       TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
                       UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                       VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+  
+  fader_countries56(iso) countries to be affected by ghg policy fader / 
+                      ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+                      ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
+                      BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
+                      BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
+                      CCK,CHN,CHE,CHL,CIV,CMR,COD,COG,COK,COL,
+                      COM,CPV,CRI,CUB,CUW,CXR,CYM,CYP,CZE,DEU,
+                      DJI,DMA,DNK,DOM,DZA,ECU,EGY,ERI,ESH,ESP,
+                      EST,ETH,FIN,FJI,FLK,FRA,FRO,FSM,GAB,GBR,
+                      GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRC,
+                      GRD,GRL,GTM,GUF,GUM,GUY,HKG,HMD,HND,HRV,
+                      HTI,HUN,IDN,IMN,IND,IOT,IRL,IRN,IRQ,ISL,
+                      ISR,ITA,JAM,JEY,JOR,JPN,KAZ,KEN,KGZ,KHM,
+                      KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,
+                      LKA,LSO,LTU,LUX,LVA,MAC,MAF,MAR,MCO,MDA,
+                      MDG,MDV,MEX,MHL,MKD,MLI,MLT,MMR,MNE,MNG,
+                      MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,
+                      NCL,NER,NFK,NGA,NIC,NIU,NLD,NOR,NPL,NRU,
+                      NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,POL,
+                      PRI,PRK,PRT,PRY,PSE,PYF,QAT,REU,ROU,RUS,
+                      RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,
+                      SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SVK,SVN,
+                      SWE,SWZ,SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,
+                      TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
+                      UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
+                      VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+
 ;
 
 scalars
@@ -46,6 +75,10 @@ scalars
   s56_counter counter for C price interpolation (1) / 0 /
   s56_timesteps number of time steps for C price interpolation (1) / 0 /
   s56_offset helper for C price interpolation (1) / 0 /
+  s56_ghgprice_fader Switch for GHG policy fader (1=on 0=off) / 1 /
+  s56_fader_start start year of GHG policy fade-in (1) / 2025 /
+  s56_fader_target target year of GHG policy fade-in (1) / 2050 /
+  s56_fader_functional_form blub / 1 /
 ;
 
 $setglobal c56_pollutant_prices  R32M46-SSP2EU-NPi
