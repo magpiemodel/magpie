@@ -434,15 +434,31 @@ i15_protein_to_kcal_ratio(t,kfo) =  fm_nutrition_attributes(t,kfo,"protein")/fm_
 * using i15_protein_to_kcal_ratio(t,kfo_rd).
 * After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted
 * back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
+
+p15_kcal_pc_calibrated_scp(t,i,kfo_rd) = 
+p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) *
+  i15_protein_to_kcal_ratio(t,kfo_rd) / i15_protein_to_kcal_ratio(t,"scp");
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") +
-  sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) *
-  i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
+                   sum(kfo_rd, p15_kcal_pc_calibrated_scp(t,i,kfo_rd));
+
 p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_rumdairy_scp_fadeout(t,i);
 
-* Add oil and sugar needed as ingredient for MP/scp production as additional demand.
+* Add oil and sugar needed as ingredient for scp-based production of milk as additional demand.
 * Based on the assumption of globally homogenous products.
-p15_kcal_pc_calibrated(t,i,"oils") = p15_kcal_pc_calibrated(t,i,"oils") + p15_kcal_pc_calibrated(t,i,"scp") * s15_unit_of_oil_per_unit_of_scp_in_kcal
-p15_kcal_pc_calibrated(t,i,"sugar") = p15_kcal_pc_calibrated(t,i,"sugar") + p15_kcal_pc_calibrated(t,i,"scp") * s15_unit_of_sugar_per_unit_of_scp_in_kcal
+* Plant oil and sugar demands as ingredients for milk production using single cell protein 
+* are calculated based on the ratio of fat or sugar to protein in cow milk. 
+* This ratio is typically reported on a mass basis, but the ratio is converted here to be based on caloric content. 
+* Cow milk content is chosen as the dominant source of milk produced globally.    
+p15_kcal_pc_calibrated(t,i,"oils") = p15_kcal_pc_calibrated(t,i,"oils") 
+   + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_kcal_pc_calibrated_scp(t,i,kfo_rd)) 
+   * (s15_scp_fat_per_milk * s15_scp_fat_to_kcal) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal);
+
+*sugar
+*p15_unit_of_sugar_per_unit_of_scp_in_kcal("livst_milk") = (s15_scp_sugar_per_milk * s15_scp_sugar_to_kcal) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal);
+*p15_unit_of_sugar_per_unit_of_scp_in_kcal("livst_rum") = 0;
+p15_kcal_pc_calibrated(t,i,"sugar") = p15_kcal_pc_calibrated(t,i,"sugar") 
+   + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_kcal_pc_calibrated_scp(t,i,kfo_rd))
+   * (s15_scp_sugar_per_milk * s15_scp_sugar_to_kcal) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal);
 
 * Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_supply_target.
 * Optional substitution with plant-based products depending on s15_livescen_target_subst.
