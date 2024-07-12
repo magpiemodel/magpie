@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **21_trade** refactor equations for enhanced readablility and improve documentation
 - **script** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
+- **15_food** revision of SCP implementation for milk. Added demand for plant oil and sugar as ingredients for milk production using single cell protein.
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`

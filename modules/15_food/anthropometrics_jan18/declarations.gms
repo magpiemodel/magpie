@@ -141,7 +141,7 @@ parameters
  p15_kcal_pc_iso(t,iso,kfo)                      Per capita consumption in food demand model after price shock on country level (kcal per capita per day)
  p15_kcal_pc(t,i,kfo)                            Per capita consumption in food demand model after price shock on regional level (kcal per capita per day)
  p15_kcal_pc_calibrated(t,i,kfo)                 Calibrated per capita consumption in food demand model after price shock (kcal per capita per day)
- p15_kcal_pc_calibrated_scp(t,i,kfo_rd)
+ p15_kcal_pc_calibrated_scp(t,i,kfo_rd)          Calibrated per capita consumption of SCP in food demand model after price shock (kcal per capita per day)
  p15_kcal_pc_calibrated_orig(t,i,kfo)            Auxiliary parameter for per capita food consumption - basis for convergence into waste and diet scenarios (kcal per capita per day)
  p15_kcal_pc_calibrated_livestock_orig(t,i)      Auxiliary parameter for per capita livestock consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
  p15_kcal_pc_calibrated_rumdairy_orig(t,i)       Auxiliary parameter for per capita ruminant and dairy consumption - basis for scenarios of ruminant-based food substitution (kcal per capita per day)
@@ -181,12 +181,12 @@ parameters
 ;
 
 scalars
- s15_scp_fat_per_milk fat needed as ingredient for scp milk (mass per 100g milk) / 3.5 /
- s15_scp_sugar_per_milk sugar needed as ingredient for scp milk (mass per 100g milk) / 5 /
- s15_scp_protein_per_milk protein needed as ingredient for scp milk (mass per 100g milk) / 3.5 /
- s15_scp_fat_to_kcal conversion factor (kcal per gram of fat) / 9 /
- s15_scp_sugar_to_kcal conversion factor (kcal per gram of sugar) / 4 /
- s15_scp_protein_to_kcal conversion factor (kcal per gram of protein) / 4 /
+ s15_scp_fat_per_milk fat needed as ingredient for scp milk (mass per 100g milk) / 3.3 /
+ s15_scp_sugar_per_milk sugar needed as ingredient for scp milk (mass per 100g milk) / 4.7 /
+ s15_scp_protein_per_milk protein needed as ingredient for scp milk (mass per 100g milk) / 3.3 /
+ s15_scp_fat_to_kcal conversion factor (kcal per gram of fat) / 8.79 /
+ s15_scp_sugar_to_kcal conversion factor (kcal per gram of sugar) / 3.87 /
+ s15_scp_protein_to_kcal conversion factor (kcal per gram of protein) / 4.27 /
 ;
 
 *' @code

@@ -140,6 +140,7 @@ parameters
  p15_kcal_pc_iso_livestock_orig(t,iso)             Auxiliary parameter for per capita livestock consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
  p15_kcal_pc_iso_rumdairy_orig(t,iso)              Auxiliary parameter for per capita ruminant and dairy consumption - basis for scenarios of ruminant-based food substitution (kcal per capita per day)
  p15_kcal_pc_iso_plant_orig(t,iso)                 Auxiliary parameter for per capita plant-based food consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
+ p15_kcal_pc_iso_scp(t,iso,kfo_rd)                 Per capita consumption of SCP in food demand model after price shock on country level (kcal per capita per day)
  p15_livestock_kcal_structure_orig(t,iso,kfo_lp)   Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
  p15_rumdairy_kcal_structure_orig(t,iso,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
  p15_plant_kcal_structure_orig(t,iso,kfo_pp)       Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
@@ -183,7 +184,12 @@ parameters
 ;
 
 scalars
- s15_year          Current year as integer value (yr)  / 2000 /
+ s15_scp_fat_per_milk fat needed as ingredient for scp milk (mass per 100g milk) / 3.3 /
+ s15_scp_sugar_per_milk sugar needed as ingredient for scp milk (mass per 100g milk) / 4.7 /
+ s15_scp_protein_per_milk protein needed as ingredient for scp milk (mass per 100g milk) / 3.3 /
+ s15_scp_fat_to_kcal conversion factor (kcal per gram of fat) / 8.79 /
+ s15_scp_sugar_to_kcal conversion factor (kcal per gram of sugar) / 3.87 /
+ s15_scp_protein_to_kcal conversion factor (kcal per gram of protein) / 4.27 /
 ;
 
 
