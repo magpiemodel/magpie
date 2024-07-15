@@ -41,7 +41,7 @@ cfg$output <- c(
 )
 
 # Set path to own coupled runs:
-path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-8/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-8.mif"
+path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif"
 
 
 #######################
