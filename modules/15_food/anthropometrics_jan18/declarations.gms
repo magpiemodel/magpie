@@ -181,12 +181,12 @@ parameters
 ;
 
 scalars
- s15_scp_fat_per_milk fat needed as ingredient for scp milk (mass per 100g milk) / 3.3 /
- s15_scp_sugar_per_milk sugar needed as ingredient for scp milk (mass per 100g milk) / 4.7 /
- s15_scp_protein_per_milk protein needed as ingredient for scp milk (mass per 100g milk) / 3.3 /
- s15_scp_fat_to_kcal conversion factor (kcal per gram of fat) / 8.79 /
- s15_scp_sugar_to_kcal conversion factor (kcal per gram of sugar) / 3.87 /
- s15_scp_protein_to_kcal conversion factor (kcal per gram of protein) / 4.27 /
+ s15_scp_fat_per_milk fat needed as ingredient for scp milk (g per 100g) / 3.3 /
+ s15_scp_sugar_per_milk sugar needed as ingredient for scp milk (g per 100g) / 4.7 /
+ s15_scp_protein_per_milk protein needed as ingredient for scp milk (g per 100g) / 3.3 /
+ s15_scp_fat_to_kcal_milk conversion factor (kcal per gram of fat) / 8.79 /
+ s15_scp_sugar_to_kcal_milk conversion factor (kcal per gram of sugar) / 3.87 /
+ s15_scp_protein_to_kcal_milk conversion factor (kcal per gram of protein) / 4.27 /
 ;
 
 *' @code

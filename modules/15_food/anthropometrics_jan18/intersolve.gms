@@ -247,11 +247,11 @@ p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_ru
 *'
 p15_kcal_pc_calibrated(t,i,"oils") = p15_kcal_pc_calibrated(t,i,"oils") 
    + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_kcal_pc_calibrated_scp(t,i,kfo_rd)) 
-   * (s15_scp_fat_per_milk * s15_scp_fat_to_kcal) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal);
+   * (s15_scp_fat_per_milk * s15_scp_fat_to_kcal_milk) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal_milk);
 *'
 p15_kcal_pc_calibrated(t,i,"sugar") = p15_kcal_pc_calibrated(t,i,"sugar") 
    + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_kcal_pc_calibrated_scp(t,i,kfo_rd))
-   * (s15_scp_sugar_per_milk * s15_scp_sugar_to_kcal) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal);
+   * (s15_scp_sugar_per_milk * s15_scp_sugar_to_kcal_milk) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal_milk);
 *'
 *' @stop
 
