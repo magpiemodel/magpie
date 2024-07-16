@@ -232,26 +232,25 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
 i15_protein_to_kcal_ratio(t,kfo) = fm_nutrition_attributes(t,kfo,"protein") / fm_nutrition_attributes(t,kfo,"kcal");
 *'
 *' Increase of single-cell protein (SCP):
-p15_kcal_pc_calibrated_scp(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) *
-                                         i15_protein_to_kcal_ratio(t,kfo_rd) / i15_protein_to_kcal_ratio(t,"scp");
-p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") + sum(kfo_rd, p15_kcal_pc_calibrated_scp(t,i,kfo_rd));
+p15_protein_pc_scp(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) * i15_protein_to_kcal_ratio(t,kfo_rd);
+p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") + sum(kfo_rd, p15_protein_pc_scp(t,i,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
 *'
 *' Reduction of ruminant meat and dairy products (kfo_rd):
 p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_rumdairy_scp_fadeout(t,i);
 *'
-*' Plant oil and sugar demands as ingredients for milk production using single cell protein 
+*' Plant oil and sugar demands as ingredients for animal-free milk alternative production using single cell protein 
 *' are calculated based on the ratio of fat or sugar to protein in cow milk. 
 *' This ratio is typically reported on a mass basis, but the ratio is converted here to be based on caloric content. 
 *' Cow milk content is chosen as the dominant source of milk produced globally.
 *' Data sources: @muehlhoff_milk_2013 and @fao_food_2004
 *'
 p15_kcal_pc_calibrated(t,i,"oils") = p15_kcal_pc_calibrated(t,i,"oils") 
-   + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_kcal_pc_calibrated_scp(t,i,kfo_rd)) 
-   * (s15_scp_fat_per_milk * s15_scp_fat_to_kcal_milk) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal_milk);
+   + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_protein_pc_scp(t,i,kfo_rd)) / 
+     s15_scp_protein_per_milk * s15_scp_fat_per_milk * fm_nutrition_attributes(t,"oils", "kcal");
 *'
 p15_kcal_pc_calibrated(t,i,"sugar") = p15_kcal_pc_calibrated(t,i,"sugar") 
-   + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_kcal_pc_calibrated_scp(t,i,kfo_rd))
-   * (s15_scp_sugar_per_milk * s15_scp_sugar_to_kcal_milk) / (s15_scp_protein_per_milk * s15_scp_protein_to_kcal_milk);
+   + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_protein_pc_scp(t,i,kfo_rd)) / 
+     s15_scp_protein_per_milk * s15_scp_sugar_per_milk * fm_nutrition_attributes(t, "sugar" ,"kcal");
 *'
 *' @stop
 
