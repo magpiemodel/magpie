@@ -47,7 +47,9 @@ path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remin
 #######################
 # SCENARIO DEFINITION #
 #######################
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
+
 # Note: The climate change impacts setting differs from the global AgMIP model comparision set-up.
 #       We do not include climate change impacts in the coupled REMIND-MAgPIE runs for the PB Deep Dive
 #       because we focus exclusively on the mitigation aspect without climate change impacts.
@@ -163,14 +165,16 @@ priceNonCO2 <- function(cfg) {
 # BAU #
 # Business as usual scenario based on SSP2 (NPis)
 cfg$title <- "BAU_NPi"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # (1b) BAU + Bioenergy #
 # Decomposition Scenario. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "BAU_Bioenergy"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 cfg <- bau(cfg = cfg)
 cfg <- bioenergy(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -178,7 +182,8 @@ start_run(cfg, codeCheck = FALSE)
 # (1c) BAU + NonCO2 pricing in land sector #
 # Decomposition Scenario. Adds non-CO2 pricing with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "BAU_NonCO2"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 cfg <- bau(cfg = cfg)
 cfg <- priceNonCO2(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -186,7 +191,8 @@ start_run(cfg, codeCheck = FALSE)
 # (1d) BAU + pricing of CO2 in land sector #
 # Decomposition Scenario. Adds CO2 pricing on land-use change emissions with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "BAU_CO2"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 cfg <- bau(cfg = cfg)
 cfg <- priceCO2(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -195,7 +201,8 @@ start_run(cfg, codeCheck = FALSE)
 # All production-side land-based mitigation measures
 cfg$title <- "BAU_Miti"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
@@ -206,7 +213,8 @@ start_run(cfg, codeCheck = FALSE)
 # (1e) CO2 and non-CO2 pricing, but no bioenergy demand from REMIND
 cfg$title <- "BAUMITI_Bioenergy"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -220,7 +228,8 @@ start_run(cfg, codeCheck = FALSE)
 # (1f) CO2 pricing and bioenergy demand from REMIND, but no non-CO2 pricing in land-system
 cfg$title <- "BAUMITI_nonCO2"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -234,7 +243,8 @@ start_run(cfg, codeCheck = FALSE)
 # (1g) non-CO2 pricing and bioenergy demand from REMIND, but no CO2 pricing in land-system
 cfg$title <- "BAUMITI_CO2"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -246,7 +256,8 @@ start_run(cfg, codeCheck = FALSE)
 
 # (1e,f,g) Demand-side options (Diet+Waste) by 2050
 cfg$title <- "BAU_Dem"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- waste(cfg = cfg)
@@ -256,7 +267,8 @@ start_run(cfg, codeCheck = FALSE)
 # (2b) CO2 and non-CO2 pricing and demand-side mitigation (diet change), but no bioenergy demand from REMIND
 cfg$title <- "MITI_Bioenergy"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -272,7 +284,8 @@ start_run(cfg, codeCheck = FALSE)
 # (2c) CO2 pricing and bioenergy demand from REMIND and demand-side mitigation (diet change), but no non-CO2 pricing in land-system
 cfg$title <- "MITI_nonCO2"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -289,7 +302,8 @@ start_run(cfg, codeCheck = FALSE)
 # (2d) non-CO2 pricing and bioenergy demand from REMIND and demand-side mitigation (diet change), but no CO2 pricing in land-system
 cfg$title <- "MITI_CO2"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -306,7 +320,8 @@ start_run(cfg, codeCheck = FALSE)
 # (2e,f,g) All production-side land-based mitigation measures, but no demand-side mitigation
 cfg$title <- "MITI_Dem"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation
@@ -317,7 +332,8 @@ start_run(cfg, codeCheck = FALSE)
 # (3b) Demand-side change + Bioenergy #
 # Decomposition Scenario with demand-side changes. Adds bioenergy demand from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "DEM_Bioenergy"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 cfg <- bau(cfg = cfg)
 cfg <- bioenergy(cfg = cfg)
 # Demand-side change (diet, waste)
@@ -328,7 +344,8 @@ start_run(cfg, codeCheck = FALSE)
 # (3c) Demand-side + NonCO2 pricing in land sector #
 # Decomposition Scenario with demand-side changes. Adds non-CO2 pricing with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "DEM_NonCO2"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 cfg <- bau(cfg = cfg)
 cfg <- priceNonCO2(cfg = cfg)
 # Demand-side change (diet, waste)
@@ -339,7 +356,8 @@ start_run(cfg, codeCheck = FALSE)
 # (3d) Demand-side + pricing of CO2 in land sector #
 # Decomposition Scenario with demand-side changes. Adds CO2 pricing on land-use change emissions with ghg price from coupled run with land-use policies consistent with 1.5C by 2050 to BAU
 cfg$title <- "DEM_CO2"
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 cfg <- bau(cfg = cfg)
 cfg <- priceCO2(cfg = cfg)
 # Demand-side change (diet, waste)
@@ -352,7 +370,8 @@ start_run(cfg, codeCheck = FALSE)
 # All production-side land-based mitigation measures and demand-side mitigation (diet change)
 cfg$title <- "MITI_All"
 # standard setting, but with NDC for miti
-cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI", "EL2_default"))
+cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # BAU settings
 cfg <- bau(cfg = cfg)
 # Mitigation (CO2, non-CO2, bioenergy)
