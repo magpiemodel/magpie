@@ -153,7 +153,7 @@ p15_kcal_pc_iso(t,iso,"sugar") = p15_kcal_pc_iso(t,iso,"sugar")
 *' fat to protein ratio. It is also assumed, unlike for microbial milk, that additional carbohydrates 
 *' (e.g., sugar) are not required for alternative microbial meats. This is because meat products contain 
 *' very little or no carbohydrates. 
-*' Data sources: @mazac_novelfoods_2022 and @jarvio_LCA_MP_2021
+*' Data sources: @mazac_novelfoods_2023 and @jarvio_LCA_MP_2021
 *' 
 p15_kcal_pc_iso(t,iso,"oils")$(s15_scp_supplement_fat_meat = 1) = p15_kcal_pc_iso(t,iso,"oils") 
    + sum(kfo_rd$sameas(kfo_rd,"livst_rum"), p15_protein_pc_iso_scp(t,iso,kfo_rd)) / 
