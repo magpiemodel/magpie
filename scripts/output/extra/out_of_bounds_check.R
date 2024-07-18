@@ -7,7 +7,7 @@
 
 # --------------------------------------------------------------
 # description: checks variables for constraint violations
-# comparison script: TRUE
+# comparison script: FALSE
 # ---------------------------------------------------------------
 
 #########################
@@ -17,7 +17,7 @@
 #
 library(gdx)
 library(lucode2)
-library(magpie4)
+library(magclass)
 
 options(error=function()traceback(2))
 
@@ -30,8 +30,6 @@ if(!exists("source_include")) {
 ###############################################################################
 cat("\nStarting output generation\n")
 
-out <- NULL
-missing <- NULL
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
@@ -43,14 +41,12 @@ for (i in 1:length(outputdir)) {
       try(z <- where(x[[i]][,,"level"] < x[[i]][,,"lower"] | x[[i]][,,"level"] > x[[i]][,,"upper"])$true, silent = TRUE)
       if(exists("z")) {
         if (length(z$individual) > 0) {
-          #print(x[[i]][z$regions,z$years,])
           for (r in z$regions) {
             for (y in z$years) {
               print(paste(i,r,y))
               print(x[[i]][r,y,])
             }
           }
-          #print(x[[i]][z$regions,z$years,])
         }
         rm(z)
       }
