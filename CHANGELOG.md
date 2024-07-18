@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **21_trade** refactor equations for enhanced readablility and improve documentation
 - **script** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
+- **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
