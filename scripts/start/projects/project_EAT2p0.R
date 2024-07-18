@@ -55,9 +55,6 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 # Trade: BAU
 bau <- function(cfg) {
 
-  # time steps until 2150
-  gms$c_timesteps <- "less_TS"
-
   # for feasibility
   cfg$gms$s80_optfile <- 1
 
