@@ -15,7 +15,7 @@ parameters
  p56_region_fader_shr(t_all,i)                    GHG policy fader share of the region (1)
  p56_country_dummy2(iso)                          Dummy parameter indicating whether country is affected by selected GHG policy fader (1)
  p56_fader(t_all)                                 GHG policy fader (1)
- p56_fader_reg(t_all,i)                                 GHG policy fader (1)
+ p56_fader_reg(t_all,i)                           Regional GHG policy fader (1)
 ;
 
 equations
