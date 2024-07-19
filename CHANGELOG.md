@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **70_livestock** added realization `fbask_jan16_sticky`
 - **script** check of variables needed in piamInterfaces in report_rds.R
 - **42_water_demand** added water abstraction type dimension for non-ag uses
+- **56_ghg_policy** added optional temporal and regional fader for GHG emission pricing policy
 
 ### removed
 -
