@@ -578,6 +578,7 @@ getReportData <- function(path_to_report_bioenergy, path_to_report_ghgprices = N
   }
 
   .readAndPrepare <- function(mifPath) {
+    require(magclass)
     rep <- read.report(mifPath, as.list = FALSE)
     if (length(getNames(rep, dim = "scenario")) != 1) stop("getReportData: report contains more or less than 1 scenario.")
     mag <- collapseNames(rep) # get rid of scenario and model dimension if they exist
