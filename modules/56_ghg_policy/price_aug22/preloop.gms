@@ -69,14 +69,14 @@ im_pollutant_prices(t_all,i,"co2_c",emis_source) = im_pollutant_prices(t_all,i,"
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i);
 
 if (s56_fader_functional_form = 1,
-  m_linear_time_interpol(p56_fader,s56_fader_start,s56_fader_target,0,1);
+  m_linear_time_interpol(p56_fader,s56_fader_start,s56_fader_target,0,s56_fader_target);
 elseif s56_fader_functional_form = 2,
-  m_sigmoid_time_interpol(p56_fader,s56_fader_start,s56_fader_target,0,1);
+  m_sigmoid_time_interpol(p56_fader,s56_fader_start,s56_fader_target,0,s56_fader_target);
 );
 
 ***build and apply temporal fader for GHG policy
 p56_fader_reg(t_all,i) = p56_fader(t_all) * p56_region_fader_shr(t_all,i) + p56_fader(t_all) * (1-p56_region_fader_shr(t_all,i));
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_fader = 1) = im_pollutant_prices(t_all,i,pollutants,emis_source) * p56_fader_reg(t_all,i);
+im_pollutant_prices(t_all,i,pollutants_fader,emis_source)$(s56_ghgprice_fader = 1) = im_pollutant_prices(t_all,i,pollutants_fader,emis_source) * p56_fader_reg(t_all,i);
 
 ***GHG emission policy
 im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);
