@@ -76,9 +76,9 @@ scalars
   s56_timesteps number of time steps for C price interpolation (1) / 0 /
   s56_offset helper for C price interpolation (1) / 0 /
   s56_ghgprice_fader Switch for GHG policy fader (1=on 0=off) / 1 /
-  s56_fader_start start year of GHG policy fade-in (1) / 2025 /
+  s56_fader_start start year of GHG policy fade-in (1) / 2030 /
   s56_fader_target target year of GHG policy fade-in (1) / 2050 /
-  s56_fader_functional_form blub / 1 /
+  s56_fader_functional_form Switch for functional form of GHG policy fader (1=linear 2=sigmoid) / 1 /
 ;
 
 $setglobal c56_pollutant_prices  R32M46-SSP2EU-NPi
