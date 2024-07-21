@@ -57,4 +57,17 @@ p58_scalingFactorRed(t,j,manPeat58) =
     $(pc58_peatland(j,manPeat58) > 1e-10 AND pc58_manLand(j,manPeat58) > 1e-10)
     + 0$(pc58_peatland(j,manPeat58) <= 1e-10 OR pc58_manLand(j,manPeat58) <= 1e-10);
 
+*' Peatland scaling factor for expansion: maxPeatland-manPeatland / maxLand-manLand = availPeatlandExp / availLandExp
+*' See macro `m58_LandLeft` for details.
+
+p58_avail_peatland_exp2(t,j) = sum(land58, pc58_peatland(j,land58)) - sum(manPeat58, pc58_peatland(j,manPeat58));
+p58_avail_land_exp2(t,j) = sum(land, pcm_land(j,land)) - sum(manPeat58, pc58_manLand(j,manPeat58));
+
+p58_scalingFactorExp(t,j) = 
+    (p58_avail_peatland_exp2(t,j) / p58_avail_land_exp2(t,j))
+    $(p58_avail_peatland_exp2(t,j) > 1e-10 AND p58_avail_land_exp2(t,j) > 1e-10)
+    + 0$(p58_avail_peatland_exp2(t,j) <= 1e-10 OR p58_avail_land_exp2(t,j) <= 1e-10);
+p58_scalingFactorExp(t,j)$(p58_scalingFactorExp(t,j) > 1) = 1; 
+
+
 *' @stop
