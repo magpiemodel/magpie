@@ -60,10 +60,15 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  vm_land_forestry(j2,type32) =e= sum(ac, v32_land(j2,type32,ac));
 
  q32_land_expansion_forestry(j2,type32) ..
- vm_landexpansion_forestry(j2,type32) =e= v32_land_expansion(j2,type32);
+ vm_landexpansion_forestry(j2,type32) =e= v32_land_expansion(j2,type32) - (v32_land_replant(j2))$sameas(type32,"plant");
 
  q32_land_reduction_forestry(j2,type32) ..
- vm_landreduction_forestry(j2,type32) =e= sum(ac_sub, v32_land_reduction(j2,type32,ac_sub));
+ vm_landreduction_forestry(j2,type32) =e= sum(ac_sub, v32_land_reduction(j2,type32,ac_sub)) - (v32_land_replant(j2))$sameas(type32,"plant");
+
+ q32_land_replant(j2) ..
+  v32_land_replant(j2)
+  =e=
+  sum(ac_sub, v32_hvarea_forestry(j2,ac_sub)) * sum(cell(i2,j2), min(1, sum(ct, p32_future_to_current_demand_ratio(ct,i2))))$s32_establishment_dynamic;
 
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 

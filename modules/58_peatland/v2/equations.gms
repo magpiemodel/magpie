@@ -15,7 +15,7 @@
 *' Peatland area change:
 
  q58_peatlandChange(j2,land58) ..
-        v58_peatlandChange(j2,land58) =e= v58_peatland(j2,land58)-pc58_peatland(j2,land58);
+  v58_peatlandChange(j2,land58) =e= v58_peatland(j2,land58)-pc58_peatland(j2,land58);
  
 *' Managed land area:
 
@@ -39,18 +39,16 @@
 *' In case managed land remains unchanged, also managed peatland remains unchanged. 
 
  q58_peatlandMan(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
-  v58_peatland(j2,manPeat58) =e= 
+  v58_peatland(j2,manPeat58) =g= 
     pc58_peatland(j2,manPeat58) 
-    + v58_manLandExp(j2,manPeat58) * sum(ct, p58_scalingFactorExp(ct,j2)); 
-    - v58_manLandRed(j2,manPeat58) * sum(ct, p58_scalingFactorRed(ct,j2,manPeat58)); 
+    + v58_manLandExp(j2,manPeat58) * sum(ct, p58_scalingFactorExp(ct,j2)) - v58_balance(j2,manPeat58)
+    - v58_manLandRed(j2,manPeat58) * sum(ct, p58_scalingFactorRed(ct,j2)); 
+
+ q58_peatlandMan2(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
+  v58_peatland(j2,manPeat58) =l= v58_manLand(j2,manPeat58);
 
 *' Peatland scaling factor for expansion: (maxPeatland - totalManagedPeatland) / (maxLand - totalManagedLand). 
 *' See macro `m58_LandLeft` for details.
-
-q58_scalingFactorExp(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
-  v58_scalingFactorExp(j2,manPeat58) * m58_LandLeft(pcm_land,"land",v58_manLand,pc58_manLand) + v58_balance(j2,manPeat58)
-  =e= 
-  m58_LandLeft(pc58_peatland,"land58",v58_peatland,pc58_peatland);
 
 *' Costs for peatland degradation and rewetting
 

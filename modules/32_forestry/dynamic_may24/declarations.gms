@@ -73,6 +73,7 @@ positive variables
  vm_landreduction_forestry(j,type32)                Forestry land reduction (mio. ha)
  vm_land_forestry(j,type32)                         Forestry land pools (mio. ha)
  v32_prod_forestry_future(i)                        Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
+ v32_land_replant(j)                                Harvested and replanted area in timber plantations (mio. ha)
 ;
 
 variables
@@ -108,6 +109,7 @@ equations
  q32_bv_plant(j,potnatveg)                         Biodiversity value for plantations (Mha)
  q32_land_expansion_forestry(j,type32)             Forestry land expansion (mio. ha)
  q32_land_reduction_forestry(j,type32)             Forestry land reduction (mio. ha)
+ q32_land_replant(j)                               Harvested and replanted area in timber plantations (mio. ha)
 ;
 
 
@@ -128,6 +130,7 @@ parameters
  ov_landreduction_forestry(t,j,type32,type)    Forestry land reduction (mio. ha)
  ov_land_forestry(t,j,type32,type)             Forestry land pools (mio. ha)
  ov32_prod_forestry_future(t,i,type)           Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
+ ov32_land_replant(t,j,type)                   Harvested and replanted area in timber plantations (mio. ha)
  ov_cdr_aff(t,j,ac,aff_effect,type)            Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_total(t,i,type)                     Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                           Land constraint (mio. ha)
@@ -157,5 +160,6 @@ parameters
  oq32_bv_plant(t,j,potnatveg,type)             Biodiversity value for plantations (Mha)
  oq32_land_expansion_forestry(t,j,type32,type) Forestry land expansion (mio. ha)
  oq32_land_reduction_forestry(t,j,type32,type) Forestry land reduction (mio. ha)
+ oq32_land_replant(t,j,type)                   Harvested and replanted area in timber plantations (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
