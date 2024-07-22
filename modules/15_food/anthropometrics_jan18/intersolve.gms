@@ -274,7 +274,7 @@ p15_kcal_pc_calibrated(t,i,"sugar") = p15_kcal_pc_calibrated(t,i,"sugar")
 p15_kcal_pc_calibrated(t,i,"oils")$(s15_scp_supplement_fat_meat = 1) = p15_kcal_pc_calibrated(t,i,"oils") 
    + sum(kfo_rd$sameas(kfo_rd,"livst_rum"), p15_protein_pc_scp(t,i,kfo_rd)) / 
      fm_nutrition_attributes(t,"scp", "protein") * (fm_nutrition_attributes(t,"scp", "protein") * 
-     s15_scp_fat_protein_ratio_meat - s15_scp_fat_per_meat) * fm_nutrition_attributes(t,"oils", "kcal");
+     s15_scp_fat_protein_ratio_meat - s15_scp_fat_content) * fm_nutrition_attributes(t,"oils", "kcal");
 *' 
 *' @stop
 

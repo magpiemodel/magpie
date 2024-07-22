@@ -184,7 +184,7 @@ scalars
  s15_scp_fat_per_milk               Fat needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 3.3 /
  s15_scp_sugar_per_milk             Sugar needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 4.7 /
  s15_scp_protein_per_milk           Protein needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 3.3 /
- s15_scp_fat_per_meat               Fat content of microbial biomass based on Solein from Solar foods (t fat per t DM) / 0.05 /
+ s15_scp_fat_content                Fat content of microbial biomass based on Solein from Solar foods (t fat per t DM) / 0.05 /
  s15_scp_fat_protein_ratio_meat     Ratio of protein to fat in both plant based meat alternatives and current meat products (t fat per t protein) / 0.66 /
 ;
 
