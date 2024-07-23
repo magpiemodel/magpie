@@ -16,8 +16,8 @@ parameters
  i58_cost_drain_recur(t)             Recurring costs for drained and managed peatlands (USD05MER per ha)
  i58_cost_drain_intact_onetime(t)    One-time costs for drainage of intact peatland (USD05MER per ha)
  i58_cost_drain_rewet_onetime(t)     One-time costs for drainage of rewetted peatland (USD05MER per ha)
- p58_avail_peatland_exp(t,j)         Available peatland for expansion (mio. ha)
- p58_avail_land_exp(t,j)             Available land for expansion (mio. ha)
+ p58_availPeatlandExp(t,j)           Available area for expansion of drained peatland (mio. ha)
+ p58_availLandExp(t,j)               Available area for expansion of managed land (mio. ha)
 ;
 
 equations

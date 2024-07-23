@@ -47,26 +47,27 @@ else
 );
 
 *' @code
+*' Peatland scaling factor for expansion: (totalPeatland - manPeatland) / (totalLand - manLand) 
+*' 
+*' p58_availPeatlandExp = totalPeatland - manPeatland
+*' 
+*' p58_availLandExp = totalLand - manLand
+
+p58_availPeatlandExp(t,j) = sum(land58, pc58_peatland(j,land58)) - sum(manPeat58, pc58_peatland(j,manPeat58));
+p58_availLandExp(t,j) = sum(land, pcm_land(j,land)) - sum(manPeat58, pc58_manLand(j,manPeat58));
+
+p58_scalingFactorExp(t,j) = 
+    (p58_availPeatlandExp(t,j) / p58_availLandExp(t,j))
+    $(p58_availPeatlandExp(t,j) > 1e-10 AND p58_availLandExp(t,j) > 1e-10)
+    + 0$(p58_availPeatlandExp(t,j) <= 1e-10 OR p58_availLandExp(t,j) <= 1e-10);
+p58_scalingFactorExp(t,j)$(p58_scalingFactorExp(t,j) > 1) = 1; 
+
 *' Peatland scaling factor for reduction: manPeatland / totalPeatland
 
 p58_scalingFactorRed(t,j) = 
     (sum(manPeat58, pc58_peatland(j,manPeat58)) / sum(land58, pc58_peatland(j,land58)))
     $(sum(manPeat58, pc58_peatland(j,manPeat58)) > 1e-10 AND sum(land58, pc58_peatland(j,land58)) > 1e-10)
-    + 0$(sum(land58, pc58_peatland(j,land58)) <= 1e-10)
-    + 1$(sum(manPeat58, pc58_manLand(j,manPeat58)) <= 1e-10);
+    + 0$(sum(land58, pc58_peatland(j,land58)) <= 1e-10 OR sum(manPeat58, pc58_manLand(j,manPeat58)) <= 1e-10);
 p58_scalingFactorRed(t,j)$(p58_scalingFactorRed(t,j) > 1) = 1; 
-
-
-*' Peatland scaling factor for expansion: totalPeatland-manPeatland / totalLand-manLand = availPeatlandExp / availLandExp
-
-p58_avail_peatland_exp(t,j) = sum(land58, pc58_peatland(j,land58)) - sum(manPeat58, pc58_peatland(j,manPeat58));
-p58_avail_land_exp(t,j) = sum(land, pcm_land(j,land)) - sum(manPeat58, pc58_manLand(j,manPeat58));
-
-p58_scalingFactorExp(t,j) = 
-    (p58_avail_peatland_exp(t,j) / p58_avail_land_exp(t,j))
-    $(p58_avail_peatland_exp(t,j) > 1e-10 AND p58_avail_land_exp(t,j) > 1e-10)
-    + 0$(p58_avail_peatland_exp(t,j) <= 1e-10 OR p58_avail_land_exp(t,j) <= 1e-10);
-p58_scalingFactorExp(t,j)$(p58_scalingFactorExp(t,j) > 1) = 1; 
-
 
 *' @stop

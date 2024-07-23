@@ -16,10 +16,15 @@
 *' In this realisation, peatland GHG emission factors for boreal and tropical climates are based on @IPCC_wetland_2013 and @wilson_2016.
 *' Peatland GHG emission factors for temperate climates are based on more recent estimates from @tiemeyer_peatland_2020. 
 *' Assumed rules for changes in peatland area: 
+*' 
 *' Sum over total peatland area (degraded, intact, rewetted) is assumed constant. 
+*' 
 *' Intact peatland area can only decrease. 
+*' 
 *' Degraded peatland area (crop, past, forestry and unused) depends on managed land. 
+*' 
 *' Area for peat extraction (peatExtract) is fixed. 
+*' 
 *' Rewetted and intact peatland have the same GHG emission factors, which avoids that intact is converted to rewetted peatland area.
 *' @stop
 

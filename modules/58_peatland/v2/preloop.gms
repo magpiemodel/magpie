@@ -17,5 +17,3 @@ pc58_peatland(j,land58) = 0;
 * For the internal GHG emission pricing it is assumed that intact peatlands have the same GHG emission factors as rewetted peatlands.
 * Without this assumption, GHG emissions of intact peatlands would be zero (no data available). This can lead to cases where intact peatland is converted to rewetted peatland.
 f58_ipcc_wetland_ef(clcl58,"intact",emis58) = f58_ipcc_wetland_ef(clcl58,"rewetted",emis58);
-
-*v58_balance.fx(j,manPeat58) = 0;
