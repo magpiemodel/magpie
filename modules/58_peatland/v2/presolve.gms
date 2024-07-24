@@ -49,9 +49,8 @@ else
 *' @code
 *' Peatland scaling factor for expansion: (totalPeatland - manPeatland) / (totalLand - manLand) 
 *' 
-*' p58_availPeatlandExp = totalPeatland - manPeatland
-*' 
-*' p58_availLandExp = totalLand - manLand
+*'   * p58_availPeatlandExp = totalPeatland - manPeatland
+*'   * p58_availLandExp = totalLand - manLand
 
 p58_availPeatlandExp(t,j) = sum(land58, pc58_peatland(j,land58)) - sum(manPeat58, pc58_peatland(j,manPeat58));
 p58_availLandExp(t,j) = sum(land, pcm_land(j,land)) - sum(manPeat58, pc58_manLand(j,manPeat58));
