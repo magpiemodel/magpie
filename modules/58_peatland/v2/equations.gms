@@ -43,10 +43,10 @@
 *' In case managed land remains unchanged, also drained peatland remains unchanged. 
 
  q58_peatlandMan(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
-  v58_peatland(j2,manPeat58) =g= 
+  v58_peatland(j2,manPeat58) =e= 
     pc58_peatland(j2,manPeat58) 
     + v58_manLandExp(j2,manPeat58) * sum(ct, p58_scalingFactorExp(ct,j2)) - v58_balance(j2,manPeat58)
-    - v58_manLandRed(j2,manPeat58) * sum(ct, p58_scalingFactorRed(ct,j2)); 
+    - v58_manLandRed(j2,manPeat58) * sum(ct, p58_scalingFactorRed(ct,j2,manPeat58)) + v58_balance2(j2,manPeat58);
 
 *' Drained peatland used for agriculture and forestry cannot exceed corresponding managed land.
 
@@ -59,7 +59,7 @@
   vm_peatland_cost(j2) =e= sum(cost58, v58_peatland_cost_annuity(j2,cost58))
               + v58_peatland(j2,"rewetted") * sum(ct, i58_cost_rewet_recur(ct))
               + sum(manPeat58, v58_peatland(j2,manPeat58)) * sum(ct, i58_cost_drain_recur(ct))
-              + sum(manPeat58, v58_balance(j2,manPeat58)) * s58_balance_penalty;
+              + sum(manPeat58, v58_balance(j2,manPeat58)+v58_balance2(j2,manPeat58)) * s58_balance_penalty;
 
  q58_peatland_cost_annuity(j2,cost58) ..
   v58_peatland_cost_annuity(j2,cost58) =g=

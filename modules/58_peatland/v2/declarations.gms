@@ -9,7 +9,7 @@ parameters
  pc58_peatland(j,land58)             Peatland area (mio. ha)
  pc58_manLand(j,manPeat58)           Managed land area (mio. ha)
  p58_scalingFactorExp(t,j)           Scaling factor for peatland expansion (1)
- p58_scalingFactorRed(t,j)           Scaling factor for peatland reduction (1)
+ p58_scalingFactorRed(t,j,manPeat58) Scaling factor for peatland reduction (1)
  p58_mapping_cell_climate(j,clcl58)  Mapping between cells and climate regions (binary)
  i58_cost_rewet_recur(t)             Recurring costs for rewetted peatland (USD05MER per ha)
  i58_cost_rewet_onetime(t)           One-time costs for peatland rewetting (USD05MER per ha)
@@ -46,6 +46,7 @@ positive variables
  v58_manLandExp(j,manPeat58)       Managed land area expansion (mio. ha)
  v58_manLandRed(j,manPeat58)       Managed land area reduction (mio. ha)
  v58_balance(j,manPeat58)          Technical balance term for peatland scaling factor (1)
+ v58_balance2(j,manPeat58)          Technical balance term for peatland scaling factor (1)
  v58_peatland_cost_annuity(j,cost58) Annuity costs for peatland conversion in the current timestep (mio. USD05MER per yr)
 ;
 
@@ -59,6 +60,7 @@ parameters
  ov58_manLandExp(t,j,manPeat58,type)               Managed land area expansion (mio. ha)
  ov58_manLandRed(t,j,manPeat58,type)               Managed land area reduction (mio. ha)
  ov58_balance(t,j,manPeat58,type)                  Technical balance term for peatland scaling factor (1)
+ ov58_balance2(t,j,manPeat58,type)                 Technical balance term for peatland scaling factor (1)
  ov58_peatland_cost_annuity(t,j,cost58,type)       Annuity costs for peatland conversion in the current timestep (mio. USD05MER per yr)
  oq58_peatland(t,j,type)                           Constraint for total peatland area (mio. ha)
  oq58_peatlandChange(t,j,land58,type)              Peatland area change (mio. ha)
