@@ -82,9 +82,9 @@ parameters
  p15_livestock_threshold_subst_fader(t_all)        Fader for livestock threshold target (1)
  p15_exo_food_scenario_fader(t_all)                Exogenous diet scenario fader (1)
 
-*prices
- p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
- i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
+* prices
+  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
+  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
   o15_bmi_shr(t,iso,sex,age,bmi_group15)           Calibrated estimates BMI share for population groups  (1)
@@ -118,12 +118,12 @@ parameters
   i15_rumdairy_scp_fadeout(t,i)                    Ruminant meat and dairy fadeout share to be replaced by SCP (1)
   i15_livestock_fadeout_threshold(t,i)             Livestock fadeout share for threshold (1)
 
-  i15_protein_to_kcal_ratio(t,kfo)           protein-to-kcal ratio (g protein per kcal)
+  i15_protein_to_kcal_ratio(t,kfo)                 Protein-to-kcal ratio (g protein per kcal)
 
- i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
- i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
- i15_livestock_kcal_structure_iso(t,iso,kfo_ap)      Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
- i15_processed_kcal_structure_iso                    Share of single processed products within total processed food (1)
+  i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
+  i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
+  i15_livestock_kcal_structure_iso(t,iso,kfo_ap)      Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
+  i15_processed_kcal_structure_iso(t,iso,kfo_pf)      Share of single processed products within total processed food (1)
 
 * diet calibration
   p15_kcal_calib(t,iso,kfo)                   Balance flow to diverge from mean calories of regressions (kcal per cap per day)
