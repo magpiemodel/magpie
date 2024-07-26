@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **15_food** revision of MP/SCP implementation for milk and meat alternatives. Added demand for fat and sugar as ingredients for MP-based milk alternatives. Added optional demand for fat as ingredient for MP-based meat alternatives.
 - **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
 - **80_optimization** abort GAMS in case of execution errors
+- **script** updated EATLancet project start scripts
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
@@ -26,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
+- **15_food** fixing parameter declaration of i15_processed_kcal_structure_iso
 
 
 ## [4.8.1] - 2024-06-19
