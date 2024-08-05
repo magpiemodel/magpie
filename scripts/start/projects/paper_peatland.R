@@ -12,7 +12,7 @@
 
 library(gms)
 library(magclass)
-library(gdx)
+library(gdx2)
 library(luscale)
 library(magpie4)
 
