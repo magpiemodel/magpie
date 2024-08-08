@@ -17,7 +17,7 @@ version <- "V13"
 
 library(lucode2)
 library(magclass)
-library(gdx)
+library(gdx2)
 library(magpie4)
 library(gms)
 

@@ -18,7 +18,7 @@
 library(lucode2)
 library(magpie4)
 library(luscale)
-
+library(gdx2)
 library(luplot)
 library(ggplot2)
 library(luscale)
