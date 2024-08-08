@@ -9,19 +9,4 @@
 # description: Downscale MAgPIE results to 0.25 degree resolution in LUH2 format for ESMs
 # comparison script: FALSE
 # ------------------------------------------------------------------------------------------------
-library(mrdownscale)
-
-outputdir <- normalizePath(outputdir)
-
-clustermap <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
-gdx <- file.path(outputdir, "fulldata.gdx")
-stopifnot(file.exists(gdx), length(clustermap) == 1)
-
-scenario <- gsub("_", "-", sub("-mag-[0-9]+$", "", basename(outputdir)))
-
-local({ # redirectSource is local by default, running it in the global environment does not work
-  redirectSource("MagpieFulldataGdx", c(clustermap, gdx), linkOthers = FALSE)
-  stopifnot(length(getConfig("redirections")) >= 1)
-  retrieveData("ESM", rev = format(Sys.time(), "%Y-%m-%d"), scenario = scenario, progress = FALSE,
-               outputfolder = outputdir)
-})
+mrdownscale::downscaleRunESM(outputdir)
