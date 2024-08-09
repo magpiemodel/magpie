@@ -9,4 +9,5 @@
 # description: Downscale MAgPIE results to 0.25 degree resolution in LUH2 format for ESMs
 # comparison script: FALSE
 # ------------------------------------------------------------------------------------------------
-mrdownscale::downscaleRunESM(outputdir)
+library(mrdownscale)
+downscaleRunESM(outputdir)
