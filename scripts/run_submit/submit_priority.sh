@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #SBATCH --qos=priority
-#SBATCH --partition=priority
 #SBATCH --job-name=mag-run
 #SBATCH --output=slurm.log
 #SBATCH --mail-type=END,FAIL

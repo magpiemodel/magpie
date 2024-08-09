@@ -14,7 +14,7 @@
 # 1.00: first working version
 
 library(gms)
-library(gdx)
+library(gdx2)
 library(magpie4)
 
 message("Starting to report gridded MAgPIE land use for SEALS")
