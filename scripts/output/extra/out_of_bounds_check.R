@@ -15,7 +15,7 @@
 #########################
 # Version 1.0, Florian Humpenoeder
 #
-library(gdx)
+library(gdx2)
 library(lucode2)
 library(magclass)
 

@@ -16,6 +16,7 @@ library(luscale)
 library(madrat)
 library(dplyr)
 library(gms)
+library(gdx2)
 
 # =============================================
 # Basic configuration

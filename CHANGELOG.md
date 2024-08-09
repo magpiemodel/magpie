@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
 - **80_optimization** abort GAMS in case of execution errors
 - **script** updated EATLancet project start scripts
+- **script** replaced gdx package with gdx2 package calls
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
