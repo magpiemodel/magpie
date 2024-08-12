@@ -87,7 +87,7 @@ if (magpie.modelstat > 2,
 
     s80_resolve_option$(s80_resolve_option >= 4) = 0;
 
-    until (magpie.modelstat <= 2 or s80_counter >= s80_maxiter)
+    until ((magpie.modelstat <= 2 AND magpie.numNOpt = 0) or s80_counter >= s80_maxiter)
   );
 );
 
