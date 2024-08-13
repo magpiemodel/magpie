@@ -12,6 +12,7 @@ s80_resolve_option = 0;
 
 *** solver settings
 option nlp = conopt4;
+option threads = 1
 magpie.optfile   = s80_optfile;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
@@ -43,7 +44,7 @@ display magpie.modelstat;
 magpie.modelStat$(magpie.modelStat=NA) = 13;
 
 * in case of problems try different solvers and optfile settings
-if (magpie.modelstat > 2 OR magpie.numNOpt > 0,
+if (magpie.modelstat > 2,
   repeat(
     s80_counter = s80_counter + 1 ;
     s80_resolve_option = s80_resolve_option + 1;
@@ -87,7 +88,7 @@ if (magpie.modelstat > 2 OR magpie.numNOpt > 0,
 
     s80_resolve_option$(s80_resolve_option >= 4) = 0;
 
-    until ((magpie.modelstat <= 2 AND magpie.numNOpt = 0) or s80_counter >= s80_maxiter)
+    until (magpie.modelstat <= 2 or s80_counter >= s80_maxiter)
   );
 );
 
