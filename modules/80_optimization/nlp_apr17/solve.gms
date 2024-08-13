@@ -43,7 +43,7 @@ display magpie.modelstat;
 magpie.modelStat$(magpie.modelStat=NA) = 13;
 
 * in case of problems try different solvers and optfile settings
-if (magpie.modelstat > 2,
+if (magpie.modelstat > 2 OR magpie.numNOpt > 0,
   repeat(
     s80_counter = s80_counter + 1 ;
     s80_resolve_option = s80_resolve_option + 1;
