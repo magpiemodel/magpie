@@ -12,7 +12,7 @@ s80_resolve_option = 0;
 
 *** solver settings
 option nlp = conopt4;
-*option threads = 1;
+option threads = 1;
 magpie.optfile   = s80_optfile;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;

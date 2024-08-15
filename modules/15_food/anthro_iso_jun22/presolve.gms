@@ -23,8 +23,8 @@ else
                                  + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_dummy(iso));
 );
 
-option nlp = conopt4
-
+option nlp = conopt4;
+option threads = 1;
 
 *' @code
 *' Within the major food groups determined by the regressions

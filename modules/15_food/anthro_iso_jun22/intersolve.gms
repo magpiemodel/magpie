@@ -27,6 +27,7 @@ if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
   display "elastic demand model is activated";
 
   option nlp = conopt4;
+  option threads = 1;
 
 * A new iteration is started
   p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
