@@ -19,6 +19,7 @@ magpie.holdfixed = 1 ;
 * linear solver
 option lp         = cplex ;
 option qcp        = cplex ;
+option threads = 1;
 $onecho > cplex.opt
 $offecho
 

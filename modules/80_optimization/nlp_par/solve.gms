@@ -13,6 +13,7 @@ p80_resolve_option(h) = 0;
 
 *** solver settings
 option nlp = conopt4;
+option threads = 1;
 magpie.solvelink = 3;
 magpie.optfile   = s80_optfile ;
 magpie.scaleopt  = 1 ;
@@ -26,6 +27,10 @@ $offecho
 
 $onecho > conopt4.op2
 Flg_Prep = FALSE
+$offecho
+
+$onecho > conopt4.op3
+Flg_NoDefc = TRUE
 $offecho
 
 h2(h) = no;
@@ -112,6 +117,10 @@ repeat
           option nlp = conopt4;
           magpie.optfile = 2;         
         elseif p80_resolve_option(h) = 4, 
+          display "Modelstat > 2 | Retry solve with CONOPT4 w/o search for definitional constraints";
+          option nlp = conopt4;
+          magpie.optfile = 3;         
+        elseif p80_resolve_option(h) = 5, 
           display "Modelstat > 2 | Retry solve with CONOPT3";
           option nlp = conopt;
           magpie.optfile = 0;         
@@ -124,7 +133,7 @@ repeat
         option nlp = conopt4;
         magpie.optfile = s80_optfile; 
         
-        p80_resolve_option(h)$(p80_resolve_option(h) >= 4) = 0;
+        p80_resolve_option(h)$(p80_resolve_option(h) >= 5) = 0;
        );
     h2(h) = no;
     i2(i) = no;
