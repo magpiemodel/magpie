@@ -14,6 +14,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **80_optimization** abort GAMS in case of execution errors
 - **58_peatland** variable `v58_scalingFactorExp` converted into parameter `p58_scalingFactorExp` to avoid infeasibilites. `p58_scalingFactorRed` has been revised.
 - **32_forestry** Interfaces `vm_landexpansion_forestry` and `vm_landreduction_forestry` have been corrected by harvested and replanted timber plantation area
+- **script** updated EATLancet project start scripts
+- **script** replaced gdx package with gdx2 package calls
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
@@ -28,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
+- **15_food** fixing parameter declaration of i15_processed_kcal_structure_iso
 
 
 ## [4.8.1] - 2024-06-19
