@@ -11,7 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **script** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
 - **15_food** revision of MP/SCP implementation for milk and meat alternatives. Added demand for fat and sugar as ingredients for MP-based milk alternatives. Added optional demand for fat as ingredient for MP-based meat alternatives.
 - **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
-- **80_optimization** abort GAMS in case of execution errors, added threads = 1 as default and Flg_NoDefc = TRUE as option
+- **80_optimization** abort GAMS in case of execution errors, added threads = 1 as default to avoid infeasibilites and Flg_NoDefc = TRUE as option
+- **config** default settings for 58_peatland revised
 - **58_peatland** variable `v58_scalingFactorExp` converted into parameter `p58_scalingFactorExp` to avoid infeasibilites. `p58_scalingFactorRed` has been revised.
 - **32_forestry** Interfaces `vm_landexpansion_forestry` and `vm_landreduction_forestry` have been corrected by harvested and replanted timber plantation area
 - **script** updated EATLancet project start scripts
