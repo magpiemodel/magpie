@@ -13,7 +13,7 @@ pc35_land_other(j,othertype35,ac) = vm_land_other.l(j,othertype35,ac);
 
 * Set the forest establishment bound for the next time step
 pm_max_forest_est(t+1,j) = f35_pot_forest_area(t+1,j) - sum(land_forest, vm_land.l(j,land_forest));
-pm_max_forest_est(t+1,j)$(pm_max_forest_est(t+1,j) < 0) = 0;
+pm_max_forest_est(t+1,j)$(pm_max_forest_est(t+1,j) < 1e-6) = 0;
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov35_secdforest(t,j,ac,"marginal")                        = v35_secdforest.m(j,ac);

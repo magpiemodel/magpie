@@ -28,14 +28,16 @@ cfg$force_download <- TRUE
 
 # Special outputs required for Deep Dive
 cfg$qos <- "standby_maxMem_dayMax"
-cfg$output <- c("output_check",
-               # "extra/highres", # do manually on last magpie run
-                "extra/disaggregation",
-               # "projects/FSEC_nitrogenPollution", # do manually on last (high-res) magpie run
-               # "projects/FSEC_water", # do manually on last (high-res) magpie run
-                # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
-                "rds_report",
-                "projects/agmip_report")
+cfg$output <- c(
+  "output_check",
+  # "extra/highres", # do manually on last magpie run
+  "extra/disaggregation",
+  # "projects/FSEC_nitrogenPollution", # do manually on last (high-res) magpie run
+  # "projects/FSEC_water", # do manually on last (high-res) magpie run
+  "projects/agmip_report",
+  # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
+  "rds_report"
+)
 
 #######################
 # SCENARIO DEFINITION #
@@ -52,9 +54,13 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 # RCP/GCM: 7p0 shocks on crops, livestock, labor
 # Trade: BAU
 bau <- function(cfg) {
+
+  # for feasibility
+  cfg$gms$s80_optfile <- 1
+
   ### General settings ###
   # For impacts of CC on labor:
-  cfg$gms$factor_costs  <- "sticky_labor" # @Alex/Edna/Florian: Should we use this one?
+  cfg$gms$factor_costs  <- "sticky_labor"
   cfg$gms$labor_prod    <- "exo"
   cfg$gms$c37_labor_rcp <- "rcp585"
   # Note: the effect of labor impacts is very low in MAgPIE and we don't have the
@@ -63,26 +69,27 @@ bau <- function(cfg) {
 
   ### Components for Decomposition ###
   # Diets: exogenous EATLancet diet
-  cfg$gms$s15_exo_diet  <- 0             # default
-  cfg$gms$c15_kcal_scen <- "healthy_BMI" # default (but not active b/c of s15_exo_diet = 0)
-  cfg$gms$c15_EAT_scen  <- "FLX"         # default (but not active b/c of s15_exo_diet = 0)
+  cfg$gms$s15_exo_diet     <- 0 # default
+  cfg$gms$c09_pal_scenario <- "SSP2" # default
+  cfg$gms$c15_kcal_scen    <- "healthy_BMI" # default (but not active b/c of s15_exo_diet = 0)
+  cfg$gms$c15_EAT_scen     <- "FLX" # default (but not active b/c of s15_exo_diet = 0)
   # Waste: half food waste
-  cfg$gms$s15_exo_waste  <- 0            # default
-  cfg$gms$s15_waste_scen <- 1.2          # default (but not active b/c of s15_exo_waste = 0)
+  cfg$gms$s15_exo_waste    <- 0 # default
+  cfg$gms$s15_waste_scen   <- 1.2 # default (but not active b/c of s15_exo_waste = 0)
   # Default interest rate (for default productivity)
-  cfg$gms$s12_interest_lic <- 0.1        # default
-  cfg$gms$s12_interest_hic <- 0.04       # default
+  cfg$gms$s12_interest_lic <- 0.1 # default
+  cfg$gms$s12_interest_hic <- 0.04 # default
   # Default livestock productivity
-  cfg$gms$c70_feed_scen <- "ssp2"
+  cfg$gms$c70_feed_scen    <- "ssp2"
   # Mitigation: no mitigation beyond NPI (NPI already set in setScenario)
-  cfg$gms$c56_emis_policy      <- "redd+natveg_nosoil"   # default
+  cfg$gms$c56_emis_policy  <- "redd+natveg_nosoil" # default
   cfg$path_to_report_ghgprices <- NA
-  cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"      # default
+  cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi" # default
   cfg$path_to_report_bioenergy <- NA
-  cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi"      # default
+  cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi" # default
 
   # Climate Change
-  cfg$input['cellular'] <- "rev4.99_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input["cellular"] <- "rev4.111EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }
@@ -90,8 +97,8 @@ bau <- function(cfg) {
 ### Diet component ##
 # Globally achieves EL2 diet by 2050
 diet <- function(cfg) {
-  # Transition towards EL2 food intake recommendations until 2050
-  cfg$gms$s15_exo_diet  <- 3
+  # EAT Lancet dietary recommendations
+  cfg$gms$s15_exo_diet <- 3
   # Physical inactivity levels are reduced to 0 from 2020 to 2050
   cfg$gms$c09_pal_scenario <- "SDP"
 
@@ -116,7 +123,7 @@ prod <- function(cfg) {
 # Reduction (halving) of food loss and waste
 waste <- function(cfg) {
   # Waste: half food waste
-  cfg$gms$s15_exo_waste  <- 1
+  cfg$gms$s15_exo_waste <- 1
   cfg$gms$s15_waste_scen <- 1.2
   return(cfg)
 }
@@ -124,30 +131,18 @@ waste <- function(cfg) {
 ### Mitigation component ##
 # Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
 # Note on our implementation:
-# We use a GHG pricing pathway based on a peak budget of 500 with overshoot
+# We use a GHG pricing pathway based on a peak budget of 650 with overshoot
 # starting from 2020.
-# Please note that with the diet shift, a lower ghg price would be necessary.
-# However, to be consistent with the other models and for the decomposition
-# scenarios to be "additive", we choose to use the same ghg price for all scenarios
-# where miti is active.
-# Reference: Humpenöder, F., Popp, A., Merfort, L., Luderer, G., Weindl, I., Bodirsky, B., Stevanović, M., Klein, D., Rodrigues, R., Bauer, N., Dietrich, J., Lotze-Campen, H., & Rockström, J. (2023). Data repository - Dietary shifts increase the feasibility of 1.5°C pathways (Version 1) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.8328217
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C considering diet change
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
+  # To Do: update to iteration 5!
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive/remind/output/C_SSP2EU-DSPkB500-noDS-rem-5/REMIND_generic_C_SSP2EU-DSPkB500-noDS-rem-5.mif"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
 }
-
-### RCP 2.6 ###
-# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU using GFDL climate model.
-rcp26 <- function(cfg) {
-  cfg$input["cellular"] <- "rev4.99_h12_05fd702e_cellularmagpie_c200_GFDL-ESM4-ssp126_lpjml-8e6c5eb1.tgz"
-  return(cfg)
-}
-
 
 #################
 # SCENARIO RUNS #
@@ -200,7 +195,6 @@ cfg$title <- "BAU_RCP26"
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 # scenario settings
 cfg <- bau(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # BAU_NoCC #
@@ -245,7 +239,6 @@ cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_Diet #
@@ -258,7 +251,6 @@ cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_PROD #
@@ -271,7 +263,6 @@ cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- waste(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_WAST #
@@ -284,7 +275,6 @@ cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_RCP70 #
@@ -323,5 +313,4 @@ cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
-cfg <- rcp26(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)

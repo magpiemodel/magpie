@@ -13,7 +13,7 @@
 # Author: Florian Humpenoeder
 
 library(magclass)
-library(gdx)
+library(gdx2)
 library(magpie4)
 library(lucode2)
 library(gms)

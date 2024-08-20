@@ -7,16 +7,57 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **21_trade** refactor equations for enhanced readablility and improve documentation
+- **script** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
+- **15_food** revision of MP/SCP implementation for milk and meat alternatives. Added demand for fat and sugar as ingredients for MP-based milk alternatives. Added optional demand for fat as ingredient for MP-based meat alternatives.
+- **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
+- **80_optimization** abort GAMS in case of execution errors
+- **script** updated EATLancet project start scripts
+- **script** replaced gdx package with gdx2 package calls
 
 ### added
--
+- **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
+- **script** added out of bounds check as output script
+- **70_livestock** added realization `fbask_jan16_sticky`
+- **script** check of variables needed in piamInterfaces in report_rds.R
+- **42_water_demand** added water abstraction type dimension for non-ag uses
+- **56_ghg_policy** added optional temporal and regional fader for GHG emission pricing policy
 
 ### removed
 -
 
 ### fixed
--
+- **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
+- **15_food** fixing parameter declaration of i15_processed_kcal_structure_iso
+
+
+## [4.8.1] - 2024-06-19
+
+### changed
+- **29_ageclass** module 29_ageclass has been renamed to 28_ageclass to make space for `29_cropland` just before `30_croparea`
+- **30_crop** module `30_crop` renamed to `30_croparea`, which now only accounts for crop area.
+- **30_crop** Semi-Natural Vegetation (SNV) implementation has been moved from `30_crop` to `29_cropland` 
+- **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
+- **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
+- **default.cfg** update additional data to rev4.51
+- **scripts** adjusted SLURM job handling
+- **scripts** updated EL2p0 start scripts
+
+### added
+- **10_land** added interface `pm_land_hist` with historic land use patterns
+- **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
+- **42_water_demand** added non-agricultural water demand for entire year
+
+### removed
+- **32_forestry** removed technical balance term `v32_land_missing_ndc`
+
+### fixed
+- **22_land_conservation** avoid infeasibilities due to very small numbers, account for cropland tree cover and lower bound of cropland
+- **32_forestry** avoid infeasibilities due to very small numbers
+- **35_natveg** avoid infeasibilities due to very small numbers
+- **44_biodiversity** Fixing to SSP2 parameters until 2025 was not working
+- **config** update to input data rev4.109. In the previous rev4.108, MER GDP was wrong and was identical to PPP GDP
+
 
 
 ## [4.8.0] - 2024-06-10
@@ -948,7 +989,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.8.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.8.1...develop
+[4.8.1]: https://github.com/magpiemodel/magpie/compare/v4.8.0...v4.8.1
 [4.8.0]: https://github.com/magpiemodel/magpie/compare/v4.7.3...v4.8.0
 [4.7.3]: https://github.com/magpiemodel/magpie/compare/v4.7.2...v4.7.3
 [4.7.2]: https://github.com/magpiemodel/magpie/compare/v4.7.1...v4.7.2

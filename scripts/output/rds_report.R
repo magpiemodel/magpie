@@ -17,6 +17,8 @@ library(magpie4)
 library(lucode2)
 library(quitte)
 library(gms)
+library(piamInterfaces)
+library(piamutils)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -35,8 +37,24 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 
 
 report <- getReport(gdx, scenario = cfg$title, dir = outputdir)
+
+for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
+  missingVariables <- sort(setdiff(unique(deletePlus(getMappingVariables(mapping,"M"))),unique(deletePlus(getNames(report,dim="variable")))))
+  if (length(missingVariables) > 0) {
+    warning("# The following ", length(missingVariables), " variables are expected in the piamInterfaces package ",
+            "for mapping ", mapping, ", but cannot be found in the MAgPIE report.\nPlease either fix in magpie4 or adjust the mapping in piamInterfaces.\n- ",
+            paste(missingVariables, collapse = ",\n- "), "\n")
+  }
+}
+
 write.report(report, file = mif)
+
 q <- as.quitte(report)
+# as.quitte converts "World" into "GLO". But we want to keep "World" and therefore undo these changes
+q <- droplevels(q)
+levels(q$region)[levels(q$region) == "GLO"] <- "World"
+q$region <- factor(q$region,levels = sort(levels(q$region)))
+
 if(all(is.na(q$value))) stop("No values in reporting!")
 
 saveRDS(q, file = rds, version = 2)
@@ -59,6 +77,6 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   saveRDS(q, file = paste0(resultsarchive, "/", stats$id, ".rds"), version = 2)
   cwd <- getwd()
   setwd(resultsarchive)
-  system("ls 1*.rds > files")
+  system("find -type f -name '1*.rds' -printf '%f\n' | sort > fileListForShinyresults")
   setwd(cwd)
 }

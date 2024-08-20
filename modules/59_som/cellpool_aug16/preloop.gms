@@ -11,12 +11,12 @@
 
 i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"secdforest","soilc") - f59_topsoilc_density(t_all,j);
 
-p59_som_pool(j,"crop") =
+pc59_som_pool(j,"crop") =
   sum((climate59,kcr),sum(clcl_climate59(clcl,climate59),
       pm_climate_class(j,clcl)) * f59_cratio_landuse(climate59,kcr)
       * f59_topsoilc_density("y1995",j) * sum(w, fm_croparea("y1995",j,w,kcr)));
 
-p59_som_pool(j,noncropland59) =
+pc59_som_pool(j,noncropland59) =
   f59_topsoilc_density("y1995",j) * pm_land_start(j,noncropland59);
 
 
@@ -28,7 +28,7 @@ p59_som_pool(j,noncropland59) =
 * ATTENTION: emissions in 1995 are not meaningful
 
 vm_carbon_stock.l(j,"crop","soilc",stockType) =
-  p59_som_pool(j,"crop") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
+  pc59_som_pool(j,"crop") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
 vm_carbon_stock.l(j,noncropland59,"soilc",stockType) =
   fm_carbon_density("y1995",j,noncropland59,"soilc") * pm_land_start(j,noncropland59);
 
@@ -73,8 +73,13 @@ i59_cratio_fallow(j) = sum(climate59,
                 * f59_cratio_landuse(climate59,"maiz")
                 * f59_cratio_tillage(climate59,"reduced_tillage")
                 * f59_cratio_inputs(climate59,"low_input"));
+
+i59_cratio_treecover = 1;
+
 *' @stop
 
-p59_carbon_density(t,j,land) = 0;
+pc59_land_before(j,land) = pm_land_start(j,land);
 
-p59_land_before(j,land) = pm_land_start(j,land);
+p59_carbon_density(t,j,land) = 0;
+pc59_carbon_density(j,land) = 0;
+pc59_carbon_density(j,land)$(pc59_land_before(j,land) > 1e-10) = pc59_som_pool(j,land) / pc59_land_before(j,land);
