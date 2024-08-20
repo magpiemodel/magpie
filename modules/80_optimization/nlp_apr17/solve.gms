@@ -71,7 +71,7 @@ if (magpie.modelstat > 2,
       magpie.optfile = 3;
     elseif s80_resolve_option = 5,
       display "Modelstat > 2 | Retry solve with CONOPT3";
-      option nlp = conopt;
+      option nlp = conopt3;
       magpie.optfile = 0;
      );
 
