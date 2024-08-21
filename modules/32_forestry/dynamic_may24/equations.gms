@@ -11,14 +11,12 @@
 ****** Costs ******
 *------------------
 
-*' The direct costs of Timber production and afforestation `vm_cost_fore` include
-*' maintenance and monitoring costs for newly established plantations as well as
-*' standing plantations '[@sathaye_ghg_2005]. In addition, this type of forest management
-*' (including afforestation) may cause costs in other parts of the model such as costs
-*' for technological change [13_tc] or land expansion [39_landconversion]. Also included
-*' are additional costs for producing timber from extremely highly managed plantations
-*' which are analogous to intensification using technological change from [13_tc] but
-*' in a parametrized form.
+*' The direct costs for timber plantations and re/afforestation `vm_cost_fore` include
+*' establishment cost for new forests, recurring maintenance and monitoring
+*' costs for standing forests as well as harvesting costs for timber plantations. 
+*' In addition, this type of forest management
+*' (including re/afforestation) may cause costs in other parts of the model such as costs
+*' for technological change [13_tc] or land expansion [39_landconversion]. 
 
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                    v32_cost_recur(i2)
