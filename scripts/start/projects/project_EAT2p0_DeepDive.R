@@ -41,7 +41,7 @@ cfg$output <- c(
 )
 
 # Set path to own coupled runs:
-path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-8/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-8.mif"
+path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif"
 
 
 #######################
@@ -64,6 +64,12 @@ cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/sce
 # RCP/GCM: 7p0 shocks on crops, livestock, labor
 # Trade: BAU
 bau <- function(cfg) {
+
+  # time steps until 2150
+  cfg$gms$c_timesteps <- "less_TS"
+
+  # for feasibility
+  cfg$gms$s80_optfile <- 1
 
   cfg$gms$factor_costs <- "sticky_labor"
   ### Components for Decomposition ###

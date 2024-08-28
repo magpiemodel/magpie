@@ -55,6 +55,9 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 # Trade: BAU
 bau <- function(cfg) {
 
+  # for feasibility
+  cfg$gms$s80_optfile <- 1
+
   ### General settings ###
   # For impacts of CC on labor:
   cfg$gms$factor_costs  <- "sticky_labor"
@@ -133,9 +136,9 @@ waste <- function(cfg) {
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C considering diet change
   # To Do: update to iteration 5!
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-8/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-8.mif"
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-8/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-8.mif"
+  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)

@@ -12,6 +12,10 @@ parameters
  pc56_c_price_induced_aff                         Helper for fixing C price driven afforestation to zero for historic time steps (binary)
  p56_region_price_shr(t_all,i)                    GHG price share of the region (1)
  p56_country_dummy(iso)                           Dummy parameter indicating whether country is affected by selected GHG policy (1)
+ p56_region_fader_shr(t_all,i)                    GHG policy fader share of the region (1)
+ p56_country_dummy2(iso)                          Dummy parameter indicating whether country is affected by selected GHG policy fader (1)
+ p56_fader(t_all)                                 GHG policy fader (1)
+ p56_fader_reg(t_all,i)                           Regional GHG policy fader (1)
 ;
 
 equations

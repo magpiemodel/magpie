@@ -79,9 +79,9 @@ parameters
  p15_livestock_threshold_subst_fader(t_all)    Fader for livestock threshold target (1)
  p15_exo_food_scenario_fader(t_all)            Exogenous diet scenario fader (1)
 
-*prices
- p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
- i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
+* prices
+  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
+  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
   p15_bodyheight(t,iso,sex,age,estimates15)           Body height (cm per cap)
@@ -118,7 +118,7 @@ parameters
   i15_staples_kcal_structure_iso(t,iso,kfo_st)       Share of single staple products within total staples (1)
   i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
   i15_livestock_kcal_structure_iso(t,iso,kfo_ap)     Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
-  i15_processed_kcal_structure_iso                   Share of single processed products within total processed food (1)
+  i15_processed_kcal_structure_iso(t,iso,kfo_pf)     Share of single processed products within total processed food (1)
 
 * diet calibration
   p15_kcal_calib(t,iso,kfo)                   Balance flow to diverge from mean calories of regressions (kcal per cap per day)
@@ -140,6 +140,7 @@ parameters
  p15_kcal_pc_iso_livestock_orig(t,iso)             Auxiliary parameter for per capita livestock consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
  p15_kcal_pc_iso_rumdairy_orig(t,iso)              Auxiliary parameter for per capita ruminant and dairy consumption - basis for scenarios of ruminant-based food substitution (kcal per capita per day)
  p15_kcal_pc_iso_plant_orig(t,iso)                 Auxiliary parameter for per capita plant-based food consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
+ p15_protein_pc_iso_scp(t,iso,kfo_rd)              Per capita consumption of SCP in food demand model after price shock on country level (g protein per capita per day)
  p15_livestock_kcal_structure_orig(t,iso,kfo_lp)   Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
  p15_rumdairy_kcal_structure_orig(t,iso,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
  p15_plant_kcal_structure_orig(t,iso,kfo_pp)       Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
@@ -183,7 +184,11 @@ parameters
 ;
 
 scalars
- s15_year          Current year as integer value (yr)  / 2000 /
+ s15_scp_fat_per_milk               Fat needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 3.3 /
+ s15_scp_sugar_per_milk             Sugar needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 4.7 /
+ s15_scp_protein_per_milk           Protein needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 3.3 /
+ s15_scp_fat_content                Fat content of microbial biomass based on Solein from Solar foods (t fat per t DM) / 0.05 /
+ s15_scp_fat_protein_ratio_meat     Ratio of protein to fat in both plant based meat alternatives and current meat products (t fat per t protein) / 0.66 /
 ;
 
 
