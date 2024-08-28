@@ -46,7 +46,7 @@ cfg$qos <- "priority_maxMem"
 ### Global Sustainability, largely based on SDP
 cfg$title <- paste(prefix, "Sustainability", sep = "_")
 cfg <- setScenario(cfg, c("rcp1p9"))
-cfg <- setScenario(cfg, c("LAMA_Sustainability"), scenario_config = "config/projects/config_lama.csv")
+cfg <- setScenario(cfg, c("LAMA_Sustainability"), scenario_config = "config/projects/scenario_config_lama.csv")
 
 cfg$gms$policy_countries30 <- all_iso_countries
 cfg$gms$policy_countries22 <- all_iso_countries
@@ -59,7 +59,7 @@ start_run(cfg,codeCheck=FALSE)
 ### Global Inequality, largely based on SSP4
 cfg$title <- paste(prefix, "Inequality", sep = "_")
 cfg <- setScenario(cfg, c("rcp1p9"))
-cfg <- setScenario(cfg, c("LAMA_Inequal"), scenario_config = "config/projects/config_lama.csv")
+cfg <- setScenario(cfg, c("LAMA_Inequal"), scenario_config = "config/projects/scenario_config_lama.csv")
 cfg$gms$policy_countries30 <- oecd90andEU
 cfg$gms$policy_countries22 <- oecd90andEU
 cfg$gms$EFP_countries <- oecd90andEU
@@ -73,7 +73,7 @@ start_run(cfg,codeCheck=FALSE)
 ### LAMA_Inequal-SustDemand
 cfg$title <- paste(prefix, "Inequality-SustDemand", sep = "_")
 cfg <- setScenario(cfg, c("rcp1p9"))
-cfg <- setScenario(cfg, c("LAMA_Inequal-SustDemand"), scenario_config = "config/projects/config_lama.csv")
+cfg <- setScenario(cfg, c("LAMA_Inequal-SustDemand"), scenario_config = "config/projects/scenario_config_lama.csv")
 cfg$gms$policy_countries30 <- oecd90andEU
 cfg$gms$policy_countries22 <- oecd90andEU
 cfg$gms$EFP_countries <- oecd90andEU
@@ -85,7 +85,7 @@ start_run(cfg,codeCheck=FALSE)
 ### LAMA_Inequal-EnvirProt
 cfg$title <- paste(prefix, "Inequality-EnvirProt", sep = "_")
 cfg <- setScenario(cfg, c("rcp1p9"))
-cfg <- setScenario(cfg, c("LAMA_Inequal-EnvirProt"), scenario_config = "config/projects/config_lama.csv")
+cfg <- setScenario(cfg, c("LAMA_Inequal-EnvirProt"), scenario_config = "config/projects/scenario_config_lama.csv")
 cfg$gms$policy_countries30 <- all_iso_countries
 cfg$gms$policy_countries22 <- all_iso_countries
 cfg$gms$EFP_countries <- all_iso_countries
@@ -97,7 +97,7 @@ start_run(cfg,codeCheck=FALSE)
 ### LAMA_Inequal-GHGPrice
 cfg$title <- paste(prefix, "Inequality-GHGPrice", sep = "_")
 cfg <- setScenario(cfg, c("rcp1p9"))
-cfg <- setScenario(cfg, c("LAMA_Inequal-GHGPrice"), scenario_config = "config/projects/config_lama.csv")
+cfg <- setScenario(cfg, c("LAMA_Inequal-GHGPrice"), scenario_config = "config/projects/scenario_config_lama.csv")
 cfg$gms$policy_countries30 <- oecd90andEU
 cfg$gms$policy_countries22 <- oecd90andEU
 cfg$gms$EFP_countries <- oecd90andEU
@@ -109,7 +109,7 @@ start_run(cfg,codeCheck=FALSE)
 ### Global Inequality with higher climate impacts
 cfg$title <- paste(prefix, "Inequality-rcp7p0", sep = "_")
 cfg <- setScenario(cfg, c("rcp7p0"))
-cfg <- setScenario(cfg, c("LAMA_Inequal"), scenario_config = "config/projects/config_lama.csv")
+cfg <- setScenario(cfg, c("LAMA_Inequal"), scenario_config = "config/projects/scenario_config_lama.csv")
 cfg$gms$policy_countries30 <- oecd90andEU
 cfg$gms$policy_countries22 <- oecd90andEU
 cfg$gms$EFP_countries <- oecd90andEU
