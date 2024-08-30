@@ -194,6 +194,8 @@ cfg$title <- "BAU_NoCC"
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
 # scenario settings
 cfg <- bau(cfg = cfg)
+# deactivate labor productivity climate impacts
+cfg$gms$labor_prod <- "off"
 start_run(cfg, codeCheck = FALSE)
 
 # BAU_MITI #
@@ -278,4 +280,6 @@ cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
+# deactivate labor productivity climate impacts
+cfg$gms$labor_prod <- "off"
 start_run(cfg, codeCheck = FALSE)
