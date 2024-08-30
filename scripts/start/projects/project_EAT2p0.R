@@ -135,7 +135,6 @@ waste <- function(cfg) {
 # starting from 2020.
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C considering diet change
-  # To Do: update to iteration 5!
   cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
@@ -159,7 +158,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # BAU_DIET #
 # Decomposition scenario. Adds EL2.0 Diet to BAU:
-# Globally achieves EL2 diet by 2050              # To Do: Check implemention!
+# Globally achieves EL2 diet by 2050
 cfg$title <- "BAU_DIET"
 # standard setting
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
@@ -186,15 +185,6 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- waste(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-# BAU_RCP26 #
-# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU
-cfg$title <- "BAU_RCP26"
-# standard setting
-cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
-# scenario settings
-cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # BAU_NoCC #
@@ -277,19 +267,6 @@ cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
-# ELM_RCP70 #
-# Decomposition Scenario. Applies RCP 7.0 climate impacts to ELM
-cfg$title <- "ELM_RCP70"
-# standard setting, but with NDC activated (for miti)
-cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
-# scenario settings
-cfg <- bau(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
 # ELM_NoCC #
 # Decomposition Scenario. Removes climate impacts (NoCC) from ELM
 cfg$title <- "ELM_NoCC"
@@ -298,18 +275,6 @@ cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-# ELM_MITI #
-# Decomposition Scenario. Removes climate mitigation and LUC policies from ELM
-cfg$title <- "ELM_MITI"
-# standard setting, but with NDC activated (for miti)
-cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
-# scenario settings
-cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
