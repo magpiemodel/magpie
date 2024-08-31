@@ -7,8 +7,8 @@
 
 
 scalars
-  s31_cost_expansion   Grasslands expansion costs (USD05MER per hectare)          / 1 /
-  s31_cost_grass_prod  Grasslands factor costs (USD05MER per tDM)                 / 1 /
+  s31_cost_expansion   Grasslands expansion costs (USD17MER per hectare)          / 1 /
+  s31_cost_grass_prod  Grasslands factor costs (USD17MER per tDM)                 / 1 /
 ;
 
 $setglobal c31_grassl_yld_scenario  cc

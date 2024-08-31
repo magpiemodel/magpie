@@ -14,6 +14,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **80_optimization** abort GAMS in case of execution errors
 - **script** updated EATLancet project start scripts
 - **script** replaced gdx package with gdx2 package calls
+- **inputdata** changed GDP base year from 2005USD to 2017USD
+- **config** changed default input data to use 2017USD
+- **module_documentation** all references to USD05 changed to USD17
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`

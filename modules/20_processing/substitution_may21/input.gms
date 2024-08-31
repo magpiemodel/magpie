@@ -22,7 +22,7 @@ $ondelim
 $include "./modules/20_processing/input/f20_processing_shares.cs3"
 $offdelim       ;
 
-table f20_processing_unitcosts(ksd,kpr)   Costs of transforming x units kpr into 1 unit ksd (USD05MER per tDM)
+table f20_processing_unitcosts(ksd,kpr)   Costs of transforming x units kpr into 1 unit ksd (USD17MER per tDM)
 $ondelim
 $include "./modules/20_processing/input/f20_processing_unitcosts.cs3"
 $offdelim       ;

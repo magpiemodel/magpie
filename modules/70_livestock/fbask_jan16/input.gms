@@ -81,7 +81,7 @@ $include "./modules/70_livestock/fbask_jan16/input/f70_hist_cap_share.csv"
 $offdelim
 ;
 
-table f70_hist_factor_costs_livst(t_all,i,kli) Historical factor costs in livestock production (mio. USD05MER)
+table f70_hist_factor_costs_livst(t_all,i,kli) Historical factor costs in livestock production (mio. USD17MER)
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_hist_factor_costs_livst.cs3"
 $offdelim

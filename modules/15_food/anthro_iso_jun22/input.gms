@@ -163,7 +163,7 @@ $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
 
 
-parameter f15_prices_initial(kall) Food prices in initialization period (USD05MER per t DM)
+parameter f15_prices_initial(kall) Food prices in initialization period (USD17MER per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_initial.csv"

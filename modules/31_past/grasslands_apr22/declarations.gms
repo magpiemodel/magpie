@@ -8,18 +8,18 @@
 
 equations
 q31_carbon(j,ag_pools,stockType)              Above ground carbon content calculation for pasture (mio tC)
-q31_cost_prod_past(i)                                   Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
+q31_cost_prod_past(i)                                   Costs for putting animals on grasslands and shifting between grassland types (mio. USD17MER per yr)
 q31_bv_manpast(j,potnatveg)                             Biodiversity value for managed pastures (Mha)
 q31_bv_rangeland(j,potnatveg)                           Biodiversity value for rangeland (Mha)
 q31_pasture_areas(j)                                    Total grassland calculation (mio. ha)
 q31_prod_pm(j)                                          Cellular grass production constraint (mio. tDM per yr)
-q31_expansion_cost(j, grassland)                        Grassland expansion cost constraint (mio. USD05MER)
+q31_expansion_cost(j, grassland)                        Grassland expansion cost constraint (mio. USD17MER)
 ;
 
 positive variables
 v31_grass_area(j,grassland)                             Grassland areas (mio. ha)
-v31_cost_grass_expansion(j, grassland)                  Costs of grassland expansion (mio. USD05MER)
-vm_cost_prod_past(i)                                    Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
+v31_cost_grass_expansion(j, grassland)                  Costs of grassland expansion (mio. USD17MER)
+vm_cost_prod_past(i)                                    Costs for putting animals on grasslands and shifting between grassland types (mio. USD17MER per yr)
 ;
 
 parameters
@@ -37,15 +37,15 @@ i31_grass_hist_yld(t_all,i, grassland)                  FAO gassland yields (tDM
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov31_grass_area(t,j,grassland,type)           Grassland areas (mio. ha)
- ov31_cost_grass_expansion(t,j,grassland,type) Costs of grassland expansion (mio. USD05MER)
- ov_cost_prod_past(t,i,type)                   Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
+ ov31_cost_grass_expansion(t,j,grassland,type) Costs of grassland expansion (mio. USD17MER)
+ ov_cost_prod_past(t,i,type)                   Costs for putting animals on grasslands and shifting between grassland types (mio. USD17MER per yr)
  oq31_carbon(t,j,ag_pools,stockType,type)      Above ground carbon content calculation for pasture (mio tC)
- oq31_cost_prod_past(t,i,type)                 Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
+ oq31_cost_prod_past(t,i,type)                 Costs for putting animals on grasslands and shifting between grassland types (mio. USD17MER per yr)
  oq31_bv_manpast(t,j,potnatveg,type)           Biodiversity value for managed pastures (Mha)
  oq31_bv_rangeland(t,j,potnatveg,type)         Biodiversity value for rangeland (Mha)
  oq31_pasture_areas(t,j,type)                  Total grassland calculation (mio. ha)
  oq31_prod_pm(t,j,type)                        Cellular grass production constraint (mio. tDM per yr)
- oq31_expansion_cost(t,j,grassland,type)       Grassland expansion cost constraint (mio. USD05MER)
+ oq31_expansion_cost(t,j,grassland,type)       Grassland expansion cost constraint (mio. USD17MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

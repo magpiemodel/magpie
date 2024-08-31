@@ -7,11 +7,11 @@
 
 
 variables
- vm_p_fert_costs(i)              costs for mineral fertilizers (mio. USD05MER per yr)
+ vm_p_fert_costs(i)              costs for mineral fertilizers (mio. USD17MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_p_fert_costs(t,i,type) costs for mineral fertilizers (mio. USD05MER per yr)
+ ov_p_fert_costs(t,i,type) costs for mineral fertilizers (mio. USD17MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
