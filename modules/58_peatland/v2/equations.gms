@@ -39,7 +39,8 @@
 *' The scaling factor for reduction reflects the ratio of drained peatland and total peatland area, 
 *' based on the assumption that the likelihood of peatland rewetting increases with a higher share of 
 *' drained peatland over total peatland area. 
-*' Vice-versa, the scaling factor for reduction decreases with an increasing share of rewetted peatland.
+*' Therefore, the scaling factor for peatland reduction increases with an increasing share of drained peatland 
+*' and decreases with a decreasing share of drained peatland. 
 *' In case managed land remains unchanged, also drained peatland remains unchanged. 
 
  q58_peatlandMan(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
