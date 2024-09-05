@@ -24,15 +24,15 @@ $setglobal c32_shock_scenario  none
 
 scalars
   s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous) / 2 /
-  s32_est_cost_plant              Establishment cost for plantations (USD per ha) / 2000 /
-  s32_est_cost_natveg             Establishment cost for natural vegetation (USD per ha) / 2000 /
-  s32_recurring_cost              Recurring costs (USD per ha) / 500 /
-  s32_harvesting_cost             Harvesting cost (USD per ha) / 2000 /
+  s32_est_cost_plant              Establishment cost for plantations (USD per ha) / 2460 /
+  s32_est_cost_natveg             Establishment cost for natural vegetation (USD per ha) / 2460 /
+  s32_recurring_cost              Recurring costs (USD per ha) / 615 /
+  s32_harvesting_cost             Harvesting cost (USD per ha) / 2460 /
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
   s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution / 1 /
-  s32_price                       Price for timber (USD)      / 45 /
+  s32_price                       Price for timber (USD)      / 55 /
   s32_free_land_cost              Penalty for technial area balance term (USD per ha) / 1e+06 /
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
