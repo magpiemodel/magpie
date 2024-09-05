@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **80_optimization** abort GAMS in case of execution errors
 - **scripts** updated EATLancet project start scripts
 - **scripts** replaced gdx package with gdx2 package calls
-- **scripts** split scenario_config into project-specific configs
+- **config** split scenario_config into project-specific configs
 
 
 ### added
