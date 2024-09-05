@@ -36,8 +36,9 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
 
 cfg$output <- c("output_check", "rds_report")
 
+#load config presetswrite it before starting the run.
 preset <-  "GENIE_SCP"
-cfg <- setScenario(cfg, c(preset)) #load config presets
+cfg <- setScenario(cfg, c(preset), scenario_config = "config/projects/scenario_config_genie.csv")
 
 ### Identifier and folder
 ###############################################

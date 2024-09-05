@@ -43,6 +43,7 @@ cfg$output <- c(
 # SCENARIO DEFINITION #
 #######################
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 
 ### BAU Scenario ###
 # SSP: SSP2
@@ -153,6 +154,7 @@ miti <- function(cfg) {
 cfg$title <- "BAU"
 # standard setting
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -163,6 +165,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "BAU_DIET"
 # standard setting
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
@@ -173,6 +176,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "BAU_PROD"
 # standard setting
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- prod(cfg = cfg)
@@ -183,6 +187,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "BAU_WAST"
 # standard setting
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- waste(cfg = cfg)
@@ -193,6 +198,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "BAU_RCP26"
 # standard setting
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -202,6 +208,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "BAU_NoCC"
 # standard setting, but without CC
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
@@ -211,6 +218,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "BAU_MITI"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
@@ -221,6 +229,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "EL2"
 # standard setting
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
@@ -233,6 +242,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "ELM"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
@@ -246,6 +256,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "ELM_DIET"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
@@ -258,6 +269,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "ELM_PROD"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
@@ -270,6 +282,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "ELM_WAST"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
@@ -282,6 +295,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "ELM_RCP70"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
@@ -295,6 +309,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "ELM_NoCC"
 # standard setting, but with NDC activated (for miti) and without CC
 cfg <- setScenario(cfg, c("nocc_hist", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
@@ -308,6 +323,7 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- "ELM_MITI"
 # standard setting, but with NDC activated (for miti)
 cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
 # scenario settings
 cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
