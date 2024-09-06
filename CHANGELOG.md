@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **script** updated EATLancet project start scripts
 - **script** replaced gdx package with gdx2 package calls
 - **config** split scenario_config into project-specific configs
+- **config** initial treecover on cropland starts from zero
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
@@ -26,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **script** check of variables needed in piamInterfaces in report_rds.R
 - **42_water_demand** added water abstraction type dimension for non-ag uses
 - **56_ghg_policy** added optional temporal and regional fader for GHG emission pricing policy
+- **cropland** added option for discarding initial treecover on cropland
 
 ### removed
 -
