@@ -30,5 +30,6 @@ cfg <- basic_settings(title = "WaterTestBug")
 
 # * Switch to activate pumping costs (only available for India currently), Set to 1 if want to use for India
 cfg$gms$s42_pumping <- 1     # def = 0
+cfg$gms$s42_multiplier <- 1      # def = 0
 
 start_run(cfg, codeCheck=FALSE)
