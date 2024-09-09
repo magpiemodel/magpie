@@ -23,14 +23,12 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax20"
+cfg$info$flag <- "PTax22"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
 cfg$force_replace <- TRUE
 cfg$force_download <- FALSE
-#cfg$qos <- "priority_maxMem"
-#cfg$qos <- "standby_maxMem_dayMax"
 cfg$qos <- "standby_maxMem"
 
 # support function to create standardized title
@@ -156,9 +154,6 @@ for (res in c("c400", "c1000")) {
   cfg$title <- .title(cfg, paste(res, ssp, "Ref", sep = "-"))
   cfg$gms$c56_mute_ghgprices_until <- "y2150"
   cfg$gms$c56_pollutant_prices <- "T0-CO2"
-  # cfg$gms$c22_base_protect <- "none"
-  # cfg$gms$c22_base_protect_noselect <- "none"
-  # cfg$gms$s22_restore_land <- 0
   start_run(cfg, codeCheck = FALSE)
   
   ## Policy scenarios
