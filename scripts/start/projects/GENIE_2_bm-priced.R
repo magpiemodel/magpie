@@ -36,11 +36,13 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
 
 cfg$output <- c("output_check", "rds_report")
 
+#load config presetswrite it before starting the run.
 preset <-  "GENIE_SCP"
-cfg <- setScenario(cfg, c(preset)) #load config presetswrite it before starting the run.
+cfg <- setScenario(cfg, c(preset), scenario_config = "config/projects/scenario_config_genie.csv")
 
 cfg$force_replace <- FALSE
 cfg$qos <- "priority"
+cfg$partition <- "priority"
 
 ### Identifier and folder
 ###############################################
@@ -81,13 +83,8 @@ for (bl in blV) {
     preflag <- paste0("MP", str_pad(mp, 2, pad = "0"), "BI", str_pad(bl * 100, 2, pad = "0"))
     cfg$results_folder <- paste("output", identifierFlag, preflag, ":title:", sep = "/")
     cfg$info$flag2 <- preflag
-
-    if (mp != 0){
-      m = 100 - mp
-      cfg$gms$c15_rumdairy_scp_scen <- paste0("sigmoid_", m, "pc_25_50")
-    } else {
-      cfg$gms$c15_rumdairy_scp_scen <- "constant"
-    }
+    
+    cfg$gms$s15_rumdairy_scp_substitution <- mp / 100
 
     for (be in beV) {
       cfg$gms$s60_bioenergy_gj_price_1st <- be

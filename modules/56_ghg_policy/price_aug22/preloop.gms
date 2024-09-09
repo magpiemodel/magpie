@@ -21,6 +21,16 @@ p56_country_dummy(policy_countries56) = 1;
 * Countries are weighted by their population size.
 p56_region_price_shr(t_all,i) = sum(i_to_iso(i,iso), p56_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
+****** Regional fader share for ghg policy fader of selective countries:
+* Country switch to determine countries for which ghg policy fader shall be applied.
+* In the default case, the ghg policy fader affects all countries when activated.
+p56_country_dummy2(iso) = 0;
+p56_country_dummy2(fader_countries56) = 1;
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by their population size.
+p56_region_fader_shr(t_all,i) = sum(i_to_iso(i,iso), p56_country_dummy2(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+
 ****select ghg prices
 $ifthen "%c56_pollutant_prices%" == "coupling"
  im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices_coupling(t_all,i,pollutants);
@@ -57,6 +67,16 @@ im_pollutant_prices(t_all,i,"co2_c",emis_source) = im_pollutant_prices(t_all,i,"
 
 ***multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i);
+
+if (s56_fader_functional_form = 1,
+  m_linear_time_interpol(p56_fader,s56_fader_start,s56_fader_target,0,s56_fader_target);
+elseif s56_fader_functional_form = 2,
+  m_sigmoid_time_interpol(p56_fader,s56_fader_start,s56_fader_target,0,s56_fader_target);
+);
+
+***build and apply temporal fader for GHG policy
+p56_fader_reg(t_all,i) = p56_fader(t_all) * p56_region_fader_shr(t_all,i) + p56_fader(t_all) * (1-p56_region_fader_shr(t_all,i));
+im_pollutant_prices(t_all,i,pollutants_fader,emis_source)$(s56_ghgprice_fader = 1) = im_pollutant_prices(t_all,i,pollutants_fader,emis_source) * p56_fader_reg(t_all,i);
 
 ***GHG emission policy
 im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);

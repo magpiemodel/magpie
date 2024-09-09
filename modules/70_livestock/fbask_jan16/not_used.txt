@@ -1,0 +1,2 @@
+name,type,reason
+pm_interest,input,Since no capital stocks are implemented there is no need to consider interest rates.

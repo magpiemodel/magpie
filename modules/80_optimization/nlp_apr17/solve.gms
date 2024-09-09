@@ -25,6 +25,10 @@ $onecho > conopt4.op2
 Flg_Prep = FALSE
 $offecho
 
+if(execerror > 0, 
+  abort "Execution error. Check your .lst file.";
+);
+
 *' @code
 solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' Optional second solve statement
