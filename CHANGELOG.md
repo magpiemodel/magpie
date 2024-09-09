@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **42_water_demand** added water abstraction type dimension for non-ag uses
 - **56_ghg_policy** added optional temporal and regional fader for GHG emission pricing policy
 - **cropland** added option for discarding initial treecover on cropland
+- **script** added output script for conversion of validation.mif file into validation.rds
 
 ### removed
 -
