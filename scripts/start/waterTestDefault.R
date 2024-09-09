@@ -17,7 +17,7 @@ basic_settings <- function(title) {
 
   source("config/default.cfg")
 
-  cfg$force_download <- FALSE
+  cfg$force_download <- TRUE
   cfg$info$flag <- "060924"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
