@@ -8,16 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **21_trade** refactor equations for enhanced readablility and improve documentation
-- **script** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
+- **scripts** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
 - **15_food** revision of MP/SCP implementation for milk and meat alternatives. Added demand for fat and sugar as ingredients for MP-based milk alternatives. Added optional demand for fat as ingredient for MP-based meat alternatives.
-- **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
+- **scripts** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
 - **80_optimization** abort GAMS in case of execution errors
-- **script** updated EATLancet project start scripts
-- **script** replaced gdx package with gdx2 package calls
+- **scripts** updated EATLancet project start scripts
+- **scripts** replaced gdx package with gdx2 package calls
+- **config** split scenario_config into project-specific configs
+
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
-- **script** added out of bounds check as output script
+- **scripts** added out of bounds check as output script
 - **70_livestock** added realization `fbask_jan16_sticky`
 - **script** check of variables needed in piamInterfaces in report_rds.R
 - **42_water_demand** added water abstraction type dimension for non-ag uses
