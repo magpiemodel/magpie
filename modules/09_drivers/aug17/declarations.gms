@@ -27,7 +27,7 @@ parameters
   i09_gdp_pc_ppp_raw(t_all,i,pop_gdp_scen09)       Per capita income in purchasing power parity (USD17PPP per cap per yr)
   i09_gdp_pc_ppp_iso_raw(t_all,iso,pop_gdp_scen09) Per capita income in purchasing power parity (USD17PPP per cap per yr)
   im_gdp_pc_ppp_iso(t_all,iso)                     Per capita income in purchasing power parity (USD17PPP per cap per yr)
-
+    
 * Development State
   im_development_state(t_all,i)                Development state according to the World Bank definition where 0=low income country 1=high income country in high income level  (1)
   im_physical_inactivity(t_all,iso,sex,age)    Share of population which is physically inactive (1)

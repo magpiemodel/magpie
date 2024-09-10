@@ -29,12 +29,12 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov44_bv_loss(t,j,type)                Change in biodiversity stock (Mha per year)
- ov_cost_bv_loss(t,j,type)             Biodiversity cost (USD17MER)
+ ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD17MER)
  ov_bv(t,j,landcover44,potnatveg,type) Biodiversity stock for all land cover classes (Mha)
  ov44_bv_weighted(t,j,type)            Range-rarity weighted biodiversity stock (Mha)
  oq44_bv_loss(t,j,type)                Change in biodiversity stock (Mha per year)
  oq44_bv_weighted(t,j,type)            Range-rarity weighted biodiversity stock (Mha)
- oq44_cost_bv_loss(t,j,type)           Cost of biodiversity loss (USD17MER)
+ oq44_cost_bv_loss(t,j,type)           Cost of biodiversity loss (mio USD17MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

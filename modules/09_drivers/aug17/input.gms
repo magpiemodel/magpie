@@ -52,3 +52,10 @@ table f09_physical_inactivity(t_all,iso,pop_gdp_scen09,sex,age) Share of populat
 $ondelim
 $include "./modules/09_drivers/input/f09_physical_inactivity.cs3"
 $offdelim;
+
+parameter fm_gdp_defl_ppp(iso) GDP deflator
+/
+$ondelim
+$include "./modules/09_drivers/input/fm_gdp_defl_ppp.cs4"
+$offdelim
+/;
