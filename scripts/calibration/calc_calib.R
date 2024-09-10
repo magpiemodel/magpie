@@ -67,7 +67,7 @@ get_yieldcalib <- function(gdx_file) {
 
   y_ini <- prep(readGDX(gdx_file, "i14_yields", "i14_yields_calib",
                         format = "first_found", react = "silent"))
-  y     <- prep(readGDX(gdx_file, "vm_yld")[, , "l"])
+  y     <- prep(readGDX(gdx_file, "vm_yld")[, , "level"])
 
   out <- y / y_ini
   out[out == 0] <- 1
