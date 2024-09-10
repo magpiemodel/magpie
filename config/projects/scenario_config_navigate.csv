@@ -1,0 +1,6 @@
+;NAVIGATE_AllOff;NAVIGATE_LandSup;NAVIGATE_LandDem;NAVIGATE_AllOn
+gms$s15_exo_waste;0;0;1;1
+gms$s15_exo_diet;0;0;1;1
+gms$c57_macc_version;PBL_2022;PBL_2022;PBL_2022;PBL_2022
+gms$c57_macc_scenario;Default;Optimistic;Default;Optimistic
+gms$s58_rewetting_switch;0;1;0;1

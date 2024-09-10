@@ -36,11 +36,12 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
 
 cfg$output <- c("output_check", "extra/disaggregation", "rds_report")
 
+#load config presetswrite it before starting the run.
 preset <-  "GENIE_SCP"
-cfg <- setScenario(cfg, c(preset)) #load config presetswrite it before starting the run.
+cfg <- setScenario(cfg, c(preset), scenario_config = "config/projects/scenario_config_genie.csv")
 
 cfg$force_replace <- TRUE
-cfg$qos <- "standby_maxMem_dayMax"
+cfg$qos <- "standby"
 
 ### Identifier and folder
 ###############################################
@@ -81,13 +82,7 @@ for (bl in blV) {
   cfg$gms$c22_protect_scenario <- pa
 
   for (mp in mpV) {
-
-    if (mp != 0){
-      m = 100 - mp
-      cfg$gms$c15_rumdairy_scp_scen <- paste0("sigmoid_", m, "pc_25_50")
-    } else {
-      cfg$gms$c15_rumdairy_scp_scen <- "constant"
-    }
+    cfg$gms$s15_rumdairy_scp_substitution <- mp / 100
 
     preflag <- paste0("MP", str_pad(mp, 2, pad = "0"),
       "BI", str_pad(bl * 100, 2, pad = "0")

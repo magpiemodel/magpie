@@ -54,7 +54,8 @@ start_run(cfg,codeCheck=FALSE)
 
 ### SSP2-Tland NDC rcp2p6 ##########################
 cfg$title <- "SSP2-Tland_NDC_rcp2p6"
-cfg <- setScenario(cfg,c("SSP2","Tland","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg,c("SSP2","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg, c("Tland"), scenario_config = "config/projects/scenario_config_gcs.csv")
 start_run(cfg,codeCheck=FALSE)
 
 ### SSP1 NDC rcp2p6 ##########################
@@ -93,14 +94,16 @@ start_run(cfg,codeCheck=FALSE)
 
 ### SSP2-Tland with climate policy parametrized from R21M42-SSP2-PkBudg900
 cfg$title <- "SSP2-Tland_ssp2pkbudg900_rcp2p6"
-cfg <- setScenario(cfg,c("SSP2","Tland","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg,c("SSP2","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg, c("Tland"), scenario_config = "config/projects/scenario_config_gcs.csv")
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
 start_run(cfg,codeCheck=FALSE)
 
 ### SSP2-Tland with climate policy parametrized from R21M42-SDP-PkBudg1000
 cfg$title <- "SSP2-Tland_sdppkbudg1000_rcp2p6"
-cfg <- setScenario(cfg,c("SSP2","Tland","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg,c("SSP2","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg, c("Tland"), scenario_config = "config/projects/scenario_config_gcs.csv")
 cfg$gms$c56_pollutant_prices <- "R21M42-SDP-PkBudg1000"
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 start_run(cfg,codeCheck=FALSE)
@@ -114,14 +117,16 @@ start_run(cfg,codeCheck=FALSE)
 
 ### SSP1-Tland with climate policy parametrized from R21M42-SSP1-PkBudg900
 cfg$title <- "SSP1-Tland_ssp1pkbudg900_rcp2p6"
-cfg <- setScenario(cfg,c("SSP1","Tland","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg,c("SSP1","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg, c("Tland"), scenario_config = "config/projects/scenario_config_gcs.csv")
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP1-PkBudg900"
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP1-PkBudg900"
 start_run(cfg,codeCheck=FALSE)
 
 ### SSP1-Tland with climate policy parametrized from R21M42-SDP-PkBudg1000
 cfg$title <- "SSP1-Tland_sdppkbudg1000_rcp2p6"
-cfg <- setScenario(cfg,c("SSP1","Tland","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg,c("SSP1","NDC","cc","rcp2p6"))
+cfg <- setScenario(cfg, c("Tland"), scenario_config = "config/projects/scenario_config_gcs.csv")
 cfg$gms$c56_pollutant_prices <- "R21M42-SDP-PkBudg1000"
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 start_run(cfg,codeCheck=FALSE)
