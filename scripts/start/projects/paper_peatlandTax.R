@@ -23,13 +23,14 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax22"
+cfg$info$flag <- "PTax23"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
+cfg$output <- c(cfg$output, "extra/highres")
 cfg$force_replace <- TRUE
 cfg$force_download <- FALSE
-cfg$qos <- "standby_maxMem"
+cfg$qos <- "standby_maxMem_dayMax"
 
 # support function to create standardized title
 .title <- function(cfg, ...)
@@ -144,7 +145,7 @@ cfg$gms$livestock <- "fbask_jan16_sticky"
 cfg$gms$s56_c_price_induced_aff <- 0
 
 ## Start scenarios
-for (res in c("c400", "c1000")) {
+for (res in c("c400")) {
   if (res == "c400") 
     cfg$input['cellular'] <- "rev4.111_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
   else if (res == "c1000") {
