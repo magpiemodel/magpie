@@ -38,6 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
 - **15_food** fixing parameter declaration of i15_processed_kcal_structure_iso
 - **80_optimization** bugfix for variables levels not obeying the bounds in nlp_par, `conopt` changed to `conopt3`
+- **35_natveg** bugfix secdforest and other land restoration to avoid double-counting of restoration in equation `q29_land_snv`
 
 
 ## [4.8.1] - 2024-06-19

@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax23"
+cfg$info$flag <- "PTax24"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
