@@ -174,6 +174,7 @@ p35_restoration_shift(j) = p35_land_restoration(j,"secdforest") - pc35_max_fores
 p35_restoration_shift(j)$(p35_restoration_shift(j) < 1e-6) = 0;
 p35_restoration_shift(j)$(p35_restoration_shift(j) > p35_land_restoration(j,"secdforest")) = p35_land_restoration(j,"secdforest");
 p35_land_restoration(j,"secdforest") = p35_land_restoration(j,"secdforest") - p35_restoration_shift(j);
+pm_land_conservation(t,j,"secdforest","restore") = p35_land_restoration(j,"secdforest");
 pm_land_conservation(t,j,"other","restore") = pm_land_conservation(t,j,"other","restore") + p35_restoration_shift(j);
 
 * set conservation bound
@@ -204,6 +205,7 @@ p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
 * Do not restore other land in areas where total natural
 * land area meets the total natural land conservation target
 p35_land_restoration(j,"other")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
+pm_land_conservation(t,j,"other","restore") = p35_land_restoration(j,"other");
 * set conservation bound
 vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
 
