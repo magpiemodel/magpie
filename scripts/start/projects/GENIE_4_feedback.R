@@ -36,8 +36,9 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
 
 cfg$output <- c("output_check", "extra/disaggregation", "rds_report")
 
+#load config presetswrite it before starting the run.
 preset <-  "GENIE_SCP"
-cfg <- setScenario(cfg, c(preset)) #load config presetswrite it before starting the run.
+cfg <- setScenario(cfg, c(preset), scenario_config = "config/projects/scenario_config_genie.csv")
 
 cfg$force_replace <- FALSE
 
@@ -77,35 +78,29 @@ for (bl in blV) {
  cfg$gms$c22_protect_scenario <- pa
 
  for (mp in mpV) {
+  cfg$gms$s15_rumdairy_scp_substitution <- mp / 100
 
-    if (mp != 0){
-      m = 100 - mp
-      cfg$gms$c15_rumdairy_scp_scen <- paste0("sigmoid_", m, "pc_25_50")
-    } else {
-      cfg$gms$c15_rumdairy_scp_scen <- "constant"
-    }
-
-    preflag <- paste0("MP", str_pad(mp, 2, pad = "0"),
-    "BD", bd, "BI", str_pad(bl * 100, 2, pad = "0")
-    )
-    cfg$results_folder <- paste(
-    # "output", identifierFlag, preflag, ":title:", sep = "/"
-    "output", identifierFlag, ":title:", sep = "/"
-    )
-    
-    n <- "Feedback_step13_400f"
-    m <- n
-    cfg$gms$c60_2ndgen_biodem <- n
-    cfg$gms$c56_pollutant_prices <- m
+  preflag <- paste0("MP", str_pad(mp, 2, pad = "0"),
+  "BD", bd, "BI", str_pad(bl * 100, 2, pad = "0")
+  )
+  cfg$results_folder <- paste(
+  # "output", identifierFlag, preflag, ":title:", sep = "/"
+  "output", identifierFlag, ":title:", sep = "/"
+  )
+  
+  n <- "Feedback_step13_400f"
+  m <- n
+  cfg$gms$c60_2ndgen_biodem <- n
+  cfg$gms$c56_pollutant_prices <- m
 
 
-    ##############################################
-    #runflag <- paste("feedback", f_flag, sep = "_")
-    runflag <- paste0(m, "") 
+  ##############################################
+  #runflag <- paste("feedback", f_flag, sep = "_")
+  runflag <- paste0(m, "") 
 
-    cfg$title <- paste0(preflag, runflag)
+  cfg$title <- paste0(preflag, runflag)
 
-    start_run(cfg, codeCheck = FALSE)
+  start_run(cfg, codeCheck = FALSE)
 
 
  } # MP replacement
