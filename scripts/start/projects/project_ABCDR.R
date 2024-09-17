@@ -19,14 +19,13 @@ source("config/default.cfg")
 #download_and_update(cfg)
 
 # create additional information to describe the runs
-cfg$info$flag <- "ABCDR07"
+cfg$info$flag <- "ABCDR08"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
 cfg$force_download <- FALSE
 
 cfg$qos <- "standby_maxMem_dayMax"
-#cfg$qos <- "priority"
 
 # support function to create standardized title
 .title <- function(cfg, ...) return(paste(cfg$info$flag, sep="_",...))
@@ -40,7 +39,6 @@ cfg$input['cellular'] <- "rev4.111_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM
 ssp <- "SSP2"
 
 cfg$gms$cropland <- "detail_apr24"
-# cfg$gms$croparea <- "detail_apr24"
 
 
 cfg$gms$scen_countries15  <- isoCountriesEUR
@@ -53,8 +51,12 @@ cfg$gms$s29_treecover_penalty_before <- 0
 cfg$gms$s29_treecover_penalty <- 5000
 cfg$gms$s30_betr_penalty <- 0
 
+cfg$gms$s29_fader_functional_form <- 1   # linear fader
+cfg$gms$s29_treecover_scenario_start <- 2025
+cfg$gms$s29_treecover_scenario_target <- 2060
+
 for (pol in c("NDC","1p5deg","1p5deg-Diet")) {
-  for (shr in c(0, 0.005, 0.01, 0.02)) {
+  for (shr in c(0, 0.005, 0.01, 0.02)) { # share in 2045
     cfg$title <- .title(cfg, paste(ssp,pol,paste0("AFS_tree_",sub("\\.","p",as.character(shr*100))),sep="-"))
     if (pol == "NDC") {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp4p5"))
@@ -75,7 +77,7 @@ for (pol in c("NDC","1p5deg","1p5deg-Diet")) {
       cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
       cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
     }
-    cfg$gms$s29_treecover_target <- shr
+    cfg$gms$s29_treecover_target <- shr / (2045 - 2025) * (2060 - 2025) # Continue linear increase after 2045 until 2060
     cfg$gms$s30_betr_target <- 0
     start_run(cfg, codeCheck = FALSE)
   }

@@ -6,10 +6,16 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** Trajectory for cropland scenarios
-* sigmoidal interpolation between start year and target year
-m_sigmoid_time_interpol(i29_snv_scenario_fader,s29_snv_scenario_start,s29_snv_scenario_target,0,1);
-m_sigmoid_time_interpol(i29_treecover_scenario_fader,s29_treecover_scenario_start,s29_treecover_scenario_target,0,1);
-m_sigmoid_time_interpol(i29_fallow_scenario_fader,s29_fallow_scenario_start,s29_fallow_scenario_target,0,1);
+* linear or sigmoidal interpolation between start year and target year
+if (s29_fader_functional_form = 1,
+  m_linear_time_interpol(i29_snv_scenario_fader,s29_snv_scenario_start,s29_snv_scenario_target,0,1);
+  m_linear_time_interpol(i29_treecover_scenario_fader,s29_treecover_scenario_start,s29_treecover_scenario_target,0,1);
+  m_linear_time_interpol(i29_fallow_scenario_fader,s29_fallow_scenario_start,s29_fallow_scenario_target,0,1);
+elseif s29_fader_functional_form = 2,
+  m_sigmoid_time_interpol(i29_snv_scenario_fader,s29_snv_scenario_start,s29_snv_scenario_target,0,1);
+  m_sigmoid_time_interpol(i29_treecover_scenario_fader,s29_treecover_scenario_start,s29_treecover_scenario_target,0,1);
+  m_sigmoid_time_interpol(i29_fallow_scenario_fader,s29_fallow_scenario_start,s29_fallow_scenario_target,0,1);
+);
 
 * linear interpolation to estimate the cropland that
 * requires relocation due to SNV policy
