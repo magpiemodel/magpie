@@ -40,7 +40,7 @@ source("scripts/start_functions.R")
 # Plausible values for "res" (high resolution): "c1000" and "c2000"
 # Options for "tc" (13_tc realization): NULL (no change), "exo" and "endo_jan22"
 
-highres <- function(cfg = cfg, res = "c2000", tc = NULL) {
+highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   #lock the model folder
   lockId <- gms::model_lock(timeout1 = 24)
   withr::defer(gms::model_unlock(lockId))
