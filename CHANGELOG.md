@@ -20,6 +20,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** split scenario_config into project-specific configs
 - **config** initial treecover on cropland starts from zero
 - **config** additional data update additional_data_rev4.53.tgz
+- **29_cropland** added option for linear and sigmoidal faders
+
 
 ### added
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
