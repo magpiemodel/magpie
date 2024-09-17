@@ -33,6 +33,7 @@ scalars
  s29_fallow_max                  Maximum share of fallow land on total cropland (1) / 0.4 /
  s29_fallow_penalty              Penalty for violation of fallow target (USD05MER per ha) / 500 /
  s29_treecover_map               Treecover map for initialization (binary) / 0 /
+ s29_fader_functional_form       Switch for functional form of faders (1) / 2 /
 ;
 
 
