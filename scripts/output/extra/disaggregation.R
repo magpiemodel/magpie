@@ -68,7 +68,6 @@ if (length(map_file) > 1) {
   base::message(message)
   x <- .fixCoords(x)
   write.magpie(x, file, comment = comment)
-  write.magpie(x, sub(".mz", ".nc", file), comment = comment)
 }
 
 .dissagcrop <- function(gdx, land_hr, map_file) {
