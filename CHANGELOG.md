@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** additional data update additional_data_rev4.53.tgz
 - **29_cropland** added option for linear and sigmoidal faders
 - **scripts** output/extra/highres.R use default 13_tc realization
+- **scripts** `.nc` files are no longer created by default after disaggregation
 
 
 ### added
@@ -34,9 +35,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **cropland** added option for discarding initial treecover on cropland
 - **script** added output script for conversion of validation.mif file into validation.rds
 - **script** for downscaling to 0.25 deg using LUH2v2h as reference via mrdownscale
+- **config** added `scenario_config_year_fix.csv` for choosing until when parameters are fixed to SSP2 values
+- **scripts** added start script for 'Healthly Landscapes' paper `paper_healthyLscps.R`
+- **scripts** added script for automatic submission of SEALS allocation runs `./extra/runSEALSallocation.R`
 
 ### removed
--
+
 
 ### fixed
 - **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
@@ -50,7 +54,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **29_ageclass** module 29_ageclass has been renamed to 28_ageclass to make space for `29_cropland` just before `30_croparea`
 - **30_crop** module `30_crop` renamed to `30_croparea`, which now only accounts for crop area.
-- **30_crop** Semi-Natural Vegetation (SNV) implementation has been moved from `30_crop` to `29_cropland` 
+- **30_crop** Semi-Natural Vegetation (SNV) implementation has been moved from `30_crop` to `29_cropland`
 - **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
 - **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
 - **default.cfg** update additional data to rev4.51
