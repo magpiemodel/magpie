@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** initial treecover on cropland starts from zero
 - **config** additional data update additional_data_rev4.53.tgz
 - **29_cropland** added option for linear and sigmoidal faders
+- **scripts** output/extra/highres.R use default 13_tc realization
 
 
 ### added
