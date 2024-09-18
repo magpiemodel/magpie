@@ -23,8 +23,8 @@ else
                                  + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_dummy(iso));
 );
 
-option nlp = conopt4
-
+option nlp = conopt4;
+option threads = 1;
 
 *' @code
 *' Within the major food groups determined by the regressions
@@ -241,7 +241,7 @@ solve m15_food_demand USING nlp MAXIMIZING v15_objective;
 * in case of problems try CONOPT3
 if(m15_food_demand.modelstat > 2,
   display "Modelstat > 2 | Retry solve with CONOPT3";
-  option nlp = conopt;
+  option nlp = conopt3;
   solve m15_food_demand USING nlp MAXIMIZING v15_objective;
   option nlp = conopt4;
 );

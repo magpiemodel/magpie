@@ -15,7 +15,7 @@
 *' Peatland area change:
 
  q58_peatlandChange(j2,land58) ..
-        v58_peatlandChange(j2,land58) =e= v58_peatland(j2,land58)-pc58_peatland(j2,land58);
+  v58_peatlandChange(j2,land58) =e= v58_peatland(j2,land58)-pc58_peatland(j2,land58);
  
 *' Managed land area:
 
@@ -30,27 +30,29 @@
  q58_manLandRed(j2,manPeat58) ..
   v58_manLandRed(j2,manPeat58) =e= m58_LandMerge(vm_landreduction,vm_landreduction_forestry,"j2");
 
-*' Future peatland dynamics (`v58_peatland`) depend on changes in managed land (`v58_manLandExp`, `v58_manLandRed`), 
-*' multiplied with corresponding scaling factors for expansion (`v58_scalingFactorExp`) and reduction (`p58_scalingFactorRed`). 
-*' The scaling factor for expansion makes sure that in case the full cell area consists of 
-*' managed land (cropland, pasture, forestry plantations), the full peatland area is drained. 
-*' Likewise, the scaling factor for reduction makes sure that in case no area is used for managed land, 
-*' managed peatland (`manPeat58`) is reduced to zero. 
-*' In case managed land remains unchanged, also managed peatland remains unchanged. 
+*' Future peatland dynamics (`v58_peatland`) for drained peatlands used as cropland, pasture or forestry (`manPeat58`) 
+*' depend on changes in managed agricultural and forestry land (`v58_manLandExp`, `v58_manLandRed`), 
+*' multiplied with corresponding scaling factors for expansion (`p58_scalingFactorExp`) and reduction (`p58_scalingFactorRed`). 
+*' Both scaling factors are time-dynamic, i.e. the scaling factors vary depending on changes in drained peatland and managed land.
+*' The scaling factor for expansion reflects the ratio of available area for peatland drainage and managed land expansion, 
+*' based on the assumption that the expansion of drained peatland is proportional to the expansion of managed land.
+*' The scaling factor for reduction reflects the ratio of drained peatland and total peatland area, 
+*' based on the assumption that the likelihood of peatland rewetting increases with a higher share of 
+*' drained peatland over total peatland area. 
+*' Therefore, the scaling factor for peatland reduction increases with an increasing share of drained peatland 
+*' and decreases with a decreasing share of drained peatland. 
+*' In case managed land remains unchanged, also drained peatland remains unchanged. 
 
  q58_peatlandMan(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,manPeat58) =e= 
     pc58_peatland(j2,manPeat58) 
-    + v58_manLandExp(j2,manPeat58) * v58_scalingFactorExp(j2,manPeat58)
-    - v58_manLandRed(j2,manPeat58) * sum(ct, p58_scalingFactorRed(ct,j2,manPeat58)); 
+    + v58_manLandExp(j2,manPeat58) * sum(ct, p58_scalingFactorExp(ct,j2)) - v58_balance(j2,manPeat58)
+    - v58_manLandRed(j2,manPeat58) * sum(ct, p58_scalingFactorRed(ct,j2,manPeat58)) + v58_balance2(j2,manPeat58);
 
-*' Peatland scaling factor for expansion: (maxPeatland - totalManagedPeatland) / (maxLand - totalManagedLand). 
-*' See macro `m58_LandLeft` for details.
+*' Drained peatland used for agriculture and forestry cannot exceed corresponding managed land.
 
-q58_scalingFactorExp(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
-  v58_scalingFactorExp(j2,manPeat58) * m58_LandLeft(pcm_land,"land",v58_manLand,pc58_manLand) + v58_balance(j2,manPeat58)
-  =e= 
-  m58_LandLeft(pc58_peatland,"land58",v58_peatland,pc58_peatland);
+ q58_peatlandMan2(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
+  v58_peatland(j2,manPeat58) =l= v58_manLand(j2,manPeat58);
 
 *' Costs for peatland degradation and rewetting
 
@@ -58,7 +60,7 @@ q58_scalingFactorExp(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   vm_peatland_cost(j2) =e= sum(cost58, v58_peatland_cost_annuity(j2,cost58))
               + v58_peatland(j2,"rewetted") * sum(ct, i58_cost_rewet_recur(ct))
               + sum(manPeat58, v58_peatland(j2,manPeat58)) * sum(ct, i58_cost_drain_recur(ct))
-              + sum(manPeat58, v58_balance(j2,manPeat58)) * s58_balance_penalty;
+              + sum(manPeat58, v58_balance(j2,manPeat58)+v58_balance2(j2,manPeat58)) * s58_balance_penalty;
 
  q58_peatland_cost_annuity(j2,cost58) ..
   v58_peatland_cost_annuity(j2,cost58) =g=
