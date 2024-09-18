@@ -192,16 +192,6 @@ cfg <- bau(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
-# BAU_RCP26 #
-# Decomposition Scenario. Apply lower climate impacts based on RCP 2.6 to BAU
-cfg$title <- "BAU_RCP26"
-# standard setting
-cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
-cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
-# scenario settings
-cfg <- bau(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
 # BAU_NoCC #
 # Decomposition scenario. Remove climate impacts (NoCC) from BAU to isolate climate effects
 cfg$title <- "BAU_NoCC"
@@ -212,17 +202,6 @@ cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/sce
 cfg <- bau(cfg = cfg)
 # deactivate labor productivity climate impacts
 cfg$gms$labor_prod <- "off"
-start_run(cfg, codeCheck = FALSE)
-
-# BAU_MITI #
-# Decomposition Scenario. Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
-cfg$title <- "BAU_MITI"
-# standard setting, but with NDC activated (for miti)
-cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
-cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
-# scenario settings
-cfg <- bau(cfg = cfg)
-cfg <- miti(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # EL2 #
@@ -289,20 +268,6 @@ cfg <- bau(cfg = cfg)
 cfg <- miti(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
-start_run(cfg, codeCheck = FALSE)
-
-# ELM_RCP70 #
-# Decomposition Scenario. Applies RCP 7.0 climate impacts to ELM
-cfg$title <- "ELM_RCP70"
-# standard setting, but with NDC activated (for miti)
-cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
-cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
-# scenario settings
-cfg <- bau(cfg = cfg)
-cfg <- miti(cfg = cfg)
-cfg <- diet(cfg = cfg)
-cfg <- prod(cfg = cfg)
-cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM_NoCC #
