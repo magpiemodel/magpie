@@ -6,18 +6,16 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: checks variables for constraint violations
+# description: converts validation.mif file into validation.rds for use in shinyresults
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
 #########################
-#### check obb ####
+#### convert validation.mif ####
 #########################
 # Version 1.0, Florian Humpenoeder
 #
-library(gdx2)
-library(lucode2)
-library(magclass)
+library(quitte)
 
 options(error=function()traceback(2))
 
@@ -33,23 +31,14 @@ cat("\nStarting output generation\n")
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
-  gdx<-file.path(outputdir[i],"fulldata.gdx")
-  if(file.exists(gdx)) {
-    x <- readGDX(gdx, "ov*", types="parameters", field = "All")
-    for(i in names(x)) {
-      print(i)
-      try(z <- where(x[[i]][,,"level"] < x[[i]][,,"lower"] | x[[i]][,,"level"] > x[[i]][,,"upper"])$true, silent = TRUE)
-      if(exists("z")) {
-        if (length(z$individual) > 0) {
-          for (r in z$regions) {
-            for (y in z$years) {
-              print(paste(i,r,y))
-              print(x[[i]][r,y,])
-            }
-          }
-        }
-        rm(z)
-      }
-    }
+  val<-file.path(outputdir[i],"validation.mif")
+  rds <- file.path(outputdir[i],"validation.rds")
+  if(file.exists(val)) {
+    q <- read.quitte(val)
+    # as.quitte converts "World" into "GLO". But we want to keep "World" and therefore undo these changes
+    q <- droplevels(q)
+    levels(q$region)[levels(q$region) == "GLO"] <- "World"
+    q$region <- factor(q$region,levels = sort(levels(q$region)))
+    saveRDS(q, file = rds, version = 2)
   }
 }
