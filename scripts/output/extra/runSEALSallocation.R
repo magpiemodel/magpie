@@ -104,7 +104,7 @@ reportLandUseForSEALS(
     overwrite = TRUE
   )
 
-  main <- readLines(file.path(dirProject, "scripts/run_test_standard.py"))
+  main <- readLines(file.path(dirProject, "scripts", "run_test_standard.py"))
 
   main[min(which(grepl("    p.user_dir =", main)))] <- paste0("    p.user_dir = \'", dirBaseFiles, "\'")
   main[min(which(grepl("    p.extra_dirs", main)))] <- paste0("    p.extra_dirs = '.'")
