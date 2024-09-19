@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Starts SEALS allocation run based on gridded MAgPIE land cover projections (SEALS)
+# description: Starts SEALS allocation run based on gridded MAgPIE land cover projections
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
