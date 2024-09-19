@@ -139,7 +139,7 @@ reportLandUseForSEALS(
   submit <- c(
     "#!/bin/bash", "\n",
     paste0("#SBATCH --qos=", qos),
-    ifelse(qos %in% c("priority", "standby"), "#SBATCH --partition=priority", "#SBATCH --partition=standard"),
+    if (qos %in% c("priority", "standby")) "#SBATCH --partition=priority" else "#SBATCH --partition=standard",
     "#SBATCH --job-name=seals_allocation",
     paste0("#SBATCH --chdir=", normalizePath(file.path(dirProject, "scripts"))),
     "#SBATCH --output=outfile_%j.out",
