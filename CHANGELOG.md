@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **29_cropland** added option for linear and sigmoidal faders
 - **scripts** output/extra/highres.R use default 13_tc realization
 - **scripts** `.nc` files are no longer created by default after disaggregation
+- **config** `cfg$gms$land_snv`changed from "secdforest, forestry, past, other" to "secdforest, other"
 
 
 ### added
