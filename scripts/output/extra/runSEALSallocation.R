@@ -81,7 +81,7 @@ if (length(list.files(dirBaseFiles)) == 0) {
     "directory under 'User settings' of the",
     "extra/runSEALSallocation.R script."
   ))
-} else if (length(list.files(dirBaseFiles)) == 0) {
+} else if (length(list.files(dirSEALS)) == 0) {
   stop(paste(
     "Please set the path to your local clone",
     "of the SEALS code under 'User settings' of the",
