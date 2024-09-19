@@ -94,6 +94,8 @@ miniforgePath <- "/p/projects/rd3mod/miniforge3/bin/activate"
 
 # create output directory
 dirProject <- "./output/seals"
+message(paste("Stitched SEALS allocation outputs are written to", 
+  "'./output/seals/intermediate/stitched_lulc_simplified_scenarios'"))
 
 if (!dir.exists(file.path(dirProject))) {
   dir.create(file.path(dirProject), recursive = TRUE)
