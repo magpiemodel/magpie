@@ -39,10 +39,6 @@ if (!exists("source_include")) {
 # for instructions on how to set up a python environment for SEALS
 sealsEnv <- "seals_dev"
 
-### Path to miniforge installation
-# For instructions on how to install miniforge see https://github.com/conda-forge/miniforge
-miniforgePath <- "/home/vjeetze/miniforge3/bin/activate"
-
 ### Path to SEALS base input file directory
 dirBaseFiles <- "/p/projects/magpie/users/vjeetze/seals/files"
 
@@ -77,6 +73,36 @@ reportLandUseForSEALS(
 # ========================
 # Setup SEALS run
 # ========================
+
+# Check whether base data and local SEALS code repo exist
+if (length(list.files(dirBaseFiles)) == 0) {
+  stop(paste(
+    "Please set the path to the SEALS base data",
+    "directory under 'User settings' of the",
+    "extra/runSEALSallocation.R script."
+  ))
+} else if (length(list.files(dirBaseFiles)) == 0) {
+  stop(paste(
+    "Please set the path to your local clone",
+    "of the SEALS code under 'User settings' of the",
+    "extra/runSEALSallocation.R script."
+  ))
+}
+
+### Path to miniforge installation
+miniforgePath <- "/p/projects/rd3mod/miniforge3/bin/activate"
+
+# create output directory
+dirProject <- "./output/seals"
+
+if (!dir.exists(file.path(dirProject))) {
+  dir.create(file.path(dirProject), recursive = TRUE)
+}
+
+iniLock <- file.path(dirProject, ".lock")
+lockOn <- filelock::lock(iniLock, exclusive = TRUE, timeout = Inf)
+Sys.chmod(iniLock, mode = "0664")
+
 
 # --------------------------------
 # Prepare SEALS start script
@@ -166,17 +192,6 @@ reportLandUseForSEALS(
     return(id)
   }
 }
-
-# create output directory
-dirProject <- "./output/seals"
-
-if (!dir.exists(file.path(dirProject))) {
-  dir.create(file.path(dirProject), recursive = TRUE)
-}
-
-iniLock <- file.path(dirProject, ".lock")
-lockOn <- filelock::lock(iniLock, exclusive = TRUE, timeout = Inf)
-Sys.chmod(iniLock, mode = "0664")
 
 # --------------------------------
 # Run SEALS allocation
