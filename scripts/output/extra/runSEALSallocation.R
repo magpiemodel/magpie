@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Starts SEALS allocation run based on gridded MAgPIE land cover projections (SEALS)
+# description: Starts SEALS allocation run based on gridded MAgPIE land cover projections
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -130,7 +130,7 @@ Sys.chmod(iniLock, mode = "0664")
     overwrite = TRUE
   )
 
-  main <- readLines(file.path(dirProject, "scripts/run_test_standard.py"))
+  main <- readLines(file.path(dirProject, "scripts", "run_test_standard.py"))
 
   main[min(which(grepl("    p.user_dir =", main)))] <- paste0("    p.user_dir = \'", dirBaseFiles, "\'")
   main[min(which(grepl("    p.extra_dirs", main)))] <- paste0("    p.extra_dirs = '.'")
@@ -165,7 +165,7 @@ Sys.chmod(iniLock, mode = "0664")
   submit <- c(
     "#!/bin/bash", "\n",
     paste0("#SBATCH --qos=", qos),
-    ifelse(qos %in% c("priority", "standby"), "#SBATCH --partition=priority", "#SBATCH --partition=standard"),
+    if (qos %in% c("priority", "standby")) "#SBATCH --partition=priority" else "#SBATCH --partition=standard",
     "#SBATCH --job-name=seals_allocation",
     paste0("#SBATCH --chdir=", normalizePath(file.path(dirProject, "scripts"))),
     "#SBATCH --output=outfile_%j.out",
