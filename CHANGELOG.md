@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ### added
+- **scripts** added output script converting all grid-level .mz files to .nc (netCDF)
 - **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
 - **scripts** added out of bounds check as output script
 - **70_livestock** added realization `fbask_jan16_sticky`
