@@ -25,7 +25,7 @@ cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
 cfg$force_download <- FALSE
 
-cfg$qos <- "standby_maxMem_dayMax"
+cfg$qos <- "standby_highMem_dayMax"
 
 # support function to create standardized title
 .title <- function(cfg, ...) return(paste(cfg$info$flag, sep="_",...))

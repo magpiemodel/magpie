@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** output/extra/highres.R use default 13_tc realization
 - **scripts** `.nc` files are no longer created by default after disaggregation
 - **config** `cfg$gms$land_snv`changed from "secdforest, forestry, past, other" to "secdforest, other"
+- **config** Submissions with high memory requirements now get 16 CPUs and 80GB of memory to account for the new specifications of PIK's new HPC 'Foote'. `maxMem` was renamed to `highMem`, because 80GB of memory does not correspond to the maximum available memory of a compute node.
 
 
 ### added

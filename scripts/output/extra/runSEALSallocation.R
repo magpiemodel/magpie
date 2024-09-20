@@ -94,8 +94,6 @@ miniforgePath <- "/p/projects/rd3mod/miniforge3/bin/activate"
 
 # create output directory
 dirProject <- "./output/seals"
-message(paste("Stitched SEALS allocation outputs are written to", 
-  "'./output/seals/intermediate/stitched_lulc_simplified_scenarios'"))
 
 if (!dir.exists(file.path(dirProject))) {
   dir.create(file.path(dirProject), recursive = TRUE)
@@ -203,7 +201,11 @@ if (!is.null(lockOn)) {
   sealsLock <- file.path(dirProject, "seals.lock")
 
   if (!file.exists(sealsLock) || file.size(sealsLock) == 0) {
-    message("Starting SEALS allocation with input data creation.")
+    message(paste(
+      "Starting SEALS allocation with input data creation.\n",
+      "Stitched SEALS allocation outputs will be written to",
+      "'./output/seals/intermediate/stitched_lulc_simplified_scenarios'"
+    ))
     .setupSEALSrun(
       title = title,
       dir = outputdir,
@@ -223,7 +225,12 @@ if (!is.null(lockOn)) {
 
     writeLines(id, sealsLock)
   } else {
-    message("Starting SEALS allocation using existing input data.")
+    message(paste(
+      "Starting SEALS allocation using existing input data.\n",
+      "Stitched SEALS allocation outputs will be written to",
+      "'./output/seals/intermediate/stitched_lulc_simplified_scenarios'"
+    ))
+
     id <- readLines(sealsLock)
 
     .setupSEALSrun(

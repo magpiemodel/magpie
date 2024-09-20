@@ -27,7 +27,7 @@ cfg$results_folder <- "output/:title::date:"
 cfg$force_download <- TRUE
 
 # Special outputs required for Deep Dive
-cfg$qos <- "standby_maxMem_dayMax"
+cfg$qos <- "standby_highMem_dayMax"
 cfg$output <- c(
   "output_check",
   # "extra/highres", # do manually on last magpie run

@@ -39,7 +39,7 @@ cfg$gms$c37_labor_uncertainty <- "ensmean"
 
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2","extra/highres")
-cfg$qos <- "priority_maxMem"
+cfg$qos <- "priority_highMem"
 
 #### Main scenarios
 
