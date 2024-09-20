@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -27,7 +27,7 @@ cfg$results_folder <- "output/:title::date:"
 cfg$force_download <- TRUE
 
 # Special outputs required for Deep Dive
-cfg$qos <- "standby_maxMem_dayMax"
+cfg$qos <- "standby_highMem_dayMax"
 cfg$output <- c(
   "output_check",
   "extra/highres",
@@ -240,7 +240,7 @@ cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/sce
 cfg <- bau(cfg = cfg)
 # Mitigation
 cfg <- miti(cfg = cfg)
-# ecoSysProtAll_agMgmtOff: 
+# ecoSysProtAll_agMgmtOff:
 # (Above ground CO2 emis from LUC in forest, forestry, natveg; All types of emis from peatland; No further CH4/N2O/other emis related to ag. management)
 cfg$gms$c56_emis_policy <- "ecoSysProtAll_agMgmtOff"
 start_run(cfg, codeCheck = FALSE)

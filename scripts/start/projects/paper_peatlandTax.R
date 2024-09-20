@@ -30,7 +30,7 @@ cfg$results_folder_highres <- "output"
 cfg$output <- c(cfg$output, "extra/highres")
 cfg$force_replace <- TRUE
 cfg$force_download <- FALSE
-cfg$qos <- "standby_maxMem_dayMax"
+cfg$qos <- "standby_highMem_dayMax"
 
 # support function to create standardized title
 .title <- function(cfg, ...)
@@ -55,7 +55,7 @@ calc_ghgprice <- function() {
   T0 <- read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
   T0 <- collapseNames(T0[, , getNames(T0, dim = 2)[1]])
   T0[, , ] <- 0
-  
+
   #T200 200 USD/tCO2 in 2050
   T200 <- new.magpie(getRegions(T0), c(seq(1995, 2025, by = 5), 2050, 2100, 2150), getNames(T0), fill = 0)
   T200[, "y2025", "co2_c"] <- 0
@@ -68,12 +68,12 @@ calc_ghgprice <- function() {
   T200[, , "n2o_n_direct"] <- T200[, , "co2_c"] * 265 * 44 / 28
   T200[, , "n2o_n_indirect"] <- T200[, , "co2_c"] * 265 * 44 / 28
   T200[, , "co2_c"] <- T200[, , "co2_c"] * 44 / 12
-  
+
   T50 <- T200 * 0.25
   T100 <- T200 * 0.5
   T400 <- T200 * 2
   T800 <- T200 * 4
-  
+
   GHG <- mbind(
     add_dimension(T0, dim = 3.2, add = "scen", nm = "T0-GHG"),
     add_dimension(
@@ -107,16 +107,16 @@ calc_ghgprice <- function() {
       nm = "T800-GHG"
     )
   )
-  
+
   CO2 <- GHG
   CO2[, , c("ch4", "n2o_n_direct", "n2o_n_indirect")] <- 0
   getNames(CO2, dim = 2) <- gsub("GHG", "CO2", getNames(CO2, dim = 2))
-  
+
   GHGCH4GWP20 <- GHG
   GHGCH4GWP20[, , "ch4"] <- GHGCH4GWP20[, , "ch4"] / 28 * 84
   getNames(GHGCH4GWP20, dim = 2) <- gsub("GHG", "GHG-GWP20", getNames(GHGCH4GWP20, dim =
                                                                         2))
-  
+
   GHG <- mbind(CO2, GHG, GHGCH4GWP20)
   if (!dir.exists("./patch_inputdata"))
     dir.create("./patch_inputdata")
@@ -126,7 +126,7 @@ calc_ghgprice <- function() {
   write.magpie(GHG, file_name = "patch_inputdata/patchGHGprices/f56_pollutant_prices.cs3")
   tardir("patch_inputdata/patchGHGprices",
          "patch_inputdata/patchGHGprices.tgz")
-  
+
   unlink("patch_inputdata/patchGHGprices", recursive = TRUE)
   return(getNames(GHG, dim = 2))
 }
@@ -146,7 +146,7 @@ cfg$gms$s56_c_price_induced_aff <- 0
 
 ## Start scenarios
 for (res in c("c400")) {
-  if (res == "c400") 
+  if (res == "c400")
     cfg$input['cellular'] <- "rev4.111_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
   else if (res == "c1000") {
     cfg$input['cellular'] <- "rev4.111_36f73207_10f98ac1_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
@@ -156,7 +156,7 @@ for (res in c("c400")) {
   cfg$gms$c56_mute_ghgprices_until <- "y2150"
   cfg$gms$c56_pollutant_prices <- "T0-CO2"
   start_run(cfg, codeCheck = FALSE)
-  
+
   ## Policy scenarios
   for (tax in c("T50-CO2",
                 "T100-CO2",

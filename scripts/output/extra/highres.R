@@ -104,7 +104,7 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   cfg$gms$s_use_gdx   <- 2
 
   #max resources for parallel runs
-  cfg$qos <- "standby_maxMem_dayMax"
+  cfg$qos <- "standby_highMem_dayMax"
 
   # set force download to FALSE
   # otherwise data is download again when calling start_run(), which overwrites
@@ -156,7 +156,7 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   write.magpie(readGDX(gdx,"f56_pollutant_prices_emulator"),"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
   write.magpie(readGDX(gdx,"f60_bioenergy_dem_coupling"),"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   write.magpie(readGDX(gdx,"f60_bioenergy_dem_emulator"),"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
-  
+
   #get regional afforestation patterns from low resolution run with c200
   aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)
   #Take away initial NDC area for consistency with global afforestation limit
