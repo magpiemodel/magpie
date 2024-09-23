@@ -6,10 +6,16 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** Trajectory for cropland scenarios
-* sigmoidal interpolation between start year and target year
-m_sigmoid_time_interpol(i29_snv_scenario_fader,s29_snv_scenario_start,s29_snv_scenario_target,0,1);
-m_sigmoid_time_interpol(i29_treecover_scenario_fader,s29_treecover_scenario_start,s29_treecover_scenario_target,0,1);
-m_sigmoid_time_interpol(i29_fallow_scenario_fader,s29_fallow_scenario_start,s29_fallow_scenario_target,0,1);
+* linear or sigmoidal interpolation between start year and target year
+if (s29_fader_functional_form = 1,
+  m_linear_time_interpol(i29_snv_scenario_fader,s29_snv_scenario_start,s29_snv_scenario_target,0,1);
+  m_linear_time_interpol(i29_treecover_scenario_fader,s29_treecover_scenario_start,s29_treecover_scenario_target,0,1);
+  m_linear_time_interpol(i29_fallow_scenario_fader,s29_fallow_scenario_start,s29_fallow_scenario_target,0,1);
+elseif s29_fader_functional_form = 2,
+  m_sigmoid_time_interpol(i29_snv_scenario_fader,s29_snv_scenario_start,s29_snv_scenario_target,0,1);
+  m_sigmoid_time_interpol(i29_treecover_scenario_fader,s29_treecover_scenario_start,s29_treecover_scenario_target,0,1);
+  m_sigmoid_time_interpol(i29_fallow_scenario_fader,s29_fallow_scenario_start,s29_fallow_scenario_target,0,1);
+);
 
 * linear interpolation to estimate the cropland that
 * requires relocation due to SNV policy
@@ -23,11 +29,14 @@ elseif s29_snv_shr > s29_snv_relocation_data_x1,
 
 
 * Initial tree cover on cropland is assumed to be equally distributed among all age-classes
-pc29_treecover_share(j) = 0;
-pc29_treecover_share(j)$(pm_land_hist("y2015",j,"crop") > 1e-10) = f29_treecover(j) / pm_land_hist("y2015",j,"crop");
-pc29_treecover_share(j)$(pc29_treecover_share(j) > s29_treecover_max) = s29_treecover_max;
-pc29_treecover(j,ac) = (pc29_treecover_share(j) * pm_land_hist("y1995",j,"crop")) / card(ac);
-
+if (s29_treecover_map = 1,
+  pc29_treecover_share(j) = 0;
+  pc29_treecover_share(j)$(pm_land_hist("y2015",j,"crop") > 1e-10) = f29_treecover(j) / pm_land_hist("y2015",j,"crop");
+  pc29_treecover_share(j)$(pc29_treecover_share(j) > s29_treecover_max) = s29_treecover_max;
+  pc29_treecover(j,ac) = (pc29_treecover_share(j) * pm_land_hist("y1995",j,"crop")) / card(ac);
+elseif s29_treecover_map = 0,
+  pc29_treecover(j,ac) = 0
+);
 vm_treecover.l(j) = sum(ac, pc29_treecover(j,ac));
 
 *' Switch for tree cover on cropland:

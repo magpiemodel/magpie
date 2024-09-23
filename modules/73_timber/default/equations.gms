@@ -55,7 +55,7 @@ q73_prod_woodfuel(j2)..
 *' Production of residues is calculated based on `s73_residue_ratio`. This fraction
 *' of industrial roundwood production is assumed to be lost during harvesting processes.
 *' USDA reports that ca. 30% of roundwood harvested are residues (@oswalt2019forest).
-*' Not all of this residue is recoverwed from forest and we assume 50% of residue
+*' Not all of this residue is recovered from forest and we assume 50% of residue
 *' removal based on @pokharel2017factors. These numbers (residue levels and residude
 *' removals vary strongly among different studies, the numbers used here are from
 *' a USDA report on state of forests in USA which has consistent reporting over years)
