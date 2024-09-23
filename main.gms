@@ -221,7 +221,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  DC4GDP2017_2017USD_oldCalib
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
