@@ -26,7 +26,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** `.nc` files are no longer created by default after disaggregation
 - **config** `cfg$gms$land_snv`changed from "secdforest, forestry, past, other" to "secdforest, other"
 - **config** Submissions with high memory requirements now get 16 CPUs and 80GB of memory to account for the new specifications of PIK's new HPC 'Foote'. `maxMem` was renamed to `highMem`, because 80GB of memory does not correspond to the maximum available memory of a compute node.
-
+- **inputdata** changed GDP base year from 2005USD to 2017USD
+- **config** changed default input data to use 2017USD
+- **module_documentation** all references to USD05 changed to USD17
 
 ### added
 - **scripts** added output script converting all grid-level .mz files to .nc (netCDF)
