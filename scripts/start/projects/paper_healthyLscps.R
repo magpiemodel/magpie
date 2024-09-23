@@ -84,7 +84,7 @@ for (ssp in SSPs) {
 
     source("config/default.cfg")
 
-    cfg$qos <- "short_maxMem"
+    cfg$qos <- "short_highMem"
 
     cfg$results_folder <- "output/:title::date:"
 
