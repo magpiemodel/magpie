@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -50,12 +50,12 @@ cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
 
-### BE 
+### BE
 cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
 cfg$gms$c60_bioenergy_subsidy <- 0
 
 ### Tau / Yield
-cfg$gms$tc <- "exo" 
+cfg$gms$tc <- "exo"
 
 ### Biodiv
 blV <- c(0) #BII lower bound (0-1), default 0
@@ -87,7 +87,7 @@ for (bl in blV) {
   # "output", identifierFlag, preflag, ":title:", sep = "/"
   "output", identifierFlag, ":title:", sep = "/"
   )
-  
+
   n <- "Feedback_step13_400f"
   m <- n
   cfg$gms$c60_2ndgen_biodem <- n
@@ -96,7 +96,7 @@ for (bl in blV) {
 
   ##############################################
   #runflag <- paste("feedback", f_flag, sep = "_")
-  runflag <- paste0(m, "") 
+  runflag <- paste0(m, "")
 
   cfg$title <- paste0(preflag, runflag)
 

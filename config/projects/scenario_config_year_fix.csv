@@ -1,0 +1,16 @@
+﻿;fix_2020;fix_2025
+gms$sm_fix_SSP2;2020;2025
+gms$sm_fix_cc;2020;2025
+gms$s15_food_substitution_start;2020;2025
+gms$s15_exo_foodscen_start;2020;2025
+gms$s21_trade_tariff_startyear;2020;2025
+gms$s22_conservation_start;2020;2025
+gms$s29_snv_scenario_start;2020;2025
+gms$s29_treecover_scenario_start;2020;2025
+gms$s29_fallow_scenario_start;2020;2025
+gms$s30_betr_scenario_start;2020;2025
+gms$s30_rotation_scenario_start;2020;2025
+gms$s38_startyear_labor_substitution;2020;2025
+gms$s42_efp_startyear;2020;2025
+gms$s44_start_year;2020;2025
+gms$s70_feed_substitution_start;2020;2025
