@@ -15,6 +15,7 @@ library(luscale)
 library(luplot)
 library(lusweave)
 library(magpiesets)
+library(gdx2)
 
 ############################# BASIC CONFIGURATION ##############################
 if (!file.exists(paste0(outputdir, "/LUH2_croparea_0.5.mz"))) stop("Cell validation is not possible. LUH2_croparea_0.5.mz and MAPSPAM_croparea_0.5.mz files are missing")

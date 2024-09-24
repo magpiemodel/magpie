@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 option nlp = conopt4;
+option threads = 1;
 
 * A new iteration is started
 p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
@@ -42,7 +43,7 @@ solve m15_food_demand USING nlp MAXIMIZING v15_objective;
 * in case of problems try CONOPT3
 if(m15_food_demand.modelstat > 2,
   display "Modelstat > 2 | Retry solve with CONOPT3";
-  option nlp = conopt;
+  option nlp = conopt3;
   solve m15_food_demand USING nlp MAXIMIZING v15_objective;
   option nlp = conopt4;
 );
@@ -221,17 +222,62 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                *(p15_kcal_pc_calibrated_plant_orig(t,i)
                + p15_kcal_pc_calibrated_rumdairy_orig(t,i) * (1-i15_rumdairy_fadeout(t,i)));
 
-*** Substitution of ruminant meat and dairy products (kfo_rd) with single-cell protein (SCP) based on protein/cap/day
-i15_protein_to_kcal_ratio(t,kfo) =  fm_nutrition_attributes(t,kfo,"protein")/fm_nutrition_attributes(t,kfo,"kcal");
-* Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day
-* using i15_protein_to_kcal_ratio(t,kfo_rd).
-* After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted
-* back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
-p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") +
-  sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) *
-  i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
+*' @code
+*' Substitution of ruminant meat and dairy products (kfo_rd) with single-cell protein (SCP) based on protein/cap/day:
+*'
+*' Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day using i15_protein_to_kcal_ratio(t,kfo_rd).
+*' After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted 
+*' back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
+*'
+*' Protein to kcal ratio:
+i15_protein_to_kcal_ratio(t,kfo) = fm_nutrition_attributes(t,kfo,"protein") / fm_nutrition_attributes(t,kfo,"kcal");
+*'
+*' Increase of single-cell protein (SCP):
+p15_protein_pc_scp(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) * i15_protein_to_kcal_ratio(t,kfo_rd);
+p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") + sum(kfo_rd, p15_protein_pc_scp(t,i,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
+*'
+*' Reduction of ruminant meat and dairy products (kfo_rd):
 p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_rumdairy_scp_fadeout(t,i);
-
+*'
+*' Plant oil and sugar demands as ingredients for animal-free milk alternative production using single cell protein 
+*' are calculated based on the ratio of fat or sugar to protein in cow milk. 
+*' This ratio is typically reported on a mass basis, but the ratio is converted here to be based on caloric content. 
+*' Cow milk content is chosen as the dominant source of milk produced globally.
+*' Data sources: @muehlhoff_milk_2013 and @fao_food_2004
+*'
+p15_kcal_pc_calibrated(t,i,"oils") = p15_kcal_pc_calibrated(t,i,"oils") 
+   + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_protein_pc_scp(t,i,kfo_rd)) / 
+     s15_scp_protein_per_milk * s15_scp_fat_per_milk * fm_nutrition_attributes(t,"oils", "kcal");
+*'
+p15_kcal_pc_calibrated(t,i,"sugar") = p15_kcal_pc_calibrated(t,i,"sugar") 
+   + sum(kfo_rd$sameas(kfo_rd,"livst_milk"), p15_protein_pc_scp(t,i,kfo_rd)) / 
+     s15_scp_protein_per_milk * s15_scp_sugar_per_milk * fm_nutrition_attributes(t, "sugar" ,"kcal");
+*' 
+*' The ratio of fat to protein in raw microbial biomass (used as single cell protein) is much lower than for 
+*' plant based meat alternatives and animal based meat products. If the desired microbial product is alternative meat, 
+*' this may require supplementation with plant based fats to more closely match other existing products. 
+*' It is therefore possible to choose whether microbial biomass should be supplemented with plant based oil, 
+*' which drives additional demand for plant based oil production in MAgPIE. 
+*' For alternative microbial meats supplemented with fat, the desired fat to protein ratio is given 
+*' as 2:3 on a mass basis, analogous to similar products. Because microbial biomass already contains some fats, 
+*' the additional amount of plant based fat needed is given as the difference between the amount of fat present 
+*' in microbial biomass and the amount of fat needed to reach the desired protein to fat ratio. 
+*' Unlike additional plant oil and sugar demand for microbial milk, the additional amount of plant fat needed 
+*' for microbial meat is calculated dynamically based on the protein content of microbial biomass. 
+*' This is because the microbial protein content varies depending on the specific type of microbes used 
+*' (e.g. bacteria or funghi), whereas the nutritional content of cow milk is assumed to be fixed. 
+*' If the microbial protein is therefore changed, the amount of fat must also change to keep the same 
+*' fat to protein ratio. It is also assumed, unlike for microbial milk, that additional carbohydrates 
+*' (e.g., sugar) are not required for alternative microbial meats. This is because meat products contain 
+*' very little or no carbohydrates. 
+*' Data sources: @mazac_novelfoods_2023 and @jarvio_LCA_MP_2021
+*' 
+p15_kcal_pc_calibrated(t,i,"oils")$(s15_scp_supplement_fat_meat = 1) = p15_kcal_pc_calibrated(t,i,"oils") 
+   + sum(kfo_rd$sameas(kfo_rd,"livst_rum"), p15_protein_pc_scp(t,i,kfo_rd)) / 
+     fm_nutrition_attributes(t,"scp", "protein") * (fm_nutrition_attributes(t,"scp", "protein") * 
+     s15_scp_fat_protein_ratio_meat - s15_scp_fat_content) * fm_nutrition_attributes(t,"oils", "kcal");
+*' 
+*' @stop
 
 * Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_supply_target.
 * Optional substitution with plant-based products depending on s15_livescen_target_subst.

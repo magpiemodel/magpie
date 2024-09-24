@@ -12,6 +12,7 @@ s80_resolve_option = 0;
 
 *** solver settings
 option nlp = conopt4;
+option threads = 1;
 magpie.optfile   = s80_optfile;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
@@ -24,6 +25,14 @@ $offecho
 $onecho > conopt4.op2
 Flg_Prep = FALSE
 $offecho
+
+$onecho > conopt4.op3
+Flg_NoDefc = TRUE
+$offecho
+
+if(execerror > 0, 
+  abort "Execution error. Check your .lst file.";
+);
 
 *' @code
 solve magpie USING nlp MINIMIZING vm_cost_glo;
@@ -57,8 +66,12 @@ if (magpie.modelstat > 2,
       option nlp = conopt4;
       magpie.optfile = 2;
     elseif s80_resolve_option = 4,
+      display "Modelstat > 2 | Retry solve with CONOPT4 w/o search for definitional constraints";
+      option nlp = conopt4;
+      magpie.optfile = 3;
+    elseif s80_resolve_option = 5,
       display "Modelstat > 2 | Retry solve with CONOPT3";
-      option nlp = conopt;
+      option nlp = conopt3;
       magpie.optfile = 0;
      );
 
@@ -81,7 +94,7 @@ if (magpie.modelstat > 2,
 *   Otherwise, the repeat loop will never end.
     magpie.modelStat$(magpie.modelStat=NA) = 13;
 
-    s80_resolve_option$(s80_resolve_option >= 4) = 0;
+    s80_resolve_option$(s80_resolve_option >= 5) = 0;
 
     until (magpie.modelstat <= 2 or s80_counter >= s80_maxiter)
   );

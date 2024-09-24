@@ -19,6 +19,7 @@ magpie.holdfixed = 1 ;
 * linear solver
 option lp         = cplex ;
 option qcp        = cplex ;
+option threads = 1;
 $onecho > cplex.opt
 $offecho
 
@@ -134,7 +135,7 @@ $batinclude "./modules/include.gms" nl_relax
 * if s80_add_conopt3 is 1 add additional solve statement for conopt3
     if((s80_add_conopt3 = 1),
       display "Additional solve with CONOPT3!";
-      option nlp = conopt;
+      option nlp = conopt3;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
       option nlp = conopt4;
@@ -153,7 +154,7 @@ $batinclude "./modules/include.gms" nl_relax
 * if solve stopped with an error, try it again with conopt3
     if ((magpie.modelstat = 13),
       display "WARNING: Modelstat 13 | retry with CONOPT3!";
-      option nlp = conopt;
+      option nlp = conopt3;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
       option nlp = conopt4;

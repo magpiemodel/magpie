@@ -200,7 +200,7 @@ fsecScenario <- function(scenario) {
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
-  cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/scenario_fsec.csv")
+  cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/projects/scenario_config_fsec.csv")
 
   # Download gridded population data
   gms::download_unpack(input = "FSEC_populationScenarios_v2_22-08-22.tgz",
@@ -214,7 +214,7 @@ fsecScenario <- function(scenario) {
   # general
   cfg$title       <- paste(v, scenario, sep = "")
   cfg$recalibrate <- FALSE
-  cfg$qos         <- "standby_maxMem_dayMax"
+  cfg$qos         <- "standby_highMem_dayMax"
   cfg$output      <- c("extra/highres",
                        "extra/disaggregation",
                        "projects/FSEC_nitrogenPollution",

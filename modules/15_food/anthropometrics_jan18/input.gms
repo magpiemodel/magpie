@@ -88,6 +88,7 @@ s15_exo_foodscen_functional_form           Switch for functional form of exogeno
 s15_exo_foodscen_start                     Food substitution start year        / 2025 /
 s15_exo_foodscen_target                    Food substitution target year       / 2050 /
 s15_exo_foodscen_convergence               Convergence to exogenous food scenario (1) / 1 /
+s15_scp_supplement_fat_meat                Switch for supplemental fat needed as ingredient for scp-based meat alternatives (1) / 0 /
 ;
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)

@@ -39,7 +39,7 @@ calibration_run <- function(putfolder, calib_magpie_name, logoption = 3) {
 get_areacalib <- function(gdx_file) {
   require(magclass)
   require(magpie4)
-  require(gdx)
+  require(gdx2)
   data <- readGDX(gdx_file, "pm_land_start")[, , c("crop", "past")]
   data <- dimSums(data, dim = 1.2)
   magpie <- land(gdx_file)[, , c("crop", "past")]
@@ -54,7 +54,7 @@ get_areacalib <- function(gdx_file) {
 
 get_yieldcalib <- function(gdx_file) {
   require(magclass)
-  require(gdx)
+  require(gdx2)
   require(luscale)
 
   prep <- function(x) {
@@ -67,7 +67,7 @@ get_yieldcalib <- function(gdx_file) {
 
   y_ini <- prep(readGDX(gdx_file, "i14_yields", "i14_yields_calib",
                         format = "first_found", react = "silent"))
-  y     <- prep(readGDX(gdx_file, "vm_yld")[, , "l"])
+  y     <- prep(readGDX(gdx_file, "vm_yld")[, , "level"])
 
   out <- y / y_ini
   out[out == 0] <- 1
@@ -81,6 +81,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.1, calibrate_pasture = TRU
                          n_maxcalib = 20, best_calib = FALSE) {
   require(magclass)
   require(magpie4)
+  require(gdx2)
   if (!(modelstat(gdx_file)[1, 1, 1] %in% c(1, 2, 7))) stop("Calibration run infeasible")
 
   area_factor  <- get_areacalib(gdx_file)

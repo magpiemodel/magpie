@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -36,8 +36,9 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
 
 cfg$output <- c("output_check", "extra/disaggregation", "rds_report")
 
+#load config presetswrite it before starting the run.
 preset <-  "GENIE_SCP"
-cfg <- setScenario(cfg, c(preset)) #load config presetswrite it before starting the run.
+cfg <- setScenario(cfg, c(preset), scenario_config = "config/projects/scenario_config_genie.csv")
 
 cfg$force_replace <- FALSE
 
@@ -49,12 +50,12 @@ cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
 
-### BE 
+### BE
 cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
 cfg$gms$c60_bioenergy_subsidy <- 0
 
 ### Tau / Yield
-cfg$gms$tc <- "exo" 
+cfg$gms$tc <- "exo"
 
 ### Biodiv
 blV <- c(0) #BII lower bound (0-1), default 0
@@ -77,35 +78,29 @@ for (bl in blV) {
  cfg$gms$c22_protect_scenario <- pa
 
  for (mp in mpV) {
+  cfg$gms$s15_rumdairy_scp_substitution <- mp / 100
 
-    if (mp != 0){
-      m = 100 - mp
-      cfg$gms$c15_rumdairy_scp_scen <- paste0("sigmoid_", m, "pc_25_50")
-    } else {
-      cfg$gms$c15_rumdairy_scp_scen <- "constant"
-    }
+  preflag <- paste0("MP", str_pad(mp, 2, pad = "0"),
+  "BD", bd, "BI", str_pad(bl * 100, 2, pad = "0")
+  )
+  cfg$results_folder <- paste(
+  # "output", identifierFlag, preflag, ":title:", sep = "/"
+  "output", identifierFlag, ":title:", sep = "/"
+  )
 
-    preflag <- paste0("MP", str_pad(mp, 2, pad = "0"),
-    "BD", bd, "BI", str_pad(bl * 100, 2, pad = "0")
-    )
-    cfg$results_folder <- paste(
-    # "output", identifierFlag, preflag, ":title:", sep = "/"
-    "output", identifierFlag, ":title:", sep = "/"
-    )
-    
-    n <- "Feedback_step13_400f"
-    m <- n
-    cfg$gms$c60_2ndgen_biodem <- n
-    cfg$gms$c56_pollutant_prices <- m
+  n <- "Feedback_step13_400f"
+  m <- n
+  cfg$gms$c60_2ndgen_biodem <- n
+  cfg$gms$c56_pollutant_prices <- m
 
 
-    ##############################################
-    #runflag <- paste("feedback", f_flag, sep = "_")
-    runflag <- paste0(m, "") 
+  ##############################################
+  #runflag <- paste("feedback", f_flag, sep = "_")
+  runflag <- paste0(m, "")
 
-    cfg$title <- paste0(preflag, runflag)
+  cfg$title <- paste0(preflag, runflag)
 
-    start_run(cfg, codeCheck = FALSE)
+  start_run(cfg, codeCheck = FALSE)
 
 
  } # MP replacement

@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -36,11 +36,13 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
 
 cfg$output <- c("output_check", "rds_report")
 
+#load config presetswrite it before starting the run.
 preset <-  "GENIE_SCP"
-cfg <- setScenario(cfg, c(preset)) #load config presetswrite it before starting the run.
+cfg <- setScenario(cfg, c(preset), scenario_config = "config/projects/scenario_config_genie.csv")
 
 cfg$force_replace <- FALSE
 cfg$qos <- "priority"
+cfg$partition <- "priority"
 
 ### Identifier and folder
 ###############################################
@@ -50,7 +52,7 @@ cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
 
-### BE 
+### BE
 cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
 cfg$gms$c60_bioenergy_subsidy <- 0
 beV <- c(0, 5, 7, 10, 15, 25, 45)
@@ -82,12 +84,7 @@ for (bl in blV) {
     cfg$results_folder <- paste("output", identifierFlag, preflag, ":title:", sep = "/")
     cfg$info$flag2 <- preflag
 
-    if (mp != 0){
-      m = 100 - mp
-      cfg$gms$c15_rumdairy_scp_scen <- paste0("sigmoid_", m, "pc_25_50")
-    } else {
-      cfg$gms$c15_rumdairy_scp_scen <- "constant"
-    }
+    cfg$gms$s15_rumdairy_scp_substitution <- mp / 100
 
     for (be in beV) {
       cfg$gms$s60_bioenergy_gj_price_1st <- be

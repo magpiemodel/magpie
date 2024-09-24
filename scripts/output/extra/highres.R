@@ -13,7 +13,7 @@
 # Author: Florian Humpenoeder
 
 library(magclass)
-library(gdx)
+library(gdx2)
 library(magpie4)
 library(lucode2)
 library(gms)
@@ -37,7 +37,10 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-highres <- function(cfg) {
+# Plausible values for "res" (high resolution): "c1000" and "c2000"
+# Options for "tc" (13_tc realization): NULL (no change), "exo" and "endo_jan22"
+
+highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   #lock the model folder
   lockId <- gms::model_lock(timeout1 = 24)
   withr::defer(gms::model_unlock(lockId))
@@ -45,9 +48,6 @@ highres <- function(cfg) {
   if(any(!(modelstat(gdx) %in% c(2,7)))) stop("Modelstat different from 2 or 7 detected")
 
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
-
-  # set high resolution, available options are c1000 and c2000
-  res <- "c1000"
 
   # search for matching high resolution file in repositories
   # pattern: "rev4.65_h12_*_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
@@ -104,7 +104,7 @@ highres <- function(cfg) {
   cfg$gms$s_use_gdx   <- 2
 
   #max resources for parallel runs
-  cfg$qos <- "standby_maxMem_dayMax"
+  cfg$qos <- "standby_highMem_dayMax"
 
   # set force download to FALSE
   # otherwise data is download again when calling start_run(), which overwrites
@@ -139,10 +139,12 @@ highres <- function(cfg) {
   f21_trade_balance <- toolAggregate(ov_prod_reg - (ov_supply + import_for_feasibility), supreg)
   write.magpie(f21_trade_balance, paste0("modules/21_trade/input/f21_trade_balance.cs3"))
 
-  #get tau from low resolution run with c200
-  ov_tau <- readGDX(gdx, "ov_tau",select=list(type="level"))
-  write.magpie(ov_tau,"modules/13_tc/input/f13_tau_scenario.csv")
-  cfg$gms$tc <- "exo"
+  if(!is.null(tc)) {
+    #get tau from low resolution run with c200
+    ov_tau <- readGDX(gdx, "ov_tau",select=list(type="level"))
+    write.magpie(ov_tau,"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- tc
+  }
 
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
@@ -154,7 +156,7 @@ highres <- function(cfg) {
   write.magpie(readGDX(gdx,"f56_pollutant_prices_emulator"),"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
   write.magpie(readGDX(gdx,"f60_bioenergy_dem_coupling"),"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   write.magpie(readGDX(gdx,"f60_bioenergy_dem_emulator"),"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
-  
+
   #get regional afforestation patterns from low resolution run with c200
   aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)
   #Take away initial NDC area for consistency with global afforestation limit
