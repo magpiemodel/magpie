@@ -37,5 +37,5 @@ if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
 
 # in case bootstrapping fails halfway, install piamenv and rely on requirement auto-fixing
 if (tryCatch(utils::packageVersion("piamenv") < "0.5.5", error = function(error) TRUE)) {
-  renv::install("piamenv", type = getOption("pkgType"), prompt = FALSE)
+  renv::install("piamenv", prompt = FALSE)
 }
