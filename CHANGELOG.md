@@ -7,50 +7,63 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **config** The default realization for the 38_factor_costs module was switched to `sticky_feb18`. In this realization, capital stocks and their depreciation are tracked, giving some inertia to random relocation of production, improving high resolution outputs.
-- **21_trade** refactor equations for enhanced readablility and improve documentation
-- **scripts** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
+-
+
+### added
+-
+
+### removed
+-
+
+### fixed
+-
+
+
+## [4.8.2] - 2024-09-24
+
+### changed
 - **15_food** revision of MP/SCP implementation for milk and meat alternatives. Added demand for fat and sugar as ingredients for MP-based milk alternatives. Added optional demand for fat as ingredient for MP-based meat alternatives.
-- **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
-- **80_optimization** abort GAMS in case of execution errors, added threads = 1 as default to avoid infeasibilites and Flg_NoDefc = TRUE as option
-- **config** default settings for 58_peatland revised
-- **58_peatland** variable `v58_scalingFactorExp` converted into parameter `p58_scalingFactorExp` to avoid infeasibilites. `p58_scalingFactorRed` has been revised.
-- **32_forestry** Interfaces `vm_landexpansion_forestry` and `vm_landreduction_forestry` have been corrected by harvested and replanted timber plantation area
-- **script** updated EATLancet project start scripts
-- **script** replaced gdx package with gdx2 package calls
-- **config** split scenario_config into project-specific configs
-- **config** initial treecover on cropland starts from zero
-- **config** additional data update additional_data_rev4.53.tgz
+- **21_trade** refactor equations for enhanced readablility and improve documentation
 - **29_cropland** added option for linear and sigmoidal faders
-- **scripts** output/extra/highres.R use default 13_tc realization
-- **scripts** `.nc` files are no longer created by default after disaggregation
+- **32_forestry** Interfaces `vm_landexpansion_forestry` and `vm_landreduction_forestry` have been corrected by harvested and replanted timber plantation area
+- **58_peatland** variable `v58_scalingFactorExp` converted into parameter `p58_scalingFactorExp` to avoid infeasibilites. `p58_scalingFactorRed` has been revised.
+- **80_optimization** abort GAMS in case of execution errors, added threads = 1 as default to avoid infeasibilites and Flg_NoDefc = TRUE as option
 - **config** `cfg$gms$land_snv`changed from "secdforest, forestry, past, other" to "secdforest, other"
+- **config** additional data update additional_data_rev4.53.tgz
+- **config** default settings for 58_peatland revised
+- **config** initial treecover on cropland starts from zero
+- **config** split scenario_config into project-specific configs
 - **config** Submissions with high memory requirements now get 16 CPUs and 80GB of memory to account for the new specifications of PIK's new HPC 'Foote'. `maxMem` was renamed to `highMem`, because 80GB of memory does not correspond to the maximum available memory of a compute node.
+- **config** The default realization for the 38_factor_costs module was switched to `sticky_feb18`. In this realization, capital stocks and their depreciation are tracked, giving some inertia to random relocation of production, improving high resolution outputs.
+- **script** replaced gdx package with gdx2 package calls
+- **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
+- **script** updated EATLancet project start scripts
+- **scripts** `.nc` files are no longer created by default after disaggregation
+- **scripts** output/extra/highres.R use default 13_tc realization
+- **scripts** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
 
 
 ### added
-- **scripts** added output script converting all grid-level .mz files to .nc (netCDF)
-- **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
-- **scripts** added out of bounds check as output script
-- **70_livestock** added realization `fbask_jan16_sticky`
-- **script** check of variables needed in piamInterfaces in report_rds.R
 - **42_water_demand** added water abstraction type dimension for non-ag uses
 - **56_ghg_policy** added optional temporal and regional fader for GHG emission pricing policy
+- **70_livestock** added realization `fbask_jan16_sticky`
+- **config** added `scenario_config_year_fix.csv` for choosing until when parameters are fixed to SSP2 values
 - **cropland** added option for discarding initial treecover on cropland
 - **script** added output script for conversion of validation.mif file into validation.rds
+- **script** check of variables needed in piamInterfaces in report_rds.R
 - **script** for downscaling to 0.25 deg using LUH2v2h as reference via mrdownscale
-- **config** added `scenario_config_year_fix.csv` for choosing until when parameters are fixed to SSP2 values
-- **scripts** added start script for 'Healthly Landscapes' paper `paper_healthyLscps.R`
+- **scripts** added out of bounds check as output script
+- **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
+- **scripts** added output script converting all grid-level .mz files to .nc (netCDF)
 - **scripts** added script for automatic submission of SEALS allocation runs `./extra/runSEALSallocation.R`
-
-### removed
+- **scripts** added start script for 'Healthly Landscapes' paper `paper_healthyLscps.R`
 
 
 ### fixed
-- **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
 - **15_food** fixing parameter declaration of i15_processed_kcal_structure_iso
-- **80_optimization** bugfix for variables levels not obeying the bounds in nlp_par, `conopt` changed to `conopt3`
 - **35_natveg** bugfix secdforest and other land restoration to avoid double-counting of restoration in equation `q29_land_snv`
+- **80_optimization** bugfix for variables levels not obeying the bounds in nlp_par, `conopt` changed to `conopt3`
+- **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
 
 
 ## [4.8.1] - 2024-06-19
@@ -1011,7 +1024,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.8.1...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.8.2...develop
+[4.8.2]: https://github.com/magpiemodel/magpie/compare/v4.8.1...v4.8.2
 [4.8.1]: https://github.com/magpiemodel/magpie/compare/v4.8.0...v4.8.1
 [4.8.0]: https://github.com/magpiemodel/magpie/compare/v4.7.3...v4.8.0
 [4.7.3]: https://github.com/magpiemodel/magpie/compare/v4.7.2...v4.7.3
