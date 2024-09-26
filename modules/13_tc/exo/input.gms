@@ -15,7 +15,7 @@ $offdelim
 
 $setglobal c13_tccost  medium
 
-table f13_tc_factor(t_all,scen13) Regression factor (USD05PPP per ha)
+table f13_tc_factor(t_all,scen13) Regression factor (USD17MER per ha)
 $ondelim
 $include "./modules/13_tc/input/f13_tc_factor.cs3"
 $offdelim

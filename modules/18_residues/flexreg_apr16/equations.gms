@@ -108,10 +108,10 @@
                   );
 
 *' Costs of residues production are determined as factor costs per ton
-*' assuming 15 USD per ton, using the lower range from
+*' assuming 15 USD17MER per ton, using the lower range from
 *' [this source](hwww1.agric.gov.ab.ca/$Department/deptdocs.nsf/All/faq7514),
 *' 10USD baling costs per large round bale plus 2USD pro bale stocking and hauling,
-*' 1 large round bale is approximately 500 kg, resulting in 24USD per ton,
+*' 1 large round bale is approximately 500 kg, resulting in 24USD17MER per ton,
 *' for developing prices see [here](citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.557.5823&rep=rep1&type=pdf).
 *' Tha calcuated factor costs per ton are therefore 24 for `res_cereals`, `res_fibrous`
 *' and `res_nonfibrous`.
