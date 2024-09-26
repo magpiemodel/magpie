@@ -148,25 +148,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.112DC_GDP2017_h12_magpie.tgz
-* md5sum: 86f9d7b7efb543e017959f3c69380a55
-* Repository: /p/projects/rd3mod/inputdata/output_1.27
+* Used data set: rev4.112_h12_magpie.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.112DC_GDP2017_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 9023d9affc5e0ad1ee7c5f8d40cb5baf
-* Repository: /p/projects/rd3mod/inputdata/output_1.27
+* Used data set: rev4.112_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.112DC_GDP2017_h12_validation.tgz
-* md5sum: a2a8886d20c347ed26d3562c6ba8809f
-* Repository: /p/projects/rd3mod/inputdata/output_1.27
+* Used data set: rev4.112_h12_validation.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.53devGDP2017.tgz
-* md5sum: dbc43a67f3a803c8a6aa4aa251fdc18f
-* Repository: /p/projects/landuse/data/input/archive
+* Used data set: additional_data_rev4.55.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_26Mar24.tgz
-* md5sum: d295e7ff0c65d97c1e0b84c440d0056b
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_26Mar24_fixed.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Sep  6 15:10:50 2024
+* Last modification (input data): Tue Sep 24 17:20:08 2024
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
