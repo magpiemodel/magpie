@@ -28,6 +28,8 @@ q70_feed(i2,kap,kall) ..
 *' productivity trajectories for simplification. Therefore,
 *' `i70_cost_regr(i,kli,"cost_regr_b")` is set to zero in the case of livestock
 *' products generated in monogastric systems.
+*' Note that regression coefficients are still based on USD04MER values, while other
+*' monetary units in MAgPIE have been updated to USD17MER.
 
 *' To account for increased hourly labor costs and producitivity in case of an external 
 *' wage scenario, the total labor costs are scaled by the corresponding increase in hourly

@@ -165,6 +165,8 @@ q15_regr_kcal(iso) ..
 *' This equation estimates key dietary composition regressision factors,
 *' such as the share of animal products, empty calories, or
 *' fruits, vegetables and nuts.
+*' Note that regression coefficients are still based on USD05PPP values, but apllied
+*' to income in USD17PPP since monetary units in MAgPIE have been updated.
 
 q15_regr(iso, regr15) ..
          v15_demand_regr(iso, regr15) =e=
