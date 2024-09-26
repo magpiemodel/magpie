@@ -67,7 +67,7 @@ sets
                       UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                       VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
-land_snv(land) land types allowed in the SNV policy / secdforest, forestry, past, other /
+land_snv(land) land types allowed in the SNV policy / secdforest, other /
 ;
 
 ********* AVAILABLE CROPLAND *******************************************
