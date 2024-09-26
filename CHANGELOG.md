@@ -3,20 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-
 ## [Unreleased]
 
 ### changed
--
-
-### added
--
-
-### removed
--
-
-### fixed
--
+- **11_costs** changed equation to fix bug in total water cost calculation 
 
 
 ## [4.8.2] - 2024-09-24
