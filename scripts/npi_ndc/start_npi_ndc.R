@@ -182,7 +182,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   npi_aff <- droplevels(subset(pol_def, policy=="npi" & landpool=="affore"))
   addtable(npi_aff[,c(-2,-3)])
   npi_aff <- calc_policy(npi_aff, land_stock, pol_type="aff", pol_mapping=pol_mapping,
-                         weight=dimSums(land_stock[,2005,c("crop","past")]),
+                         weight=dimSums(land_stock[,2005,c("crop","past")]) + 10^-10,
                          map_file=map_file)
   getNames(npi_aff) <- "npi"
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
@@ -195,7 +195,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   ndc_aff <- droplevels(subset(pol_def, policy=="ndc" & landpool=="affore"))
   addtable(ndc_aff[,c(-2,-3)])
   ndc_aff <- calc_policy(ndc_aff, land_stock, pol_type="aff", pol_mapping=pol_mapping,
-                         weight=dimSums(land_stock[,2005,c("crop","past")]),
+                         weight=dimSums(land_stock[,2005,c("crop","past")]) + 10^-10,
                          map_file=map_file)
   getNames(ndc_aff) <- "ndc"
   #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
