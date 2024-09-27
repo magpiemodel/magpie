@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax25"
+cfg$info$flag <- "PTax26"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -46,7 +46,7 @@ cfg$repositories <- append(
 
 cfg$input['regional'] <- "rev4.112_36f73207_magpie.tgz"
 cfg$input['validation'] <- "rev4.112_36f73207_validation.tgz"
-cfg$input['calibration'] <- "calibration_H16_14Jun24.tgz"
+cfg$input['calibration'] <- "calibration_H16_27Sep24.tgz"
 cfg$input['cellular'] <- "rev4.112_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
 download_and_update(cfg)
 
