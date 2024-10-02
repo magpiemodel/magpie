@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax26"
+cfg$info$flag <- "PTax30"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -166,6 +166,7 @@ for (res in c("c400")) {
                 "T400-GHG-GWP20")) {
     cfg$title <- .title(cfg, paste(res, ssp, tax, sep = "-"))
     cfg$gms$c56_mute_ghgprices_until <- "y2025"
+    cfg$gms$s58_cost_drain_intact_onetime  <- 10000
     cfg$gms$c56_pollutant_prices <- tax
     start_run(cfg, codeCheck = FALSE)
   }
