@@ -8,7 +8,7 @@
 
 positive variables
  vm_nr_inorg_fert_reg(i,land_ag)  Inorganic fertilizer application (Tg N per yr)
- vm_nr_inorg_fert_costs(i)        Cost of inorganic fertilizers (mio. USD05MER per yr)
+ vm_nr_inorg_fert_costs(i)        Cost of inorganic fertilizers (mio. USD17MER per yr)
  vm_nr_eff(i)                    Cropland nutrient uptake efficiency (Tg N per yr)
  vm_nr_eff_pasture(i)            Pasture nutrient uptake efficiency (Tg N per yr)
  v50_nr_inputs(i)                Total inputs to croplands (Tg N per yr)
@@ -21,7 +21,7 @@ positive variables
 ;
 
 equations
- q50_nr_cost_fert(i)           Fertilizer costs (mio. USD05MER per yr)
+ q50_nr_cost_fert(i)           Fertilizer costs (mio. USD17MER per yr)
  q50_nr_bal_crp(i)             Cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)
  q50_nr_withdrawals(i,kcr)     Calculating nr withdrawals (Tg N per yr)
  q50_nr_inputs(i)              Calculating nr withdrawals (Tg N per yr)
@@ -49,7 +49,7 @@ parameters
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_nr_inorg_fert_reg(t,i,land_ag,type) Inorganic fertilizer application (Tg N per yr)
- ov_nr_inorg_fert_costs(t,i,type)       Cost of inorganic fertilizers (mio. USD05MER per yr)
+ ov_nr_inorg_fert_costs(t,i,type)       Cost of inorganic fertilizers (mio. USD17MER per yr)
  ov_nr_eff(t,i,type)                    Cropland nutrient uptake efficiency (Tg N per yr)
  ov_nr_eff_pasture(t,i,type)            Pasture nutrient uptake efficiency (Tg N per yr)
  ov50_nr_inputs(t,i,type)               Total inputs to croplands (Tg N per yr)
@@ -59,7 +59,7 @@ parameters
  ov50_nr_withdrawals_pasture(t,i,type)  Withdrawals of Nr from pasture soils (Tg N per yr)
  ov50_nr_surplus_pasture(t,i,type)      Total Nr surplus on pasture soils (Tg N per yr)
  ov50_nr_deposition(t,i,land,type)      Atmospheric deposition (Tg N per yr)
- oq50_nr_cost_fert(t,i,type)            Fertilizer costs (mio. USD05MER per yr)
+ oq50_nr_cost_fert(t,i,type)            Fertilizer costs (mio. USD17MER per yr)
  oq50_nr_bal_crp(t,i,type)              Cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)
  oq50_nr_withdrawals(t,i,kcr,type)      Calculating nr withdrawals (Tg N per yr)
  oq50_nr_inputs(t,i,type)               Calculating nr withdrawals (Tg N per yr)

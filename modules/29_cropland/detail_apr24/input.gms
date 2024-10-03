@@ -15,8 +15,8 @@ scalars
  s29_snv_scenario_target         SNV scenario target year      / 2050 /
  s29_snv_relocation_data_x1      First reference value in SNV target cropland data (1) / 0.2 /
  s29_snv_relocation_data_x2      Second reference value in SNV target cropland data (1) / 0.5 /
- s29_cost_treecover_est          Tree cover establishment cost (USD05MER per ha) / 2000 /
- s29_cost_treecover_recur        Tree cover recurring cost (USD05MER per ha) / 500 /
+ s29_cost_treecover_est          Tree cover establishment cost (USD17MER per ha) / 2460 /
+ s29_cost_treecover_recur        Tree cover recurring cost (USD17MER per ha) / 615 /
  s29_treecover_plantation        Growth curve switch for tree cover on cropland 0=natveg 1=plantations (1) / 0 /
  s29_treecover_bii_coeff         BII coefficent to be used for tree cover on cropland 0=secondary vegetation 1=timber plantations (1) / 0 /
  s29_treecover_scenario_start    Cropland treecover scenario start year       / 2025 /
@@ -25,13 +25,13 @@ scalars
  s29_treecover_target_noselect   Minimum share of treecover on total cropland in target year (1) / 0 /
  s29_treecover_keep              Avoid loss of existing treecover (1=yes 0=no) / 0 /
  s29_treecover_max               Maximum share of treecover on total cropland (1) / 0.4 /
- s29_treecover_penalty_before    Penalty for violation of treecover target before scenario start (USD05MER per ha) / 0 /
- s29_treecover_penalty           Penalty for violation of treecover target after sceanrio start (USD05MER per ha) / 5000 /
+ s29_treecover_penalty_before    Penalty for violation of treecover target before scenario start (USD17MER per ha) / 0 /
+ s29_treecover_penalty           Penalty for violation of treecover target after sceanrio start (USD17MER per ha) / 6150 /
  s29_fallow_scenario_start       Fallow land scenario start year       / 2025 /
  s29_fallow_scenario_target      Fallow land scenario target year      / 2050 /
  s29_fallow_target               Minimum share of fallow land on total cropland in target year (1) / 0 /
  s29_fallow_max                  Maximum share of fallow land on total cropland (1) / 0.4 /
- s29_fallow_penalty              Penalty for violation of fallow target (USD05MER per ha) / 500 /
+ s29_fallow_penalty              Penalty for violation of fallow target (USD17MER per ha) / 615 /
  s29_treecover_map               Treecover map for initialization (binary) / 0 /
  s29_fader_functional_form       Switch for functional form of faders (1) / 2 /
 ;
@@ -67,7 +67,7 @@ sets
                       UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                       VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
-land_snv(land) land types allowed in the SNV policy / secdforest, forestry, past, other /
+land_snv(land) land types allowed in the SNV policy / secdforest, other /
 ;
 
 ********* AVAILABLE CROPLAND *******************************************

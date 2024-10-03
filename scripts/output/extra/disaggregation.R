@@ -450,7 +450,7 @@ message("Disaggregating BII values")
 # Load input data for BII disaggregation
 land_ini_hr <- read.magpie(land_hr_file)[, "y1995", ]
 side_layers_hr <- read.magpie(luh_side_layers)
-landArea <- dimSums(land_ini_hr, dim = 3)
+landArea <- dimSums(land_ini_hr, dim = 3) + 10^-10
 side_layers_lr <- toolAggregate(x = side_layers_hr, rel = map_file, weight = landArea, from = "cell", to = "cluster")
 
 # Convert land types for BII disaggregation

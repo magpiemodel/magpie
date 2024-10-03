@@ -67,9 +67,9 @@ pollutants_fader(pollutants) pollutants affected by GHG policy fader / co2_c, ch
 ;
 
 scalars
-  s56_limit_ch4_n2o_price         Upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 4000 /
+  s56_limit_ch4_n2o_price         Upper limit for CH4 and N2O GHG prices (USD17MER per tC) / 4920 /
   s56_cprice_red_factor           Reduction factor for CO2 price (-) / 1 /
-  s56_minimum_cprice              Minium C price for future time steps (USD per tC) / 0 /
+  s56_minimum_cprice              Minium C price for future time steps (USD17MER per tC) / 0 /
   s56_ghgprice_devstate_scaling   Switch for scaling GHG price with development state (1=on 0=off) / 0 /
   s56_c_price_induced_aff         Switch for C price driven re-afforestation (1=on 0=off) / 1 /
   s56_c_price_exp_aff             Time horizon of CO2 price expectation for re-afforestation (years) / 50 /
@@ -93,19 +93,19 @@ $setglobal c56_mute_ghgprices_until  y2030
 $setglobal c56_carbon_stock_pricing  actualNoAcEst
 *   options:  actual, actualNoAcEst
 
-table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
+table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD17MER per t)
 $ondelim
 $include "./modules/56_ghg_policy/input/f56_pollutant_prices.cs3"
 $offdelim
 ;
 
-$if "%c56_pollutant_prices%" == "coupling" table f56_pollutant_prices_coupling(t_all,i,pollutants) Regional ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
+$if "%c56_pollutant_prices%" == "coupling" table f56_pollutant_prices_coupling(t_all,i,pollutants) Regional ghg certificate prices for N2O-N CH4 CO2-C (USD17MER per t)
 $if "%c56_pollutant_prices%" == "coupling" $ondelim
 $if "%c56_pollutant_prices%" == "coupling" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3"
 $if "%c56_pollutant_prices%" == "coupling" $offdelim
 $if "%c56_pollutant_prices%" == "coupling" ;
 
-$if "%c56_pollutant_prices%" == "emulator" table f56_pollutant_prices_emulator(t_all,i,pollutants) Global ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
+$if "%c56_pollutant_prices%" == "emulator" table f56_pollutant_prices_emulator(t_all,i,pollutants) Global ghg certificate prices for N2O-N CH4 CO2-C (USD17MER per t)
 $if "%c56_pollutant_prices%" == "emulator" $ondelim
 $if "%c56_pollutant_prices%" == "emulator" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3"
 $if "%c56_pollutant_prices%" == "emulator" $offdelim

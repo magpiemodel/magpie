@@ -9,14 +9,14 @@ if (smax(j, pm_labor_prod(t,j)) <> 1 OR smin(j, pm_labor_prod(t,j)) <> 1,
   abort "This factor cost realization cannot handle labor productivities != 1"
 );
 
-p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f38_reg_parameters("intercept"));
+p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),(im_gdp_pc_ppp_iso("y2010",iso) * fm_gdp_defl_ppp(iso))))+f38_reg_parameters("intercept"));
 
 if (m_year(t)<2010,
   pm_cost_share_crops(t,i,"capital") = f38_historical_share(t,i);
   pm_cost_share_crops(t,i,"labor")   = 1 - f38_historical_share(t,i);
 
 elseif (m_year(t)>=2010),
-  pm_cost_share_crops(t,i,"capital") = f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f38_reg_parameters("intercept")+p38_share_calibration(i);
+  pm_cost_share_crops(t,i,"capital") = f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),(im_gdp_pc_ppp_iso(t,iso) * fm_gdp_defl_ppp(iso))))+f38_reg_parameters("intercept")+p38_share_calibration(i);
   pm_cost_share_crops(t,i,"labor")   = 1 - pm_cost_share_crops(t,i,"capital");
 );
 

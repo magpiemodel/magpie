@@ -6,3 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_landdiff.scale = 10e3;
+v10_balance_positive.scale(j) = 10e-10;
+v10_balance_negative.scale(j) = 10e-10;

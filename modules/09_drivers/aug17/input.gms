@@ -23,12 +23,12 @@ parameters
   sm_fix_cc                 year until which all parameters affected by cc are fixed to historical values (year) / 2025 /
 ;
 
-table f09_gdp_ppp_iso(t_all,iso,pop_gdp_scen09) Income in purchasing power parity (mio. USD05PPP per yr)
+table f09_gdp_ppp_iso(t_all,iso,pop_gdp_scen09) Income in purchasing power parity (mio. USD17PPP per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_ppp_iso.csv"
 $offdelim;
 
-table f09_gdp_mer_iso(t_all,iso,pop_gdp_scen09)  Income in market exchange rates (mio. USD05MER per yr)
+table f09_gdp_mer_iso(t_all,iso,pop_gdp_scen09)  Income in market exchange rates (mio. USD17MER per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_mer_iso.csv"
 $offdelim;
@@ -52,3 +52,10 @@ table f09_physical_inactivity(t_all,iso,pop_gdp_scen09,sex,age) Share of populat
 $ondelim
 $include "./modules/09_drivers/input/f09_physical_inactivity.cs3"
 $offdelim;
+
+parameter fm_gdp_defl_ppp(iso) GDP deflator
+/
+$ondelim
+$include "./modules/09_drivers/input/fm_gdp_defl_ppp.cs4"
+$offdelim
+/;

@@ -7,12 +7,12 @@
 
 parameters
  i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
- i21_trade_margin(h,k_trade)                    Trade margins (USD05MER per tDM)
- i21_trade_tariff(h,k_trade)                    Trade tariffs (USD05MER per tDM)
+ i21_trade_margin(h,k_trade)                    Trade margins (USD17MER per tDM)
+ i21_trade_tariff(h,k_trade)                    Trade tariffs (USD17MER per tDM)
 ;
 
 positive variables
- vm_cost_trade(i)                            Regional  trade costs (mio. USD05MER per yr)
+ vm_cost_trade(i)                            Regional  trade costs (mio. USD17MER per yr)
 ;
 
 equations
@@ -22,7 +22,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)          Regional  trade costs (mio. USD05MER per yr)
+ ov_cost_trade(t,i,type)          Regional  trade costs (mio. USD17MER per yr)
  oq21_trade_glo(t,k_trade,type)   Global production constraint (mio. tDM per yr)
  oq21_notrade(t,h,k_notrade,type) Superregional production constraint of non-tradable commodities (mio. tDM per yr)
 ;

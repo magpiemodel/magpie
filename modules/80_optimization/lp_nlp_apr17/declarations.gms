@@ -12,5 +12,5 @@ parameters
 
 scalars
   s80_counter      counter (1)
-  s80_obj_linear   linear objective value (mio. USD05MER per yr)
+  s80_obj_linear   linear objective value (mio. USD17MER per yr)
 ;
