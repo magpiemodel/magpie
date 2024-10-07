@@ -59,9 +59,9 @@ write.ghgtax <- function(mifname, outfile) {
   tmp <- read.report(fname, as.list = FALSE)
 
   # Select variables from REMIND report
-  ghg_price_names <- c("Price|Carbon (US$2005/t CO2)",
-                       "Price|N2O (US$2005/t N2O)",
-                       "Price|CH4 (US$2005/t CH4)")
+  ghg_price_names <- c("Price|Carbon (US$2017/t CO2)",
+                       "Price|N2O (US$2017/t N2O)",
+                       "Price|CH4 (US$2017/t CH4)")
   tmp <- collapseNames(tmp[,,ghg_price_names])
   # remove global dimension
   tmp <- tmp["GLO",,,invert=TRUE]
@@ -72,11 +72,11 @@ write.ghgtax <- function(mifname, outfile) {
 
   ghgtax <- new.magpie(cells_and_regions = getRegions(tmp),years = time,fill = NA,sets = c("regions","years","gas"),names = c("n2o_n_direct","n2o_n_indirect","ch4","co2_c"))
 
-  # unit defined in modules/56_ghg_policy/input/f56_pollutant_prices.cs3: US$ 2005 per Mg N2O-N CH4 and CO2-C
-  ghgtax[,,"co2_c"]          <- tmp[,,"Price|Carbon (US$2005/t CO2)"] * 44/12  # US$2005/tCO2 -> US$2005/tC
-  ghgtax[,,"ch4"]            <- tmp[,,"Price|CH4 (US$2005/t CH4)"]
-  ghgtax[,,"n2o_n_direct"]   <- tmp[,,"Price|N2O (US$2005/t N2O)"] * 44/28     # US$2005/tN2O -> US$2005/tN
-  ghgtax[,,"n2o_n_indirect"] <- tmp[,,"Price|N2O (US$2005/t N2O)"] * 44/28     # US$2005/tN2O -> US$2005/tN
+  # unit defined in modules/56_ghg_policy/input/f56_pollutant_prices.cs3: US$ 2017 per Mg N2O-N CH4 and CO2-C
+  ghgtax[,,"co2_c"]          <- tmp[,,"Price|Carbon (US$2017/t CO2)"] * 44/12  # US$2017/tCO2 -> US$2017/tC
+  ghgtax[,,"ch4"]            <- tmp[,,"Price|CH4 (US$2017/t CH4)"]
+  ghgtax[,,"n2o_n_direct"]   <- tmp[,,"Price|N2O (US$2017/t N2O)"] * 44/28     # US$2017/tN2O -> US$2017/tN
+  ghgtax[,,"n2o_n_indirect"] <- tmp[,,"Price|N2O (US$2017/t N2O)"] * 44/28     # US$2017/tN2O -> US$2017/tN
 
   # set ghg prices before and in 2020 to zero
   ghgtax[,getYears(ghgtax)<="y2020",] <- 0
@@ -89,7 +89,7 @@ write.ghgtax <- function(mifname, outfile) {
   cat("CO2 price in 2025:",ghgtax[,2025,"co2_c"],"\n")
   for_plot <- ghgtax[1,,"co2_c"] * 12/44 # convert unit back just for plotting
   #for_plot <- for_plot[,c("y1995","y2110","y2130","y2150"),,invert=TRUE]
-  txtplot(as.numeric(gsub("y","",getYears(for_plot))),for_plot,ylab="US$2005/tCO2")
+  txtplot(as.numeric(gsub("y","",getYears(for_plot))),for_plot,ylab="US$2017/tCO2")
 
   cat("Writing GHG tax scenario",scenarios[scen,"ghgtax_name"],"\n\n")
   write.magpie(ghgtax, file_name = outfile)
