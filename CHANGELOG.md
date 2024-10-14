@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **module_documentation** all references to USD05 changed to USD17
 
 ### added
--
+- **62_material** added switch to turn off future material demand for bioplastic
 
 ### removed
 -
