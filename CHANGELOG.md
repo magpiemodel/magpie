@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** REMIND coupling reads data in US$2017, not US$2005
 
 ### added
--
+- **62_material** added switch to turn off future material demand for bioplastic
 
 ### removed
 -
