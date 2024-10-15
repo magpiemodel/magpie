@@ -9,9 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **inputdata** changed GDP base year from 2005USD to 2017USD
 - **config** changed default input data to use 2017USD
 - **module_documentation** all references to USD05 changed to USD17
+- **scripts** REMIND coupling reads data in US$2017, not US$2005
 
 ### added
--
+- **62_material** added switch to turn off future material demand for bioplastic
 
 ### removed
 -
