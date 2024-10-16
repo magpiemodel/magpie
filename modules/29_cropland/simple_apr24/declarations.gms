@@ -18,7 +18,7 @@ parameters
 ;
 
 positive variables
- vm_cost_cropland(j)                Cost for total cropland (mio. USD05MER per yr)
+ vm_cost_cropland(j)                Cost for total cropland (mio. USD17MER per yr)
  vm_fallow(j)                       Fallow land is temporarily fallow cropland (mio. ha)
  vm_treecover(j)                    Cropland tree cover (mio. ha)
 ;
@@ -33,7 +33,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_cropland(t,j,type)               Cost for total cropland (mio. USD05MER per yr)
+ ov_cost_cropland(t,j,type)               Cost for total cropland (mio. USD17MER per yr)
  ov_fallow(t,j,type)                      Fallow land is temporarily fallow cropland (mio. ha)
  ov_treecover(t,j,type)                   Cropland tree cover (mio. ha)
  oq29_cropland(t,j,type)                  Total cropland calculation (mio. ha)

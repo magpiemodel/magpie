@@ -7,7 +7,7 @@
 
 
 positive variables
- vm_cost_bv_loss(j)           Biodiversity cost (mio USD)
+ vm_cost_bv_loss(j)           Biodiversity cost (mio USD17MER)
  vm_bv(j,landcover44,potnatveg)     Biodiversity stock for all land cover classes (Mha)
  v44_bii(i,biome44)           Biodiversity Intactness Index BII (1)
  v44_bii_missing(i,biome44)       Missing BII increase for compliance with BII target (1)
@@ -22,19 +22,19 @@ parameters
 equations
  q44_bii(i,biome44)                     Biodiversity Intactness Index BII (1)
  q44_bii_target(i,biome44)              Missing BII increase for compliance with BII target (1)
- q44_cost(i)              Biodiversity cost (mio USD)
+ q44_cost(i)              Biodiversity cost (mio USD17MER)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD)
+ ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD17MER)
  ov_bv(t,j,landcover44,potnatveg,type) Biodiversity stock for all land cover classes (Mha)
  ov44_bii(t,i,biome44,type)            Biodiversity Intactness Index BII (1)
  ov44_bii_missing(t,i,biome44,type)    Missing BII increase for compliance with BII target (1)
  oq44_bii(t,i,biome44,type)            Biodiversity Intactness Index BII (1)
  oq44_bii_target(t,i,biome44,type)     Missing BII increase for compliance with BII target (1)
- oq44_cost(t,i,type)                   Biodiversity cost (mio USD)
+ oq44_cost(t,i,type)                   Biodiversity cost (mio USD17MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

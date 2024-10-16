@@ -41,7 +41,7 @@ $include "./modules/18_residues/input/f18_res_combust_eff.cs4"
 $offdelim
 /;
 
-parameter f18_fac_req_kres(kres) Factor requirements (USD05MER per tDM)
+parameter f18_fac_req_kres(kres) Factor requirements (USD17MER per tDM)
 /
 $ondelim
 $include "./modules/18_residues/flexcluster_jul23/input/f18_fac_req_kres.csv"

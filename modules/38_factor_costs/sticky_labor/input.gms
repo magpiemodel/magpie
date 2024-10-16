@@ -20,7 +20,7 @@ s38_targetyear_labor_share Year for which the target labor share should be set (
 s38_target_fulfillment Share by which a region moves from its baseline labor share towards the target value (1) / 0.5 /
 ;
 
-parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)
+parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD17MER per tDM)
 /
 $ondelim
 $include "./modules/38_factor_costs/input/f38_fac_req_fao.csv"
@@ -28,7 +28,7 @@ $offdelim
 /
 ;
 
-parameter f38_fac_req_fao_reg(t_all,i,kcr) Factor requirement costs (USD05MER per tDM)
+parameter f38_fac_req_fao_reg(t_all,i,kcr) Factor requirement costs (USD17MER per tDM)
 /
 $ondelim
 $include "./modules/38_factor_costs/input/f38_fac_req_fao_regional.cs4"

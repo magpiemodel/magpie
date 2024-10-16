@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variables
- vm_cost_trade(i)                            Regional  trade costs (mio. USD05MER per yr)
+ vm_cost_trade(i)                            Regional  trade costs (mio. USD17MER per yr)
 ;
 
 equations
@@ -15,7 +15,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)     Regional  trade costs (mio. USD05MER per yr)
+ ov_cost_trade(t,i,type)     Regional  trade costs (mio. USD17MER per yr)
  oq21_notrade(t,h,kall,type) Superregional production constraint of non-tradable commodities (mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

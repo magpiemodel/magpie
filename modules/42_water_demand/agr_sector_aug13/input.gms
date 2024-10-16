@@ -109,7 +109,7 @@ sets
 
 * Costs of pumping are calculated for India as per methodology in forthcoming paper by Singh et.al.
 parameter
-f42_pumping_cost(t_all,i) Cost of pumping irrigation water (USD05MER per m^3)
+f42_pumping_cost(t_all,i) Cost of pumping irrigation water (USD17MER per m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/f42_pumping_cost.cs4"

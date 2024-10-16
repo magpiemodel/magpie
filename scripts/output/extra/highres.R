@@ -152,10 +152,14 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   cfg$gms$s15_elastic_demand <- 0
 
   #get exogenous bioenergy demand and GHG prices from c200 run because these files may have been overwritten
-  write.magpie(readGDX(gdx,"f56_pollutant_prices_coupling"),"modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
-  write.magpie(readGDX(gdx,"f56_pollutant_prices_emulator"),"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
-  write.magpie(readGDX(gdx,"f60_bioenergy_dem_coupling"),"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
-  write.magpie(readGDX(gdx,"f60_bioenergy_dem_emulator"),"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
+  a <- readGDX(gdx,"f56_pollutant_prices_coupling", react = "silent")
+  if(!is.null(a)) write.magpie(a,"modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
+  a <- readGDX(gdx,"f56_pollutant_prices_emulator", react = "silent")
+  if(!is.null(a)) write.magpie(a,"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
+  a <- readGDX(gdx,"f60_bioenergy_dem_coupling", react = "silent")
+  if(!is.null(a)) write.magpie(a,"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+  a <- readGDX(gdx,"f60_bioenergy_dem_emulator", react = "silent")
+  if(!is.null(a)) write.magpie(a,"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
 
   #get regional afforestation patterns from low resolution run with c200
   aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)

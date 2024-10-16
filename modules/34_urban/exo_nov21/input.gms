@@ -10,7 +10,7 @@ $setglobal c34_urban_scenario  SSP2
 
 
 scalars
-  s34_urban_deviation_cost Artificial cost for urban deviation variables (USD05MER per ha) / 1e+06 /
+  s34_urban_deviation_cost Artificial cost for urban deviation variables (USD17MER per ha) / 1e+06 /
 ;
 
 table f34_urbanland(t_all, j, urban_scen34)     Urban land

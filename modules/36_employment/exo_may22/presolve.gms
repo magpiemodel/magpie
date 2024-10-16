@@ -6,12 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * capital cost share to split non-magpie factor costs into labor and capital
-p36_share_calibration(i) = f36_hist_cap_share("y2010",i)-(f36_regr_cap_share("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f36_regr_cap_share("intercept"));
+p36_share_calibration(i) = f36_hist_cap_share("y2010",i)-(f36_regr_cap_share("slope")*log10(sum(i_to_iso(i,iso),(im_gdp_pc_ppp_iso("y2010",iso) * fm_gdp_defl_ppp(iso))))+f36_regr_cap_share("intercept"));
 
 if (m_year(t)<2010,
  p36_cost_share(t,i) = f36_hist_cap_share(t,i);
 elseif (m_year(t)>=2010),
- p36_cost_share(t,i) = f36_regr_cap_share("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f36_regr_cap_share("intercept")+p36_share_calibration(i);
+ p36_cost_share(t,i) = f36_regr_cap_share("slope")*log10(sum(i_to_iso(i,iso),(im_gdp_pc_ppp_iso(t,iso) * fm_gdp_defl_ppp(iso))))+f36_regr_cap_share("intercept")+p36_share_calibration(i);
 );
 
 *' @code
