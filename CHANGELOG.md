@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** changed default input data to use 2017USD
 - **module_documentation** all references to USD05 changed to USD17
 - **scripts** REMIND coupling reads data in US$2017, not US$2005
+- **config** updated input data to rev4.113
+- **config** SHAPE scenarios start year of dietary shift changed to 2025
 
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
@@ -20,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### fixed
 - **11_costs** changed equation to fix bug in total water cost calculation 
 - **29_cropland** treecover age-class growth was not working properly because ac_sub was erroneously not fixed 
-
+- **scripts** script/output/extra/resubmit.R 
 
 ## [4.8.2] - 2024-09-24
 
