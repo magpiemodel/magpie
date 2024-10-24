@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
-- **config** added SSP1-MC, SSP2-MC and SSP5-MC
+- **config** added SSP1-POP-GDP SSP2-POP-GDP and SSP5-POP-GDP
 
 ### removed
 -
