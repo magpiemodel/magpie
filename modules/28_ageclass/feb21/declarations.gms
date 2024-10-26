@@ -6,5 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameter
- im_plantedclass_ac(j,ac)                       Raw Distribution of ageclass in secondary forest as a proxy for planted forest (mio. ha)
+ im_forest_ageclass(j,ac)                       Raw Distribution of ageclass in secondary forest as a proxy for planted forest (mio. ha)
 ;

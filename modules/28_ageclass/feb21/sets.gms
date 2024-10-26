@@ -11,18 +11,14 @@ ac_poulter Forest age classes in Poulter data set
 class6, class7, class8, class9, class10,
 class11, class12, class13, class14, class15 /
 
-ac_planted(ac) Young age classes which probably belong to managed forest
+ac_young(ac) Young age classes
 / ac0, ac5, ac10, ac15, ac20, ac25, ac30 /
-
-ac_plantations(ac) Possible age classes which probably belong to plantations
-/ ac0, ac5, ac10, ac15, ac20, ac25, ac30,
-  ac35, ac40, ac45, ac50, ac55, ac60 /
 
 ac_poulter_to_ac(ac_poulter,ac) mapping between ac and ac_poulter
 /
-class1   .  (ac5,ac10)
-class2   .  (ac15,ac20)
-class3   .  (ac25,ac30)
+class4   .  (ac5,ac10)
+class4   .  (ac15,ac20)
+class4   .  (ac25,ac30)
 class4   .  (ac35,ac40)
 class5   .  (ac45,ac50)
 class6   .  (ac55,ac60)
@@ -34,7 +30,6 @@ class11  .  (ac105,ac110)
 class12  .  (ac115,ac120)
 class13  .  (ac125,ac130)
 class14  .  (ac135,ac140)
-class15  .  (ac145,ac150)
 /
 
 ;

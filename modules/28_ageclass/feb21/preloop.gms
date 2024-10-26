@@ -5,11 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* Ben Poulter age class distribution
-im_plantedclass_ac(j,ac)  = 0;
-*im_plantedclass_ac(j,ac)  = sum(ac_poulter_to_ac(ac_poulter,ac),f28_forestageclasses(j,ac_poulter)$(not sameas(ac_poulter,"class15")));
-im_plantedclass_ac(j,ac)  = sum(ac_poulter_to_ac(ac_poulter,ac),f28_forestageclasses(j,ac_poulter));
+* Two age-classes in `ac` are mapped to one age-class in `ac_poulter`. 
+* Therefore, each age-class in `ac_poulter` is distributed equally to all beloning age-classes in `ac`.
+im_forest_ageclass(j,ac)  = 0;
+im_forest_ageclass(j,ac)  = sum(ac_poulter_to_ac(ac_poulter,ac),f28_forestageclasses(j,ac_poulter)) / 2;
+im_forest_ageclass(j,"acx")  = f28_forestageclasses(j,"class15")
 
-* As summing over makes double counting (two magpie age classes in one poulter class)
-* We divide by 2
-im_plantedclass_ac(j,ac)  = im_plantedclass_ac(j,ac) /2;
+
+ i35_plantedclass_ac(j,ac) =  im_forest_ageclass(j,ac);
+ i35_plantedclass_ac(j,ac_young)$(i35_plantedclass_ac(j,ac_young) > im_forest_ageclass(j,"ac35")) =  im_forest_ageclass(j,"ac35");
+
