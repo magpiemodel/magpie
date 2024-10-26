@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-ac_poulter Forest age classes in Poulter data set
+ac_gfad Forest age classes in GFAD data set
 / class1, class2, class3, class4, class5,
 class6, class7, class8, class9, class10,
 class11, class12, class13, class14, class15 /
@@ -14,7 +14,7 @@ class11, class12, class13, class14, class15 /
 ac_young(ac) Young age classes
 / ac0, ac5, ac10, ac15, ac20, ac25, ac30 /
 
-ac_poulter_to_ac(ac_poulter,ac) mapping between ac and ac_poulter
+ac_gfad_to_ac(ac_gfad,ac) mapping between ac and ac_gfad
 /
 class1   .  (ac5,ac10)
 class2   .  (ac15,ac20)
@@ -34,5 +34,5 @@ class14  .  (ac135,ac140)
 
 ;
 
-alias(ac_poulter,ac_poulter2);
+alias(ac_gfad,ac_gfad2);
 alias(ac,ac2);

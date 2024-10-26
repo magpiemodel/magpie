@@ -16,15 +16,18 @@ elseif s35_secdf_distribution = 1,
 * ac0 is excluded here. Therefore no initial shifting is needed.
   i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")/(card(ac)-1);
 elseif s35_secdf_distribution = 2,
-*classes 1, 2, 3 include many plantations and are therefore excluded
-*Instead, we use class 4 for all young age-classes
- i35_plantedclass_ac(j,ac) =  im_forest_ageclass(j,ac);
- i35_plantedclass_ac(j,ac_young) = im_forest_ageclass(j,"ac35");
+*classes 1, 2, 3 include plantation and are therefore excluded
+*As disturbance history (fire) would affect the age structure
+*We use the share from class 4 to be in class 1,2,3
+*class 15 is primary forest and is therefore excluded
+ p35_secdf_ageclass(j,ac) = im_forest_ageclass(j,ac);
+ p35_secdf_ageclass(j,ac_young) = im_forest_ageclass(j,"ac35");
+ p35_secdf_ageclass(j,"acx") = 0;
 
 * Distribute this area correctly
- p35_poulter_dist(j,ac) = 0;
- p35_poulter_dist(j,ac) = (i35_plantedclass_ac(j,ac)/sum(ac2,i35_plantedclass_ac(j,ac2)))$(sum(ac2,i35_plantedclass_ac(j,ac2))>0);
- i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")*p35_poulter_dist(j,ac);
+ p35_secdf_ageclass_dist(j,ac) = 1/card(ac);
+ p35_secdf_ageclass_dist(j,ac)$(sum(ac2,p35_secdf_ageclass(j,ac2))>0) = (p35_secdf_ageclass(j,ac)/sum(ac2,p35_secdf_ageclass(j,ac2)));
+ i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")*p35_secdf_ageclass_dist(j,ac);
 );
 
 *use residual approach to avoid rounding errors

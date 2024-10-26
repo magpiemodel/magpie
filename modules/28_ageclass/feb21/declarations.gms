@@ -6,5 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameter
- im_forest_ageclass(j,ac)                       Raw Distribution of ageclass in secondary forest as a proxy for planted forest (mio. ha)
+ im_forest_ageclass(j,ac)      Forest area in 5-year age-classes based on GFAD (mio. ha)
 ;

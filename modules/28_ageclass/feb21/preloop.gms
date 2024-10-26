@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* Two age-classes in `ac` are mapped to one age-class in `ac_poulter`. 
-* Therefore, each age-class in `ac_poulter` is distributed equally to all beloning age-classes in `ac`.
+* Two age-classes in `ac` are mapped to one age-class in `ac_gfad`. 
+* Therefore, each age-class in `ac_gfad` is distributed equally to all beloning age-classes in `ac`.
 im_forest_ageclass(j,ac)  = 0;
-im_forest_ageclass(j,ac)  = sum(ac_poulter_to_ac(ac_poulter,ac),f28_forestageclasses(j,ac_poulter)) / 2;
+im_forest_ageclass(j,ac)  = sum(ac_gfad_to_ac(ac_gfad,ac),f28_forestageclasses(j,ac_gfad)) / 2;
 im_forest_ageclass(j,"acx")  = f28_forestageclasses(j,"class15");
