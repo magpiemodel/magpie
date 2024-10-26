@@ -16,9 +16,9 @@ ac_young(ac) Young age classes
 
 ac_poulter_to_ac(ac_poulter,ac) mapping between ac and ac_poulter
 /
-class4   .  (ac5,ac10)
-class4   .  (ac15,ac20)
-class4   .  (ac25,ac30)
+class1   .  (ac5,ac10)
+class2   .  (ac15,ac20)
+class3   .  (ac25,ac30)
 class4   .  (ac35,ac40)
 class5   .  (ac45,ac50)
 class6   .  (ac55,ac60)
