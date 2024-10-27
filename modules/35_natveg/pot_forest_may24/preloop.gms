@@ -22,7 +22,8 @@ elseif s35_secdf_distribution = 2,
 *class 15 is primary forest and is therefore excluded
  p35_secdf_ageclass(j,ac) = im_forest_ageclass(j,ac);
  p35_secdf_ageclass(j,ac_young)$(p35_secdf_ageclass(j,ac_young) > p35_secdf_ageclass(j,"ac35")) = p35_secdf_ageclass(j,"ac35");
-* p35_secdf_ageclass(j,"acx") = 0;
+ p35_secdf_ageclass(j,"acx") = p35_secdf_ageclass(j,"acx") - pcm_land(j,"primforest");
+ p35_secdf_ageclass(j,"acx")$(p35_secdf_ageclass(j,"acx") < 0) = 0;
 
 * Distribute this area correctly
  p35_secdf_ageclass_dist(j,ac) = 0;
