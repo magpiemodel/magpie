@@ -7,8 +7,8 @@
 
 *' @title Age class
 
-*' @description The age-class module provides the distribution of forest age-classes 
-*' to other modules. The age-class distribution is used in
+*' @description The age-class module provides forest area in age-classes 
+*' to other modules. The interface `im_forest_ageclass` is used in
 *' [35_natveg] for the initialization of secondary forest areas.
 
 *' @authors Abhijeet Mishra, Florian Humpenöder

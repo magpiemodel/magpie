@@ -16,16 +16,18 @@ elseif s35_secdf_distribution = 1,
 * ac0 is excluded here. Therefore no initial shifting is needed.
   i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")/(card(ac)-1);
 elseif s35_secdf_distribution = 2,
-*classes 1, 2, 3 include plantation and are therefore excluded
-*As disturbance history (fire) would affect the age structure
-*We use the share from class 4 to be in class 1,2,3
-*class 15 is primary forest and is therefore excluded
+*For the initialization of age-classes in secondary forest, forest area in 5-year age-classes based on GFAD is used 
  p35_secdf_ageclass(j,ac) = im_forest_ageclass(j,ac);
- p35_secdf_ageclass(j,ac_young)$(p35_secdf_ageclass(j,ac_young) > p35_secdf_ageclass(j,"ac35")) = p35_secdf_ageclass(j,"ac35");
+* p35_secdf_ageclass(j,ac_young)$(p35_secdf_ageclass(j,ac_young) > p35_secdf_ageclass(j,"ac35")) = p35_secdf_ageclass(j,"ac35");
+* Young forest (`ac_young`) includes plantations and might be (strongly) affected by disturbances such as fire. 
+* Therefore, young forest (`ac_young`) is disregarded for the initialization of age-classes in secondary forest. 
+* Instead, age-class areas from `ac35` are used as a proxy for `ac_young`.
+ p35_secdf_ageclass(j,ac_young) = p35_secdf_ageclass(j,"ac35");
+* `acx` includes primary forest. Therefore, primary forest is subtracted from `acx`.
  p35_secdf_ageclass(j,"acx") = p35_secdf_ageclass(j,"acx") - pcm_land(j,"primforest");
  p35_secdf_ageclass(j,"acx")$(p35_secdf_ageclass(j,"acx") < 0) = 0;
 
-* Distribute this area correctly
+* Distribution of age-classes in secondary forest. In case of missing area information, `acx` is assumed.
  p35_secdf_ageclass_dist(j,ac) = 0;
  p35_secdf_ageclass_dist(j,"acx") = 1;
  p35_secdf_ageclass_dist(j,ac)$(sum(ac2,p35_secdf_ageclass(j,ac2))>0) = 

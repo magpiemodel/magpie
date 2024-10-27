@@ -9,4 +9,6 @@
 * Therefore, each age-class in `ac_gfad` is distributed equally to all beloning age-classes in `ac`.
 im_forest_ageclass(j,ac)  = 0;
 im_forest_ageclass(j,ac)  = sum(ac_gfad_to_ac(ac_gfad,ac),f28_forestageclasses(j,ac_gfad)) / 2;
+* `class15` in GFAD1.1 includes forests that are 150 years or older, also including primary forest.
+* Therefore, `class15` is mapped to the highest age-class `acx`.
 im_forest_ageclass(j,"acx")  = f28_forestageclasses(j,"class15");
