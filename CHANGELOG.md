@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** REMIND coupling reads data in US$2017, not US$2005
 - **config** updated input data to rev4.114
 - **config** SHAPE scenarios start year of dietary shift changed to 2025
+- **28_ageclass_** number of age-classes doubled from 150 to 300 years for better match of growth curves with potential natural vegetation.
 - **35_natveg_** revised age-class initialization of secondary forest
 
 ### added
