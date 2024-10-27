@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **11_costs** changed equation to fix bug in total water cost calculation 
 - **29_cropland** treecover age-class growth was not working properly because ac_sub was erroneously not fixed 
 - **scripts** script/output/extra/resubmit.R 
-- **28_ageclass_** bugfix input data unit and code clean-up
+- **28_ageclass_** bugfix input data unit and code clean-up. Renamed `feb21` realization to `oct24`
 
 ## [4.8.2] - 2024-09-24
 
