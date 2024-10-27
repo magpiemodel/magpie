@@ -18,7 +18,6 @@ elseif s35_secdf_distribution = 1,
 elseif s35_secdf_distribution = 2,
 *For the initialization of age-classes in secondary forest, forest area in 5-year age-classes based on GFAD is used 
  p35_secdf_ageclass(j,ac) = im_forest_ageclass(j,ac);
-* p35_secdf_ageclass(j,ac_young)$(p35_secdf_ageclass(j,ac_young) > p35_secdf_ageclass(j,"ac35")) = p35_secdf_ageclass(j,"ac35");
 * Young forest (`ac_young`) includes plantations and might be (strongly) affected by disturbances such as fire. 
 * Therefore, young forest (`ac_young`) is disregarded for the initialization of age-classes in secondary forest. 
 * Instead, age-class areas from `ac35` are used as a proxy for `ac_young`.
