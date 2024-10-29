@@ -35,12 +35,12 @@ q70_feed(i2,kap,kall) ..
 
 q70_cost_prod_liv_labor(i2) ..
  vm_cost_prod_livst(i2,"labor") =e= sum(kli, vm_prod_reg(i2,kli) * sum(ct, i70_fac_req_livst(ct,i2,kli))) 
-     *sum(ct, p70_cost_share_livst(ct,i2,"labor")) 
+     *sum(ct, pm_factor_cost_shares(ct,i2,"labor")) 
      *sum(ct, (1/pm_productivity_gain_from_wages(ct,i2)) * (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
   
 q70_cost_prod_liv_capital(i2) ..
  vm_cost_prod_livst(i2,"capital") =e= sum(kli, vm_prod_reg(i2,kli) * sum(ct, i70_fac_req_livst(ct,i2,kli))) 
-     *sum(ct, p70_cost_share_livst(ct,i2,"capital"));
+     *sum(ct, pm_factor_cost_shares(ct,i2,"capital"));
 
 q70_cost_prod_fish(i2) ..
  vm_cost_prod_fish(i2) =e=
