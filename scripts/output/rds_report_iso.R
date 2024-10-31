@@ -34,7 +34,7 @@ report <- getReportIso(gdx, scenario = cfg$title, dir = outputdir)
 
 mif <- sub(".rds",".mif",rds_iso)
 write.report(report, file = mif, scenario = cfg$title)
-report <- read.report(file = mif, as.list=F)
+report <- read.report(file = mif, as.list = FALSE)
 
 q <- as.quitte(report)
 # as.quitte converts "World" into "GLO". But we want to keep "World" and therefore undo these changes
