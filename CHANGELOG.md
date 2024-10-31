@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **38_factor_costs** updated use of USDA cost shares 
 - **inputdata** changed GDP base year from 2005USD to 2017USD
 - **config** changed default input data to use 2017USD
 - **module_documentation** all references to USD05 changed to USD17
