@@ -48,6 +48,7 @@ for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
 }
 
 write.report(report, file = mif)
+report <- read.report(file = mif, as.list=F)
 
 q <- as.quitte(report)
 # as.quitte converts "World" into "GLO". But we want to keep "World" and therefore undo these changes
