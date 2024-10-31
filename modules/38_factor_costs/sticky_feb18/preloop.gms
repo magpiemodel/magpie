@@ -13,6 +13,6 @@ p38_capital_cost_shares_iso(t,iso)$(m_year(t)<2010)  = f38_historical_share(t,is
 p38_capital_cost_shares_iso(t,iso)$(m_year(t)>=2010) = f38_reg_parameters("slope") * log10(im_gdp_pc_ppp_iso(t,iso)) + f38_reg_parameters("intercept") + p38_share_calibration(iso);
 
 * aggregate factor cost shares
-pm_factor_cost_shares(t,i,"capital") = (1/sum(i_to_iso(i,iso), f38_hist_factor_costs(t,iso))) * 
-                          sum(i_to_iso(i,iso), f38_hist_factor_costs(t,iso) * p38_capital_cost_shares_iso(t,iso));
+pm_factor_cost_shares(t,i,"capital") = (1/sum(i_to_iso(i,iso), f38_hist_factor_costs("y2010",iso))) * 
+                          sum(i_to_iso(i,iso), f38_hist_factor_costs("y2010",iso) * p38_capital_cost_shares_iso(t,iso));
 pm_factor_cost_shares(t,i,"labor")   = 1 - pm_factor_cost_shares(t,i,"capital");
