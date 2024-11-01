@@ -22,7 +22,7 @@ library(piamutils)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
-if(!exists("source_include")) {
+if (!exists("source_include")) {
   outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
   readArgs("outputdir")
 }
@@ -57,20 +57,22 @@ for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
 
 write.report(report, file = mif)
 
-q <- as.quitte(report)
+qu <- as.quitte(report)
 # as.quitte converts "World" into "GLO". But we want to keep "World" and therefore undo these changes
-q <- droplevels(q)
-levels(q$region)[levels(q$region) == "GLO"] <- "World"
-q$region <- factor(q$region,levels = sort(levels(q$region)))
+qu <- droplevels(qu)
+levels(qu$region)[levels(qu$region) == "GLO"] <- "World"
+qu$region <- factor(qu$region,levels = sort(levels(qu$region)))
 
-if(all(is.na(q$value))) stop("No values in reporting!")
+if (all(is.na(qu$value))) {
+  stop("No values in reporting!")
+}
 
-saveRDS(q, file = rds, version = 2)
+saveRDS(qu, file = rds, version = 2)
 
-if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
+if (file.exists(runstatistics) && dir.exists(resultsarchive)) {
   stats <- list()
   load(runstatistics)
-  if(is.null(stats$id)) {
+  if (is.null(stats$id)) {
     # create an id if it does not exist (which means that statistics have not
     # been saved to the archive before) and save statistics to the archive
     message("No id found in runstatistics.rda. Calling lucode2::runstatistics() to create one.")
@@ -82,9 +84,8 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   }
 
   # Save report to results archive
-  saveRDS(q, file = paste0(resultsarchive, "/", stats$id, ".rds"), version = 2)
-  cwd <- getwd()
-  setwd(resultsarchive)
-  system("find -type f -name '1*.rds' -printf '%f\n' | sort > fileListForShinyresults")
-  setwd(cwd)
+  saveRDS(qu, file = paste0(resultsarchive, "/", stats$id, ".rds"), version = 2)
+  withr::with_dir(resultsarchive, {
+    system("find -type f -name '1*.rds' -printf '%f\n' | sort > fileListForShinyresults")
+  })
 }
