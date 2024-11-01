@@ -38,16 +38,19 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 
 report <- getReport(gdx, scenario = cfg$title, dir = outputdir)
 if (!all(grepl(" \\(([^\\()]*)\\)($|\\.)", getNames(report, fulldim = TRUE)$variable))) {
-  warning("Variables should be in the format 'name (unit)', but the following are not:\n",
+  warning("Variables should be in the format 'name (unit)' (the space between name and unit is important), ",
+          "but the following are not:\n",
           paste(grep(" \\(([^\\()]*)\\)($|\\.)", getNames(report, fulldim = TRUE)$variable,
                      invert = TRUE, value = TRUE), collapse = "\n"))
 }
 
 for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
-  missingVariables <- sort(setdiff(unique(deletePlus(getMappingVariables(mapping, "M"))), unique(deletePlus(getNames(report, dim = "variable")))))
+  missingVariables <- sort(setdiff(unique(deletePlus(getMappingVariables(mapping, "M"))),
+                                   unique(deletePlus(getNames(report, dim = "variable")))))
   if (length(missingVariables) > 0) {
     warning("# The following ", length(missingVariables), " variables are expected in the piamInterfaces package ",
-            "for mapping ", mapping, ", but cannot be found in the MAgPIE report.\nPlease either fix in magpie4 or adjust the mapping in piamInterfaces.\n- ",
+            "for mapping ", mapping, ", but cannot be found in the MAgPIE report.\n",
+            "Please either fix in magpie4 or adjust the mapping in piamInterfaces.\n- ",
             paste(missingVariables, collapse = ",\n- "), "\n")
   }
 }
