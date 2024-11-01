@@ -7,12 +7,12 @@
 
 *' @title Age class
 
-*' @description The age-class module calculates the distribution of secondary
-*' forests and timber plantations based on Poulter dataset. This is used in
-*' [32_forestry] and [35_natveg] for initialization of forest areas.
+*' @description The age-class module provides forest area in age-classes 
+*' to other modules. The interface `im_forest_ageclass` is used in
+*' [35_natveg] for the initialization of secondary forest areas.
 
 *' @authors Abhijeet Mishra, Florian Humpenöder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%ageclass%" == "feb21" $include "./modules/28_ageclass/feb21/realization.gms"
+$Ifi "%ageclass%" == "oct24" $include "./modules/28_ageclass/oct24/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
