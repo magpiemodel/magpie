@@ -37,6 +37,11 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 
 
 report <- getReport(gdx, scenario = cfg$title, dir = outputdir)
+if (!all(grepl(" \\(([^\\()]*)\\)($|\\.)", getNames(report, fulldim = TRUE)$variable))) {
+  warning("Variables should be in the format 'name (unit)', but the following are not:\n",
+          paste(grep(" \\(([^\\()]*)\\)($|\\.)", getNames(report, fulldim = TRUE)$variable,
+                     invert = TRUE, value = TRUE), collapse = "\n"))
+}
 
 for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
   missingVariables <- sort(setdiff(unique(deletePlus(getMappingVariables(mapping, "M"))), unique(deletePlus(getNames(report, dim = "variable")))))
@@ -48,7 +53,6 @@ for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
 }
 
 write.report(report, file = mif)
-report <- read.report(file = mif, as.list = FALSE)
 
 q <- as.quitte(report)
 # as.quitte converts "World" into "GLO". But we want to keep "World" and therefore undo these changes
