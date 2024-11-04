@@ -7,3 +7,4 @@
 
 vm_cost_prod_crop.scale(i,factors) = 10e5;
 v38_investment_immobile.scale(j,kcr) = 10e3;
+v38_capital_need.scale(j,kcr,mobil38) = 10e3;
