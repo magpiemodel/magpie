@@ -17,8 +17,7 @@
 *' `v10_balance_negative`should deviate from zero only in exceptional cases. 
 
  q10_transition_matrix(j2) ..
-  sum((land_from,land_to), vm_lu_transitions(j2,land_from,land_to))
-  + v10_balance_positive(j2) - v10_balance_negative(j2) =e=
+  sum((land_from,land_to), vm_lu_transitions(j2,land_from,land_to)) =e=
   sum(land, pcm_land(j2,land));
 
  q10_transition_to(j2,land_to) ..
