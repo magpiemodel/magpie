@@ -54,7 +54,7 @@ parameters
  ov38_investment_mobile(t,j,type)        Investment costs in mobile farm capital (mio USD17MER per yr)
  ov38_laborhours_need(t,j,kcr,type)      Labor required per unit of output (hours per ton DM)
  ov38_capital_need(t,j,kcr,mobil38,type) Captial required per unit of output (USD17MER per ton DM)
- ov38_relax_CES_lp(t,j,kcr,type)         Variable to make CES function feasible in linearized model (1) 
+ ov38_relax_CES_lp(t,j,kcr,type)         Variable to make CES function feasible in linearized model (1)
  oq38_cost_prod_labor(t,i,type)          Regional labor input costs for crop production (mio USD17MER)
  oq38_cost_prod_capital(t,i,type)        Regional capital input costs for crop production (mio USD17MER)
  oq38_investment_immobile(t,j,kcr,type)  Cellular immobile investments into farm capital   (mio USD17MER)
