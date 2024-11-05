@@ -21,8 +21,8 @@ positive variables
  vm_landreduction(j,land)                   Land reduction (mio. ha)
  vm_cost_land_transition(j)                  Costs for lu transitions (mio. USD17MER per yr)
  vm_lu_transitions(j,land_from,land_to) Land transitions between time steps (mio. ha)
- v10_balance_positive(j)          Balance variable for land transitions (mio. ha)
- v10_balance_negative(j)          Balance variable for land transitions (mio. ha)
+ v10_balance_positive(j,land_from)          Balance variable for land transitions (mio. ha)
+ v10_balance_negative(j,land_from)          Balance variable for land transitions (mio. ha)
 ;
 
 equations

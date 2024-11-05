@@ -26,7 +26,7 @@
 
  q10_transition_from(j2,land_from) ..
   sum(land_to, vm_lu_transitions(j2,land_from,land_to)) =e=
-  vm_land.l(j2,land_from);
+  vm_land.l(j2,land_from) + v10_balance_positive(j2,land_from) - v10_balance_negative(j2,land_from);
 
 *' The following two equations calculate land expansion and land contraction based
 *' on the above land transition matrix.
@@ -46,7 +46,7 @@
  q10_cost(j2) ..
         vm_cost_land_transition(j2) =e=
         sum(land, vm_landexpansion(j2,land) + vm_landreduction(j2,land)) * 1
-        + (v10_balance_positive(j2) + v10_balance_negative(j2)) * s10_cost_balance;
+        + sum(land_from, v10_balance_positive(j2,land_from) + v10_balance_negative(j2,land_from)) * s10_cost_balance;
 
 *' The gross changes in land are calculated based on land expansion, land
 *' contraction and land changes from within the modules [35_natveg]
