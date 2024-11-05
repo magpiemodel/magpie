@@ -23,7 +23,7 @@ magpie.savepoint = 0;
 
 $onecho > conopt4.opt
 Lim_Variable = 1.e25
-Tol_Feas_Min = 3.e-13
+Tol_Bound = 1.e-10
 $offecho
 
 $onecho > conopt4.op2
