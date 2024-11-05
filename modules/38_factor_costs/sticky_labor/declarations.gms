@@ -30,7 +30,7 @@ parameters
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD17MER)
 
  p38_capital_cost_shares_iso(t,iso)    Capital shares of factor costs on iso level (1)
- p38_share_calibration(iso)            Summation factor used to calibrate calculated capital shares with historical values (1)
+ p38_capital_share_calibration(iso)    Summation factor used to calibrate calculated capital shares with historical values (1)
  pm_factor_cost_shares(t,i,factors)    Capital and labor shares of factor costs on regional level (1) 
  p38_min_labor_share(t,j)              Minimum labor share out of labor plus capital needed (1)
 
