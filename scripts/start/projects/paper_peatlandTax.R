@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax35"
+cfg$info$flag <- "PTax36"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -69,6 +69,7 @@ calc_ghgprice <- function() {
   T200[, , "n2o_n_indirect"] <- T200[, , "co2_c"] * 265 * 44 / 28
   T200[, , "co2_c"] <- T200[, , "co2_c"] * 44 / 12
 
+  T25 <- T200 * 0.125
   T50 <- T200 * 0.25
   T100 <- T200 * 0.5
   T400 <- T200 * 2
@@ -76,6 +77,12 @@ calc_ghgprice <- function() {
 
   GHG <- mbind(
     add_dimension(T0, dim = 3.2, add = "scen", nm = "T0-GHG"),
+    add_dimension(
+      T25,
+      dim = 3.2,
+      add = "scen",
+      nm = "T25-GHG"
+    ),
     add_dimension(
       T50,
       dim = 3.2,
@@ -158,7 +165,8 @@ for (res in c("c400")) {
   start_run(cfg, codeCheck = FALSE)
 
   ## Policy scenarios
-  for (tax in c("T50-CO2",
+  for (tax in c("T25-CO2",
+                "T50-CO2",
                 "T100-CO2",
                 "T200-CO2",
                 "T400-CO2",
