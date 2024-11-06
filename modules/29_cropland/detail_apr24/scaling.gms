@@ -5,6 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_costs_additional_mon.scale(i) = 10e4;
-*Don't scale this variable. Model is very sensitive to scaling this variable and might become infeasible or very slow.
-*v71_feed_balanceflow.scale(j,kli_rum,kforage) = 10e3;
+v29_treecover.scale(j,ac) = 10e-3;
+v29_treecover_missing.scale(j) = 10e-3;

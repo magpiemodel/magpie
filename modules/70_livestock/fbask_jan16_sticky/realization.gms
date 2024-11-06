@@ -102,6 +102,7 @@ $Ifi "%phase%" == "sets" $include "./modules/70_livestock/fbask_jan16_sticky/set
 $Ifi "%phase%" == "declarations" $include "./modules/70_livestock/fbask_jan16_sticky/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/70_livestock/fbask_jan16_sticky/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/70_livestock/fbask_jan16_sticky/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/70_livestock/fbask_jan16_sticky/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/70_livestock/fbask_jan16_sticky/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/70_livestock/fbask_jan16_sticky/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/70_livestock/fbask_jan16_sticky/postsolve.gms"
