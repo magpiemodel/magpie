@@ -29,8 +29,9 @@ parameters
  p38_capital_immobile(t,j,kcr)         Preexisting immobile capital stocks before investment (mio USD17MER)
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD17MER)
 
- pm_cost_share_crops(t,i,factors)      Capital and labor shares of the regional factor costs for crop production   (1)
- p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
+ p38_capital_cost_shares_iso(t,iso)    Capital shares of factor costs on iso level (1)
+ p38_capital_share_calibration(iso)    Summation factor used to calibrate calculated capital shares with historical values (1)
+ pm_factor_cost_shares(t,i,factors)    Capital and labor shares of factor costs on regional level (1) 
  p38_min_labor_share(t,j)              Minimum labor share out of labor plus capital needed (1)
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
@@ -54,7 +55,7 @@ parameters
  ov38_investment_mobile(t,j,type)        Investment costs in mobile farm capital (mio USD17MER per yr)
  ov38_laborhours_need(t,j,kcr,type)      Labor required per unit of output (hours per ton DM)
  ov38_capital_need(t,j,kcr,mobil38,type) Captial required per unit of output (USD17MER per ton DM)
- ov38_relax_CES_lp(t,j,kcr,type)         Variable to make CES function feasible in linearized model (1) 
+ ov38_relax_CES_lp(t,j,kcr,type)         Variable to make CES function feasible in linearized model (1)
  oq38_cost_prod_labor(t,i,type)          Regional labor input costs for crop production (mio USD17MER)
  oq38_cost_prod_capital(t,i,type)        Regional capital input costs for crop production (mio USD17MER)
  oq38_investment_immobile(t,j,kcr,type)  Cellular immobile investments into farm capital   (mio USD17MER)

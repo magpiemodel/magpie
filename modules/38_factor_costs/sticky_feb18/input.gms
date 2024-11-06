@@ -39,8 +39,14 @@ $offdelim
 /
 ;
 
-table f38_historical_share(t_all,i) Historical capital share
+table f38_historical_share(t_all,iso) Historical capital share
 $ondelim
-$include "./modules/38_factor_costs/input/f38_historical_share.csv"
+$include "./modules/38_factor_costs/input/f38_historical_share_iso.csv"
+$offdelim
+;
+
+table f38_hist_factor_costs(t_all,iso) Historical factor costs for crop and livestock (mio USD17MER)
+$ondelim
+$include "./modules/38_factor_costs/input/f38_hist_factor_costs_iso.csv"
 $offdelim
 ;
