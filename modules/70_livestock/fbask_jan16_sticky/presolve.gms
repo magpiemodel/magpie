@@ -55,17 +55,6 @@ else
 
 *' @stop
 
-p70_cost_share_calibration(i) = f70_hist_cap_share("y2010",i)-(f70_cap_share_reg("slope")*log10(sum(i_to_iso(i,iso),(im_gdp_pc_ppp_iso("y2010",iso) * fm_gdp_defl_ppp(iso))))+f70_cap_share_reg("intercept"));
-
-if (m_year(t)<2010,
- p70_cost_share_livst(t,i,"capital") = f70_hist_cap_share(t,i);
- p70_cost_share_livst(t,i,"labor")   = 1 - f70_hist_cap_share(t,i);
-
-elseif (m_year(t)>=2010),
- p70_cost_share_livst(t,i,"capital") = f70_cap_share_reg("slope")*log10(sum(i_to_iso(i,iso),(im_gdp_pc_ppp_iso(t,iso) * fm_gdp_defl_ppp(iso))))+f70_cap_share_reg("intercept")+p70_cost_share_calibration(i);
- p70_cost_share_livst(t,i,"labor")   = 1 - p70_cost_share_livst(t,i,"capital");
-);
-
 
 *** Section implementing the "sticky" part of the realization
 *' The capital need per unit of production is based on the capital share of the factor requirements, 
@@ -73,7 +62,7 @@ elseif (m_year(t)>=2010),
 *' In addition `s70_multiplicator_capital_need` can be used to increase the capital need.
 
 p70_capital_need(t,i,kli) = i70_fac_req_livst(t,i,kli)      
-                            * p70_cost_share_livst(t,i,"capital")
+                            * pm_factor_cost_shares(t,i,"capital")
                             / (pm_interest(t,i)+s70_depreciation_rate)
                             * s70_multiplicator_capital_need;
 
