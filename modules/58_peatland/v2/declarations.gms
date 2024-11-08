@@ -76,5 +76,6 @@ parameters
  oq58_peatland_cost_annuity(t,j,cost58,type)       Annuity costs for peatland conversion in the current timestep (mio. USD17MER per yr)
  oq58_peatland_emis_detail(t,j,land58,emis58,type) Detailed GHG emissions from peatlands (Tg per yr)
  oq58_peatland_emis(t,i,poll58,type)               GHG emissions from managed peatland (Tg per yr)
+ oq58_rewetting_exo(t,j,manPeat58,type)            blub (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -51,7 +51,7 @@
 
  q58_rewetting_exo(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   sum(drained58, v58_peatland(j2,drained58)) =l= 
-  sum(drained58, p58_peatland_ref(j2,drained58)) * (1-sum(ct, i58_peatland_rewetting_fader(ct))) * s58_rewetting_exo
+  sum(drained58, p58_peatland_ref(j2,drained58)) * (1-sum(ct, i58_peatland_rewetting_fader(ct))) * s58_rewetting_exo;
 
 *' Drained peatland used for agriculture and forestry cannot exceed corresponding managed land.
 
