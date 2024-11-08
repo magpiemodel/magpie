@@ -23,11 +23,11 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax36"
+cfg$info$flag <- "PTax38"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
-cfg$output <- c(cfg$output, "extra/highres")
+#cfg$output <- c(cfg$output, "extra/highres")
 cfg$force_replace <- TRUE
 cfg$force_download <- FALSE
 cfg$qos <- "standby_highMem_dayMax"
@@ -44,10 +44,10 @@ cfg$repositories <- append(
   getOption("magpie_repos")
 )
 
-cfg$input['regional'] <- "rev4.115_36f73207_magpie.tgz"
-cfg$input['validation'] <- "rev4.115_36f73207_validation.tgz"
-cfg$input['calibration'] <- "calibration_H16_27Sep24.tgz"
-cfg$input['cellular'] <- "rev4.115_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+cfg$input['regional'] <- "rev4.115_5d9a2237_magpie.tgz"
+cfg$input['validation'] <- "rev4.115_5d9a2237_validation.tgz"
+cfg$input['calibration'] <- "calibration_H15_27Sep24.tgz"
+cfg$input['cellular'] <- "rev4.115_5d9a2237_d882386f_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
 download_and_update(cfg)
 
 ## Create patch file for GHG prices
@@ -154,17 +154,18 @@ cfg$gms$s56_c_price_induced_aff <- 0
 ## Start scenarios
 for (res in c("c400")) {
   if (res == "c400")
-    cfg$input['cellular'] <- "rev4.115_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+    cfg$input['cellular'] <- "rev4.115_5d9a2237_d882386f_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
   else if (res == "c1000") {
-    cfg$input['cellular'] <- "rev4.115_36f73207_10f98ac1_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+    cfg$input['cellular'] <- "rev4.115_5d9a2237_277ed036_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
   }
   ## Ref scenario
-  cfg$title <- .title(cfg, paste(res, ssp, "Ref", sep = "-"))
+  cfg$title <- .title(cfg, paste(ssp, "Ref", sep = "-"))
   cfg$gms$c56_mute_ghgprices_until <- "y2150"
   cfg$gms$c56_pollutant_prices <- "T0-CO2"
+  cfg$gms$s58_rewetting_exo <- 0
   start_run(cfg, codeCheck = FALSE)
 
-  ## Policy scenarios
+  ## GHG policy scenarios
   for (tax in c("T25-CO2",
                 "T50-CO2",
                 "T100-CO2",
@@ -172,10 +173,52 @@ for (res in c("c400")) {
                 "T400-CO2",
                 "T400-GHG",
                 "T400-GHG-GWP20")) {
-    cfg$title <- .title(cfg, paste(res, ssp, tax, sep = "-"))
+    cfg$title <- .title(cfg, paste(ssp, tax, sep = "-"))
     cfg$gms$c56_mute_ghgprices_until <- "y2025"
     cfg$gms$s58_cost_drain_intact_onetime  <- 10000
     cfg$gms$c56_pollutant_prices <- tax
     start_run(cfg, codeCheck = FALSE)
   }
+  
+  ## Exo rewet scenarios
+  cfg$title <- .title(cfg, paste(ssp, "NRL50", sep = "-"))
+  cfg$gms$c56_mute_ghgprices_until <- "y2150"
+  cfg$gms$c56_pollutant_prices <- "T0-CO2"
+  cfg$gms$s58_rewetting_exo <- 0.5
+  cfg$gms$s58_cost_drain_intact_onetime  <- 10000
+  start_run(cfg, codeCheck = FALSE)
+  
+  cfg$title <- .title(cfg, paste(ssp, "NRL100", sep = "-"))
+  cfg$gms$c56_mute_ghgprices_until <- "y2150"
+  cfg$gms$c56_pollutant_prices <- "T0-CO2"
+  cfg$gms$s58_rewetting_exo <- 1
+  cfg$gms$s58_cost_drain_intact_onetime  <- 10000
+  start_run(cfg, codeCheck = FALSE)
+
+  cfg$title <- .title(cfg, paste(ssp, "AREA100", sep = "-"))
+  cfg$gms$c56_mute_ghgprices_until <- "y2150"
+  cfg$gms$c56_pollutant_prices <- "T0-CO2"
+  cfg$gms$s58_rewetting_exo <- 0
+  cfg$gms$s58_cost_drain_intact_onetime  <- 10000
+  cfg$gms$s58_cost_rewet_onetime  <- -100
+  cfg$gms$s58_cost_rewet_recur  <- -100
+  start_run(cfg, codeCheck = FALSE)
+  
+  cfg$title <- .title(cfg, paste(ssp, "AREA500", sep = "-"))
+  cfg$gms$c56_mute_ghgprices_until <- "y2150"
+  cfg$gms$c56_pollutant_prices <- "T0-CO2"
+  cfg$gms$s58_rewetting_exo <- 0
+  cfg$gms$s58_cost_drain_intact_onetime  <- 10000
+  cfg$gms$s58_cost_rewet_onetime  <- -500
+  cfg$gms$s58_cost_rewet_recur  <- -100
+  start_run(cfg, codeCheck = FALSE)
+  
+  cfg$title <- .title(cfg, paste(ssp, "AREA1000", sep = "-"))
+  cfg$gms$c56_mute_ghgprices_until <- "y2150"
+  cfg$gms$c56_pollutant_prices <- "T0-CO2"
+  cfg$gms$s58_rewetting_exo <- 0
+  cfg$gms$s58_cost_drain_intact_onetime  <- 10000
+  cfg$gms$s58_cost_rewet_onetime  <- -1000
+  cfg$gms$s58_cost_rewet_recur  <- -100
+  start_run(cfg, codeCheck = FALSE)
 }
