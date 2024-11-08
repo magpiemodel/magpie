@@ -14,6 +14,7 @@ scalars
   s58_rewetting_switch Peatland rewetting on (Inf) or off (0) / Inf /
   s58_fix_peatland Year indicating until when peatland area should be fixed (year) / 2020 /
   s58_balance_penalty Penalty for technical peatland balance term (USD17MER) / 1e+06 /
+  s58_rewetting_exo share / 0 /
 ;
 
 *Peatland area based on Global Peatland Map 2.0 and Global Peatland Database
