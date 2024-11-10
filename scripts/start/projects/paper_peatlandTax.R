@@ -47,7 +47,7 @@ cfg$repositories <- append(
 cfg$input['regional'] <- "rev4.115_5d9a2237_magpie.tgz"
 cfg$input['validation'] <- "rev4.115_5d9a2237_validation.tgz"
 cfg$input['calibration'] <- "calibration_H15_27Sep24.tgz"
-cfg$input['cellular'] <- "rev4.115_5d9a2237_d882386f_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
+cfg$input['cellular'] <- "rev4.115_5d9a2237_4f52075b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
 download_and_update(cfg)
 
 ## Create patch file for GHG prices
@@ -154,7 +154,7 @@ cfg$gms$s56_c_price_induced_aff <- 0
 ## Start scenarios
 for (res in c("c200")) {
   if (res == "c200")
-    cfg$input['cellular'] <- "rev4.115_5d9a2237_d882386f_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
+    cfg$input['cellular'] <- "rev4.115_5d9a2237_4f52075b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
   else if (res == "c400")
     cfg$input['cellular'] <- "rev4.115_5d9a2237_d882386f_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
   else if (res == "c1000") {
