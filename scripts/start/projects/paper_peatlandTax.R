@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax40"
+cfg$info$flag <- "PTax41"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -152,7 +152,7 @@ cfg$gms$livestock <- "fbask_jan16_sticky"
 cfg$gms$s56_c_price_induced_aff <- 0
 
 ## Start scenarios
-for (res in c("c200")) {
+for (res in c("c400")) {
   if (res == "c200")
     cfg$input['cellular'] <- "rev4.115_5d9a2237_4f52075b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
   else if (res == "c400")
@@ -221,7 +221,7 @@ for (res in c("c200")) {
   cfg$gms$s58_rewetting_exo <- 0
   cfg$gms$s58_cost_drain_intact_onetime  <- 10000
   cfg$gms$s58_cost_rewet_onetime  <- 0
-  cfg$gms$s58_cost_rewet_recur  <- 500
+  cfg$gms$s58_cost_rewet_recur  <- -500
   start_run(cfg, codeCheck = FALSE)
   
   cfg$title <- .title(cfg, paste(ssp, "AREA1000", sep = "-"))
@@ -230,7 +230,7 @@ for (res in c("c200")) {
   cfg$gms$s58_rewetting_exo <- 0
   cfg$gms$s58_cost_drain_intact_onetime  <- 10000
   cfg$gms$s58_cost_rewet_onetime  <- 0
-  cfg$gms$s58_cost_rewet_recur  <- 1000
+  cfg$gms$s58_cost_rewet_recur  <- -1000
   start_run(cfg, codeCheck = FALSE)
 
   cfg$title <- .title(cfg, paste(ssp, "AREA2000", sep = "-"))
@@ -239,7 +239,7 @@ for (res in c("c200")) {
   cfg$gms$s58_rewetting_exo <- 0
   cfg$gms$s58_cost_drain_intact_onetime  <- 10000
   cfg$gms$s58_cost_rewet_onetime  <- 0
-  cfg$gms$s58_cost_rewet_recur  <- 2000
+  cfg$gms$s58_cost_rewet_recur  <- -2000
   start_run(cfg, codeCheck = FALSE)
   
   cfg$title <- .title(cfg, paste(ssp, "AREA5000", sep = "-"))
@@ -248,7 +248,7 @@ for (res in c("c200")) {
   cfg$gms$s58_rewetting_exo <- 0
   cfg$gms$s58_cost_drain_intact_onetime  <- 10000
   cfg$gms$s58_cost_rewet_onetime  <- 0
-  cfg$gms$s58_cost_rewet_recur  <- 5000
+  cfg$gms$s58_cost_rewet_recur  <- -5000
   start_run(cfg, codeCheck = FALSE)
   
 }
