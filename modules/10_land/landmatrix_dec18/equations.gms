@@ -18,7 +18,7 @@
 
  q10_transition_matrix(j2) ..
   sum((land_from,land_to), vm_lu_transitions(j2,land_from,land_to)) =e=
-  sum(land, vm_land(j2,land));
+  sum(land, pcm_land(j2,land));
 
  q10_transition_to(j2,land_to) ..
   sum(land_from, vm_lu_transitions(j2,land_from,land_to)) =e=
@@ -26,7 +26,7 @@
 
  q10_transition_from(j2,land_from) ..
   sum(land_to, vm_lu_transitions(j2,land_from,land_to)) =e=
-  vm_land.l(j2,land_from) + v10_balance_positive(j2,land_from) - v10_balance_negative(j2,land_from);
+  pcm_land(j2,land_from) + v10_balance_positive(j2,land_from) - v10_balance_negative(j2,land_from);
 
 *' The following two equations calculate land expansion and land contraction based
 *' on the above land transition matrix.
