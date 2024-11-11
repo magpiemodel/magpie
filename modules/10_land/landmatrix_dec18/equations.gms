@@ -18,7 +18,7 @@
 
  q10_transition_matrix(j2) ..
   sum((land_from,land_to), vm_lu_transitions(j2,land_from,land_to)) =e=
-  sum(land, pcm_land(j2,land));
+  sum(land, vm_land(j2,land));
 
  q10_transition_to(j2,land_to) ..
   sum(land_from, vm_lu_transitions(j2,land_from,land_to)) =e=
