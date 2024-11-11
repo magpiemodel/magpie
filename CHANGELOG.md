@@ -15,6 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** SHAPE scenarios start year of dietary shift changed to 2025
 - **core** number of age-classes doubled from 150 to 300 years for better match of growth curves with potential natural vegetation.
 - **35_natveg** revised age-class initialization of secondary forest
+- **modules** update of scaling factors in several modules
+
 
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
@@ -28,6 +30,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **29_cropland** treecover age-class growth was not working properly because ac_sub was erroneously not fixed 
 - **scripts** script/output/extra/resubmit.R 
 - **28_ageclass** bugfix input data unit and code clean-up. Renamed `feb21` realization to `oct24`
+- **70_livestock** bugfix scaling.gms file in wrong folder
+- **10_land** bugfix land transition matrix for improved feasibility (variables and parameters have different accuracy)
+- **44_biodiversity** avoid division by zero and improved consistency between realisations for fixing variables
 
 ## [4.8.2] - 2024-09-24
 
