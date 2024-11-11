@@ -4,3 +4,6 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
+
+v10_balance_positive.fx(j,land_from) = 0;
+v10_balance_negative.fx(j,land_from) = 0;
