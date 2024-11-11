@@ -378,8 +378,6 @@ out <- peat_hr / dimSums(land_hr[, getYears(peat_hr), ], dim = 3)
 out[is.nan(out)] <- 0
 out[is.infinite(out)] <- 0
 
-rm(land_hr, peat_hr)
-
 .writeDisagg(out, peatland_hr_share_out_file,
   comment = "unit: grid-cell land area fraction",
   message = "Write outputs peatland share"
@@ -526,6 +524,10 @@ if (grepl("grass", cfg$gms$past)) {
     "past", "manpast",
     gsub("range", "rangeland", getNames(land_lr))
   )
+  getNames(land_consv_hr) <- gsub(
+    "past", "manpast",
+    gsub("range", "rangeland", getNames(land_consv_hr))
+  )
 } else {
   # Disaggregate pasture
   land_ini_lr <- mbind(
@@ -536,6 +538,11 @@ if (grepl("grass", cfg$gms$past)) {
   land_lr <- mbind(
     land_lr[, , c("past"), invert = TRUE],
     collapseNames(land_lr[, , "past"]) * side_layers_lr[, , c("manpast", "rangeland")]
+  )
+
+  land_consv_hr <- mbind(
+    land_consv_hr[, , c("past"), invert = TRUE],
+    collapseNames(land_consv_hr[, , "past"]) * side_layers_hr[, , c("manpast", "rangeland")]
   )
 }
 
@@ -556,6 +563,7 @@ land_bii_hr <- interpolateAvlCroplandWeighted(
   marginal_land = marginal_land,
   urban_land_hr = urban_land_hr,
   land_consv_hr = land_consv_hr,
+  peat_hr = peat_hr,
   snv_pol_shr = snv_pol_shr,
   snv_pol_fader = snv_pol_fader,
   unit = "share"
