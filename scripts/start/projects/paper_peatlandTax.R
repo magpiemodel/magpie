@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax34"
+cfg$info$flag <- "PTax36"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -44,10 +44,10 @@ cfg$repositories <- append(
   getOption("magpie_repos")
 )
 
-cfg$input['regional'] <- "rev4.113_36f73207_magpie.tgz"
-cfg$input['validation'] <- "rev4.113_36f73207_validation.tgz"
+cfg$input['regional'] <- "rev4.115_36f73207_magpie.tgz"
+cfg$input['validation'] <- "rev4.115_36f73207_validation.tgz"
 cfg$input['calibration'] <- "calibration_H16_27Sep24.tgz"
-cfg$input['cellular'] <- "rev4.113_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+cfg$input['cellular'] <- "rev4.115_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
 download_and_update(cfg)
 
 ## Create patch file for GHG prices
@@ -69,6 +69,7 @@ calc_ghgprice <- function() {
   T200[, , "n2o_n_indirect"] <- T200[, , "co2_c"] * 265 * 44 / 28
   T200[, , "co2_c"] <- T200[, , "co2_c"] * 44 / 12
 
+  T25 <- T200 * 0.125
   T50 <- T200 * 0.25
   T100 <- T200 * 0.5
   T400 <- T200 * 2
@@ -76,6 +77,12 @@ calc_ghgprice <- function() {
 
   GHG <- mbind(
     add_dimension(T0, dim = 3.2, add = "scen", nm = "T0-GHG"),
+    add_dimension(
+      T25,
+      dim = 3.2,
+      add = "scen",
+      nm = "T25-GHG"
+    ),
     add_dimension(
       T50,
       dim = 3.2,
@@ -147,9 +154,9 @@ cfg$gms$s56_c_price_induced_aff <- 0
 ## Start scenarios
 for (res in c("c400")) {
   if (res == "c400")
-    cfg$input['cellular'] <- "rev4.113_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+    cfg$input['cellular'] <- "rev4.115_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
   else if (res == "c1000") {
-    cfg$input['cellular'] <- "rev4.113_36f73207_10f98ac1_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+    cfg$input['cellular'] <- "rev4.115_36f73207_10f98ac1_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
   }
   ## Ref scenario
   cfg$title <- .title(cfg, paste(res, ssp, "Ref", sep = "-"))
@@ -158,7 +165,8 @@ for (res in c("c400")) {
   start_run(cfg, codeCheck = FALSE)
 
   ## Policy scenarios
-  for (tax in c("T50-CO2",
+  for (tax in c("T25-CO2",
+                "T50-CO2",
                 "T100-CO2",
                 "T200-CO2",
                 "T400-CO2",

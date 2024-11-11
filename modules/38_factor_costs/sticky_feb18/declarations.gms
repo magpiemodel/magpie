@@ -24,8 +24,9 @@ parameters
  p38_capital_immobile(t,j,kcr)         Preexisting immobile capital stocks before investment (mio USD17MER)
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD17MER)
 
- pm_cost_share_crops(t,i,factors)      Capital and labor shares of the regional factor costs for crop production (1)
- p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
+ p38_capital_cost_shares_iso(t,iso)    Capital shares of factor costs on iso level (1)
+ p38_capital_share_calibration(iso)    Summation factor used to calibrate calculated capital shares with historical values (1)
+ pm_factor_cost_shares(t,i,factors)    Capital and labor shares of factor costs on regional level (1) 
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
 

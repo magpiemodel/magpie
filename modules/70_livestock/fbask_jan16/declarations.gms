@@ -32,8 +32,6 @@ parameters
  i70_foddr_scp_fadeout(t_all,i)                   Fodder fadeout (share 0-1) to be replaced by SCP (1)
  p70_country_dummy(iso)                           Dummy parameter indicating whether country is affected by feed scenarios (1)
  p70_feedscen_region_shr(t_all,i)                 Weighted share of region with regards to feed scenario of countries (1)
- p70_cost_share_livst(t,i,factors)                Capital and labor shares of the regional factor costs for plant production for livestock  (1)
- p70_cost_share_calibration(i)                    Summation factor used to calibrate calculated capital shares with historical values (1)
  i70_cost_regr(i,kap,cost_regr)                   Regression coefficients for livestock factor requirements (1)
  i70_fac_req_livst(t_all,i,kli)                   Factor requirements (USD17MER per tDM)
  p70_cereal_subst_fader(t_all)                    Cereal feed substitution with SCP fader (1)

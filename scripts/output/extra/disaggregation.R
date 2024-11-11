@@ -364,7 +364,7 @@ land_hr <- .fixCoords(land_hr)
 gc()
 
 # -----------------------------------
-# Create peatland outputs
+# Write peatland outputs
 # -----------------------------------
 
 # Write output

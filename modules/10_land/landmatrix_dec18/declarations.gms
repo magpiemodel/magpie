@@ -21,8 +21,8 @@ positive variables
  vm_landreduction(j,land)                   Land reduction (mio. ha)
  vm_cost_land_transition(j)                  Costs for lu transitions (mio. USD17MER per yr)
  vm_lu_transitions(j,land_from,land_to) Land transitions between time steps (mio. ha)
- v10_balance_positive(j)          Balance variable for land transitions (mio. ha)
- v10_balance_negative(j)          Balance variable for land transitions (mio. ha)
+ v10_balance_positive(j,land_from)          Balance variable for land transitions (mio. ha)
+ v10_balance_negative(j,land_from)          Balance variable for land transitions (mio. ha)
 ;
 
 equations
@@ -43,8 +43,8 @@ parameters
  ov_landreduction(t,j,land,type)               Land reduction (mio. ha)
  ov_cost_land_transition(t,j,type)             Costs for lu transitions (mio. USD17MER per yr)
  ov_lu_transitions(t,j,land_from,land_to,type) Land transitions between time steps (mio. ha)
- ov10_balance_positive(t,j,type)               Balance variable for land transitions (mio. ha)
- ov10_balance_negative(t,j,type)               Balance variable for land transitions (mio. ha)
+ ov10_balance_positive(t,j,land_from,type)     Balance variable for land transitions (mio. ha)
+ ov10_balance_negative(t,j,land_from,type)     Balance variable for land transitions (mio. ha)
  oq10_transition_matrix(t,j,type)              Land transition constraint cell area (mio. ha)
  oq10_transition_to(t,j,land_to,type)          Land transition constraint to (mio. ha)
  oq10_transition_from(t,j,land_from,type)      Land transition constraint from (mio. ha)

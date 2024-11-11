@@ -148,15 +148,15 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.112_h12_magpie.tgz
+* Used data set: rev4.114_h12_magpie.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.112_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* Used data set: rev4.114_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.112_h12_validation.tgz
+* Used data set: rev4.114_h12_validation.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.112
+* Regions data revision: 4.114
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.112
+* * Revision: 4.114
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Tue Sep 24 17:20:08 2024
+* Last modification (input data): Sun Oct 27 00:37:36 2024
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -247,7 +247,7 @@ $setglobal processing  substitution_may21
 $setglobal trade  selfsuff_reduced
 $setglobal land_conservation  area_based_apr22
 
-$setglobal ageclass  feb21
+$setglobal ageclass  oct24
 
 $setglobal cropland  simple_apr24
 $setglobal croparea  simple_apr24
