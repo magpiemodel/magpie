@@ -12,7 +12,7 @@
 *' The regional layer is needed for compatibility with the high resolution parallel optimization output script (scripts/output/extra/highres.R)
 
  q44_bii(i2,biome44)$(sum(cell(i2,j2), f44_biome(j2,biome44)*f44_rr_layer(j2)) > 1e-10) .. 
-         v44_bii(i2,biome44) * sum((cell(i2,j2),land), vm_land(j2,land) * f44_rr_layer(j2) * f44_biome(j2,biome44))
+         v44_bii(i2,biome44) * sum((cell(i2,j2),land), pcm_land(j2,land) * f44_rr_layer(j2) * f44_biome(j2,biome44))
           =e=
           sum((cell(i2,j2),potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg) * f44_rr_layer(j2) * f44_biome(j2,biome44));
 
