@@ -5,10 +5,23 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v44_bii.l(i,biome44) = 0.75;
+i44_biome_share(j,biome44) = 0;
+i44_biome_share(j,biome44)$(sum(land, pcm_land(j,land)) > 0) = f44_biome_area(j,biome44) / sum(land, pcm_land(j,land));
 
-v44_bii.fx(i,biome44)$(sum(cell(i,j), f44_biome(j,biome44)*f44_rr_layer(j)) <= 1e-10) = 0;
-v44_bii_missing.fx(i,biome44)$(sum(cell(i,j), f44_biome(j,biome44)*f44_rr_layer(j)) <= 1e-10) = 0;
+i44_biome_area_reg(i,biome44) = 
+  sum((cell(i,j),land), pcm_land(j,land) * f44_rr_layer(j) * i44_biome_share(j,biome44));
+
+loop(i,
+  loop(biome44,
+    if(i44_biome_area_reg(i,biome44) <= 0,
+      v44_bii.fx(i,biome44) = 0;
+      v44_bii_missing.fx(i,biome44) = 0;
+    else
+      v44_bii.l(i,biome44) = 
+        sum((cell(i,j),potnatveg,landcover44), vm_bv.l(j,landcover44,potnatveg) * f44_rr_layer(j) * i44_biome_share(j,biome44))
+        / i44_biome_area_reg(i,biome44);
+    );
+  );
+);
+
 p44_bii_lower_bound(t,i,biome44) = 0;
-
-vm_bv.l(j,landcover44,potnatveg) = 0;

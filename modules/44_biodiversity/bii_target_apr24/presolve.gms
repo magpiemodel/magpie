@@ -23,8 +23,11 @@ else
   );
   p44_bii_lower_bound(t2,i,biome44)$(p44_bii_lower_bound(t2,i,biome44) >= 1) = 1;
   p44_bii_lower_bound(t2,i,biome44)$(m_year(t2) < s44_start_year) = 0;
-  p44_bii_lower_bound(t2,i,biome44)$(sum(cell(i,j), f44_biome(j,biome44)*f44_rr_layer(j)) <= 1e-10) = 0;
+  p44_bii_lower_bound(t2,i,biome44)$(i44_biome_area_reg(i,biome44) <= 0) = 0;
 * The lower bound of `v44_bii` is set to `p44_bii_lower_bound` to avoid a reduction of BII in combination with `v44_bii_missing`.
   v44_bii.lo(i,biome44) = p44_bii_lower_bound(t,i,biome44);
   display p44_bii_lower_bound;
 );
+
+i44_biome_area_reg(i,biome44) = 
+  sum((cell(i,j),land), pcm_land(j,land) * f44_rr_layer(j) * i44_biome_share(j,biome44));

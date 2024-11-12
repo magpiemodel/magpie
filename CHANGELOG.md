@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
 - **config** added SSP1-POP-GDP SSP2-POP-GDP and SSP5-POP-GDP
+- **modules[29-35]** added initial vales for ov_bv for better starting point
 
 ### removed
 -
@@ -31,8 +32,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** script/output/extra/resubmit.R 
 - **28_ageclass** bugfix input data unit and code clean-up. Renamed `feb21` realization to `oct24`
 - **70_livestock** bugfix scaling.gms file in wrong folder
-- **10_land** bugfix land transition matrix for improved feasibility (variables and parameters have different accuracy)
-- **44_biodiversity** avoid division by zero and improved consistency between realisations for fixing variables
+- **10_land** Simplified land transition matrix for improved feasibility
+- **44_biodiversity** bugfix biorealm_biome.cs3 in input data (shares did not add-up to 1)
 
 ## [4.8.2] - 2024-09-24
 
