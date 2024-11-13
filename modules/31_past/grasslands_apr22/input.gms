@@ -19,7 +19,7 @@ $setglobal c31_grassl_yld_scenario  cc
 parameter f31_pastr_suitability(t_all,j) Areas suitable for pasture management (mio. ha)
 /
 $ondelim
-$include "./modules/31_past/input/f31_pastr_suitability.cs2"
+$include "./modules/31_past/input/f31_max_managed_pasture.cs2"
 $offdelim
 /;
 
