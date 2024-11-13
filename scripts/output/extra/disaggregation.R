@@ -87,7 +87,8 @@ if (length(map_file) > 1) {
 }
 
 .dissagLandConsv <- function(gdx, cfg, map_file, wdpa_hr_file, consv_prio_hr_file) {
-  land_consv_lr <- readGDX(gdx, "p22_conservation_area", react = "silent")
+  land_consv_lr <- readGDX(gdx, "pm_land_conservation", react = "silent")
+  land_consv_lr <- dimSums(land_consv_lr, dim=3.2)
   wdpa_hr <- read.magpie(wdpa_hr_file)
   map <- readRDS(map_file)
 
@@ -275,6 +276,8 @@ if (cfg$gms$urban == "exo_nov21") {
 # Prepare land conservation data
 # ----------------------------------------
 
+message("Disaggregating conservation land")
+
 land_consv_hr <- NULL
 if (file.exists(wdpa_hr_file)) {
   land_consv_hr <- .dissagLandConsv(gdx, cfg, map_file, wdpa_hr_file, consv_prio_hr_file)
@@ -300,6 +303,30 @@ avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz") # available cropl
 marginal_land <- cfg$gms$c29_marginal_land # marginal land scenario
 snv_pol_fader <- readGDX(gdx, "i29_snv_scenario_fader")
 
+
+# --------------------------------
+# Disaggregate peatland
+# --------------------------------
+
+message("Disaggregating peatland")
+
+# check for peatland version
+if (cfg$gms$peatland == "v2") {
+  peat_lr <- PeatlandArea(gdx, level = "cell", sum = FALSE)
+  peat_ini_hr <- read.magpie(peatland_v2_hr_file)
+  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "rewetted", dim = "d3", fill = 0)
+  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "unused", dim = "d3", fill = 0)
+  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr, peat_ini_hr, map_file))
+  peat_hr <- peat_hr[, getYears(peat_hr, as.integer = T) >= cfg$gms$s58_fix_peatland, ]
+} else if (cfg$gms$peatland == "on") {
+  peat_lr <- PeatlandArea(gdx, level = "cell", sum = TRUE)
+  peat_ini_hr <- mbind(setNames(read.magpie(peatland_on_intact_hr_file), "intact"), setNames(read.magpie(peatland_on_degrad_hr_file), "degrad"))
+  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "rewet", dim = "d3", fill = 0)
+  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr, peat_ini_hr, map_file))
+  peat_hr <- peat_hr[, getYears(peat_hr, as.integer = T) >= cfg$gms$s58_fix_peatland, ]
+}
+peat_hr <- .fixCoords(peat_hr)
+
 # ============================================
 # Start disaggregation
 # ============================================
@@ -319,6 +346,7 @@ land_hr <- interpolateAvlCroplandWeighted(
   marginal_land = marginal_land,
   urban_land_hr = urban_land_hr,
   land_consv_hr = land_consv_hr,
+  peat_hr = peat_hr,
   snv_pol_shr = snv_pol_shr,
   snv_pol_fader = snv_pol_fader
 )
@@ -334,6 +362,28 @@ land_hr <- .fixCoords(land_hr)
   message = "Write outputs cell.land_share"
 )
 gc()
+
+# -----------------------------------
+# Write peatland outputs
+# -----------------------------------
+
+# Write output
+.writeDisagg(peat_hr, peatland_hr_out_file,
+  comment = "unit: Mha per grid-cell",
+  message = "Write outputs peatland Mha"
+)
+gc()
+
+out <- peat_hr / dimSums(land_hr[, getYears(peat_hr), ], dim = 3)
+out[is.nan(out)] <- 0
+out[is.infinite(out)] <- 0
+
+.writeDisagg(out, peatland_hr_share_out_file,
+  comment = "unit: grid-cell land area fraction",
+  message = "Write outputs peatland share"
+)
+gc()
+
 
 # ---------------------------------
 #  Split land pools
@@ -474,6 +524,10 @@ if (grepl("grass", cfg$gms$past)) {
     "past", "manpast",
     gsub("range", "rangeland", getNames(land_lr))
   )
+  getNames(land_consv_hr) <- gsub(
+    "past", "manpast",
+    gsub("range", "rangeland", getNames(land_consv_hr))
+  )
 } else {
   # Disaggregate pasture
   land_ini_lr <- mbind(
@@ -484,6 +538,11 @@ if (grepl("grass", cfg$gms$past)) {
   land_lr <- mbind(
     land_lr[, , c("past"), invert = TRUE],
     collapseNames(land_lr[, , "past"]) * side_layers_lr[, , c("manpast", "rangeland")]
+  )
+
+  land_consv_hr <- mbind(
+    land_consv_hr[, , c("past"), invert = TRUE],
+    collapseNames(land_consv_hr[, , "past"]) * side_layers_hr[, , c("manpast", "rangeland")]
   )
 }
 
@@ -504,6 +563,7 @@ land_bii_hr <- interpolateAvlCroplandWeighted(
   marginal_land = marginal_land,
   urban_land_hr = urban_land_hr,
   land_consv_hr = land_consv_hr,
+  peat_hr = peat_hr,
   snv_pol_shr = snv_pol_shr,
   snv_pol_fader = snv_pol_fader,
   unit = "share"
@@ -531,47 +591,5 @@ rm(land_bii_hr)
 rm(bii_hr)
 gc()
 
-
-# --------------------------------
-# Disaggregate peatland
-# --------------------------------
-
-message("Disaggregating peatland")
-
-# check for peatland version
-if (cfg$gms$peatland == "v2") {
-  peat_lr <- PeatlandArea(gdx, level = "cell", sum = FALSE)
-  peat_ini_hr <- read.magpie(peatland_v2_hr_file)
-  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "rewetted", dim = "d3", fill = 0)
-  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "unused", dim = "d3", fill = 0)
-  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr, peat_ini_hr, map_file))
-  peat_hr <- peat_hr[, getYears(peat_hr, as.integer = T) >= cfg$gms$s58_fix_peatland, ]
-} else if (cfg$gms$peatland == "on") {
-  peat_lr <- PeatlandArea(gdx, level = "cell", sum = TRUE)
-  peat_ini_hr <- mbind(setNames(read.magpie(peatland_on_intact_hr_file), "intact"), setNames(read.magpie(peatland_on_degrad_hr_file), "degrad"))
-  peat_ini_hr <- add_columns(peat_ini_hr, addnm = "rewet", dim = "d3", fill = 0)
-  peat_hr <- suppressWarnings(luscale::interpolate2(peat_lr, peat_ini_hr, map_file))
-  peat_hr <- peat_hr[, getYears(peat_hr, as.integer = T) >= cfg$gms$s58_fix_peatland, ]
-}
-peat_hr <- .fixCoords(peat_hr)
-
-# Write output
-.writeDisagg(peat_hr, peatland_hr_out_file,
-  comment = "unit: Mha per grid-cell",
-  message = "Write outputs peatland Mha"
-)
-gc()
-
-out <- peat_hr / dimSums(land_hr[, getYears(peat_hr), ], dim = 3)
-out[is.nan(out)] <- 0
-out[is.infinite(out)] <- 0
-
-rm(land_hr, peat_hr)
-
-.writeDisagg(out, peatland_hr_share_out_file,
-  comment = "unit: grid-cell land area fraction",
-  message = "Write outputs peatland share"
-)
-gc()
 
 message("Finished disaggregation")
