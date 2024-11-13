@@ -5,12 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* Calculate biome share
 i44_biome_share(j,biome44) = 
    (f44_biome_area(j,biome44) + 1e-10) / sum(biome44_2, f44_biome_area(j,biome44_2) + 1e-10);
 
+* Update i44_biome_area_reg
 i44_biome_area_reg(i,biome44) = 
   sum((cell(i,j),land), pcm_land(j,land) * i44_biome_share(j,biome44));
 
+* Update v44_bii.l based on vm_bv.l
 loop(i,
   loop(biome44,
     if(i44_biome_area_reg(i,biome44) <= 0,

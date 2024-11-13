@@ -5,8 +5,23 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* Update i44_biome_area_reg
 i44_biome_area_reg(i,biome44) = 
-  sum((cell(i,j),land), pcm_land(j,land) * f44_rr_layer(j) * i44_biome_share(j,biome44));
+  sum((cell(i,j),land), pcm_land(j,land) * i44_biome_share(j,biome44));
+
+* Update v44_bii.l based on vm_bv.l
+loop(i,
+  loop(biome44,
+    if(i44_biome_area_reg(i,biome44) <= 0,
+      v44_bii.fx(i,biome44) = 0;
+      v44_bii_missing.fx(i,biome44) = 0;
+    else
+      v44_bii.l(i,biome44) = 
+        sum((cell(i,j),potnatveg,landcover44), vm_bv.l(j,landcover44,potnatveg) * i44_biome_share(j,biome44))
+        / i44_biome_area_reg(i,biome44);
+    );
+  );
+);
 
 * The start value for the linear interpolation is the BII at biome level in the start year.
 p44_start_value(i,biome44)$(m_year(t) = s44_start_year) = v44_bii.l(i,biome44);
