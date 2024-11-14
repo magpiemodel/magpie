@@ -9,7 +9,7 @@
 i44_biome_share(j,biome44) = 
    (f44_biome_area(j,biome44) + 1e-10) / sum(biome44_2, f44_biome_area(j,biome44_2) + 1e-10);
 
-* Update i44_biome_area_reg
+* Set i44_biome_area_reg
 i44_biome_area_reg(i,biome44) = 
   sum((cell(i,j),land), pcm_land(j,land) * f44_rr_layer(j) * i44_biome_share(j,biome44));
 
