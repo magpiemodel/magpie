@@ -13,7 +13,7 @@
  q44_bii(i2,biome44)$(i44_biome_area_reg(i2,biome44) > 0) .. 
           v44_bii(i2,biome44)
           =e=
-          sum((cell(i2,j2),potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg) * f44_biome(j2,biome44))
+          sum((cell(i2,j2),potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg) * i44_biome_share(j2,biome44))
           / i44_biome_area_reg(i2,biome44);
 
 *' For each of the 71 biomes, the BII has to meet a minium level based on `s44_bii_lower_bound`.
