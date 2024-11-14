@@ -5,10 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* Update i44_biome_area_reg
-i44_biome_area_reg(i,biome44) = 
-  sum((cell(i,j),land), pcm_land(j,land) * i44_biome_share(j,biome44));
-
 * Update v44_bii.l based on vm_bv.l
 loop(i,
   loop(biome44,
