@@ -13,18 +13,4 @@ i44_biome_share(j,biome44) =
 i44_biome_area_reg(i,biome44) = 
   sum((cell(i,j),land), pcm_land(j,land) * i44_biome_share(j,biome44));
 
-* Update v44_bii.l based on vm_bv.l
-loop(i,
-  loop(biome44,
-    if(i44_biome_area_reg(i,biome44) <= 0,
-      v44_bii.fx(i,biome44) = 0;
-      v44_bii_missing.fx(i,biome44) = 0;
-    else
-      v44_bii.l(i,biome44) = 
-        sum((cell(i,j),potnatveg,landcover44), vm_bv.l(j,landcover44,potnatveg) * i44_biome_share(j,biome44))
-        / i44_biome_area_reg(i,biome44);
-    );
-  );
-);
-
 p44_bii_lower_bound(t,i,biome44) = 0;
