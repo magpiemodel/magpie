@@ -7,18 +7,14 @@
 
 *' @equations
 
-*' The following three equations describe the general structure of the land transition matrix.
-*' The first equation defines the total amount of land to be constant over time.
-*' The two balancing variables `v10_balance_positive` and `v10_balance_negative` are needed 
-*' to avoid technical infeasibilities due to small differences in accuracy between 
-*' variables and parameters in GAMS. The use of `v10_balance_positive` and 
-*' `v10_balance_negative` is minimized by putting a high cost factor on these variables 
-*' (`q10_cost`). In practice, `v10_balance_positive` and 
-*' `v10_balance_negative`should deviate from zero only in exceptional cases. 
 
- q10_transition_matrix(j2) ..
-  sum((land_from,land_to), vm_lu_transitions(j2,land_from,land_to)) =e=
-  sum(land, vm_land(j2,land));
+*' This equation defines the total amount of land to be constant over time. 
+
+ q10_land_area(j2) ..
+  sum(land, vm_land(j2,land)) =e=
+  sum(land, pcm_land(j2,land));
+
+*' The following two equations describe the land transition matrix.
 
  q10_transition_to(j2,land_to) ..
   sum(land_from, vm_lu_transitions(j2,land_from,land_to)) =e=
@@ -26,7 +22,7 @@
 
  q10_transition_from(j2,land_from) ..
   sum(land_to, vm_lu_transitions(j2,land_from,land_to)) =e=
-  vm_land.l(j2,land_from) + v10_balance_positive(j2,land_from) - v10_balance_negative(j2,land_from);
+  pcm_land(j2,land_from);
 
 *' The following two equations calculate land expansion and land contraction based
 *' on the above land transition matrix.
@@ -45,8 +41,7 @@
 
  q10_cost(j2) ..
         vm_cost_land_transition(j2) =e=
-        sum(land, vm_landexpansion(j2,land) + vm_landreduction(j2,land)) * 1
-        + sum(land_from, v10_balance_positive(j2,land_from) + v10_balance_negative(j2,land_from)) * s10_cost_balance;
+        sum(land, vm_landexpansion(j2,land) + vm_landreduction(j2,land)) * 1;
 
 *' The gross changes in land are calculated based on land expansion, land
 *' contraction and land changes from within the modules [35_natveg]

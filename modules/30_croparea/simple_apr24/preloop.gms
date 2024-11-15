@@ -23,3 +23,12 @@ p30_country_dummy(policy_countries30) = 1;
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by available cropland area.
 p30_country_weight(i) = sum(i_to_iso(i,iso), p30_country_dummy(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
+
+* Initialize biodiversity value
+vm_bv.l(j,"crop_ann",potnatveg) =
+  sum((crop_ann30,w), fm_croparea("y1995",j,w,crop_ann30)) * fm_bii_coeff("crop_ann",potnatveg) 
+  * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"crop_per",potnatveg) =
+  sum((crop_per30,w), fm_croparea("y1995",j,w,crop_per30)) * fm_bii_coeff("crop_per",potnatveg) 
+  * fm_luh2_side_layers(j,potnatveg);

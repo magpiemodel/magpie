@@ -109,3 +109,11 @@ else
 vm_fallow.lo(j) = 0;
 vm_fallow.up(j) = p29_avl_cropland(t,j);
 m_boundfix(vm_fallow,(j),l,1e-6);
+
+* Update biodiversity value
+vm_bv.l(j,"crop_fallow",potnatveg) = 
+  vm_fallow.l(j) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"crop_tree",potnatveg) =
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc29_treecover(j,ac)) * 
+  p29_treecover_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);

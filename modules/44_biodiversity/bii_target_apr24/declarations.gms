@@ -7,22 +7,24 @@
 
 
 positive variables
- vm_cost_bv_loss(j)           Biodiversity cost (mio USD17MER)
- vm_bv(j,landcover44,potnatveg)     Biodiversity stock for all land cover classes (Mha)
- v44_bii(i,biome44)           Biodiversity Intactness Index BII (1)
+ vm_cost_bv_loss(j)               Biodiversity cost (mio USD17MER)
+ vm_bv(j,landcover44,potnatveg)   Biodiversity stock for all land cover classes (Mha)
+ v44_bii(i,biome44)               Biodiversity Intactness Index BII (1)
  v44_bii_missing(i,biome44)       Missing BII increase for compliance with BII target (1)
 ;
 
 parameters
- p44_bii_lower_bound(t,i,biome44)   Interpolated lower bound for BII over time (1)
+ p44_bii_lower_bound(t,i,biome44) Interpolated lower bound for BII over time (1)
  p44_start_value(i,biome44)       Start value for BII lower bound (1)
  p44_target_value(i,biome44)      Target value for BII lower bound (1)
+ i44_biome_share(j,biome44)       Share of biome type in each spatial unit (1)
+ i44_biome_area_reg(i,biome44)    Area of range-rarity weighted biome type in each region (mio. ha)
 ;
 
 equations
- q44_bii(i,biome44)                     Biodiversity Intactness Index BII (1)
- q44_bii_target(i,biome44)              Missing BII increase for compliance with BII target (1)
- q44_cost(i)              Biodiversity cost (mio USD17MER)
+ q44_bii(i,biome44)        Biodiversity Intactness Index BII (1)
+ q44_bii_target(i,biome44) Missing BII increase for compliance with BII target (1)
+ q44_cost(i)               Biodiversity cost (mio USD17MER)
 ;
 
 
