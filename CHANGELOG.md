@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core** number of age-classes doubled from 150 to 300 years for better match of growth curves with potential natural vegetation.
 - **35_natveg** revised age-class initialization of secondary forest
 - **modules** update of scaling factors in several modules
+- **config** default for `c60_bioenergy_subsidy` changed from 369 to 246 USD17MER per ton
 
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
@@ -34,6 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **70_livestock** bugfix scaling.gms file in wrong folder
 - **10_land** Simplified land transition matrix for improved feasibility
 - **44_biodiversity** bugfix biorealm_biome.cs3 in input data (shares did not add-up to 1)
+- **config** additional data increased to `additional_data_rev4.58.tgz` which fixes missing gdp2017 conversions in f20_processing_unitcosts
 
 ## [4.8.2] - 2024-09-24
 
