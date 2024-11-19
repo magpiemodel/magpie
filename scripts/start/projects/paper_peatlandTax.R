@@ -46,7 +46,7 @@ cfg$repositories <- append(
 
 cfg$input['regional'] <- "rev4.116_5d9a2237_magpie.tgz"
 cfg$input['validation'] <- "rev4.116_5d9a2237_validation.tgz"
-cfg$input['calibration'] <- "calibration_H15_27Sep24.tgz"
+cfg$input['calibration'] <- "calibration_H16_27Sep24.tgz"
 cfg$input['cellular'] <- "rev4.116_5d9a2237_4f52075b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
 download_and_update(cfg)
 
