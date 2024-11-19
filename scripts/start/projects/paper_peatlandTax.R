@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax41"
+cfg$info$flag <- "PTax42"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -44,10 +44,6 @@ cfg$repositories <- append(
   getOption("magpie_repos")
 )
 
-cfg$input['regional'] <- "rev4.116_5d9a2237_magpie.tgz"
-cfg$input['validation'] <- "rev4.116_5d9a2237_validation.tgz"
-cfg$input['calibration'] <- "calibration_H15_27Sep24.tgz"
-cfg$input['cellular'] <- "rev4.116_5d9a2237_4f52075b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-db9e7cf8.tgz"
 download_and_update(cfg)
 
 ## Create patch file for GHG prices
@@ -146,6 +142,7 @@ ssp <- "SSP2"
 cfg <- setScenario(cfg, c(ssp, "NPI", "rcp7p0"))
 cfg$gms$c56_pollutant_prices_noselect <- "T0-CO2"
 cfg$gms$policy_countries56  <- isoCountriesEUR
+cfg$gms$policy_countries58 <- isoCountriesEUR
 cfg$gms$c56_emis_policy <- "sdp_peatland"
 cfg$gms$factor_costs <- "sticky_feb18"
 cfg$gms$livestock <- "fbask_jan16_sticky"
@@ -175,6 +172,13 @@ for (tax in c("T25-CO2",
 }
 
 ## Exo rewet scenarios
+cfg$title <- .title(cfg, paste(ssp, "NRL33", sep = "-"))
+cfg$gms$c56_mute_ghgprices_until <- "y2150"
+cfg$gms$c56_pollutant_prices <- "T0-CO2"
+cfg$gms$s58_rewetting_exo <- 0.33
+cfg$gms$s58_cost_drain_intact_onetime  <- 10000
+start_run(cfg, codeCheck = FALSE)
+
 cfg$title <- .title(cfg, paste(ssp, "NRL50", sep = "-"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$gms$c56_pollutant_prices <- "T0-CO2"
@@ -187,58 +191,4 @@ cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$gms$c56_pollutant_prices <- "T0-CO2"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_cost_drain_intact_onetime  <- 10000
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- .title(cfg, paste(ssp, "AREA50", sep = "-"))
-cfg$gms$c56_mute_ghgprices_until <- "y2150"
-cfg$gms$c56_pollutant_prices <- "T0-CO2"
-cfg$gms$s58_rewetting_exo <- 0
-cfg$gms$s58_cost_drain_intact_onetime  <- 10000
-cfg$gms$s58_cost_rewet_onetime  <- 0
-cfg$gms$s58_cost_rewet_recur  <- -50
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- .title(cfg, paste(ssp, "AREA100", sep = "-"))
-cfg$gms$c56_mute_ghgprices_until <- "y2150"
-cfg$gms$c56_pollutant_prices <- "T0-CO2"
-cfg$gms$s58_rewetting_exo <- 0
-cfg$gms$s58_cost_drain_intact_onetime  <- 10000
-cfg$gms$s58_cost_rewet_onetime  <- 0
-cfg$gms$s58_cost_rewet_recur  <- -100
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- .title(cfg, paste(ssp, "AREA500", sep = "-"))
-cfg$gms$c56_mute_ghgprices_until <- "y2150"
-cfg$gms$c56_pollutant_prices <- "T0-CO2"
-cfg$gms$s58_rewetting_exo <- 0
-cfg$gms$s58_cost_drain_intact_onetime  <- 10000
-cfg$gms$s58_cost_rewet_onetime  <- 0
-cfg$gms$s58_cost_rewet_recur  <- -500
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- .title(cfg, paste(ssp, "AREA1000", sep = "-"))
-cfg$gms$c56_mute_ghgprices_until <- "y2150"
-cfg$gms$c56_pollutant_prices <- "T0-CO2"
-cfg$gms$s58_rewetting_exo <- 0
-cfg$gms$s58_cost_drain_intact_onetime  <- 10000
-cfg$gms$s58_cost_rewet_onetime  <- 0
-cfg$gms$s58_cost_rewet_recur  <- -1000
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- .title(cfg, paste(ssp, "AREA2000", sep = "-"))
-cfg$gms$c56_mute_ghgprices_until <- "y2150"
-cfg$gms$c56_pollutant_prices <- "T0-CO2"
-cfg$gms$s58_rewetting_exo <- 0
-cfg$gms$s58_cost_drain_intact_onetime  <- 10000
-cfg$gms$s58_cost_rewet_onetime  <- 0
-cfg$gms$s58_cost_rewet_recur  <- -2000
-start_run(cfg, codeCheck = FALSE)
-
-cfg$title <- .title(cfg, paste(ssp, "AREA5000", sep = "-"))
-cfg$gms$c56_mute_ghgprices_until <- "y2150"
-cfg$gms$c56_pollutant_prices <- "T0-CO2"
-cfg$gms$s58_rewetting_exo <- 0
-cfg$gms$s58_cost_drain_intact_onetime  <- 10000
-cfg$gms$s58_cost_rewet_onetime  <- 0
-cfg$gms$s58_cost_rewet_recur  <- -5000
 start_run(cfg, codeCheck = FALSE)

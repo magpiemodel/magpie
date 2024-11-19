@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **62_material** added switch to turn off future material demand for bioplastic
 - **config** added SSP1-POP-GDP SSP2-POP-GDP and SSP5-POP-GDP
 - **modules[29-35]** added initial values for ov_bv for better starting point
+- **58_peatland** added option for exogenous peatland rewetting
 
 ### removed
 -
