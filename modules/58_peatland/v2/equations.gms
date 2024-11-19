@@ -58,8 +58,7 @@
 
  q58_rewetting_exo(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,"rewetted") =g= 
-  sum(drained58, p58_peatland_ref(j2,drained58)) * sum(ct, i58_peatland_rewetting_fader(ct)) * s58_rewetting_exo;
-
+  sum(drained58, p58_peatland_ref(j2,drained58)) * sum(ct, i58_rewetting_exo(ct,j2));
 
 *' Costs for peatland degradation and rewetting
 
