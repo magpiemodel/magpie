@@ -75,10 +75,10 @@ parameters
  oq58_manLandRed(t,j,manPeat58,type)               Managed land area reduction (mio. ha)
  oq58_peatlandMan(t,j,manPeat58,type)              Change of managed peatland area (mio. ha)
  oq58_peatlandMan2(t,j,manPeat58,type)             Contraint for managed peatland area (mio. ha)
+ oq58_rewetting_exo(t,j,manPeat58,type)            Constraint for exogenous peatland rewetting (mio. ha)
  oq58_peatland_cost(t,j,type)                      One-time and recurring cost of peatland conversion and management (mio. USD17MER per yr)
  oq58_peatland_cost_annuity(t,j,cost58,type)       Annuity costs for peatland conversion in the current timestep (mio. USD17MER per yr)
  oq58_peatland_emis_detail(t,j,land58,emis58,type) Detailed GHG emissions from peatlands (Tg per yr)
  oq58_peatland_emis(t,i,poll58,type)               GHG emissions from managed peatland (Tg per yr)
- oq58_rewetting_exo(t,j,manPeat58,type)            blub (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
