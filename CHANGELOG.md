@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core** number of age-classes doubled from 150 to 300 years for better match of growth curves with potential natural vegetation.
 - **35_natveg** revised age-class initialization of secondary forest
 - **modules** update of scaling factors in several modules
+- **scripts** add mrdownscale script (0.5deg downscaling using LandUseInit as reference)
+- **scripts** renamed disaggregation_mrdownscale.R -> mrdownscale_LUH2.R
 
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
