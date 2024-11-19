@@ -17,7 +17,6 @@ $Ifi "%phase%" == "input" $include "./modules/10_land/landmatrix_dec18/input.gms
 $Ifi "%phase%" == "equations" $include "./modules/10_land/landmatrix_dec18/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/10_land/landmatrix_dec18/scaling.gms"
 $Ifi "%phase%" == "start" $include "./modules/10_land/landmatrix_dec18/start.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/10_land/landmatrix_dec18/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/10_land/landmatrix_dec18/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/10_land/landmatrix_dec18/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

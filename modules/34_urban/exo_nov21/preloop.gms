@@ -15,3 +15,7 @@ i34_urban_area(t_all, j) = f34_urbanland(t_all, j,"%c34_urban_scenario%");
 );
 
 pcm_land(j,"urban") = i34_urban_area("y1995",j);
+
+* Initialize biodiversity value
+vm_bv.l(j2,"urban", potnatveg) = 
+  pcm_land(j2,"urban") * fm_bii_coeff("urban",potnatveg) * fm_luh2_side_layers(j2,potnatveg);

@@ -66,3 +66,12 @@ p29_country_dummy(policy_countries29) = 1;
 * Countries are weighted by available cropland area.
 pm_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
 p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_dummy(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
+
+* Initialize biodiversity value
+vm_fallow.l(j) = 0;
+vm_bv.l(j,"crop_fallow",potnatveg) = 
+  vm_fallow.l(j) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j2,"crop_tree",potnatveg) =
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc29_treecover(j2,ac)) * 
+  p29_treecover_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);

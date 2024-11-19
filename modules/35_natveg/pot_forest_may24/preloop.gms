@@ -85,3 +85,15 @@ m_sigmoid_time_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);
 
   pc35_secdforest(j,ac) = i35_secdforest(j,ac);
   pc35_land_other(j,othertype35,ac) = i35_land_other(j,othertype35,ac);
+
+* Initialize biodiversity value
+vm_bv.l(j,"primforest",potnatveg) = 
+  pcm_land(j,"primforest") * fm_bii_coeff("primary",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"secdforest",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), i35_secdforest(j,ac)) *
+  fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"other",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), sum(othertype35, i35_land_other(j,othertype35,ac))) *
+  fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
