@@ -23,6 +23,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **62_material** added switch to turn off future material demand for bioplastic
 - **config** added SSP1-POP-GDP SSP2-POP-GDP and SSP5-POP-GDP
 - **modules[29-35]** added initial values for ov_bv for better starting point
+- **32_forestry** added option s32_npi_ndc_reversal
+- **35_natveg** added option s35_npi_ndc_reversal
 
 ### removed
 -
