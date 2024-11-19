@@ -5,8 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-m_linear_time_interpol(i58_peatland_rewetting_fader,2030,2050,0.3,0.5);
-
+m_linear_time_interpol(i58_peatland_rewetting_fader,s58_rewet_exo_start_year,s58_rewet_exo_target_year,s58_rewet_exo_start_value,s58_rewet_exo_target_value);
 
 vm_emissions_reg.fx(i,"peatland",pollutants) = 0;
 vm_emissions_reg.lo(i,"peatland",poll58) = -Inf;
