@@ -145,7 +145,6 @@ cfg$gms$policy_countries56  <- isoCountriesEUR
 cfg$gms$policy_countries58 <- isoCountriesEUR
 cfg$gms$c56_emis_policy <- "sdp_peatland"
 cfg$gms$factor_costs <- "sticky_feb18"
-cfg$gms$livestock <- "fbask_jan16_sticky"
 cfg$gms$s56_c_price_induced_aff <- 0
 
 ## Start scenarios
