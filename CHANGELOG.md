@@ -25,7 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **modules[29-35]** added initial values for ov_bv for better starting point
 
 ### removed
--
+- **31_past** removed `grasslands_apr22` realization
 
 ### fixed
 - **11_costs** changed equation to fix bug in total water cost calculation
