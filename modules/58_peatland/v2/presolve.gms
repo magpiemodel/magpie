@@ -38,6 +38,7 @@ else
   v58_peatland.l(j,land58) = pc58_peatland(j,land58);
   v58_peatland.up(j,drained58) = Inf;
   v58_peatland.up(j,"rewetted") = s58_rewetting_switch;
+  v58_peatland.lo(j,"intact") = pc58_peatland(j,"intact") * i58_intact_protection_exo(j);
   v58_peatland.up(j,"intact") = pc58_peatland(j,"intact");
   v58_peatland.fx(j,"peatExtract") = pc58_peatland(j,"peatExtract");
   v58_balance.lo(j,manPeat58) = 0;

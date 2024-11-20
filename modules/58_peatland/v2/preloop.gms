@@ -23,6 +23,9 @@ i58_rewetting_exo(t,j) = i58_peatland_rewetting_fader(t) *
   (s58_rewetting_exo * sum(cell(i,j), p58_country_weight(i))
   + s58_rewetting_exo_noselect * sum(cell(i,j), 1-p58_country_weight(i)));
 
+i58_intact_protection_exo(j) = s58_intact_prot_exo * sum(cell(i,j), p58_country_weight(i))
+                      + s58_intact_prot_exo_noselect * sum(cell(i,j), 1-p58_country_weight(i));
+
 * fix uncontrolled pollutants to zero
 vm_emissions_reg.fx(i,"peatland",pollutants) = 0;
 vm_emissions_reg.lo(i,"peatland",poll58) = -Inf;

@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax43"
+cfg$info$flag <- "PTax44"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -153,6 +153,7 @@ cfg$title <- .title(cfg, paste(ssp, "Ref", sep = "-"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$gms$c56_pollutant_prices <- "T0-CO2"
 cfg$gms$s58_rewetting_exo <- 0
+cfg$gms$s58_intact_prot_exo <- 0
 start_run(cfg, codeCheck = FALSE)
 
 ## GHG policy scenarios
@@ -166,6 +167,7 @@ for (tax in c("T25-CO2",
   cfg$title <- .title(cfg, paste(ssp, tax, sep = "-"))
   cfg$gms$c56_mute_ghgprices_until <- "y2025"
   cfg$gms$c56_pollutant_prices <- tax
+  cfg$gms$s58_intact_prot_exo <- 1
   start_run(cfg, codeCheck = FALSE)
 }
 
@@ -174,16 +176,19 @@ cfg$title <- .title(cfg, paste(ssp, "NRL33", sep = "-"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$gms$c56_pollutant_prices <- "T0-CO2"
 cfg$gms$s58_rewetting_exo <- 0.33
+cfg$gms$s58_intact_prot_exo <- 1
 start_run(cfg, codeCheck = FALSE)
 
 cfg$title <- .title(cfg, paste(ssp, "NRL50", sep = "-"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$gms$c56_pollutant_prices <- "T0-CO2"
 cfg$gms$s58_rewetting_exo <- 0.5
+cfg$gms$s58_intact_prot_exo <- 1
 start_run(cfg, codeCheck = FALSE)
 
 cfg$title <- .title(cfg, paste(ssp, "NRL100", sep = "-"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$gms$c56_pollutant_prices <- "T0-CO2"
 cfg$gms$s58_rewetting_exo <- 1
+cfg$gms$s58_intact_prot_exo <- 1
 start_run(cfg, codeCheck = FALSE)

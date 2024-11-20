@@ -22,7 +22,8 @@ parameters
  p58_peatland_ref(j,land58)          Peatland area in reference period (mio. ha)
  p58_country_dummy(iso)              Dummy parameter indicating whether country is affected by exogenous peatland rewetting (1)
  p58_country_weight(i)               Policy country weight per region (1)
- i58_rewetting_exo(t,j)              Share of drained peatland in reference period to be rewetted (1)
+ i58_rewetting_exo(t,j)              Cellular share of drained peatland in reference period to be rewetted (1)
+ i58_intact_protection_exo(j)        Cellular share of intact peatland that should be protected (1)
 ;
 
 equations
