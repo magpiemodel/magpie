@@ -120,10 +120,11 @@ v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
 v32_land.lo(j,"ndc",ac_est) = 0;
 v32_land.up(j,"ndc",ac_est) = Inf;
 
-* release all bounds in case of NPI / NDC reversal
+* release all bounds in case of NPI / NDC reversal and set recurring costs to zero
 if (m_year(t) >= s35_npi_ndc_reversal,
   v32_land.lo(j,"ndc",ac) = 0;
   v32_land.up(j,"ndc",ac) = Inf;
+  i32_recurring_cost("ndc") = 0;
 );
 
 ** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac_est is free
