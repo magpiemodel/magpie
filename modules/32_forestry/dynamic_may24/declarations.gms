@@ -55,6 +55,7 @@ parameters
  p32_future_to_current_demand_ratio(t,i)            Ratio of future and current timber demand (1)
  p32_demand_forestry_future(t,i,kforestry)          Future forestry demand in current time step (tDM per yr)
  p32_est_cost(type32)                               Establishment cost (USD17MER per ha)
+ i32_recurring_cost(type32)                         Recurring costs (USD17MER per ha)
 ;
 
 positive variables

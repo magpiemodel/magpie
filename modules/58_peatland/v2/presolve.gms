@@ -29,9 +29,6 @@ if (m_year(t) <= s58_fix_peatland,
   i58_cost_drain_intact_onetime(t) = 0;
   i58_cost_drain_rewet_onetime(t) = 0;
   i58_cost_rewet_onetime(t) = 0;
-
-* save area in reference period
-  p58_peatland_ref(j,land58)$(m_year(t) = s58_fix_peatland) = pc58_peatland(j,land58);
 else
 * Define bounds and costs for peatland area after the year given by s58_fix_peatland 
   v58_peatland.lo(j,land58) = 0;

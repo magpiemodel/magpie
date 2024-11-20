@@ -227,6 +227,12 @@ p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j
   = pcm_land(j,"primforest") + pcm_land(j,"secdforest") + pcm_land(j,"forestry");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
+* NPI / NDC reversal
+if (m_year(t) >= s35_npi_ndc_reversal,
+  p35_min_forest(t,j) = 0;
+  p35_min_other(t,j) = 0;
+);
+
 ** Youngest age classes are not allowed to be harvested
 v35_hvarea_secdforest.fx(j,ac_est) = 0;
 v35_hvarea_other.fx(j,othertype35,ac_est) = 0;

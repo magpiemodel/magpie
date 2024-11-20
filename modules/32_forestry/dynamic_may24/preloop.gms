@@ -5,7 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*m_sigmoid_time_interpol(i32_plant_contr_fader,2020,2050,0.05,0);
+i32_recurring_cost(type32) = s32_recurring_cost;
+
 m_sigmoid_time_interpol(i32_plant_contr_growth_fader,s32_plant_contr_growth_startyear,s32_plant_contr_growth_endyear,s32_plant_contr_growth_startvalue,s32_plant_contr_growth_endvalue);
 
 p32_est_cost("plant") = s32_est_cost_plant;
