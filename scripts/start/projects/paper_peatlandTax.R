@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax44"
+cfg$info$flag <- "PTax45"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -149,15 +149,51 @@ cfg$gms$s56_c_price_induced_aff <- 0
 
 ## Start scenarios
 ## Ref scenario
-cfg$title <- .title(cfg, paste(ssp, "Ref", sep = "-"))
+cfg$title <- .title(cfg, paste("TAU",ssp, "Ref", sep = "-"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$gms$c56_pollutant_prices <- "T0-CO2"
 cfg$gms$s58_rewetting_exo <- 0
 cfg$gms$s58_intact_prot_exo <- 0
-start_run(cfg, codeCheck = FALSE)
+x <- try(modelstat(file.path("output",cfg$title,"fulldata.gdx")),silent = TRUE)
+if(is.null(x) | (is.magpie(x) & any(!x %in% c(2,7)))) {
+  download_and_update(cfg)
+  start_run(cfg, codeCheck = FALSE)
+  message(paste0("TAU run started: ",cfg$title))
+  Sys.sleep(10)
+}  
+
+
+### wait until model runs with endogenous TAU are finished, check is performed every 10 minutes
+success <- FALSE
+while (!success) {
+  z <- NULL
+  for (rcp in rcps) {
+    for (ssp in ssps) {
+      x <- try(modelstat(file.path("output",cfg$title,"fulldata.gdx")),silent = TRUE)
+      if (is.magpie(x) & all(x %in% c(2,7))) {
+        x <- add_dimension(collapseNames(x),dim = 3.1,add = "scen",nm = paste0(ssp,rcp))
+      } else x <- NULL
+      z <- mbind(z,x)
+    }
+  }
+  if (is.null(z)) {
+    message("Not any model run with endogenous TAU finished. Sleeping for 10 minutes.")
+    Sys.sleep(60*10)
+  } else if (dim(z)[3] < length(ssps) * length(rcps)) {
+    message("At least on model run with endogenous TAU not yet finished. Sleeping for 10 minutes.")
+    Sys.sleep(60*10)
+  } else if (dim(z)[3] == length(ssps) * length(rcps)) {
+    if (all(z %in% c(2,7))) success <- TRUE else stop("Modelstat different from 2 or 7 detected")
+  }
+}
+
+# use exo TC in all following runs
+write.magpie(readGDX(file.path("output",cfg$title,"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+cfg$gms$tc <- "exo"
 
 ## GHG policy scenarios
-for (tax in c("T25-CO2",
+for (tax in c("T0-CO2",
+              "T25-CO2",
               "T50-CO2",
               "T100-CO2",
               "T200-CO2",
