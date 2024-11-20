@@ -158,7 +158,7 @@ q32_cost_establishment(i2)..
 *' trees established for re/afforestation purposes.
 
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
-                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * s32_recurring_cost;
+                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub) * i32_recurring_cost(type32));
 
 
 **** Plantation establishment decision
