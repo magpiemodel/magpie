@@ -40,7 +40,7 @@ Imports:
 Suggests:
     goxygen,
     languageserver,
-    mrdownscale (>= 0.23.0),
+    mrdownscale (>= 0.28.0),
     qgraph,
     shinyresults,
     XML

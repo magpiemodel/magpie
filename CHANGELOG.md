@@ -17,12 +17,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core** number of age-classes doubled from 150 to 300 years for better match of growth curves with potential natural vegetation.
 - **35_natveg** revised age-class initialization of secondary forest
 - **modules** update of scaling factors in several modules
+- **scripts** renamed disaggregation_mrdownscale.R -> mrdownscale_LUH2.R
 - **config** default for `c60_bioenergy_subsidy` changed from 369 to 246 USD17MER per ton
 
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
 - **config** added SSP1-POP-GDP SSP2-POP-GDP and SSP5-POP-GDP
 - **modules[29-35]** added initial values for ov_bv for better starting point
+- **scripts** add mrdownscale script (0.5deg downscaling using LandUseInit as reference)
 - **58_peatland** added option for exogenous peatland rewetting
 
 ### removed
