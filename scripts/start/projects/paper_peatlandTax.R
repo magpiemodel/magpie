@@ -169,16 +169,13 @@ while (!success) {
   z <- NULL
   x <- try(modelstat(file.path("output",cfg$title,"fulldata.gdx")),silent = TRUE)
   if (is.magpie(x) & all(x %in% c(2,7))) {
-    x <- add_dimension(collapseNames(x),dim = 3.1,add = "scen",nm = paste0(ssp,rcp))
+    x <- x
   } else x <- NULL
   z <- mbind(z,x)
   if (is.null(z)) {
     message("Not any model run with endogenous TAU finished. Sleeping for 10 minutes.")
     Sys.sleep(60*10)
-  } else if (dim(z)[3] < length(ssps) * length(rcps)) {
-    message("At least on model run with endogenous TAU not yet finished. Sleeping for 10 minutes.")
-    Sys.sleep(60*10)
-  } else if (dim(z)[3] == length(ssps) * length(rcps)) {
+  } else {
     if (all(z %in% c(2,7))) success <- TRUE else stop("Modelstat different from 2 or 7 detected")
   }
 }
