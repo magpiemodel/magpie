@@ -181,6 +181,7 @@ while (!success) {
 }
 
 # use exo TC in all following runs
+download_and_update(cfg)
 write.magpie(readGDX(file.path("output",cfg$title,"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
 cfg$gms$tc <- "exo"
 
