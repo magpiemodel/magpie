@@ -36,7 +36,6 @@ gms$c22_protect_scenario;;;;;;;;;;BH;none;BH_IFL;BH;;;;;;;;;;;;;;;;;;;;
 gms$s29_snv_shr;;;;;;;;;;0;0;0;0.2;;;;;;;;;;;;;;;;;;;;
 gms$s29_snv_scenario_target;;;;;;;;;;;;;2030;;;;;;;;;;;;;;;;;;;;
 gms$c30_bioen_water;;;;;;;;;;rainfed;all;rainfed;rainfed;;;;;;;;;;;;;;;;;;;;
-gms$c31_grassl_yld_scenario;cc;nocc;nocc_hist;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s32_initial_distribution;;;;;;;;;;;;;;;;;;;;;;;;;1;1;0;;;;;;
 gms$s32_hvarea;;;;;;;;;;;;;;;;;;;;;;;;;2;1;0;;;;;;
 gms$s32_aff_plantation;;;;;;;;;;0;1;0;0;;;;;;;;;;;;;;;;;;;;
