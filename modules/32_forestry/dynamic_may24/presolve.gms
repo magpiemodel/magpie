@@ -121,7 +121,7 @@ v32_land.lo(j,"ndc",ac_est) = 0;
 v32_land.up(j,"ndc",ac_est) = Inf;
 
 * release all bounds in case of NPI / NDC reversal and set recurring costs to zero
-if (m_year(t) >= s35_npi_ndc_reversal,
+if (m_year(t) >= s32_npi_ndc_reversal,
   v32_land.lo(j,"ndc",ac) = 0;
   v32_land.up(j,"ndc",ac) = Inf;
   i32_recurring_cost("ndc") = 0;
