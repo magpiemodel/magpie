@@ -30,7 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **58_peatland** added option for exogenous peatland rewetting
 
 ### removed
--
+- **31_past** removed `grasslands_apr22` realization
 
 ### fixed
 - **11_costs** changed equation to fix bug in total water cost calculation
