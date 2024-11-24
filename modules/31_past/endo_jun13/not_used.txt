@@ -1,4 +1,0 @@
-name,type,reason
-vm_tau,input,questionnaire
-fm_pastr_tau_hist,input,questionnaire
-sm_fix_cc, input, not needed
