@@ -70,7 +70,7 @@
 
  q58_peatland_cost_annuity(j2,cost58) ..
   v58_peatland_cost_annuity(j2,cost58) =g=
-  sum(intact2cost(intact58,cost58), v58_peatlandChange(j2,intact58)) * sum(ct, i58_cost_onetime(ct,cost58))
+  sum(map_cost58(intact58,cost58), v58_peatlandChange(j2,intact58)) * sum(ct, i58_cost_onetime(ct,cost58))
   * sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
 *' Detailed peatland GHG emissions

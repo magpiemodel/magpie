@@ -22,7 +22,7 @@ sets
   cost58 annunity cost categories
     / drain_intact, drain_rewetted, rewetted /
 
-  intact2cost(intact58,cost58) Mapping between intact58 and cost58
+  map_cost58(intact58,cost58) Mapping between intact58 and cost58
            / intact .(drain_intact)
            rewetted .(drain_rewetted)
            rewetted .(rewetted) /
