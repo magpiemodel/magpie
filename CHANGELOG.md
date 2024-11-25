@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** add mrdownscale script (0.5deg downscaling using LandUseInit as reference)
 - **32_forestry** added option s32_npi_ndc_reversal
 - **35_natveg** added option s35_npi_ndc_reversal
+- **58_peatland** added option for exogenous peatland rewetting
 
 ### removed
 - **31_past** removed `grasslands_apr22` realization
