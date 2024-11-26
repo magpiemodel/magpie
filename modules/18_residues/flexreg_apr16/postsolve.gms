@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ****** Residues
+vm_prod_reg.up(i,kres) = Inf;
 
 *** EOF postsolve.gms ***
 

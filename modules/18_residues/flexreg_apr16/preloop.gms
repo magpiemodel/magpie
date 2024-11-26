@@ -7,3 +7,6 @@
 
  
 i18_res_use_burn(t_all,dev18,kcr) = f18_res_use_burn(t_all,"%c18_burn_scen%",dev18,kcr);
+
+vm_prod_reg.up(i,kres) = 1500;
+
