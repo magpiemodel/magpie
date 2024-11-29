@@ -69,9 +69,9 @@ im_pollutant_prices(t_all,i,"co2_c",emis_source) = im_pollutant_prices(t_all,i,"
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i);
 
 if (s56_fader_functional_form = 1,
-  m_linear_time_interpol(p56_fader,s56_fader_start,s56_fader_target,0,s56_fader_target);
+  m_linear_time_interpol(p56_fader,s56_fader_start,s56_fader_end,0,s56_fader_target);
 elseif s56_fader_functional_form = 2,
-  m_sigmoid_time_interpol(p56_fader,s56_fader_start,s56_fader_target,0,s56_fader_target);
+  m_sigmoid_time_interpol(p56_fader,s56_fader_start,s56_fader_end,0,s56_fader_target);
 );
 
 ***build and apply temporal fader for GHG policy
