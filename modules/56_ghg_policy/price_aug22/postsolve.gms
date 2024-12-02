@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+pcm_carbon_stock(j,land,ag_pools,stockType) = vm_carbon_stock.l(j,land,ag_pools,stockType);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_carbon_stock(t,j,land,c_pools,stockType,"marginal")   = vm_carbon_stock.m(j,land,c_pools,stockType);
  ov_emission_costs(t,i,"marginal")                        = vm_emission_costs.m(i);

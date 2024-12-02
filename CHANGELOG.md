@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** added option s32_npi_ndc_reversal
 - **35_natveg** added option s35_npi_ndc_reversal
 - **58_peatland** added option for exogenous peatland rewetting
+- **56_ghg_policy** added new interface pcm_carbon_stock to avoid use of vm_carbon_stock.l in equations
 
 ### removed
 - **31_past** removed `grasslands_apr22` realization

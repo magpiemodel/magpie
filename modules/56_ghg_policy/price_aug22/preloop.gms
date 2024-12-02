@@ -7,7 +7,8 @@
 
 * starting value of above ground carbon stocks 1995 is only an estimate.
 * ATTENTION: emissions in 1995 are not meaningful
-vm_carbon_stock.l(j,land,ag_pools,stockType) = fm_carbon_density("y1995",j,land,ag_pools)*pcm_land(j,land);
+pcm_carbon_stock(j,land,ag_pools,stockType) = fm_carbon_density("y1995",j,land,ag_pools)*pcm_land(j,land);
+vm_carbon_stock.l(j,land,ag_pools,stockType) = pcm_carbon_stock(j,land,ag_pools,stockType);
 
 v56_emis_pricing.fx(i,emis_oneoff,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
 

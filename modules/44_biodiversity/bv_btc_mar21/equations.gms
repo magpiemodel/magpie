@@ -15,7 +15,7 @@
 *' Change in biodiversity stock compared to previous time step, divided by time step length.
  q44_bv_loss(j2) .. v44_bv_loss(j2)
           =e=
-          (v44_bv_weighted.l(j2) - v44_bv_weighted(j2))/m_timestep_length;
+          (pc44_bv_weighted(j2) - v44_bv_weighted(j2))/m_timestep_length;
 
 *' Biodiversity stock weighted by range-rarity restoration prioritization layer (`f44_rr_layer`)
  q44_bv_weighted(j2) .. v44_bv_weighted(j2)

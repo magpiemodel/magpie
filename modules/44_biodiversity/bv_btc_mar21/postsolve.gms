@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+pc44_bv_weighted(j) = v44_bv_weighted.l(j)
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov44_bv_loss(t,j,"marginal")                = v44_bv_loss.m(j);
  ov_cost_bv_loss(t,j,"marginal")             = vm_cost_bv_loss.m(j);
