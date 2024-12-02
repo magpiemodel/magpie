@@ -69,7 +69,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** `.nc` files are no longer created by default after disaggregation
 - **scripts** output/extra/highres.R use default 13_tc realization
 - **scripts** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
-
+- **modules** renamed `country_dummy` to `country_switch` in all modules
 
 ### added
 - **42_water_demand** added water abstraction type dimension for non-ag uses
