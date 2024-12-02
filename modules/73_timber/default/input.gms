@@ -18,7 +18,7 @@ scalars
 * inflated using USD05 --> USD17 rate of 1.23
   s73_timber_prod_cost_wood            Cost for producing one unit of wood (USD17MER per tDM) / 148 /
   s73_timber_prod_cost_woodfuel        Cost for prodcing one unit of woodfuel (USD17MER per tDM) / 74 /
-  s73_free_prod_cost                   Very high cost for settling demand without production (USD17MER per tDM) / 24600 /
+  s73_free_prod_cost                   Very high cost for settling demand without production (USD17MER per tDM) / 1e+06 /
   s73_timber_demand_switch             Logical switch to turn on or off timber demand 1=on 0=off (1) / 1 /
   s73_increase_ceiling                 Limiter for not allowing a demand jump between time steps beyond a certain limit (1) / 1.025 /
   s73_residue_ratio                    Proportion of overall industrial roundwood production which ends up as residue during harvest (1) / 0.15 /

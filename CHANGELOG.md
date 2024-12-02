@@ -43,6 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **44_biodiversity** bugfix biorealm_biome.cs3 in input data (shares did not add-up to 1)
 - **config** additional data increased to `additional_data_rev4.58.tgz` which fixes missing gdp2017 conversions in f20_processing_unitcosts
 - **56_ghg_policy** Fader for GHG emission pricing policy
+- **config** settings in default.cfg for some switches in `73_timber` did not work correctly
 
 ## [4.8.2] - 2024-09-24
 
