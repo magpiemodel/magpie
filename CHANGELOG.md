@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **modules** update of scaling factors in several modules
 - **scripts** renamed disaggregation_mrdownscale.R -> mrdownscale_LUH2.R
 - **config** default for `c60_bioenergy_subsidy` changed from 369 to 246 USD17MER per ton
-- **scripts** NPI/NDC policies synced to the year 2025 
+- **scripts** NPI/NDC policies synced to the year 2025 - update of additional data to `additional_data_rev4.59.tgz`
 
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
