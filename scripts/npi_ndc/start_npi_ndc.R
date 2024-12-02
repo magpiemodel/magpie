@@ -121,8 +121,8 @@ calc_NPI_NDC <- function(policyregions = "iso",
                         map_file=map_file)
   getNames(ndc_ad) <- "ndc.forest"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
-  ndc_ad[,which(getYears(ndc_ad,as.integer=TRUE)<=2020),] <-
-    npi_ad[,which(getYears(npi_ad,as.integer=TRUE)<=2020),]
+  ndc_ad[,which(getYears(ndc_ad,as.integer=TRUE)<=2025),] <-
+    npi_ad[,which(getYears(npi_ad,as.integer=TRUE)<=2025),]
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
 
 
@@ -155,8 +155,8 @@ calc_NPI_NDC <- function(policyregions = "iso",
                           pol_mapping=pol_mapping, map_file=map_file)
   getNames(ndc_aolc) <- "ndc.other"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
-  ndc_aolc[,which(getYears(ndc_aolc,as.integer=TRUE)<=2020),] <-
-    npi_aolc[,which(getYears(npi_aolc,as.integer=TRUE)<=2020),]
+  ndc_aolc[,which(getYears(ndc_aolc,as.integer=TRUE)<=2025),] <-
+    npi_aolc[,which(getYears(npi_aolc,as.integer=TRUE)<=2025),]
 
   #write AD and AOLC policies together
   none_ad_aolc_pol <- mbind(npi_ad,npi_aolc)
@@ -199,8 +199,8 @@ calc_NPI_NDC <- function(policyregions = "iso",
                          map_file=map_file)
   getNames(ndc_aff) <- "ndc"
   #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
-  ndc_aff[,which(getYears(ndc_aff,as.integer=TRUE)<=2020),] <-
-    npi_aff[,which(getYears(npi_aff,as.integer=TRUE)<=2020),]
+  ndc_aff[,which(getYears(ndc_aff,as.integer=TRUE)<=2025),] <-
+    npi_aff[,which(getYears(npi_aff,as.integer=TRUE)<=2025),]
 
   #write AFF policies
   none_aff_pol <- npi_aff
