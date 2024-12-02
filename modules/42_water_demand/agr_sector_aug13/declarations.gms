@@ -14,7 +14,7 @@ parameters
  i42_env_flow_policy(t,i)                  Determines whether environmental flow protection is enforced (1)
  p42_efp(t_all,scen42)                     Determines whether environmental flow protection is enforced and its fading in of environmental flow policy (1)
  p42_efp_fader(t_all)                      Determines the fading in of environmental flow policy (1)
- p42_country_dummy(iso)                    Dummy parameter indicating whether country is affected by EFP (1)
+ p42_country_switch(iso)                    Switch indicating whether country is affected by EFP (1)
  p42_EFP_region_shr(t_all,i)               Weighted share of region with regards to EFP (1)
  ic42_pumping_cost(i)                      Parameter to capture values for pumping costs in a particular time step (USD17MER per m^3)
  i42_watdem_total(t,j,watdem_ineldo,wtype) Non-agricultural water demand for entire year used in post-processing (mio. m^3 per yr)

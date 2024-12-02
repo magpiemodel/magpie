@@ -21,14 +21,14 @@ i70_livestock_productivity(t_all,i,sys)$(i70_livestock_productivity(t_all,i,sys)
 
 * Switch to determine countries for which feed substitution scenarios shall be applied.
 * In the default case, the food scenario affects all countries when activated.
-p70_country_dummy(iso) = 0;
-p70_country_dummy(scen_countries70) = 1;
+p70_country_switch(iso) = 0;
+p70_country_switch(scen_countries70) = 1;
 
 
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_switch(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 
 if (s70_subst_functional_form = 1,

@@ -30,7 +30,7 @@ parameters
  pm_past_mngmnt_factor(t,i)                       Regional pasture management intensification factor (1)
  i70_cereal_scp_fadeout(t_all,i)                  Cereal feed fadeout (share 0-1) to be replaced by SCP (1)
  i70_foddr_scp_fadeout(t_all,i)                   Fodder fadeout (share 0-1) to be replaced by SCP (1)
- p70_country_dummy(iso)                           Dummy parameter indicating whether country is affected by feed scenarios (1)
+ p70_country_switch(iso)                           Switch indicating whether country is affected by feed scenarios (1)
  p70_feedscen_region_shr(t_all,i)                 Weighted share of region with regards to feed scenario of countries (1)
  i70_cost_regr(i,kap,cost_regr)                   Regression coefficients for livestock factor requirements (1)
  i70_fac_req_livst(t_all,i,kli)                   Factor requirements (USD17MER per tDM)

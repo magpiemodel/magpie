@@ -14,7 +14,7 @@ parameters
  i60_1stgen_bioenergy_subsidy_gj(t)               Global 1st generation bioenergy subsidy per GJ (USD17MER per GJ)
  i60_2ndgen_bioenergy_subsidy(t)                  Global 2nd generation bioenergy subsidy (USD17MER per GHJ)
  p60_region_BE_shr(t_all,i)                       Bioenergy demand share of the region (1)
- p60_country_dummy(iso)                           Dummy parameter indicating whether country is selected for selected bioenergy demand scenario (1)
+ p60_country_switch(iso)                           Switch indicating whether country is selected for selected bioenergy demand scenario (1)
 ;
 
 positive variables

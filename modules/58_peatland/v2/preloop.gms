@@ -10,12 +10,12 @@ m_linear_time_interpol(i58_peatland_rewetting_fader,s58_rewet_exo_start_year,s58
 
 * Country switch to determine countries for which certain policies shall be applied.
 * In the default case, the policy affects all countries when activated.
-p58_country_dummy(iso) = 0;
-p58_country_dummy(policy_countries58) = 1;
+p58_country_switch(iso) = 0;
+p58_country_switch(policy_countries58) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by total peatland area.
-p58_country_weight(i) = sum(i_to_iso(i,iso), p58_country_dummy(iso) * sum(land58, f58_peatland_area_iso(iso,land58))) 
+p58_country_weight(i) = sum(i_to_iso(i,iso), p58_country_switch(iso) * sum(land58, f58_peatland_area_iso(iso,land58))) 
   / sum(i_to_iso(i,iso), sum(land58, f58_peatland_area_iso(iso,land58)));
 
 * construct exogenous peatland rewetting scenario

@@ -11,7 +11,7 @@ parameters
  ic55_manure_fuel_shr(i,kli)                      Share of manure excreted on pastures used for fuel (tNr per tNr)
  ic55_awms_shr(i,kli,awms_conf)                   Share of manure Nr managed in each animal waste management systems (tNr per tNr)
  p55_region_shr(t_all,i)                          AWM scenario share of the region (1)
- p55_country_dummy(iso)                           Dummy parameter indicating whether country is affected by selected awm scenario (1)
+ p55_country_switch(iso)                           Switch indicating whether country is affected by selected awm scenario (1)
 ;
 
 

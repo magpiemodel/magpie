@@ -9,12 +9,12 @@
 * Country switch to determine countries for which scenario shall be applied.
 * In the default case, the selected scneario (c60_2ndgen_biodem) affects
 * all countries.
-p60_country_dummy(iso) = 0;
-p60_country_dummy(scen_countries60) = 1;
+p60_country_switch(iso) = 0;
+p60_country_switch(scen_countries60) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p60_region_BE_shr(t_all,i) = sum(i_to_iso(i,iso), p60_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p60_region_BE_shr(t_all,i) = sum(i_to_iso(i,iso), p60_country_switch(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 $ifthen "%c60_2ndgen_biodem%" == "coupling"
   i60_bioenergy_dem(t,i) = f60_bioenergy_dem_coupling(t,i);
