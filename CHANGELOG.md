@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **modules** update of scaling factors in several modules
 - **scripts** renamed disaggregation_mrdownscale.R -> mrdownscale_LUH2.R
 - **config** default for `c60_bioenergy_subsidy` changed from 369 to 246 USD17MER per ton
+- **scripts** NPI/NDC policies synced to the year 2025 - update of additional data to `additional_data_rev4.59.tgz`
 
 ### added
 - **62_material** added switch to turn off future material demand for bioplastic
@@ -28,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** added option s32_npi_ndc_reversal
 - **35_natveg** added option s35_npi_ndc_reversal
 - **58_peatland** added option for exogenous peatland rewetting
+- **56_ghg_policy** added new interface pcm_carbon_stock to avoid use of vm_carbon_stock.l in equations
 
 ### removed
 - **31_past** removed `grasslands_apr22` realization
@@ -42,6 +44,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **10_land** Simplified land transition matrix for improved feasibility
 - **44_biodiversity** bugfix biorealm_biome.cs3 in input data (shares did not add-up to 1)
 - **config** additional data increased to `additional_data_rev4.58.tgz` which fixes missing gdp2017 conversions in f20_processing_unitcosts
+- **56_ghg_policy** Fader for GHG emission pricing policy
+- **config** settings in default.cfg for some switches in `73_timber` did not work correctly
 
 ## [4.8.2] - 2024-09-24
 
@@ -65,7 +69,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** `.nc` files are no longer created by default after disaggregation
 - **scripts** output/extra/highres.R use default 13_tc realization
 - **scripts** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
-
+- **modules** renamed `country_dummy` to `country_switch` in all modules
 
 ### added
 - **42_water_demand** added water abstraction type dimension for non-ag uses

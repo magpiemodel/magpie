@@ -16,7 +16,7 @@ parameters
  i29_snv_relocation_target(j)       Overall cropland area that requires relocation due to SNV policy (mio. ha)
  p29_snv_relocation(t,j)            Cropland area that is actually relocated during time step (mio. ha)
  p29_max_snv_relocation(t,j)        Maximum cropland relocation during time step (mio. ha)
- p29_country_dummy(iso)             Dummy parameter indicating whether country is affected by selected cropland policy (1)
+ p29_country_switch(iso)             Switch indicating whether country is affected by selected cropland policy (1)
  pm_avl_cropland_iso(iso)           Available land area for cropland at ISO level (mio. ha)
  i29_snv_scenario_fader(t_all)      SNV scenario fader (1)
 

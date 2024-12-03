@@ -58,8 +58,8 @@ Elseif s15_milk_share_fadeout_india = 1,
 * Switch to determine countries for which exogenous food scenarios (EAT Lancet diet and
 * food waste scenarios), and food substitution scenarios shall be applied.
 * In the default case, the exogenous food scenarios affect all countries.
-p15_country_dummy(iso) = 0;
-p15_country_dummy(scen_countries15) = 1;
+p15_country_switch(iso) = 0;
+p15_country_switch(scen_countries15) = 1;
 
 ** The following lines define scenario faders for substituting different food groups
 * If s15_exo_foodscen_functional_form = 1, the exogenous food scenario is faded in linearly.
@@ -96,13 +96,13 @@ elseif s15_food_subst_functional_form = 2,
 
 
 * Food substitution scenarios including functional forms, targets and transition periods
-i15_ruminant_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_ruminant_subst_fader(t);
-i15_fish_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_fish_subst_fader(t);
-i15_alcohol_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_alcohol_subst_fader(t);
-i15_livestock_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_livestock_subst_fader(t);
-i15_rumdairy_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_rumdairy_subst_fader(t);
-i15_rumdairy_scp_fadeout(t,iso) = 1 - p15_country_dummy(iso)*p15_rumdairy_scp_subst_fader(t);
-i15_livestock_fadeout_threshold(t,iso) = 1 - p15_country_dummy(iso)*p15_livestock_threshold_subst_fader(t);
+i15_ruminant_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_ruminant_subst_fader(t);
+i15_fish_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_fish_subst_fader(t);
+i15_alcohol_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_alcohol_subst_fader(t);
+i15_livestock_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_livestock_subst_fader(t);
+i15_rumdairy_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_rumdairy_subst_fader(t);
+i15_rumdairy_scp_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_rumdairy_scp_subst_fader(t);
+i15_livestock_fadeout_threshold(t,iso) = 1 - p15_country_switch(iso)*p15_livestock_threshold_subst_fader(t);
 
 
 ** The following lines define the scenario fader for the exogeneous food scenario
@@ -117,7 +117,7 @@ elseif s15_exo_foodscen_functional_form = 2,
 );
 
 * Fade in scenarios at country level
-i15_exo_foodscen_fader(t,iso) = p15_exo_food_scenario_fader(t) * p15_country_dummy(iso);
+i15_exo_foodscen_fader(t,iso) = p15_exo_food_scenario_fader(t) * p15_country_switch(iso);
 
 * Select from the data set of EAT Lancet scenarios the target years that are
 * consistent with the target year of the fader:

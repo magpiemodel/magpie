@@ -7,6 +7,7 @@
 
 parameters
  p44_price_bv_loss(t_all)                 Price (subsidy) for biodiversity stock loss (gain) (USD17MER per ha)
+ pc44_bv_weighted(j)                 Range-rarity weighted biodiversity stock (Mha)
 ;
 
 variables

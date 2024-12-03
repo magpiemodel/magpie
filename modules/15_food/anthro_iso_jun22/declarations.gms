@@ -176,7 +176,7 @@ parameters
  i15_exo_foodscen_fader(t,iso)                Fader that converges per capita food consumption to an exogenous diet scenario (1)
 
 * country-specific scenario switch
- p15_country_dummy(iso)                       Dummy parameter indicating whether country is affected by diet scenarios (1)
+ p15_country_switch(iso)                       Switch indicating whether country is affected by diet scenarios (1)
 
 * calculate diet iteration breakpoint
  p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD17PPP per capita)

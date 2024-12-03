@@ -17,12 +17,12 @@ fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 
 * Country switch to determine countries for which certain policies shall be applied.
 * In the default case, the policy affects all countries when activated.
-p30_country_dummy(iso) = 0;
-p30_country_dummy(policy_countries30) = 1;
+p30_country_switch(iso) = 0;
+p30_country_switch(policy_countries30) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by available cropland area.
-p30_country_weight(i) = sum(i_to_iso(i,iso), p30_country_dummy(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
+p30_country_weight(i) = sum(i_to_iso(i,iso), p30_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
 
 * Initialize biodiversity value
 vm_bv.l(j,"crop_ann",potnatveg) =

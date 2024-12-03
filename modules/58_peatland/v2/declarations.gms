@@ -18,7 +18,7 @@ parameters
  p58_availLandExp(t,j)               Available area for expansion of managed land (mio. ha)
  i58_peatland_rewetting_fader(t_all) Temporal fader for exogenous peatland rewetting (1)
  p58_peatland_ref(j,land58)          Peatland area in reference period (mio. ha)
- p58_country_dummy(iso)              Dummy parameter indicating whether country is affected by exogenous peatland rewetting (1)
+ p58_country_switch(iso)              Switch indicating whether country is affected by exogenous peatland rewetting (1)
  p58_country_weight(i)               Policy country weight per region (1)
  i58_rewetting_exo(t,j)              Cellular share of drained peatland in reference period to be rewetted (1)
  i58_intact_protection_exo(j)        Cellular share of intact peatland that should be protected (1)
