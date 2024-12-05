@@ -3,49 +3,50 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [4.9.0] - 2024-12-05
 
 ### changed
-- **38_factor_costs** updated use of USDA cost shares
-- **inputdata** changed GDP base year from 2005USD to 2017USD
-- **config** changed default input data to use 2017USD
-- **module_documentation** all references to USD05 changed to USD17
-- **scripts** REMIND coupling reads data in US$2017, not US$2005
-- **config** updated input data to rev4.114
-- **config** SHAPE scenarios start year of dietary shift changed to 2025
-- **extra/disaggregation** Peatland now considered in disaggregation of land pools
-- **core** number of age-classes doubled from 150 to 300 years for better match of growth curves with potential natural vegetation.
 - **35_natveg** revised age-class initialization of secondary forest
-- **modules** update of scaling factors in several modules
-- **scripts** renamed disaggregation_mrdownscale.R -> mrdownscale_LUH2.R
+- **38_factor_costs** updated use of USDA cost shares
+- **config** changed default input data to use 2017USD
 - **config** default for `c60_bioenergy_subsidy` changed from 369 to 246 USD17MER per ton
+- **config** SHAPE scenarios start year of dietary shift changed to 2025
+- **config** updated input data to rev4.114
+- **core** number of age-classes doubled from 150 to 300 years for better match of growth curves with potential natural vegetation.
+- **extra/disaggregation** Peatland now considered in disaggregation of land pools
+- **inputdata** changed GDP base year from 2005USD to 2017USD
+- **module_documentation** all references to USD05 changed to USD17
+- **modules** update of scaling factors in several modules
 - **scripts** NPI/NDC policies synced to the year 2025 - update of additional data to `additional_data_rev4.59.tgz`
+- **scripts** REMIND coupling reads data in US$2017, not US$2005
+- **scripts** renamed disaggregation_mrdownscale.R -> mrdownscale_LUH2.R
 
 ### added
+- **32_forestry** added option s32_npi_ndc_reversal
+- **35_natveg** added option s35_npi_ndc_reversal
+- **56_ghg_policy** added new interface pcm_carbon_stock to avoid use of vm_carbon_stock.l in equations
+- **58_peatland** added option for exogenous peatland rewetting
 - **62_material** added switch to turn off future material demand for bioplastic
 - **config** added SSP1-POP-GDP SSP2-POP-GDP and SSP5-POP-GDP
 - **modules[29-35]** added initial values for ov_bv for better starting point
 - **scripts** add mrdownscale script (0.5deg downscaling using LandUseInit as reference)
-- **32_forestry** added option s32_npi_ndc_reversal
-- **35_natveg** added option s35_npi_ndc_reversal
-- **58_peatland** added option for exogenous peatland rewetting
-- **56_ghg_policy** added new interface pcm_carbon_stock to avoid use of vm_carbon_stock.l in equations
 
 ### removed
-- **31_past** removed `grasslands_apr22` realization
 - **13_tau** removed interface `fm_pastr_tau_hist`
+- **31_past** removed `grasslands_apr22` realization
 
 ### fixed
-- **11_costs** changed equation to fix bug in total water cost calculation
-- **29_cropland** treecover age-class growth was not working properly because ac_sub was erroneously not fixed
-- **scripts** script/output/extra/resubmit.R
-- **28_ageclass** bugfix input data unit and code clean-up. Renamed `feb21` realization to `oct24`
-- **70_livestock** bugfix scaling.gms file in wrong folder
 - **10_land** Simplified land transition matrix for improved feasibility
+- **11_costs** changed equation to fix bug in total water cost calculation
+- **28_ageclass** bugfix input data unit and code clean-up. Renamed `feb21` realization to `oct24`
+- **29_cropland** treecover age-class growth was not working properly because ac_sub was erroneously not fixed
 - **44_biodiversity** bugfix biorealm_biome.cs3 in input data (shares did not add-up to 1)
-- **config** additional data increased to `additional_data_rev4.58.tgz` which fixes missing gdp2017 conversions in f20_processing_unitcosts
 - **56_ghg_policy** Fader for GHG emission pricing policy
+- **70_livestock** bugfix scaling.gms file in wrong folder
+- **config** additional data increased to `additional_data_rev4.58.tgz` which fixes missing gdp2017 conversions in f20_processing_unitcosts
 - **config** settings in default.cfg for some switches in `73_timber` did not work correctly
+- **scripts** script/output/extra/resubmit.R
+
 
 ## [4.8.2] - 2024-09-24
 
@@ -86,7 +87,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** added script for automatic submission of SEALS allocation runs `./extra/runSEALSallocation.R`
 - **scripts** added start script for 'Healthly Landscapes' paper `paper_healthyLscps.R`
 
-
 ### fixed
 - **15_food** fixing parameter declaration of i15_processed_kcal_structure_iso
 - **35_natveg** bugfix secdforest and other land restoration to avoid double-counting of restoration in equation `q29_land_snv`
@@ -120,7 +120,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg** avoid infeasibilities due to very small numbers
 - **44_biodiversity** Fixing to SSP2 parameters until 2025 was not working
 - **config** update to input data rev4.109. In the previous rev4.108, MER GDP was wrong and was identical to PPP GDP
-
 
 
 ## [4.8.0] - 2024-06-10
@@ -1052,7 +1051,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.8.2...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.9.0...develop
+[4.9.0]: https://github.com/magpiemodel/magpie/compare/v4.8.2...v4.9.0
 [4.8.2]: https://github.com/magpiemodel/magpie/compare/v4.8.1...v4.8.2
 [4.8.1]: https://github.com/magpiemodel/magpie/compare/v4.8.0...v4.8.1
 [4.8.0]: https://github.com/magpiemodel/magpie/compare/v4.7.3...v4.8.0
