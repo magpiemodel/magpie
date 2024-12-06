@@ -8,12 +8,12 @@
 ****** Region price share for awm scenario of selective countries:
 * Country switch to determine countries for which awm scenario shall be applied.
 * In the default case, the awm scenario affects all countries when activated.
-p55_country_dummy(iso) = 0;
-p55_country_dummy(scen_countries55) = 1;
+p55_country_switch(iso) = 0;
+p55_country_switch(scen_countries55) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p55_region_shr(t_all,i) = sum(i_to_iso(i,iso), p55_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p55_region_shr(t_all,i) = sum(i_to_iso(i,iso), p55_country_switch(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 
 if(m_year(t) <= sm_fix_SSP2,

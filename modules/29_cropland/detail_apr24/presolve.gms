@@ -64,11 +64,10 @@ if (s29_treecover_keep = 1,
  i29_treecover_target(t,j)$(i29_treecover_target(t,j) < pc29_treecover_share(j)) = pc29_treecover_share(j);
 );
 
-* Bounds for treecover. Only ac_est can increase in optimization. ac_sub can only decrease.
+* Bounds for treecover. Only ac_est can increase in optimization. ac_sub is fixed.
 v29_treecover.lo(j,ac_est) = 0;
 v29_treecover.up(j,ac_est) = Inf;
-v29_treecover.lo(j,ac_sub) = 0;
-v29_treecover.up(j,ac_sub) = pc29_treecover(j,ac_sub);
+v29_treecover.fx(j,ac_sub) = pc29_treecover(j,ac_sub);
 m_boundfix(v29_treecover,(j,ac_sub),l,1e-6);
 
 * set treecover penalty
@@ -110,3 +109,11 @@ else
 vm_fallow.lo(j) = 0;
 vm_fallow.up(j) = p29_avl_cropland(t,j);
 m_boundfix(vm_fallow,(j),l,1e-6);
+
+* Update biodiversity value
+vm_bv.l(j,"crop_fallow",potnatveg) = 
+  vm_fallow.l(j) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"crop_tree",potnatveg) =
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc29_treecover(j,ac)) * 
+  p29_treecover_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);

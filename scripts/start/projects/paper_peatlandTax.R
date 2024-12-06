@@ -23,14 +23,13 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax24"
+cfg$info$flag <- "PTax48"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
-cfg$output <- c(cfg$output, "extra/highres")
 cfg$force_replace <- TRUE
 cfg$force_download <- FALSE
-cfg$qos <- "standby_highMem_dayMax"
+cfg$qos <- "standby_dayMax"
 
 # support function to create standardized title
 .title <- function(cfg, ...)
@@ -44,10 +43,6 @@ cfg$repositories <- append(
   getOption("magpie_repos")
 )
 
-cfg$input['regional'] <- "rev4.111_36f73207_magpie.tgz"
-cfg$input['validation'] <- "rev4.111_36f73207_validation.tgz"
-cfg$input['calibration'] <- "calibration_H16_14Jun24.tgz"
-cfg$input['cellular'] <- "rev4.111_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
 download_and_update(cfg)
 
 ## Create patch file for GHG prices
@@ -55,7 +50,7 @@ calc_ghgprice <- function() {
   T0 <- read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
   T0 <- collapseNames(T0[, , getNames(T0, dim = 2)[1]])
   T0[, , ] <- 0
-
+  
   #T200 200 USD/tCO2 in 2050
   T200 <- new.magpie(getRegions(T0), c(seq(1995, 2025, by = 5), 2050, 2100, 2150), getNames(T0), fill = 0)
   T200[, "y2025", "co2_c"] <- 0
@@ -68,14 +63,21 @@ calc_ghgprice <- function() {
   T200[, , "n2o_n_direct"] <- T200[, , "co2_c"] * 265 * 44 / 28
   T200[, , "n2o_n_indirect"] <- T200[, , "co2_c"] * 265 * 44 / 28
   T200[, , "co2_c"] <- T200[, , "co2_c"] * 44 / 12
-
+  
+  T25 <- T200 * 0.125
   T50 <- T200 * 0.25
   T100 <- T200 * 0.5
   T400 <- T200 * 2
   T800 <- T200 * 4
-
+  
   GHG <- mbind(
     add_dimension(T0, dim = 3.2, add = "scen", nm = "T0-GHG"),
+    add_dimension(
+      T25,
+      dim = 3.2,
+      add = "scen",
+      nm = "T25-GHG"
+    ),
     add_dimension(
       T50,
       dim = 3.2,
@@ -107,16 +109,16 @@ calc_ghgprice <- function() {
       nm = "T800-GHG"
     )
   )
-
+  
   CO2 <- GHG
   CO2[, , c("ch4", "n2o_n_direct", "n2o_n_indirect")] <- 0
   getNames(CO2, dim = 2) <- gsub("GHG", "CO2", getNames(CO2, dim = 2))
-
+  
   GHGCH4GWP20 <- GHG
   GHGCH4GWP20[, , "ch4"] <- GHGCH4GWP20[, , "ch4"] / 28 * 84
   getNames(GHGCH4GWP20, dim = 2) <- gsub("GHG", "GHG-GWP20", getNames(GHGCH4GWP20, dim =
                                                                         2))
-
+  
   GHG <- mbind(CO2, GHG, GHGCH4GWP20)
   if (!dir.exists("./patch_inputdata"))
     dir.create("./patch_inputdata")
@@ -126,7 +128,7 @@ calc_ghgprice <- function() {
   write.magpie(GHG, file_name = "patch_inputdata/patchGHGprices/f56_pollutant_prices.cs3")
   tardir("patch_inputdata/patchGHGprices",
          "patch_inputdata/patchGHGprices.tgz")
-
+  
   unlink("patch_inputdata/patchGHGprices", recursive = TRUE)
   return(getNames(GHG, dim = 2))
 }
@@ -139,34 +141,96 @@ ssp <- "SSP2"
 cfg <- setScenario(cfg, c(ssp, "NPI", "rcp7p0"))
 cfg$gms$c56_pollutant_prices_noselect <- "T0-CO2"
 cfg$gms$policy_countries56  <- isoCountriesEUR
+cfg$gms$policy_countries58 <- isoCountriesEUR
 cfg$gms$c56_emis_policy <- "sdp_peatland"
-cfg$gms$factor_costs <- "sticky_feb18"
-cfg$gms$livestock <- "fbask_jan16_sticky"
 cfg$gms$s56_c_price_induced_aff <- 0
 
 ## Start scenarios
-for (res in c("c400")) {
-  if (res == "c400")
-    cfg$input['cellular'] <- "rev4.111_36f73207_44a213b6_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
-  else if (res == "c1000") {
-    cfg$input['cellular'] <- "rev4.111_36f73207_10f98ac1_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
-  }
-  ## Ref scenario
-  cfg$title <- .title(cfg, paste(res, ssp, "Ref", sep = "-"))
-  cfg$gms$c56_mute_ghgprices_until <- "y2150"
-  cfg$gms$c56_pollutant_prices <- "T0-CO2"
+## Ref scenario
+cfg$title <- .title(cfg, paste("TAU",ssp, "Ref", sep = "-"))
+cfg$gms$c56_mute_ghgprices_until <- "y2150"
+cfg$gms$c56_pollutant_prices <- "T0-CO2"
+cfg$gms$s58_rewetting_exo <- 0
+cfg$gms$s58_intact_prot_exo <- 0
+x <- try(modelstat(file.path("output",cfg$title,"fulldata.gdx")),silent = TRUE)
+if(is.null(x) | (is.magpie(x) & any(!x %in% c(2,7)))) {
+  download_and_update(cfg)
   start_run(cfg, codeCheck = FALSE)
+  message(paste0("TAU run started: ",cfg$title))
+  Sys.sleep(10)
+}  
 
-  ## Policy scenarios
-  for (tax in c("T50-CO2",
-                "T100-CO2",
-                "T200-CO2",
-                "T400-CO2",
-                "T400-GHG",
-                "T400-GHG-GWP20")) {
-    cfg$title <- .title(cfg, paste(res, ssp, tax, sep = "-"))
-    cfg$gms$c56_mute_ghgprices_until <- "y2025"
-    cfg$gms$c56_pollutant_prices <- tax
-    start_run(cfg, codeCheck = FALSE)
+
+### wait until model runs with endogenous TAU are finished, check is performed every 10 minutes
+success <- FALSE
+while (!success) {
+  z <- NULL
+  x <- try(modelstat(file.path("output",cfg$title,"fulldata.gdx")),silent = TRUE)
+  if (is.magpie(x) & all(x %in% c(2,7))) {
+    x <- x
+  } else x <- NULL
+  z <- mbind(z,x)
+  if (is.null(z)) {
+    message("Not any model run with endogenous TAU finished. Sleeping for 10 minutes.")
+    Sys.sleep(60*10)
+  } else {
+    if (all(z %in% c(2,7))) success <- TRUE else stop("Modelstat different from 2 or 7 detected")
   }
 }
+
+# use exo TC in all following runs
+download_and_update(cfg)
+write.magpie(readGDX(file.path("output",cfg$title,"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+cfg$gms$tc <- "exo"
+
+## GHG policy scenarios
+for (tax in c("T0-CO2",
+              "T25-CO2",
+              "T50-CO2",
+              "T100-CO2",
+              "T200-CO2",
+              "T400-CO2",
+              "T400-GHG",
+              "T400-GHG-GWP20")) {
+  cfg$title <- .title(cfg, paste(ssp, tax, sep = "-"))
+  cfg$gms$c56_mute_ghgprices_until <- "y2025"
+  cfg$gms$c56_pollutant_prices <- tax
+  start_run(cfg, codeCheck = FALSE)
+}
+
+## Exo rewet scenarios
+# 15% of currently drained peatland rewetted by 2050 (0.3 * 0.5)
+cfg$title <- .title(cfg, paste(ssp, "NRL15", sep = "-"))
+cfg$gms$c56_mute_ghgprices_until <- "y2150"
+cfg$gms$c56_pollutant_prices <- "T0-CO2"
+cfg$gms$s58_rewetting_exo <- 0.3
+cfg$gms$s58_rewet_exo_target_value <- 0.5
+cfg$gms$s58_intact_prot_exo <- 1
+start_run(cfg, codeCheck = FALSE)
+
+# 25% of currently drained peatland rewetted by 2050 (0.5 * 0.5)
+cfg$title <- .title(cfg, paste(ssp, "NRL25", sep = "-"))
+cfg$gms$c56_mute_ghgprices_until <- "y2150"
+cfg$gms$c56_pollutant_prices <- "T0-CO2"
+cfg$gms$s58_rewetting_exo <- 0.5
+cfg$gms$s58_rewet_exo_target_value <- 0.5
+cfg$gms$s58_intact_prot_exo <- 1
+start_run(cfg, codeCheck = FALSE)
+
+# 50% of currently drained peatland rewetted by 2050 (1 * 0.5)
+cfg$title <- .title(cfg, paste(ssp, "NRL50", sep = "-"))
+cfg$gms$c56_mute_ghgprices_until <- "y2150"
+cfg$gms$c56_pollutant_prices <- "T0-CO2"
+cfg$gms$s58_rewetting_exo <- 1
+cfg$gms$s58_rewet_exo_target_value <- 0.5
+cfg$gms$s58_intact_prot_exo <- 1
+start_run(cfg, codeCheck = FALSE)
+
+# 100% of currently drained peatland rewetted by 2050 (2 * 0.5)
+cfg$title <- .title(cfg, paste(ssp, "NRL100", sep = "-"))
+cfg$gms$c56_mute_ghgprices_until <- "y2150"
+cfg$gms$c56_pollutant_prices <- "T0-CO2"
+cfg$gms$s58_rewetting_exo <- 2
+cfg$gms$s58_rewet_exo_target_value <- 0.5
+cfg$gms$s58_intact_prot_exo <- 1
+start_run(cfg, codeCheck = FALSE)

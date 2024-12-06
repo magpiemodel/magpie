@@ -6,10 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variables
-  vm_costs_additional_mon(i)                       Punishment cost for additionally transported monogastric livst_egg (mio. USD05MER per yr)
+  vm_costs_additional_mon(i)                       Punishment cost for additionally transported monogastric livst_egg (mio. USD17MER per yr)
 ;
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_costs_additional_mon(t,i,type) Punishment cost for additionally transported monogastric livst_egg (mio. USD05MER per yr)
+ ov_costs_additional_mon(t,i,type) Punishment cost for additionally transported monogastric livst_egg (mio. USD17MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

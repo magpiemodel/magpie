@@ -8,8 +8,8 @@
 
 * starting value of carbon stocks 1995 is only an estimate.
 * ATTENTION: emissions in 1995 are not meaningful
-vm_carbon_stock.l(j,land,"soilc","actual") = fm_carbon_density("y1995",j,land,"soilc") * pcm_land(j,land);
-*pcm_carbon_stock(j,land,"soilc") = vm_carbon_stock.l(j,land,"soilc");
+pcm_carbon_stock(j,land,"soilc","actual") = fm_carbon_density("y1995",j,land,"soilc") * pcm_land(j,land);
+vm_carbon_stock.l(j,land,"soilc","actual") = pcm_carbon_stock(j,land,"soilc","actual");
 
 * Soilc is not different for all non cropland vegetated land types
 * No age-class soil carbon density distribution is nessessary

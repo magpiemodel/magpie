@@ -16,17 +16,22 @@ elseif s35_secdf_distribution = 1,
 * ac0 is excluded here. Therefore no initial shifting is needed.
   i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")/(card(ac)-1);
 elseif s35_secdf_distribution = 2,
-*classes 1, 2, 3 include plantation and are therefore excluded
-*As disturbance history (fire) would affect the age structure
-*We use the sahre from class 4 to be in class 1,2,3
-*class 15 is primary forest and is therefore excluded
- i35_plantedclass_ac(j,ac) =  im_plantedclass_ac(j,ac);
- i35_plantedclass_ac(j,ac_planted)$(i35_plantedclass_ac(j,ac_planted) > im_plantedclass_ac(j,"ac35")) =  im_plantedclass_ac(j,"ac35");
+*For the initialization of age-classes in secondary forest, forest area in 5-year age-classes based on GFAD is used 
+ p35_secdf_ageclass(j,ac) = im_forest_ageclass(j,ac);
+* Young forest (`ac_young`) includes plantations and might be (strongly) affected by disturbances such as fire. 
+* Therefore, young forest (`ac_young`) is disregarded for the initialization of age-classes in secondary forest. 
+* Instead, age-class areas from `ac35` are used as a proxy for `ac_young`.
+ p35_secdf_ageclass(j,ac_young) = p35_secdf_ageclass(j,"ac35");
+* `acx` includes primary forest. Therefore, primary forest is subtracted from `acx`.
+ p35_secdf_ageclass(j,"acx") = p35_secdf_ageclass(j,"acx") - pcm_land(j,"primforest");
+ p35_secdf_ageclass(j,"acx")$(p35_secdf_ageclass(j,"acx") < 0) = 0;
 
-* Distribute this area correctly
- p35_poulter_dist(j,ac) = 0;
- p35_poulter_dist(j,ac) = (i35_plantedclass_ac(j,ac)/sum(ac2,i35_plantedclass_ac(j,ac2)))$(sum(ac2,i35_plantedclass_ac(j,ac2))>0);
- i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")*p35_poulter_dist(j,ac);
+* Distribution of age-classes in secondary forest. In case of missing area information, `acx` is assumed.
+ p35_secdf_ageclass_dist(j,ac) = 0;
+ p35_secdf_ageclass_dist(j,"acx") = 1;
+ p35_secdf_ageclass_dist(j,ac)$(sum(ac2,p35_secdf_ageclass(j,ac2))>0) = 
+           p35_secdf_ageclass(j,ac)/sum(ac2,p35_secdf_ageclass(j,ac2));
+ i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")*p35_secdf_ageclass_dist(j,ac);
 );
 
 *use residual approach to avoid rounding errors
@@ -80,3 +85,15 @@ m_sigmoid_time_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);
 
   pc35_secdforest(j,ac) = i35_secdforest(j,ac);
   pc35_land_other(j,othertype35,ac) = i35_land_other(j,othertype35,ac);
+
+* Initialize biodiversity value
+vm_bv.l(j,"primforest",potnatveg) = 
+  pcm_land(j,"primforest") * fm_bii_coeff("primary",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"secdforest",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), i35_secdforest(j,ac)) *
+  fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"other",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), sum(othertype35, i35_land_other(j,othertype35,ac))) *
+  fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);

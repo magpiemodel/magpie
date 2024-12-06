@@ -27,10 +27,12 @@ pc59_som_pool(j,noncropland59) =
 * starting value of carbon stocks 1995 is only an estimate.
 * ATTENTION: emissions in 1995 are not meaningful
 
-vm_carbon_stock.l(j,"crop","soilc",stockType) =
+pcm_carbon_stock(j,"crop","soilc",stockType) =
   pc59_som_pool(j,"crop") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
-vm_carbon_stock.l(j,noncropland59,"soilc",stockType) =
+vm_carbon_stock.l(j,"crop","soilc",stockType) = pcm_carbon_stock(j,"crop","soilc",stockType);
+pcm_carbon_stock(j,noncropland59,"soilc",stockType) =
   fm_carbon_density("y1995",j,noncropland59,"soilc") * pm_land_start(j,noncropland59);
+vm_carbon_stock.l(j,noncropland59,"soilc",stockType) = pcm_carbon_stock(j,noncropland59,"soilc",stockType);
 
 *****************************
 *** cshare calculation    ***

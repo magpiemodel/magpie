@@ -5,6 +5,20 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* Update v44_bii.l based on vm_bv.l
+loop(i,
+  loop(biome44,
+    if(i44_biome_area_reg(i,biome44) <= 0,
+      v44_bii.fx(i,biome44) = 0;
+      v44_bii_missing.fx(i,biome44) = 0;
+    else
+      v44_bii.l(i,biome44) = 
+        sum((cell(i,j),potnatveg,landcover44), vm_bv.l(j,landcover44,potnatveg) * i44_biome_share(j,biome44))
+        / i44_biome_area_reg(i,biome44);
+    );
+  );
+);
+
 * The start value for the linear interpolation is the BII at biome level in the start year.
 p44_start_value(i,biome44)$(m_year(t) = s44_start_year) = v44_bii.l(i,biome44);
 * The target value for the linear interpolation is the lower bound defined in `s44_bii_lower_bound`.
@@ -17,13 +31,13 @@ else
   p44_bii_lower_bound(t2,i,biome44) = p44_start_value(i,biome44) + ((m_year(t2) - s44_start_year) / (s44_target_year - s44_start_year)) * (p44_target_value(i,biome44) - p44_start_value(i,biome44));
   p44_bii_lower_bound(t2,i,biome44)$(m_year(t2) > s44_target_year) = p44_target_value(i,biome44);
   if(c44_bii_decrease = 0,
-    p44_bii_lower_bound(t2,i,biome44)$(v44_bii.l(i,biome44) >= p44_target_value(i,biome44)) = v44_bii.l(i,biome44);   
+    p44_bii_lower_bound(t,i,biome44)$(v44_bii.l(i,biome44) >= p44_target_value(i,biome44)) = v44_bii.l(i,biome44);   
   elseif c44_bii_decrease = 1,
-    p44_bii_lower_bound(t2,i,biome44)$(v44_bii.l(i,biome44) >= p44_target_value(i,biome44)) = p44_target_value(i,biome44);
+    p44_bii_lower_bound(t,i,biome44)$(v44_bii.l(i,biome44) >= p44_target_value(i,biome44)) = p44_target_value(i,biome44);
   );
-  p44_bii_lower_bound(t2,i,biome44)$(p44_bii_lower_bound(t2,i,biome44) >= 1) = 1;
-  p44_bii_lower_bound(t2,i,biome44)$(m_year(t2) < s44_start_year) = 0;
-  p44_bii_lower_bound(t2,i,biome44)$(sum(cell(i,j), f44_biome(j,biome44)) = 0) = 0;
+  p44_bii_lower_bound(t,i,biome44)$(p44_bii_lower_bound(t,i,biome44) >= 1) = 1;
+  p44_bii_lower_bound(t,i,biome44)$(m_year(t) < s44_start_year) = 0;
+  p44_bii_lower_bound(t,i,biome44)$(i44_biome_area_reg(i,biome44) <= 0) = 0;
 * The lower bound of `v44_bii` is set to `p44_bii_lower_bound` to avoid a reduction of BII in combination with `v44_bii_missing`.
   v44_bii.lo(i,biome44) = p44_bii_lower_bound(t,i,biome44);
   display p44_bii_lower_bound;

@@ -6,11 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars 
- s44_bii_lower_bound      Lower bound for BII (1)                     / 0 /
+ s44_bii_lower_bound    Lower bound for BII (1)                                 / 0 /
  c44_bii_decrease       Implementation of lower bound for BII (binary)          / 1 /
  s44_target_year        Year in which the BII lower bound is reached  (1)       / 2100 /
  s44_start_year         Start year for interpolation towards BII lower bound (1)    / 2025 /
- s44_cost_bii_missing     Technical costs for missing BII increase (USD per unit of BII)  / 1e+06 /
+ s44_cost_bii_missing   Technical costs for missing BII increase (USD17MER per unit of BII)  / 1e+06 /
 ;
 
 
@@ -20,7 +20,7 @@ $include "./modules/44_biodiversity/bii_target_apr24/input/f44_bii_coeff.cs3"
 $offdelim
 ;
 
-table f44_biome(j,biome44) Share of biome type in each spatial unit (1)
+table f44_biome_area(j,biome44) Area of biome type in each spatial unit (mio. ha)
 $ondelim
 $include "./modules/44_biodiversity/bii_target_apr24/input/biorealm_biome.cs3"
 $offdelim

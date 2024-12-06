@@ -54,6 +54,12 @@
  q58_peatlandMan2(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatland(j2,manPeat58) =l= v58_manLand(j2,manPeat58);
 
+*' Constraint for optional exogenous peatland rewetting
+
+ q58_rewetting_exo(j2,manPeat58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
+  v58_peatland(j2,"rewetted") =g= 
+  sum(drained58, p58_peatland_ref(j2,drained58)) * sum(ct, i58_rewetting_exo(ct,j2));
+
 *' Costs for peatland degradation and rewetting
 
  q58_peatland_cost(j2) ..
@@ -64,9 +70,7 @@
 
  q58_peatland_cost_annuity(j2,cost58) ..
   v58_peatland_cost_annuity(j2,cost58) =g=
-    (- v58_peatlandChange(j2,"intact") * sum(ct, i58_cost_drain_intact_onetime(ct)))$sameas(cost58,"drain_intact")
-   + (- v58_peatlandChange(j2,"rewetted") * sum(ct, i58_cost_drain_rewet_onetime(ct)))$sameas(cost58,"drain_rewetted")
-   + (v58_peatlandChange(j2,"rewetted") * sum(ct, i58_cost_rewet_onetime(ct)))$sameas(cost58,"rewet")
+  sum(map_cost58(intact58,cost58), v58_peatlandChange(j2,intact58)) * sum(ct, i58_cost_onetime(ct,cost58))
   * sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
 *' Detailed peatland GHG emissions

@@ -5,7 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*m_sigmoid_time_interpol(i32_plant_contr_fader,2020,2050,0.05,0);
+i32_recurring_cost(type32) = s32_recurring_cost;
+
 m_sigmoid_time_interpol(i32_plant_contr_growth_fader,s32_plant_contr_growth_startyear,s32_plant_contr_growth_endyear,s32_plant_contr_growth_startvalue,s32_plant_contr_growth_endvalue);
 
 p32_est_cost("plant") = s32_est_cost_plant;
@@ -228,3 +229,16 @@ p32_land(t,j,type32,ac) = 0;
 
 * initialize forest disturbance losses
 p32_disturbance_loss_ftype32(t,j,"aff",ac) = 0;
+
+* Initialize biodiversity value
+vm_bv.l(j,"aff_co2p",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"aff",ac)) *
+  p32_bii_coeff("aff",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"aff_ndc",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"ndc",ac)) *
+  p32_bii_coeff("ndc",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"plant",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"plant",ac)) *
+  p32_bii_coeff("plant",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);

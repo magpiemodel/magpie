@@ -5,5 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v58_peatlandChange.scale(j,land58) = 10e-3;
-v58_peatland.scale(j,land58) = 10e-3;
+
+vm_cost_prod_livst.scale(i,factors) = 10e5;
+vm_cost_prod_fish.scale(i) = 10e5;

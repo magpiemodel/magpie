@@ -64,13 +64,13 @@ p15_demand2intake_ratio_ref(i) = 0;
 * Switch to determine countries for which  exogenous food scenarios (EAT Lancet diet and
 * food waste scenarios), and food substitution scenarios shall be applied.
 * In the default case, the food scenario affects all countries when activated.
-p15_country_dummy(iso) = 0;
-p15_country_dummy(scen_countries15) = 1;
+p15_country_switch(iso) = 0;
+p15_country_switch(scen_countries15) = 1;
 
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p15_foodscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p15_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p15_foodscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p15_country_switch(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 
 ** The following lines define scenario faders for substituting different food groups

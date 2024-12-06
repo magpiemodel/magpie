@@ -16,4 +16,4 @@
  q52_emis_co2_actual(i2,emis_oneoff) ..
   vm_emissions_reg(i2,emis_oneoff,"co2_c") =e=
                  sum((cell(i2,j2),emis_land(emis_oneoff,land,c_pools)),
-                 (vm_carbon_stock.l(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"actual"))/m_timestep_length);
+                 (pcm_carbon_stock(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"actual"))/m_timestep_length);

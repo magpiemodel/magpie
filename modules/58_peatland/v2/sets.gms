@@ -16,20 +16,29 @@ sets
   manPeat58(land58) Drained and managed peatland categories
     / crop, past, forestry /
 
+  intact58(land58) intact and rewetted peatland categories
+    / intact, rewetted /
+  
   cost58 annunity cost categories
-    / drain_intact, drain_rewetted, rewet /
+    / drain_intact, drain_rewetted, rewetted /
+
+  map_cost58(intact58,cost58) Mapping between intact58 and cost58
+           / intact .(drain_intact)
+           rewetted .(drain_rewetted)
+           rewetted .(rewetted) /
 
   emis58 Wetland emission types
   / co2, doc, ch4, n2o /
 
   emisSub58(emis58) Wetland emission types
-  / co2, ch4, n2o /
+  / co2, doc, ch4, n2o /
 
   poll58(pollutants) Wetland emissions that can be taxed
   / co2_c, ch4, n2o_n_direct /
   
   emisSub58_to_poll58(emisSub58,poll58) Mapping
       / co2 .(co2_c)    
+        doc .(co2_c)      
         ch4 .(ch4)      
         n2o .(n2o_n_direct) /
   

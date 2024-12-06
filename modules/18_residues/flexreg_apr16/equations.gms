@@ -107,14 +107,9 @@
                     + vm_res_ag_burn(i2,kcr,pk18)
                   );
 
-*' Costs of residues production are determined as factor costs per ton
-*' assuming 15 USD per ton, using the lower range from
-*' [this source](hwww1.agric.gov.ab.ca/$Department/deptdocs.nsf/All/faq7514),
-*' 10USD baling costs per large round bale plus 2USD pro bale stocking and hauling,
-*' 1 large round bale is approximately 500 kg, resulting in 24USD per ton,
-*' for developing prices see [here](citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.557.5823&rep=rep1&type=pdf).
-*' Tha calcuated factor costs per ton are therefore 24 for `res_cereals`, `res_fibrous`
-*' and `res_nonfibrous`.
+*' Costs of residue harvest are based on straw baling and hauling from 
+*' Budynski, Stephanie. 2020. Straw Manufacturing in Alberta (@budynski_straw_2020), 
+*' using the lower range of the US costs.
 
  q18_cost_prod_res(i2,kres) ..
                   vm_cost_prod_kres(i2,kres)

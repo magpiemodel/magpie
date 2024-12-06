@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-table f28_forestageclasses(j,ac_poulter) Poulter age-class area in each cluster (1)
+table f28_forestageclasses(j,ac_gfad) Forest area in 15 10-year age classes from GFAD (Mha)
 $ondelim
 $include "./modules/28_ageclass/input/forestageclasses.cs3"
 $offdelim

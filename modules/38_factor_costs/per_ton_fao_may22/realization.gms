@@ -24,6 +24,7 @@ $Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/per_ton_fao
 $Ifi "%phase%" == "input" $include "./modules/38_factor_costs/per_ton_fao_may22/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/per_ton_fao_may22/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/per_ton_fao_may22/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/per_ton_fao_may22/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/per_ton_fao_may22/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/per_ton_fao_may22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

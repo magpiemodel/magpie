@@ -12,13 +12,13 @@
 * Regional share of land conservation policies in selective countries:
 * Country switch to determine countries for which land conservation shall be applied.
 * In the default case, the land conservation affects all countries when activated.
-p22_country_dummy(iso) = 0;
-p22_country_dummy(policy_countries22) = 1;
+p22_country_switch(iso) = 0;
+p22_country_switch(policy_countries22) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by total land area.
 i22_land_iso(iso) = sum(land, fm_land_iso("y1995",iso,land));
-p22_country_weight(i) = sum(i_to_iso(i,iso), p22_country_dummy(iso) * i22_land_iso(iso)) / sum(i_to_iso(i,iso), i22_land_iso(iso));
+p22_country_weight(i) = sum(i_to_iso(i,iso), p22_country_switch(iso) * i22_land_iso(iso)) / sum(i_to_iso(i,iso), i22_land_iso(iso));
 
 * ---------------------------------------------------------------------
 * Initialise baseline protection and conservation priority areas

@@ -30,5 +30,9 @@ if (sum(sameas(t_past,t),1) = 1,
   p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate(t,i,kall);
   p62_bioplastic_substrate_lastcalibyear(i,kall) = p62_bioplastic_substrate(t,i,kall);
 else
-  p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate_lastcalibyear(i,kall) * p62_scaling_factor(i);
+  if (s62_include_bioplastic = 0,
+    p62_bioplastic_substrate_double_counted(t,i,kall) = 0;
+  else
+    p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate_lastcalibyear(i,kall) * p62_scaling_factor(i);
+  );
 );
