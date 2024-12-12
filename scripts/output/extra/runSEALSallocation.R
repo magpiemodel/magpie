@@ -63,10 +63,10 @@ if (length(cfg$seals_years) != 0) {
 }
 
 # Restructure data to conform to SEALS
-outFile <- paste0("cell.land_0.5_SEALS_", title, ".nc")
+sealsInput <- paste0("cell.land_0.5_SEALS_", title, ".nc")
 reportLandUseForSEALS(
   magCellLand = "cell.land_0.5_share.mz",
-  outFile = outFile,
+  outFile = sealsInput,
   dir = outputdir, selectyears = rep_years
 )
 
@@ -109,7 +109,7 @@ Sys.chmod(iniLock, mode = "0664")
 # Prepare SEALS start script
 # --------------------------------
 
-.setupSEALSrun <- function(cfg, dir, dirProject, dirSEALS, dirBaseFiles) {
+.setupSEALSrun <- function(cfg, sealsInput, dir, dirProject, dirSEALS, dirBaseFiles) {
   if (!dir.exists(file.path(dirProject, "scripts"))) {
     dir.create(file.path(dirProject, "scripts"), recursive = TRUE)
   }
@@ -206,7 +206,7 @@ Sys.chmod(iniLock, mode = "0664")
     sealsConfig[nrow(sealsConfig), "climate_label"] <- rcp
     sealsConfig[nrow(sealsConfig), "counterfactual_label"] <- title
     sealsConfig[nrow(sealsConfig), "comparison_counterfactual_labels"] <- ifelse(scenarioType == "bau", "", "bau")
-    sealsConfig[, "coarse_projections_input_path"] <- normalizePath(file.path(dir, outFile))
+    sealsConfig[, "coarse_projections_input_path"] <- normalizePath(file.path(dir, sealsInput))
     sealsConfig[nrow(sealsConfig), "years"] <- sealsYears
     sealsConfig[nrow(sealsConfig), "calibration_parameters_source"] <- normalizePath(sealsCoeffPath)
     write.csv(sealsConfig, file.path(dirProject, "inputs", paste0("seals_scenario_config_", title, ".csv")),
@@ -288,6 +288,7 @@ if (!is.null(lockOn)) {
 
   .setupSEALSrun(
     cfg = cfg,
+    sealsInput = sealsInput,
     dir = outputdir,
     dirProject = dirProject,
     dirSEALS = dirSEALS,
