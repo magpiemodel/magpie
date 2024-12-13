@@ -10,8 +10,9 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
-# Version 1.00 - Patrick v. Jeetze, Pascal Sauer
-# 1.00: first working version
+# Version 1.1.0 - Patrick v. Jeetze, Pascal Sauer
+# 1.0.0: first working version
+# 1.1.0: SEALS coefficients are modified based on scenario settings
 
 library(gms)
 library(gdx2)
@@ -164,9 +165,9 @@ Sys.chmod(iniLock, mode = "0664")
       "WDPA", consv, sealsCoeff[consvRow, "data_location"]
     )
 
-    peatArea <- PeatlandArea(file.path(dir, "fulldata.gdx"))
+    peatArea <- PeatlandArea(file.path(dir, "fulldata.gdx"))[, as.numeric(sealsYears), ]
     rewetSwitch <- dimSums(peatArea[, , "rewet"], dim = 1) / dimSums(peatArea, dim = c(1, 3)) > 0.01
-    if (rewetSwitch) {
+    if (any(c(rewetSwitch))) {
       peatRow <- which(sealsCoeff[, "spatial_regressor_name"] == "peatland_rewetting")
       # SEALS rewetting coefficient
       rewetCoeff <- 10000
