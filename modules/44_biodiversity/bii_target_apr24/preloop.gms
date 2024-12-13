@@ -6,8 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * Calculate biome share
-i44_biome_share(j,biome44) = 
-   (f44_biome_area(j,biome44) + 1e-10) / sum(biome44_2, f44_biome_area(j,biome44_2) + 1e-10);
+i44_biome_share(j,biome44) = 0;
+i44_biome_share(j,biome44)$(sum(biome44_2, f44_biome_area(j,biome44_2)) > 0) = 
+   f44_biome_area(j,biome44) / sum(biome44_2, f44_biome_area(j,biome44_2));
 
 * Set i44_biome_area_reg
 i44_biome_area_reg(i,biome44) = 

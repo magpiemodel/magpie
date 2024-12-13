@@ -16,7 +16,6 @@ positive variables
 parameters
  p44_bii_lower_bound(t,i,biome44) Interpolated lower bound for BII over time (1)
  p44_start_value(i,biome44)       Start value for BII lower bound (1)
- p44_target_value(i,biome44)      Target value for BII lower bound (1)
  i44_biome_share(j,biome44)       Share of biome type in each spatial unit (1)
  i44_biome_area_reg(i,biome44)    Area of range-rarity weighted biome type in each region (mio. ha)
 ;
