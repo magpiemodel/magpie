@@ -152,13 +152,10 @@ Sys.chmod(iniLock, mode = "0664")
 
   message("Updating SEALS model coefficients based on scenario settings")
 
-  sealsCoeff <- c(
-    "input/seals_global_coefficients.csv",
-    "../input/seals_global_coefficients.csv",
-    "../../input/seals_global_coefficients.csv"
-  )
-  sealsCoeff <- suppressWarnings(sealsCoeff[min(which(file.exists(sealsCoeff)))])
-  if (!is.na(sealsCoeff)) {
+  sealsCoeff <- paste0(c("./", "../", "../../"), "input/seals_global_coefficients.csv")
+  sealsCoeff <- Find(file.exists, sealsCoeff)
+
+  if (!is.null(sealsCoeff)) {
     sealsCoeff <- read.csv(sealsCoeff)
     consvRow <- which(sealsCoeff[, "spatial_regressor_name"] == "land_conservation")
     sealsCoeff[consvRow, "data_location"] <- sub(
@@ -194,13 +191,10 @@ Sys.chmod(iniLock, mode = "0664")
 
   message("Creating SEALS scenario definitions CSV")
 
-  sealsConfig <- c(
-    "input/seals_scenario_config.csv",
-    "../input/seals_scenario_config.csv",
-    "../../input/seals_scenario_config.csv"
-  )
-  sealsConfig <- suppressWarnings(sealsConfig[min(which(file.exists(sealsConfig)))])
-  if (!is.na(sealsConfig)) {
+  sealsConfig <- paste0(c("./", "../", "../../"), "input/seals_scenario_config.csv")
+  sealsConfig <- Find(file.exists, sealsConfig)
+
+  if (!is.null(sealsConfig)) {
     sealsConfig <- read.csv(sealsConfig)
     sealsConfig[nrow(sealsConfig), "scenario_label"] <- title
     sealsConfig[nrow(sealsConfig), "scenario_type"] <- scenarioType
