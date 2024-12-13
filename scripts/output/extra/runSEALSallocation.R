@@ -164,8 +164,9 @@ Sys.chmod(iniLock, mode = "0664")
       "WDPA", consv, sealsCoeff[consvRow, "data_location"]
     )
 
-    peatlandPrice <- readGDX(file.path(dir, "fulldata.gdx"), "im_pollutant_prices")
-    if (any(peatlandPrice[, as.numeric(sealsYears), "co2_c.peatland"] > 0)) {
+    peatArea <- PeatlandArea(file.path(dir, "fulldata.gdx"))
+    rewetSwitch <- dimSums(peatArea[, , "rewet"], dim = 1) / dimSums(peatArea, dim = c(1, 3)) > 0.01
+    if (rewetSwitch) {
       peatRow <- which(sealsCoeff[, "spatial_regressor_name"] == "peatland_rewetting")
       # SEALS rewetting coefficient
       rewetCoeff <- 10000
@@ -181,7 +182,7 @@ Sys.chmod(iniLock, mode = "0664")
     )
 
     write.csv(sealsCoeff, sealsCoeffPath,
-      row.names = FALSE, na = ""
+      row.names = FALSE, na = "", quote = FALSE # quote = FALSE is critical here!
     )
   } else {
     stop("Could not find seals_global_coefficients.csv file")
@@ -210,7 +211,7 @@ Sys.chmod(iniLock, mode = "0664")
     sealsConfig[nrow(sealsConfig), "years"] <- sealsYears
     sealsConfig[nrow(sealsConfig), "calibration_parameters_source"] <- normalizePath(sealsCoeffPath)
     write.csv(sealsConfig, file.path(dirProject, "inputs", paste0("seals_scenario_config_", title, ".csv")),
-      row.names = FALSE, na = ""
+      row.names = FALSE, na = "", quote = FALSE # quote = FALSE is critical here!
     )
   } else {
     stop("Could not find seals_scenario_config.csv file template")
