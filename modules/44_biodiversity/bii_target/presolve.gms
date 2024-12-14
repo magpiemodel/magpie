@@ -13,7 +13,7 @@ loop(i,
       v44_bii_missing.fx(i,biome44) = 0;
     else
       v44_bii.l(i,biome44) = 
-        sum((cell(i,j),landcover44,potnatveg), vm_bv.l(j,landcover44,potnatveg) * f44_rr_layer(j) * i44_biome_share(j,biome44))
+        sum((cell(i,j),landcover44,potnatveg), vm_bv.l(j,landcover44,potnatveg) * i44_biome_share(j,biome44))
         / i44_biome_area_reg(i,biome44);
     );
   );
