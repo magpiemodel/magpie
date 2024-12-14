@@ -19,14 +19,16 @@ magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
 
 $onecho > conopt4.opt
-Lim_Variable = 1.e25
+Tol_Scale_Min = 1e-4;
 $offecho
 
 $onecho > conopt4.op2
-Flg_Prep = FALSE
+Tol_Scale_Min = 1e-4;
+Lim_Variable = 1.e25
 $offecho
 
 $onecho > conopt4.op3
+Tol_Scale_Min = 1e-4;
 Flg_NoDefc = TRUE
 $offecho
 
@@ -58,15 +60,15 @@ if (magpie.modelstat > 2,
       option nlp = conopt4;
       magpie.optfile = 0;
     elseif s80_resolve_option = 2,
-      display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE";
+      display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE 1";
       option nlp = conopt4;
       magpie.optfile = 1;
     elseif s80_resolve_option = 3,
-      display "Modelstat > 2 | Retry solve with CONOPT4 w/o preprocessing";
+      display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE 2";
       option nlp = conopt4;
       magpie.optfile = 2;
     elseif s80_resolve_option = 4,
-      display "Modelstat > 2 | Retry solve with CONOPT4 w/o search for definitional constraints";
+      display "Modelstat > 2 | Retry solve with CONOPT4 OPTFILE 3";
       option nlp = conopt4;
       magpie.optfile = 3;
     elseif s80_resolve_option = 5,
