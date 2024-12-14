@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **44_biodiversity** bugfix i44_biome_share, code cleanup, added scaling of `q44_bii`
 
 ## [4.9.0] - 2024-12-05
 
