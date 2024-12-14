@@ -5,4 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-q44_bii.scale(i,biome44) = 1e20;
+q44_bii.scale(i,biome44) = 1e10;
