@@ -6,3 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_landdiff.scale = 10e3;
+
+q10_transition_to.scale(j,land_to) = 1e20;
+q10_transition_from.scale(j,land_from) = 1e20;
