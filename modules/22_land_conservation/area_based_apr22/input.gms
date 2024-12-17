@@ -5,13 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c22_base_protect  WDPA
+$setglobal c22_base_protect_noselect  WDPA
 $setglobal c22_protect_scenario  none
 $setglobal c22_protect_scenario_noselect  none
 
 scalars
 s22_restore_land  If land restoration is allowed (0=no 1=yes) / 1 /
-s22_conservation_start    Land conservation start year        / 2020 /
-s22_conservation_target   Land conservation target year       / 2030 /
+s22_conservation_start    Land conservation start year        / 2025 /
+s22_conservation_target   Land conservation target year       / 2050 /
 ;
 
 * Set-switch for countries affected by regional land conservation policy
@@ -45,13 +47,13 @@ sets
                       VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
-table f22_wdpa_baseline(t_all,j,land) Initial protected area as derived from WDPA until 2020 (mio. ha)
+table f22_wdpa_baseline(t_all,j,wdpa_cat22,land) Initial protected area as derived from WDPA until 2020 (mio. ha)
 $ondelim
 $include "./modules/22_land_conservation/input/wdpa_baseline.cs3"
 $offdelim
 ;
 * fix to 2020 values for years after 2020
-m_fillmissingyears(f22_wdpa_baseline,"j,land");
+m_fillmissingyears(f22_wdpa_baseline,"j,wdpa_cat22,land");
 
 table f22_consv_prio(j,consv_prio22,land) Conservation priority areas (mio. ha)
 $ondelim

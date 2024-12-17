@@ -5,14 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* capital cost share to split non-magpie factor costs into labor and capital
-p36_share_calibration(i) = f36_hist_cap_share("y2010",i)-(f36_regr_cap_share("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f36_regr_cap_share("intercept"));
-
-if (m_year(t)<2010,
- p36_cost_share(t,i) = f36_hist_cap_share(t,i);
-elseif (m_year(t)>=2010),
- p36_cost_share(t,i) = f36_regr_cap_share("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f36_regr_cap_share("intercept")+p36_share_calibration(i);
-);
 
 *' @code
 
@@ -21,7 +13,7 @@ elseif (m_year(t)>=2010),
 *' are both kept constant for future years. 
 
 p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) *
-                                     (1-p36_cost_share(t,i)) * (1/pm_productivity_gain_from_wages(t,i)) *
+                                     (pm_factor_cost_shares(t,i,"labor")) * (1/pm_productivity_gain_from_wages(t,i)) *
                                      (pm_hourly_costs(t,i,"scenario") / pm_hourly_costs(t,i,"baseline"));
 
 *' @stop

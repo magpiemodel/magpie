@@ -21,7 +21,7 @@ update-renv: ## Upgrade all pik-piam packages in your renv to the respective
 
 update-renv-all: ## Upgrade all packages (including CRAN packages) in your renv
                  ## to the respective latest release and write renv.lock to archive.
-	Rscript -e 'renv::update(exclude = "renv"); piamenv::archiveRenv()'
+	Rscript -e 'renv::update(); piamenv::archiveRenv()'
 
 archive-renv: ## Write renv.lock to archive.
 	Rscript -e 'piamenv::archiveRenv()'

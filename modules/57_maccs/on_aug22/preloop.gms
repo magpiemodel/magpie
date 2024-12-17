@@ -5,14 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$if "%c57_macc_version%" == "PBL_2007" s57_step_length = 5;
-$if "%c57_macc_version%" == "PBL_2019" s57_step_length = 20;
-$if "%c57_macc_version%" == "PBL_2022" s57_step_length = 20;
+* inflated using USD05 --> USD17 MER rate: 5 * 1.23
+$if "%c57_macc_version%" == "PBL_2007" s57_step_length = 6.15;
+* inflated using USD10 --> USD17 MER rate: 20 * 1.12
+$if "%c57_macc_version%" == "PBL_2019" s57_step_length = 22.4;
+* inflated using USD10 --> USD17 MER rate: 20 * 1.12
+$if "%c57_macc_version%" == "PBL_2022" s57_step_length = 22.4;
 
 $ontext
 Determine level of GHG emission abatement depending on GHG prices.
-There are 201 abatement steps. Each step is 5 USD per tC eq in case of PBL_2007 and
-20 USD per tC eq in case of PBL_2019.
+There are 201 abatement steps. Each step is 6.15 USD17MER per tC eq in case of PBL_2007 and
+22.4 USD17MER per tC eq in case of PBL_2019.
 Since the GHG prices are in USD per ton N and USD per ton CH4, conversion to USD per ton C eq is needed.
 In this realization, the IPCC AR4 global warming potential factor for N2O (298) and CH4 (25) are used because
 PBL used these parameters to convert USD per ton N2O and USD per ton CH4 into USD per ton C eq.

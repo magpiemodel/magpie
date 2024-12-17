@@ -39,7 +39,7 @@ q57_labor_costs(i2) ..
     + sum(emis_source_inorg_fert_n2o,
       (vm_emissions_reg(i2,emis_source_inorg_fert_n2o,"n2o_n_direct") / s57_implicit_emis_factor) *
       sum(ct,im_maccs_mitigation(ct,i2,emis_source_inorg_fert_n2o,"n2o_n_direct")) * s57_implicit_fert_cost))
-  * sum(ct, pm_cost_share_crops(ct ,i2,"labor") * (1/pm_productivity_gain_from_wages(ct,i2)) * 
+  * sum(ct, pm_factor_cost_shares(ct ,i2,"labor") * (1/pm_productivity_gain_from_wages(ct,i2)) * 
           (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
 
 q57_capital_costs(i2) ..
@@ -49,4 +49,4 @@ q57_capital_costs(i2) ..
     + sum(emis_source_inorg_fert_n2o,
       (vm_emissions_reg(i2,emis_source_inorg_fert_n2o,"n2o_n_direct") / s57_implicit_emis_factor) *
       sum(ct,im_maccs_mitigation(ct,i2,emis_source_inorg_fert_n2o,"n2o_n_direct")) * s57_implicit_fert_cost))
-  * sum(ct, pm_cost_share_crops(ct ,i2,"capital"));
+  * sum(ct, pm_factor_cost_shares(ct ,i2,"capital"));

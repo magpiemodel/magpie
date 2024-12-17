@@ -99,6 +99,7 @@
                     items = scen2nd60))
 
   gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
+  gms::writeSets(sets , "modules/60_bioenergy/1st2ndgen_priced_feb24/sets.gms")
 }
 
 # Function to extract information from info.txt
@@ -167,21 +168,6 @@
   gms::replace_in_file("main.gms",paste('*',content),subject)
 }
 
-
-.spam2rds <- function(spatial_header, cells_tmp,
-                      outfile  = "clustermap_rev0_dummy.rds",
-                      spamfile = Sys.glob("input/0.5-to-*_sum.spam")) {
-
-  sp  <- luscale::read.spam(spamfile)
-  a   <- apply(sp, 2, function(x) return(which(x == 1)))
-  out <- data.frame(cell = cells_tmp, region = sub("\\..*$","",spatial_header),
-                    country = sub("\\..*$", "", cells_tmp), global = "GLO")
-  out$cluster <- paste0(out$region,".", a)
-  out <- out[,c("cell", "cluster", "region", "country", "global")]
-  saveRDS(out, paste0("input/", outfile), version = 2)
-}
-
-
 ################################################################################
 ######################### MAIN FUNCTIONS #######################################
 ################################################################################
@@ -210,8 +196,6 @@ download_and_update <- function(cfg) {
   cel  <- magclass::getItems(tmp2, dim = 1)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
-  rds <- any(grepl(pattern = "clustermap_rev.*.rds", x = list.files("input")))
-  if (!rds) .spam2rds(spatial_header, cel, "clustermap_rev0_dummy.rds")
   .update_info(filemap, x = tmp, regionscode, reg_revision, warnings)
   .update_sets_core(x = tmp, map = map)
   .update_sets_modules()
@@ -316,12 +300,11 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     message("done.")
   }
 
-  # If reports for both bioenergy and GHG prices are available convert them
-  # to MAgPIE input, save to the respective input folders, and use it as input
-  if (!is.na(cfg$path_to_report_bioenergy) & !is.na(cfg$path_to_report_ghgprices)) {
-    getReportData(cfg$path_to_report_bioenergy, cfg$path_to_report_ghgprices)
-    cfg <- gms::setScenario(cfg,"coupling")
-  }
+  # If available (i.e. paths are set) extract bioenergy and/or GHG prices 
+  # from REMIND report and save them to the respective input folders
+  # Please note: For them to be used by the model, either the 'coupling' scenario
+  # must be selected or the corresponding switches must be set individually.
+  getReportData(cfg$path_to_report_bioenergy, cfg$path_to_report_ghgprices)
 
   # update all parameters which contain the levels and marginals
   # of all variables and equations
@@ -537,7 +520,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
         cfg$qos <- "standby"
       } else if(all(load > 80)) {
         cfg$qos <- "priority"
-      } else if(load["priority"] < load["standard"]) {
+      } else if(all(c("priority", "standard") %in% names(load)) && load["priority"] < load["standard"]) {
         cfg$qos <- "standby"
       } else {
         cfg$qos <- "short"
@@ -572,16 +555,16 @@ getReportData <- function(path_to_report_bioenergy, path_to_report_ghgprices = N
   }
 
   .emissionPrices <- function(mag){
-    out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
+    out_c <- mag[,,"Price|Carbon (US$2017/t CO2)"]*44/12 # US$2017/tCO2 -> US$2017/tC
     dimnames(out_c)[[3]] <- "co2_c"
 
-    out_n2o_direct <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28 # US$2005/tN2O -> US$2005/tN
+    out_n2o_direct <- mag[,,"Price|N2O (US$2017/t N2O)"]*44/28 # US$2017/tN2O -> US$2017/tN
     dimnames(out_n2o_direct)[[3]] <- "n2o_n_direct"
 
-    out_n2o_indirect <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28 # US$2005/tN2O -> US$2005/tN
+    out_n2o_indirect <- mag[,,"Price|N2O (US$2017/t N2O)"]*44/28 # US$2017/tN2O -> US$2017/tN
     dimnames(out_n2o_indirect)[[3]] <- "n2o_n_indirect"
 
-    out_ch4 <- mag[,,"Price|CH4 (US$2005/t CH4)"]
+    out_ch4 <- mag[,,"Price|CH4 (US$2017/t CH4)"]
     dimnames(out_ch4)[[3]] <- "ch4"
 
     out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)
@@ -595,6 +578,7 @@ getReportData <- function(path_to_report_bioenergy, path_to_report_ghgprices = N
   }
 
   .readAndPrepare <- function(mifPath) {
+    require(magclass)
     rep <- read.report(mifPath, as.list = FALSE)
     if (length(getNames(rep, dim = "scenario")) != 1) stop("getReportData: report contains more or less than 1 scenario.")
     mag <- collapseNames(rep) # get rid of scenario and model dimension if they exist
@@ -610,17 +594,21 @@ getReportData <- function(path_to_report_bioenergy, path_to_report_ghgprices = N
     return(mag)
   }
 
-  # read REMIND report
-  message("Reading bioenergy_demand from ", path_to_report_bioenergy)
-  mag <- .readAndPrepare(path_to_report_bioenergy)
-
-  .bioenergyDemand(mag)
-
-  # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
-  if (is.na(path_to_report_ghgprices)) {
-    message("Reading ghg prices from the same file (", path_to_report_bioenergy, ")")
-    .emissionPrices(mag)
-  } else {
+  # if paths are provided, read bioenergy demand and ghg prices from REMIND reports 
+  if (!is.na(path_to_report_bioenergy)) {
+    message("Reading bioenergy_demand from ", path_to_report_bioenergy)
+    mag <- .readAndPrepare(path_to_report_bioenergy)
+    .bioenergyDemand(mag)
+  
+    if (path_to_report_ghgprices %in% path_to_report_bioenergy) {
+      message("Reading ghg prices from the same file (", path_to_report_bioenergy, ")")
+      .emissionPrices(mag)
+    }
+  }
+  
+  # read ghg prices from another REMIND report because path_to_report_bioenergy
+  # is different from path_to_report_ghgprices (including NA)
+  if (!is.na(path_to_report_ghgprices) && ! path_to_report_ghgprices %in% path_to_report_bioenergy) {
     message("Reading ghg prices from ", path_to_report_ghgprices)
     ghgmag <- .readAndPrepare(path_to_report_ghgprices)
     .emissionPrices(ghgmag)

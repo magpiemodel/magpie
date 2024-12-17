@@ -27,6 +27,7 @@ if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
 # bootstrapping, will only run once after this repo is freshly cloned
 if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
   message("R package dependencies are not installed in this renv, installing now...")
+  renv::install("rmarkdown", prompt = FALSE) # rmarkdown is required to find dependencies in Rmd files
   renv::hydrate(prompt = FALSE, report = FALSE) # auto-detect and install all dependencies
   message("Finished installing R package dependencies.")
   if (!("upstream" %in% gert::git_remote_list()$name)) {
@@ -36,7 +37,6 @@ if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
 }
 
 # in case bootstrapping fails halfway, install piamenv and rely on requirement auto-fixing
-if (tryCatch(packageVersion("piamenv"),
-             error = function(e) package_version("0.0")) < package_version("0.3.4")) {
+if (tryCatch(utils::packageVersion("piamenv") < "0.5.5", error = function(error) TRUE)) {
   renv::install("piamenv", prompt = FALSE)
 }

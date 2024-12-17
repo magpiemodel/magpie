@@ -39,14 +39,18 @@ vm_watdem.fx("manufacturing",j) = sum(wat_src, im_wat_avail(t,wat_src,j)) * s42_
 vm_watdem.fx("electricity",j) = 0;
 vm_watdem.fx("domestic",j) = 0;
 
+* Fill non-agricultural water demand parameter of entire year for post-processing 
+i42_watdem_total(t,j,watdem_ineldo,wtype) = 0;
+i42_watdem_total(t,j,"manufacturing","withdrawal") = sum(wat_src, im_wat_avail(t,wat_src,j)) * s42_reserved_fraction;
+
 * Country switch to determine countries for which EFP holds.
 * In the default case, the EFP affects all countries when activated.
-p42_country_dummy(iso) = 0;
-p42_country_dummy(EFP_countries) = 1;
+p42_country_switch(iso) = 0;
+p42_country_switch(EFP_countries) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p42_EFP_region_shr(t_all,i) = sum(i_to_iso(i,iso), p42_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p42_EFP_region_shr(t_all,i) = sum(i_to_iso(i,iso), p42_country_switch(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 * Environmental policy switch:
 $ifthen "%c42_env_flow_policy%" == "mixed"

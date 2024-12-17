@@ -8,7 +8,7 @@
 sets
 
   landcover44 land cover classes used in bii calculation
-    / crop_ann, crop_per, manpast, rangeland, urban, aff_ndc, aff_co2p, primforest, secdforest, other, plant /
+    / crop_ann, crop_per, crop_tree, crop_fallow, manpast, rangeland, urban, aff_ndc, aff_co2p, primforest, secdforest, other, plant /
 
   bii_class44 bii coefficent land cover classes
     / crop_ann, crop_per, manpast, rangeland, urban, primary, secd_mature, secd_young, timber /
@@ -30,3 +30,5 @@ sets
     OC1,OC2,OC7,NT3,NT4,NT7,NT8,NT10,NT12,NT13,NT14,PA11,PA12,PA13,NA5,PA1,PA4,PA5,PA6,
     PA8,PA9,PA10,AN99,AT98,NA2,NA6,NA7,NA12,NA99,PA98,PA99,AA12,AA13 /  
 ;
+
+alias(biome44,biome44_2);

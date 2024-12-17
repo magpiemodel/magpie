@@ -23,7 +23,12 @@ $setglobal c70_fac_req_regr  glo
 
 scalars
   s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
-  s70_past_mngmnt_factor_fix  Year until the pasture management factor is fixed to 1    / 2005 /  
+  s70_past_mngmnt_factor_fix  Year until the pasture management factor is fixed to 1    / 2005 /
+  s70_subst_functional_form                  Switch for functional form of feed substitution scenario fader (1) / 1 /
+  s70_feed_substitution_start                Feed substitution start year        / 2025 /
+  s70_feed_substitution_target               Feed substitution target year       / 2050 /
+  s70_cereal_scp_substitution                Cereal feed substitution with SCP share (1) / 0 /
+  s70_foddr_scp_substitution                 Fodder substitution with SCP share (1) / 0 /
 ;
 
 table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) Feed baskets in tDM per tDM livestock product (1)
@@ -41,7 +46,7 @@ $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_livestock_productivity.cs3"
 $offdelim;
 
-table f70_cost_regr(kap,cost_regr) Factor requirements livestock (USD04 per tDM (A) and USD (B))
+table f70_cost_regr(kap,cost_regr) Factor requirements livestock (USD17MER per tDM (A) and USD17MER (B))
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_capit_liv_regr.csv"
 $offdelim
@@ -62,21 +67,7 @@ $include "./modules/70_livestock/fbask_jan16/input/f70_pyld_slope_reg.cs4"
 $offdelim
 /;
 
-parameter f70_cap_share_reg(share_regr) Parameters for regression
-/
-$ondelim
-$include "./modules/70_livestock/fbask_jan16/input/f70_cap_share_reg.csv"
-$offdelim
-/
-;
-
-table f70_hist_cap_share(t_all,i) Historical capital share
-$ondelim
-$include "./modules/70_livestock/fbask_jan16/input/f70_hist_cap_share.csv"
-$offdelim
-;
-
-table f70_hist_factor_costs_livst(t_all,i,kli) Historical factor costs in livestock production (mio. USD05MER)
+table f70_hist_factor_costs_livst(t_all,i,kli) Historical factor costs in livestock production (mio. USD17MER)
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_hist_factor_costs_livst.cs3"
 $offdelim
@@ -91,7 +82,7 @@ $offdelim
 * Set-switch for countries affected by country-specific exogenous diet scenario
 * Default: all iso countries selected
 sets
-  scen_countries70(iso) countries to be affected by selected feed sceanrio / 
+  scen_countries70(iso) countries to be affected by selected feed sceanrio /
                 ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
@@ -118,10 +109,3 @@ sets
                           UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
-
-*** Feed substitution scenarios
-
-table f70_feed_substitution_fader(t_all,fadeoutscen70)   Fader for feed substitution scenarios (1)
-$ondelim
-$include "./modules/70_livestock/fbask_jan16/input/f70_feed_substitution_fader.csv"
-$offdelim;

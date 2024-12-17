@@ -13,11 +13,11 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-version <- "V13"
+version <- "V14"
 
 library(lucode2)
 library(magclass)
-library(gdx)
+library(gdx2)
 library(magpie4)
 library(gms)
 
@@ -29,7 +29,7 @@ source("scripts/start_functions.R")
 calc_bioen <- function(x) {
   #B0
   B0 <- new.magpie("GLO",seq(1995,2150,by=5),NULL,fill = 0)
-
+  
   #B50
   #50 EJ in 2050 globally, linear interpolation
   B50 <- new.magpie("GLO",c(seq(1995,2020,by=5),2050,2100,2150),NULL,fill = 0)
@@ -43,7 +43,7 @@ calc_bioen <- function(x) {
   #B100
   #100 EJ in 2050 globally, linear interpolation
   B100 <- B50*2
-
+  
   if (x == "B0") {
     return(B0)
   } else if (x == "B50") {
@@ -108,18 +108,20 @@ for (rcp in rcps) {
   for (ssp in ssps) {
     cfg$title <- paste("TAU",ssp,rcp,tau_scen,sep="-")
     cfg <- setScenario(cfg,c(ssp,"NPI",rcp))
+    cfg <- setScenario(cfg, "fix_2020", scenario_config = "config/projects/scenario_config_year_fix.csv")
     cfg$gms$s32_max_aff_area <- 0
     cfg$gms$s56_c_price_induced_aff <- 0
     cfg$gms$c30_bioen_type <- bioen_type
     cfg$gms$c30_bioen_water <- bioen_water
     cfg$gms$tc <- "endo_jan22"
     x <- try(modelstat(file.path("output",cfg$title,"fulldata.gdx")),silent = TRUE)
-    if(any(!x %in% c(2,7))) {
+    if(is.null(x) | (is.magpie(x) & any(!x %in% c(2,7)))) {
       download_and_update(cfg)
       write.magpie(calc_bioen(biodem),"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
       write.magpie(calc_ghgprice(ghgprice),"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
       start_run(cfg,codeCheck=FALSE)
       message(paste0("TAU run started: ",cfg$title))
+      Sys.sleep(10)
     }
   }
 }
@@ -132,12 +134,12 @@ while (!success) {
   for (rcp in rcps) {
     for (ssp in ssps) {
       x <- try(modelstat(file.path("output",paste("TAU",ssp,rcp,tau_scen,sep="-"),"fulldata.gdx")),silent = TRUE)
-      if (is(x, "try-error")) x <- NULL else if (is.magpie(x) & all(x %in% c(2,7))) x <- add_dimension(collapseNames(x),dim = 3.1,add = "scen",nm = paste0(ssp,rcp))
+      if (is.magpie(x) & all(x %in% c(2,7))) {
+        x <- add_dimension(collapseNames(x),dim = 3.1,add = "scen",nm = paste0(ssp,rcp))
+      } else x <- NULL
       z <- mbind(z,x)
     }
   }
-  print(str(z))
-  print(dim(z))
   if (is.null(z)) {
     message("Not any model run with endogenous TAU finished. Sleeping for 10 minutes.")
     Sys.sleep(60*10)
@@ -158,6 +160,7 @@ for (rcp in rcps) {
         for (bioen_type in c("all","begr","betr")) {
           for (bioen_water in c("all","rainfed")) {
             cfg <- setScenario(cfg,c(ssp,"NPI",rcp))
+            cfg <- setScenario(cfg, "fix_2020", scenario_config = "config/projects/scenario_config_year_fix.csv")
             cfg$title <- paste(version,ssp,rcp,biodem,ghgprice,paste0("Type",toupper(bioen_type)),paste0("Water",toupper(bioen_water)),sep="-")
             cfg$gms$s32_max_aff_area <- 0
             cfg$gms$s56_c_price_induced_aff <- 0

@@ -6,13 +6,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variables
- vm_peatland_cost(j)              One-time and recurring cost of managed peatland (mio. USD05MER per yr)
+ vm_peatland_cost(j)              One-time and recurring cost of managed peatland (mio. USD17MER per yr)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_peatland_cost(t,j,type) One-time and recurring cost of managed peatland (mio. USD05MER per yr)
+ ov_peatland_cost(t,j,type) One-time and recurring cost of managed peatland (mio. USD17MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

@@ -8,8 +8,9 @@
 *****************************Technical macros***********************************
 
 * Macro for fixing a variable in the case that lower and upper bound are too
-* close to each other (closer than argument "sens")
-* EXAMPLE: ma_boundfix(vm_land,(j,"ifft"),up,10e-5);
+* close to each other (closer than argument "sens"). 
+* "arg" specifies the set for fixing. "sufx" specifies to what value the variable should be fixed ("l","lo","up").
+* EXAMPLE: m_boundfix(vm_land,(j,"ifft"),up,1e-6);
 $macro m_boundfix(x,arg,sufx,sens) x.fx arg$(x.up arg-x.lo arg<sens) = x.sufx arg;
 
 $macro m_weightedmean(x,w,s) (sum(s,x*w)/sum(s,w))$(sum(s,w)>0) + 0$(sum(s,w)<=0);
@@ -97,12 +98,12 @@ $macro m_linear_cell_data_interpol(output,x,input_x1,input_x2,input_y1,input_y2)
 * macro for simple carbon stocks
 $macro m_carbon_stock(land,carbon_density,item) \
             (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actual")) + \
-            (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
+            (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actualNoAcEst"))
 
 * macro for carbon stocks with age classes
 $macro m_carbon_stock_ac(land,carbon_density,sets,sets_sub) \
             sum((&&sets), land(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"actual")) + \
-            sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
+            sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"))
 
 * macros for peatland module
 $macro m58_LandMerge(land,landForestry,set) \
@@ -110,7 +111,9 @@ $macro m58_LandMerge(land,landForestry,set) \
    + land(&&set,"past")$(sameas(manPeat58,"past")) \
    + landForestry(&&set,"plant")$(sameas(manPeat58,"forestry"))
 
-$macro m58_LandLeft(pclandFull,setFull,vland,pcland) \
-    (sum(&&setFull,pclandFull(j2,&&setFull)) \
-     - sum(manPeat58_alias$(not sameas(manPeat58_alias,manPeat58)),vland(j2,manPeat58_alias)) \
-     - sum(manPeat58_alias$(sameas(manPeat58_alias,manPeat58)),pcland(j2,manPeat58_alias)))
+* macro for trade module
+$macro m21_baseline_production(supply, excess_prod, self_suff) \
+    ((sum(supreg(h2,i2),supply(i2,k_trade)) + excess_prod(h2,k_trade)) \
+     $((sum(ct,self_suff(ct,h2,k_trade)) >= 1)) \
+     + (sum(supreg(h2,i2),vm_supply(i2,k_trade)) * sum(ct,self_suff(ct,h2,k_trade))) \
+       $((sum(ct,self_suff(ct,h2,k_trade)) < 1)))

@@ -17,8 +17,8 @@ positive variables
 
 *** #### Food Demand Model
 equations
-  q15_aim                Objective function of food demand model (mio. USD05PPP)
-  q15_budget(iso)        Household budget constraint (USD05PPP per cap per day)
+  q15_aim                Objective function of food demand model (mio. USD17PPP)
+  q15_budget(iso)        Household budget constraint (USD17PPP per cap per day)
 
   q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15)   Estimates regression parameters for BMI regression shares (1)
   q15_bmi_shr_verylow(iso,sex,agegroup15)           Estimates BMI share for population groups with low BMI (1)
@@ -43,8 +43,8 @@ positive variables
   v15_kcal_regr(iso,kfo)                                 Uncalibrated regression estimates of calorie demand (kcal per cap per day)
   v15_kcal_regr_total(iso)                               Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
   v15_demand_regr(iso, regr15)                           Uncalibrated regression estimates of kcal shares (1)
-  v15_income_pc_real_ppp_iso(iso)                        Real income per cap (USD05PPP per cap)
-  v15_income_balance(iso)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)
+  v15_income_pc_real_ppp_iso(iso)                        Real income per cap (USD17PPP per cap)
+  v15_income_balance(iso)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD17PPP per cap per yr)
   v15_kcal_intake_total_regr(iso)                        Food intake (kcal per cap per day)
   v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)     Hierarchical tree parameter regressions (1)
   v15_bmi_shr_regr(iso,sex,age,bmi_group15)              Uncalibrated share of population groups belonging to a certain BMI group (1)
@@ -52,7 +52,7 @@ positive variables
 ;
 
 variables
-  v15_objective                      Objective term (USD05PPP)
+  v15_objective                      Objective term (USD17PPP)
 ;
 
 scalars
@@ -63,17 +63,25 @@ scalars
 
 parameters
 * technical
- p15_modelstat(t)                       Model solver status (1)
- p15_iteration_counter(t)               Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
- p15_convergence_measure(t,iter15)      Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
- i15_dem_intercept(iso,regr15)          Food regression parameters intercept in kcal or as share (X)
- i15_dem_saturation(iso,regr15)         Food regression parameters saturation in kcal or as share (X)
- i15_dem_halfsat(iso,regr15)            Food regression parameters halfsaturation (USD05PPP per cap)
- i15_dem_nonsat(iso,regr15)             Food regression parameters nonsaturation (1)
+ p15_modelstat(t)                              Model solver status (1)
+ p15_iteration_counter(t)                      Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
+ p15_convergence_measure(t,iter15)             Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
+ i15_dem_intercept(iso,regr15)                 Food regression parameters intercept in kcal or as share (X)
+ i15_dem_saturation(iso,regr15)                Food regression parameters saturation in kcal or as share (X)
+ i15_dem_halfsat(iso,regr15)                   Food regression parameters halfsaturation (USD05PPP per cap)
+ i15_dem_nonsat(iso,regr15)                    Food regression parameters nonsaturation (1)
+ p15_ruminant_subst_fader(t_all)               Ruminant meat substitution fader (1)
+ p15_fish_subst_fader(t_all)                   Fish substitution fader (1)
+ p15_alcohol_subst_fader(t_all)                Alcohol substitution fader (1)
+ p15_livestock_subst_fader(t_all)              Livestock substitution fader (1)
+ p15_rumdairy_subst_fader(t_all)               Ruminant and dairy substitution fader (1)
+ p15_rumdairy_scp_subst_fader(t_all)           Ruminant and dairy substitution with SCP fader (1)
+ p15_livestock_threshold_subst_fader(t_all)    Fader for livestock threshold target (1)
+ p15_exo_food_scenario_fader(t_all)            Exogenous diet scenario fader (1)
 
-*prices
- p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
- i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
+* prices
+  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD17PPP per kcal)
+  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD17PPP per kcal)
 
 * anthropometrics
   p15_bodyheight(t,iso,sex,age,estimates15)           Body height (cm per cap)
@@ -110,7 +118,7 @@ parameters
   i15_staples_kcal_structure_iso(t,iso,kfo_st)       Share of single staple products within total staples (1)
   i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
   i15_livestock_kcal_structure_iso(t,iso,kfo_ap)     Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
-  i15_processed_kcal_structure_iso                   Share of single processed products within total processed food (1)
+  i15_processed_kcal_structure_iso(t,iso,kfo_pf)     Share of single processed products within total processed food (1)
 
 * diet calibration
   p15_kcal_calib(t,iso,kfo)                   Balance flow to diverge from mean calories of regressions (kcal per cap per day)
@@ -132,6 +140,7 @@ parameters
  p15_kcal_pc_iso_livestock_orig(t,iso)             Auxiliary parameter for per capita livestock consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
  p15_kcal_pc_iso_rumdairy_orig(t,iso)              Auxiliary parameter for per capita ruminant and dairy consumption - basis for scenarios of ruminant-based food substitution (kcal per capita per day)
  p15_kcal_pc_iso_plant_orig(t,iso)                 Auxiliary parameter for per capita plant-based food consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
+ p15_protein_pc_iso_scp(t,iso,kfo_rd)              Per capita consumption of SCP in food demand model after price shock on country level (g protein per capita per day)
  p15_livestock_kcal_structure_orig(t,iso,kfo_lp)   Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
  p15_rumdairy_kcal_structure_orig(t,iso,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
  p15_plant_kcal_structure_orig(t,iso,kfo_pp)       Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
@@ -167,15 +176,19 @@ parameters
  i15_exo_foodscen_fader(t,iso)                Fader that converges per capita food consumption to an exogenous diet scenario (1)
 
 * country-specific scenario switch
- p15_country_dummy(iso)                       Dummy parameter indicating whether country is affected by diet scenarios (1)
+ p15_country_switch(iso)                       Switch indicating whether country is affected by diet scenarios (1)
 
 * calculate diet iteration breakpoint
- p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD05PPP per capita)
+ p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD17PPP per capita)
  p15_delta_income(t,i,iter15)                 Regional change in per capita income due to price shock on regional level (1)
 ;
 
 scalars
- s15_year          Current year as integer value (yr)  / 2000 /
+ s15_scp_fat_per_milk               Fat needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 3.3 /
+ s15_scp_sugar_per_milk             Sugar needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 4.7 /
+ s15_scp_protein_per_milk           Protein needed as ingredient for scp-based milk alternative (g per 100g wet matter) / 3.3 /
+ s15_scp_fat_content                Fat content of microbial biomass based on Solein from Solar foods (t fat per t DM) / 0.05 /
+ s15_scp_fat_protein_ratio_meat     Ratio of protein to fat in both plant based meat alternatives and current meat products (t fat per t protein) / 0.66 /
 ;
 
 
@@ -222,16 +235,16 @@ parameters
  ov15_kcal_regr(t,iso,kfo,type)                                 Uncalibrated regression estimates of calorie demand (kcal per cap per day)
  ov15_kcal_regr_total(t,iso,type)                               Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
  ov15_demand_regr(t,iso,regr15,type)                            Uncalibrated regression estimates of kcal shares (1)
- ov15_income_pc_real_ppp_iso(t,iso,type)                        Real income per cap (USD05PPP per cap)
- ov15_income_balance(t,iso,type)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)
+ ov15_income_pc_real_ppp_iso(t,iso,type)                        Real income per cap (USD17PPP per cap)
+ ov15_income_balance(t,iso,type)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD17PPP per cap per yr)
  ov15_kcal_intake_total_regr(t,iso,type)                        Food intake (kcal per cap per day)
  ov15_regr_overgroups(t,iso,sex,agegroup15,bmi_tree15,type)     Hierarchical tree parameter regressions (1)
  ov15_bmi_shr_regr(t,iso,sex,age,bmi_group15,type)              Uncalibrated share of population groups belonging to a certain BMI group (1)
  ov15_bmi_shr_overgroups(t,iso,sex,agegroup15,bmi_group15,type) Uncalibrated  share of population groups belonging to a certain BMI group (1)
- ov15_objective(t,type)                                         Objective term (USD05PPP)
+ ov15_objective(t,type)                                         Objective term (USD17PPP)
  oq15_food_demand(t,i,kfo,type)                                 Food demand (mio. kcal)
- oq15_aim(t,type)                                               Objective function of food demand model (mio. USD05PPP)
- oq15_budget(t,iso,type)                                        Household budget constraint (USD05PPP per cap per day)
+ oq15_aim(t,type)                                               Objective function of food demand model (mio. USD17PPP)
+ oq15_budget(t,iso,type)                                        Household budget constraint (USD17PPP per cap per day)
  oq15_regr_bmi_shr(t,iso,sex,agegroup15,bmi_tree15,type)        Estimates regression parameters for BMI regression shares (1)
  oq15_bmi_shr_verylow(t,iso,sex,agegroup15,type)                Estimates BMI share for population groups with low BMI (1)
  oq15_bmi_shr_low(t,iso,sex,agegroup15,type)                    Estimates BMI share for population groups with very low BMI (1)

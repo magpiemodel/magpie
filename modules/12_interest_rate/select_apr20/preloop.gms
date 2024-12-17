@@ -9,12 +9,12 @@
 * shall be applied.
 * In the default case, the interest rate scenario affects all countries when
 * activated.
-p12_country_dummy(iso) = 0;
-p12_country_dummy(select_countries12) = 1;
+p12_country_switch(iso) = 0;
+p12_country_switch(select_countries12) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p12_reg_shr(t_all,i) = sum(i_to_iso(i,iso), p12_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p12_reg_shr(t_all,i) = sum(i_to_iso(i,iso), p12_country_switch(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 * Interest rate in countries selected in select_countries12
 $ifthen "%c12_interest_rate%" == "coupling"

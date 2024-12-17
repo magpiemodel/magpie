@@ -7,7 +7,7 @@
 
 scalars
 s36_weeks_in_year number of weeks in a year (weeks per yr) / 52.1429 /
-s36_minimum_wage global minimum wage (USDMER05 per hour) / 0 /
+s36_minimum_wage global minimum wage (USD17MER per hour) / 0 /
 s36_scale_productivity_with_wage how strong the wage increase should affect labor productivity (1) / 0 /
 ;
 
@@ -23,7 +23,7 @@ $include "./modules/36_employment/exo_may22/input/f36_weekly_hours_iso.csv"
 $offdelim
 ;
 
-table f36_hist_hourly_costs(t_all,iso) Historical values of hourly labor costs in agriculture (USD05MER per h)
+table f36_hist_hourly_costs(t_all,iso) Historical values of hourly labor costs in agriculture (USD17MER per h)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_historic_hourly_labor_costs.csv"
 $offdelim
@@ -43,30 +43,14 @@ $include "./modules/36_employment/exo_may22/input/f36_historic_ag_employment.csv
 $offdelim
 ;
 
-table f36_unspecified_subsidies(t_all,i) Factor cost share of unspecified subsidies not included in MAgPIE labor costs (mio. USD05MER)
+table f36_unspecified_subsidies(t_all,i) Factor cost share of unspecified subsidies not included in MAgPIE labor costs (mio. USD17MER)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_unspecified_subsidies.csv"
 $offdelim
 ;
 
-table f36_nonmagpie_factor_costs(t_all,i) Factor cost share of VoP from ag commodities not mapped to MAgPIE (mio. USD05MER)
+table f36_nonmagpie_factor_costs(t_all,i) Factor cost share of VoP from ag commodities not mapped to MAgPIE (mio. USD17MER)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_nonmagpie_factor_costs.csv"
 $offdelim
 ;
-
-parameter f36_regr_cap_share(reg36) Parameters for dynamic regression
-/
-$ondelim
-$include "./modules/36_employment/exo_may22/input/f36_regression_cap_share.csv"
-$offdelim
-/
-;
-
-table f36_hist_cap_share(t_all,i) Historical capital share
-$ondelim
-$include "./modules/36_employment/exo_may22/input/f36_historical_share.csv"
-$offdelim
-;
-
-

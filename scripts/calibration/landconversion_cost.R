@@ -38,7 +38,7 @@ calibration_run <- function(putfolder, calib_magpie_name, logoption = 3, s_use_g
 getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05, lowpass_filter = 1) {
   require(magclass)
   require(magpie4)
-  require(gdx)
+  require(gdx2)
   y <- readGDX(gdx_file,"t")
   magpie <- land(gdx_file)[, y, "crop"]
   hist <- dimSums(readGDX(gdx_file, "f10_land")[, , "crop"], dim = 1.2)
@@ -94,6 +94,7 @@ getHistCrop <- function() {
 update_calib <- function(gdx_file, calib_accuracy = 0.05, lowpass_filter = 1, calib_file, cost_max = 3, cost_min = 0.05, calibration_step = "", n_maxcalib = 40, best_calib = FALSE) {
   require(magclass)
   require(magpie4)
+  require(gdx2)
   if (!(modelstat(gdx_file)[1, 1, 1] %in% c(1, 2, 7))) stop("Calibration run infeasible")
   
   y <- readGDX(gdx_file,"t")

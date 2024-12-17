@@ -36,13 +36,21 @@ if ((s42_pumping = 1),
 
 
 * Water withdrawals in manufacturing, electricity, domestic, ecosystem
-* depends on the socioeconomic scenario
-if ((s42_watdem_nonagr_scenario = 1),
- vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp1",watdem_ineldo);
-Elseif(s42_watdem_nonagr_scenario = 2),
- vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp2",watdem_ineldo);
-Elseif(s42_watdem_nonagr_scenario = 3),
- vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp3",watdem_ineldo);
+* depend on the socioeconomic scenario
+if (m_year(t) <= sm_fix_SSP2,
+  vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp2",watdem_ineldo,"withdrawal");
+  i42_watdem_total(t,j,watdem_ineldo,wtype) = f42_watdem_ineldo_total(t,j,"ssp2",watdem_ineldo,wtype);
+else
+  if ((s42_watdem_nonagr_scenario = 1),
+    vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp1",watdem_ineldo,"withdrawal");
+    i42_watdem_total(t,j,watdem_ineldo,wtype) = f42_watdem_ineldo_total(t,j,"ssp1",watdem_ineldo,wtype);
+  Elseif (s42_watdem_nonagr_scenario = 2),
+    vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp2",watdem_ineldo,"withdrawal");
+    i42_watdem_total(t,j,watdem_ineldo,wtype) = f42_watdem_ineldo_total(t,j,"ssp2",watdem_ineldo,wtype);
+  Elseif (s42_watdem_nonagr_scenario = 3),
+    vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp3",watdem_ineldo,"withdrawal");
+    i42_watdem_total(t,j,watdem_ineldo,wtype) = f42_watdem_ineldo_total(t,j,"ssp3",watdem_ineldo,wtype);
+  );
 );
 
 
@@ -58,12 +66,12 @@ Elseif (s42_env_flow_scenario = 1),
 
 * Country switch to determine countries for which EFP holds.
 * In the default case, the EFP affects all countries when activated.
-p42_country_dummy(iso) = 0;
-p42_country_dummy(EFP_countries) = 1;
+p42_country_switch(iso) = 0;
+p42_country_switch(EFP_countries) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p42_EFP_region_shr(t_all,i) = sum(i_to_iso(i,iso), p42_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p42_EFP_region_shr(t_all,i) = sum(i_to_iso(i,iso), p42_country_switch(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 * Environmental policy switch:
 $ifthen "%c42_env_flow_policy%" == "mixed"

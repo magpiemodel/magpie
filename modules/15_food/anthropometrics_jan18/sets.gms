@@ -8,7 +8,7 @@
 sets
 
    iter15 iterations between food demand model and magpie
-   /iter1*iter10/   
+   /iter1*iter10/
    curr_iter15(iter15)  currently active iteration
    prev_iter15(iter15)     last active iteration
 
@@ -145,7 +145,7 @@ sets
   livst_fadeoutscen15 Scenarios for changed composition of livestock products
        / halving2050, constant /
 
-* The set kfo_rd can be defined in default.cfg and is used in the food substitution scenarios c15_rumdairy_scp_scen and c15_rumdairyscen
+* The set kfo_rd can be defined in default.cfg and is used in the food substitution scenarios s15_rumdairy_scp_substitution and s15_rumdairy_substitution
   kfo_rd(kfo) Ruminant meat and dairy food products
        / livst_rum,livst_milk /
 
@@ -153,7 +153,7 @@ sets
        / constant,
          lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_zero_20_70, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
          lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
-   lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50, sigmoid_50pc_20_50, sigmoid_80pc_20_50 /
+   lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50, sigmoid_50pc_20_50, sigmoid_80pc_20_50, sigmoid_75pc_25_50, sigmoid_50pc_25_50, sigmoid_25pc_25_50 /
 
   t_scen15(t_all) Target years for transition to exogenous scenario diets
        / y2010, y2030, y2050 /

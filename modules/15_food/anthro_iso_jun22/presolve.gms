@@ -13,18 +13,18 @@ if(m_year(t) <= sm_fix_SSP2,
  i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
  i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
 else
- i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept")*p15_country_dummy(iso)
-                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","intercept")*(1-p15_country_dummy(iso));
- i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation")*p15_country_dummy(iso)
-                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","saturation")*(1-p15_country_dummy(iso));
- i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation")*p15_country_dummy(iso)
-                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","halfsaturation")*(1-p15_country_dummy(iso));
- i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation")*p15_country_dummy(iso)
-                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_dummy(iso));
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept")*p15_country_switch(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","intercept")*(1-p15_country_switch(iso));
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation")*p15_country_switch(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","saturation")*(1-p15_country_switch(iso));
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation")*p15_country_switch(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","halfsaturation")*(1-p15_country_switch(iso));
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation")*p15_country_switch(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_switch(iso));
 );
 
-option nlp = conopt4
-
+option nlp = conopt4;
+option threads = 1;
 
 *' @code
 *' Within the major food groups determined by the regressions
@@ -241,7 +241,7 @@ solve m15_food_demand USING nlp MAXIMIZING v15_objective;
 * in case of problems try CONOPT3
 if(m15_food_demand.modelstat > 2,
   display "Modelstat > 2 | Retry solve with CONOPT3";
-  option nlp = conopt;
+  option nlp = conopt3;
   solve m15_food_demand USING nlp MAXIMIZING v15_objective;
   option nlp = conopt4;
 );

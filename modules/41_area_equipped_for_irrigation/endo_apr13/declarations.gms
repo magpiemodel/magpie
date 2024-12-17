@@ -8,11 +8,11 @@
 parameters
  p41_AEI_start(t,j)              Area equipped for irrigation at the beginning of each time step (mio. ha)
  pc41_AEI_start(j)               Area equipped for irrigation at the beginning of current time step (mio. ha)
- pc41_unitcost_AEI(i)            Unit cost of AEI expansion (USD04MER per ha)
+ pc41_unitcost_AEI(i)            Unit cost of AEI expansion (USD17MER per ha)
  ;
 
 variables
- vm_cost_AEI(i)                  Annuitized irrigation expansion costs (mio. USD04MER per yr)
+ vm_cost_AEI(i)                  Annuitized irrigation expansion costs (mio. USD17MER per yr)
 ;
 
 positive variables
@@ -21,14 +21,14 @@ positive variables
 
 equations
  q41_area_irrig(j)               Irrigation area constraint (mio. ha)
- q41_cost_AEI(i)                 Calculation of costs of irrigation area expansion (mio. USD04MER)
+ q41_cost_AEI(i)                 Calculation of costs of irrigation area expansion (mio. USD17MER)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_AEI(t,i,type)     Annuitized irrigation expansion costs (mio. USD04MER per yr)
+ ov_cost_AEI(t,i,type)     Annuitized irrigation expansion costs (mio. USD17MER per yr)
  ov_AEI(t,j,type)          Area equipped for irrigation in each grid cell (mio. ha)
  oq41_area_irrig(t,j,type) Irrigation area constraint (mio. ha)
- oq41_cost_AEI(t,i,type)   Calculation of costs of irrigation area expansion (mio. USD04MER)
+ oq41_cost_AEI(t,i,type)   Calculation of costs of irrigation area expansion (mio. USD17MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

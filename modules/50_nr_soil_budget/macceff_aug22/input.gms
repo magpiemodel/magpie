@@ -26,7 +26,7 @@ $setglobal c50_dep_scen  history
 *   options:   history
 
 scalar
-      s50_fertilizer_costs Costs of fertilizer (USD05MER per tN)            / 600 /
+      s50_fertilizer_costs Costs of fertilizer (USD17MER per tN)            / 738 /
       s50_maccs_global_ef Do maccs assume global emission factor (binary)    /1/
       s50_maccs_implicit_nue_glo Global nitrogen use efficiency implicit to MACCs /0.5/
 ;

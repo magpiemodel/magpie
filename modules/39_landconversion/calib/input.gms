@@ -6,11 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s39_cost_establish_crop       Cost for cropland expansion before calibration (USD05MER per hectare) / 10000 /
- s39_reward_crop_reduction     Reward for cropland reduction before calibration (USD05MER per hectare) / 6000 /
- s39_cost_establish_past       Cost for pasture land expansion (USD05MER per hectare)    / 8000 /
- s39_cost_establish_forestry   Cost for foresty land expansion (USD05MER per hectare)    / 1000 /
- s39_cost_establish_urban      Cost for urban land expansion (USD05MER per hectare)    / 10000 /
+ s39_cost_establish_crop       Cost for cropland expansion before calibration (USD17MER per hectare) / 12300 /
+ s39_reward_crop_reduction     Reward for cropland reduction before calibration (USD17MER per hectare) / 7380 /
+ s39_cost_establish_past       Cost for pasture land expansion (USD17MER per hectare)    / 9840 /
+ s39_cost_establish_forestry   Cost for foresty land expansion (USD17MER per hectare)    / 1230 /
+ s39_cost_establish_urban      Cost for urban land expansion (USD17MER per hectare)    / 12300 /
  s39_ignore_calib        Switch for ignoring calibration factors (1) / 0 /
 ;
 

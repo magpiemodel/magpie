@@ -17,10 +17,12 @@ library(magpie4)
 library(lucode2)
 library(quitte)
 library(gms)
+library(piamInterfaces)
+library(piamutils)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
-if(!exists("source_include")) {
+if (!exists("source_include")) {
   outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
   readArgs("outputdir")
 }
@@ -35,16 +37,42 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 
 
 report <- getReport(gdx, scenario = cfg$title, dir = outputdir)
+if (!all(grepl(" \\(([^\\()]*)\\)($|\\.)", getNames(report, fulldim = TRUE)$variable))) {
+  warning("Variables should be in the format 'name (unit)' (the space between name and unit is important), ",
+          "but the following are not:\n",
+          paste(grep(" \\(([^\\()]*)\\)($|\\.)", getNames(report, fulldim = TRUE)$variable,
+                     invert = TRUE, value = TRUE), collapse = "\n"))
+}
+
+for (mapping in c("AR6", "NAVIGATE", "SHAPE", "AR6_MAgPIE")) {
+  missingVariables <- sort(setdiff(unique(deletePlus(getMappingVariables(mapping, "M"))),
+                                   unique(deletePlus(getNames(report, dim = "variable")))))
+  if (length(missingVariables) > 0) {
+    warning("# The following ", length(missingVariables), " variables are expected in the piamInterfaces package ",
+            "for mapping ", mapping, ", but cannot be found in the MAgPIE report.\n",
+            "Please either fix in magpie4 or adjust the mapping in piamInterfaces.\n- ",
+            paste(missingVariables, collapse = ",\n- "), "\n")
+  }
+}
+
 write.report(report, file = mif)
-q <- as.quitte(report)
-if(all(is.na(q$value))) stop("No values in reporting!")
 
-saveRDS(q, file = rds, version = 2)
+qu <- as.quitte(report)
+# as.quitte converts "World" into "GLO". But we want to keep "World" and therefore undo these changes
+qu <- droplevels(qu)
+levels(qu$region)[levels(qu$region) == "GLO"] <- "World"
+qu$region <- factor(qu$region,levels = sort(levels(qu$region)))
 
-if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
+if (all(is.na(qu$value))) {
+  stop("No values in reporting!")
+}
+
+saveRDS(qu, file = rds, version = 2)
+
+if (file.exists(runstatistics) && dir.exists(resultsarchive)) {
   stats <- list()
   load(runstatistics)
-  if(is.null(stats$id)) {
+  if (is.null(stats$id)) {
     # create an id if it does not exist (which means that statistics have not
     # been saved to the archive before) and save statistics to the archive
     message("No id found in runstatistics.rda. Calling lucode2::runstatistics() to create one.")
@@ -56,9 +84,8 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   }
 
   # Save report to results archive
-  saveRDS(q, file = paste0(resultsarchive, "/", stats$id, ".rds"), version = 2)
-  cwd <- getwd()
-  setwd(resultsarchive)
-  system("ls 1*.rds > files")
-  setwd(cwd)
+  saveRDS(qu, file = paste0(resultsarchive, "/", stats$id, ".rds"), version = 2)
+  withr::with_dir(resultsarchive, {
+    system("find -type f -name '1*.rds' -printf '%f\n' | sort > fileListForShinyresults")
+  })
 }

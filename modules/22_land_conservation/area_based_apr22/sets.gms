@@ -7,6 +7,12 @@
 
 sets
 
+  base22 All baseline protection options
+    / none, WDPA, WDPA_I-II-III, WDPA_IV-V-VI /
+
+  wdpa_cat22(base22) Protected area categories
+    / WDPA, WDPA_I-II-III, WDPA_IV-V-VI /
+
   consv22_all All conservation options
   / none, 30by30, KBA, GSN_DSA, GSN_RarePhen, GSN_AreaIntct, GSN_ClimTier1, GSN_ClimTier2,
     BH, IFL, BH_IFL, IrrC_50pc, IrrC_75pc, IrrC_95pc, IrrC_99pc, IrrC_75pc_30by30,

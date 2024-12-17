@@ -37,13 +37,13 @@ fsecScenario <- function(scenario) {
                                   "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
                                   "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19")),
+                                  "soil", "allDietAndWaste", "allEnvPrice", "SDPenergy", "RCP19")),
             f_FSDPlabor1p9 = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC",
                                   "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "capitalSubst", "minWage",
                                   "REDDaff", "REDD", "landscapeElements", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "soil", "allDietAndWaste", "allEnvPrice", "SSP1energy", "RCP19", "labor1p9")),
+                                  "soil", "allDietAndWaste", "allEnvPrice", "SDPenergy", "RCP19", "labor1p9")),
             # FSDPs (without external)
             d_SSP1fsdp       = list(standard = c("cc", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
@@ -135,7 +135,7 @@ fsecScenario <- function(scenario) {
                                         fsec = c("FSEC", "soil", "RCP60")),
             # Scenarios (combinations of transformation clusters)
             b_ExternalPressures   = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics", "timberCities", "SSP1energy", "RCP26")),
+                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics", "timberCities", "SDPenergy", "RCP26")),
             b_WaterSoil           = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "soil", "RCP60")),
             b_REDDaffRuminants    = list(standard = c("cc", "SSP2", "NDC", "ForestryEndo"),
@@ -200,7 +200,7 @@ fsecScenario <- function(scenario) {
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
-  cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/scenario_fsec.csv")
+  cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/projects/scenario_config_fsec.csv")
 
   # Download gridded population data
   gms::download_unpack(input = "FSEC_populationScenarios_v2_22-08-22.tgz",
@@ -214,7 +214,7 @@ fsecScenario <- function(scenario) {
   # general
   cfg$title       <- paste(v, scenario, sep = "")
   cfg$recalibrate <- FALSE
-  cfg$qos         <- "standby_maxMem_dayMax"
+  cfg$qos         <- "standby_highMem_dayMax"
   cfg$output      <- c("extra/highres",
                        "extra/disaggregation",
                        "projects/FSEC_nitrogenPollution",
@@ -226,7 +226,7 @@ fsecScenario <- function(scenario) {
                        "rds_report")
   cfg$force_download  <- TRUE
   cfg$gms$s80_optfile <- 0
-  cfg$gms$s80_maxiter <- 100
+  cfg$gms$s80_maxiter <- 30
 
   return(cfg)
 }

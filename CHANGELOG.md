@@ -1,8 +1,187 @@
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+## [4.9.0] - 2024-12-05
+
+### changed
+- **35_natveg** revised age-class initialization of secondary forest
+- **38_factor_costs** updated use of USDA cost shares
+- **config** changed default input data to use 2017USD
+- **config** default for `c60_bioenergy_subsidy` changed from 369 to 246 USD17MER per ton
+- **config** SHAPE scenarios start year of dietary shift changed to 2025
+- **config** updated input data to rev4.114
+- **core** number of age-classes doubled from 150 to 300 years for better match of growth curves with potential natural vegetation.
+- **extra/disaggregation** Peatland now considered in disaggregation of land pools
+- **inputdata** changed GDP base year from 2005USD to 2017USD
+- **module_documentation** all references to USD05 changed to USD17
+- **modules** update of scaling factors in several modules
+- **scripts** NPI/NDC policies synced to the year 2025 - update of additional data to `additional_data_rev4.59.tgz`
+- **scripts** REMIND coupling reads data in US$2017, not US$2005
+- **scripts** renamed disaggregation_mrdownscale.R -> mrdownscale_LUH2.R
+
+### added
+- **32_forestry** added option s32_npi_ndc_reversal
+- **35_natveg** added option s35_npi_ndc_reversal
+- **56_ghg_policy** added new interface pcm_carbon_stock to avoid use of vm_carbon_stock.l in equations
+- **58_peatland** added option for exogenous peatland rewetting
+- **62_material** added switch to turn off future material demand for bioplastic
+- **config** added SSP1-POP-GDP SSP2-POP-GDP and SSP5-POP-GDP
+- **modules[29-35]** added initial values for ov_bv for better starting point
+- **scripts** add mrdownscale script (0.5deg downscaling using LandUseInit as reference)
+
+### removed
+- **13_tau** removed interface `fm_pastr_tau_hist`
+- **31_past** removed `grasslands_apr22` realization
+
+### fixed
+- **10_land** Simplified land transition matrix for improved feasibility
+- **11_costs** changed equation to fix bug in total water cost calculation
+- **28_ageclass** bugfix input data unit and code clean-up. Renamed `feb21` realization to `oct24`
+- **29_cropland** treecover age-class growth was not working properly because ac_sub was erroneously not fixed
+- **44_biodiversity** bugfix biorealm_biome.cs3 in input data (shares did not add-up to 1)
+- **56_ghg_policy** Fader for GHG emission pricing policy
+- **70_livestock** bugfix scaling.gms file in wrong folder
+- **config** additional data increased to `additional_data_rev4.58.tgz` which fixes missing gdp2017 conversions in f20_processing_unitcosts
+- **config** settings in default.cfg for some switches in `73_timber` did not work correctly
+- **scripts** script/output/extra/resubmit.R
+
+
+## [4.8.2] - 2024-09-24
+
+### changed
+- **15_food** revision of MP/SCP implementation for milk and meat alternatives. Added demand for fat and sugar as ingredients for MP-based milk alternatives. Added optional demand for fat as ingredient for MP-based meat alternatives.
+- **21_trade** refactor equations for enhanced readablility and improve documentation
+- **29_cropland** added option for linear and sigmoidal faders
+- **32_forestry** Interfaces `vm_landexpansion_forestry` and `vm_landreduction_forestry` have been corrected by harvested and replanted timber plantation area
+- **58_peatland** variable `v58_scalingFactorExp` converted into parameter `p58_scalingFactorExp` to avoid infeasibilites. `p58_scalingFactorRed` has been revised.
+- **80_optimization** abort GAMS in case of execution errors, added threads = 1 as default to avoid infeasibilites and Flg_NoDefc = TRUE as option
+- **config** `cfg$gms$land_snv`changed from "secdforest, forestry, past, other" to "secdforest, other"
+- **config** additional data update additional_data_rev4.53.tgz
+- **config** default settings for 58_peatland revised
+- **config** initial treecover on cropland starts from zero
+- **config** split scenario_config into project-specific configs
+- **config** Submissions with high memory requirements now get 16 CPUs and 80GB of memory to account for the new specifications of PIK's new HPC 'Foote'. `maxMem` was renamed to `highMem`, because 80GB of memory does not correspond to the maximum available memory of a compute node.
+- **config** The default realization for the 38_factor_costs module was switched to `sticky_feb18`. In this realization, capital stocks and their depreciation are tracked, giving some inertia to random relocation of production, improving high resolution outputs.
+- **script** replaced gdx package with gdx2 package calls
+- **script** scripts/start_functions.R decide individually for demand and price whether they are read from a REMIND report.
+- **script** updated EATLancet project start scripts
+- **scripts** `.nc` files are no longer created by default after disaggregation
+- **scripts** output/extra/highres.R use default 13_tc realization
+- **scripts** rewrite of merge_report.R based on rds files and rbind, which allows for more flexibility when merging reports. Avoid inconsistent use of "GLO" instead of "World" in report.rds files.
+- **modules** renamed `country_dummy` to `country_switch` in all modules
+
+### added
+- **42_water_demand** added water abstraction type dimension for non-ag uses
+- **56_ghg_policy** added optional temporal and regional fader for GHG emission pricing policy
+- **70_livestock** added realization `fbask_jan16_sticky`
+- **config** added `scenario_config_year_fix.csv` for choosing until when parameters are fixed to SSP2 values
+- **cropland** added option for discarding initial treecover on cropland
+- **script** added output script for conversion of validation.mif file into validation.rds
+- **script** check of variables needed in piamInterfaces in report_rds.R
+- **script** for downscaling to 0.25 deg using LUH2v2h as reference via mrdownscale
+- **scripts** added out of bounds check as output script
+- **scripts** added output report `EU_report.R` that uses `EU_report.Rmd`
+- **scripts** added output script converting all grid-level .mz files to .nc (netCDF)
+- **scripts** added script for automatic submission of SEALS allocation runs `./extra/runSEALSallocation.R`
+- **scripts** added start script for 'Healthly Landscapes' paper `paper_healthyLscps.R`
+
+### fixed
+- **15_food** fixing parameter declaration of i15_processed_kcal_structure_iso
+- **35_natveg** bugfix secdforest and other land restoration to avoid double-counting of restoration in equation `q29_land_snv`
+- **80_optimization** bugfix for variables levels not obeying the bounds in nlp_par, `conopt` changed to `conopt3`
+- **scripts** fixing an error in start.R and output.R which occurred if more than one slurm job was submitted at the same time.
+
+
+## [4.8.1] - 2024-06-19
+
+### changed
+- **29_ageclass** module 29_ageclass has been renamed to 28_ageclass to make space for `29_cropland` just before `30_croparea`
+- **30_crop** module `30_crop` renamed to `30_croparea`, which now only accounts for crop area.
+- **30_crop** Semi-Natural Vegetation (SNV) implementation has been moved from `30_crop` to `29_cropland`
+- **30_crop** the previous `30_crop/endo_apr21` realization has been moved to `30_croparea/simple_apr24`
+- **30_crop** the two realizations `penalty_apr22` and `rotation_apr22` have been merged into a single `30_croparea/detail_apr24` realization
+- **default.cfg** update additional data to rev4.51
+- **scripts** adjusted SLURM job handling
+- **scripts** updated EL2p0 start scripts
+
+### added
+- **10_land** added interface `pm_land_hist` with historic land use patterns
+- **29_cropland** new module `29_cropland` accounting for crop area, fallow cropland and tree cover on cropland with two realizations: `detail_apr24` and `simple_apr24` (default).
+- **42_water_demand** added non-agricultural water demand for entire year
+
+### removed
+- **32_forestry** removed technical balance term `v32_land_missing_ndc`
+
+### fixed
+- **22_land_conservation** avoid infeasibilities due to very small numbers, account for cropland tree cover and lower bound of cropland
+- **32_forestry** avoid infeasibilities due to very small numbers
+- **35_natveg** avoid infeasibilities due to very small numbers
+- **44_biodiversity** Fixing to SSP2 parameters until 2025 was not working
+- **config** update to input data rev4.109. In the previous rev4.108, MER GDP was wrong and was identical to PPP GDP
+
+
+## [4.8.0] - 2024-06-10
+
+### changed
+- **14_yields** revised timber yield calculations
+- **15_food, default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying food substitution scenarios and exogeneous food intake scenarios
+- **22_land_conservation and default.cfg** Added options for baseline protection
+- **32_forestry** renamed interface `pm_demand_ext` to `pm_demand_forestry`
+- **32_forestry** revision and simplification of forestry implementation, renamed realization from `dynamic_feb21` to `dynamic_may24`.
+- **35_natveg**  `vm_land(j2,"forestry")` included in NPI/NDC constraint `q35_min_forest`
+- **35_natveg** replaced the realisation `dynamic_feb21` with realisation `pot_forest_may24`. The new realisation provides additional information on the potential forest area, which is now used to constrain forest and forestry expansion and recovery. The remaining area for forest establishment is provided to the forestry module via the new interface parameter `pcm_max_forest_est`.
+- **41_area_equipped_for_irrigation** updated (non-default) AEI data (from Mehta2022 to Mehta2024)
+- **52_carbon** Separate carbon densities for forest and other land. Before there was only a single carbon density for natural vegetation land.
+- **70_livestock** default.cfg and scenario_config.csv** changed fader setup and introduced new switches for specifying feed substitution with SCP scenarios
+- **80_optimization** Simplifed cycling through CONOPT4, CONOPT4 with OPTFILE, CONOPT4 without preprocessing and CONOPT3.
+- **default.cfg** changed default realization for 44_biodiversity to new realization `bii_target_apr24`
+- **default.cfg** defaults for `cfg$gms$sm_fix_SSP2`, `cfg$gms$sm_fix_cc` and other switches changed from 2020 to 2025
+- **default.cfg** Forestry sector included by default by using the `ForestryEndo` settings from `scenario_config.csv`: `s32_initial_distribution = 1`, `s32_demand_establishment = 1`, `s32_hvarea = 2`, `s35_secdf_distribution = 2`, `s35_hvarea = 2`, `s73_timber_demand_switch = 1`
+- **default.cfg** update additional data to rev4.50
+- **scripts** modified agmip_merge_report to use piamInterfaces
+- **scripts** start/test_runs.R added 2 more test runs from FSEC
+
+### added
+- **15_food** added additional sigmoid food substition scenarios `sigmoid_75pc_25_50`, `sigmoid_50pc_25_50` and `sigmoid_25pc_25_50`
+- **21_trade** Minimum trade margin for forestry products `s21_min_trade_margin_forestry`
+- **30_crop** added regional cropland equation `q30_crop_reg` and presolve growth constraint
+- **44_biodiversity** added new realization `bii_target_apr24`, taking into account `f44_rr_layer`
+- **60_bioenergy** added new realization `1st2ndgen_priced_feb24` to enable price-driven 2nd gen bioenergy production
+- **73_timber** added interface `im_timber_prod_cost`
+- **citation** added abstract
+- **core** added `coup2110`timesteps
+- **default.cfg** added cropland growth constraint `cfg$gms$s30_annual_max_growth`
+- **default.cfg** added settings for new price-driven bioenergy realization `1st2ndgen_priced_feb24`: `cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix`, `cfg$gms$c60_bioenergy_subsidy_fix_SSP2`, `s60_bioenergy_gj_price_1st`,
+- **default.cfg** added technical cost for missing BII increase `cfg$gms$s44_cost_bii_missing`
+- **default.cfg** cfg$gms$s80_secondsolve option for second solve statement with 0=off as default
+- **scenario_config.csv** added preset for GENIE project
+- **scripts** added "checkSummation" output script for consistency checking a report.mif
+- **scripts** added automatic set writer for new bioenergy realization to `start_functions`
+- **scripts** added start scripts for the GENIE project
+`s60_bioenergy_price_2nd`, `c60_price_implementation`
+
+### removed
+- **14_yields** removed interface `pm_timber_yield_initial`
+- **21_trade** removed interface `pm_selfsuff_ext`, removed `v21_manna_from_heaven`
+- **32_forestry** removed interface `pm_representative_rotation`
+- **35_natveg** removed growing stock calculation and calibration, which is no longer needed.
+- **62_material/16_demand** Removed double structure for forestry products. `pm_demand_foresty` is now used in `62_material`
+- **73_timber** removed interfaces `pm_demand_forestry_future` and `sm_wood_density`
+- **scripts** removed support for spam files in start_functions
+- **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
+
+### fixed
+- **14_yields** fix division by zero in preloop of managementcalib_aug19
+- **44_biodiversity** avoid division by zero
+- **58_peatland** Added balance variable to avoid random infeasibilites
+- **80_optimization** fixed a bug in nlp_apr17; cycling through CONOPT4, CONOPT4 without preprocessing and CONOPT3 was not working
+- **extra/disaggregation** fixed bug in disaggregation of land conservation related to switch from 59k to 67k that produced erroneous outputs
+- **scenario_config.csv** same revision for input files as in default.cfg
+- **scenario_fsec.csv** scenario settings
+- **scripts/start/test_runs.R** include all default output script, in particular disaggregation.R, which is needed for BII
+- **start/projects/fsec.R** scenario settings
 
 
 ## [4.7.3] - 2024-04-12
@@ -23,6 +202,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **56_ghg_policy** added NDC scenarios
 - **60_bioenergy** added NDC scenarios
 - **scripts** start script for EAT2p0 Deep Dive project
+
 ### fixed
 - **15_food** Small number rather 0 in condition checking calorie balancing
 - **34_urban** `static` realization was not working because `vm_carbon_stock` was referenced without the set `stockType`
@@ -871,7 +1051,11 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.7.3...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.9.0...develop
+[4.9.0]: https://github.com/magpiemodel/magpie/compare/v4.8.2...v4.9.0
+[4.8.2]: https://github.com/magpiemodel/magpie/compare/v4.8.1...v4.8.2
+[4.8.1]: https://github.com/magpiemodel/magpie/compare/v4.8.0...v4.8.1
+[4.8.0]: https://github.com/magpiemodel/magpie/compare/v4.7.3...v4.8.0
 [4.7.3]: https://github.com/magpiemodel/magpie/compare/v4.7.2...v4.7.3
 [4.7.2]: https://github.com/magpiemodel/magpie/compare/v4.7.1...v4.7.2
 [4.7.1]: https://github.com/magpiemodel/magpie/compare/v4.7.0...v4.7.1

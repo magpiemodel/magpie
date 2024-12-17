@@ -21,19 +21,32 @@ i70_livestock_productivity(t_all,i,sys)$(i70_livestock_productivity(t_all,i,sys)
 
 * Switch to determine countries for which feed substitution scenarios shall be applied.
 * In the default case, the food scenario affects all countries when activated.
-p70_country_dummy(iso) = 0;
-p70_country_dummy(scen_countries70) = 1;
+p70_country_switch(iso) = 0;
+p70_country_switch(scen_countries70) = 1;
 
 
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_switch(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+
+
+if (s70_subst_functional_form = 1,
+
+  m_linear_time_interpol(p70_cereal_subst_fader,s70_feed_substitution_start,s70_feed_substitution_target,0,s70_cereal_scp_substitution);
+  m_linear_time_interpol(p70_foddr_subst_fader,s70_feed_substitution_start,s70_feed_substitution_target,0,s70_foddr_scp_substitution);
+
+elseif s70_subst_functional_form = 2,
+
+  m_sigmoid_time_interpol(p70_cereal_subst_fader,s70_feed_substitution_start,s70_feed_substitution_target,0,s70_cereal_scp_substitution);
+  m_sigmoid_time_interpol(p70_foddr_subst_fader,s70_feed_substitution_start,s70_feed_substitution_target,0,s70_foddr_scp_substitution);
+
+);
 
 * Feed substitution scenarios including functional forms, targets and transition periods
 * Note: p70_feedscen_region_shr(t,i) is 1 in the default case)
-i70_cereal_scp_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_cereal_scp_scen%"));
-i70_foddr_scp_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_foddr_scp_scen%"));
+i70_cereal_scp_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*p70_cereal_subst_fader(t_all);
+i70_foddr_scp_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*p70_foddr_subst_fader(t_all);
 
 
 *** Substitution of cereal feed (kcer70) with single-cell protein (SCP) based on Nr

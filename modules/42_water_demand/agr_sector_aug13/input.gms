@@ -29,7 +29,7 @@ s42_env_flow_scenario            EFP scenario.     (1)          / 2 /
 *                                                                          s42_env_flow_fraction has no effect.
 
 * Linear fading in of environmental flow policy between startyear and targetyear
-s42_efp_startyear                  Environmental flow policy start year   / 2020 /
+s42_efp_startyear                  Environmental flow policy start year   / 2025 /
 s42_efp_targetyear                 Environmental flow policy target year  / 2040 /
 
 s42_env_flow_base_fraction         Fraction of available water that is reserved for the environment where no EFP policy is implemented (1) / 0.05 /
@@ -109,7 +109,7 @@ sets
 
 * Costs of pumping are calculated for India as per methodology in forthcoming paper by Singh et.al.
 parameter
-f42_pumping_cost(t_all,i) Cost of pumping irrigation water (USD05MER per m^3)
+f42_pumping_cost(t_all,i) Cost of pumping irrigation water (USD17MER per m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/f42_pumping_cost.cs4"
