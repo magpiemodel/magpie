@@ -10,13 +10,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** peatland rewetting now automatically considered in `extra/runSEALSallocation.R`
 
 ### added
--
+- **start_scripts** added `lock_timeout` as option to `start_run` function
 
 ### removed
 -
 
 ### fixed
--
+- **44_biodiversity** bugfix i44_biome_share, code cleanup, added scaling of `q44_bii`
 
 ## [4.9.0] - 2024-12-05
 

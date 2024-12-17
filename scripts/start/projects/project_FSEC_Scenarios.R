@@ -39,5 +39,5 @@ for (scenarioName in c(
 
     # Start runs
     cfg <- fsecScenario(scenario = scenarioName)
-    start_run(cfg = cfg, codeCheck = codeCheck)
+    start_run(cfg = cfg, codeCheck = codeCheck, lock_timeout = 6)
 }
