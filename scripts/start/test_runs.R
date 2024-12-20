@@ -75,24 +75,28 @@ codeCheck <- FALSE
 
 ### Business-as-usual
 cfg <- fsecScenario(scenario = "c_BAU")
+cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### NatureSparing
 cfg <- fsecScenario(scenario = "b_NatureSparing")
+cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### LandscapeElements
 cfg <- fsecScenario(scenario = "a_LandscapeElements")
+cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### FSDP Scenario
 cfg <- fsecScenario(scenario = "e_FSDP")
+cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
