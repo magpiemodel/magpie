@@ -79,7 +79,7 @@ for (scen in scenarios) {
   scen <- unlist(strsplit(scen, "-"))
   ssp <- scen[grepl("SSP", scen)]
 
-  if (length(ssp) == 0 || ssp == "SSP2") {
+  if (length(ssp) == 0) {
     ssp <- "SSP2"
   }
 
