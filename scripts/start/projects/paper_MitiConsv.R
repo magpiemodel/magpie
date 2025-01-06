@@ -43,9 +43,6 @@ cfg$best_calib_landconversion_cost <- FALSE
 
 cfg$gms$s14_use_yield_calib <- 1
 
-# which input data sets should be used?
-# cfg$input["cellular"] <- "..."
-
 # cc is new default
 cfg <- setScenario(cfg, c("nocc_hist", "NPI", "ForestryExo"))
 cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
@@ -96,12 +93,7 @@ for (scen in scenarios) {
       "output_check", "extra/disaggregation", "rds_report", "extra/runSEALSallocation"
   )
 
-  # cfg$input["cellular"] <- "..."
-
   cfg$input["calibration"] <- calib_tgz
-  # cfg$input["calibration"] <- "calibration_rev9_healthyLscps_25Sep24.tgz"
-
-  # cfg$gms$c_timesteps <- "5year2050"
 
   # Climate change switched off for these runs
   cfg <- setScenario(cfg, c(ssp, "nocc_hist", "NPI", "ForestryExo"))
