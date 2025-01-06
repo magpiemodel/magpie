@@ -106,8 +106,9 @@ for (scen in scenarios) {
   cfg$gms$land_snv <- "secdforest, other"
 
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-NPi2025-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-NPi2025-rem-12.mif"
-  cfg$path_to_report_bioenergy <- cfg$gms$c60_2ndgen_biodem
+  cfg$gms$c60_2ndgen_biodem <- "coupling"
+  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-NPi2025-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-NPi2025-rem-12.mif"
+  cfg$path_to_report_bioenergy <- cfg$path_to_report_ghgprices
 
 
   if ("PriceAff" %in% scen) {
