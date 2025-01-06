@@ -67,12 +67,12 @@ prefix <- paste(rev, "MitiConsv", cres, sep = "_")
 
 
 scenarios <- c(
-  "SSP2-REF", "SSP2-PB650-PriceAff", "SSP2-PB650-PriceProt",
-  "SSP2-PB1000-PriceAff", "SSP2-PB1000-PriceProt",
-  "SSP2-PB650-PriceAff-30by30", "SSP2-PB650-PriceProt-30by30",
-  "SSP2-PB650-PriceAff-BH", "SSP2-PB650-PriceProt-BH",
-  "SSP2-PB1000-PriceAff-30by30", "SSP2-PB1000-PriceProt-30by30",
-  "SSP2-PB1000-PriceAff-BH", "SSP2-PB1000-PriceProt-BH"
+  "SSP2-REF", "SSP2-PB650-PriceAR", "SSP2-PB650-PriceProt",
+  "SSP2-PB1000-PriceAR", "SSP2-PB1000-PriceProt",
+  "SSP2-PB650-PriceAR-30by30", "SSP2-PB650-PriceProt-30by30",
+  "SSP2-PB650-PriceAR-BH", "SSP2-PB650-PriceProt-BH",
+  "SSP2-PB1000-PriceAR-30by30", "SSP2-PB1000-PriceProt-30by30",
+  "SSP2-PB1000-PriceAR-BH", "SSP2-PB1000-PriceProt-BH"
   )
 
 for (scen in scenarios) {
@@ -111,13 +111,13 @@ for (scen in scenarios) {
   cfg$path_to_report_bioenergy <- cfg$path_to_report_ghgprices
 
 
-  if ("PriceAff" %in% scen) {
+  if ("PriceAR" %in% scen) {
     cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
   }
 
   if ("PriceProt" %in% scen) {
     cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
-    cfg$gms$s56_c_price_induced_aff <- 0
+    cfg$gms$s56_c_price_induced_AR <- 0
   }
 
 
