@@ -68,7 +68,6 @@ calib_tgz <- magpie4::submitCalibration(paste(rev, "MitiConsv", sep = "_"))
 
 prefix <- paste(rev, "MitiConsv", cres, sep = "_")
 
-# scenarios <- "SSP2"
 
 scenarios <- c(
   "SSP2-REF", "SSP2-PB650-PriceAff", "SSP2-PB650-PriceProt",
@@ -76,8 +75,8 @@ scenarios <- c(
   "SSP2-PB650-PriceAff-30by30", "SSP2-PB650-PriceProt-30by30",
   "SSP2-PB650-PriceAff-BH", "SSP2-PB650-PriceProt-BH",
   "SSP2-PB1000-PriceAff-30by30", "SSP2-PB1000-PriceProt-30by30",
-  "SSP2-PB1000-PriceAff-BH", "SSP2-PB1000-PriceProt-BH",
-)
+  "SSP2-PB1000-PriceAff-BH", "SSP2-PB1000-PriceProt-BH"
+  )
 
 for (scen in scenarios) {
   scen <- unlist(strsplit(scen, "-"))
@@ -116,7 +115,7 @@ for (scen in scenarios) {
 
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$gms$c60_2ndgen_biodem <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-NPi2025-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-NPi2025-rem-12.mif"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-NPi2025-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-NPi2025-rem-12.mif"
+  cfg$path_to_report_bioenergy <- cfg$gms$c60_2ndgen_biodem
 
 
   if ("PriceAff" %in% scen) {
@@ -134,7 +133,7 @@ for (scen in scenarios) {
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
     cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg650-rem-12.mif"
-    cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg650-rem-12.mif"
+    cfg$path_to_report_bioenergy <- cfg$path_to_report_ghgprices
   }
 
   if ("PB1000" %in% scen) {
@@ -142,7 +141,7 @@ for (scen in scenarios) {
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
     cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
-    cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
+    cfg$path_to_report_bioenergy <- cfg$path_to_report_ghgprices
   }
 
   if ("30by30" %in% scen) {
