@@ -124,8 +124,6 @@ for (scen in scenarios) {
     pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg650-rem-12.mif"
   }
 
-
-
   if ("PB1000" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
