@@ -65,7 +65,6 @@ calib_tgz <- magpie4::submitCalibration(paste(rev, "MitiConsv", sep = "_"))
 
 prefix <- paste(rev, "MitiConsv", cres, sep = "_")
 
-
 scenarios <- c(
   "SSP2-REF", "SSP2-PB650-PriceAR", "SSP2-PB650-PriceProt",
   "SSP2-PB1000-PriceAR", "SSP2-PB1000-PriceProt",
@@ -117,7 +116,6 @@ for (scen in scenarios) {
     cfg$gms$s56_c_price_induced_AR <- 0
   }
 
-
   if ("PB650" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
@@ -137,7 +135,6 @@ for (scen in scenarios) {
   if ("BH" %in% scen) {
     cfg$gms$c22_protect_scenario <- "BH"
   }
-
 
   # Settings taken from coupled runs
   cfg$gms$c56_pollutant_prices <- "coupling"
