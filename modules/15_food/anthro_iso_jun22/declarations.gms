@@ -17,8 +17,8 @@ positive variables
 
 *** #### Food Demand Model
 equations
-  q15_aim                Objective function of food demand model (mio. USD05PPP)
-  q15_budget(iso)        Household budget constraint (USD05PPP per cap per day)
+  q15_aim                Objective function of food demand model (mio. USD17PPP)
+  q15_budget(iso)        Household budget constraint (USD17PPP per cap per day)
 
   q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15)   Estimates regression parameters for BMI regression shares (1)
   q15_bmi_shr_verylow(iso,sex,agegroup15)           Estimates BMI share for population groups with low BMI (1)
@@ -43,8 +43,8 @@ positive variables
   v15_kcal_regr(iso,kfo)                                 Uncalibrated regression estimates of calorie demand (kcal per cap per day)
   v15_kcal_regr_total(iso)                               Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
   v15_demand_regr(iso, regr15)                           Uncalibrated regression estimates of kcal shares (1)
-  v15_income_pc_real_ppp_iso(iso)                        Real income per cap (USD05PPP per cap)
-  v15_income_balance(iso)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)
+  v15_income_pc_real_ppp_iso(iso)                        Real income per cap (USD17PPP per cap)
+  v15_income_balance(iso)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD17PPP per cap per yr)
   v15_kcal_intake_total_regr(iso)                        Food intake (kcal per cap per day)
   v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)     Hierarchical tree parameter regressions (1)
   v15_bmi_shr_regr(iso,sex,age,bmi_group15)              Uncalibrated share of population groups belonging to a certain BMI group (1)
@@ -52,7 +52,7 @@ positive variables
 ;
 
 variables
-  v15_objective                      Objective term (USD05PPP)
+  v15_objective                      Objective term (USD17PPP)
 ;
 
 scalars
@@ -80,8 +80,8 @@ parameters
  p15_exo_food_scenario_fader(t_all)            Exogenous diet scenario fader (1)
 
 * prices
-  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
-  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
+  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD17PPP per kcal)
+  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD17PPP per kcal)
 
 * anthropometrics
   p15_bodyheight(t,iso,sex,age,estimates15)           Body height (cm per cap)
@@ -176,10 +176,10 @@ parameters
  i15_exo_foodscen_fader(t,iso)                Fader that converges per capita food consumption to an exogenous diet scenario (1)
 
 * country-specific scenario switch
- p15_country_dummy(iso)                       Dummy parameter indicating whether country is affected by diet scenarios (1)
+ p15_country_switch(iso)                       Switch indicating whether country is affected by diet scenarios (1)
 
 * calculate diet iteration breakpoint
- p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD05PPP per capita)
+ p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD17PPP per capita)
  p15_delta_income(t,i,iter15)                 Regional change in per capita income due to price shock on regional level (1)
 ;
 
@@ -235,16 +235,16 @@ parameters
  ov15_kcal_regr(t,iso,kfo,type)                                 Uncalibrated regression estimates of calorie demand (kcal per cap per day)
  ov15_kcal_regr_total(t,iso,type)                               Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
  ov15_demand_regr(t,iso,regr15,type)                            Uncalibrated regression estimates of kcal shares (1)
- ov15_income_pc_real_ppp_iso(t,iso,type)                        Real income per cap (USD05PPP per cap)
- ov15_income_balance(t,iso,type)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)
+ ov15_income_pc_real_ppp_iso(t,iso,type)                        Real income per cap (USD17PPP per cap)
+ ov15_income_balance(t,iso,type)                                Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD17PPP per cap per yr)
  ov15_kcal_intake_total_regr(t,iso,type)                        Food intake (kcal per cap per day)
  ov15_regr_overgroups(t,iso,sex,agegroup15,bmi_tree15,type)     Hierarchical tree parameter regressions (1)
  ov15_bmi_shr_regr(t,iso,sex,age,bmi_group15,type)              Uncalibrated share of population groups belonging to a certain BMI group (1)
  ov15_bmi_shr_overgroups(t,iso,sex,agegroup15,bmi_group15,type) Uncalibrated  share of population groups belonging to a certain BMI group (1)
- ov15_objective(t,type)                                         Objective term (USD05PPP)
+ ov15_objective(t,type)                                         Objective term (USD17PPP)
  oq15_food_demand(t,i,kfo,type)                                 Food demand (mio. kcal)
- oq15_aim(t,type)                                               Objective function of food demand model (mio. USD05PPP)
- oq15_budget(t,iso,type)                                        Household budget constraint (USD05PPP per cap per day)
+ oq15_aim(t,type)                                               Objective function of food demand model (mio. USD17PPP)
+ oq15_budget(t,iso,type)                                        Household budget constraint (USD17PPP per cap per day)
  oq15_regr_bmi_shr(t,iso,sex,agegroup15,bmi_tree15,type)        Estimates regression parameters for BMI regression shares (1)
  oq15_bmi_shr_verylow(t,iso,sex,agegroup15,type)                Estimates BMI share for population groups with low BMI (1)
  oq15_bmi_shr_low(t,iso,sex,agegroup15,type)                    Estimates BMI share for population groups with very low BMI (1)

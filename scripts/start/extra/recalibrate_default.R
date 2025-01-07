@@ -20,7 +20,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- FALSE
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$title <- "calib_run"
+cfg$title <- "calib_run_H12"
 cfg$output <- c("rds_report")
 cfg$force_replace <- TRUE
 cfg$qos <- "priority"

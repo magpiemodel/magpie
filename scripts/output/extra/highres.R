@@ -152,16 +152,20 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   cfg$gms$s15_elastic_demand <- 0
 
   #get exogenous bioenergy demand and GHG prices from c200 run because these files may have been overwritten
-  write.magpie(readGDX(gdx,"f56_pollutant_prices_coupling"),"modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
-  write.magpie(readGDX(gdx,"f56_pollutant_prices_emulator"),"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
-  write.magpie(readGDX(gdx,"f60_bioenergy_dem_coupling"),"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
-  write.magpie(readGDX(gdx,"f60_bioenergy_dem_emulator"),"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
+  a <- readGDX(gdx,"f56_pollutant_prices_coupling", react = "silent")
+  if(!is.null(a)) write.magpie(a,"modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
+  a <- readGDX(gdx,"f56_pollutant_prices_emulator", react = "silent")
+  if(!is.null(a)) write.magpie(a,"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
+  a <- readGDX(gdx,"f60_bioenergy_dem_coupling", react = "silent")
+  if(!is.null(a)) write.magpie(a,"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+  a <- readGDX(gdx,"f60_bioenergy_dem_emulator", react = "silent")
+  if(!is.null(a)) write.magpie(a,"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
 
-  #get regional afforestation patterns from low resolution run with c200
+  #get regional afforestation/reforestation (AR) patterns from low resolution run with c200
   aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)
-  #Take away initial NDC area for consistency with global afforestation limit
+  #Take away initial NDC area for consistency with global AR limit
   aff <- aff-setYears(aff[,1,],NULL)
-  #calculate maximum regional afforestation over time
+  #calculate maximum regional AR over time
   aff_max <- setYears(aff[,1,],NULL)
   for (r in getRegions(aff)) {
     aff_max[r,,] <- max(aff[r,,])
@@ -169,10 +173,10 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   aff_max[aff_max < 0] <- 0
   write.magpie(aff_max,"modules/32_forestry/input/f32_max_aff_area.cs4")
   cfg$gms$s32_max_aff_area_glo <- 0
-  #check
+  #check if regional AR exceeds global AR limit
   if(cfg$gms$s32_max_aff_area < Inf) {
-    indicator <- abs(sum(aff_max)-cfg$gms$s32_max_aff_area)
-    if(indicator > 1e-06) warning(paste("Global and regional afforestation limit differ by",indicator,"Mha"))
+    indicator <- sum(aff_max)-cfg$gms$s32_max_aff_area
+    if(indicator > 1e-06) warning(paste("Regional AR exceeds global AR limit by",indicator,"Mha"))
   }
 
   Sys.sleep(2)

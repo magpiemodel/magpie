@@ -16,5 +16,5 @@ loop(t,
 );
 
 pcm_tau(h,"crop")        = fm_tau1995(h);
-pcm_tau(h,"pastr")       = fm_pastr_tau_hist("y1995",h);
+pcm_tau(h,"pastr")       = f13_pastr_tau_hist("y1995",h);
 pc13_tcguess(h,tautype)  = f13_tcguess(h);

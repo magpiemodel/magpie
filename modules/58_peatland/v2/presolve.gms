@@ -26,15 +26,17 @@ if (m_year(t) <= s58_fix_peatland,
 
   i58_cost_rewet_recur(t) = 0;
   i58_cost_drain_recur(t) = 0;
-  i58_cost_drain_intact_onetime(t) = 0;
-  i58_cost_drain_rewet_onetime(t) = 0;
-  i58_cost_rewet_onetime(t) = 0;
+  i58_cost_onetime(t,cost58) = 0;
+
+* save area in reference period
+  p58_peatland_ref(j,land58)$(m_year(t) = s58_fix_peatland) = pc58_peatland(j,land58);
 else
 * Define bounds and costs for peatland area after the year given by s58_fix_peatland 
   v58_peatland.lo(j,land58) = 0;
   v58_peatland.l(j,land58) = pc58_peatland(j,land58);
-  v58_peatland.up(j,drained58) = Inf;
+  v58_peatland.up(j,drained58) = sum(land58, pc58_peatland(j,land58));
   v58_peatland.up(j,"rewetted") = s58_rewetting_switch;
+  v58_peatland.lo(j,"intact") = pc58_peatland(j,"intact") * i58_intact_protection_exo(j);
   v58_peatland.up(j,"intact") = pc58_peatland(j,"intact");
   v58_peatland.fx(j,"peatExtract") = pc58_peatland(j,"peatExtract");
   v58_balance.lo(j,manPeat58) = 0;
@@ -44,9 +46,9 @@ else
 
   i58_cost_rewet_recur(t) = s58_cost_rewet_recur;
   i58_cost_drain_recur(t) = s58_cost_drain_recur;
-  i58_cost_drain_intact_onetime(t) = s58_cost_drain_intact_onetime;
-  i58_cost_drain_rewet_onetime(t) = s58_cost_drain_rewet_onetime;
-  i58_cost_rewet_onetime(t) = s58_cost_rewet_onetime;
+  i58_cost_onetime(t,"drain_intact") = -s58_cost_drain_intact_onetime;
+  i58_cost_onetime(t,"drain_rewetted") = -s58_cost_drain_rewet_onetime;
+  i58_cost_onetime(t,"rewetted") = s58_cost_rewet_onetime;
 );
 
 *' @code

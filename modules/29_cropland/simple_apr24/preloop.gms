@@ -27,10 +27,10 @@ elseif s29_snv_shr > s29_snv_relocation_data_x1,
 
 * Country switch to determine countries for which certain policies shall be applied.
 * In the default case, the policy affects all countries when activated.
-p29_country_dummy(iso) = 0;
-p29_country_dummy(policy_countries29) = 1;
+p29_country_switch(iso) = 0;
+p29_country_switch(policy_countries29) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by available cropland area.
 pm_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
-p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_dummy(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
+p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));

@@ -20,12 +20,12 @@ source("scripts/projects/fsec.R")
 
 # Calibration run
 cfg       <- fsecScenario(scenario = "c_BAU")
-cfg$title <- "FSEC23Mar2024"
+cfg$title <- "calib_run_FSEC"
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE # required when penality_apr22 activated
 cfg$best_calib                      <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$best_calib_landconversion_cost  <- FALSE
+cfg$best_calib_landconversion_cost  <- TRUE
 cfg$output                          <- c("rds_report")
 cfg$force_replace                   <- TRUE
 cfg$qos <- "priority"

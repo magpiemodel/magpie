@@ -15,13 +15,14 @@ scalars
 * 60 EUR/m3 = 72 USD/m3
 * 72 USD/m3 / 0.6 = 120 USD/tDM
 * https://unece.org/forests/prices
-  s73_timber_prod_cost_wood            Cost for producing one unit of wood (USD per tDM) / 120 /
-  s73_timber_prod_cost_woodfuel        Cost for prodcing one unit of woodfuel (USD per tDM) / 60 /
-  s73_free_prod_cost                   Very high cost for settling demand without production (USD per tDM) / 20000 /
+* inflated using USD05 --> USD17 rate of 1.23
+  s73_timber_prod_cost_wood            Cost for producing one unit of wood (USD17MER per tDM) / 148 /
+  s73_timber_prod_cost_woodfuel        Cost for prodcing one unit of woodfuel (USD17MER per tDM) / 74 /
+  s73_free_prod_cost                   Very high cost for settling demand without production (USD17MER per tDM) / 1e+06 /
   s73_timber_demand_switch             Logical switch to turn on or off timber demand 1=on 0=off (1) / 1 /
   s73_increase_ceiling                 Limiter for not allowing a demand jump between time steps beyond a certain limit (1) / 1.025 /
   s73_residue_ratio                    Proportion of overall industrial roundwood production which ends up as residue during harvest (1) / 0.15 /
-  s73_reisdue_removal_cost             Cost of removing residues left after industrial roundwood harvest (USD per tDM) / 2 /
+  s73_reisdue_removal_cost             Cost of removing residues left after industrial roundwood harvest (USD17MER per tDM) / 2.5 /
   s73_expansion                        Construction wood demand expansion factor by end of century based on industrial roundwood demand as base (1=100 percent increase) / 0 /
 ;
 

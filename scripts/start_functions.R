@@ -555,16 +555,16 @@ getReportData <- function(path_to_report_bioenergy, path_to_report_ghgprices = N
   }
 
   .emissionPrices <- function(mag){
-    out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
+    out_c <- mag[,,"Price|Carbon (US$2017/t CO2)"]*44/12 # US$2017/tCO2 -> US$2017/tC
     dimnames(out_c)[[3]] <- "co2_c"
 
-    out_n2o_direct <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28 # US$2005/tN2O -> US$2005/tN
+    out_n2o_direct <- mag[,,"Price|N2O (US$2017/t N2O)"]*44/28 # US$2017/tN2O -> US$2017/tN
     dimnames(out_n2o_direct)[[3]] <- "n2o_n_direct"
 
-    out_n2o_indirect <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28 # US$2005/tN2O -> US$2005/tN
+    out_n2o_indirect <- mag[,,"Price|N2O (US$2017/t N2O)"]*44/28 # US$2017/tN2O -> US$2017/tN
     dimnames(out_n2o_indirect)[[3]] <- "n2o_n_indirect"
 
-    out_ch4 <- mag[,,"Price|CH4 (US$2005/t CH4)"]
+    out_ch4 <- mag[,,"Price|CH4 (US$2017/t CH4)"]
     dimnames(out_ch4)[[3]] <- "ch4"
 
     out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)

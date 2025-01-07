@@ -21,6 +21,7 @@
 $Ifi "%phase%" == "declarations" $include "./modules/31_past/endo_jun13/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/31_past/endo_jun13/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/31_past/endo_jun13/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/31_past/endo_jun13/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/31_past/endo_jun13/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/31_past/endo_jun13/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

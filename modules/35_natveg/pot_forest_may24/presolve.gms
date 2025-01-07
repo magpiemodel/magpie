@@ -227,6 +227,12 @@ p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j
   = pcm_land(j,"primforest") + pcm_land(j,"secdforest") + pcm_land(j,"forestry");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
+* NPI / NDC reversal
+if (m_year(t) >= s35_npi_ndc_reversal,
+  p35_min_forest(t,j) = 0;
+  p35_min_other(t,j) = 0;
+);
+
 ** Youngest age classes are not allowed to be harvested
 v35_hvarea_secdforest.fx(j,ac_est) = 0;
 v35_hvarea_other.fx(j,othertype35,ac_est) = 0;
@@ -244,3 +250,15 @@ elseif s35_hvarea = 1,
  v35_hvarea_primforest.fx(j) = (vm_land.l(j,"primforest") - vm_land.lo(j,"primforest"))*s35_hvarea_primforest*m_timestep_length_forestry;
  v35_hvarea_other.fx(j,othertype35,ac_sub) = (vm_land_other.l(j,othertype35,ac_sub) - vm_land_other.lo(j,othertype35,ac_sub))*s35_hvarea_other*m_timestep_length_forestry;
 );
+
+* Update biodiversity value
+vm_bv.l(j,"primforest",potnatveg) = 
+  pcm_land(j,"primforest") * fm_bii_coeff("primary",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"secdforest",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc35_secdforest(j,ac)) *
+  fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"other",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), sum(othertype35, pc35_land_other(j,othertype35,ac))) *
+  fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);

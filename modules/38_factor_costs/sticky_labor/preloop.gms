@@ -10,10 +10,15 @@ s38_ces_elast_par = (1/s38_ces_elast_subst) - 1 ;
 
 p38_intr_depr(t,i) = (1-s38_depreciation_rate) * pm_interest(t,i)/(1+pm_interest(t,i)) + s38_depreciation_rate;
 
-*  calculate labor/capital cost shares from regression
-p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f38_reg_parameters("intercept"));
+*  calculate capital cost shares from regression
+p38_capital_share_calibration(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f38_historical_share(t_past,iso) - (f38_reg_parameters("slope") * 
+                                    log10(im_gdp_pc_ppp_iso(t_past,iso)) + f38_reg_parameters("intercept")));
 
-pm_cost_share_crops(t,i,"capital")$(m_year(t)<2010) = f38_historical_share(t,i);
-pm_cost_share_crops(t,i,"capital")$(m_year(t)>=2010) = f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f38_reg_parameters("intercept")+p38_share_calibration(i);
+p38_capital_cost_shares_iso(t,iso)$(m_year(t)<2010)  = f38_historical_share(t,iso);
+p38_capital_cost_shares_iso(t,iso)$(m_year(t)>=2010) = f38_reg_parameters("slope") * log10(im_gdp_pc_ppp_iso(t,iso)) + f38_reg_parameters("intercept") + p38_capital_share_calibration(iso);
 
-pm_cost_share_crops(t,i,"labor")   = 1 - pm_cost_share_crops(t,i,"capital");
+* aggregate factor cost shares
+pm_factor_cost_shares(t,i,"capital") = sum(t_past$(ord(t_past) eq card(t_past)), 
+                                            sum(i_to_iso(i,iso), f38_hist_factor_costs(t_past,iso) * p38_capital_cost_shares_iso(t,iso)) / 
+                                            sum(i_to_iso(i,iso), f38_hist_factor_costs(t_past,iso)));
+pm_factor_cost_shares(t,i,"labor")   = 1 - pm_factor_cost_shares(t,i,"capital");

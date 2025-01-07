@@ -10,15 +10,15 @@
 * Country switches to determine countries for which chosen Neff scenario
 * shall be applied.
 * In the default case, the scenarios affects all countries when activated.
-p50_country_dummy_cropneff(iso) = 0;
-p50_country_dummy_cropneff(cropneff_countries) = 1;
-p50_country_dummy_pastneff(iso) = 0;
-p50_country_dummy_pastneff(pastneff_countries) = 1;
+p50_country_switch_cropneff(iso) = 0;
+p50_country_switch_cropneff(cropneff_countries) = 1;
+p50_country_switch_pastneff(iso) = 0;
+p50_country_switch_pastneff(pastneff_countries) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p50_cropneff_region_shr(t,i) = sum(i_to_iso(i,iso), p50_country_dummy_cropneff(iso) * im_pop_iso(t,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t,iso));
-p50_pastneff_region_shr(t,i) = sum(i_to_iso(i,iso), p50_country_dummy_pastneff(iso) * im_pop_iso(t,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t,iso));
+p50_cropneff_region_shr(t,i) = sum(i_to_iso(i,iso), p50_country_switch_cropneff(iso) * im_pop_iso(t,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t,iso));
+p50_pastneff_region_shr(t,i) = sum(i_to_iso(i,iso), p50_country_switch_pastneff(iso) * im_pop_iso(t,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t,iso));
 
 * Nitrogen use efficiency
 loop(t,

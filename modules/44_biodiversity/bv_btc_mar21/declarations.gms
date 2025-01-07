@@ -6,12 +6,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p44_price_bv_loss(t_all)                 Price (subsidy) for biodiversity stock loss (gain) (USD per ha)
+ p44_price_bv_loss(t_all)                 Price (subsidy) for biodiversity stock loss (gain) (USD17MER per ha)
+ pc44_bv_weighted(j)                 Range-rarity weighted biodiversity stock (Mha)
 ;
 
 variables
  v44_bv_loss(j)                                 Change in biodiversity stock (Mha per year)
- vm_cost_bv_loss(j)                     Biodiversity cost (mio USD)
+ vm_cost_bv_loss(j)                     Biodiversity cost (mio USD17MER)
 ;
 
 positive variables
@@ -22,19 +23,19 @@ positive variables
 equations
  q44_bv_loss(j)                                 Change in biodiversity stock (Mha per year)
  q44_bv_weighted(j)                     Range-rarity weighted biodiversity stock (Mha)
- q44_cost_bv_loss(j)                      Cost of biodiversity loss (mio USD)
+ q44_cost_bv_loss(j)                      Cost of biodiversity loss (mio USD17MER)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov44_bv_loss(t,j,type)                Change in biodiversity stock (Mha per year)
- ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD)
+ ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD17MER)
  ov_bv(t,j,landcover44,potnatveg,type) Biodiversity stock for all land cover classes (Mha)
  ov44_bv_weighted(t,j,type)            Range-rarity weighted biodiversity stock (Mha)
  oq44_bv_loss(t,j,type)                Change in biodiversity stock (Mha per year)
  oq44_bv_weighted(t,j,type)            Range-rarity weighted biodiversity stock (Mha)
- oq44_cost_bv_loss(t,j,type)           Cost of biodiversity loss (mio USD)
+ oq44_cost_bv_loss(t,j,type)           Cost of biodiversity loss (mio USD17MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

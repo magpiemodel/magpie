@@ -1,3 +1,0 @@
-name,type,reason
-pcm_land, input, not needed
-vm_yld,variable, not needed

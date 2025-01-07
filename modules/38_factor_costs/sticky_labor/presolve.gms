@@ -17,26 +17,26 @@ else
  i38_fac_req(t,i,kcr) = i38_fac_req(t,i,kcr);
 );
 
-p38_labor_need(t,i,kcr) = i38_fac_req(t,i,kcr)  * pm_cost_share_crops(t,i,"labor");
-p38_capital_need(t,i,kcr,"mobile") = i38_fac_req(t,i,kcr) * pm_cost_share_crops(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
-p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(t,i,kcr)  * pm_cost_share_crops(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
+p38_labor_need(t,i,kcr) = i38_fac_req(t,i,kcr)  * pm_factor_cost_shares(t,i,"labor");
+p38_capital_need(t,i,kcr,"mobile") = i38_fac_req(t,i,kcr) * pm_factor_cost_shares(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
+p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(t,i,kcr)  * pm_factor_cost_shares(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
 * minimum labor share based on target and adjustment factor
 if (m_year(t) <= s38_startyear_labor_substitution,
   p38_min_labor_share(t,j) = 0;
 elseif m_year(t) <= s38_targetyear_labor_share,
   p38_min_labor_share(t,j) = sum(cell(i,j),
-        max(pm_cost_share_crops(t,i,"labor"), pm_cost_share_crops(t,i,"labor") + 
+        max(pm_factor_cost_shares(t,i,"labor"), pm_factor_cost_shares(t,i,"labor") + 
         ((m_year(t)-s38_startyear_labor_substitution)/(s38_targetyear_labor_share-s38_startyear_labor_substitution) *
         (s38_target_fulfillment * (s38_target_labor_share - sum(t2$(m_year(t2) = s38_targetyear_labor_share),
-                                                                pm_cost_share_crops(t2,i,"labor")))))));
+                                                                pm_factor_cost_shares(t2,i,"labor")))))));
 else 
   p38_min_labor_share(t,j)$(sum(t2$(m_year(t2) = s38_targetyear_labor_share), 
-                                sum(cell(i,j), pm_cost_share_crops(t2,i,"labor"))) <= s38_target_labor_share) 
+                                sum(cell(i,j), pm_factor_cost_shares(t2,i,"labor"))) <= s38_target_labor_share) 
                     =  sum(t2$(m_year(t2) = s38_targetyear_labor_share), p38_min_labor_share(t2,j));
   p38_min_labor_share(t,j)$(sum(t2$(m_year(t2) = s38_targetyear_labor_share),
-                                sum(cell(i,j), pm_cost_share_crops(t2,i,"labor"))) > s38_target_labor_share)  
-                    =  max(sum(cell(i,j), pm_cost_share_crops(t,i,"labor")), s38_target_labor_share);
+                                sum(cell(i,j), pm_factor_cost_shares(t2,i,"labor"))) > s38_target_labor_share)  
+                    =  max(sum(cell(i,j), pm_factor_cost_shares(t,i,"labor")), s38_target_labor_share);
 );
 
 * overwrite with 0 in case target labor share is 0 (i.e. off)

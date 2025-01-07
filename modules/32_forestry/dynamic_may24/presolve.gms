@@ -33,7 +33,7 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
 if(s32_aff_plantation = 0,
  p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 elseif s32_aff_plantation = 1,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,"vegc");
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,ag_pools);
 );
 
 *' Timber plantations carbon densities:
@@ -120,6 +120,13 @@ v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
 v32_land.lo(j,"ndc",ac_est) = 0;
 v32_land.up(j,"ndc",ac_est) = Inf;
 
+* release all bounds in case of NPI / NDC reversal and set recurring costs to zero
+if (m_year(t) >= s32_npi_ndc_reversal,
+  v32_land.lo(j,"ndc",ac) = 0;
+  v32_land.up(j,"ndc",ac) = Inf;
+  i32_recurring_cost("ndc") = 0;
+);
+
 ** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac_est is free
 if(s32_aff_prot = 0,
   v32_land.fx(j,"aff",ac)$(ac.off <= s32_planing_horizon/5) = pc32_land(j,"aff",ac);
@@ -182,5 +189,18 @@ p32_future_to_current_demand_ratio(t,i)$(sum(kforestry, pm_demand_forestry(t,i,k
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + v32_land.lo(j,"plant",ac) + p32_land(t,j,"aff",ac))+ p32_aff_pol_timestep(t,j))
         = pm_land_conservation(t,j,"secdforest","restore") - (sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + p32_aff_pol_timestep(t,j));
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") <= sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + p32_aff_pol_timestep(t,j)) = 0;
+
+* Update biodiversity value
+vm_bv.l(j,"aff_co2p",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"aff",ac)) *
+  p32_bii_coeff("aff",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"aff_ndc",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"ndc",ac)) *
+  p32_bii_coeff("ndc",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.l(j,"plant",potnatveg) = 
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"plant",ac)) *
+  p32_bii_coeff("plant",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
 
 *** EOF presolve.gms ***
