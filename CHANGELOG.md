@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** peatland rewetting now automatically considered in `extra/runSEALSallocation.R`
 
 ### added
+- **scripts** added start script for land-based mitigation and biodiversity conservation paper
 - **start_scripts** added `lock_timeout` as option to `start_run` function
 
 ### removed
