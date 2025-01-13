@@ -99,15 +99,6 @@ for (scen in scenarios) {
   # SNV habitat defintion
   cfg$gms$land_snv <- "secdforest, other"
 
-  if ("PriceAR" %in% scen) {
-    cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
-  }
-
-  if ("PriceProt" %in% scen) {
-    cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
-    cfg$gms$s56_c_price_induced_aff <- 0
-  }
-
   if ("PB650" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
@@ -128,6 +119,15 @@ for (scen in scenarios) {
     cfg$gms$c60_2ndgen_biodem <- "coupling"
     cfg$path_to_report_ghgprices <- pathToCoupledOutput
     cfg$path_to_report_bioenergy <- pathToCoupledOutput
+  }
+
+  if ("PriceAR" %in% scen) {
+    cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
+  }
+
+  if ("PriceProt" %in% scen) {
+    cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
+    cfg$gms$s56_c_price_induced_aff <- 0
   }
 
   if ("30by30" %in% scen) {
