@@ -9,7 +9,7 @@
 # description: Land-based mitigation and habitat conservation
 # -------------------------------------------------------------
 
-rev <- "rev9"
+rev <- "rev14"
 
 cres <- "c200"
 
@@ -35,16 +35,11 @@ cfg$title <- "calib_run"
 cfg$output <- c("rds_report", "validation_short")
 cfg$force_replace <- TRUE
 
-cfg$recalibrate <- TRUE
-cfg$recalibrate_landconversion_cost <- TRUE
-
 cfg$best_calib <- TRUE
 cfg$best_calib_landconversion_cost <- FALSE
 
-cfg$gms$s14_use_yield_calib <- 1
-
 # cc is new default
-cfg <- setScenario(cfg, c("nocc_hist", "NPI", "ForestryExo"))
+cfg <- setScenario(cfg, c("SSP2","nocc_hist", "NPI", "ForestryExo"))
 cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
 
 # sticky
@@ -98,9 +93,6 @@ for (scen in scenarios) {
   cfg <- setScenario(cfg, c(ssp, "nocc_hist", "NPI", "ForestryExo"))
   cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
 
-  # Set path to coupled output
-  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-NPi2025-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-NPi2025-rem-12.mif"
-
   # sticky
   cfg$gms$factor_costs <- "sticky_feb18"
 
@@ -120,12 +112,22 @@ for (scen in scenarios) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
     pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg650-rem-12.mif"
+    # Settings taken from coupled runs
+    cfg$gms$c56_pollutant_prices <- "coupling"
+    cfg$gms$c60_2ndgen_biodem <- "coupling"
+    cfg$path_to_report_ghgprices <- pathToCoupledOutput
+    cfg$path_to_report_bioenergy <- pathToCoupledOutput
   }
 
   if ("PB1000" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
     pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
+    # Settings taken from coupled runs
+    cfg$gms$c56_pollutant_prices <- "coupling"
+    cfg$gms$c60_2ndgen_biodem <- "coupling"
+    cfg$path_to_report_ghgprices <- pathToCoupledOutput
+    cfg$path_to_report_bioenergy <- pathToCoupledOutput
   }
 
   if ("30by30" %in% scen) {
@@ -135,12 +137,6 @@ for (scen in scenarios) {
   if ("BH" %in% scen) {
     cfg$gms$c22_protect_scenario <- "BH"
   }
-
-  # Settings taken from coupled runs
-  cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$path_to_report_ghgprices <- pathToCoupledOutput
-  cfg$path_to_report_bioenergy <- pathToCoupledOutput
 
   cfg$title <- paste0(prefix, "_", paste(scen, collapse = "-"))
   start_run(cfg = cfg, codeCheck = FALSE)
