@@ -105,7 +105,7 @@ for (scen in scenarios) {
 
   if ("PriceProt" %in% scen) {
     cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
-    cfg$gms$s56_c_price_induced_AR <- 0
+    cfg$gms$s56_c_price_induced_aff <- 0
   }
 
   if ("PB650" %in% scen) {
