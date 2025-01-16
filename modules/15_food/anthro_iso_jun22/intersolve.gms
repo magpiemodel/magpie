@@ -19,6 +19,10 @@
 *' module is executed once again.
     display "Coupling: Reading out marginal costs from MAgPIE";
     p15_prices_kcal(t,iso,kfo,curr_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
+*' the quantity of tax money from emission pricing for redistribution is calculated 
+    p15_tax_recycling(t,iso) = sum(i_to_iso(i,iso), (vm_emission_costs.l(i)
+        / im_pop(t,i)) * s15_tax_recycling 
+        * (im_gdp_pc_ppp_iso(t,iso) / im_gdp_pc_mer_iso(t,iso)));
 *' @stop
   );
 

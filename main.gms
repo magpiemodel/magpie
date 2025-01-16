@@ -160,7 +160,7 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.59.tgz
+* Used data set: additional_data_rev4.60.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.114
+* Regions data revision: 4.116
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.114
+* * Revision: 4.116
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Sun Oct 27 00:37:36 2024
+* Last modification (input data): Thu Jan 16 10:54:57 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
