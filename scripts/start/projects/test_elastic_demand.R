@@ -32,16 +32,25 @@ cfg$force_replace <- TRUE
 # support function to create standardized title
 .title <- function(cfg, ...) return(paste(cfg$info$flag, sep="_",...))
 
-# Reference and Policy run for SSP1, SSP2 and SSP5
+# Reference and Policy run for various shares of tax recycling
 for(s15_tax_redistribution in c(0,0.5,1)) {
 
   cfg$title <- .title(cfg, paste("SSP2","PkBudg650","recycling",s15_tax_redistribution,sep="-"))
-  cfg$gms$s15_elastic_demand <- 0
+  cfg$gms$s15_elastic_demand <- 1
   cfg$gms$s15_tax_redistribution <- s15_tax_redistribution
-  cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
+  cfg <- setScenario(cfg,c("SSP2","NDC","rcp1p9"))
   cfg$gms$c56_mute_ghgprices_until <- "y2030"
   cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
   cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
+  start_run(cfg, codeCheck = FALSE)
+  
+  cfg$title <- .title(cfg, paste("SSP2","Ref",sep="-"))
+  cfg$gms$s15_elastic_demand <- 1
+  cfg$gms$s15_tax_redistribution <- s15_tax_redistribution
+  cfg <- setScenario(cfg,c("SSP2","NPI","rcp7p0"))
+  cfg$gms$c56_mute_ghgprices_until <- "y2150"
+  cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NPi")
+  cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NPi")
   start_run(cfg, codeCheck = FALSE)
 
 }
