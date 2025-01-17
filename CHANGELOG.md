@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [4.9.0] - 2024-12-05
 
 ### changed
+- **scripts** changed EL2 Deep Dive c30_bioen_water switch to all and added sensitivity for paper revision
 - **35_natveg** revised age-class initialization of secondary forest
 - **38_factor_costs** updated use of USDA cost shares
 - **config** changed default input data to use 2017USD

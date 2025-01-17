@@ -39,6 +39,10 @@ cfg$output <- c(
   "rds_report"
 )
 
+# Set path to own coupled runs:
+path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release_v3/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
+
+
 #######################
 # SCENARIO DEFINITION #
 #######################
@@ -136,9 +140,9 @@ waste <- function(cfg) {
 # starting from 2020.
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C considering diet change
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
+  cfg$path_to_report_ghgprices <- path2MitigationRun
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
+  cfg$path_to_report_bioenergy <- path2MitigationRun
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
