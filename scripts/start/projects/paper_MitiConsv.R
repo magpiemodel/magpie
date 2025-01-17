@@ -9,7 +9,7 @@
 # description: Land-based mitigation and habitat conservation
 # -------------------------------------------------------------
 
-rev <- "rev14"
+rev <- "rev15"
 
 cres <- "c200"
 
@@ -35,11 +35,11 @@ cfg$title <- "calib_run"
 cfg$output <- c("rds_report", "validation_short")
 cfg$force_replace <- TRUE
 
-cfg$best_calib <- TRUE
+cfg$recalibrate_landconversion_cost <- TRUE
 cfg$best_calib_landconversion_cost <- FALSE
 
 # cc is new default
-cfg <- setScenario(cfg, c("SSP2","nocc_hist", "NPI", "ForestryExo"))
+cfg <- setScenario(cfg, c("SSP2EU", "nocc_hist", "NPI", "ForestryExo"))
 cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
 
 # sticky
@@ -73,8 +73,8 @@ for (scen in scenarios) {
   scen <- unlist(strsplit(scen, "-"))
   ssp <- scen[grepl("SSP", scen)]
 
-  if (length(ssp) == 0) {
-    ssp <- "SSP2"
+  if (length(ssp) == 0 || ssp == "SSP2") {
+    ssp <- "SSP2EU"
   }
 
   source("config/default.cfg")
