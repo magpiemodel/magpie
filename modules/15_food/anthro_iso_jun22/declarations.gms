@@ -176,7 +176,7 @@ parameters
  p15_country_switch(iso)                       Switch indicating whether country is affected by diet scenarios (1)
 
 * elastic demand
-  p15_tax_recycling(t,iso)                          Tax revenue recycling to households
+  p15_tax_recycling(t,iso)                          Tax revenue recycling to households (USD17PPP per capita)
   p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD17PPP per kcal)
   i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD17PPP per kcal)
 

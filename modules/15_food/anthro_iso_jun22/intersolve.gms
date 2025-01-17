@@ -36,12 +36,13 @@ if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
 * A new iteration is started
   p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
 * The set current iter includes only one element with the set element
-* of the current iteration, e.g. "iter2"
+* of the current iteration, e.g. "iter2". As iter0 also exists,
+* "iter2" is the third entry of the set iter15, so we add 1.
   curr_iter15(iter15) = no;
-  curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+  curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)+1) = yes;
 * Now we also define a set for the previous iteration
   prev_iter15(iter15) = no;
-  prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
+  prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
 
 *' @code
   display "starting m15_food_demand in iteration number ", p15_iteration_counter;
