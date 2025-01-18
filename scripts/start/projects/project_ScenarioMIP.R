@@ -20,9 +20,6 @@ source("scripts/start_functions.R")
 # Source default cfg. This loads the object "cfg" in R environment
 source("config/default.cfg")
 
-#download default input data
-download_and_update(cfg)
-
 # create additional information to describe the runs
 cfg$info$flag <- "SMIP13"
 
@@ -32,7 +29,9 @@ cfg$force_replace <- TRUE
 # support function to create standardized title
 .title <- function(cfg, ...) return(paste(cfg$info$flag, sep="_",...))
 
+#download default input data
 cfg$input[["report_coupling"]] <- "SMIPv04_report_coupling.tgz"
+download_and_update(cfg)
 
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
