@@ -112,4 +112,4 @@ p56_c_price_aff(t_all,i,ac)$(ord(t_all)+ac.off<card(t_all)) = p56_c_price_aff(t_
 ac_exp(ac)$(ac.off = s56_c_price_exp_aff/5) = yes;
 p56_c_price_aff(t_all,i,ac)$(ac.off >= s56_c_price_exp_aff/5) = sum(ac_exp, p56_c_price_aff(t_all,i,ac_exp));
 *zero C price before starting year
-p56_c_price_aff(t_all,i,ac)$(m_year(t_all) <= max(m_year("%c56_mute_ghgprices_until%"),s56_fader_start)) = 0;
+p56_c_price_aff(t_all,i,ac)$(m_year(t_all) <= max(m_year("%c56_mute_ghgprices_until%"),s56_fader_start*s56_ghgprice_fader)) = 0;
