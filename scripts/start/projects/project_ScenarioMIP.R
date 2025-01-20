@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP19"
+cfg$info$flag <- "SMIP20"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
@@ -90,6 +90,17 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg100
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0
 start_run(cfg, codeCheck = FALSE)
+
+#L-SSP2-PkBudg1000-AFoff-simple
+cfg$title <- .title(cfg, "L-SSP2-PkBudg1000-AFoff-simple")
+cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
+cfg$gms$s29_treecover_target <- 0
+cfg$gms$cropland    <- "simple_apr24"
+start_run(cfg, codeCheck = FALSE)
+cfg$gms$cropland    <- "detail_apr24"
 
 #VLHO-SSP2-EcBudg400
 cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400")
@@ -217,4 +228,4 @@ cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.015
-start_run(cfg, codeCheck = FALSE)
+#start_run(cfg, codeCheck = FALSE)
