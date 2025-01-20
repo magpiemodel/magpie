@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP18"
+cfg$info$flag <- "SMIP19"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
@@ -148,6 +148,16 @@ cfg$gms$s29_treecover_target <- 0.015
 cfg$gms$s56_minimum_cprice <- 4
 start_run(cfg, codeCheck = FALSE)
 
+#VLLO-SSP1-PkBudg650-min3p67
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min3p67")
+cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s56_minimum_cprice <- 3.67
+start_run(cfg, codeCheck = FALSE)
+
 #VLLO-SSP1-PkBudg650-min0
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min0")
 cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
@@ -176,17 +186,6 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.015
 cfg$gms$s56_fader_end <- 2070
-start_run(cfg, codeCheck = FALSE)
-
-#VLLO-SSP1-PkBudg650-2070-form2
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2070-form2")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
-cfg$gms$s56_fader_end <- 2070
-cfg$gms$s56_fader_functional_form <- 2
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650-2070-form2
