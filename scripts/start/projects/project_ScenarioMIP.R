@@ -118,6 +118,16 @@ cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkB
 cfg$gms$s29_treecover_target <- 0.015
 start_run(cfg, codeCheck = FALSE)
 
+#VLLO-SSP1-PkBudg650-all_nosoil
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-all_nosoil")
+cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$c56_emis_policy <- "all_nosoil"
+start_run(cfg, codeCheck = FALSE)
+
 #VLLO-SSP1-PkBudg650-min18
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min18")
 cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
