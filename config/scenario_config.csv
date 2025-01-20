@@ -67,7 +67,7 @@ gms$c56_pollutant_prices;;;;;;;;;;;;;;;;;;;;;;;;coupling;emulator;coupling;;;;;;
 gms$s56_c_price_exp_aff;;;;;;;;;;50;30;50;50;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s56_buffer_aff;;;;;;;;;;0.5;0.5;0.2;0.3;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c56_emis_policy;;;;;;;;;;reddnatveg_nosoil;reddnatveg_nosoil;redd_nosoil;all_nosoil;;;;;;reddnatveg_nosoil;;;;;;;;;;;;;;;;;;
-gms$s56_minimum_cprice;;;;;;;;;;;;;;;;;;;;0;0;0;0;;;;;;;;;;;;;;
+gms$s56_minimum_cprice;;;;;;;;;;;;;;;;;;;;0;0;0;11;;;;;;;;;;;;;;
 gms$s56_ghgprice_fader;;;;;;;;;;;;;;;;;;;1;;;;;;;;;;;;;;;;;;
 gms$s56_fader_start;;;;;;;;;;;;;;;;;;;2035;;;;;;;;;;;;;;;;;;
 gms$s56_fader_end;;;;;;;;;;;;;;;;;;;2050;;;;;;;;;;;;;;;;;;
