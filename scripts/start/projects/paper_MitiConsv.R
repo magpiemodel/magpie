@@ -9,7 +9,7 @@
 # description: Land-based mitigation and habitat conservation
 # -------------------------------------------------------------
 
-rev <- "rev15"
+rev <- "rev16"
 
 cres <- "c200"
 
@@ -87,11 +87,12 @@ for (scen in scenarios) {
     "output_check", "extra/disaggregation", "rds_report", "extra/runSEALSallocation"
   )
 
-  cfg$input["calibration"] <- calib_tgz
-
   # Climate change switched off for these runs
   cfg <- setScenario(cfg, c(ssp, "nocc_hist", "NPI", "ForestryExo"))
   cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
+
+  # Update calibration
+  cfg$input["calibration"] <- calib_tgz
 
   # sticky
   cfg$gms$factor_costs <- "sticky_feb18"
