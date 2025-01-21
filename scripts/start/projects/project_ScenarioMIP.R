@@ -117,7 +117,21 @@ cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-plant","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s29_treecover_target <- 0.03
+cfg$gms$s29_treecover_plantation <- 1
+cfg$gms$s29_treecover_bii_coeff <- 1
+start_run(cfg, codeCheck = FALSE)
+
+#VLHO-SSP2-EcBudg400-plant-50
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant")
+cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-plant","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
+cfg$gms$s29_treecover_target <- 0.03
+cfg$gms$s29_treecover_plantation <- 1
+cfg$gms$s29_treecover_bii_coeff <- 1
+cfg$gms$s32_planing_horizon <- 50
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650
@@ -126,7 +140,7 @@ cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-nat
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s29_treecover_target <- 0.03
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650-all_nosoil
@@ -135,7 +149,7 @@ cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-nat
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s29_treecover_target <- 0.03
 cfg$gms$c56_emis_policy <- "all_nosoil"
 start_run(cfg, codeCheck = FALSE)
 
@@ -145,7 +159,7 @@ cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-nat
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s29_treecover_target <- 0.03
 cfg$gms$s56_minimum_cprice <- 18
 start_run(cfg, codeCheck = FALSE)
 
@@ -175,7 +189,7 @@ cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-nat
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s29_treecover_target <- 0.03
 cfg$gms$s56_minimum_cprice <- 3.67
 start_run(cfg, codeCheck = FALSE)
 
@@ -185,7 +199,7 @@ cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-nat
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s29_treecover_target <- 0.03
 cfg$gms$s56_minimum_cprice <- 0
 start_run(cfg, codeCheck = FALSE)
 
@@ -227,5 +241,5 @@ cfg$gms$s56_ghgprice_fader <- 0
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s29_treecover_target <- 0.03
 #start_run(cfg, codeCheck = FALSE)
