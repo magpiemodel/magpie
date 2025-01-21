@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP20"
+cfg$info$flag <- "SMIP21"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
@@ -149,26 +149,26 @@ cfg$gms$s29_treecover_target <- 0.015
 cfg$gms$s56_minimum_cprice <- 18
 start_run(cfg, codeCheck = FALSE)
 
-#VLLO-SSP1-PkBudg650-min7
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min7")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
-cfg$gms$s56_minimum_cprice <- 7
-start_run(cfg, codeCheck = FALSE)
-
-#VLLO-SSP1-PkBudg650-min4
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min4")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
-cfg$gms$s56_minimum_cprice <- 4
-start_run(cfg, codeCheck = FALSE)
-
+# #VLLO-SSP1-PkBudg650-min7
+# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min7")
+# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$gms$s29_treecover_target <- 0.015
+# cfg$gms$s56_minimum_cprice <- 7
+# start_run(cfg, codeCheck = FALSE)
+# 
+# #VLLO-SSP1-PkBudg650-min4
+# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min4")
+# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$gms$s29_treecover_target <- 0.015
+# cfg$gms$s56_minimum_cprice <- 4
+# start_run(cfg, codeCheck = FALSE)
+# 
 #VLLO-SSP1-PkBudg650-min3p67
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min3p67")
 cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
@@ -189,36 +189,36 @@ cfg$gms$s29_treecover_target <- 0.015
 cfg$gms$s56_minimum_cprice <- 0
 start_run(cfg, codeCheck = FALSE)
 
-#VLLO-SSP1-PkBudg650-2060
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2060")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
-cfg$gms$s56_fader_end <- 2060
-start_run(cfg, codeCheck = FALSE)
-
-#VLLO-SSP1-PkBudg650-2070
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2070")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
-cfg$gms$s56_fader_end <- 2070
-start_run(cfg, codeCheck = FALSE)
-
-#VLLO-SSP1-PkBudg650-2070-form2
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2070-form2")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
-cfg$gms$s56_fader_end <- 2070
-cfg$gms$s56_fader_functional_form <- 2
-start_run(cfg, codeCheck = FALSE)
+# #VLLO-SSP1-PkBudg650-2060
+# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2060")
+# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$gms$s29_treecover_target <- 0.015
+# cfg$gms$s56_fader_end <- 2060
+# start_run(cfg, codeCheck = FALSE)
+# 
+# #VLLO-SSP1-PkBudg650-2070
+# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2070")
+# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$gms$s29_treecover_target <- 0.015
+# cfg$gms$s56_fader_end <- 2070
+# start_run(cfg, codeCheck = FALSE)
+# 
+# #VLLO-SSP1-PkBudg650-2070-form2
+# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2070-form2")
+# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+# cfg$gms$s29_treecover_target <- 0.015
+# cfg$gms$s56_fader_end <- 2070
+# cfg$gms$s56_fader_functional_form <- 2
+# start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650-FaderOff
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-FaderOff")
