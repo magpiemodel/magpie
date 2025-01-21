@@ -75,7 +75,7 @@
  q35_min_forest(j2) .. sum(land_forest, pcm_land(j2,land_forest)) 
                      - sum(ac_sub, v35_secdforest_reduction(j2,ac_sub))
                      - v35_primforest_reduction(j2)
-                     - sum(type32, vm_landreduction_forestry(j2,type32))
+                     - vm_landreduction_forestry(j2,"ndc")
                         =g=
                        sum(ct, p35_min_forest(ct,j2));
 
