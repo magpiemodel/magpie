@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP21"
+cfg$info$flag <- "SMIP22"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
@@ -39,7 +39,7 @@ cfg$gms$cropland    <- "detail_apr24"
 
 #H-SSP3-NPi2025
 cfg$title <- .title(cfg, "H-SSP3-NPi2025")
-cfg <- setScenario(cfg,c("SSP3","NPI","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("SSP3","NPI","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-M-SSP3-NPi2025-var-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-M-SSP3-NPi2025-var-rem-7.mif"
@@ -48,7 +48,7 @@ start_run(cfg, codeCheck = FALSE)
 
 #H-SSP3-rollBack
 cfg$title <- .title(cfg, "H-SSP3-rollBack")
-cfg <- setScenario(cfg,c("SSP3","NPI-revert","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("SSP3","NPI-revert","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
@@ -57,7 +57,7 @@ start_run(cfg, codeCheck = FALSE)
 
 #M-SSP2-NPi2025
 cfg$title <- .title(cfg, "M-SSP2-NPi2025")
-cfg <- setScenario(cfg,c("SSP2","NPI","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("SSP2","NPI","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-M-SSP2-NPi2025-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-M-SSP2-NPi2025-def-rem-7.mif"
@@ -66,7 +66,7 @@ start_run(cfg, codeCheck = FALSE)
 
 #ML-SSP2-PkBudg1500
 cfg$title <- .title(cfg, "ML-SSP2-PkBudg1500")
-cfg <- setScenario(cfg,c("SSP2","NPI","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("SSP2","NPI","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2040"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-ML-SSP2-PkBudg1500-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-ML-SSP2-PkBudg1500-def-rem-7.mif"
@@ -75,171 +75,57 @@ start_run(cfg, codeCheck = FALSE)
 
 #L-SSP2-PkBudg1000
 cfg$title <- .title(cfg, "L-SSP2-PkBudg1000")
-cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("SSP2","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.015
 start_run(cfg, codeCheck = FALSE)
 
-#L-SSP2-PkBudg1000-AFoff
-cfg$title <- .title(cfg, "L-SSP2-PkBudg1000-AFoff")
-cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0
-start_run(cfg, codeCheck = FALSE)
-
-#L-SSP2-PkBudg1000-AFoff-simple
-cfg$title <- .title(cfg, "L-SSP2-PkBudg1000-AFoff-simple")
-cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0
-cfg$gms$cropland    <- "simple_apr24"
-start_run(cfg, codeCheck = FALSE)
-cfg$gms$cropland    <- "detail_apr24"
-
-#VLHO-SSP2-EcBudg400
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400")
-cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+#VLHO-SSP2-EcBudg400-natveg
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-natveg")
+cfg <- setScenario(cfg,c("SSP2","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.015
+cfg$gms$s29_treecover_target <- 0.03
 start_run(cfg, codeCheck = FALSE)
 
 #VLHO-SSP2-EcBudg400-plant
 cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant")
-cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-plant","nocc_hist"))
+cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$s29_treecover_plantation <- 1
-cfg$gms$s29_treecover_bii_coeff <- 1
 start_run(cfg, codeCheck = FALSE)
 
 #VLHO-SSP2-EcBudg400-plant-50
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant")
-cfg <- setScenario(cfg,c("SSP2","NDC","GHG-Price-Fader","AF-plant","nocc_hist"))
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-50")
+cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant",,"nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$s29_treecover_plantation <- 1
-cfg$gms$s29_treecover_bii_coeff <- 1
 cfg$gms$s32_planing_horizon <- 50
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.03
-start_run(cfg, codeCheck = FALSE)
-
-#VLLO-SSP1-PkBudg650-all_nosoil
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-all_nosoil")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$c56_emis_policy <- "all_nosoil"
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650-min18
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min18")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.03
 cfg$gms$s56_minimum_cprice <- 18
 start_run(cfg, codeCheck = FALSE)
-
-# #VLLO-SSP1-PkBudg650-min7
-# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min7")
-# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-# cfg$gms$c56_mute_ghgprices_until <- "y2030"
-# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$gms$s29_treecover_target <- 0.015
-# cfg$gms$s56_minimum_cprice <- 7
-# start_run(cfg, codeCheck = FALSE)
-# 
-# #VLLO-SSP1-PkBudg650-min4
-# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min4")
-# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-# cfg$gms$c56_mute_ghgprices_until <- "y2030"
-# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$gms$s29_treecover_target <- 0.015
-# cfg$gms$s56_minimum_cprice <- 4
-# start_run(cfg, codeCheck = FALSE)
-# 
-#VLLO-SSP1-PkBudg650-min3p67
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min3p67")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$s56_minimum_cprice <- 3.67
-start_run(cfg, codeCheck = FALSE)
-
-#VLLO-SSP1-PkBudg650-min0
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min0")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.03
 cfg$gms$s56_minimum_cprice <- 0
-start_run(cfg, codeCheck = FALSE)
-
-# #VLLO-SSP1-PkBudg650-2060
-# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2060")
-# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-# cfg$gms$c56_mute_ghgprices_until <- "y2030"
-# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$gms$s29_treecover_target <- 0.015
-# cfg$gms$s56_fader_end <- 2060
-# start_run(cfg, codeCheck = FALSE)
-# 
-# #VLLO-SSP1-PkBudg650-2070
-# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2070")
-# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-# cfg$gms$c56_mute_ghgprices_until <- "y2030"
-# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$gms$s29_treecover_target <- 0.015
-# cfg$gms$s56_fader_end <- 2070
-# start_run(cfg, codeCheck = FALSE)
-# 
-# #VLLO-SSP1-PkBudg650-2070-form2
-# cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-2070-form2")
-# cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-# cfg$gms$c56_mute_ghgprices_until <- "y2030"
-# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-# cfg$gms$s29_treecover_target <- 0.015
-# cfg$gms$s56_fader_end <- 2070
-# cfg$gms$s56_fader_functional_form <- 2
-# start_run(cfg, codeCheck = FALSE)
-
-#VLLO-SSP1-PkBudg650-FaderOff
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-FaderOff")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","GHG-Price-Fader","AF-natveg","nocc_hist"))
-cfg$gms$s56_ghgprice_fader <- 0
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.03
-#start_run(cfg, codeCheck = FALSE)
