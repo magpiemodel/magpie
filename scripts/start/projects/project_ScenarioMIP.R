@@ -135,43 +135,43 @@ cfg$gms$cropland    <- "detail_apr24"
 
 
 #VLHO-SSP2-EcBudg400-plant
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-29bii0")
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-29bii1")
 cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$s29_treecover_bii_coeff <- 0
+cfg$gms$s29_treecover_bii_coeff <- 1
 start_run(cfg, codeCheck = FALSE)
 
-#VLHO-SSP2-EcBudg400-plant
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-32bii0")
-cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$s32_aff_bii_coeff <- 0
-start_run(cfg, codeCheck = FALSE)
-
-#VLHO-SSP2-EcBudg400-plant
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-29bii032bii0")
-cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$s29_treecover_bii_coeff <- 0
-cfg$gms$s32_aff_bii_coeff <- 0
-start_run(cfg, codeCheck = FALSE)
-
-#VLHO-SSP2-EcBudg400-plant
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-29natveg")
-cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
-cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$s29_treecover_bii_coeff <- 0
-cfg$gms$s29_treecover_plantation <- 0
-start_run(cfg, codeCheck = FALSE)
+# #VLHO-SSP2-EcBudg400-plant
+# cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-32bii0")
+# cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
+# cfg$gms$s29_treecover_target <- 0.03
+# cfg$gms$s32_aff_bii_coeff <- 0
+# start_run(cfg, codeCheck = FALSE)
+# 
+# #VLHO-SSP2-EcBudg400-plant
+# cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-29bii032bii0")
+# cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
+# cfg$gms$s29_treecover_target <- 0.03
+# cfg$gms$s29_treecover_bii_coeff <- 0
+# cfg$gms$s32_aff_bii_coeff <- 0
+# start_run(cfg, codeCheck = FALSE)
+# 
+# #VLHO-SSP2-EcBudg400-plant
+# cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-29natveg")
+# cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
+# cfg$gms$s29_treecover_target <- 0.03
+# cfg$gms$s29_treecover_bii_coeff <- 0
+# cfg$gms$s29_treecover_plantation <- 0
+# start_run(cfg, codeCheck = FALSE)
