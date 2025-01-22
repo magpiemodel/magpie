@@ -72,12 +72,16 @@
 *' the natural land conservation constraint) and specifically formulated for forest and
 *' other land stocks.
 
- q35_min_forest(j2) .. sum(land_forest, vm_land(j2,land_forest)) - vm_landexpansion_forestry(j2,"ndc")
+ q35_min_forest(j2) .. sum(land_forest, vm_land(j2,land_forest))
                         =g=
                        sum(ct, p35_min_forest(ct,j2)) ;
 
  q35_min_other(j2) .. vm_land(j2,"other")
                       =g= sum(ct, p35_min_other(ct,j2));
+
+ q35_max_ndc_aff(j2) .. vm_landexpansion_forestry(j2,"ndc")
+                        =l=
+                        vm_landreduction(j2,"crop") + vm_landreduction(j2,"past");
 
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
 *' The gross change in natural vegetation is calculated based on land expansion and

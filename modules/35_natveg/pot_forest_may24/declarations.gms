@@ -43,6 +43,7 @@ equations
  q35_carbon_other(j,ag_pools,stockType)                  Other land carbon stock calculation (mio tC)
  q35_min_forest(j)                                       Minimum forest land constraint (mio. ha)
  q35_min_other(j)                                        Minimum other land constraint (mio. ha)
+ q35_max_ndc_aff(j)                                      TEST (mio. ha)
  q35_landdiff                                            Difference in natveg land (mio. ha)
  q35_other_expansion(j,othertype35)                      Other land expansion (mio. ha)
  q35_other_reduction(j,othertype35,ac)                   Other land reduction (mio. ha)
