@@ -77,7 +77,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' The constraint `q32_ndc_aff_limit` makes sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
 
  q32_ndc_aff_limit(j2) ..
- sum(ct, p32_aff_pol_timestep(ct,j2)) * vm_natveg_reduction(j2) =e= 0;
+ sum(ct, p32_aff_pol_timestep(ct,j2)) * vm_natforest_reduction(j2) =e= 0;
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global endogenous
 *' afforestation defined in `i32_max_aff_area_glo`.
