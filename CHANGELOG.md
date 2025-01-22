@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### added
 - **scripts** added start script for land-based mitigation and biodiversity conservation paper
 - **start_scripts** added `lock_timeout` as option to `start_run` function
+- **scripts** release number can be passed as an argument to test_runs.R to tag as release
 
 ### removed
 -
