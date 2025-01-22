@@ -72,11 +72,14 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
- sum(ac_est, v32_land(j2,"ndc",ac_est)) =e= sum(ct, p32_aff_pol_timestep(ct,j2)) + v32_ndc_area_missing(j2);
+ sum(ac_est, v32_land(j2,"ndc",ac_est)) + v32_ndc_area_missing(j2) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
- q32_ndc_aff_limit(j2) .. sum(ac_est, v32_land(j2,"ndc",ac_est))
-                        =l=
-                        vm_landreduction(j2,"crop") + vm_landreduction(j2,"past");
+ q32_ndc_aff_limit(j2) ..
+ sum(ct, p32_aff_pol_timestep(ct,j2)) * (sum(ac_sub, v35_secdforest_reduction(j2,ac_sub)) + v35_primforest_reduction(j2)) =e= 0;
+
+* q32_ndc_aff_limit(j2) .. sum(ac_est, v32_land(j2,"ndc",ac_est))
+*                        =l=
+*                        vm_landreduction(j2,"crop") + vm_landreduction(j2,"past");
 
 
 
