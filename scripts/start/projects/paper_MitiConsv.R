@@ -98,7 +98,6 @@ for (scen in scenarios) {
 
   # Calibration settings
   cfg$input["calibration"] <- calib_tgz
-  cfg$best_calib_landconversion_cost <- FALSE
 
   # sticky
   cfg$gms$factor_costs <- "sticky_feb18"
