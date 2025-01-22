@@ -31,12 +31,17 @@ source("scripts/start_functions.R")
 
 source("config/default.cfg")
 
-cfg$title <- "calib_run"
+cfg$title <- paste0(rev, "_calib_MitiConsv")
 cfg$output <- c("rds_report", "validation_short")
 cfg$force_replace <- TRUE
 
+# land conversion cost calibration settings
 cfg$recalibrate_landconversion_cost <- TRUE
+cfg$restart_landconversion_cost <- FALSE
 cfg$best_calib_landconversion_cost <- FALSE
+
+cfg$calib_accuracy_landconversion_cost <- 0.01
+cfg$lowpass_filter_landconversion_cost <- 1
 
 # cc is new default
 cfg <- setScenario(cfg, c("SSP2EU", "nocc_hist", "NPI", "ForestryExo"))
@@ -63,10 +68,10 @@ prefix <- paste(rev, "MitiConsv", cres, sep = "_")
 scenarios <- c(
   "SSP2-REF", "SSP2-PB650-PriceAR", "SSP2-PB650-PriceProt",
   "SSP2-PB1000-PriceAR", "SSP2-PB1000-PriceProt",
-  "SSP2-PB650-PriceAR-30by30", "SSP2-PB650-PriceProt-30by30",
   "SSP2-PB650-PriceAR-BH", "SSP2-PB650-PriceProt-BH",
-  "SSP2-PB1000-PriceAR-30by30", "SSP2-PB1000-PriceProt-30by30",
-  "SSP2-PB1000-PriceAR-BH", "SSP2-PB1000-PriceProt-BH"
+  "SSP2-PB1000-PriceAR-BH", "SSP2-PB1000-PriceProt-BH",
+  "SSP2-PB650-PriceAR-KBA", "SSP2-PB650-PriceProt-KBA",
+  "SSP2-PB1000-PriceAR-KBA", "SSP2-PB1000-PriceProt-KBA"
 )
 
 for (scen in scenarios) {
@@ -91,8 +96,9 @@ for (scen in scenarios) {
   cfg <- setScenario(cfg, c(ssp, "nocc_hist", "NPI", "ForestryExo"))
   cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
 
-  # Update calibration
+  # Calibration settings
   cfg$input["calibration"] <- calib_tgz
+  cfg$best_calib_landconversion_cost <- FALSE
 
   # sticky
   cfg$gms$factor_costs <- "sticky_feb18"
@@ -131,8 +137,8 @@ for (scen in scenarios) {
     cfg$gms$s56_c_price_induced_aff <- 0
   }
 
-  if ("30by30" %in% scen) {
-    cfg$gms$c22_protect_scenario <- "30by30"
+  if ("KBA" %in% scen) {
+    cfg$gms$c22_protect_scenario <- "KBA"
   }
 
   if ("BH" %in% scen) {
