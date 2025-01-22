@@ -140,17 +140,17 @@ cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.03
-start_run(cfg, codeCheck = FALSE)
+#start_run(cfg, codeCheck = FALSE)
 
 
-#VLHO-SSP2-EcBudg400-plant
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-29bii01")
+#VLHO-SSP2-EcBudg400-plant2
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant2")
 cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.03
-cfg$gms$s29_treecover_bii_coeff <- 0
+cfg$gms$s29_fallow_max <- 0
 start_run(cfg, codeCheck = FALSE)
 
 # #VLHO-SSP2-EcBudg400-plant
