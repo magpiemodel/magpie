@@ -69,19 +69,15 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
   =e=
   sum(ac_sub, v32_hvarea_forestry(j2,ac_sub)) * sum(cell(i2,j2), min(1, sum(ct, p32_future_to_current_demand_ratio(ct,i2))))$s32_establishment_dynamic;
 
-*' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
+*' The constraint `q32_aff_pol` accounts for the exogenous re/afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
  sum(ac_est, v32_land(j2,"ndc",ac_est)) + v32_ndc_area_missing(j2) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
+*' The constraint `q32_ndc_aff_limit` makes sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
+
  q32_ndc_aff_limit(j2) ..
- sum(ct, p32_aff_pol_timestep(ct,j2)) * (sum(ac_sub, v35_secdforest_reduction(j2,ac_sub)) + v35_primforest_reduction(j2)) =e= 0;
-
-* q32_ndc_aff_limit(j2) .. sum(ac_est, v32_land(j2,"ndc",ac_est))
-*                        =l=
-*                        vm_landreduction(j2,"crop") + vm_landreduction(j2,"past");
-
-
+ sum(ct, p32_aff_pol_timestep(ct,j2)) * vm_natveg_reduction(j2) =e= 0;
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global endogenous
 *' afforestation defined in `i32_max_aff_area_glo`.
