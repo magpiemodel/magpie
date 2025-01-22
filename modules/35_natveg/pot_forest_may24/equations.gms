@@ -79,10 +79,6 @@
  q35_min_other(j2) .. vm_land(j2,"other")
                       =g= sum(ct, p35_min_other(ct,j2));
 
- q35_max_ndc_aff(j2) .. vm_landexpansion_forestry(j2,"ndc")
-                        =l=
-                        vm_landreduction(j2,"crop") + vm_landreduction(j2,"past");
-
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
 *' The gross change in natural vegetation is calculated based on land expansion and
 *' land contraction of other land, and land reduction of primary and secondary forest.

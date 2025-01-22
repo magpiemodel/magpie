@@ -75,6 +75,7 @@ positive variables
  vm_land_forestry(j,type32)                         Forestry land pools (mio. ha)
  v32_prod_forestry_future(i)                        Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
  v32_land_replant(j)                                Harvested and replanted area in timber plantations (mio. ha)
+ v32_ndc_area_missing(j)                            Missing NDC area (mio. ha)
 ;
 
 variables
@@ -91,6 +92,7 @@ equations
  q32_max_aff                                        Maximum total global afforestation (mio. ha)
  q32_max_aff_reg(i)                                 Maximum total regional afforestation (mio. ha)
  q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
+ q32_ndc_aff_limit(j)                               NDC afforestation limit (mio. ha)
  q32_aff_est(j)                                     Afforestation constraint for establishment age classes (mio. ha)
  q32_hvarea_forestry(j,ac)                          Plantations area harvest (mio. ha)
  q32_cost_recur(i)                                  Recurruing costs (mio. USD)
