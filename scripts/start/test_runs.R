@@ -24,7 +24,12 @@ source("config/default.cfg")
 download_and_update(cfg)
 
 # create additional information to describe the runs
-cfg$info$flag <- "weeklyTests"
+arguments <- commandArgs(trailingOnly = TRUE)
+if (length(arguments) == 1) {
+  cfg$info$flag <- paste0("release-", arguments)
+} else {
+  cfg$info$flag <- "weeklyTests"
+}
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
