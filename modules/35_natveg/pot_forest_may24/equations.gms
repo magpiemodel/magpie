@@ -74,7 +74,7 @@
 
  q35_min_forest(j2) .. sum(land_forest, vm_land(j2,land_forest))
                        =g=
-                       sum(ct, p35_min_forest(ct,j2)) ;
+                       sum(ct, p35_min_forest(ct,j2));
 
  q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
 
