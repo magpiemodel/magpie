@@ -73,11 +73,10 @@
 *' other land stocks.
 
  q35_min_forest(j2) .. sum(land_forest, vm_land(j2,land_forest))
-                        =g=
+                       =g=
                        sum(ct, p35_min_forest(ct,j2)) ;
 
- q35_min_other(j2) .. vm_land(j2,"other")
-                      =g= sum(ct, p35_min_other(ct,j2));
+ q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
 
  q35_natforest_reduction(j2) .. vm_natforest_reduction(j2) =e=
  v35_primforest_reduction(j2) + sum(ac_sub, v35_secdforest_reduction(j2,ac_sub));

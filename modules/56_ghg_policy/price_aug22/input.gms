@@ -8,7 +8,8 @@
 * Set-switch for countries affected by regional ghg policy
 * Default: all iso countries selected
 sets
-  policy_countries56(iso) countries to be affected by ghg policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  policy_countries56(iso) countries to be affected by ghg policy / 
+                      ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                       ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                       BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                       BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
@@ -34,7 +35,8 @@ sets
                       UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                       VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
   
-  fader_countries56(iso) countries to be affected by ghg policy fader / ABW,AFG,AGO,AIA,ALA,AND,ARE,ARG,ARM,ASM,ATA,
+  fader_countries56(iso) countries to be affected by ghg policy fader / 
+                                ABW,AFG,AGO,AIA,ALA,AND,ARE,ARG,ARM,ASM,ATA,
                                 ATF,ATG,AZE,BDI,BEN,BES,BFA,BGD,BHR,BHS,BLM,
                                 BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,
                                 CCK,CHN,CHL,CIV,CMR,COD,COG,COK,COL,COM,CPV,
@@ -54,8 +56,7 @@ sets
                                 TWN,TZA,UGA,UKR,UMI,URY,UZB,VAT,VCT,VEN,VGB,
                                 VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
-pollutants_fader(pollutants) pollutants affected by GHG policy fader / co2_c,  ch4,  n2o_n_direct,  n2o_n_indirect,  nh3_n,  
-		no2_n,  no3_n /
+pollutants_fader(pollutants) pollutants affected by GHG policy fader / co2_c, ch4, n2o_n_direct, n2o_n_indirect, nh3_n, no2_n, no3_n /
 
 ;
 
