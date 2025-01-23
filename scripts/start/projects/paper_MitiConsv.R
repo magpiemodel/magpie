@@ -66,12 +66,12 @@ calib_tgz <- magpie4::submitCalibration(paste(rev, "MitiConsv", sep = "_"))
 prefix <- paste(rev, "MitiConsv", cres, sep = "_")
 
 scenarios <- c(
-  "SSP2-REF", "SSP2-PB650-PriceAR", "SSP2-PB650-PriceProt",
-  "SSP2-PB1000-PriceAR", "SSP2-PB1000-PriceProt",
-  "SSP2-PB650-PriceAR-BH", "SSP2-PB650-PriceProt-BH",
-  "SSP2-PB1000-PriceAR-BH", "SSP2-PB1000-PriceProt-BH",
-  "SSP2-PB650-PriceAR-KBA", "SSP2-PB650-PriceProt-KBA",
-  "SSP2-PB1000-PriceAR-KBA", "SSP2-PB1000-PriceProt-KBA"
+  "SSP2-REF", "SSP2-PB650-AR", "SSP2-PB650-AvC",
+  "SSP2-PB1000-AR", "SSP2-PB1000-AvC",
+  "SSP2-PB650-AR-BH", "SSP2-PB650-AvC-BH",
+  "SSP2-PB1000-AR-BH", "SSP2-PB1000-AvC-BH",
+  "SSP2-PB650-AR-KBA", "SSP2-PB650-AvC-KBA",
+  "SSP2-PB1000-AR-KBA", "SSP2-PB1000-AvC-KBA"
 )
 
 for (scen in scenarios) {
@@ -127,11 +127,11 @@ for (scen in scenarios) {
     cfg$path_to_report_bioenergy <- pathToCoupledOutput
   }
 
-  if ("PriceAR" %in% scen) {
+  if ("AR" %in% scen) {
     cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
   }
 
-  if ("PriceProt" %in% scen) {
+  if ("AvC" %in% scen) {
     cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
     cfg$gms$s56_c_price_induced_aff <- 0
   }
