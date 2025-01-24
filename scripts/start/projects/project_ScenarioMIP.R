@@ -82,8 +82,8 @@ cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg
 cfg$gms$s29_treecover_target <- 0.015
 start_run(cfg, codeCheck = FALSE)
 
-#VLHO-SSP2-EcBudg400-natveg
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-natveg")
+#VLHO-SSP2-EcBudg400-natveg50 -> not used
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-natveg50")
 cfg <- setScenario(cfg,c("SSP2","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-def-rem-7.mif"
@@ -91,8 +91,8 @@ cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcB
 cfg$gms$s29_treecover_target <- 0.03
 start_run(cfg, codeCheck = FALSE)
 
-#VLHO-SSP2-EcBudg400-plant
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant")
+#VLHO-SSP2-EcBudg400-plant30 -> default
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant30")
 cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
@@ -100,8 +100,8 @@ cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcB
 cfg$gms$s29_treecover_target <- 0.03
 start_run(cfg, codeCheck = FALSE)
 
-#VLHO-SSP2-EcBudg400-plant-50
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant-50")
+#VLHO-SSP2-EcBudg400-plant50 -> variant
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant50")
 cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
@@ -119,7 +119,7 @@ cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkB
 cfg$gms$s29_treecover_target <- 0.03
 start_run(cfg, codeCheck = FALSE)
 
-#VLLO-SSP1-PkBudg650-min18
+#VLLO-SSP1-PkBudg650-min18 -> old version with mininum CO2 price
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-min18")
 cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
