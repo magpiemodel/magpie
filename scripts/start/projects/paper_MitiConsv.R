@@ -105,26 +105,24 @@ for (scen in scenarios) {
   # SNV habitat defintion
   cfg$gms$land_snv <- "secdforest, other"
 
+  # Set path to coupled output
+  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-NPi-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-NPi-rem-12.mif"
+
+  # No ghg price in NPI run
+  cfg$gms$c56_mute_ghgprices_until <- "y2100"
+
   if ("PB650" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg650-rem-12.mif"
-    # Settings taken from coupled runs
-    cfg$gms$c56_pollutant_prices <- "coupling"
-    cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$path_to_report_ghgprices <- pathToCoupledOutput
-    cfg$path_to_report_bioenergy <- pathToCoupledOutput
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg650-rem-12.mif"
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
   if ("PB1000" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
-    # Settings taken from coupled runs
-    cfg$gms$c56_pollutant_prices <- "coupling"
-    cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$path_to_report_ghgprices <- pathToCoupledOutput
-    cfg$path_to_report_bioenergy <- pathToCoupledOutput
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
   if ("AR" %in% scen) {
@@ -143,6 +141,12 @@ for (scen in scenarios) {
   if ("BH" %in% scen) {
     cfg$gms$c22_protect_scenario <- "BH"
   }
+
+  # Settings taken from coupled runs
+  cfg$gms$c56_pollutant_prices <- "coupling"
+  cfg$gms$c60_2ndgen_biodem <- "coupling"
+  cfg$path_to_report_ghgprices <- pathToCoupledOutput
+  cfg$path_to_report_bioenergy <- pathToCoupledOutput
 
   cfg$title <- paste0(prefix, "_", paste(scen, collapse = "-"))
   start_run(cfg = cfg, codeCheck = FALSE)
