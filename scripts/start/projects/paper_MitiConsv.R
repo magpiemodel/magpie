@@ -114,14 +114,14 @@ for (scen in scenarios) {
   if ("PB650" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg650-rem-12.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg650-rem-12.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
   if ("PB1000" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
