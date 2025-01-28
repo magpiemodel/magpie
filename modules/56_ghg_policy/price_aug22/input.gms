@@ -37,28 +37,27 @@ sets
   
   fader_countries56(iso) countries to be affected by ghg policy fader
                     / ABW,AFG,AGO,AIA,ALA,AND,ARE,ARG,ARM,ASM,ATA,
-                                ATF,ATG,AZE,BDI,BEN,BES,BFA,BGD,BHR,BHS,BLM,
-                                BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,
-                                CCK,CHN,CHL,CIV,CMR,COD,COG,COK,COL,COM,CPV,
-                                CRI,CUB,CUW,CXR,CYM,DJI,DMA,DOM,DZA,ECU,EGY,
-                                ERI,ESH,ETH,FJI,FLK,FRO,FSM,GAB,GEO,GGY,GHA,
-                                GIB,GIN,GLP,GMB,GNB,GNQ,GRD,GRL,GTM,GUF,GUM,
-                                GUY,HKG,HMD,HND,HTI,IDN,IMN,IND,IOT,IRN,IRQ,
-                                ISR,JAM,JEY,JOR,KAZ,KEN,KGZ,KHM,KIR,KNA,KOR,
-                                KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,MAC,MAF,
-                                MAR,MCO,MDA,MDG,MDV,MEX,MHL,MLI,MMR,MNG,MNP,
-                                MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,
-                                NFK,NGA,NIC,NIU,NPL,NRU,OMN,PAK,PAN,PCN,PER,
-                                PHL,PLW,PNG,PRI,PRK,PRY,PSE,PYF,QAT,REU,RUS,
-                                RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,
-                                SMR,SOM,SPM,SSD,STP,SUR,SWZ,SXM,SYC,SYR,TCA,
-                                TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUV,
-                                TWN,TZA,UGA,UKR,UMI,URY,UZB,VAT,VCT,VEN,VGB,
-                                VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+                      ATF,ATG,AZE,BDI,BEN,BES,BFA,BGD,BHR,BHS,BLM,
+                      BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,
+                      CCK,CHN,CHL,CIV,CMR,COD,COG,COK,COL,COM,CPV,
+                      CRI,CUB,CUW,CXR,CYM,DJI,DMA,DOM,DZA,ECU,EGY,
+                      ERI,ESH,ETH,FJI,FLK,FRO,FSM,GAB,GEO,GGY,GHA,
+                      GIB,GIN,GLP,GMB,GNB,GNQ,GRD,GRL,GTM,GUF,GUM,
+                      GUY,HKG,HMD,HND,HTI,IDN,IMN,IND,IOT,IRN,IRQ,
+                      ISR,JAM,JEY,JOR,KAZ,KEN,KGZ,KHM,KIR,KNA,KOR,
+                      KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,MAC,MAF,
+                      MAR,MCO,MDA,MDG,MDV,MEX,MHL,MLI,MMR,MNG,MNP,
+                      MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,
+                      NFK,NGA,NIC,NIU,NPL,NRU,OMN,PAK,PAN,PCN,PER,
+                      PHL,PLW,PNG,PRI,PRK,PRY,PSE,PYF,QAT,REU,RUS,
+                      RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,
+                      SMR,SOM,SPM,SSD,STP,SUR,SWZ,SXM,SYC,SYR,TCA,
+                      TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUV,
+                      TWN,TZA,UGA,UKR,UMI,URY,UZB,VAT,VCT,VEN,VGB,
+                      VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
 pollutants_fader(pollutants) pollutants affected by GHG policy fader 
-              / co2_c,  ch4,  n2o_n_direct,  n2o_n_indirect,  nh3_n,  
-		no2_n,  no3_n /
+              / co2_c, ch4, n2o_n_direct, n2o_n_indirect, nh3_n, no2_n, no3_n /
 
 ;
 
