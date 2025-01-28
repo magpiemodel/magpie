@@ -17,7 +17,7 @@ $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_waste_shr.csv"
 $offdelim;
 
-table fm_attributes(attributes,kall) Conversion factors - where X is ton N P K C DM WM or PJ GE (X per tDM)
+table fm_attributes(attributes,kall) Conversion factors - where X is ton N P K C DM WM or GJ GE (X per tDM)
 $ondelim
 $include "./modules/16_demand/sector_may15/input/fm_attributes.cs3"
 $offdelim;
