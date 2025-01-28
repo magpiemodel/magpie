@@ -9,7 +9,7 @@
 # description: Land-based mitigation and habitat conservation
 # -------------------------------------------------------------
 
-rev <- "rev14"
+rev <- "rev16"
 
 cres <- "c200"
 
@@ -31,15 +31,20 @@ source("scripts/start_functions.R")
 
 source("config/default.cfg")
 
-cfg$title <- "calib_run"
+cfg$title <- paste0(rev, "_calib_MitiConsv")
 cfg$output <- c("rds_report", "validation_short")
 cfg$force_replace <- TRUE
 
-cfg$best_calib <- TRUE
+# land conversion cost calibration settings
+cfg$recalibrate_landconversion_cost <- TRUE
+cfg$restart_landconversion_cost <- FALSE
 cfg$best_calib_landconversion_cost <- FALSE
 
+cfg$calib_accuracy_landconversion_cost <- 0.01
+cfg$lowpass_filter_landconversion_cost <- 1
+
 # cc is new default
-cfg <- setScenario(cfg, c("SSP2","nocc_hist", "NPI", "ForestryExo"))
+cfg <- setScenario(cfg, c("SSP2EU", "nocc_hist", "NPI", "ForestryExo"))
 cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
 
 # sticky
@@ -61,20 +66,20 @@ calib_tgz <- magpie4::submitCalibration(paste(rev, "MitiConsv", sep = "_"))
 prefix <- paste(rev, "MitiConsv", cres, sep = "_")
 
 scenarios <- c(
-  "SSP2-REF", "SSP2-PB650-PriceAR", "SSP2-PB650-PriceProt",
-  "SSP2-PB1000-PriceAR", "SSP2-PB1000-PriceProt",
-  "SSP2-PB650-PriceAR-30by30", "SSP2-PB650-PriceProt-30by30",
-  "SSP2-PB650-PriceAR-BH", "SSP2-PB650-PriceProt-BH",
-  "SSP2-PB1000-PriceAR-30by30", "SSP2-PB1000-PriceProt-30by30",
-  "SSP2-PB1000-PriceAR-BH", "SSP2-PB1000-PriceProt-BH"
+  "SSP2-REF", "SSP2-PB650-AR", "SSP2-PB650-AvC",
+  "SSP2-PB1000-AR", "SSP2-PB1000-AvC",
+  "SSP2-PB650-AR-BH", "SSP2-PB650-AvC-BH",
+  "SSP2-PB1000-AR-BH", "SSP2-PB1000-AvC-BH",
+  "SSP2-PB650-AR-KBA", "SSP2-PB650-AvC-KBA",
+  "SSP2-PB1000-AR-KBA", "SSP2-PB1000-AvC-KBA"
 )
 
 for (scen in scenarios) {
   scen <- unlist(strsplit(scen, "-"))
   ssp <- scen[grepl("SSP", scen)]
 
-  if (length(ssp) == 0) {
-    ssp <- "SSP2"
+  if (length(ssp) == 0 || ssp == "SSP2") {
+    ssp <- "SSP2EU"
   }
 
   source("config/default.cfg")
@@ -87,11 +92,12 @@ for (scen in scenarios) {
     "output_check", "extra/disaggregation", "rds_report", "extra/runSEALSallocation"
   )
 
-  cfg$input["calibration"] <- calib_tgz
-
   # Climate change switched off for these runs
   cfg <- setScenario(cfg, c(ssp, "nocc_hist", "NPI", "ForestryExo"))
   cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
+
+  # Calibration settings
+  cfg$input["calibration"] <- calib_tgz
 
   # sticky
   cfg$gms$factor_costs <- "sticky_feb18"
@@ -99,44 +105,48 @@ for (scen in scenarios) {
   # SNV habitat defintion
   cfg$gms$land_snv <- "secdforest, other"
 
+  # Set path to coupled output
+  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-NPi-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-NPi-rem-12.mif"
+
+  # No ghg price in NPI run
+  cfg$gms$c56_mute_ghgprices_until <- "y2100"
+
   if ("PB650" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg650-rem-12.mif"
-    # Settings taken from coupled runs
-    cfg$gms$c56_pollutant_prices <- "coupling"
-    cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$path_to_report_ghgprices <- pathToCoupledOutput
-    cfg$path_to_report_bioenergy <- pathToCoupledOutput
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg650-rem-12.mif"
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
   if ("PB1000" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Dec24/remind/output/C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev5_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
-    # Settings taken from coupled runs
-    cfg$gms$c56_pollutant_prices <- "coupling"
-    cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$path_to_report_ghgprices <- pathToCoupledOutput
-    cfg$path_to_report_bioenergy <- pathToCoupledOutput
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
-  if ("PriceAR" %in% scen) {
+  if ("AR" %in% scen) {
     cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
   }
 
-  if ("PriceProt" %in% scen) {
+  if ("AvC" %in% scen) {
     cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
     cfg$gms$s56_c_price_induced_aff <- 0
   }
 
-  if ("30by30" %in% scen) {
-    cfg$gms$c22_protect_scenario <- "30by30"
+  if ("KBA" %in% scen) {
+    cfg$gms$c22_protect_scenario <- "KBA"
   }
 
   if ("BH" %in% scen) {
     cfg$gms$c22_protect_scenario <- "BH"
   }
+
+  # Settings taken from coupled runs
+  cfg$gms$c56_pollutant_prices <- "coupling"
+  cfg$gms$c60_2ndgen_biodem <- "coupling"
+  cfg$path_to_report_ghgprices <- pathToCoupledOutput
+  cfg$path_to_report_bioenergy <- pathToCoupledOutput
 
   cfg$title <- paste0(prefix, "_", paste(scen, collapse = "-"))
   start_run(cfg = cfg, codeCheck = FALSE)
