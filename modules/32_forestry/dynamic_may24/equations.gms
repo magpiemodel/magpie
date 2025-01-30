@@ -31,7 +31,7 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 *-----------------------------------------------
 *' The interface `vm_cdr_aff` provides the projected biogeochemical (bgc) carbon sequestration
 *' and the local biophysical (bph) warming/cooling effects of an afforestation
-*' activity for a planning horizon of 50 years `s32_planing_horizon` to the [56_ghg_policy] module.
+*' activity for a planning horizon of 50 years `s32_planning_horizon` to the [56_ghg_policy] module.
 
 q32_cdr_aff(j2,ac) ..
 vm_cdr_aff(j2,ac,"bgc") =e=
