@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,6 +19,7 @@ $Ifi "%phase%" == "sets" $include "./modules/44_biodiversity/bii_target_apr24/se
 $Ifi "%phase%" == "declarations" $include "./modules/44_biodiversity/bii_target_apr24/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/44_biodiversity/bii_target_apr24/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/44_biodiversity/bii_target_apr24/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/44_biodiversity/bii_target_apr24/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/44_biodiversity/bii_target_apr24/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/44_biodiversity/bii_target_apr24/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/44_biodiversity/bii_target_apr24/postsolve.gms"

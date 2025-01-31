@@ -3,9 +3,25 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+
+## [4.9.1] - 2025-01-28
+
+### changed
+- **scripts** peatland rewetting now automatically considered in `extra/runSEALSallocation.R`
+
+### added
+- **scripts** added start script for land-based mitigation and biodiversity conservation paper
+- **scripts** release number can be passed as an argument to test_runs.R to tag as release
+- **start_scripts** added `lock_timeout` as option to `start_run` function
+
+### fixed
+- **44_biodiversity** bugfix i44_biome_share, code cleanup, added scaling of `q44_bii`
+
+
 ## [4.9.0] - 2024-12-05
 
 ### changed
+- **scripts** changed EL2 Deep Dive c30_bioen_water switch to all and added sensitivity for paper revision
 - **35_natveg** revised age-class initialization of secondary forest
 - **38_factor_costs** updated use of USDA cost shares
 - **config** changed default input data to use 2017USD
@@ -1051,7 +1067,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.9.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.9.1...develop
+[4.9.1]: https://github.com/magpiemodel/magpie/compare/v4.9.0...v4.9.1
 [4.9.0]: https://github.com/magpiemodel/magpie/compare/v4.8.2...v4.9.0
 [4.8.2]: https://github.com/magpiemodel/magpie/compare/v4.8.1...v4.8.2
 [4.8.1]: https://github.com/magpiemodel/magpie/compare/v4.8.0...v4.8.1

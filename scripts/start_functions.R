@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -202,7 +202,7 @@ download_and_update <- function(cfg) {
 }
 
 
-start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE) {
+start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE, lock_timeout = 1) {
 
   timePrepareStart <- Sys.time()
 
@@ -222,7 +222,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   withr::defer(setwd(maindir))
 
   if(lock_model) {
-    lock_id <- gms::model_lock(timeout1 = 1)
+    lock_id <- gms::model_lock(timeout1 = lock_timeout)
     withr::defer(gms::model_unlock(lock_id))
   }
 

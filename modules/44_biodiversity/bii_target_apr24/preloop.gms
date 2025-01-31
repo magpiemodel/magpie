@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,8 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * Calculate biome share
-i44_biome_share(j,biome44) = 
-   (f44_biome_area(j,biome44) + 1e-10) / sum(biome44_2, f44_biome_area(j,biome44_2) + 1e-10);
+i44_biome_share(j,biome44) = 0;
+i44_biome_share(j,biome44)$(sum(biome44_2, f44_biome_area(j,biome44_2)) > 0) = 
+   f44_biome_area(j,biome44) / sum(biome44_2, f44_biome_area(j,biome44_2));
 
 * Set i44_biome_area_reg
 i44_biome_area_reg(i,biome44) = 
