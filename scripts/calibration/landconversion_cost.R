@@ -35,7 +35,7 @@ calibration_run <- function(putfolder, calib_magpie_name, logoption = 3, s_use_g
 
 # get ratio between modelled area and reference area
 
-getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05, lowpass_filter = 1, histData = "FAO") {
+getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05, lowpass_filter = 1, histData = "FAO", cost_min = 0.2) {
   require(magclass)
   require(magpie4)
   require(gdx2)
@@ -65,7 +65,7 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05, lowpa
     out[is.na(out)] <- 1
     getNames(out) <- NULL
     out[out < 0] <- 1
-    out[,1,] <- 0
+    out[,1,] <- cost_min
   } else if (mode == "reward") {
     shrLostProj <- new.magpie(getRegions(magpie), getYears(magpie), fill = 0)
     shrLostHist <- new.magpie(getRegions(magpie), getYears(magpie), fill = 0)
