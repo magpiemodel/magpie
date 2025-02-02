@@ -110,6 +110,16 @@ cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkB
 cfg$gms$s29_treecover_target <- 0.03
 start_run(cfg, codeCheck = FALSE)
 
+#VLLO-SSP1-PkBudg650
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-feedSSP1")
+cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$gms$s29_treecover_target <- 0.03
+cfg$gms$c70_feed_scen <- "ssp1"
+start_run(cfg, codeCheck = FALSE)
+
 #VLLO-SSP1-PkBudg650-old -> old version with minimum CO2 price
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-old")
 cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
