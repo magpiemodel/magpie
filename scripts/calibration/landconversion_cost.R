@@ -94,7 +94,7 @@ time_series_cost <- function(calib_factor) {
 
 time_series_reward <- function(calib_factor) {
   out2 <- new.magpie(getRegions(calib_factor), years = c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5)), fill = 0)
-  out2[, seq(2000, 2015, by = 5), ] <- calib_factor
+  out2[, getYears(calib_factor), ] <- calib_factor
   out2 <- time_interpolate(out2, seq(2020, 2050, by = 5), integrate_interpolated_years = T)
   return(out2)
 }
@@ -125,6 +125,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
 
   calib_factor_cost <- setNames(old_calib[, , "cost"], NULL) * calib_correction_cost
   calib_factor_reward <- setNames(old_calib[, , "reward"], NULL) * calib_correction_reward
+  calib_factor_reward[,1995,] <- 0
   calib_factor_reward[calib_factor_reward < 0] <- 0
   
   if (!start_flag) {
@@ -159,6 +160,10 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
     above_limit <- (calib_factor_cost >= cost_max)
     calib_factor_cost[above_limit] <- cost_max
     calib_divergence_cost[getRegions(calib_factor_cost), , ][above_limit] <- 0
+    
+    above_limit <- (calib_factor_reward >= cost_max)
+    calib_factor_reward[above_limit] <- cost_max
+    calib_divergence_reward[getRegions(calib_factor_reward), , ][above_limit] <- 0
   }
 
   if (!is.null(cost_min)) {
