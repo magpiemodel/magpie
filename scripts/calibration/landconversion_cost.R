@@ -64,22 +64,25 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05, lowpa
     out[out == 0] <- 1
     out[is.na(out)] <- 1
     getNames(out) <- NULL
-
-    out[which(out < 0, arr.ind = T)] <- 1
-    out <- lowpass(out,i = lowpass_filter)
+    out[out < 0] <- 1
+    out[,1,] <- 0
   } else if (mode == "reward") {
-    shrLostProj <- (setYears(magpie[, 2015, ], NULL) - setYears(magpie[, 1995, ], NULL)) / setYears(magpie[, 1995, ], NULL)
-    shrLostHist <- (setYears(data[getRegions(magpie), 2015, ], NULL) - setYears(data[getRegions(magpie), 1995, ], NULL)) / setYears(data[getRegions(magpie), 1995, ], NULL)
-    out <- new.magpie(getRegions(magpie), getYears(magpie), fill = 0)
-    out[ , seq(2000, 2015, by = 5), ] <- shrLostHist / shrLostProj
+    shrLostProj <- new.magpie(getRegions(magpie), getYears(magpie), fill = 0)
+    shrLostHist <- new.magpie(getRegions(magpie), getYears(magpie), fill = 0)
+    for (i in 2:length(y)) {
+      shrLostProj[ , y[i], ] <- (setYears(magpie[, y[i], ], NULL) - setYears(magpie[, y[i-1], ], NULL)) / setYears(magpie[, y[i-1], ], NULL)
+      shrLostHist[ , y[i], ] <- (setYears(data[, y[i], ], NULL) - setYears(data[, y[i-1], ], NULL)) / setYears(data[, y[i-1], ], NULL)
+    }
+    out <- shrLostHist / shrLostProj
     out[is.na(out)] <- 0
     out[is.infinite(out)] <- 0
     getNames(out) <- NULL
     
     # only reward if share of cropland lost between 1995 and 2015 exceeds a certain threshold. Otherwise set to 0.
-    out[rownames(which(shrLostHist > -calib_accuracy, arr.ind = T)),,] <- 0
-    out[which(out < 0, arr.ind = T)] <- 0
+    out[shrLostHist > -calib_accuracy] <- 0
+    out[out < 0] <- 0
   }
+  out <- lowpass(out,i = lowpass_filter)
   return(magpiesort(out))
 }
 
@@ -147,13 +150,13 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
     
     # set value for India to cost_max for better convergence
     if ("IND" %in% getRegions(calib_factor_cost)) {
-      calib_factor_cost["IND", , ] <- cost_max
+      calib_factor_cost["IND", -1 , ] <- cost_max
     }
     
     # set value for CAZ to cost_max for better convergence; only needed for LUH2 due to mismatch between LUH2 and FAO historical data for cropland.
     if (histData == "MAgPIEown") {
       if ("CAZ" %in% getRegions(calib_factor_cost)) {
-        calib_factor_cost["CAZ", , ] <- cost_max
+        calib_factor_cost["CAZ", -1 , ] <- cost_max
       }
     }
     
