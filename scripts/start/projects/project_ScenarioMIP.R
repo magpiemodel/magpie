@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP34"
+cfg$info$flag <- "SMIP35"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
@@ -112,7 +112,7 @@ start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650-old -> old version with minimum CO2 price
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-old")
-cfg <- setScenario(cfg,c("SDP-MC","SSP1-POP-GDP","NDC","AR-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
