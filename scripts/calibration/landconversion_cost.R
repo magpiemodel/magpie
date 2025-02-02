@@ -70,7 +70,8 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05, lowpa
   } else if (mode == "reward") {
     shrLostProj <- (setYears(magpie[, 2015, ], NULL) - setYears(magpie[, 1995, ], NULL)) / setYears(magpie[, 1995, ], NULL)
     shrLostHist <- (setYears(data[getRegions(magpie), 2015, ], NULL) - setYears(data[getRegions(magpie), 1995, ], NULL)) / setYears(data[getRegions(magpie), 1995, ], NULL)
-    out <- shrLostHist/shrLostProj
+    out <- new.magpie(getRegions(magpie), getYears(magpie), fill = 0)
+    out[ , seq(2000, 2015, by = 5), ] <- shrLostHist / shrLostProj
     out[is.na(out)] <- 0
     out[is.infinite(out)] <- 0
     getNames(out) <- NULL
@@ -113,6 +114,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
 
   calib_correction_reward <- getCalibFactor(gdx_file, mode = "reward", calib_accuracy = calib_accuracy, lowpass_filter = lowpass_filter)
   calib_divergence_reward <- abs(calib_correction_reward - 1)
+  calib_divergence_reward[calib_correction_reward == 0] <- 0
   
   ### -> in case it is the first step, it forces the initial factors to be equal to 1
   if (file.exists(calib_file)) {
@@ -125,9 +127,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
 
   calib_factor_cost <- setNames(old_calib[, , "cost"], NULL) * calib_correction_cost
   calib_factor_reward <- setNames(old_calib[, , "reward"], NULL) * calib_correction_reward
-  calib_factor_reward[,1995,] <- 0
-  calib_factor_reward[calib_factor_reward < 0] <- 0
-  
+
   if (!start_flag) {
     # use calibration factors where accuracy was reached
     # use stricter divergence threshold in first 5 calibration_step steps
