@@ -249,7 +249,7 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  oct24
 
-$setglobal cropland  simple_apr24
+$setglobal cropland  detail_apr24
 $setglobal croparea  simple_apr24
 $setglobal past  endo_jun13
 
@@ -260,7 +260,7 @@ $setglobal natveg  pot_forest_may24
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  per_ton_fao_may22
+$setglobal factor_costs  sticky_feb18
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12

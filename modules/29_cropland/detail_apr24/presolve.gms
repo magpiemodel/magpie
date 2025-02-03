@@ -40,6 +40,17 @@ p29_avl_cropland(t,j) = f29_avl_cropland(j,"%c29_marginal_land%") * (1 - p29_snv
 * Tree cover on cropland
 * ------------------------------------------------------- 
 
+** set bii coefficients
+if(m_year(t) <= sm_fix_SSP2,
+ p29_treecover_bii_coeff(bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg)
+else
+ if(s29_treecover_bii_coeff = 0,
+  p29_treecover_bii_coeff(bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg)
+ elseif s29_treecover_bii_coeff = 1,
+  p29_treecover_bii_coeff(bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg)
+ );
+);
+
 * Growth of trees on cropland is modelled by shifting age-classes according to time step length.
 s29_shift = m_timestep_length_forestry/5;
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s29_shift = 1)
