@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
 - **config.cfg** default for `cfg$gms$s29_fallow_max ` changed from 0.4 to 0
 - **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
+- **scripts** land conversion cost calibration for cropland - FAO as target data set instead of MAgPIEown
 
 ### added
 - **scenario_config.csv** added column `NPI-revert`
