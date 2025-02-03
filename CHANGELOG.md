@@ -8,9 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
-- **config.cfg default** for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24" 
-- **config.cfg default** for `cfg$gms$s29_treecover_max` changed from "0.4" to "1" 
-- **config.cfg default** for `cfg$gms$s29_fallow_max ` changed from "0.4" to 0
+- **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24" 
+- **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
+- **config.cfg** default for `cfg$gms$s29_fallow_max ` changed from 0.4 to 0
+- **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
 
 ### added
 - **scenario_config.csv** added column `NPI-revert`
