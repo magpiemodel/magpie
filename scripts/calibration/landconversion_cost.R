@@ -67,10 +67,8 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05, lowpa
     out[out < 0] <- 1
     out <- lowpass(out,i = lowpass_filter)
   } else if (mode == "reward") {
-    shrLostProj <- new.magpie(getRegions(magpie), getYears(magpie), fill = 0)
     shrLostHist <- new.magpie(getRegions(magpie), getYears(magpie), fill = 0)
     for (i in 2:length(y)) {
-      shrLostProj[ , y[i], ] <- (setYears(magpie[, y[i], ], NULL) - setYears(magpie[, y[i-1], ], NULL)) / setYears(magpie[, y[i-1], ], NULL)
       shrLostHist[ , y[i], ] <- (setYears(data[, y[i], ], NULL) - setYears(data[, y[i-1], ], NULL)) / setYears(data[, y[i-1], ], NULL)
     }
     
