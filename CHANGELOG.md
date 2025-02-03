@@ -7,26 +7,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- scenario_config.csv `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
-- config.cfg default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24" 
-- config.cfg default for `cfg$gms$s29_treecover_max` changed from "0.4" to "1" 
-- config.cfg default for `cfg$gms$s29_fallow_max ` changed from "0.4" to 0
+- **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
+- **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24" 
+- **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
+- **config.cfg** default for `cfg$gms$s29_fallow_max ` changed from 0.4 to 0
+- **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
 
 ### added
-- scenario_config.csv added column `NPI-revert`
-- scenario_config.csv added columns `AR-natveg` and `AR-plant` for CO2 price re/afforestation and AgroForestry settings
-- scenario_config.csv added scenario `VLLO` based on `SDP-MC`
-- config.cfg added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
-- start script for ScenarioMIP MAgPIE standalone runs
+- **scenario_config.csv** added column `NPI-revert`
+- **scenario_config.csv** added columns `AR-natveg` and `AR-plant` for CO2 price re/afforestation and AgroForestry settings
+- **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
+- **default.cfg** added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
+- **scripts** start script for ScenarioMIP MAgPIE standalone runs
 
 ### removed
-- scenario_config.csv removed column `SSP2-EU`
+- **scenario_config.csv** removed column `SSP2-EU`
 
 ### fixed
-- `29_cropland` identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
-- `32_forestry` added contraint `q32_ndc_aff_limit` to make sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
-- `35_natveg` added interface `vm_natforest_reduction`
-- `56_ghg_policy` bugfixes for regional GHG policy fader
+- **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
+- **32_forestry** added contraint `q32_ndc_aff_limit` to make sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
+- **35_natveg** added interface `vm_natforest_reduction`
+- **56_ghg_policy** bugfixes for regional GHG policy fader
 
 
 ## [4.9.1] - 2025-01-28
