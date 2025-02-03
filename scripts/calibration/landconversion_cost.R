@@ -40,7 +40,6 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05, lowpa
   require(magpie4)
   require(gdx2)
   y <- readGDX(gdx_file,"t")
-  y <- seq(1995,2015,by=5)
   magpie <- land(gdx_file)[, y, "crop"]
   if (histData == "MAgPIEown") {
     hist <- dimSums(readGDX(gdx_file, "f10_land")[, , "crop"], dim = 1.2)
@@ -107,7 +106,7 @@ time_series_reward <- function(calib_factor) {
 }
 
 # Calculate the correction factor and save it
-update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, calib_file, cost_max = 3, cost_min = 0.2, calibration_step = "", n_maxcalib = 20, best_calib = FALSE, histData = "FAO") {
+update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, calib_file, cost_max = 2.5, cost_min = 0.2, calibration_step = "", n_maxcalib = 20, best_calib = FALSE, histData = "FAO") {
   require(magclass)
   require(magpie4)
   require(gdx2)
@@ -149,10 +148,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
   }
 
   if (!is.null(cost_max)) {
-    # if reward exists, set cost calibration to cost_max
-    # reward_exists <- (calib_factor_reward > 0)
-    # calib_factor_cost[reward_exists] <- cost_max
-    
+
     # set value for India to cost_max for better convergence
     if ("IND" %in% getRegions(calib_factor_cost)) {
       calib_factor_cost["IND", -1 , ] <- cost_max
@@ -169,9 +165,6 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
     calib_factor_cost[above_limit] <- cost_max
     calib_divergence_cost[getRegions(calib_factor_cost), , ][above_limit] <- 0
     
-    # above_limit <- (calib_factor_reward >= cost_max)
-    # calib_factor_reward[above_limit] <- cost_max
-    # calib_divergence_reward[getRegions(calib_factor_reward), , ][above_limit] <- 0
   }
 
   if (!is.null(cost_min)) {
@@ -268,7 +261,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
 calibrate_magpie <- function(n_maxcalib = 20,
                              restart = FALSE,
                              calib_accuracy = 0.01,
-                             cost_max = 3,
+                             cost_max = 2.5,
                              cost_min = 0.2,
                              calib_magpie_name = "magpie_calib",
                              lowpass_filter = 1,
