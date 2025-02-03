@@ -150,8 +150,8 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, lowpass_filter = 1, ca
 
   if (!is.null(cost_max)) {
     # if reward exists, set cost calibration to cost_max
-    reward_exists <- (calib_factor_reward > 0)
-    calib_factor_cost[reward_exists] <- cost_max
+    # reward_exists <- (calib_factor_reward > 0)
+    # calib_factor_cost[reward_exists] <- cost_max
     
     # set value for India to cost_max for better convergence
     if ("IND" %in% getRegions(calib_factor_cost)) {
