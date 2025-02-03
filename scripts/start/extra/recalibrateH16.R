@@ -30,4 +30,4 @@ cfg$output <- c("rds_report")
 cfg$force_replace <- TRUE
 cfg$qos <- "priority"
 start_run(cfg,codeCheck=FALSE)
-magpie4::submitCalibration("H16")
+magpie4::submitCalibration("H16_FAO")
