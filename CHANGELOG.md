@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **start_scripts** added `lock_timeout` as option to `start_run` function
 
 ### removed
--
+- **modules/15_food/anthropometrics_jan18** removed as outdated
 
 ### fixed
 - **44_biodiversity** bugfix i44_biome_share, code cleanup, added scaling of `q44_bii`
