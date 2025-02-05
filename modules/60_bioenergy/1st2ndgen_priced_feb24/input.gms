@@ -35,7 +35,7 @@ sets
 
 scalars
   c60_biodem_level  bioenergy demand level indicator 1 for regional and 0 for global demand   (1)   / 1 /
-  s60_bioenergy_1st_subsidy_floor first generation bioenergy subsidy (USD17MER per ton) / 6.5 /
+  s60_bioenergy_1st_subsidy_floor first generation bioenergy subsidy (USD17MER per GJ) / 6.5 /
   s60_bioenergy_1st_price first generation bioenergy per-GJ price (USD17MER per GJ) / 0 /
   s60_bioenergy_2nd_price second generation bioenergy price (USD17MER per GJ) / 0 /
   s60_2ndgen_bioenergy_dem_min Minimum dedicated 2nd generation bioenergy demand assumed in each region during SSP2-fix (mio. GJ per yr) / 1 /
