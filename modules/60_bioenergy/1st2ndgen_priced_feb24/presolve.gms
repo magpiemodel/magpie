@@ -28,21 +28,21 @@ else
 
 $ifthen "%c60_price_implementation%" == "exp"
   if(m_year(t) > sm_fix_SSP2,
-    i60_1stgen_bioenergy_subsidy_gj(t) = 
+    i60_1stgen_bioenergy_subsidy(t) = 
       (s60_bioenergy_1st_price / 8) * (8 ** (1 / (2100 - sm_fix_SSP2))) ** (m_year(t) - sm_fix_SSP2);
     i60_2ndgen_bioenergy_subsidy(t) =
       (s60_bioenergy_2nd_price / 8) * (8 ** (1 / (2100 - sm_fix_SSP2))) ** (m_year(t) - sm_fix_SSP2);
   );
 $elseif "%c60_price_implementation%" == "const"
   if(m_year(t) > sm_fix_SSP2,
-    i60_1stgen_bioenergy_subsidy_gj(t) = 
+    i60_1stgen_bioenergy_subsidy(t) = 
       s60_bioenergy_1st_price;
     i60_2ndgen_bioenergy_subsidy(t) =
       s60_bioenergy_2nd_price;
   );
 $else
   if(m_year(t) > sm_fix_SSP2,
-    i60_1stgen_bioenergy_subsidy_gj(t) = 
+    i60_1stgen_bioenergy_subsidy(t) = 
       s60_bioenergy_1st_price / (2100 - sm_fix_SSP2) * (m_year(t) - sm_fix_SSP2);
     i60_2ndgen_bioenergy_subsidy(t) =
       s60_bioenergy_2nd_price / (2100 - sm_fix_SSP2) * (m_year(t) - sm_fix_SSP2);
