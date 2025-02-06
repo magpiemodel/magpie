@@ -160,7 +160,7 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.59.tgz
+* Used data set: additional_data_rev4.60.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.114
+* Regions data revision: 4.116
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.114
+* * Revision: 4.116
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Sun Oct 27 00:37:36 2024
+* Last modification (input data): Mon Feb  3 18:07:20 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -221,7 +221,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  default_0p4_till2045_62_scm
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -260,7 +260,7 @@ $setglobal natveg  pot_forest_may24
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  per_ton_fao_may22
+$setglobal factor_costs  sticky_feb18
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12
@@ -279,7 +279,7 @@ $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_aug22
 $setglobal maccs  on_aug22
 $setglobal peatland  v2
-$setglobal som  static_jan19
+$setglobal som  cellpool_jan23
 
 $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
