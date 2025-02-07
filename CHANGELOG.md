@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** settings for  land conversion cost calibration updated
 
 ### added
+- **scripts** output script for testing elastic demand
 - **scenario_config.csv** added column `NPI-revert`
 - **scenario_config.csv** added columns `AR-natveg` and `AR-plant` for CO2 price re/afforestation and AgroForestry settings
 - **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
