@@ -33,7 +33,7 @@ cfg$qos <- "standby_dayMax"
 
 cfg$input['regional'] <- "rev4.116_36f73207_magpie.tgz"
 cfg$input['validation'] <- "rev4.116_36f73207_validation.tgz"
-cfg$input['calibration'] <- "calibration_H16_27Sep24.tgz"
+cfg$input['calibration'] <- "calibration_H16_FAO_03Feb25.tgz"
 cfg$input['cellular'] <- "rev4.116_36f73207_bd86374e_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
 
 ssp <- "SSP2"

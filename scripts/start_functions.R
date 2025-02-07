@@ -476,7 +476,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
                      debug = cfg$debug,
-                     best_calib = cfg$best_calib_landconversion_cost)
+                     best_calib = cfg$best_calib_landconversion_cost,
+                     histData = cfg$cost_calib_hist_data)
     cat("Land conversion cost calibration factor calculated!\n")
   }
 

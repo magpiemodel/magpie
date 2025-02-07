@@ -25,9 +25,8 @@ cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE # required when penality_apr22 activated
 cfg$best_calib                      <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$best_calib_landconversion_cost  <- TRUE
 cfg$output                          <- c("rds_report")
 cfg$force_replace                   <- TRUE
 cfg$qos <- "priority"
 start_run(cfg, codeCheck = FALSE)
-magpie4::submitCalibration("FSEC")
+magpie4::submitCalibration("FSEC_FAO")
