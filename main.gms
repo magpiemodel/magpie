@@ -164,9 +164,9 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_27Sep24.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_FAO30_03Feb25.tgz
+* md5sum: aba0b877f383fefabc558d79180fc43f
+* Repository: /Users/flo/Development/input_data/
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -200,7 +200,7 @@ $title magpie
 * 2: In override(url = url, destfile = destfile, quiet = quiet,  ... :
 *   URL 'https://rse.pik-potsdam.de/r/packages/src/contrib/mrdownscale_0.29.0.tar.gz': Timeout of 60 seconds was reached
 * 
-* Last modification (input data): Fri Jan 17 13:44:42 2025
+* Last modification (input data): Thu Feb  6 14:08:31 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
