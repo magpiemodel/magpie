@@ -4,13 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+## [Unreleased]
+
+### changed
+-
+
+### added
+- **data-changelog** added a data changelog (and corresponding script) to see model output changes at a glance
+-
+
+### removed
+-
+
+### fixed
+-
+
+
 ## [4.9.1] - 2025-01-28
 
 ### changed
 - **scripts** peatland rewetting now automatically considered in `extra/runSEALSallocation.R`
 
 ### added
-- **data-changelog** added a data changelog (and corresponding script) to see model output changes at a glance
 - **scripts** added start script for land-based mitigation and biodiversity conservation paper
 - **scripts** release number can be passed as an argument to test_runs.R to tag as release
 - **start_scripts** added `lock_timeout` as option to `start_run` function
