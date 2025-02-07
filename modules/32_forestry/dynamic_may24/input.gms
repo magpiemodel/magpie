@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,7 +28,7 @@ scalars
   s32_est_cost_natveg             Establishment cost for natural vegetation (USD17MER per ha) / 2460 /
   s32_recurring_cost              Recurring costs (USD17MER per ha) / 615 /
   s32_harvesting_cost             Harvesting cost (USD17MER per ha) / 2460 /
-  s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
+  s32_planning_horizon             Afforestation planing horizon (years)            / 50 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
   s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution / 1 /
