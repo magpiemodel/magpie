@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -75,6 +75,7 @@ positive variables
  vm_land_forestry(j,type32)                         Forestry land pools (mio. ha)
  v32_prod_forestry_future(i)                        Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
  v32_land_replant(j)                                Harvested and replanted area in timber plantations (mio. ha)
+ v32_ndc_area_missing(j)                            Technical variable reflecting missing area towards the NPI NDC re-afforestation target (mio. ha)
 ;
 
 variables
@@ -91,6 +92,7 @@ equations
  q32_max_aff                                        Maximum total global afforestation (mio. ha)
  q32_max_aff_reg(i)                                 Maximum total regional afforestation (mio. ha)
  q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
+ q32_ndc_aff_limit(j)                               Constraint for avoiding that NPI NDC re-afforestation happens at the cost of forests and other natural vegetation (mio. ha)
  q32_aff_est(j)                                     Afforestation constraint for establishment age classes (mio. ha)
  q32_hvarea_forestry(j,ac)                          Plantations area harvest (mio. ha)
  q32_cost_recur(i)                                  Recurruing costs (mio. USD)
@@ -132,6 +134,7 @@ parameters
  ov_land_forestry(t,j,type32,type)             Forestry land pools (mio. ha)
  ov32_prod_forestry_future(t,i,type)           Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
  ov32_land_replant(t,j,type)                   Harvested and replanted area in timber plantations (mio. ha)
+ ov32_ndc_area_missing(t,j,type)               Technical variable reflecting missing area towards the NPI NDC re-afforestation target (mio. ha)
  ov_cdr_aff(t,j,ac,aff_effect,type)            Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_total(t,i,type)                     Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                           Land constraint (mio. ha)
@@ -142,6 +145,7 @@ parameters
  oq32_max_aff(t,type)                          Maximum total global afforestation (mio. ha)
  oq32_max_aff_reg(t,i,type)                    Maximum total regional afforestation (mio. ha)
  oq32_aff_pol(t,j,type)                        Afforestation policy constraint (mio. ha)
+ oq32_ndc_aff_limit(t,j,type)                  Constraint for avoiding that NPI NDC re-afforestation happens at the cost of forests and other natural vegetation (mio. ha)
  oq32_aff_est(t,j,type)                        Afforestation constraint for establishment age classes (mio. ha)
  oq32_hvarea_forestry(t,j,ac,type)             Plantations area harvest (mio. ha)
  oq32_cost_recur(t,i,type)                     Recurruing costs (mio. USD)

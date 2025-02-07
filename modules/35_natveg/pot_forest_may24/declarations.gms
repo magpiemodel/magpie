@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -43,6 +43,7 @@ equations
  q35_carbon_other(j,ag_pools,stockType)                  Other land carbon stock calculation (mio tC)
  q35_min_forest(j)                                       Minimum forest land constraint (mio. ha)
  q35_min_other(j)                                        Minimum other land constraint (mio. ha)
+ q35_natforest_reduction(j)                              Natural forest reduction (mio. ha)
  q35_landdiff                                            Difference in natveg land (mio. ha)
  q35_other_expansion(j,othertype35)                      Other land expansion (mio. ha)
  q35_other_reduction(j,othertype35,ac)                   Other land reduction (mio. ha)
@@ -83,6 +84,7 @@ positive variables
   v35_hvarea_primforest(j)                               Harvested area from primary forest (mio. ha)
   vm_prod_natveg(j,land_natveg,kforestry)                Production of woody biomass from natural vegetation (mio. tDM per yr)
   vm_cost_hvarea_natveg(i)                               Cost of harvesting natural vegetation (mio. USD17MER)
+  vm_natforest_reduction(j)                              Natural forest reduction (mio. ha)
 ;
 
 
@@ -101,6 +103,7 @@ parameters
  ov35_hvarea_primforest(t,j,type)                    Harvested area from primary forest (mio. ha)
  ov_prod_natveg(t,j,land_natveg,kforestry,type)      Production of woody biomass from natural vegetation (mio. tDM per yr)
  ov_cost_hvarea_natveg(t,i,type)                     Cost of harvesting natural vegetation (mio. USD17MER)
+ ov_natforest_reduction(t,j,type)                    Natural forest reduction (mio. ha)
  oq35_land_secdforest(t,j,type)                      Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                           Other land pool calculation (mio. ha)
  oq35_carbon_primforest(t,j,ag_pools,stockType,type) Primforest carbon stock calculation (mio tC)
@@ -108,6 +111,7 @@ parameters
  oq35_carbon_other(t,j,ag_pools,stockType,type)      Other land carbon stock calculation (mio tC)
  oq35_min_forest(t,j,type)                           Minimum forest land constraint (mio. ha)
  oq35_min_other(t,j,type)                            Minimum other land constraint (mio. ha)
+ oq35_natforest_reduction(t,j,type)                  Natural forest reduction (mio. ha)
  oq35_landdiff(t,type)                               Difference in natveg land (mio. ha)
  oq35_other_expansion(t,j,othertype35,type)          Other land expansion (mio. ha)
  oq35_other_reduction(t,j,othertype35,ac,type)       Other land reduction (mio. ha)
