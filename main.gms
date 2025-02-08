@@ -194,7 +194,6 @@ $title magpie
 *    14   23   10    7    4   26   21    9   16   23   32   15
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
-* 
 * Last modification (input data): Thu Feb  6 14:08:31 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
