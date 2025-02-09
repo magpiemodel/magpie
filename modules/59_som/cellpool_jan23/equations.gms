@@ -12,7 +12,8 @@
 
 q59_som_target_cropland(j2) ..
               v59_som_target(j2,"crop")
-              =e= (sum((kcr,w), vm_area(j2,kcr,w) * i59_cratio(j2,kcr,w)) 
+              =e= (sum((kcr,w), vm_area(j2,kcr,w) * i59_cratio(j2,kcr,w)) * 
+                     (1 + sum(ct, i59_scm_target(ct,j2)) * (i59_scm_ratio(j2) - 1)) 
                    + vm_fallow(j2) * i59_cratio_fallow(j2) 
                    + vm_treecover(j2) * i59_cratio_treecover)
                    * sum(ct,f59_topsoilc_density(ct,j2));
@@ -82,3 +83,12 @@ q59_nr_som_fertilizer2(j2) ..
           vm_landexpansion(j2,"crop") * s59_nitrogen_uptake;
 
 *' Here we assume a maximum of 200 kg on the expanded area.
+
+
+*' Cost for soil carbon management are based on a per hectare value
+
+  q59_cost_scm(j2) ..
+    vm_cost_scm(j2) =e= 
+      sum((kcr,w), vm_area(j2,kcr,w)) *
+       sum(ct, i59_scm_target(ct,j2)) * s59_cost_scm_recur;
+
