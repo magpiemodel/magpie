@@ -53,8 +53,8 @@ cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
 
 ### BE
-cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
-cfg$gms$c60_bioenergy_subsidy <- 0
+cfg$gms$s60_2ndgen_bioenergy_dem_min <- 0
+cfg$gms$s60_bioenergy_1st_subsidy <- 0
 beV <- c(0, 5, 7, 10, 15, 25, 45)
 
 ### Tau / Yield
@@ -87,8 +87,8 @@ for (bl in blV) {
     cfg$gms$s15_rumdairy_scp_substitution <- mp / 100
 
     for (be in beV) {
-      cfg$gms$s60_bioenergy_gj_price_1st <- be
-      cfg$gms$s60_bioenergy_price_2nd <- be
+      cfg$gms$s60_bioenergy_1st_price <- be
+      cfg$gms$s60_bioenergy_2nd_price <- be
 
       ##############################################
       runflag <- "price"

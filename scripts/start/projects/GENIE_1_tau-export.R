@@ -54,8 +54,8 @@ cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 cfg$gms$c44_bii_decrease <- 0
 cfg$gms$c22_protect_scenario <- "BH"
 
-cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
-cfg$gms$c60_bioenergy_subsidy <- 0
+cfg$gms$s60_2ndgen_bioenergy_dem_min <- 0
+cfg$gms$s60_bioenergy_1st_subsidy <- 0
 
 cfg$gms$c60_2ndgen_biodem <- "R32M46-SSP2EU-NPi"
 

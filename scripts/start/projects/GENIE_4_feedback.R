@@ -51,8 +51,8 @@ cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
 
 ### BE
-cfg$gms$s60_2ndgen_bioenergy_dem_min_post_fix <- 0
-cfg$gms$c60_bioenergy_subsidy <- 0
+cfg$gms$s60_2ndgen_bioenergy_dem_min <- 0
+cfg$gms$s60_bioenergy_1st_subsidy <- 0
 
 ### Tau / Yield
 cfg$gms$tc <- "exo"
