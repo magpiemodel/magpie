@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,6 +19,10 @@
 *' module is executed once again.
     display "Coupling: Reading out marginal costs from MAgPIE";
     p15_prices_kcal(t,iso,kfo,curr_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
+*' the quantity of tax money from emission pricing for redistribution is calculated 
+    p15_tax_recycling(t,iso) = sum(i_to_iso(i,iso), (vm_emission_costs.l(i)
+        / im_pop(t,i)) * s15_tax_recycling 
+        * (im_gdp_pc_ppp_iso(t,iso) / im_gdp_pc_mer_iso(t,iso)));
 *' @stop
   );
 
@@ -32,12 +36,13 @@ if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
 * A new iteration is started
   p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
 * The set current iter includes only one element with the set element
-* of the current iteration, e.g. "iter2"
+* of the current iteration, e.g. "iter2". As iter0 also exists,
+* "iter2" is the third entry of the set iter15, so we add 1.
   curr_iter15(iter15) = no;
-  curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+  curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)+1) = yes;
 * Now we also define a set for the previous iteration
   prev_iter15(iter15) = no;
-  prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
+  prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
 
 *' @code
   display "starting m15_food_demand in iteration number ", p15_iteration_counter;

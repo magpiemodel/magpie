@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -160,13 +160,13 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.59.tgz
+* Used data set: additional_data_rev4.60.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_27Sep24.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_FAO30_03Feb25.tgz
+* md5sum: aba0b877f383fefabc558d79180fc43f
+* Repository: /Users/flo/Development/input_data/
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.114
+* Regions data revision: 4.116
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.114
+* * Revision: 4.116
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -194,8 +194,7 @@ $title magpie
 *    14   23   10    7    4   26   21    9   16   23   32   15
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
-* 
-* Last modification (input data): Sun Oct 27 00:37:36 2024
+* Last modification (input data): Thu Feb  6 14:08:31 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -249,7 +248,7 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  oct24
 
-$setglobal cropland  simple_apr24
+$setglobal cropland  detail_apr24
 $setglobal croparea  simple_apr24
 $setglobal past  endo_jun13
 
@@ -260,7 +259,7 @@ $setglobal natveg  pot_forest_may24
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  per_ton_fao_may22
+$setglobal factor_costs  sticky_feb18
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12

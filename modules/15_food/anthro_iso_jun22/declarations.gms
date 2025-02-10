@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -79,9 +79,6 @@ parameters
  p15_livestock_threshold_subst_fader(t_all)    Fader for livestock threshold target (1)
  p15_exo_food_scenario_fader(t_all)            Exogenous diet scenario fader (1)
 
-* prices
-  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD17PPP per kcal)
-  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD17PPP per kcal)
 
 * anthropometrics
   p15_bodyheight(t,iso,sex,age,estimates15)           Body height (cm per cap)
@@ -177,6 +174,11 @@ parameters
 
 * country-specific scenario switch
  p15_country_switch(iso)                       Switch indicating whether country is affected by diet scenarios (1)
+
+* elastic demand
+  p15_tax_recycling(t,iso)                          Tax revenue recycling to households (USD17PPP per capita)
+  p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD17PPP per kcal)
+  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD17PPP per kcal)
 
 * calculate diet iteration breakpoint
  p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD17PPP per capita)

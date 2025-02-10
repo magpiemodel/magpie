@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -77,6 +77,9 @@
                        sum(ct, p35_min_forest(ct,j2));
 
  q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
+
+ q35_natforest_reduction(j2) .. vm_natforest_reduction(j2) =e=
+ v35_primforest_reduction(j2) + sum(ac_sub, v35_secdforest_reduction(j2,ac_sub));
 
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
 *' The gross change in natural vegetation is calculated based on land expansion and

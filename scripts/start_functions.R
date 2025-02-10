@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -476,7 +476,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
                      debug = cfg$debug,
-                     best_calib = cfg$best_calib_landconversion_cost)
+                     best_calib = cfg$best_calib_landconversion_cost,
+                     histData = cfg$cost_calib_hist_data)
     cat("Land conversion cost calibration factor calculated!\n")
   }
 

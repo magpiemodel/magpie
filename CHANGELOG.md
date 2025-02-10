@@ -7,18 +7,48 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+
+- **15_food** tax recycling for income effect in elastic food demand
+- **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
+- **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24" 
+- **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
+- **config.cfg** default for `cfg$gms$s29_fallow_max ` changed from 0.4 to 0
+- **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
+- **scripts** land conversion cost calibration for cropland - FAO as target data set instead of MAgPIEown
+- **default.cfg** settings for  land conversion cost calibration updated
+
+### added
+- **scripts** output script for testing elastic demand
+- **scenario_config.csv** added column `NPI-revert`
+- **scenario_config.csv** added columns `AR-natveg` and `AR-plant` for CO2 price re/afforestation and AgroForestry settings
+- **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
+- **default.cfg** added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
+- **scripts** start script for ScenarioMIP MAgPIE standalone runs
+
+### removed
+- **modules/15_food/anthropometrics_jan18** removed as outdated
+- **scenario_config.csv** removed column `SSP2-EU`
+
+### fixed
+- **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
+- **32_forestry** added contraint `q32_ndc_aff_limit` to make sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
+- **35_natveg** added interface `vm_natforest_reduction`
+- **56_ghg_policy** bugfixes for regional GHG policy fader
+
+
+## [4.9.1] - 2025-01-28
+
+### changed
 - **scripts** peatland rewetting now automatically considered in `extra/runSEALSallocation.R`
 
 ### added
 - **scripts** added start script for land-based mitigation and biodiversity conservation paper
-- **start_scripts** added `lock_timeout` as option to `start_run` function
 - **scripts** release number can be passed as an argument to test_runs.R to tag as release
-
-### removed
--
+- **start_scripts** added `lock_timeout` as option to `start_run` function
 
 ### fixed
 - **44_biodiversity** bugfix i44_biome_share, code cleanup, added scaling of `q44_bii`
+
 
 ## [4.9.0] - 2024-12-05
 
@@ -1069,7 +1099,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.9.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.9.1...develop
+[4.9.1]: https://github.com/magpiemodel/magpie/compare/v4.9.0...v4.9.1
 [4.9.0]: https://github.com/magpiemodel/magpie/compare/v4.8.2...v4.9.0
 [4.8.2]: https://github.com/magpiemodel/magpie/compare/v4.8.1...v4.8.2
 [4.8.1]: https://github.com/magpiemodel/magpie/compare/v4.8.0...v4.8.1

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -39,6 +39,17 @@ p29_avl_cropland(t,j) = f29_avl_cropland(j,"%c29_marginal_land%") * (1 - p29_snv
 * -------------------------------------------------------
 * Tree cover on cropland
 * ------------------------------------------------------- 
+
+** set bii coefficients
+if(m_year(t) <= sm_fix_SSP2,
+ p29_treecover_bii_coeff(bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg)
+else
+ if(s29_treecover_bii_coeff = 0,
+  p29_treecover_bii_coeff(bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg)
+ elseif s29_treecover_bii_coeff = 1,
+  p29_treecover_bii_coeff(bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg)
+ );
+);
 
 * Growth of trees on cropland is modelled by shifting age-classes according to time step length.
 s29_shift = m_timestep_length_forestry/5;
