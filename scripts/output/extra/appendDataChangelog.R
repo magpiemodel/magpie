@@ -13,12 +13,18 @@ variables <- c(
 )
 roundDigits <- 2
 maxEntries <- 15
-changelog <- "../../data-changelog.csv"
 
-id <- commandArgs(trailingOnly = TRUE)
-if (length(id) == 0) {
-  load("runstatistics.rda")
-  id <- format(stats$date, "%Y-%m-%d")
+# the following settings may be overwritten by args, see below
+changelog <- "../../data-changelog.csv"
+load("runstatistics.rda")
+id <- format(stats$date, "%Y-%m-%d")
+
+arguments <- commandArgs(trailingOnly = TRUE)
+if (length(arguments) >= 1) {
+  changelog <- arguments[1]
+  if (length(arguments) >= 2) {
+    id <- arguments[2]
+  }
 }
 
 r <- readRDS("report.rds")
