@@ -17,7 +17,7 @@ if(m_year(t) <= sm_fix_SSP2,
   i60_res_2ndgenBE_dem(t,i) =
     f60_res_2ndgenBE_dem(t,i,"ssp2");
   i60_1stgen_bioenergy_subsidy(t) =
-    s60_bioenergy_1st_subsidy_floor;
+    s60_bioenergy_1st_subsidy;
   i60_2ndgen_bioenergy_subsidy(t) = 0;
 else
   i60_1stgen_bioenergy_dem(t,i,kall) =
@@ -50,8 +50,8 @@ $else
 $endif
 
 * Enforce floor for first generation bioenergy subsidy
-i60_1stgen_bioenergy_subsidy(t)$(i60_1stgen_bioenergy_subsidy(t) < s60_bioenergy_1st_subsidy_floor) 
-  = s60_bioenergy_1st_subsidy_floor;
+i60_1stgen_bioenergy_subsidy(t)$(i60_1stgen_bioenergy_subsidy(t) < s60_bioenergy_1st_subsidy) 
+  = s60_bioenergy_1st_subsidy;
 
 * Add minimal bioenergy demand in case of zero demand or very small demand to avoid zero prices
 i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) < s60_2ndgen_bioenergy_dem_min) = s60_2ndgen_bioenergy_dem_min;
