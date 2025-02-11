@@ -62,10 +62,25 @@ changelog <- Sys.getenv("DATA_CHANGELOG_PATH")
 if (changelog != "") {
   message("Appending to data changelog at ", changelog)
 
-  # TODO move to another place (gms? magpie4?)
-  # TODO documentation
-  addToDataChangelog <- function(report, changelog, rowname, years, variables,
-                                    maxEntries = 15, roundDigits = 2) {
+  # TODO move addToDataChangelog to another place (gms? magpie4?)
+
+  #' addToDataChangelog
+  #'
+  #' Prepend data from the given report to the changelog.
+  #'
+  #' @param report data.frame as obtained by readRDS("report.rds")
+  #' @param changelog Path to the changelog file
+  #' @param versionId The model version identifier, e.g. a release number like 4.9.1 or a data like 2025-02-01
+  #' @param years For which years the variables should be read and put into the changelog
+  #' @param variables Which variables to read from the report (e.g. "Emissions|CO2|Land|+|Land-use Change")
+  #' @param ... Reserved for future expansion.
+  #' @param maxEntries The maximum number of versionIds to keep in the changelog, the oldest one is removed first.
+  #' @param roundDigits Numbers are rounded to this many decimal places before being written to the changelog.
+  #'
+  #' @author Pascal Sauer
+  #' @export
+  addToDataChangelog <- function(report, changelog, versionId, years, variables, ...,
+                                 maxEntries = 15, roundDigits = 2) {
     x <- report[report$region == "World"
                 & report$variable %in% variables
                 & report$period %in% years,
@@ -99,7 +114,7 @@ if (changelog != "") {
     write.csv(out, changelog, quote = FALSE, row.names = FALSE)
     return(invisible(out))
   }
-  years <- c(2050, 2100)
+
   variables <- c(
     lucEmis = "Emissions|CO2|Land|+|Land-use Change", # +++++
     tau = "Productivity|Landuse Intensity Indicator Tau", # +++++
@@ -116,9 +131,9 @@ if (changelog != "") {
   load("runstatistics.rda") # load 'stats'
 
   addToDataChangelog(report, changelog,
-                        rowname = format(stats$date, "%Y-%m-%d"),
-                        years = c(2050, 2100),
-                        variables = variables)
+                     rowname = format(stats$date, "%Y-%m-%d"),
+                     years = c(2050, 2100),
+                     variables = variables)
 }
 
 write.report(report, file = mif)
