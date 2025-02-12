@@ -18,7 +18,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** settings for  land conversion cost calibration updated
 - **60_bioenergy** renamed `c60_bioenergy_subsidy` to `s60_bioenergy_1st_subsidy` to more clearly reflect its use and changed its unit to USD17MER per GJ. Adjusted `q60_bioenergy_incentive` accordingly
 - **60_bioenergy** renamed `s60_bioenergy_gj_price_1st` to `s60_bioenergy_1st_price` and `s60_bioenergy_price_2nd` to `s60_bioenergy_2nd_price` 
-- **config** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
+- **default.cfg** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
+- **default.cfg** default for `cfg$gms$bioenergy` change from `1stgen_priced_dec18` to `1st2ndgen_priced_feb24`
 
 ### added
 - **scripts** output script for testing elastic demand
@@ -31,7 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### removed
 - **modules/15_food/anthropometrics_jan18** removed as outdated
 - **scenario_config.csv** removed column `SSP2-EU`
-- **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min` since no longer in use
+- **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min_post_fix` since no longer in use
 
 ### fixed
 - **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
