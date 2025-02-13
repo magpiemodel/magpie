@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+
+- **15_food** tax recycling for income effect in elastic food demand
 - **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
 - **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24" 
 - **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
@@ -16,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** settings for  land conversion cost calibration updated
 
 ### added
+- **scripts** output script for testing elastic demand
 - **scenario_config.csv** added column `NPI-revert`
 - **scenario_config.csv** added columns `AR-natveg` and `AR-plant` for CO2 price re/afforestation and AgroForestry settings
 - **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
@@ -23,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** start script for ScenarioMIP MAgPIE standalone runs
 
 ### removed
+- **modules/15_food/anthropometrics_jan18** removed as outdated
 - **scenario_config.csv** removed column `SSP2-EU`
 
 ### fixed
