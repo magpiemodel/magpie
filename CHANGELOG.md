@@ -24,16 +24,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
 - **default.cfg** added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
 - **scripts** start script for ScenarioMIP MAgPIE standalone runs
+- **59_som** added soil carbon management option to cellpool_jan23 realization 
 
 ### removed
 - **modules/15_food/anthropometrics_jan18** removed as outdated
 - **scenario_config.csv** removed column `SSP2-EU`
+- **59_som** removed cellpool_aug16 realization (out-dated parameters)
 
 ### fixed
 - **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
 - **32_forestry** added contraint `q32_ndc_aff_limit` to make sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
 - **35_natveg** added interface `vm_natforest_reduction`
 - **56_ghg_policy** bugfixes for regional GHG policy fader
+- **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
 
 
 ## [4.9.1] - 2025-01-28
