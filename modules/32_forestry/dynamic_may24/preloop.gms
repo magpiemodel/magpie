@@ -161,6 +161,12 @@ elseif s32_initial_distribution = 1,
     p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
     p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
 
+elseif s32_initial_distribution = 2,
+** Initialize with equal distribution among rotation age classes
+** Plantated forest area is divided into ndcs (other planted forest) and plantations
+    p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = pm_land_start(j,"forestry") * s32_plant_shr/p32_rotation_cellular_harvesting("y1995",j);
+    p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * (1-s32_plant_shr)/p32_rotation_cellular_harvesting("y1995",j);
+
 );
 
 ** Redistribute to youngest age class in case the distribution to plantations and

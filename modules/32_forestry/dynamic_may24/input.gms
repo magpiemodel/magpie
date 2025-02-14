@@ -42,13 +42,14 @@ scalars
   s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
   s32_max_aff_area_glo            Switch for global or regional afforestation constraint (1) / 1 /
   s32_aff_prot                    Switch for protection of afforested areas (0=until end of planning horizon 1=forever) / 1 /
-  s32_plant_contr_growth_startyear  Start year for plantation contribution growth fader (year) / 2020 /
-  s32_plant_contr_growth_endyear    End year for plantation contribution growth fader (year) / 2050 /
+  s32_plant_contr_growth_startyear  Start year for plantation contribution growth fader (year) / 1995 /
+  s32_plant_contr_growth_endyear    End year for plantation contribution growth fader (year) / 2025 /
   s32_plant_contr_growth_startvalue Start value for plantation contribution growth fader (percent per year) / 0.05 /
   s32_plant_contr_growth_endvalue   End value for plantation contribution growth fader (percent per year) / 0 /
   s32_plant_contr_max               Maximum plantation contribution for establishment decision (percent) / 0.5 /
   s32_demand_establishment          Boolean switch for establishment demand assumption 1=forward looking 0=static (1) / 1 /
   s32_npi_ndc_reversal              Year in which NPI NDC reversal should take place (1) / Inf /
+  s32_plant_shr                     Share of plantations in planted forests (1) / 0.7 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
