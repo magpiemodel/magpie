@@ -191,13 +191,11 @@ download_and_update <- function(cfg) {
   # updating the general information in magpie.gms and input/info.txt
   # and .update_sets, which is updating the resolution- and region-depending
   # sets in core/sets.gms
-  tmp  <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
-  tmp2 <- magclass::read.magpie("modules/10_land/input/avl_land_t_0.5.mz")
-  cel  <- magclass::getItems(tmp2, dim = 1)
+  avl_land_t  <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
-  .update_info(filemap, x = tmp, regionscode, reg_revision, warnings)
-  .update_sets_core(x = tmp, map = map)
+  .update_info(filemap, x = avl_land_t, regionscode, reg_revision, warnings)
+  .update_sets_core(x = avl_land_t, map = map)
   .update_sets_modules()
 }
 
