@@ -16,7 +16,7 @@ dataChangelog <- cfg$dataChangelog
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 cfg$dataChangelog <- dataChangelog
 
-stopifnot(!is.null(cfg$dataChangelog$path))
+stopifnot(cfg$dataChangelog$path != "")
 
 report <- readRDS(file.path(cfg$results_folder, "report.rds"))
 
