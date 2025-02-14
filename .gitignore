@@ -5,7 +5,7 @@ magpie_calib.*
 
 #ignore input files
 *.cs*
-!/data-changelog.csv
+!/releaseDataChangelog.csv
 *.mz
 *.rds
 /input/
