@@ -114,6 +114,11 @@ else
 * set restoration to zero
 pm_land_conservation(t,j,land,"restore") = 0;
 
+if (m_year(t) >= s22_base_protect_reversal,
+  pm_land_conservation(t,j,land,consv_type) = 0;
+);
+
+
 );
 
 
