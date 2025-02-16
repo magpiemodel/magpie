@@ -157,7 +157,7 @@ q35_prod_primforest(j2)..
 *' Wood production from other landis not allowed.
 
 q35_prod_other(j2)..
-               vm_prod_natveg(j2,"other","woodfuel")
+              sum(kforestry, vm_prod_natveg(j2,"other",kforestry))
                =e=
                (sum(ac_sub, v35_hvarea_other(j2,"othernat",ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other")))
               + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"))))

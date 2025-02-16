@@ -16,6 +16,7 @@ p73_fraction(t_all)                                                         Frac
 p73_demand_constr_wood(t_all,i)                                             Demand for construction wood (mio. tDM per yr)
 p73_fraction_sm_fix                                                         Modifier fraction at sm_fix_SSP2 time step (1)
 im_timber_prod_cost(kforestry)                                              Cost for producing one unit of wood and woodfuel (USD17MER per tDM)
+p73_income_elasticity(t_all,iso,total_wood_products)                        Income elasticities of wood products (1)
 ;
 
 positive variables
