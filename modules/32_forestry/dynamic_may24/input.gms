@@ -49,7 +49,7 @@ scalars
   s32_plant_contr_max               Maximum plantation contribution for establishment decision (percent) / 1 /
   s32_demand_establishment          Boolean switch for establishment demand assumption 1=forward looking 0=static (1) / 1 /
   s32_npi_ndc_reversal              Year in which NPI NDC reversal should take place (1) / Inf /
-  s32_min_plant_shr                 Minimum share of plantations in planted forests (1) / 0.25 /
+  s32_min_plant_shr                 Minimum share of plantations in planted forests (1) / 0.2 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
