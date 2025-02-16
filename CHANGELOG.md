@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+
+- **15_food** tax recycling for income effect in elastic food demand
 - **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
 - **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24" 
 - **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
@@ -14,8 +16,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
 - **scripts** land conversion cost calibration for cropland - FAO as target data set instead of MAgPIEown
 - **default.cfg** settings for  land conversion cost calibration updated
+- **60_bioenergy** renamed `c60_bioenergy_subsidy` to `s60_bioenergy_1st_subsidy` to more clearly reflect its use and changed its unit to USD17MER per GJ. Adjusted `q60_bioenergy_incentive` accordingly
+- **60_bioenergy** renamed `s60_bioenergy_gj_price_1st` to `s60_bioenergy_1st_price` and `s60_bioenergy_price_2nd` to `s60_bioenergy_2nd_price` 
+- **default.cfg** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
+- **default.cfg** default for `cfg$gms$bioenergy` change from `1stgen_priced_dec18` to `1st2ndgen_priced_feb24`
 
 ### added
+- **scripts** output script for testing elastic demand
 - **scenario_config.csv** added column `NPI-revert`
 - **scenario_config.csv** added columns `AR-natveg` and `AR-plant` for CO2 price re/afforestation and AgroForestry settings
 - **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
@@ -23,7 +30,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** start script for ScenarioMIP MAgPIE standalone runs
 
 ### removed
+- **modules/15_food/anthropometrics_jan18** removed as outdated
 - **scenario_config.csv** removed column `SSP2-EU`
+- **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min_post_fix` since no longer in use
 
 ### fixed
 - **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
