@@ -5,12 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c52_carbon_scenario  cc
+$setglobal c52_carbon_scenario  nocc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
-$setglobal c52_land_carbon_sink_rcp  RCPBU
+$setglobal c52_land_carbon_sink_rcp  nocc
 *   options:  RCP19, RCP26, RCP34, RCP45, RCP60, RCPBU
 
 table fm_carbon_density(t_all,j,land,c_pools) LPJmL carbon density for land and carbon pools (tC per ha)

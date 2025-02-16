@@ -61,7 +61,7 @@
 *' Forestry related costs (afforestation) ([32_forestry]),
 *' Bioenergy costs ([60_bioenergy]),
 *' Processing costs ([20_processing]),
-*' Punish costs for overrate cropland differences, costs for soil carbon management ([59_som]).
+*' Costs for soil carbon management ([59_som]).
 *' Small costs for land transitions ([10_land]).
 *' Peatland degradation and restoration costs ([58_peatland]).
 *' Peatland emission costs ([56_ghg_policy]).

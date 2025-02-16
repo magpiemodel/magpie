@@ -41,7 +41,7 @@ s42_multiplier_startyear           Year from which pumping costs multiplier will
 s42_multiplier                     multiplier to change pumping costs for sensitivity analysis takes numeric values (1)  / 0 /
 ;
 
-$setglobal c42_watdem_scenario  cc
+$setglobal c42_watdem_scenario  nocc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)

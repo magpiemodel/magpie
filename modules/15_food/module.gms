@@ -22,5 +22,4 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%food%" == "anthro_iso_jun22" $include "./modules/15_food/anthro_iso_jun22/realization.gms"
-$Ifi "%food%" == "anthropometrics_jan18" $include "./modules/15_food/anthropometrics_jan18/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

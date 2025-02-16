@@ -13,7 +13,7 @@
 q59_som_target_cropland(j2) ..
               v59_som_target(j2,"crop")
               =e= (sum((kcr,w), vm_area(j2,kcr,w) * i59_cratio(j2,kcr,w)) * 
-                     (1 + sum(ct, i59_scm_target(ct,j2)) * (i59_scm_ratio(j2) - 1)) 
+                     (1 + sum(ct, i59_scm_target(ct,j2)) * (i59_ratio_scm(j2) - 1)) 
                    + vm_fallow(j2) * i59_cratio_fallow(j2) 
                    + vm_treecover(j2) * i59_cratio_treecover)
                    * sum(ct,f59_topsoilc_density(ct,j2));

@@ -149,24 +149,24 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: rev4.116_h12_magpie.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: a020594c956835f8f44fc1b062506a01
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.116_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 6bc13df515d9663430beff24c80280fd
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.116_h12_validation.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 494dbecfb4800872218fc6d791880ff9
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.60.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 4a34597095b29a273245a5ba42b60bdc
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: calibration_H12_FAO30_03Feb25.tgz
 * md5sum: aba0b877f383fefabc558d79180fc43f
-* Repository: /Users/flo/Development/input_data/
+* Repository: /p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -194,7 +194,17 @@ $title magpie
 *    14   23   10    7    4   26   21    9   16   23   32   15
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
-* Last modification (input data): Thu Feb  6 14:08:31 2025
+* Warning messages:
+* 1: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
+*   Config looks different when stored via saveConfig and loaded via loadConfig!
+* 2: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
+*   Config looks different when stored via saveConfig and loaded via loadConfig!
+* 3: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
+*   Config looks different when stored via saveConfig and loaded via loadConfig!
+* 4: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
+*   Config looks different when stored via saveConfig and loaded via loadConfig!
+* 
+* Last modification (input data): Sat Feb 15 23:29:08 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -220,7 +230,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  default_0p3_SCM01_nocc
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -278,7 +288,7 @@ $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_aug22
 $setglobal maccs  on_aug22
 $setglobal peatland  v2
-$setglobal som  static_jan19
+$setglobal som  cellpool_jan23
 
 $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16

@@ -85,7 +85,7 @@ i59_cratio_treecover = 1;
 *' For dedicated soil carbon management we use the `high_input_nomanure` values from the IPCC guidelines,
 *' as the refer to the usage of dedicated SCM measures such as cover crops, improved residue management etc.
 
-i59_scm_ratio(j) = sum(climate59, sum(clcl_climate59(clcl,climate59),
+i59_ratio_scm(j) = sum(climate59, sum(clcl_climate59(clcl,climate59),
                      pm_climate_class(j,clcl)) *
                        f59_cratio_inputs(climate59,"high_input_nomanure"));
 
@@ -99,12 +99,12 @@ elseif s59_fader_functional_form = 2,
 
 * Country switch to determine countries for which certain policies shall be applied.
 * In the default case, the policy affects all countries when activated.
-p59_country_switch(iso) = 0;
-p59_country_switch(policy_countries59) = 1;
+p59_scm_country_switch(iso) = 0;
+p59_scm_country_switch(policy_countries59) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by available cropland area `pm_avl_cropland_iso`
-p59_country_weight(i) = sum(i_to_iso(i,iso), p59_country_switch(iso) * 
+p59_country_weight(i) = sum(i_to_iso(i,iso), p59_scm_country_switch(iso) * 
   pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
 
 

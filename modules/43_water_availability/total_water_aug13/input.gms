@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-$setglobal c43_watavail_scenario  cc
+$setglobal c43_watavail_scenario  nocc
 *   options:   cc       (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
