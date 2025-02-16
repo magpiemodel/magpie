@@ -43,7 +43,7 @@ scalars
   s32_max_aff_area_glo            Switch for global or regional afforestation constraint (1) / 1 /
   s32_aff_prot                    Switch for protection of afforested areas (0=until end of planning horizon 1=forever) / 1 /
   s32_plant_contr_growth_startyear  Start year for plantation contribution growth fader (year) / 1995 /
-  s32_plant_contr_growth_endyear    End year for plantation contribution growth fader (year) / 2025 /
+  s32_plant_contr_growth_endyear    End year for plantation contribution growth fader (year) / 2035 /
   s32_plant_contr_growth_startvalue Start value for plantation contribution growth fader (percent per year) / 0.05 /
   s32_plant_contr_growth_endvalue   End value for plantation contribution growth fader (percent per year) / 0 /
   s32_plant_contr_max               Maximum plantation contribution for establishment decision (percent) / 1 /
