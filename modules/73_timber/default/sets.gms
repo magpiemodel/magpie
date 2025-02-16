@@ -21,7 +21,7 @@ wood_products(total_wood_products)  Major 2nd level products from wood processin
 fibreboard,particle_board_and_osb,plywood,veneer_sheets,
 wood_pulp,
 sawnwood,
-other_sawnwood
+other_industrial_roundwood
 /
 
 construction_wood(total_wood_products)        Wood products used for building construction
