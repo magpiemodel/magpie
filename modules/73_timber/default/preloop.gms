@@ -12,7 +12,7 @@ s73_free_prod_cost$(s73_timber_demand_switch = 0) = s73_timber_prod_cost_wood;
 p73_forestry_demand_prod_specific(t_past_forestry,iso,total_wood_products) = f73_prod_specific_timber(t_past_forestry,iso,total_wood_products);
 
 p73_income_elasticity(t_all,iso,total_wood_products) = f73_income_elasticity(total_wood_products);
-p73_income_elasticity(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso) > 10000) = 0;
+p73_income_elasticity(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso) > s73_income_threshold) = 0;
 p73_income_elasticity(t_all,iso,"wood_fuel") = f73_income_elasticity("wood_fuel");
 
 ** Loop over time to calculate future demand
@@ -48,7 +48,7 @@ pm_demand_forestry(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,
 p73_fraction(t_all)    = s73_expansion/(m_year("y2100") - sm_fix_SSP2);
 
 ** Populate the fraction for each time step
-loop(t_all$(m_year(t_all) > 2005),
+loop(t_all$(m_year(t_all) > 1995),
   p73_fraction(t_all)  = s73_expansion/(m_year("y2100") - sm_fix_SSP2) * m_yeardiff(t_all) + p73_fraction(t_all-1);
   );
 
