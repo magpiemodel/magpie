@@ -171,7 +171,7 @@ p32_plant_contr(t,i)$(p32_plant_contr(t,i) > s32_plant_contr_max) = s32_plant_co
 ** s32_demand_establishment = 1 forward looking (establishment based on future demand according to rotation length)
 if(s32_demand_establishment = 1,
   if(m_year(t) <= sm_fix_SSP2,
-    p32_demand_forestry_future(t,i,kforestry) = sum(t_ext$(t_ext.pos = t.pos + p32_rotation_regional(t,i)),pm_demand_forestry(t_ext,i,kforestry));
+    p32_demand_forestry_future(t,i,kforestry) = sum(t2$(m_year(t2) = sm_fix_SSP2), pm_demand_forestry(t2,i,kforestry));
   else
     p32_demand_forestry_future(t,i,kforestry) = sum(t_ext$(t_ext.pos = t.pos + p32_rotation_regional(t,i)),pm_demand_forestry(t_ext,i,kforestry));
    );
