@@ -20,6 +20,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **60_bioenergy** renamed `s60_bioenergy_gj_price_1st` to `s60_bioenergy_1st_price` and `s60_bioenergy_price_2nd` to `s60_bioenergy_2nd_price` 
 - **default.cfg** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
 - **default.cfg** default for `cfg$gms$bioenergy` change from `1stgen_priced_dec18` to `1st2ndgen_priced_feb24`
+- **73_timber** revised timber demand calculations 
+- **35_natveg** revised wood harvest assumptions
 
 ### added
 - **scripts** output script for testing elastic demand
