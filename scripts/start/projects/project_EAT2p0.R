@@ -224,6 +224,17 @@ cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
+# BAU_MITI #
+# Decomposition Scenario. Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "BAU_MITI"
+# standard setting, but with NDC activated (for miti)
+cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
+# scenario settings
+cfg <- miti(cfg = cfg)
+cfg <- bau(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
 # ELM #
 # Full EAT-Lancet scenario (diet, productivity, FLW) with mitigation policies consistent with 1.5C. Climate based on a lower climate impacts with RCP 2.6
 cfg$title <- "ELM"
