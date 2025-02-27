@@ -152,12 +152,11 @@ q35_prod_primforest(j2)..
               v35_hvarea_primforest(j2) * sum(ct, pm_timber_yield(ct,j2,"acx","primforest")) / m_timestep_length_forestry;
 
 ** Other land
-*' Wood-fuel production from other land is calculated by multiplying the area under
+*' Woody biomass production from other land is calculated by multiplying the area under
 *' production with corresponding yields of other land, divided by the timestep length.
-*' Wood production from other landis not allowed.
 
 q35_prod_other(j2)..
-               vm_prod_natveg(j2,"other","woodfuel")
+              sum(kforestry, vm_prod_natveg(j2,"other",kforestry))
                =e=
                (sum(ac_sub, v35_hvarea_other(j2,"othernat",ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other")))
               + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"))))

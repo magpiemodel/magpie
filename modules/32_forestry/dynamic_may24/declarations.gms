@@ -56,6 +56,7 @@ parameters
  p32_demand_forestry_future(t,i,kforestry)          Future forestry demand in current time step (tDM per yr)
  p32_est_cost(type32)                               Establishment cost (USD17MER per ha)
  i32_recurring_cost(type32)                         Recurring costs (USD17MER per ha)
+ p32_plantedforest(i)                               Planted forest (mio. ha)
 ;
 
 positive variables
