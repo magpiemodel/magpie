@@ -267,7 +267,7 @@ gc()
 }
 
 ####### ONLY DYNAMIC FORESTRY ON#############
-#check for dynamic foresty
+#check for dynamic forestry
 if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   message("Start forestry / timber reporting")
 
@@ -295,7 +295,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   }
 
   #### Wood: Yields
-  a <- ForestYield(gdx,level="cell")
+  a <- forestYield(gdx,level="cell")
   a_fix<- new.magpie(cells_and_regions=getCells(a),years=getYears(a),
                      names=getNames(a))
 
