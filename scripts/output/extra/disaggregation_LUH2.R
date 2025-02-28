@@ -295,7 +295,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   }
 
   #### Wood: Yields
-  a <- forestYield(gdx,level="cell")
+  a <- ForestYield(gdx,level="cell")
   a_fix<- new.magpie(cells_and_regions=getCells(a),years=getYears(a),
                      names=getNames(a))
 
