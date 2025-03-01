@@ -27,7 +27,7 @@ scalars
   s32_est_cost_plant              Establishment cost for plantations (USD17MER per ha) / 2460 /
   s32_est_cost_natveg             Establishment cost for natural vegetation (USD17MER per ha) / 2460 /
   s32_recurring_cost              Recurring costs (USD17MER per ha) / 615 /
-  s32_harvesting_cost             Harvesting cost (USD17MER per ha) / 2460 /
+  s32_harvesting_cost             Harvesting cost (USD17MER per ha) / 1230 /
   s32_planning_horizon             Afforestation planing horizon (years)            / 50 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
