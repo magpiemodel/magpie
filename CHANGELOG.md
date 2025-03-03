@@ -24,6 +24,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **73_timber** revised timber demand calculations 
 - **32_forestry** revised plantation establishment assumptions
 - **35_natveg** revised wood harvest assumptions
+- **32_forestry** timber plantation harvest is no longer enforced at rotation age to avoid conflicts with `q21_trade_reg_up`, which can result in huge costs and negative prices for wood
+- **21_trade** Cost for additional imports to maintain feasibility reduced from 12300 to 1500 USD17MER per tDM to avoid implausibly high costs and prices for wood and woodfuel
 
 ### added
 - **scripts** output script for testing elastic demand
@@ -45,6 +47,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** added contraint `q32_ndc_aff_limit` to make sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
 - **35_natveg** added interface `vm_natforest_reduction`
 - **56_ghg_policy** bugfixes for regional GHG policy fader
+- **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
 
 
 ## [4.9.1] - 2025-01-28
