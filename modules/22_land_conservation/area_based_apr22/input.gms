@@ -14,6 +14,7 @@ scalars
 s22_restore_land  If land restoration is allowed (0=no 1=yes) / 1 /
 s22_conservation_start    Land conservation start year        / 2025 /
 s22_conservation_target   Land conservation target year       / 2050 /
+s22_base_protect_reversal Year in which base protection reversal should take place (1) / Inf /
 ;
 
 * Set-switch for countries affected by regional land conservation policy

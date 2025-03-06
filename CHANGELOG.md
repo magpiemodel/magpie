@@ -8,18 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 
+- **scripts** changed c30_bioen_water switch to all in EAT2p0 start script and re-included missing BAU_MITI scenario
 - **15_food** tax recycling for income effect in elastic food demand
 - **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
-- **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24" 
+- **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24"
 - **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
 - **config.cfg** default for `cfg$gms$s29_fallow_max ` changed from 0.4 to 0
 - **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
 - **scripts** land conversion cost calibration for cropland - FAO as target data set instead of MAgPIEown
 - **default.cfg** settings for  land conversion cost calibration updated
 - **60_bioenergy** renamed `c60_bioenergy_subsidy` to `s60_bioenergy_1st_subsidy` to more clearly reflect its use and changed its unit to USD17MER per GJ. Adjusted `q60_bioenergy_incentive` accordingly
-- **60_bioenergy** renamed `s60_bioenergy_gj_price_1st` to `s60_bioenergy_1st_price` and `s60_bioenergy_price_2nd` to `s60_bioenergy_2nd_price` 
+- **60_bioenergy** renamed `s60_bioenergy_gj_price_1st` to `s60_bioenergy_1st_price` and `s60_bioenergy_price_2nd` to `s60_bioenergy_2nd_price`
 - **default.cfg** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
 - **default.cfg** default for `cfg$gms$bioenergy` change from `1stgen_priced_dec18` to `1st2ndgen_priced_feb24`
+- **73_timber** revised timber demand calculations 
+- **32_forestry** revised plantation establishment assumptions
+- **35_natveg** revised wood harvest assumptions
+- **32_forestry** timber plantation harvest is no longer enforced at rotation age to avoid conflicts with `q21_trade_reg_up`, which can result in huge costs and negative prices for wood
+- **21_trade** Cost for additional imports to maintain feasibility reduced from 12300 to 1500 USD17MER per tDM to avoid implausibly high costs and prices for wood and woodfuel
 
 ### added
 - **scripts** output script for testing elastic demand
@@ -28,6 +34,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
 - **default.cfg** added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
 - **scripts** start script for ScenarioMIP MAgPIE standalone runs
+- **22_land_conservation** added option for base protection reversal
+- **scripts** The constraint to maintain 20% semi-natural vegetation at the 1x1km scale is passed on to SEALS, if the setting is changed from the `default.cfg`
 - **59_som** added soil carbon management option to cellpool_jan23 realization 
 - **11_cost** added cost term for soil carbon management
 - **default.cfg** added setting for soil carbon management to config
@@ -43,6 +51,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** added contraint `q32_ndc_aff_limit` to make sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
 - **35_natveg** added interface `vm_natforest_reduction`
 - **56_ghg_policy** bugfixes for regional GHG policy fader
+- **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
 - **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
 
 
