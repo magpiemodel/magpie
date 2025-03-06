@@ -9,7 +9,7 @@ $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
 $setglobal c35_shock_scenario  none
 
-$setglobal c35_pot_forest_scenario  nocc
+$setglobal c35_pot_forest_scenario  cc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)

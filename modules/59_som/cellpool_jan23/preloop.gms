@@ -85,7 +85,7 @@ i59_cratio_treecover = 1;
 *' For dedicated soil carbon management we use the `high_input_nomanure` values from the IPCC guidelines,
 *' as the refer to the usage of dedicated SCM measures such as cover crops, improved residue management etc.
 
-i59_ratio_scm(j) = sum(climate59, sum(clcl_climate59(clcl,climate59),
+i59_cratio_scm(j) = sum(climate59, sum(clcl_climate59(clcl,climate59),
                      pm_climate_class(j,clcl)) *
                        f59_cratio_inputs(climate59,"high_input_nomanure"));
 

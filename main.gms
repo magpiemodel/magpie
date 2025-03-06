@@ -204,7 +204,7 @@ $title magpie
 * 4: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
 *   Config looks different when stored via saveConfig and loaded via loadConfig!
 * 
-* Last modification (input data): Sat Feb 15 23:29:08 2025
+* Last modification (input data): Thu Feb 20 17:30:37 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -230,7 +230,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default_0p3_SCM01_nocc
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -288,9 +288,9 @@ $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_aug22
 $setglobal maccs  on_aug22
 $setglobal peatland  v2
-$setglobal som  cellpool_jan23
+$setglobal som  static_jan19
 
-$setglobal bioenergy  1stgen_priced_dec18
+$setglobal bioenergy  1st2ndgen_priced_feb24
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 
