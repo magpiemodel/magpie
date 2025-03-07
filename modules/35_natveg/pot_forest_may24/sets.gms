@@ -11,8 +11,8 @@ sets
   / overall, deforestation, shifting_agriculture,
   forestry, wildfire, urbanization /
 
-  combined_loss(driver_source) Combined loss from fire plus agriculture
-  / overall /
+  combined_loss(driver_source) Combined loss deforestation and shifting_agriculture
+  / deforestation, shifting_agriculture /
 
   pol35 Land protection policy
   / none, npi, ndc /
