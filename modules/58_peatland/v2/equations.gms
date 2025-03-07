@@ -51,7 +51,7 @@
 
 *' Annual limit for peatland rewetting based on `s58_annual_rewetting_limit`.
 
- q58_peatlandReductionLimit(j2) .. 
+ q58_peatlandReductionLimit(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
   v58_peatlandChange(j2,"rewetted") / m_timestep_length =l= 
   s58_annual_rewetting_limit * sum(drained58, pc58_peatland(j2,drained58));
 
