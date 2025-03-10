@@ -68,8 +68,8 @@ im_pollutant_prices(t_all,i,"co2_c",emis_source) = im_pollutant_prices(t_all,i,"
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) <= sm_fix_SSP2) = 0;
 ** set GHG prices to zero for all future time steps until the year defined by `c56_mute_ghgprices_until` or `s56_fader_start`
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) > sm_fix_SSP2 AND m_year(t_all) <= max(m_year("%c56_mute_ghgprices_until%"),s56_fader_start*s56_ghgprice_fader)) = 0;
-** Exception for C price, which can be set to a minium price for all future time steps until the year defined by `c56_mute_ghgprices_until` or `s56_fader_start`
-im_pollutant_prices(t_all,i,"co2_c",emis_source)$(m_year(t_all) > sm_fix_SSP2 AND m_year(t_all) <= max(m_year("%c56_mute_ghgprices_until%"),s56_fader_start*s56_ghgprice_fader)) = s56_minimum_cprice;
+** Exception for C price, which can be set to a minium price for all time steps
+im_pollutant_prices(t_all,i,"co2_c",emis_source)$(im_pollutant_prices(t_all,i,"co2_c",emis_source) < s56_minimum_cprice) = s56_minimum_cprice;
 
 ***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
 *12/44 conversion from USD17MER per tC to USD17MER per tCO2
@@ -80,7 +80,13 @@ im_pollutant_prices(t_all,i,"n2o_n_direct",emis_source)$(im_pollutant_prices(t_a
 im_pollutant_prices(t_all,i,"n2o_n_indirect",emis_source)$(im_pollutant_prices(t_all,i,"n2o_n_indirect",emis_source) > s56_limit_ch4_n2o_price*12/44*265*44/28) = s56_limit_ch4_n2o_price*12/44*265*44/28;
 
 ***GHG emission policy
-im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);
+loop(t,
+ if(m_year(t) <= sm_fix_SSP2,
+  im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("reddnatveg_nosoil",pollutants,emis_source);
+ else
+  im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);
+ );
+);
 
 ***construct age-class dependent C price for afforestation incentive
 ***this is needed because time steps (t) and age-classes (ac) can differ. ac and t_all are always in 5-year time steps.
