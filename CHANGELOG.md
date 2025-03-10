@@ -26,6 +26,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg** revised wood harvest assumptions
 - **32_forestry** timber plantation harvest is no longer enforced at rotation age to avoid conflicts with `q21_trade_reg_up`, which can result in huge costs and negative prices for wood
 - **21_trade** Cost for additional imports to maintain feasibility reduced from 12300 to 1500 USD17MER per tDM to avoid implausibly high costs and prices for wood and woodfuel
+- **default.cfg** Reactivated external scenario for damage from shifting agriculture (`cfg$gms$s35_forest_damage <- 2`)
+- **56_ghg_policy** Minimum CO2 price of 1 $ per ton CO2 on emissions from deforestation and other land conversion in all time steps to avoid sudden jumps in carbon stock changes (`cfg$gms$s56_minimum_cprice <- 3.67`)
 
 ### added
 - **scripts** output script for testing elastic demand
@@ -36,6 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** start script for ScenarioMIP MAgPIE standalone runs
 - **22_land_conservation** added option for base protection reversal 
 - **scripts** The constraint to maintain 20% semi-natural vegetation at the 1x1km scale is passed on to SEALS, if the setting is changed from the `default.cfg`
+- **58_peatland** Limit for annual peatland rewetting (2% of degraded peatland per year) to avoid adhoc rewetting of degraded peatlands with the introduction of the CO2 price (`cfg$gms$s58_annual_rewetting_limit <- 0.02`)
 
 ### removed
 - **modules/15_food/anthropometrics_jan18** removed as outdated
