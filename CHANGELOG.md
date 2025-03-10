@@ -229,7 +229,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **21_trade** removed interface `pm_selfsuff_ext`, removed `v21_manna_from_heaven`
 - **32_forestry** removed interface `pm_representative_rotation`
 - **35_natveg** removed growing stock calculation and calibration, which is no longer needed.
-- **62_material/16_demand** Removed double structure for forestry products. `pm_demand_foresty` is now used in `62_material`
+- **62_material/16_demand** Removed double structure for forestry products. `pm_demand_forestry` is now used in `62_material`
 - **73_timber** removed interfaces `pm_demand_forestry_future` and `sm_wood_density`
 - **scripts** removed support for spam files in start_functions
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
@@ -776,7 +776,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
 - **13_tc** different educated guess for vm_tau in 1995
 - **scaling** Update of scaling factors. removed duplicates
-- **32_foresty** Avoid division by zero (observed under higher regional resolutions)
+- **32_forestry** Avoid division by zero (observed under higher regional resolutions)
 - **35_natveg** Avoid division by zero (observed under higher regional resolutions)
 - **70_livestock** Avoid division by zero (observed under higher regional resolutions)
 - **60_bioenergy** Minimum dedicated 2nd generation bioenergy demand assumed in each region raised from 0.01 to 1 mio. GJ per yr, and added as option in the config file (s60_2ndgen_bioenergy_dem_min)
@@ -809,7 +809,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **output.R** added SLURM standby maxMem and SLURM priority maxMem; needed for some output scripts (e.g. disaggregation_LUH2.R)
 
 ### removed
-- **32_foresty** Removed static realization
+- **32_forestry** Removed static realization
 - **35_natveg** Removed static realization
 - **scripts** lpjml_addon script is removed and all calls within dependend starting scripts
 - **scripts** output/extra/disaggregation_transitions_.R moved to deprecated folder
@@ -826,12 +826,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **10_land** fixed rare infeasibility in "landmatrix_dec18" realization
 - **38_factor_costs** For the sticky_feb18 realization correction in initial capital stocks, use of production initial values, and 05USDppp units changed to 05USDMER for sticky so it matches the units of the other realizations
 - **80_optimization** Bug fixes in the nlp_par (parallel optimization) and improved code to collect failing handles.
-- **32_foresty** Avoid division by zero in q32_establishment_dynamic_yield
+- **32_forestry** Avoid division by zero in q32_establishment_dynamic_yield
 - **35_natveg** fixed land protection to SSP2 default (WDPA) for historic period
 - **15_food** New iteration needs to be started before setting food prices for curr_iter15
 - **scripts** scripts/output/extra/highres.R bugfixes
 - **38_factor_costs** units in sticky_feb18
-- **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation;
+- **32_forestry** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation;
 - **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
 - **56_ghg_policy** choose the correct scenario for fixing the GHG prices until sm_fix_SSP2
 
@@ -841,7 +841,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **13_tc** added switch to ignore historic tau patterns in historic time steps (new default)
 - **16_demand** Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**
-- **32_foresty** Added option to choose a rotation length calculation criteria
+- **32_forestry** Added option to choose a rotation length calculation criteria
 - **35_natveg** Calculation of land protection policies revised and moved from presolve.gms to preloop.gms
 - **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization). Bugfix in the yearly update of the variable input requirements. Addition of the time dimension and clean up of names of parameters used in the realization. Removal of the management factor (this factor was not being used, it was being cancelled out in previous calculations). Correction of the costs, they are given in 05USDppp.
 - **39_landconversion** lower costs for expansion of forestry land
@@ -880,10 +880,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core** removed sets ac_young and ac_mature (no longer needed due to changes in 44_biodiversity)
 
 ### fixed
-- **32_foresty** BII coefficients for CO2 price driven afforestation
-- **32_foresty** growth curve CO2 price driven afforestation
-- **32_foresty** NPI/NDC afforestation infeasibility
-- **32_foresty** Correct distribution from LUH data to plantations and ndcs
+- **32_forestry** BII coefficients for CO2 price driven afforestation
+- **32_forestry** growth curve CO2 price driven afforestation
+- **32_forestry** NPI/NDC afforestation infeasibility
+- **32_forestry** Correct distribution from LUH data to plantations and ndcs
 - **35_natveg** option to fade out damage from shifting agriculture by 2030
 - **44_biodiversity** ac0 included in pricing of biodiversity loss
 
