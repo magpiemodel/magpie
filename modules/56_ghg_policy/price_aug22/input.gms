@@ -64,7 +64,7 @@ pollutants_fader(pollutants) pollutants affected by GHG policy fader
 scalars
   s56_limit_ch4_n2o_price         Upper limit for CH4 and N2O GHG prices (USD17MER per tC) / 4920 /
   s56_cprice_red_factor           Reduction factor for CO2 price (-) / 1 /
-  s56_minimum_cprice              Minium C price for future time steps (USD17MER per tC) / 0 /
+  s56_minimum_cprice              Minium C price (USD17MER per tC) / 3.67 /
   s56_ghgprice_devstate_scaling   Switch for scaling GHG price with development state (1=on 0=off) / 0 /
   s56_c_price_induced_aff         Switch for C price driven re-afforestation (1=on 0=off) / 1 /
   s56_c_price_exp_aff             Time horizon of CO2 price expectation for re-afforestation (years) / 50 /
