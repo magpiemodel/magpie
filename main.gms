@@ -194,16 +194,6 @@ $title magpie
 *    14   23   10    7    4   26   21    9   16   23   32   15
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
-* Warning messages:
-* 1: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
-*   Config looks different when stored via saveConfig and loaded via loadConfig!
-* 2: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
-*   Config looks different when stored via saveConfig and loaded via loadConfig!
-* 3: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
-*   Config looks different when stored via saveConfig and loaded via loadConfig!
-* 4: In gms::check_config(cfg, extras = c("info", "repositories",  ... :
-*   Config looks different when stored via saveConfig and loaded via loadConfig!
-* 
 * Last modification (input data): Thu Feb 20 17:30:37 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
