@@ -89,6 +89,8 @@ i59_cratio_scm(j) = sum(climate59, sum(clcl_climate59(clcl,climate59),
                      pm_climate_class(j,clcl)) *
                        f59_cratio_inputs(climate59,"high_input_nomanure"));
 
+*' @stop
+
 ** Trajectory for cropland scenarios
 * linear or sigmoidal interpolation between start year and target year
 if (s59_fader_functional_form = 1,
@@ -106,9 +108,6 @@ p59_scm_country_switch(policy_countries59) = 1;
 * Countries are weighted by available cropland area `pm_avl_cropland_iso`
 p59_country_weight(i) = sum(i_to_iso(i,iso), p59_scm_country_switch(iso) * 
   pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
-
-
-*' @stop
 
 pc59_land_before(j,land) = pm_land_start(j,land);
 
