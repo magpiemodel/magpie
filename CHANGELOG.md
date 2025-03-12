@@ -39,7 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **22_land_conservation** added option for base protection reversal
 - **scripts** The constraint to maintain 20% semi-natural vegetation at the 1x1km scale is passed on to SEALS, if the setting is changed from the `default.cfg`
 - **58_peatland** Limit for annual peatland rewetting (2% of degraded peatland per year) to avoid adhoc rewetting of degraded peatlands with the introduction of the CO2 price (`cfg$gms$s58_annual_rewetting_limit <- 0.02`)
-- **59_som** added soil carbon management option to cellpool_jan23 realization 
+- **59_som** added soil carbon management option to cellpool_jan23 realization
 - **11_cost** added cost term for soil carbon management
 - **default.cfg** added setting for soil carbon management to config
 
