@@ -160,11 +160,11 @@ $title magpie
 * md5sum: 494dbecfb4800872218fc6d791880ff9
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.60.tgz
+* Used data set: additional_data_rev4.62.tgz
 * md5sum: 4a34597095b29a273245a5ba42b60bdc
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_FAO30_03Feb25.tgz
+* Used data set: calibration_H12_FAO_10Mar25
 * md5sum: aba0b877f383fefabc558d79180fc43f
 * Repository: /p/projects/landuse/data/input/calibration
 * 
@@ -278,7 +278,7 @@ $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_aug22
 $setglobal maccs  on_aug22
 $setglobal peatland  v2
-$setglobal som  static_jan19
+$setglobal som  cellpool_jan23
 
 $setglobal bioenergy  1st2ndgen_priced_feb24
 $setglobal material  exo_flexreg_apr16
