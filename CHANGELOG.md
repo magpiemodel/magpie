@@ -36,13 +36,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
 - **default.cfg** added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
 - **scripts** start script for ScenarioMIP MAgPIE standalone runs
-- **22_land_conservation** added option for base protection reversal 
+- **22_land_conservation** added option for base protection reversal
 - **scripts** The constraint to maintain 20% semi-natural vegetation at the 1x1km scale is passed on to SEALS, if the setting is changed from the `default.cfg`
 - **58_peatland** Limit for annual peatland rewetting (2% of degraded peatland per year) to avoid adhoc rewetting of degraded peatlands with the introduction of the CO2 price (`cfg$gms$s58_annual_rewetting_limit <- 0.02`)
+- **59_som** added soil carbon management option to cellpool_jan23 realization
+- **11_cost** added cost term for soil carbon management
+- **default.cfg** added setting for soil carbon management to config and set `cellpool_jan23` realizaton as new default for `59_som` module.
 
 ### removed
 - **modules/15_food/anthropometrics_jan18** removed as outdated
 - **scenario_config.csv** removed column `SSP2-EU`
+- **59_som** removed cellpool_aug16 realization (out-dated parameters)
 - **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min_post_fix` since no longer in use
 
 ### fixed
@@ -51,6 +55,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg** added interface `vm_natforest_reduction`
 - **56_ghg_policy** bugfixes for regional GHG policy fader
 - **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
+- **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
 
 
 ## [4.9.1] - 2025-01-28
