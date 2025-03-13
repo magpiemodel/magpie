@@ -164,7 +164,7 @@ $title magpie
 * md5sum: 4a34597095b29a273245a5ba42b60bdc
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_FAO30_03Feb25.tgz
+* Used data set: calibration_H12_FAO_10Mar25
 * md5sum: aba0b877f383fefabc558d79180fc43f
 * Repository: /p/projects/landuse/data/input/calibration
 * 
