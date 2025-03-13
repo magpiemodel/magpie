@@ -41,7 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **58_peatland** Limit for annual peatland rewetting (2% of degraded peatland per year) to avoid adhoc rewetting of degraded peatlands with the introduction of the CO2 price (`cfg$gms$s58_annual_rewetting_limit <- 0.02`)
 - **59_som** added soil carbon management option to cellpool_jan23 realization
 - **11_cost** added cost term for soil carbon management
-- **default.cfg** added setting for soil carbon management to config
+- **default.cfg** added setting for soil carbon management to config and set `cellpool_jan23` realizaton as new default for `59_som` module.
 
 ### removed
 - **modules/15_food/anthropometrics_jan18** removed as outdated
