@@ -99,15 +99,14 @@ cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s59_scm_target <- 0.2
 start_run(cfg, codeCheck = FALSE)
 
-#VLHO-SSP2-EcBudg400-plant50 -> var_a
-cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-plant50")
-cfg <- setScenario(cfg,c("SSP2","NDC","AR-plant","nocc_hist"))
+#VLHO-SSP2-EcBudg400-ARnatveg -> var_a
+cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-ARnatveg")
+cfg <- setScenario(cfg,c("SSP2","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s59_scm_target <- 0.2
-cfg$gms$s32_planning_horizon <- 50
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650
