@@ -48,7 +48,7 @@ gms$c32_aff_mask;;;;noboreal;noboreal;noboreal;noboreal;noboreal;onlytropical;on
 gms$c34_urban_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP2;SSP1;SSP1;;;;;;;;;;;;;;;;;;;;;;;
 gms$c32_aff_policy;;;;;;;;;;;;;;;;;;;none;npi;npi;ndc;;;;;;;;;;;;;;
 gms$s32_npi_ndc_reversal;;;;;;;;;;;;;;;;;;;Inf;Inf;2030;Inf;;;;;;;;;;;;;;
-gms$s32_planning_horizon;;;;50;50;50;50;50;50;30;50;50;50;;;;50;30;;;;;;;;;;;;;;;;;;
+gms$s32_planning_horizon;;;;50;50;50;50;50;50;30;50;50;50;;;;50;50;;;;;;;;;;;;;;;;;;
 gms$c35_ad_policy;;;;;;;;;;;;;;;;;;;none;npi;npi;ndc;;;;;;;;;;;;;;
 gms$c35_aolc_policy;;;;;;;;;;;;;;;;;;;none;npi;npi;ndc;;;;;;;;;;;;;;
 gms$s35_npi_ndc_reversal;;;;;;;;;;;;;;;;;;;Inf;Inf;2030;Inf;;;;;;;;;;;;;;
