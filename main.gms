@@ -160,7 +160,7 @@ $title magpie
 * md5sum: 494dbecfb4800872218fc6d791880ff9
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.60.tgz
+* Used data set: additional_data_rev4.62.tgz
 * md5sum: 4a34597095b29a273245a5ba42b60bdc
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
