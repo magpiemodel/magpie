@@ -52,7 +52,7 @@ general_settings<-function(title) {
   cfg$recalibrate <- FALSE
   cfg<-gms::setScenario(cfg,"cc")
   cfg$gms$c56_emis_policy <- "all"
-  cfg$gms$som <- "cellpool_aug16"
+  cfg$gms$som <- "cellpool_jan23"
   cfg$gms$c59_som_scenario  <- "cc"
   cfg$gms$forestry  <- "dynamic_oct19"
   cfg$gms$maccs  <- "on_sep16"
