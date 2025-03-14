@@ -49,7 +49,7 @@ general_settings<-function(title) {
   cfg<-setScenario(cfg,"cc")
   cfg$force_download <- TRUE
   cfg$gms$c_timesteps <- 12
-  cfg$gms$som <- "cellpool_aug16"
+  cfg$gms$som <- "cellpool_jan23"
   cfg$gms$factor_costs <- "sticky_feb18"
   cfg$gms$s15_elastic_demand <- 0
   cfg$gms$nitrogen <- "rescaled_jan21"
