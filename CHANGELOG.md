@@ -48,6 +48,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config.csv** removed column `SSP2-EU`
 - **59_som** removed cellpool_aug16 realization (out-dated parameters)
 - **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min_post_fix` since no longer in use
+- **scenario_config.csv** GDP scenario for VLLO in scenario_config.csv changed from SDP-MC to SSP1 (needed for consistency with REMIND)
 
 ### fixed
 - **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.

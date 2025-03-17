@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP51"
+cfg$info$flag <- "SMIP52"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
@@ -47,6 +47,7 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-M-SSP3-NPi2025-v
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-M-SSP3-NPi2025-var-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0
 cfg$gms$s59_scm_target <- 0
+cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
 #H-SSP3-rollBack
@@ -57,6 +58,7 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0
 cfg$gms$s59_scm_target <- 0
+cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
 #M-SSP2-NPi2025
@@ -67,6 +69,7 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-M-SSP2-NPi2025-d
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-M-SSP2-NPi2025-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0
 cfg$gms$s59_scm_target <- 0
+cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
 #ML-SSP2-PkBudg1500
@@ -77,6 +80,7 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-ML-SSP2-PkBudg15
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-ML-SSP2-PkBudg1500-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.01
 cfg$gms$s59_scm_target <- 0.1
+cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
 #L-SSP2-PkBudg1000
@@ -87,6 +91,7 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg100
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.01
 cfg$gms$s59_scm_target <- 0.1
+cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
 #VLHO-SSP2-EcBudg400 -> default
@@ -97,6 +102,7 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s59_scm_target <- 0.2
+cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
 #VLHO-SSP2-EcBudg400-ARnatveg -> var_a
@@ -107,6 +113,7 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s59_scm_target <- 0.2
+cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650
@@ -117,4 +124,5 @@ cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s59_scm_target <- 0.2
+cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
