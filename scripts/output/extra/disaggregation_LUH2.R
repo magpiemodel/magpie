@@ -245,7 +245,7 @@ gc()
 
 #### Protected areas
 
-b <- protectedArea(gdx,level = "grid",dir=outputdir) / dimSums(land_hr, dim=3)
+b <- landConservation(gdx,level = "grid",dir=outputdir) / dimSums(land_hr, dim=3)
 b[is.na(b)] <- 0
 luh2 <- data.frame(matrix(nrow=7,ncol=2))
 names(luh2) <- c("LUH2","MAgPIE")
