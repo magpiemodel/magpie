@@ -198,7 +198,7 @@ for (tax in c("T0-CO2",
   start_run(cfg, codeCheck = FALSE)
 }
 
-cfg$gms$s58_annual_rewetting_limit <- Inf
+cfg$gms$s58_annual_rewetting_limit <- 1
 
 ## Exo rewet scenarios
 # 15% of currently drained peatland rewetted by 2050 (0.3 * 0.5)
