@@ -129,7 +129,7 @@ map_LUHMAg_grid<-setYears(madrat::toolAggregate(mapping[countries,,],rel=mapping
 land_hr <- read.magpie(land_hr_out_file)
 land_hr <- land_hr[,-1,]
 calArea <- function(ix,iy,res=0.5,mha=1) { # pixelarea in m2, mha as factor
-  mha*(111.263*1000*res)*(111.263*1000*res)*cos(iy*pi/180.)
+  mha*(111.263*1000*res)*(111.263*1000*res)*cos(iy*pi/180)
 }
 
 # grid cell area as magclass object

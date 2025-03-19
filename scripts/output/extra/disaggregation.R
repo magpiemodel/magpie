@@ -377,7 +377,7 @@ gc()
 
 # grid cell area as magclass object
 calArea <- function(ix,iy,res=0.5,mha=1) { # pixelarea in m2, mha as factor
-  mha*(111.263*1000*res)*(111.263*1000*res)*cos(iy*pi/180.)
+  mha*(111.263*1000*res)*(111.263*1000*res)*cos(iy*pi/180)
 }
 map <- toolGetMappingCoord2Country(pretty = TRUE)
 grarea <- new.magpie(cells_and_regions = map$coords,
