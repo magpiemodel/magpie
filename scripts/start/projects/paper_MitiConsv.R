@@ -97,7 +97,7 @@ for (scen in scenarios) {
   cfg$gms$land_snv <- "secdforest, other"
 
   # Set path to coupled output
-  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev7_MitiConsv_SSP2-NPi-rem-12/REMIND_generic_C_rev7_MitiConsv_SSP2-NPi-rem-12.mif"
+  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev8_MitiConsv_SSP2-NPi-rem-12/REMIND_generic_C_rev8_MitiConsv_SSP2-NPi-rem-12.mif"
 
   # No ghg price in NPI run
   cfg$gms$c56_mute_ghgprices_until <- "y2100"
@@ -105,14 +105,14 @@ for (scen in scenarios) {
   if ("PB650" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev7_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev7_MitiConsv_SSP2-PkBudg650-rem-12.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev8_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev8_MitiConsv_SSP2-PkBudg650-rem-12.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
   if ("PB1000" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev7_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev7_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev8_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev8_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
