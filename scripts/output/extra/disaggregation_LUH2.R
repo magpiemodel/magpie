@@ -16,6 +16,7 @@ library(luscale)
 library(madrat)
 library(raster)
 library(mrcommons)
+library(mstools)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
@@ -132,10 +133,9 @@ cal_area <- function(ix,iy,res=0.5,mha=1) { # pixelarea in m2, mha as factor
 }
 
 # grid cell area as magclass object
-coord <- mrcommons:::magpie_coord
-grarea <- new.magpie(cells_and_regions=mapping_spatial$cell,
-                     fill=cal_area(coord[,"lon"],coord[,"lat"], mha=10^-10))
-#grarea <- round(grarea,6)
+map <- toolGetMappingCoord2Country(pretty = TRUE)
+grarea <- new.magpie(cells_and_regions = map$coords,
+                     fill = calArea(map$lon, map$lat, mha = 10^-10))
 
 # adjust total grid land area so that it is smaller than the gridcell area (some cells have a larger area actually; should be investigated)
 frac <- grarea/dimSums(land_hr, dim=3)

@@ -17,6 +17,7 @@ library(madrat)
 library(dplyr)
 library(gms)
 library(gdx2)
+library(mstools)
 
 # =============================================
 # Basic configuration
@@ -374,12 +375,17 @@ gc()
 )
 gc()
 
-out <- peat_hr / dimSums(land_hr[, getYears(peat_hr), ], dim = 3)
+# grid cell area as magclass object
+map <- toolGetMappingCoord2Country(pretty = TRUE)
+grarea <- new.magpie(cells_and_regions = map$coords,
+                     fill = calArea(map$lon, map$lat, mha = 10^-10))
+
+out <- peat_hr / grarea
 out[is.nan(out)] <- 0
 out[is.infinite(out)] <- 0
 
 .writeDisagg(out, peatland_hr_share_out_file,
-  comment = "unit: grid-cell land area fraction",
+  comment = "unit: grid-cell area fraction",
   message = "Write outputs peatland share"
 )
 gc()
