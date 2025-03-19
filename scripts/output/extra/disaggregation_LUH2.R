@@ -311,6 +311,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   luh2[2,] <- c("primf_bioh","Primary forest")
   luh2[3,] <- c("secdf_bioh","Secondary forest")
   luh2[4,] <- c("primn_secdn_bioh","Other land")
+  b <- b[,,luh2[,2]]
   b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
   gc()
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_yields.nc"))){
