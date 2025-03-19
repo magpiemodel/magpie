@@ -20,7 +20,7 @@ library(mstools)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
-  outputdir <- "/p/projects/magpie/data/ISIMIP/ISIMIP_150322/magpie/output/c1000_150322_Calib/ISIMIP_150322_med_ssp585_IPSL-CM6A-LR_cc_c1000/"
+  outputdir <- "output/weeklyTests_SSP2-Ref/"
 
   readArgs("outputdir")
 }
@@ -284,6 +284,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   luh2[2,] <- c("primf_harv","Primary forest")
   luh2[3,] <- c("secdf_harv","Secondary forest")
   luh2[4,] <- c("primn_secdn_harv","Other land")
+  b <- b[,,luh2[,2]]
   b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
   gc()
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_area.nc"))){
