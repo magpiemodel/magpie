@@ -68,7 +68,7 @@ cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c56_pollutant_prices <- "reddnatveg_nosoil_nopeat"
+cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 start_run(cfg, codeCheck = FALSE)
 
 ## Exo rewet scenarios
@@ -78,7 +78,7 @@ cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c56_pollutant_prices <- "reddnatveg_nosoil_nopeat"
+cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_rewet_exo_start_value <- 0
 cfg$gms$s58_rewet_exo_target_value <- 0.15
@@ -93,7 +93,7 @@ cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c56_pollutant_prices <- "reddnatveg_nosoil_nopeat"
+cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_rewet_exo_start_value <- 0
 cfg$gms$s58_rewet_exo_target_value <- 0.25
@@ -108,7 +108,7 @@ cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c56_pollutant_prices <- "reddnatveg_nosoil_nopeat"
+cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_rewet_exo_start_value <- 0
 cfg$gms$s58_rewet_exo_target_value <- 0.5
@@ -123,7 +123,7 @@ cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c56_pollutant_prices <- "reddnatveg_nosoil_nopeat"
+cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_rewet_exo_start_value <- 0
 cfg$gms$s58_rewet_exo_target_value <- 1
