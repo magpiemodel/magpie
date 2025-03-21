@@ -28,6 +28,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **21_trade** Cost for additional imports to maintain feasibility reduced from 12300 to 1500 USD17MER per tDM to avoid implausibly high costs and prices for wood and woodfuel
 - **default.cfg** Reactivated external scenario for damage from shifting agriculture (`cfg$gms$s35_forest_damage <- 2`)
 - **56_ghg_policy** Minimum CO2 price of 1 $ per ton CO2 on emissions from deforestation and other land conversion in all time steps to avoid sudden jumps in carbon stock changes (`cfg$gms$s56_minimum_cprice <- 3.67`)
+- **default.cfg** input data upgraded from rev4.116 to rev4.117
+- **09_drivers** removed SSP2EU scenario from set
 
 ### added
 - **scripts** output script for testing elastic demand
@@ -57,6 +59,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **56_ghg_policy** bugfixes for regional GHG policy fader
 - **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
 - **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
+- **scripts/output** peatland share calculation fixed in disaggreagtion.R and minor bugfixes in disaggreagtion_LUH2.R
 
 
 ## [4.9.1] - 2025-01-28

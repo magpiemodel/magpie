@@ -148,25 +148,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.116_h12_magpie.tgz
-* md5sum: a020594c956835f8f44fc1b062506a01
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.117_h12_magpie.tgz
+* md5sum: ca5eee589e6422199cf67e6f72122573
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.116_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 6bc13df515d9663430beff24c80280fd
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.117_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: 777e853539276d63e3a3bea977e7b330
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.116_h12_validation.tgz
-* md5sum: 494dbecfb4800872218fc6d791880ff9
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.117_h12_validation.tgz
+* md5sum: 90882b57d0184bf34b0a2aed432c5f54
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.62.tgz
-* md5sum: 4a34597095b29a273245a5ba42b60bdc
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_FAO_10Mar25
-* md5sum: aba0b877f383fefabc558d79180fc43f
-* Repository: /p/projects/landuse/data/input/calibration
+* Used data set: calibration_H12_FAO_13Mar25.tgz
+* md5sum: 8ed8aaebec91ddfb9d1ffca379306283
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.116
+* Regions data revision: 4.117
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.116
+* * Revision: 4.117
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -194,7 +194,10 @@ $title magpie
 *    14   23   10    7    4   26   21    9   16   23   32   15
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
-* Last modification (input data): Thu Feb 20 17:30:37 2025
+* Warning message:
+* package 'gms' was built under R version 4.4.3
+* 
+* Last modification (input data): Wed Mar 19 07:58:05 2025
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
