@@ -50,24 +50,24 @@ ssp <- "SSP2"
 cfg$title <- .title(cfg, paste(ssp, "Ref", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NPI", "rcp7p0"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
-cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-NPi")
-cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-NPi")
+cfg$gms$c56_pollutant_prices <- "R32M46-SSP2EU-NPi"
+cfg$gms$c60_2ndgen_biodem    <- "R32M46-SSP2EU-NPi"
 start_run(cfg, codeCheck = FALSE)
 
 # PkBudg650
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2025"
-cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
+cfg$gms$c56_pollutant_prices <- "R32M46-SSP2EU-PkBudg650"
+cfg$gms$c60_2ndgen_biodem    <- "R32M46-SSP2EU-PkBudg650"
 start_run(cfg, codeCheck = FALSE)
 
 #PkBudg650 without peatland policy
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "noPeatland", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2025"
-cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
+cfg$gms$c56_pollutant_prices <- "R32M46-SSP2EU-PkBudg650"
+cfg$gms$c60_2ndgen_biodem    <- "R32M46-SSP2EU-PkBudg650"
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 start_run(cfg, codeCheck = FALSE)
 
@@ -76,8 +76,8 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "NRL15", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2025"
-cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
+cfg$gms$c56_pollutant_prices <- "R32M46-SSP2EU-PkBudg650"
+cfg$gms$c60_2ndgen_biodem    <- "R32M46-SSP2EU-PkBudg650"
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_rewet_exo_start_value <- 0
@@ -91,8 +91,8 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "NRL25", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2025"
-cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
+cfg$gms$c56_pollutant_prices <- "R32M46-SSP2EU-PkBudg650"
+cfg$gms$c60_2ndgen_biodem    <- "R32M46-SSP2EU-PkBudg650"
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_rewet_exo_start_value <- 0
@@ -106,8 +106,8 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "NRL50", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2025"
-cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
+cfg$gms$c56_pollutant_prices <- "R32M46-SSP2EU-PkBudg650"
+cfg$gms$c60_2ndgen_biodem    <- "R32M46-SSP2EU-PkBudg650"
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_rewet_exo_start_value <- 0
@@ -121,8 +121,8 @@ start_run(cfg, codeCheck = FALSE)
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "NRL100", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
 cfg$gms$c56_mute_ghgprices_until <- "y2025"
-cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
-cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
+cfg$gms$c56_pollutant_prices <- "R32M46-SSP2EU-PkBudg650"
+cfg$gms$c60_2ndgen_biodem    <- "R32M46-SSP2EU-PkBudg650"
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
 cfg$gms$s58_rewetting_exo <- 1
 cfg$gms$s58_rewet_exo_start_value <- 0
