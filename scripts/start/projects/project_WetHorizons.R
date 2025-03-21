@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "WH01"
+cfg$info$flag <- "WH02"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -57,7 +57,7 @@ start_run(cfg, codeCheck = FALSE)
 # PkBudg650
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$gms$c56_mute_ghgprices_until <- "y2025"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 start_run(cfg, codeCheck = FALSE)
@@ -65,7 +65,7 @@ start_run(cfg, codeCheck = FALSE)
 #PkBudg650 without peatland policy
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "noPeatland", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$gms$c56_mute_ghgprices_until <- "y2025"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
@@ -75,7 +75,7 @@ start_run(cfg, codeCheck = FALSE)
 # 15% of currently drained peatland rewetted by 2050
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "NRL15", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$gms$c56_mute_ghgprices_until <- "y2025"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
@@ -90,7 +90,7 @@ start_run(cfg, codeCheck = FALSE)
 # 25% of currently drained peatland rewetted by 2050
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "NRL25", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$gms$c56_mute_ghgprices_until <- "y2025"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
@@ -105,7 +105,7 @@ start_run(cfg, codeCheck = FALSE)
 # 50% of currently drained peatland rewetted by 2050
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "NRL50", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$gms$c56_mute_ghgprices_until <- "y2025"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
@@ -120,7 +120,7 @@ start_run(cfg, codeCheck = FALSE)
 # 100% of currently drained peatland rewetted by 2050
 cfg$title <- .title(cfg, paste(ssp, "PkBudg650", "NRL100", sep = "-"))
 cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$gms$c56_mute_ghgprices_until <- "y2025"
 cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-PkBudg650")
 cfg$gms$c56_emis_policy <- "reddnatveg_nosoil_nopeat"
