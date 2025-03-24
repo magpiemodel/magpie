@@ -80,7 +80,7 @@
 
  q35_natforest_reduction(j2) .. vm_natforest_reduction(j2) =e=
  v35_primforest_reduction(j2) + sum(ac_sub, v35_secdforest_reduction(j2,ac_sub)) + 
- sum((ac_sub,othertype35), v35_other_reduction(j2,othertype35,ac_sub));
+ sum(ac_sub, v35_other_reduction(j2,"othernat",ac_sub));
  
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
 *' The gross change in natural vegetation is calculated based on land expansion and
