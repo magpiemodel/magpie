@@ -50,18 +50,19 @@ cfg$gms$s15_elastic_demand <- 1
 # cfg$gms$c60_1stgen_biodem <- "const2030"
 # start_run(cfg, codeCheck = FALSE)
 
-# #H-SSP3-rollBack2
-# cfg$title <- .title(cfg, "H-SSP3-rollBack2")
-# cfg <- setScenario(cfg,c("SSP3","NPI-revert","AR-natveg","nocc_hist"))
-# cfg$gms$c56_mute_ghgprices_until <- "y2150"
-# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
-# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
-# cfg$gms$s32_npi_ndc_reversal <- 2035
-# cfg$gms$s35_npi_ndc_reversal <- 2035
-# cfg$gms$s29_treecover_target <- 0
-# cfg$gms$s59_scm_target <- 0
-# cfg$gms$c60_1stgen_biodem <- "const2030"
-# start_run(cfg, codeCheck = FALSE)
+#H-SSP3-rollBack3
+cfg$title <- .title(cfg, "H-SSP3-rollBack3")
+cfg <- setScenario(cfg,c("SSP3","NPI-revert","AR-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2150"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
+cfg$gms$s32_npi_ndc_reversal <- 2035
+cfg$gms$s35_npi_ndc_reversal <- 2035
+cfg$gms$c70_feed_scen <- "ssp2"
+cfg$gms$s29_treecover_target <- 0
+cfg$gms$s59_scm_target <- 0
+cfg$gms$c60_1stgen_biodem <- "const2030"
+start_run(cfg, codeCheck = FALSE)
 
 # #M-SSP2-NPi2025
 # cfg$title <- .title(cfg, "M-SSP2-NPi2025")
@@ -85,19 +86,19 @@ cfg$gms$s15_elastic_demand <- 1
 # cfg$gms$c60_1stgen_biodem <- "const2030"
 # start_run(cfg, codeCheck = FALSE)
 # 
-#L-SSP2-PkBudg1000-NPI
-cfg$title <- .title(cfg, "L-SSP2-PkBudg1000-NPI")
-cfg <- setScenario(cfg,c("SSP2","NPI","AR-natveg","nocc_hist"))
-#cfg$gms$c32_aff_policy <- "npi"
-cfg$gms$c56_mute_ghgprices_until <- "y2030"
-cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
-cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
-cfg$gms$s29_treecover_scenario_start <- 2030
-cfg$gms$s29_treecover_target <- 0.01
-cfg$gms$s59_scm_scenario_start <- 2030
-cfg$gms$s59_scm_target <- 0.1
-cfg$gms$c60_1stgen_biodem <- "const2030"
-start_run(cfg, codeCheck = FALSE)
+# #L-SSP2-PkBudg1000-NPI
+# cfg$title <- .title(cfg, "L-SSP2-PkBudg1000-NPI")
+# cfg <- setScenario(cfg,c("SSP2","NPI","AR-natveg","nocc_hist"))
+# #cfg$gms$c32_aff_policy <- "npi"
+# cfg$gms$c56_mute_ghgprices_until <- "y2030"
+# cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
+# cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
+# cfg$gms$s29_treecover_scenario_start <- 2030
+# cfg$gms$s29_treecover_target <- 0.01
+# cfg$gms$s59_scm_scenario_start <- 2030
+# cfg$gms$s59_scm_target <- 0.1
+# cfg$gms$c60_1stgen_biodem <- "const2030"
+# start_run(cfg, codeCheck = FALSE)
 # 
 # #VLHO-SSP2-EcBudg400 -> default
 # cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400")
