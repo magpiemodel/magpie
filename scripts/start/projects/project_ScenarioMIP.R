@@ -56,6 +56,20 @@ cfg <- setScenario(cfg,c("SSP3","NPI-revert","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
+cfg$gms$s32_npi_ndc_reversal <- 2030
+cfg$gms$s35_npi_ndc_reversal <- 2030
+cfg$gms$c70_feed_scen <- "ssp2"
+cfg$gms$s29_treecover_target <- 0
+cfg$gms$s59_scm_target <- 0
+cfg$gms$c60_1stgen_biodem <- "const2030"
+start_run(cfg, codeCheck = FALSE)
+
+#H-SSP3-rollBack4
+cfg$title <- .title(cfg, "H-SSP3-rollBack4")
+cfg <- setScenario(cfg,c("SSP3","NPI-revert","AR-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2150"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
 cfg$gms$s32_npi_ndc_reversal <- 2035
 cfg$gms$s35_npi_ndc_reversal <- 2035
 cfg$gms$c70_feed_scen <- "ssp2"
