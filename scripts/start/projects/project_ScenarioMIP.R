@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP54_Test3"
+cfg$info$flag <- "SMIP55"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
@@ -86,6 +86,7 @@ start_run(cfg, codeCheck = FALSE)
 #L-SSP2-PkBudg1000
 cfg$title <- .title(cfg, "L-SSP2-PkBudg1000")
 cfg <- setScenario(cfg,c("SSP2","NDC","AR-natveg","nocc_hist"))
+cfg$gms$c32_aff_policy <- "npi"
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-L-SSP2-PkBudg1000-def-rem-7.mif"
@@ -111,7 +112,7 @@ start_run(cfg, codeCheck = FALSE)
 
 #VLHO-SSP2-EcBudg400-ARnatveg -> var_a
 cfg$title <- .title(cfg, "VLHO-SSP2-EcBudg400-ARnatveg")
-cfg <- setScenario(cfg,c("SSP2","NDC","AR-natveg","nocc_hist"))
+cfg <- setScenario(cfg,c("SSP2","NPI","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLHO-SSP2-EcBudg400-var_plantation-rem-7.mif"
@@ -125,6 +126,7 @@ start_run(cfg, codeCheck = FALSE)
 #VLLO-SSP1-PkBudg650
 cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650")
 cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
+cfg$gms$c32_aff_policy <- "npi"
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
