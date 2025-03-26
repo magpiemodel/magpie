@@ -79,6 +79,12 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  q32_ndc_aff_limit(j2) ..
  sum(ct, p32_aff_pol_timestep(ct,j2)) * vm_natforest_reduction(j2) =e= 0;
 
+*' Annual limit for re/afforestation based on `s32_annual_aff_limit`.
+
+ q32_co2p_aff_limit(j2) ..
+  vm_landexpansion_forestry(j2,"aff")/ m_timestep_length =l= 
+  s32_annual_aff_limit * sum((ac,type32), pc32_land(j2,type32,ac));
+
 *' The constraint `q32_max_aff` accounts for the allowed maximum global endogenous
 *' afforestation defined in `i32_max_aff_area_glo`.
 *' The constraint `q32_max_aff_reg` accounts for the allowed maximum regional endogenous
