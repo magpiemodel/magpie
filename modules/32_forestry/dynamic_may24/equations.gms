@@ -79,7 +79,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  q32_ndc_aff_limit(j2) ..
  sum(ct, p32_aff_pol_timestep(ct,j2)) * vm_natforest_reduction(j2) =e= 0;
 
-*' Annual limit for re/afforestation based on `s32_annual_aff_limit`.
+*' The annual upper limit for re-afforestation is based on an annual share (`s32_annual_aff_limit`) of the overall forest establishment potential (`pm_max_forest_est`).
 
  q32_co2p_aff_limit(j2) ..
   vm_landexpansion_forestry(j2,"aff") / m_timestep_length =l= 
