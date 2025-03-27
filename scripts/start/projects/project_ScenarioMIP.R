@@ -49,6 +49,7 @@ cfg <- setScenario(cfg,c("SSP3","NPI-revert","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-H-SSP3-rollBack-def-rem-7.mif"
+cfg$gms$c15_food_scenario <- "SSP2"
 cfg$gms$s32_npi_ndc_reversal <- 2030
 cfg$gms$s35_npi_ndc_reversal <- 2030
 cfg$gms$s29_treecover_target <- 0
@@ -125,6 +126,7 @@ cfg <- setScenario(cfg,c("SSP3","NPI","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2150"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-M-SSP3-NPi2025-var-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-M-SSP3-NPi2025-var-rem-7.mif"
+cfg$gms$c15_food_scenario <- "SSP2"
 cfg$gms$s29_treecover_target <- 0
 cfg$gms$s59_scm_target <- 0
 cfg$gms$c60_1stgen_biodem <- "const2030"
