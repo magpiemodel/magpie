@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **15_food** included a convergence mechanism fto support convergence between iterations
 - **38_factor_costs** code cleanup, documentation
 - **41_area_equipped_for_irrigation** code cleanup
 - **scripts** changed c30_bioen_water switch to all in EAT2p0 start script and re-included missing BAU_MITI scenario
