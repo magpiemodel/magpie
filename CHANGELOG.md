@@ -46,6 +46,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **59_som** added soil carbon management option to cellpool_jan23 realization
 - **11_cost** added cost term for soil carbon management
 - **default.cfg** added setting for soil carbon management to config and set `cellpool_jan23` realizaton as new default for `59_som` module.
+- **32_forestry** Upper annual limit for re/afforestation (`s32_annual_aff_limit`) applied to NPI/NDC and CO2-price driven re/afforestation (default: 3% of overall forest establishment potential) 
 
 ### removed
 - **modules/15_food/anthropometrics_jan18** removed as outdated
