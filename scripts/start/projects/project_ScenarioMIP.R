@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP58"
+cfg$info$flag <- "SMIP59"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
