@@ -761,7 +761,7 @@ if (s15_exo_waste = 1,
    p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15) = p15_kcal_pc(t,i,kfo) + p15_balanceflow_kcal(t,i,kfo);
    p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15)$(p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15) < 0) = 0;
 
-*' If in the model requires more than 3 iterations, the convergence should be supported by averaging between iterations
+*' If the model requires more than 3 iterations, the convergence should be supported by averaging between iterations
    if (p15_iteration_counter(t) <= 3,
      p15_kcal_pc_calibrated(t,i,kfo) = sum(curr_iter15, p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15));
    else
