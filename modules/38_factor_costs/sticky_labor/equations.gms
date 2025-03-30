@@ -65,7 +65,7 @@ q38_cost_prod_capital(i2).. vm_cost_prod_crop(i2,"capital")=e=(sum((cell(i2,j2),
 *' (5) I_0 <= K_0 * z * (1+r) / (r+d) 
 
 *' Now, we have the problem that MAgPIE does not see the future. It only sees the costs and the utility of the current period.
-*' In MAgPIE, the invesment is done if the utiltiy of the current period U_0 exceeds the costs is sees in the current period, C_0.
+*' In MAgPIE, the invesment is done if the utiltiy of the current period U_0 exceeds the costs it sees in the current period, C_0.
 *' We know based on equation (1) that U_0 = K_0 * z, which we can enter into (4) such that
 *' (6) I_0 <= U_0 * (1+r) / (r+d) 
 
