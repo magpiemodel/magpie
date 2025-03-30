@@ -54,7 +54,7 @@ q38_cost_prod_capital(i2).. vm_cost_prod_crop(i2,"capital")=e=(sum((cell(i2,j2),
 *' (1) U_t = K_t  * z
 *' NOTE: A big assumption is that z is not time-dependent, so we assume that all future periods have the same benefit from the capital stock.
 
-*' The utility in the next timestep, t+1 should ne lower, because the capital depreciates, and because future utility is discounted because 
+*' The utility in the next timestep, t+1 should be lower, because the capital depreciates, and because future utility is discounted because 
 *' of time preference or opportunity costs. The result is
 *' (2) U_t+1 = K_t * (1-d) * z / (1+r)
 *' next, we want to sum up all utilities form now until forever, so
