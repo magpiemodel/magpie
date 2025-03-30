@@ -57,7 +57,7 @@ q38_cost_prod_capital(i2).. vm_cost_prod_crop(i2,"capital")=e=(sum((cell(i2,j2),
 *' The utility in the next timestep, t+1 should be lower, because the capital depreciates, and because future utility is discounted because 
 *' of time preference or opportunity costs. The result is
 *' (2) U_t+1 = K_t * (1-d) * z / (1+r)
-*' next, we want to sum up all utilities form now until forever, so
+*' next, we want to sum up all utilities from now until forever, so
 *' (3) U_0..n = U_0 + U_1 + ... U_n
 *' we can enter (2) in (3) to get
 *' (4) I_0 <= K_0 * z + K_0 * z*(1-d)/(1+r) + K_0 * z * (1-d)^2 / (1+r)^2 +...+ K_0 * z * (1-d)^n/((1+r)^n) 
