@@ -63,6 +63,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
 - **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
 - **scripts/output** peatland share calculation fixed in disaggreagtion.R and minor bugfixes in disaggreagtion_LUH2.R
+- **44_biodiversity** scaling of equation `q44_bii` removed, which caused non-matching LHS and RHS 
 
 
 ## [4.9.1] - 2025-01-28
