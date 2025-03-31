@@ -145,8 +145,8 @@ cfg$gms$s59_scm_target <- 0.2
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
-#VLLO-SSP1-PkBudg650-noAnnualAffLimit
-cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-noAnnualAffLimit")
+#VLLO-SSP1-PkBudg650-BII74by2100
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-BII74by2100")
 cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
@@ -156,7 +156,63 @@ cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s59_scm_scenario_start <- 2025
 cfg$gms$s59_scm_target <- 0.2
 cfg$gms$c60_1stgen_biodem <- "const2030"
-cfg$gms$s32_annual_aff_limit <- 1
+cfg$gms$s44_bii_lower_bound <- 0.74
+start_run(cfg, codeCheck = FALSE)
+
+#VLLO-SSP1-PkBudg650-BII76by2100
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-BII76by2100")
+cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$gms$s29_treecover_scenario_start <- 2025
+cfg$gms$s29_treecover_target <- 0.02
+cfg$gms$s59_scm_scenario_start <- 2025
+cfg$gms$s59_scm_target <- 0.2
+cfg$gms$c60_1stgen_biodem <- "const2030"
+cfg$gms$s44_bii_lower_bound <- 0.76
+start_run(cfg, codeCheck = FALSE)
+
+#VLLO-SSP1-PkBudg650-BII78by2100
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-BII78by2100")
+cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$gms$s29_treecover_scenario_start <- 2025
+cfg$gms$s29_treecover_target <- 0.02
+cfg$gms$s59_scm_scenario_start <- 2025
+cfg$gms$s59_scm_target <- 0.2
+cfg$gms$c60_1stgen_biodem <- "const2030"
+cfg$gms$s44_bii_lower_bound <- 0.78
+start_run(cfg, codeCheck = FALSE)
+
+#VLLO-SSP1-PkBudg650-BII80by2100
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-BII80by2100")
+cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$gms$s29_treecover_scenario_start <- 2025
+cfg$gms$s29_treecover_target <- 0.02
+cfg$gms$s59_scm_scenario_start <- 2025
+cfg$gms$s59_scm_target <- 0.2
+cfg$gms$c60_1stgen_biodem <- "const2030"
+cfg$gms$s44_bii_lower_bound <- 0.8
+start_run(cfg, codeCheck = FALSE)
+
+#VLLO-SSP1-PkBudg650-BII85by2100
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-BII85by2100")
+cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$gms$s29_treecover_scenario_start <- 2025
+cfg$gms$s29_treecover_target <- 0.02
+cfg$gms$s59_scm_scenario_start <- 2025
+cfg$gms$s59_scm_target <- 0.2
+cfg$gms$c60_1stgen_biodem <- "const2030"
+cfg$gms$s44_bii_lower_bound <- 0.85
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650-BII90by2100
@@ -171,7 +227,6 @@ cfg$gms$s59_scm_scenario_start <- 2025
 cfg$gms$s59_scm_target <- 0.2
 cfg$gms$c60_1stgen_biodem <- "const2030"
 cfg$gms$s44_bii_lower_bound <- 0.9
-cfg$gms$s44_bii_lower_bound <- 2100
 start_run(cfg, codeCheck = FALSE)
 
 #VLLO-SSP1-PkBudg650-BIInoDecrease
@@ -187,4 +242,19 @@ cfg$gms$s59_scm_target <- 0.2
 cfg$gms$c60_1stgen_biodem <- "const2030"
 cfg$gms$s44_bii_lower_bound <- 0
 cfg$gms$c44_bii_decrease <- 0
+start_run(cfg, codeCheck = FALSE)
+cfg$gms$c44_bii_decrease <- 1
+
+#VLLO-SSP1-PkBudg650-noAnnualAffLimit
+cfg$title <- .title(cfg, "VLLO-SSP1-PkBudg650-noAnnualAffLimit")
+cfg <- setScenario(cfg,c("VLLO","NDC","AR-natveg","nocc_hist"))
+cfg$gms$c56_mute_ghgprices_until <- "y2030"
+cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv04-VLLO-SSP1-PkBudg650-def-rem-7.mif"
+cfg$gms$s29_treecover_scenario_start <- 2025
+cfg$gms$s29_treecover_target <- 0.02
+cfg$gms$s59_scm_scenario_start <- 2025
+cfg$gms$s59_scm_target <- 0.2
+cfg$gms$c60_1stgen_biodem <- "const2030"
+cfg$gms$s32_annual_aff_limit <- 1
 start_run(cfg, codeCheck = FALSE)
