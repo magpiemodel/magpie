@@ -149,15 +149,15 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: rev4.117_h12_magpie.tgz
-* md5sum: NA
+* md5sum: ca5eee589e6422199cf67e6f72122573
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.117_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
+* md5sum: 777e853539276d63e3a3bea977e7b330
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.117_h12_validation.tgz
-* md5sum: NA
+* md5sum: 90882b57d0184bf34b0a2aed432c5f54
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.62.tgz
@@ -165,7 +165,7 @@ $title magpie
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: calibration_H12_FAO_13Mar25.tgz
-* md5sum: NA
+* md5sum: 8ed8aaebec91ddfb9d1ffca379306283
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
