@@ -422,7 +422,7 @@ gc()
 # ---------------------------------
 
 message("Disaggregating MAgPIE crop types")
-area_shr_hr <- .dissagcrop(gdx, land_split_hr, map = map_file)
+area_shr_hr <- .dissagcrop(gdx, land_split_hr, map_file = map_file)
 
 # Write output
 .writeDisagg(area_shr_hr, croparea_hr_share_out_file,
@@ -560,7 +560,7 @@ land_ini_hr <- land_ini_hr[, , getNames(land_ini_lr)]
 getSets(land_ini_hr)["d3.1"] <- "land"
 
 # Disaggregate BII values to high resolution
-bii_hr <- .dissagBII(gdx, map = map_file, dir = outputdir)
+bii_hr <- .dissagBII(gdx, map_file = map_file, dir = outputdir)
 
 # Disaggregate land pools for BII estimation
 land_bii_hr <- interpolateAvlCroplandWeighted(

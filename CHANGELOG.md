@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **56_ghg_policy** Minimum CO2 price of 1 $ per ton CO2 on emissions from deforestation and other land conversion in all time steps to avoid sudden jumps in carbon stock changes (`cfg$gms$s56_minimum_cprice <- 3.67`)
 - **default.cfg** input data upgraded from rev4.116 to rev4.117
 - **09_drivers** removed SSP2EU scenario from set
+- **default.cfg** default for module `44_biodiversity` changed from `bii_target_apr24` to `bii_target
 
 ### added
 - **scripts** output script for testing elastic demand
@@ -54,6 +55,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **59_som** removed cellpool_aug16 realization (out-dated parameters)
 - **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min_post_fix` since no longer in use
 - **scenario_config.csv** GDP scenario for VLLO in scenario_config.csv changed from SDP-MC to SSP1 (needed for consistency with REMIND)
+- **44_biodiversity** realisation `bii_target_apr24` removed because it is identical to `bii_target`. `bii_target` set as new default.
 
 ### fixed
 - **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
@@ -63,6 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
 - **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
 - **scripts/output** peatland share calculation fixed in disaggreagtion.R and minor bugfixes in disaggreagtion_LUH2.R
+- **44_biodiversity** scaling of equation `q44_bii` removed, which caused non-matching LHS and RHS 
 
 
 ## [4.9.1] - 2025-01-28
