@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **38_factor_costs** code cleanup, documentation
 - **41_area_equipped_for_irrigation** code cleanup
 - **scripts** changed c30_bioen_water switch to all in EAT2p0 start script and re-included missing BAU_MITI scenario
+- **scripts** reduced setup information written to main.gms
 - **15_food** tax recycling for income effect in elastic food demand
 - **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
 - **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24"
