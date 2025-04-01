@@ -19,13 +19,13 @@ loop(i,
   );
 );
 
-if (m_year(t) = s44_start_year AND s44_bii_lower_bound > 0,
+if (m_year(t) = s44_start_year AND s44_bii_target > 0,
 * The start value for the linear interpolation is the BII at biome level in the start year.
   p44_start_value(i,biome44) = v44_bii.l(i,biome44);
-* The target value for the linear interpolation is the lower bound defined in `s44_bii_lower_bound`.
+* The target value for the linear interpolation is the lower bound defined in `s44_bii_target`.
 * Linear increase of BII target values at biome level from start year to target year, and constant values thereafter.
-  p44_bii_target(t2,i,biome44) = p44_start_value(i,biome44) + ((m_year(t2) - s44_start_year) / (s44_target_year - s44_start_year)) * (s44_bii_lower_bound - p44_start_value(i,biome44));
-  p44_bii_target(t2,i,biome44)$(m_year(t2) > s44_target_year) = s44_bii_lower_bound;
+  p44_bii_target(t2,i,biome44) = p44_start_value(i,biome44) + ((m_year(t2) - s44_start_year) / (s44_target_year - s44_start_year)) * (s44_bii_target - p44_start_value(i,biome44));
+  p44_bii_target(t2,i,biome44)$(m_year(t2) > s44_target_year) = s44_bii_target;
 * Avoid implausible values
   p44_bii_target(t2,i,biome44)$(p44_bii_target(t2,i,biome44) >= 1) = 1;
   p44_bii_target(t2,i,biome44)$(m_year(t2) < s44_start_year) = 0;

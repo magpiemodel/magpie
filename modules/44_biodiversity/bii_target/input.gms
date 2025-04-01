@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars 
- s44_bii_lower_bound    Target value for BII in target year (1)                 / 0 /
+ s44_bii_target         Target value for BII in target year (1)                 / 0 /
  c44_bii_decrease       Implementation of target for BII (binary)               / 1 /
  s44_target_year        Year in which the BII target is reached  (1)           / 2100 /
  s44_start_year         Start year for interpolation towards BII target (1)    / 2030 /

@@ -74,7 +74,7 @@ for (bl in blV) {
   }
 
  cfg$gms$c44_bii_decrease <- bd
- cfg$gms$s44_bii_lower_bound <- bl
+ cfg$gms$s44_bii_target <- bl
  cfg$gms$c22_protect_scenario <- pa
 
  for (mp in mpV) {
