@@ -165,7 +165,18 @@
                paste('Last modification (input data):',date()),
                '')
   writeLines(content,'input/info.txt')
-  gms::replace_in_file("main.gms",paste('*',content),subject)
+  contentShort <- c(paste('Low resolution:', low_res),
+                    paste('High resolution:', high_res),
+                    '',
+                    paste('Total number of cells:', sum(ijn["n"])),
+                    '',
+                    'Number of cells per region:',
+                    paste(format(ijn[["i"]], width = 5, justify = "right"), collapse = ""),
+                    paste(format(ijn[["n"]], width = 5), collapse = ""),
+                    '',
+                    paste('Regionscode:', regionscode))
+  
+  gms::replace_in_file("main.gms",paste('*',contentShort),subject)
 }
 
 ################################################################################
