@@ -38,7 +38,7 @@ vm_carbon_stock.l(j,noncropland59,"soilc",stockType) = pcm_carbon_stock(j,noncro
 *** cshare calculation    ***
 *****************************
 
-*' @code The cellpool_aug16 calculates the carbon loss with the assumption
+*' @code This realization calculates the carbon loss with the assumption
 *' of a lossrate of 15% per year resulting in 44% in 5 years, 80% in 10 years
 *' and 96% in 20 years. The lossrate for a given timestep is than calculate by
 

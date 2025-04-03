@@ -7,8 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-
+- **15_food** included a convergence mechanism to support convergence between iterations
+- **38_factor_costs** code cleanup, documentation
+- **41_area_equipped_for_irrigation** code cleanup
 - **scripts** changed c30_bioen_water switch to all in EAT2p0 start script and re-included missing BAU_MITI scenario
+- **scripts** reduced setup information written to main.gms
 - **15_food** tax recycling for income effect in elastic food demand
 - **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
 - **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24"
@@ -28,6 +31,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **21_trade** Cost for additional imports to maintain feasibility reduced from 12300 to 1500 USD17MER per tDM to avoid implausibly high costs and prices for wood and woodfuel
 - **default.cfg** Reactivated external scenario for damage from shifting agriculture (`cfg$gms$s35_forest_damage <- 2`)
 - **56_ghg_policy** Minimum CO2 price of 1 $ per ton CO2 on emissions from deforestation and other land conversion in all time steps to avoid sudden jumps in carbon stock changes (`cfg$gms$s56_minimum_cprice <- 3.67`)
+- **default.cfg** input data upgraded from rev4.116 to rev4.117
+- **09_drivers** removed SSP2EU scenario from set
+- **default.cfg** default for module `44_biodiversity` changed from `bii_target_apr24` to `bii_target
 
 ### added
 - **scripts** output script for testing elastic demand
@@ -42,12 +48,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **59_som** added soil carbon management option to cellpool_jan23 realization
 - **11_cost** added cost term for soil carbon management
 - **default.cfg** added setting for soil carbon management to config and set `cellpool_jan23` realizaton as new default for `59_som` module.
+- **32_forestry** Upper annual limit for re/afforestation (`s32_annual_aff_limit`) applied to NPI/NDC and CO2-price driven re/afforestation (default: 3% of overall forest establishment potential) 
 
 ### removed
 - **modules/15_food/anthropometrics_jan18** removed as outdated
 - **scenario_config.csv** removed column `SSP2-EU`
 - **59_som** removed cellpool_aug16 realization (out-dated parameters)
 - **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min_post_fix` since no longer in use
+- **scenario_config.csv** GDP scenario for VLLO in scenario_config.csv changed from SDP-MC to SSP1 (needed for consistency with REMIND)
+- **44_biodiversity** realisation `bii_target_apr24` removed because it is identical to `bii_target`. `bii_target` set as new default.
 
 ### fixed
 - **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
@@ -56,6 +65,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **56_ghg_policy** bugfixes for regional GHG policy fader
 - **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
 - **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
+- **scripts/output** peatland share calculation fixed in disaggreagtion.R and minor bugfixes in disaggreagtion_LUH2.R
+- **44_biodiversity** scaling of equation `q44_bii` removed, which caused non-matching LHS and RHS 
 
 
 ## [4.9.1] - 2025-01-28
