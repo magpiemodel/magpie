@@ -20,6 +20,7 @@ magpie.holdfixed = 1 ;
 
 $onecho > conopt4.opt
 Lim_Variable = 1.e25
+Tol_Optimality = s80_toloptimal
 $offecho
 
 $onecho > conopt4.op2

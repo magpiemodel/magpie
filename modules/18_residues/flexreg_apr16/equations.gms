@@ -73,10 +73,10 @@
                   vm_prod_reg(i2,kres) * fm_attributes(attributes,kres);
 
 *' Amount produced at cellular level is flexible, can be distributed as it wants 
- q18_prod_res_cell(j2,kres)..
-                  sum(cell(i2,j2), vm_prod_reg(i2,kres))
+ q18_prod_res_cell(i2,kres)..
+                  sum(cell(i2,j2), v18_prod_res(j2,kres))
                   =e=
-                  v18_prod_res(j2,kres) ;
+                  vm_prod_reg(i2,kres);
 
 
 *' Residues recycled to croplands in nutrients `vm_res_recycling(i2,"nr")` are

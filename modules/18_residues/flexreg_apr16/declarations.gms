@@ -18,19 +18,15 @@ positive variables
 ;
 
 equations
-
  q18_prod_res_ag_reg(i,kcr,attributes)     Production constraint of aboveground residues (mio. tDM)
  q18_prod_res_bg_reg(i,kcr,dm_nr)          Production constraint of belowground residues (mio. tDM)
-
  q18_res_field_balance(i,kcr,attributes)   Calculation of the residues amount recycled to soils (mio. tDM)
  q18_res_field_burn(i,kcr,attributes)      Fixing of the residues amount burned in a region in respective attribute units DM GJ Nr P K WM C (mio. tX)
  q18_translate(i,kres,attributes)          Transformation of the multiple crop residues into supply balance crop redisues in respective attribute units DM GJ Nr P K WM C (mio. tX)
  q18_prod_res_cell(j,kres)                 Allows for distribution of residues to cellular level (mio. tDM)
-
  q18_res_recycling_nr(i)                   Nutrient recycling of reaactive nitrogen (mio. tNr)
  q18_res_recycling_pk(i,pk18)              Nutrient recycling of phosphorus and potash (mio. tX)
  q18_cost_prod_res(i,kres)                 Production costs of harvesting crop residues (mio. USD17MER)
-
 ;
 
 parameters
