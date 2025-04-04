@@ -44,7 +44,7 @@ start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"newdefault",sep="_")
 cfg$gms$crop    <- "penalty_apr22"
-cfg$gms$som    <- "cellpool_aug16"
+cfg$gms$som    <- "cellpool_jan23"
 cfg$gms$c30_rotation_scenario = "default"
 
 

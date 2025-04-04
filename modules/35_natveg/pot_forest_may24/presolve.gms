@@ -239,8 +239,6 @@ v35_hvarea_other.fx(j,othertype35,ac_est) = 0;
 v35_secdforest_reduction.fx(j,ac_est) = 0;
 v35_other_reduction.fx(j,othertype35,ac_est) = 0;
 
-vm_prod_natveg.fx(j,"other","wood") = 0;
-
 if(s35_hvarea = 0,
  v35_hvarea_secdforest.fx(j,ac_sub) = 0;
  v35_hvarea_primforest.fx(j) = 0;

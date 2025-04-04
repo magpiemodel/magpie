@@ -36,7 +36,7 @@ fibreboard,particle_board_and_osb,plywood,veneer_sheets
 
 kforestry_to_woodprod(kforestry,total_wood_products) Mapping between intermediate and end use wood products
 /
-wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwood,other_sawnwood,other_industrial_roundwood)
+wood . (industrial_roundwood)
 woodfuel . (wood_fuel)
 /
 

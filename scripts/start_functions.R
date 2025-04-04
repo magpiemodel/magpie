@@ -165,7 +165,18 @@
                paste('Last modification (input data):',date()),
                '')
   writeLines(content,'input/info.txt')
-  gms::replace_in_file("main.gms",paste('*',content),subject)
+  contentShort <- c(paste('Low resolution:', low_res),
+                    paste('High resolution:', high_res),
+                    '',
+                    paste('Total number of cells:', sum(ijn["n"])),
+                    '',
+                    'Number of cells per region:',
+                    paste(format(ijn[["i"]], width = 5, justify = "right"), collapse = ""),
+                    paste(format(ijn[["n"]], width = 5), collapse = ""),
+                    '',
+                    paste('Regionscode:', regionscode))
+  
+  gms::replace_in_file("main.gms",paste('*',contentShort),subject)
 }
 
 ################################################################################
@@ -476,7 +487,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
                      debug = cfg$debug,
-                     best_calib = cfg$best_calib_landconversion_cost)
+                     best_calib = cfg$best_calib_landconversion_cost,
+                     histData = cfg$cost_calib_hist_data)
     cat("Land conversion cost calibration factor calculated!\n")
   }
 

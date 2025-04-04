@@ -19,7 +19,6 @@ $Ifi "%phase%" == "sets" $include "./modules/44_biodiversity/bii_target/sets.gms
 $Ifi "%phase%" == "declarations" $include "./modules/44_biodiversity/bii_target/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/44_biodiversity/bii_target/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/44_biodiversity/bii_target/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/44_biodiversity/bii_target/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/44_biodiversity/bii_target/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/44_biodiversity/bii_target/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/44_biodiversity/bii_target/postsolve.gms"
