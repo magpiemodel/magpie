@@ -8,7 +8,7 @@
 sets
    pop_gdp_scen09  Population and GDP scenario
        / SSP1, SSP2, SSP3, SSP4, SSP5,
-         SDP, SDP_EI, SDP_MC, SDP_RC, SSP2EU /
+         SDP, SDP_EI, SDP_MC, SDP_RC /
 
    age Population age groups
        / 0--4, 5--9,   10--14, 15--19,

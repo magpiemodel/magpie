@@ -13,7 +13,10 @@
 *' This approach also accounts for the temporal dimension of soil organic carbon change,
 *' since it assumes a gradual step of 15% in the direction of the new equilibrium soil
 *' organic carbon pool each year. Stock change factors tracks crop types as well as
-*' management (e.g. irrigation) and input differences on cropland.
+*' management (e.g. irrigation) and input differences on cropland. 
+*' Dedicated soil carbon management can be switched on for a share of cropland, characterized 
+*' by a higher input factor, which according to the IPCC guidelines reflects improved agronomic 
+*' practices. Target shares are set exogenously and are phased in over time.  
 
 *' @limitations It is assumed that pastures and rangelandes as well as managed forests
 *' do not change in soil carbon compared to the natural reference state. Moreover only

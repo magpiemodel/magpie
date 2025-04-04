@@ -8,7 +8,7 @@
 sets
 
    iter15 iterations between food demand model and magpie
-   /iter1*iter10/
+   /iter0*iter10/
    curr_iter15(iter15)  currently active iteration
    prev_iter15(iter15)     last active iteration
 

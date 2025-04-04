@@ -93,8 +93,11 @@ bau <- function(cfg) {
   cfg$path_to_report_bioenergy <- NA
   cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi" # default
 
+  # Allow irrigated and rainfed bioenergy production
+  cfg$gms$c30_bioen_water <- "all"
+
   # Climate Change
-  cfg$input["cellular"] <- "rev4.116EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input["cellular"] <- "rev4.117EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }
@@ -219,6 +222,17 @@ cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
+# BAU_MITI #
+# Decomposition Scenario. Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "BAU_MITI"
+# standard setting, but with NDC activated (for miti)
+cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
+# scenario settings
+cfg <- miti(cfg = cfg)
+cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM #

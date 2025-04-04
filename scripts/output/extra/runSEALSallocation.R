@@ -162,6 +162,19 @@ Sys.chmod(iniLock, mode = "0664")
       "WDPA", consv, sealsCoeff[consvRow, "data_location"]
     )
 
+    if (cfg$gms$s29_snv_shr != 0) {
+      if (cfg$gms$s29_snv_shr == 0.2) {
+        # snv policy reallocation incentive
+        snvRow1 <- which(sealsCoeff[, "spatial_regressor_name"] == "snv20_realloc")
+        sealsCoeff[snvRow1, c("forest", "othernat")] <- -100
+        # snv policy expansion constraint
+        snvRow2 <- which(sealsCoeff[, "spatial_regressor_name"] == "snv20_expan")
+        sealsCoeff[snvRow2, "cropland"] <- 0
+      } else {
+        warning("Only if s29_snv_shr is 0.2 can it be explicitly considered at the 1x1km scale during the SEALS allocation.")
+      }
+    }
+
     peatArea <- PeatlandArea(file.path(dir, "fulldata.gdx"))[, as.numeric(sealsYears), ]
     rewetSwitch <- dimSums(peatArea[, , "rewet"], dim = 1) / dimSums(peatArea, dim = c(1, 3)) > 0.01
     if (any(c(rewetSwitch))) {
