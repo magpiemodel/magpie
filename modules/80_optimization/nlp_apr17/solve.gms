@@ -18,10 +18,10 @@ magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
 
-$onecho > conopt4.opt
-Lim_Variable = 1.e25
-Tol_Optimality = s80_toloptimal
-$offecho
+put optfile;
+put 'Lim_Variable = 1.e25' /;
+put 'Tol_Optimality = ', s80_toloptimal:12:11 /;
+putclose optfile;
 
 $onecho > conopt4.op2
 Flg_Prep = FALSE
