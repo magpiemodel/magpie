@@ -7,7 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **default.cfg** input data upgraded from rev4.117 to rev4.118, changed default for bioenergy demand and GHG prices to R34M410
+- **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410 
 
 ### added
 -
