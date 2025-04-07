@@ -44,10 +44,6 @@ cfg$title <- .title(cfg, "singleTimeStep")
 start_run(cfg, codeCheck = TRUE)
 cfg$gms$c_timesteps <- timeSteps
 
-
-cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp == "SSP2") "SSP2EU" else ssp, "-NDC")
-
-
 # Reference and Policy run for SSP1, SSP2 and SSP3
 # NPi2025: continuation of current climate polices
 # PkBudg1000: ambitious climate policy broadly in line with 2deg C Paris target
