@@ -7,7 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **default.cfg** input data upgraded from rev4.117 to rev4.118, default for bioenergy demand and GHG prices changed from R32M46 to R34M410, `rcp4p5` used for SSP2-NPi2025 in line with MAGICC climate outcome and REMIND assumptions.
+- **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410. 
 
 ### added
 -
