@@ -73,7 +73,7 @@
                   vm_prod_reg(i2,kres) * fm_attributes(attributes,kres);
 
 *' Amount produced at cellular level is flexible, can be distributed as it wants 
- q18_prod_res_cell(i2,kres)..
+ q18_prod_res_reg(i2,kres)..
                   sum(cell(i2,j2), v18_prod_res(j2,kres))
                   =e=
                   vm_prod_reg(i2,kres);
