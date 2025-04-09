@@ -53,7 +53,8 @@ Elseif s15_milk_share_fadeout_india = 1,
 );
 
 
-* ###### Exogenous food waste and diet scenarios as well as food substitution scenarios
+* ###### Precalculation of exogenous food waste and diet faders as well as food substitution faders.
+* The actual fading happens in exodietmacro.gms
 
 * Switch to determine countries for which exogenous food scenarios (EAT Lancet diet and
 * food waste scenarios), and food substitution scenarios shall be applied.

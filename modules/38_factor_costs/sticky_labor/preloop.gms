@@ -8,7 +8,7 @@
 *   Calibrate the CES function:
 s38_ces_elast_par = (1/s38_ces_elast_subst) - 1 ;
 
-p38_intr_depr(t,i) = (1-s38_depreciation_rate) * pm_interest(t,i)/(1+pm_interest(t,i)) + s38_depreciation_rate;
+p38_intr_depr(t,i) = (pm_interest(t, i) + s38_depreciation_rate) / (1+pm_interest(t,i));
 
 *  calculate capital cost shares from regression
 p38_capital_share_calibration(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f38_historical_share(t_past,iso) - (f38_reg_parameters("slope") * 

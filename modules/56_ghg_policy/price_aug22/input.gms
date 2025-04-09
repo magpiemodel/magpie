@@ -79,8 +79,8 @@ scalars
   s56_fader_functional_form       Switch for functional form of GHG policy fader (1=linear 2=sigmoid) / 1 /
 ;
 
-$setglobal c56_pollutant_prices  R32M46-SSP2EU-NPi
-$setglobal c56_pollutant_prices_noselect  R32M46-SSP2EU-NPi
+$setglobal c56_pollutant_prices  R34M410-SSP2-NPi2025
+$setglobal c56_pollutant_prices_noselect  R34M410-SSP2-NPi2025
 $setglobal c56_emis_policy  reddnatveg_nosoil
 $setglobal c56_cprice_aff  secdforest_vegc
 $setglobal c56_mute_ghgprices_until  y2030

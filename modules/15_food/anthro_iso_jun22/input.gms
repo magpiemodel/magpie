@@ -67,8 +67,9 @@ s15_elastic_demand                  Elastic demand switch (1=elastic 0=exogenous
 s15_tax_recycling                   Tax recycling multiplier (1=distribution neutral) (1) / 1 / 
 s15_calibrate                       Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
-s15_maxiter                         Scalar defining maximum number of iterations (1) / 5 /
+s15_maxiter                         Scalar defining maximum number of iterations (1) / 10 /
 s15_convergence                     Convergence criterion (1) / 0.005 /
+s15_convergence_partstep            Share of last iteration for convergence (1=only current iteration 0.5=half last iteration) / 0.5 /
 * maximum relative per-capita gdp difference within a region between two iteratios
 s15_exo_waste                       Switch for transition towards exogenous food waste scenario (1)  / 0 /
 s15_waste_scen                      Scenario target for the ratio between food demand and intake (1)  / 1.2 /

@@ -9,7 +9,7 @@
 # description: Land-based mitigation and habitat conservation
 # -------------------------------------------------------------
 
-rev <- "rev16"
+rev <- "rev18"
 
 cres <- "c200"
 
@@ -37,14 +37,9 @@ cfg$force_replace <- TRUE
 
 # land conversion cost calibration settings
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$restart_landconversion_cost <- FALSE
-cfg$best_calib_landconversion_cost <- FALSE
-
-cfg$calib_accuracy_landconversion_cost <- 0.01
-cfg$lowpass_filter_landconversion_cost <- 1
 
 # cc is new default
-cfg <- setScenario(cfg, c("SSP2EU", "nocc_hist", "NPI", "ForestryExo"))
+cfg <- setScenario(cfg, c("SSP2", "nocc_hist", "NPI", "ForestryExo"))
 cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
 
 # sticky
@@ -78,10 +73,6 @@ for (scen in scenarios) {
   scen <- unlist(strsplit(scen, "-"))
   ssp <- scen[grepl("SSP", scen)]
 
-  if (length(ssp) == 0 || ssp == "SSP2") {
-    ssp <- "SSP2EU"
-  }
-
   source("config/default.cfg")
 
   cfg$qos <- "short_highMem"
@@ -106,7 +97,7 @@ for (scen in scenarios) {
   cfg$gms$land_snv <- "secdforest, other"
 
   # Set path to coupled output
-  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-NPi-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-NPi-rem-12.mif"
+  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev8_MitiConsv_SSP2-NPi-rem-12/REMIND_generic_C_rev8_MitiConsv_SSP2-NPi-rem-12.mif"
 
   # No ghg price in NPI run
   cfg$gms$c56_mute_ghgprices_until <- "y2100"
@@ -114,14 +105,14 @@ for (scen in scenarios) {
   if ("PB650" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg650-rem-12.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev8_MitiConsv_SSP2-PkBudg650-rem-12/REMIND_generic_C_rev8_MitiConsv_SSP2-PkBudg650-rem-12.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 
   if ("PB1000" %in% scen) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jan25/remind/output/C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev6_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Mar25/remind/output/C_rev8_MitiConsv_SSP2-PkBudg1000-rem-12/REMIND_generic_C_rev8_MitiConsv_SSP2-PkBudg1000-rem-12.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
   }
 

@@ -114,6 +114,7 @@ equations
  q32_land_expansion_forestry(j,type32)             Forestry land expansion (mio. ha)
  q32_land_reduction_forestry(j,type32)             Forestry land reduction (mio. ha)
  q32_land_replant(j)                               Harvested and replanted area in timber plantations (mio. ha)
+ q32_co2p_aff_limit(j)                             Annual upper limit for re-afforestation (mio. ha per yr)
 ;
 
 
@@ -167,5 +168,6 @@ parameters
  oq32_land_expansion_forestry(t,j,type32,type) Forestry land expansion (mio. ha)
  oq32_land_reduction_forestry(t,j,type32,type) Forestry land reduction (mio. ha)
  oq32_land_replant(t,j,type)                   Harvested and replanted area in timber plantations (mio. ha)
+ oq32_co2p_aff_limit(t,j,type)                 Annual upper limit for re-afforestation (mio. ha per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
