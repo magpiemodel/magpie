@@ -181,6 +181,13 @@ $offdelim
 /;
 
 
+parameter f15_markup_coef(kfo) Coefficient for value-added on food products (X)
+/
+$ondelim
+$include "./modules/15_food/input/f15_markup_coef.csv"
+$offdelim
+/;
+
 table f15_kcal_calib_fadeout(t_all,calibscen15) Calibration fadeout factor (1)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"

@@ -6,6 +6,22 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+*' do post hoc value-added prices
+
+*' food away from home regression 
+
+p15_shr_fafh(t,iso) = 1.045e-01 + 5.603e-06 * im_gdp_pc_mer_iso(t,iso);
+p15_shr_fafh(t,iso)$(p15_shr_fafh(t,iso) > 1) = 1;
+p15_shr_fafh(t,iso)$(p15_shr_fafh(t, iso) < 0) = 0;
+
+p15_price_markup_fah(t,iso,kfo) = (0.0015 * (f15_markup_coef(kfo)**log(im_gdp_pc_mer_iso(t,iso))) + 322) * fm_attributes("wm", kfo);
+p15_price_markup_fah_kcal(t,iso,kfo) = p15_price_markup_fah(t,iso,kfo) / (fm_nutrition_attributes(t,kfo,"kcal")*10**6);
+p15_price_markup_fafh(t,iso,kfo) = (0.0023 * (f15_markup_coef(kfo)**log(im_gdp_pc_mer_iso(t,iso))) + 322)* fm_attributes("wm", kfo);
+p15_price_markup_fafh_kcal(t,iso,kfo) = p15_price_markup_fafh(t,iso,kfo)  / (fm_nutrition_attributes(t,kfo,"kcal")*10**6);
+
+p15_value_added_expenditures(t,iso,kfo) = p15_shr_fafh(t,iso) * p15_kcal_pc_iso(t,iso,kfo)*p15_price_markup_fafh_kcal(t,iso,kfo)
+                                         + (1-p15_shr_fafh(t,iso)) * p15_kcal_pc_iso(t,iso,kfo)*p15_price_markup_fah_kcal(t,iso,kfo);
+
 if(ord(t)>1,
 * start from bodyheight structure of last period
    p15_bodyheight(t,iso,sex,age,"final") = p15_bodyheight(t-1,iso,sex,age,"final");

@@ -78,6 +78,12 @@ parameters
  p15_rumdairy_scp_subst_fader(t_all)           Ruminant and dairy substitution with SCP fader (1)
  p15_livestock_threshold_subst_fader(t_all)    Fader for livestock threshold target (1)
  p15_exo_food_scenario_fader(t_all)            Exogenous diet scenario fader (1)
+ p15_shr_fafh(t,iso)                           Share of calories away from home (1)
+ p15_price_markup_fah_kcal(t,iso,kfo)          Price per calorie at home (USD17MER per kcal)
+ p15_price_markup_fah(t,iso, kfo)              Price per tDM at home (USD17MER per tDM)
+ p15_price_markup_fafh_kcal(t,iso,kfo)         Price per calorie away from home (USD17MER per kcal)
+ p15_price_markup_fafh(t,iso, kfo)             Price per tDM away from home (USD17MER per tDM)
+ p15_value_added_expenditures(t,iso,kfo)       Expenditures on food value-added not including producer (USD17MER)
 
 
 * anthropometrics
@@ -180,7 +186,8 @@ parameters
   p15_tax_recycling(t,iso)                          Tax revenue recycling to households (USD17PPP per capita)
   p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD17PPP per kcal)
   i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD17PPP per kcal)
-
+  p15_price_markup(t,iso,kfo)                       Prices after markup (USD17PPP per tWM)
+  p15_price_markup_kcal(t,iso,kfo)                  Prices after markup (USD17PPP per lkcal)
 * calculate diet iteration breakpoint
  p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD17PPP per capita)
  p15_delta_income(t,i,iter15)                 Regional change in per capita income due to price shock on regional level (1)
