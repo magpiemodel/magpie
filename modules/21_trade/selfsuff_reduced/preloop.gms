@@ -6,6 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+*' Trade liberalization i.e. shift from self-sufficiency fixed pool to free pool begins
+*' with sm_fix_SSP2 to keep values matching historical data until then.
 loop(t_all,
  if(m_year(t_all) <= sm_fix_SSP2,
  i21_trade_bal_reduction(t_all,k_trade)=1;
