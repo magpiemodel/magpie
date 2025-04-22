@@ -10,8 +10,8 @@
 *' with sm_fix_SSP2 to keep values matching historical data until then.
 loop(t_all,
  if(m_year(t_all) <= sm_fix_SSP2,
- i21_trade_bal_reduction(t_all,k_trade)=1;
- i21_trade_bal_reduction(t_all,k_hardtrade21)=1;
+ i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","l909090r808080");
+ i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","l909090r808080");
  else
  i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
