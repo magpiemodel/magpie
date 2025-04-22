@@ -7,8 +7,11 @@
 
 parameters
  i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
+ i21_exp_shr(t_all,h,k_trade)                   Trade export shr (1)
  i21_trade_margin(h,k_trade)                    Trade margins (USD17MER per tDM)
  i21_trade_tariff(h,k_trade)                    Trade tariffs (USD17MER per tDM)
+ i21_exports(t_all,h,k_trade)                   Total exports (tDM)
+ i21_exp_glo(t_all,k_trade)                     Total global exports (tDM)
 ;
 
 positive variables

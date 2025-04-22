@@ -29,9 +29,9 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_self_suff.cs3"
 $offdelim;
 
-table f21_exp_shr(t_all,h,kall) Superregional and crop-specific export share (1)
+table f21_dom_supply(t_all,h,kall) Superregional domestic supply (mio. tDM per yr)
 $ondelim
-$include "./modules/21_trade/input/f21_trade_export_share.cs3"
+$include "./modules/21_trade/input/f21_trade_domestic_supply.cs3"
 $offdelim;
 
 table f21_trade_balanceflow(t_all,kall) Domestic balance flows (mio. tDM per yr)
