@@ -55,7 +55,7 @@
 
  q21_excess_supply(h2,k_trade)..
  v21_excess_prod(h2,k_trade) =e=
- v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,h2,k_trade));
+ v21_excess_dem(k_trade)*sum(ct,i21_exp_shr(ct,h2,k_trade));
 
 * Trade costs are associated with exporting superregions. They are dependent on net exports, trade margin, and tariffs.
 
