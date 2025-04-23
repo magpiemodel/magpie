@@ -48,7 +48,7 @@ parameters
  oq18_res_field_balance(t,i,kcr,attributes,type) Calculation of the residues amount recycled to soils (mio. tDM)
  oq18_res_field_burn(t,i,kcr,attributes,type)    Fixing of the residues amount burned in a region in respective attribute units DM GJ Nr P K WM C (mio. tX)
  oq18_translate(t,i,kres,attributes,type)        Transformation of the multiple crop residues into supply balance crop redisues in respective attribute units DM GJ Nr P K WM C (mio. tX)
- oq18_prod_res_cell(t,i,kres,type)               Allows for distribution of residues to cellular level (mio. tDM)
+ oq18_prod_res_reg(t,i,kres,type)                Allows for distribution of residues to cellular level (mio. tDM)
  oq18_res_recycling_nr(t,i,type)                 Nutrient recycling of reaactive nitrogen (mio. tNr)
  oq18_res_recycling_pk(t,i,pk18,type)            Nutrient recycling of phosphorus and potash (mio. tX)
  oq18_cost_prod_res(t,i,kres,type)               Production costs of harvesting crop residues (mio. USD17MER)
