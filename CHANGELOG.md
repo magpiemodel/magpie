@@ -13,10 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### added
 - **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
-- **80_optimzation** added writing of conopt opt files with using scalars from input 
+- **80_optimization** added writing of conopt opt files with using scalars from input 
 
 ### removed
-- **80_optimzation** removed older optfile, that should be tried if not foptimal solution can be found
+- **80_optimization** removed older optfile, that should be tried if no optimal solution can be found
 
 ### fixed
 - **18_residues** fixed equation for cluster level production of crop residues in flexreg_apr16 realization

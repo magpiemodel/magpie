@@ -34,12 +34,12 @@ $elseif "%c80_nlp_solver%" == "conopt4+conopt3"
   s80_add_conopt3   = 1;
 $endif
 
-$onecho > conopt4.opt
-Lim_Variable = 1.e25
-$offecho
+put optfile;
+put 'Tol_Optimality = ', s80_toloptimal:12:11 /;
+putclose optfile;
 
 $onecho > conopt4.op2
-Flg_Prep = FALSE
+Lim_Variable = 1.e25
 $offecho
 
 repeat(
