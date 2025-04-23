@@ -1,2 +1,0 @@
-name,type,reason
-sm_fix_SSP2,input,not needed
