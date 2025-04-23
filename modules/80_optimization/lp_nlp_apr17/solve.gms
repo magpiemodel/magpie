@@ -143,7 +143,7 @@ $batinclude "./modules/include.gms" nl_relax
 
 * if solve stopped with an error, try it again with CONOPT4 and OPTFILE
     if((magpie.modelstat = 13),
-      display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
+      display "WARNING: Modelstat 13 | Retry solve with CONOPT4 increasing largest allowable value";
       option nlp = conopt4;
       magpie.optfile = 2
       solve magpie USING nlp MINIMIZING vm_cost_glo;
