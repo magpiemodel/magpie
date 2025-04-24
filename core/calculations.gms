@@ -21,7 +21,6 @@ $batinclude "./modules/include.gms" preloop
 * to be done here because a file declaration cannot be inside a loop
 file dummy; dummy.pw=2000; put dummy;
 
-
 ************************OPTIMIZATION PROCESS START******************************
 * This section contains only sourcecode that is directly connected to the
 * optimization process. That means that everything on the following lines
