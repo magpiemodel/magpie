@@ -143,7 +143,7 @@ if (length(map_file) > 1) {
       }
       # future conservation only pertains to natveg
       consv_prio_hr[, , c("crop", "past", "forestry", "urban")] <- 0
-      consv_fader <- readGDX(gdx, "p22_conservation_fader", format = "first_found")
+      consv_fader <- readGDX(gdx, "i22_conservation_fader", format = "first_found")
       consv_prio_hr <- consv_prio_hr * consv_fader[, getYears(land_consv_hr), ]
 
       # add conservation priority areas

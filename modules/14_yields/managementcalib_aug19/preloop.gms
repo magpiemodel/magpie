@@ -184,3 +184,15 @@ if ((s14_degradation = 1),
 );
 
 *' @stop
+
+
+* Country switch to determine countries for which certain policies shall be applied.
+* In the default case, the policy affects all countries when activated.
+p14_country_switch(iso) = 0;
+p14_country_switch(croparea_consv_countries14) = 1;
+
+** Trajectory for implementation of croparea conservation
+* sigmoidal interpolation between 2020 and target year
+m_sigmoid_time_interpol(i14_croparea_consv_fader,s14_croparea_consv_start,s14_croparea_consv_target,0,1);
+
+m_sigmoid_time_interpol(i14_tau_croparea_consv_fader,s14_croparea_consv_start,s14_croparea_consv_target,1,s14_croparea_consv_tau_factor);

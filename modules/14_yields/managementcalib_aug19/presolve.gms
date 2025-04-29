@@ -63,3 +63,32 @@ pm_timber_yield(t,j,ac,"other") =
 pm_timber_yield(t,j,ac,land_timber) = pm_timber_yield(t,j,ac,land_timber)$(pm_timber_yield(t,j,ac,land_timber) > 0) + 0.0001$(pm_timber_yield(t,j,ac,land_timber) = 0);
 ** Put yields to 0 where they dont exceed a minimum yield for harvest
 pm_timber_yield(t,j,ac,land_natveg)$(pm_timber_yield(t,j,ac,land_natveg) < s14_minimum_wood_yield) = 0;
+
+
+** Share of cropland within conservation priority area
+p14_cropland_consv_shr(t,j) = 0;
+
+if(c14_croparea_consv = 1,
+  p14_cropland_consv_shr(t,j)$(pcm_land(j,"crop") > 0) = sum(consv_type, pm_land_conservation(t,j,"crop",consv_type))/pcm_land(j,"crop");
+  p14_cropland_consv_shr(t,j)$(p14_cropland_consv_shr(t,j) > 1) = 1;
+
+  if(s14_croparea_consv_shr > 0 AND m_year(t) >= s14_croparea_consv_start,
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by available cropland area.
+    p14_country_weight(i) = sum(i_to_iso(i,iso), p14_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
+    p14_cropland_consv_shr(t,j) = i14_croparea_consv_fader(t) *
+    (s14_croparea_consv_shr * sum(cell(i,j), p14_country_weight(i))
+    + s14_croparea_consv_shr_noselect * sum(cell(i,j), 1-p14_country_weight(i)));
+
+  );
+
+);
+
+if (c14_croparea_consv_tau_increase = 1,
+  p14_tau_consv(h,"crop") =  i14_tau_croparea_consv_fader(t) * pcm_tau(h,"crop");
+
+elseif c14_croparea_consv_tau_increase = 0 AND m_year(t) <= s14_croparea_consv_target,
+  p14_tau_consv(h,"crop") =  i14_tau_croparea_consv_fader(t) * pcm_tau(h,"crop");
+
+);
