@@ -85,10 +85,18 @@ if(c14_croparea_consv = 1,
 
 );
 
-if (c14_croparea_consv_tau_increase = 1,
-  p14_tau_consv(h,"crop") =  i14_tau_croparea_consv_fader(t) * pcm_tau(h,"crop");
+p14_country_wght_supreg(h) = sum((i_to_iso(i,iso), supreg(h,i)), p14_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum((i_to_iso(i,iso), supreg(h,i)), pm_avl_cropland_iso(iso));
 
-elseif c14_croparea_consv_tau_increase = 0 AND m_year(t) <= s14_croparea_consv_target,
-  p14_tau_consv(h,"crop") =  i14_tau_croparea_consv_fader(t) * pcm_tau(h,"crop");
+p14_croparea_consv_tau_factor(h) = (s14_croparea_consv_tau_factor * p14_country_wght_supreg(h)
+                            + s14_croparea_consv_tau_factor_noselect * (1-p14_country_wght_supreg(h)));
+
+if (m_year(t) < s14_croparea_consv_start,
+  p14_tau_consv(h,"crop") =  pcm_tau(h,"crop");
+
+elseif c14_croparea_consv_tau_increase = 1 AND m_year(t) >= s14_croparea_consv_start,
+  p14_tau_consv(h,"crop") =  p14_croparea_consv_tau_factor(h) * pcm_tau(h,"crop");
+
+elseif c14_croparea_consv_tau_increase = 0 AND m_year(t) = s14_croparea_consv_start
+  p14_tau_consv(h,"crop") =  p14_croparea_consv_tau_factor(h) * pcm_tau(h,"crop");
 
 );
