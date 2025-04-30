@@ -16,8 +16,6 @@
 *' @authors  Xiaoxi Wang, Anne Biewald, Christoph Schmitz, Markus Bonsch
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%trade%" == "exo" $include "./modules/21_trade/exo/realization.gms"
-$Ifi "%trade%" == "free_apr16" $include "./modules/21_trade/free_apr16/realization.gms"
-$Ifi "%trade%" == "off" $include "./modules/21_trade/off/realization.gms"
 $Ifi "%trade%" == "selfsuff_reduced" $include "./modules/21_trade/selfsuff_reduced/realization.gms"
 $Ifi "%trade%" == "selfsuff_reduced_bilateral22" $include "./modules/21_trade/selfsuff_reduced_bilateral22/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
