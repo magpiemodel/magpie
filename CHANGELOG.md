@@ -7,66 +7,85 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **15_food** included a convergence mechanism to support convergence between iterations
-- **38_factor_costs** code cleanup, documentation
-- **41_area_equipped_for_irrigation** code cleanup
-- **scripts** changed c30_bioen_water switch to all in EAT2p0 start script and re-included missing BAU_MITI scenario
-- **scripts** reduced setup information written to main.gms
-- **15_food** tax recycling for income effect in elastic food demand
-- **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
-- **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24"
-- **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
-- **config.cfg** default for `cfg$gms$s29_fallow_max ` changed from 0.4 to 0
-- **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
-- **scripts** land conversion cost calibration for cropland - FAO as target data set instead of MAgPIEown
-- **default.cfg** settings for  land conversion cost calibration updated
-- **60_bioenergy** renamed `c60_bioenergy_subsidy` to `s60_bioenergy_1st_subsidy` to more clearly reflect its use and changed its unit to USD17MER per GJ. Adjusted `q60_bioenergy_incentive` accordingly
-- **60_bioenergy** renamed `s60_bioenergy_gj_price_1st` to `s60_bioenergy_1st_price` and `s60_bioenergy_price_2nd` to `s60_bioenergy_2nd_price`
-- **default.cfg** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
-- **default.cfg** default for `cfg$gms$bioenergy` change from `1stgen_priced_dec18` to `1st2ndgen_priced_feb24`
-- **73_timber** revised timber demand calculations 
-- **32_forestry** revised plantation establishment assumptions
-- **35_natveg** revised wood harvest assumptions
-- **32_forestry** timber plantation harvest is no longer enforced at rotation age to avoid conflicts with `q21_trade_reg_up`, which can result in huge costs and negative prices for wood
-- **21_trade** Cost for additional imports to maintain feasibility reduced from 12300 to 1500 USD17MER per tDM to avoid implausibly high costs and prices for wood and woodfuel
-- **default.cfg** Reactivated external scenario for damage from shifting agriculture (`cfg$gms$s35_forest_damage <- 2`)
-- **56_ghg_policy** Minimum CO2 price of 1 $ per ton CO2 on emissions from deforestation and other land conversion in all time steps to avoid sudden jumps in carbon stock changes (`cfg$gms$s56_minimum_cprice <- 3.67`)
-- **default.cfg** input data upgraded from rev4.116 to rev4.117
-- **09_drivers** removed SSP2EU scenario from set
-- **default.cfg** default for module `44_biodiversity` changed from `bii_target_apr24` to `bii_target
+- **21_trade** changed export share calculation to be done at region level in the model
+- **default.cfg** input data upgraded from rev4.117 to rev4.118, default for bioenergy demand and GHG prices changed from R32M46 to R34M410, `rcp4p5` used for SSP2-NPi2025 in line with MAGICC climate outcome and REMIND assumptions.
+- **default.cfg** changed running magpie by default with optfile for specified solver settings (Tol_Optimality)
+- **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410. 
 
 ### added
-- **scripts** output script for testing elastic demand
+- **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
+- **80_optimization** added writing of conopt opt files with using scalars from input 
+
+### removed
+- **80_optimization** removed older optfile, that should be tried if no optimal solution can be found
+
+### fixed
+- **18_residues** fixed equation for cluster level production of crop residues in flexreg_apr16 realization
+
+
+## [4.10.0] - 2025-04-03
+
+### changed
+- **09_drivers** removed SSP2EU scenario from set
+- **15_food** included a convergence mechanism to support convergence between iterations
+- **15_food** tax recycling for income effect in elastic food demand
+- **21_trade** Cost for additional imports to maintain feasibility reduced from 12300 to 1500 USD17MER per tDM to avoid implausibly high costs and prices for wood and woodfuel
+- **32_forestry** revised plantation establishment assumptions
+- **32_forestry** timber plantation harvest is no longer enforced at rotation age to avoid conflicts with `q21_trade_reg_up`, which can result in huge costs and negative prices for wood
+- **35_natveg** revised wood harvest assumptions
+- **38_factor_costs** code cleanup, documentation
+- **41_area_equipped_for_irrigation** code cleanup
+- **56_ghg_policy** Minimum CO2 price of 1 $ per ton CO2 on emissions from deforestation and other land conversion in all time steps to avoid sudden jumps in carbon stock changes (`cfg$gms$s56_minimum_cprice <- 3.67`)
+- **60_bioenergy** renamed `c60_bioenergy_subsidy` to `s60_bioenergy_1st_subsidy` to more clearly reflect its use and changed its unit to USD17MER per GJ. Adjusted `q60_bioenergy_incentive` accordingly
+- **60_bioenergy** renamed `s60_bioenergy_gj_price_1st` to `s60_bioenergy_1st_price` and `s60_bioenergy_price_2nd` to `s60_bioenergy_2nd_price`
+- **73_timber** revised timber demand calculations
+- **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24"
+- **config.cfg** default for `cfg$gms$s29_fallow_max ` changed from 0.4 to 0
+- **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
+- **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
+- **default.cfg** default for `cfg$gms$bioenergy` change from `1stgen_priced_dec18` to `1st2ndgen_priced_feb24`
+- **default.cfg** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
+- **default.cfg** default for module `44_biodiversity` changed from `bii_target_apr24` to `bii_target
+- **default.cfg** input data upgraded from rev4.116 to rev4.117
+- **default.cfg** Reactivated external scenario for damage from shifting agriculture (`cfg$gms$s35_forest_damage <- 2`)
+- **default.cfg** settings for  land conversion cost calibration updated
+- **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
+- **scripts** changed c30_bioen_water switch to all in EAT2p0 start script and re-included missing BAU_MITI scenario
+- **scripts** land conversion cost calibration for cropland - FAO as target data set instead of MAgPIEown
+- **scripts** reduced setup information written to main.gms
+
+### added
+- **11_cost** added cost term for soil carbon management
+- **22_land_conservation** added option for base protection reversal
+- **32_forestry** Upper annual limit for re/afforestation (`s32_annual_aff_limit`) applied to NPI/NDC and CO2-price driven re/afforestation (default: 3% of overall forest establishment potential)
+- **58_peatland** Limit for annual peatland rewetting (2% of degraded peatland per year) to avoid adhoc rewetting of degraded peatlands with the introduction of the CO2 price (`cfg$gms$s58_annual_rewetting_limit <- 0.02`)
+- **59_som** added soil carbon management option to cellpool_jan23 realization
+- **default.cfg** added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
+- **default.cfg** added setting for soil carbon management to config and set `cellpool_jan23` realizaton as new default for `59_som` module.
 - **scenario_config.csv** added column `NPI-revert`
 - **scenario_config.csv** added columns `AR-natveg` and `AR-plant` for CO2 price re/afforestation and AgroForestry settings
 - **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
-- **default.cfg** added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
+- **scripts** output script for testing elastic demand
 - **scripts** start script for ScenarioMIP MAgPIE standalone runs
-- **22_land_conservation** added option for base protection reversal
 - **scripts** The constraint to maintain 20% semi-natural vegetation at the 1x1km scale is passed on to SEALS, if the setting is changed from the `default.cfg`
-- **58_peatland** Limit for annual peatland rewetting (2% of degraded peatland per year) to avoid adhoc rewetting of degraded peatlands with the introduction of the CO2 price (`cfg$gms$s58_annual_rewetting_limit <- 0.02`)
-- **59_som** added soil carbon management option to cellpool_jan23 realization
-- **11_cost** added cost term for soil carbon management
-- **default.cfg** added setting for soil carbon management to config and set `cellpool_jan23` realizaton as new default for `59_som` module.
-- **32_forestry** Upper annual limit for re/afforestation (`s32_annual_aff_limit`) applied to NPI/NDC and CO2-price driven re/afforestation (default: 3% of overall forest establishment potential) 
 
 ### removed
-- **modules/15_food/anthropometrics_jan18** removed as outdated
-- **scenario_config.csv** removed column `SSP2-EU`
+- **15_food/anthropometrics_jan18** removed as outdated
+- **44_biodiversity** realisation `bii_target_apr24` removed because it is identical to `bii_target`. `bii_target` set as new default.
 - **59_som** removed cellpool_aug16 realization (out-dated parameters)
 - **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min_post_fix` since no longer in use
 - **scenario_config.csv** GDP scenario for VLLO in scenario_config.csv changed from SDP-MC to SSP1 (needed for consistency with REMIND)
-- **44_biodiversity** realisation `bii_target_apr24` removed because it is identical to `bii_target`. `bii_target` set as new default.
+- **scenario_config.csv** removed column `SSP2-EU`
 
 ### fixed
 - **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
 - **32_forestry** added contraint `q32_ndc_aff_limit` to make sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
 - **35_natveg** added interface `vm_natforest_reduction`
+- **44_biodiversity** scaling of equation `q44_bii` removed, which caused non-matching LHS and RHS
 - **56_ghg_policy** bugfixes for regional GHG policy fader
-- **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
 - **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
+- **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
 - **scripts/output** peatland share calculation fixed in disaggreagtion.R and minor bugfixes in disaggreagtion_LUH2.R
-- **44_biodiversity** scaling of equation `q44_bii` removed, which caused non-matching LHS and RHS 
 
 
 ## [4.9.1] - 2025-01-28
@@ -1132,7 +1151,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.9.1...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.10.0...develop
+[4.10.0]: https://github.com/magpiemodel/magpie/compare/v4.9.1...v4.10.0
 [4.9.1]: https://github.com/magpiemodel/magpie/compare/v4.9.0...v4.9.1
 [4.9.0]: https://github.com/magpiemodel/magpie/compare/v4.8.2...v4.9.0
 [4.8.2]: https://github.com/magpiemodel/magpie/compare/v4.8.1...v4.8.2
