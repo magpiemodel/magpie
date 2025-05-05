@@ -16,47 +16,12 @@ s14_limit_calib                    Relative managament calibration switch (1=lim
 s14_calib_ir2rf                    Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /
 s14_degradation                    Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /
 s14_use_yield_calib                Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
-c14_croparea_consv                 Switch for crop area conservation either in conservation priority areas or in a given share of the total croparea (0=no 1=yes) / 1 /
-c14_croparea_consv_tau_increase    Switch for tau increase on crop area conservation (0=no 1=yes) / 1 /
-s14_croparea_consv_tau_factor      Tau factor for crop area conservation / 0.8 /
-s14_croparea_consv_shr             Share of crop area in which no endogeneous yield changes are allowed due to conservation (1) / 0 /
-s14_croparea_consv_shr_noselect    Share of crop area in which no endogeneous yield changes are allowed due to conservation (1) / 0 /
-s14_croparea_consv_start           Croparea conservation start year        / 2025 /
-s14_croparea_consv_target          Croparea conservation target year       / 2030 /
 s14_minimum_wood_yield             Minimum wood yield for timber harvest in natural vegetation (tDM per ha per yr) / 10 /
 s14_yld_past_switch                Spillover parameter for translating technological change in the crop sector into pasture yieldincreases  (1)     / 0.25 /
 s14_yld_reduction_soil_loss        Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
 s14_carbon_fraction                Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
 ;
 
-sets
-  croparea_consv_countries14(iso) countries to be affected by croparea conservation policy
-                      / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
-                      ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
-                      BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
-                      BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
-                      CCK,CHN,CHE,CHL,CIV,CMR,COD,COG,COK,COL,
-                      COM,CPV,CRI,CUB,CUW,CXR,CYM,CYP,CZE,DEU,
-                      DJI,DMA,DNK,DOM,DZA,ECU,EGY,ERI,ESH,ESP,
-                      EST,ETH,FIN,FJI,FLK,FRA,FRO,FSM,GAB,GBR,
-                      GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRC,
-                      GRD,GRL,GTM,GUF,GUM,GUY,HKG,HMD,HND,HRV,
-                      HTI,HUN,IDN,IMN,IND,IOT,IRL,IRN,IRQ,ISL,
-                      ISR,ITA,JAM,JEY,JOR,JPN,KAZ,KEN,KGZ,KHM,
-                      KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,
-                      LKA,LSO,LTU,LUX,LVA,MAC,MAF,MAR,MCO,MDA,
-                      MDG,MDV,MEX,MHL,MKD,MLI,MLT,MMR,MNE,MNG,
-                      MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,
-                      NCL,NER,NFK,NGA,NIC,NIU,NLD,NOR,NPL,NRU,
-                      NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,POL,
-                      PRI,PRK,PRT,PRY,PSE,PYF,QAT,REU,ROU,RUS,
-                      RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,
-                      SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SVK,SVN,
-                      SWE,SWZ,SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,
-                      TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
-                      UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
-                      VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
-;
 
 ******* Calibration factor
 $onEmpty

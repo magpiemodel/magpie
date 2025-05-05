@@ -20,12 +20,6 @@ parameters
  i14_calib_yields_ratio(i)                               Irrigated to rainfed yield ratio for calibrated yields (1)
  i14_target_ratio(i)                                     Target irrigated to rainfed ratio as upper bound (1)
  i14_modeled_yields_hist2(i,knbe14)                      Calibrated yields average over region and water supply type at the historical reference year (tDM per ha per yr)
- p14_tau_consv(h,tautype)                               tau for cropland within conservation priority areas (1)
- p14_cropland_consv_shr(t,j)                             Share of cropland within conservation priority areas(1)
- i14_croparea_consv_fader(t_all)                         Crop area conservation fader (1)
- i14_tau_croparea_consv_fader(t_all)                     Fader for tau factor for crop area conservation (1)
- p14_country_weight(i)                                   Policy country weight per region (1)
- p14_country_switch(iso)                                 Switch indicating whether country is affected by selected cropland policy (1)
  ;
 
 positive variables
