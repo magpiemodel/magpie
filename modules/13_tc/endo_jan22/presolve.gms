@@ -72,5 +72,5 @@ if(ord(t) = 1,
   pcm_tau(j,tautype) = vm_tau.l(j,tautype);
 else
   v13_tau.l(h,tautype) = pc13_tau(h,tautype)*(1+pc13_tcguess(h,tautype))**m_yeardiff(t);
-  v13_tau_consv.l(h,tautype) = pc13_tau_consv(h,tautype);
+  v13_tau_consv.l(h,tautype) = p13_croparea_consv_tau_factor(h) * v13_tau.l(h,tautype);
 );
