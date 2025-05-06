@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **18_residues** fixed equation for cluster level production of crop residues in flexreg_apr16 realization
+- **44_biodiversity** expanded age-classes from 150 to 300 years in line with `ac` set. This bugfix is crucial for the BII indicator.
 
 
 ## [4.10.0] - 2025-04-03
