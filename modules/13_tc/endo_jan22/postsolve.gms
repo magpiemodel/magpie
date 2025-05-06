@@ -11,9 +11,9 @@ if((ord(t)>1),
  pc13_tcguess(h,tautype) = (v13_tau.l(h,tautype)/pc13_tau(h, tautype))**(1/m_yeardiff(t)) - 1;
 );
 
-pcm_tau(j, tautype) = vm_tau.l(j, tautype);
 pc13_tau(h, tautype) = v13_tau.l(h, tautype);
 pc13_tau_consv(h, tautype) = v13_tau_consv.l(h, tautype);
+pcm_tau(j, tautype) = vm_tau.l(j, tautype);
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
