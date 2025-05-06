@@ -16,16 +16,7 @@ else
   v13_tau.lo(h, tautype) =    pc13_tau(h, tautype);
 );
 
-  v13_tau.up(h,tautype) =  2 * pc13_tau(h,tautype);
-
-* educated guess for v13_tau.l:
-if(ord(t) = 1,
-  v13_tau.l(h,tautype) = pc13_tau(h,tautype);
-else
-  v13_tau.l(h,tautype) = pc13_tau(h,tautype)*(1+pc13_tcguess(h,tautype))**m_yeardiff(t);
-);
-
-v13_tau.up(h,tautype) = 2 * pc13_tau(h,tautype);
+  v13_tau.up(h,tautype) = 2 * pc13_tau(h,tautype);
 
 if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 
@@ -40,7 +31,6 @@ if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
   vm_tech_cost.l(i) = vm_tech_cost.up(i);
 
 );
-
 
 ** Share of cropland within conservation priority area
 p13_cropland_consv_shr(t,j) = 0;
@@ -71,4 +61,16 @@ if (ord(t) = 1,
   pc13_tau_consv(h,tautype) = p13_croparea_consv_tau_factor(h) * pc13_tau(h,"crop")
 elseif c13_croparea_consv_tau_increase = 0 AND m_year(t) >= s13_croparea_consv_start,
   v13_tau_consv.fx(h,tautype) = pc13_tau_consv(h,tautype);
+);
+
+
+* educated guess for tau levels:
+if(ord(t) = 1,
+  v13_tau.l(h,tautype) = pc13_tau(h,tautype);
+  v13_tau_consv.l(h,tautype) = pc13_tau_consv(h,tautype);
+  vm_tau.l(j,tautype) = sum((cell(i,j), supreg(h,i)),(1-p13_cropland_consv_shr(t,j)) * v13_tau.l(h,tautype) + p13_cropland_consv_shr(t,j) * v13_tau_consv.l(h,tautype));
+  pcm_tau(j,tautype) = vm_tau.l(j,tautype);
+else
+  v13_tau.l(h,tautype) = pc13_tau(h,tautype)*(1+pc13_tcguess(h,tautype))**m_yeardiff(t);
+  v13_tau_consv.l(h,tautype) = pc13_tau_consv(h,tautype);
 );
