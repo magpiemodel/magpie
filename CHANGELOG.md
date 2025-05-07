@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### added
 - **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
 - **80_optimization** added writing of conopt opt files with using scalars from input 
+- **core.gms** added unused set number_order to force number sets like maccs_steps to be ordered
 
 ### removed
 - **80_optimization** removed older optfile, that should be tried if no optimal solution can be found
