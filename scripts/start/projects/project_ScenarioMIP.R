@@ -163,8 +163,8 @@ cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv06-VLHO-SSP2-EcB
 cfg$gms$s29_treecover_scenario_start <- 2030
 cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s44_bii_target <- 0
-cfg$gms$c44_bii_decrease <- 1
-cfg$gms$s44_start_year <- 2030
+cfg$gms$c44_bii_decrease <- 0
+cfg$gms$s44_start_year <- 2050
 cfg$gms$s59_scm_scenario_start <- 2030
 cfg$gms$s59_scm_target <- 0.2
 cfg$gms$c60_1stgen_biodem <- "const2030"
