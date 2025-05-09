@@ -7,19 +7,25 @@
 
 
 positive variables
- vm_dem_feed(i,kap,kall)          Regional feed demand including byproducts (mio. tDM per yr)
- vm_cost_prod_livst(i,factors)    Livestock factor costs (mio. USD17MER per yr)
- vm_cost_prod_fish(i)             Fish factor costs (mio. USD17MER per yr)
+ vm_dem_feed(i,kap,kall)           Regional feed demand including byproducts (mio. tDM per yr)
+ vm_cost_prod_livst(i,factors)     Livestock factor costs (mio. USD17MER per yr)
+ vm_cost_prod_fish(i)              Fish factor costs (mio. USD17MER per yr)
+;
+
+variables
+ vm_feed_balanceflow(i,kap,kall)   Regional feed balance flows (mio. tDM)
 ;
 
 equations
- q70_feed(i,kap,kall)             Regional feed demand
- q70_cost_prod_liv_labor(i)       Regional labor costs for livestock production
- q70_cost_prod_liv_capital(i)     Regional capital costs for livestock production
- q70_cost_prod_fish(i)            Regional factor input costs for fish production
+ q70_feed(i,kap,kall)              Regional feed demand
+ q70_feed_balanceflow(i,kli_rum)   Regional feed balance flow calculations for ruminant products
+ q70_cost_prod_liv_labor(i)        Regional labor costs for livestock production
+ q70_cost_prod_liv_capital(i)      Regional capital costs for livestock production
+ q70_cost_prod_fish(i)             Regional factor input costs for fish production
 ;
 
 parameters
+ p70_balanceflow2pasture(i)                       Share of indefinite feed sources relative to pasture demand (1)
  im_slaughter_feed_share(t_all,i,kap,attributes)  Share of feed that is incorporated in animal biomass (1)
  i70_livestock_productivity(t_all,i,sys)          Productivity indicator for livestock production (t FM per animal per yr)
  im_feed_baskets(t_all,i,kap,kall)                Feed baskets in tDM per tDM livestock product (1)
@@ -30,7 +36,7 @@ parameters
  pm_past_mngmnt_factor(t,i)                       Regional pasture management intensification factor (1)
  i70_cereal_scp_fadeout(t_all,i)                  Cereal feed fadeout (share 0-1) to be replaced by SCP (1)
  i70_foddr_scp_fadeout(t_all,i)                   Fodder fadeout (share 0-1) to be replaced by SCP (1)
- p70_country_switch(iso)                           Switch indicating whether country is affected by feed scenarios (1)
+ p70_country_switch(iso)                          Switch indicating whether country is affected by feed scenarios (1)
  p70_feedscen_region_shr(t_all,i)                 Weighted share of region with regards to feed scenario of countries (1)
  i70_cost_regr(i,kap,cost_regr)                   Regression coefficients for livestock factor requirements (1)
  i70_fac_req_livst(t_all,i,kli)                   Factor requirements (USD17MER per tDM)

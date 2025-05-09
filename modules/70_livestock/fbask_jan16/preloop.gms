@@ -4,6 +4,10 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
+
+p70_balanceflow2pasture(i) = 0;
+p70_balanceflow2pasture("IND") = 0.385;
+
 loop(t_all,
  if(m_year(t_all) <= sm_fix_SSP2,
   im_slaughter_feed_share(t_all,i,kap,attributes) = f70_slaughter_feed_share(t_all,i,kap,attributes,"ssp2");

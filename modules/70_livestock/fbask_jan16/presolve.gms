@@ -6,14 +6,20 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+
+vm_feed_balanceflow.fx(i,kap,kall) = fm_feed_balanceflow(t,i,kap,kall);
+vm_feed_balanceflow.fx(i,kli_rum,"pasture") = NA;
+
+
+
 *' @code
-*' The fbask_jan16 realization of the livestock module also estimates an exogenous 
+*' The fbask_jan16 realization of the livestock module also estimates an exogenous
 *' pasture management factor `pm_past_mngmnt_factor` that is used to scale
 *' biophysical pasture yields in the module [14_yields].
 
 *' The exogenous calculation of pasture management requires information on
 *' changes in the number of cattle reared to fulfil the food demand for ruminant
-*' livestock products: 
+*' livestock products:
 
 p70_cattle_stock_proxy(t,i) = im_pop(t,i)*pm_kcal_pc_initial(t,i,"livst_rum")
                   /i70_livestock_productivity(t,i,"sys_beef");
@@ -43,18 +49,14 @@ else
    p70_incr_cattle(t,i) = 1;
 );
 
-*' The pasture management factor is calculated by applying a linear relationship 
+*' The pasture management factor is calculated by applying a linear relationship
 *' that links changes in pasture management with changes in the number of cattle:
 
 if (m_year(t) <= s70_past_mngmnt_factor_fix,
    pm_past_mngmnt_factor(t,i) = 1;
-else               
-   pm_past_mngmnt_factor(t,i) =   ( (s70_pyld_intercept + f70_pyld_slope_reg(i)*p70_incr_cattle(t,i)**(5/(m_year(t)-m_year(t-1))) 
+else
+   pm_past_mngmnt_factor(t,i) =   ( (s70_pyld_intercept + f70_pyld_slope_reg(i)*p70_incr_cattle(t,i)**(5/(m_year(t)-m_year(t-1)))
            )**((m_year(t)-m_year(t-1))/5) )*pm_past_mngmnt_factor(t-1,i);
  );
 
 *' @stop
-
-
-
-

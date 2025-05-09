@@ -6,6 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+
+vm_feed_balanceflow.fx(i,kap,kall) = fm_feed_balanceflow(t,i,kap,kall);
+vm_feed_balanceflow.fx(i,kli_rum,"pasture") = NA;
+
+
+
 *' @code
 *' This realization of the livestock module also estimates an exogenous 
 *' pasture management factor `pm_past_mngmnt_factor` that is used to scale
