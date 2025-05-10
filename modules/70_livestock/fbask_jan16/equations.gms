@@ -24,9 +24,9 @@ q70_feed(i2,kap,kall) ..
 
 q70_feed_balanceflow(i2,kli_rum) ..
  vm_feed_balanceflow(i2,kli_rum,"pasture") =e=
-     (vm_prod_reg(i2,kli_rum)*sum(ct,im_feed_baskets(ct,i2,kli_rum,"pasture"))
+     (sum(ct,fm_feed_balanceflow(ct,i2,kli_rum,"pasture")))$(p70_balanceflow2pasture(i2)=0)
+     - (vm_prod_reg(i2,kli_rum)*sum(ct,im_feed_baskets(ct,i2,kli_rum,"pasture"))
      *p70_balanceflow2pasture(i2))$(p70_balanceflow2pasture(i2)>0)
-     + (sum(ct,fm_feed_balanceflow(ct,i2,kli_rum,"pasture")))$(p70_balanceflow2pasture(i2)=0)
      ;
 
 *' Factor requirement costs (e.g. labour, capital, but without costs for feed)

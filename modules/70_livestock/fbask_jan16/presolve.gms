@@ -8,7 +8,8 @@
 
 
 vm_feed_balanceflow.fx(i,kap,kall) = fm_feed_balanceflow(t,i,kap,kall);
-vm_feed_balanceflow.fx(i,kli_rum,"pasture") = NA;
+vm_feed_balanceflow.up(i,kli_rum,"pasture") = Inf;
+vm_feed_balanceflow.lo(i,kli_rum,"pasture") = -Inf;
 
 
 

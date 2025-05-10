@@ -52,14 +52,16 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_feed(t,i,kap,kall,type)       Regional feed demand including byproducts (mio. tDM per yr)
- ov_cost_prod_livst(t,i,factors,type) Livestock factor costs (mio. USD17MER per yr)
- ov_cost_prod_fish(t,i,type)          Fish factor costs (mio. USD17MER per yr)
- ov70_investment(t,i,kli,type)        Investment in immobile farm capital (mio USD17MER per yr)
- oq70_feed(t,i,kap,kall,type)         Regional feed demand
- oq70_cost_prod_liv_labor(t,i,type)   Regional labor costs for livestock production
- oq70_cost_prod_liv_capital(t,i,type) Regional investment costs in farm capital
- oq70_investment(t,i,kli,type)        Regional investments into farm capital
- oq70_cost_prod_fish(t,i,type)        Regional factor input costs for fish production
+ ov_dem_feed(t,i,kap,kall,type)          Regional feed demand including byproducts (mio. tDM per yr)
+ ov_cost_prod_livst(t,i,factors,type)    Livestock factor costs (mio. USD17MER per yr)
+ ov_cost_prod_fish(t,i,type)             Fish factor costs (mio. USD17MER per yr)
+ ov70_investment(t,i,kli,type)           Investment in immobile farm capital (mio USD17MER per yr)
+ ov_feed_balanceflow(t,i,kap,kall,type)  Regional feed balance flows (mio. tDM)
+ oq70_feed(t,i,kap,kall,type)            Regional feed demand
+ oq70_feed_balanceflow(t,i,kli_rum,type) Regional feed balance flow calculations for ruminant products
+ oq70_cost_prod_liv_labor(t,i,type)      Regional labor costs for livestock production
+ oq70_cost_prod_liv_capital(t,i,type)    Regional investment costs in farm capital
+ oq70_investment(t,i,kli,type)           Regional investments into farm capital
+ oq70_cost_prod_fish(t,i,type)           Regional factor input costs for fish production
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
