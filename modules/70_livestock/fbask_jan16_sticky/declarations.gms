@@ -7,6 +7,7 @@
 
 
 positive variables
+ vm_feed_intake(i,kap,kall)        Regional feed intake including byproducts (mio. tDM per yr)
  vm_dem_feed(i,kap,kall)           Regional feed demand including byproducts (mio. tDM per yr)
  vm_cost_prod_livst(i,factors)     Livestock factor costs (mio. USD17MER per yr)
  vm_cost_prod_fish(i)              Fish factor costs (mio. USD17MER per yr)
@@ -20,6 +21,7 @@ variables
 equations
  q70_feed(i,kap,kall)              Regional feed demand
  q70_feed_balanceflow(i,kli_rum)   Regional feed balance flow calculations for ruminant products
+ q70_feed_intake(i,kap,kall)       Regional feed intake
  q70_cost_prod_liv_labor(i)        Regional labor costs for livestock production
  q70_cost_prod_liv_capital(i)      Regional investment costs in farm capital
  q70_investment(i,kli)             Regional investments into farm capital
@@ -52,12 +54,14 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
+ ov_feed_intake(t,i,kap,kall,type)    Regional feed intake including byproducts (mio. tDM per yr)
  ov_dem_feed(t,i,kap,kall,type)          Regional feed demand including byproducts (mio. tDM per yr)
  ov_cost_prod_livst(t,i,factors,type)    Livestock factor costs (mio. USD17MER per yr)
  ov_cost_prod_fish(t,i,type)             Fish factor costs (mio. USD17MER per yr)
  ov70_investment(t,i,kli,type)           Investment in immobile farm capital (mio USD17MER per yr)
  ov_feed_balanceflow(t,i,kap,kall,type)  Regional feed balance flows (mio. tDM)
  oq70_feed(t,i,kap,kall,type)            Regional feed demand
+ oq70_feed_intake(t,i,kap,kall,type)  Regional feed intake
  oq70_feed_balanceflow(t,i,kli_rum,type) Regional feed balance flow calculations for ruminant products
  oq70_cost_prod_liv_labor(t,i,type)      Regional labor costs for livestock production
  oq70_cost_prod_liv_capital(t,i,type)    Regional investment costs in farm capital

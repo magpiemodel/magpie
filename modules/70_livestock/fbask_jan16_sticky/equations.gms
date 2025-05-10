@@ -29,6 +29,12 @@ q70_feed_balanceflow(i2,kli_rum) ..
      *p70_balanceflow2pasture(i2))$(p70_balanceflow2pasture(i2)>0)
      ;
 
+
+q70_feed_intake(i2,kap,kall) ..
+ vm_feed_intake(i2,kap,kall) =e= vm_prod_reg(i2,kap)
+     *sum(ct,im_feed_baskets(ct,i2,kap,kall));
+
+
 *' Factor requirement costs (e.g. labour, capital, but without costs for feed)
 *' of livestock production depend on the amount of production and the per-unit
 *' costs. For ruminant products (milk and meet), we use a regression of per-unit

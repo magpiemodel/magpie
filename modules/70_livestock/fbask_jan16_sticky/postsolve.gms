@@ -9,6 +9,7 @@
 p70_capital(t+1,i,kli) = p70_capital(t,i,kli) + v70_investment.l(i,kli);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
+
  ov_dem_feed(t,i,kap,kall,"marginal")          = vm_dem_feed.m(i,kap,kall);
  ov_cost_prod_livst(t,i,factors,"marginal")    = vm_cost_prod_livst.m(i,factors);
  ov_cost_prod_fish(t,i,"marginal")             = vm_cost_prod_fish.m(i);
@@ -53,5 +54,6 @@ p70_capital(t+1,i,kli) = p70_capital(t,i,kli) + v70_investment.l(i,kli);
  oq70_cost_prod_liv_capital(t,i,"lower")       = q70_cost_prod_liv_capital.lo(i);
  oq70_investment(t,i,kli,"lower")              = q70_investment.lo(i,kli);
  oq70_cost_prod_fish(t,i,"lower")              = q70_cost_prod_fish.lo(i);
+
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 
