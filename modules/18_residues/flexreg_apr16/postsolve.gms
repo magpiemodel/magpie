@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -23,7 +23,7 @@
  oq18_res_field_balance(t,i,kcr,attributes,"marginal") = q18_res_field_balance.m(i,kcr,attributes);
  oq18_res_field_burn(t,i,kcr,attributes,"marginal")    = q18_res_field_burn.m(i,kcr,attributes);
  oq18_translate(t,i,kres,attributes,"marginal")        = q18_translate.m(i,kres,attributes);
- oq18_prod_res_cell(t,j,kres,"marginal")               = q18_prod_res_cell.m(j,kres);
+ oq18_prod_res_reg(t,i,kres,"marginal")                = q18_prod_res_reg.m(i,kres);
  oq18_res_recycling_nr(t,i,"marginal")                 = q18_res_recycling_nr.m(i);
  oq18_res_recycling_pk(t,i,pk18,"marginal")            = q18_res_recycling_pk.m(i,pk18);
  oq18_cost_prod_res(t,i,kres,"marginal")               = q18_cost_prod_res.m(i,kres);
@@ -40,7 +40,7 @@
  oq18_res_field_balance(t,i,kcr,attributes,"level")    = q18_res_field_balance.l(i,kcr,attributes);
  oq18_res_field_burn(t,i,kcr,attributes,"level")       = q18_res_field_burn.l(i,kcr,attributes);
  oq18_translate(t,i,kres,attributes,"level")           = q18_translate.l(i,kres,attributes);
- oq18_prod_res_cell(t,j,kres,"level")                  = q18_prod_res_cell.l(j,kres);
+ oq18_prod_res_reg(t,i,kres,"level")                   = q18_prod_res_reg.l(i,kres);
  oq18_res_recycling_nr(t,i,"level")                    = q18_res_recycling_nr.l(i);
  oq18_res_recycling_pk(t,i,pk18,"level")               = q18_res_recycling_pk.l(i,pk18);
  oq18_cost_prod_res(t,i,kres,"level")                  = q18_cost_prod_res.l(i,kres);
@@ -57,7 +57,7 @@
  oq18_res_field_balance(t,i,kcr,attributes,"upper")    = q18_res_field_balance.up(i,kcr,attributes);
  oq18_res_field_burn(t,i,kcr,attributes,"upper")       = q18_res_field_burn.up(i,kcr,attributes);
  oq18_translate(t,i,kres,attributes,"upper")           = q18_translate.up(i,kres,attributes);
- oq18_prod_res_cell(t,j,kres,"upper")                  = q18_prod_res_cell.up(j,kres);
+ oq18_prod_res_reg(t,i,kres,"upper")                   = q18_prod_res_reg.up(i,kres);
  oq18_res_recycling_nr(t,i,"upper")                    = q18_res_recycling_nr.up(i);
  oq18_res_recycling_pk(t,i,pk18,"upper")               = q18_res_recycling_pk.up(i,pk18);
  oq18_cost_prod_res(t,i,kres,"upper")                  = q18_cost_prod_res.up(i,kres);
@@ -74,7 +74,7 @@
  oq18_res_field_balance(t,i,kcr,attributes,"lower")    = q18_res_field_balance.lo(i,kcr,attributes);
  oq18_res_field_burn(t,i,kcr,attributes,"lower")       = q18_res_field_burn.lo(i,kcr,attributes);
  oq18_translate(t,i,kres,attributes,"lower")           = q18_translate.lo(i,kres,attributes);
- oq18_prod_res_cell(t,j,kres,"lower")                  = q18_prod_res_cell.lo(j,kres);
+ oq18_prod_res_reg(t,i,kres,"lower")                   = q18_prod_res_reg.lo(i,kres);
  oq18_res_recycling_nr(t,i,"lower")                    = q18_res_recycling_nr.lo(i);
  oq18_res_recycling_pk(t,i,pk18,"lower")               = q18_res_recycling_pk.lo(i,pk18);
  oq18_cost_prod_res(t,i,kres,"lower")                  = q18_cost_prod_res.lo(i,kres);

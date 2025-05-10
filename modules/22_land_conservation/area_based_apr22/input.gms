@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,6 +14,7 @@ scalars
 s22_restore_land  If land restoration is allowed (0=no 1=yes) / 1 /
 s22_conservation_start    Land conservation start year        / 2025 /
 s22_conservation_target   Land conservation target year       / 2050 /
+s22_base_protect_reversal Year in which base protection reversal should take place (1) / Inf /
 ;
 
 * Set-switch for countries affected by regional land conservation policy

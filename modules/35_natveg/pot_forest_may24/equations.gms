@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -78,6 +78,9 @@
 
  q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
 
+ q35_natforest_reduction(j2) .. vm_natforest_reduction(j2) =e=
+ v35_primforest_reduction(j2) + sum(ac_sub, v35_secdforest_reduction(j2,ac_sub));
+
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
 *' The gross change in natural vegetation is calculated based on land expansion and
 *' land contraction of other land, and land reduction of primary and secondary forest.
@@ -149,12 +152,11 @@ q35_prod_primforest(j2)..
               v35_hvarea_primforest(j2) * sum(ct, pm_timber_yield(ct,j2,"acx","primforest")) / m_timestep_length_forestry;
 
 ** Other land
-*' Wood-fuel production from other land is calculated by multiplying the area under
+*' Woody biomass production from other land is calculated by multiplying the area under
 *' production with corresponding yields of other land, divided by the timestep length.
-*' Wood production from other landis not allowed.
 
 q35_prod_other(j2)..
-               vm_prod_natveg(j2,"other","woodfuel")
+              sum(kforestry, vm_prod_natveg(j2,"other",kforestry))
                =e=
                (sum(ac_sub, v35_hvarea_other(j2,"othernat",ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other")))
               + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"))))

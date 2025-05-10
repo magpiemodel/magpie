@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,7 +9,8 @@
 *' together with regional demands, establish a baseline value for the production of traded products in the superregions. 
 *' Production is then allowed to fluctuate freely within a band around this baseline value, 
 *' only being enforced to maintain the condition of global production exceeding global demand.
-*' The width of the production band is determined by the `i21_trade_bal_reduction` (ptb) factor.
+*' The width of the production band is determined by the `i21_trade_bal_reduction` (ptb) factor, which differentiates 
+*' itself by SSP after the year prescribed by sm_fix_SSP2.
 *'
 *' Effectively, this factor splits the global demand into two pools: The `ptb` share of demand goes 
 *' into a pool for which the origin of products is fixed by the self-sufficiency ratios and export shares.

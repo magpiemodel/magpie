@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -758,9 +758,21 @@ if (s15_exo_waste = 1,
 *' Finally, countries with zero food demand according to FAOSTAT are calibrated
 *' down to zero to match FAO world totals.
 *' Values are rounded to avoid path dependencies of MAgPIE solver.
-   p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc(t,i,kfo) + p15_balanceflow_kcal(t,i,kfo);
+   p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15) = p15_kcal_pc(t,i,kfo) + p15_balanceflow_kcal(t,i,kfo);
+   p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15)$(p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15) < 0) = 0;
+
+*' If the model requires more than 3 iterations, the convergence should be supported by averaging between iterations
+   if (p15_iteration_counter(t) <= 3,
+     p15_kcal_pc_calibrated(t,i,kfo) = sum(curr_iter15, p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15));
+   else
+     p15_kcal_pc_calibrated(t,i,kfo) = 
+       sum(curr_iter15, p15_kcal_pc_calibrated_alliter(t,i,kfo,curr_iter15) * (1-s15_convergence_partstep))
+       + sum(prev_iter15, p15_kcal_pc_calibrated_alliter(t,i,kfo,prev_iter15) * (s15_convergence_partstep));
+   );
+   
+   
+   
    p15_kcal_pc_calibrated(t,i,kfo) = round(p15_kcal_pc_calibrated(t,i,kfo), 2);
-   p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo) < 0) = 0;
 
 *' @stop
  );

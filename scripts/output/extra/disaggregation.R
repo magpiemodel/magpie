@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,6 +17,7 @@ library(madrat)
 library(dplyr)
 library(gms)
 library(gdx2)
+library(mstools)
 
 # =============================================
 # Basic configuration
@@ -374,12 +375,20 @@ gc()
 )
 gc()
 
-out <- peat_hr / dimSums(land_hr[, getYears(peat_hr), ], dim = 3)
+# grid cell area as magclass object
+calArea <- function(ix,iy,res=0.5,mha=1) { # pixelarea in m2, mha as factor
+  mha*(111.263*1000*res)*(111.263*1000*res)*cos(iy*pi/180)
+}
+map <- toolGetMappingCoord2Country(pretty = TRUE)
+grarea <- new.magpie(cells_and_regions = map$coords,
+                     fill = calArea(map$lon, map$lat, mha = 10^-10))
+
+out <- peat_hr / grarea
 out[is.nan(out)] <- 0
 out[is.infinite(out)] <- 0
 
 .writeDisagg(out, peatland_hr_share_out_file,
-  comment = "unit: grid-cell land area fraction",
+  comment = "unit: grid-cell area fraction",
   message = "Write outputs peatland share"
 )
 gc()
@@ -413,7 +422,7 @@ gc()
 # ---------------------------------
 
 message("Disaggregating MAgPIE crop types")
-area_shr_hr <- .dissagcrop(gdx, land_split_hr, map = map_file)
+area_shr_hr <- .dissagcrop(gdx, land_split_hr, map_file = map_file)
 
 # Write output
 .writeDisagg(area_shr_hr, croparea_hr_share_out_file,
@@ -551,7 +560,7 @@ land_ini_hr <- land_ini_hr[, , getNames(land_ini_lr)]
 getSets(land_ini_hr)["d3.1"] <- "land"
 
 # Disaggregate BII values to high resolution
-bii_hr <- .dissagBII(gdx, map = map_file, dir = outputdir)
+bii_hr <- .dissagBII(gdx, map_file = map_file, dir = outputdir)
 
 # Disaggregate land pools for BII estimation
 land_bii_hr <- interpolateAvlCroplandWeighted(

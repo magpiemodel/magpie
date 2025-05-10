@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,9 +11,14 @@ parameters
           pc59_carbon_density(j,land)          Soil carbon density of a hectare of land between time steps (tC per ha)
           i59_tillage_share(i,tillage59)       Share of land under tillage class (1)
           i59_input_share(i,inputs59)          Share of land under input class (1)
+          i59_scm_target(t,j)                  Target for the share of cropland under soil carbon managament (1)
           i59_cratio(j,kcr,w)                  Ratio of carbon density of land relative to natural vegetaion (1)
           i59_cratio_fallow(j)                 Ratio of carbon density of fallow land relative to natural vegetation (1)
           i59_cratio_treecover                 Ratio of carbon density of tree cover on cropland relative to natural vegetation (1)
+          i59_cratio_scm(j)                    Ratio of carbon density of cropland under soil carbon managament relative to natural vegetation (1)
+          i59_scm_scenario_fader(t_all)        Cropland soil carbon management scenario fader (1)
+          p59_scm_country_switch(iso)          Switch indicating whether country is affected by selected soil carbon management policy (1)
+          p59_country_weight(i)                Soil carbon management policy country weight per region (1)
           pc59_som_pool(j,land)                Actual C pool (mio. tC)
           i59_subsoilc_density(t_all,j)        Subsoil carbon density of a hectare of land (tC per ha)
           pc59_land_before(j,land)             Land area in previous time step (mio. ha)
@@ -27,11 +32,13 @@ equations
          q59_nr_som_fertilizer(j)                         Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
          q59_nr_som_fertilizer2(j)                        Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
          q59_carbon_soil(j,land,stockType)                Soil carbon content calculation (mio. tC)
+         q59_cost_scm(j)                                  Recurring cost for soil carbon management on cropland (mio. USD17MER per yr)       
 ;
 
 positive variables
          v59_som_target(j,land)           Long-term target state of C pool (mio. tC)
          v59_som_pool(j,land)             Soil organic matter pool (mio. tC)
+         vm_cost_scm(j)                   Recurring cost for soil carbon management on cropland (mio. USD17MER per yr)
 ;
 
 variables
@@ -43,6 +50,7 @@ variables
 parameters
  ov59_som_target(t,j,land,type)                      Long-term target state of C pool (mio. tC)
  ov59_som_pool(t,j,land,type)                        Soil organic matter pool (mio. tC)
+ ov_cost_scm(t,j,type)                               Recurring cost for soil carbon management on cropland (mio. USD17MER per yr)
  ov_nr_som(t,j,type)                                 Release of soil organic matter (Mt N per yr)
  ov_nr_som_fertilizer(t,j,type)                      Uptake of soil organic matter from plants (Mt N per yr)
  oq59_som_target_cropland(t,j,type)                  Estimates the long-term target state of cropland (mio. tC)
@@ -52,5 +60,6 @@ parameters
  oq59_nr_som_fertilizer(t,j,type)                    Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
  oq59_nr_som_fertilizer2(t,j,type)                   Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
  oq59_carbon_soil(t,j,land,stockType,type)           Soil carbon content calculation (mio. tC)
+ oq59_cost_scm(t,j,type)                             Recurring cost for soil carbon management on cropland (mio. USD17MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

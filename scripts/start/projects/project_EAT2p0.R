@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -38,6 +38,10 @@ cfg$output <- c(
   # add output file: pb_report (magpie (special mif created by getReportPBindicators & remind mif (REMIND_generic_scenName.mif))
   "rds_report"
 )
+
+# Set path to own coupled runs:
+path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release_v3/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
+
 
 #######################
 # SCENARIO DEFINITION #
@@ -89,8 +93,11 @@ bau <- function(cfg) {
   cfg$path_to_report_bioenergy <- NA
   cfg$gms$c60_2ndgen_biodem    <- "R21M42-SSP2-NPi" # default
 
+  # Allow irrigated and rainfed bioenergy production
+  cfg$gms$c30_bioen_water <- "all"
+
   # Climate Change
-  cfg$input["cellular"] <- "rev4.116EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input["cellular"] <- "rev4.118EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }
@@ -136,9 +143,9 @@ waste <- function(cfg) {
 # starting from 2020.
 miti <- function(cfg) {
   # Mitigation: consistent with 1.5C considering diet change
-  cfg$path_to_report_ghgprices <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
+  cfg$path_to_report_ghgprices <- path2MitigationRun
   cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$path_to_report_bioenergy <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_AgMIP-rem-12.mif"
+  cfg$path_to_report_bioenergy <- path2MitigationRun
   cfg$gms$c60_2ndgen_biodem    <- "coupling"
 
   return(cfg)
@@ -215,6 +222,17 @@ cfg <- bau(cfg = cfg)
 cfg <- diet(cfg = cfg)
 cfg <- prod(cfg = cfg)
 cfg <- waste(cfg = cfg)
+start_run(cfg, codeCheck = FALSE)
+
+# BAU_MITI #
+# Decomposition Scenario. Adds mitigation and land-use policies consistent with 1.5C by 2050 to BAU
+cfg$title <- "BAU_MITI"
+# standard setting, but with NDC activated (for miti)
+cfg <- setScenario(cfg, c("cc", "SSP2", "NDC"))
+cfg <- setScenario(cfg, c("EL2_default"), scenario_config = "config/projects/scenario_config_el2.csv")
+# scenario settings
+cfg <- miti(cfg = cfg)
+cfg <- bau(cfg = cfg)
 start_run(cfg, codeCheck = FALSE)
 
 # ELM #

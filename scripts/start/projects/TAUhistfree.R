@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -35,7 +35,7 @@ cfg$qos <- "priority"
 cfg$gms$s80_optfile <- 1
 cfg$gms$s80_maxiter <- 30
 
-# cfg$gms$s32_planing_horizon <- 100
+# cfg$gms$s32_planning_horizon <- 100
 # cfg$gms$c35_protect_scenario <- "WDPA"
 # cfg$gms$c56_emis_policy <- "redd+_nosoil"
 

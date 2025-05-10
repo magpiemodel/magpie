@@ -31,10 +31,10 @@ cfg$qos <- "standby_dayMax"
 .title <- function(cfg, ...) return(paste(cfg$info$flag, sep="_",...))
 
 
-cfg$input['regional'] <- "rev4.116_36f73207_magpie.tgz"
-cfg$input['validation'] <- "rev4.116_36f73207_validation.tgz"
-cfg$input['calibration'] <- "calibration_H16_27Sep24.tgz"
-cfg$input['cellular'] <- "rev4.116_36f73207_bd86374e_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+cfg$input['regional'] <- "rev4.118_36f73207_magpie.tgz"
+cfg$input['validation'] <- "rev4.118_36f73207_validation.tgz"
+cfg$input['calibration'] <- "calibration_H16_FAO_03Feb25.tgz"
+cfg$input['cellular'] <- "rev4.118_36f73207_bd86374e_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
 
 ssp <- "SSP2"
 
@@ -54,19 +54,19 @@ for (pol in c("NDC","1p5deg","1p5deg-Diet")) {
       cfg$title <- .title(cfg, paste(ssp,pol,ifelse(growth==0,"natveg","plant"),paste0("AFS_tree_",sub("\\.","p",as.character(shr*100))),sep="-"))
       if (pol == "NDC") {
         cfg <- setScenario(cfg,c(ssp,"NDC","rcp4p5"))
-        cfg$input['cellular'] <- "rev4.116_36f73207_582d657c_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+        cfg$input['cellular'] <- "rev4.118_36f73207_582d657c_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
         cfg$gms$c56_mute_ghgprices_until <- "y2150"
         cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NDC")
         cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-NDC")
       } else if (pol == "1p5deg") {
         cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-        cfg$input['cellular'] <- "rev4.116_36f73207_ab632bd4_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+        cfg$input['cellular'] <- "rev4.118_36f73207_ab632bd4_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
         cfg$gms$c56_mute_ghgprices_until <- "y2030"
         cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
         cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
       } else if (pol == "1p5deg-Diet") {
         cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9","eat_lancet_diet_v1"))
-        cfg$input['cellular'] <- "rev4.116_36f73207_ab632bd4_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
+        cfg$input['cellular'] <- "rev4.118_36f73207_ab632bd4_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1_clusterweight-ba4466a8.tgz"
         cfg$gms$c56_mute_ghgprices_until <- "y2030"
         cfg$gms$c56_pollutant_prices <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
         cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")

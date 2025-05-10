@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -52,7 +52,7 @@ general_settings<-function(title) {
   cfg$recalibrate <- FALSE
   cfg<-gms::setScenario(cfg,"cc")
   cfg$gms$c56_emis_policy <- "all"
-  cfg$gms$som <- "cellpool_aug16"
+  cfg$gms$som <- "cellpool_jan23"
   cfg$gms$c59_som_scenario  <- "cc"
   cfg$gms$forestry  <- "dynamic_oct19"
   cfg$gms$maccs  <- "on_sep16"

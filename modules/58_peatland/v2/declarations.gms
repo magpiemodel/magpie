@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -37,6 +37,7 @@ equations
  q58_peatland_cost_annuity(j,cost58)  Annuity costs for peatland conversion in the current timestep (mio. USD17MER per yr)
  q58_peatland_emis_detail(j,land58,emis58) Detailed GHG emissions from peatlands (Tg per yr)
  q58_peatland_emis(i,poll58)          GHG emissions from managed peatland (Tg per yr)
+ q58_peatlandReductionLimit(j)        Annual limit for peatland rewetting (mio. ha per yr)
 ;
 
 variables
@@ -79,5 +80,6 @@ parameters
  oq58_peatland_cost_annuity(t,j,cost58,type)       Annuity costs for peatland conversion in the current timestep (mio. USD17MER per yr)
  oq58_peatland_emis_detail(t,j,land58,emis58,type) Detailed GHG emissions from peatlands (Tg per yr)
  oq58_peatland_emis(t,i,poll58,type)               GHG emissions from managed peatland (Tg per yr)
+ oq58_peatlandReductionLimit(t,j,type)             Annual limit for peatland rewetting (mio. ha per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

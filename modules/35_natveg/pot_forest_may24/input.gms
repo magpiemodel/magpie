@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,7 +20,7 @@ s35_hvarea_secdforest annual secdforest harvest rate for s35_hvarea equals 1 (pe
 s35_hvarea_primforest annual primforest harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
 s35_hvarea_other annual other land harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
 s35_timber_harvest_cost_secdforest   Cost for harvesting from secondary forest (USD17MER per ha) / 2460/
-s35_timber_harvest_cost_other        Cost for harvesting from other land (USD17MER per ha) / 1845 /
+s35_timber_harvest_cost_other        Cost for harvesting from other land (USD17MER per ha) / 3075 /
 s35_timber_harvest_cost_primforest   Cost for harvesting from primary forest (USD17MER per ha) / 3690/
 s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (1=unconstrained) (1) /1/
 s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes 2=Poulter distribution from MODIS satellite data) (1) / 2 /

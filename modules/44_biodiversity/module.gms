@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -15,6 +15,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%biodiversity%" == "bii_target" $include "./modules/44_biodiversity/bii_target/realization.gms"
-$Ifi "%biodiversity%" == "bii_target_apr24" $include "./modules/44_biodiversity/bii_target_apr24/realization.gms"
 $Ifi "%biodiversity%" == "bv_btc_mar21" $include "./modules/44_biodiversity/bv_btc_mar21/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,11 +19,9 @@ q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,
 *' and corrected to make sure that the annual depreciation of the current time-step is accounted for.
 q38_cost_prod_capital(i2).. vm_cost_prod_crop(i2,"capital")=e=(sum((cell(i2,j2),kcr),v38_investment_immobile(j2,kcr))
-                                    +sum((cell(i2,j2)),v38_investment_mobile(j2)))
-                                    *((1-s38_depreciation_rate)*
-                                    sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
-                                        + s38_depreciation_rate)
-                                        ;
+                                    + sum((cell(i2,j2)),v38_investment_mobile(j2)))
+                                    * sum(ct, (pm_interest(ct, i2) + s38_depreciation_rate) / (1+pm_interest(ct,i2)))
+                                    ;
 
 
 *' Each cropping activity requires a certain capital stock that depends on the

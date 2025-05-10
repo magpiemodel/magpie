@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,11 +10,10 @@ parameters
  i60_bioenergy_dem(t,i)                           Regional bioenergy demand per year (mio. GJ per yr)
  i60_res_2ndgenBE_dem(t,i)                        Regional residue demand for 2nd generation bioenergy per year (mio. GJ per yr)
  i60_1stgen_bioenergy_dem(t,i,kall)               Regional 1st generation bioenergy demand (mio. GJ per yr)
- i60_1stgen_bioenergy_subsidy_tdm(t)              Global 1st generation bioenergy subsidy per tDM (USD17MER per tDM)
- i60_1stgen_bioenergy_subsidy_gj(t)               Global 1st generation bioenergy subsidy per GJ (USD17MER per GJ)
+ i60_1stgen_bioenergy_subsidy(t)                  Global 1st generation bioenergy subsidy per GJ (USD17MER per GJ)
  i60_2ndgen_bioenergy_subsidy(t)                  Global 2nd generation bioenergy subsidy (USD17MER per GHJ)
  p60_region_BE_shr(t_all,i)                       Bioenergy demand share of the region (1)
- p60_country_switch(iso)                           Switch indicating whether country is selected for selected bioenergy demand scenario (1)
+ p60_country_switch(iso)                          Switch indicating whether country is selected for selected bioenergy demand scenario (1)
 ;
 
 positive variables

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -34,12 +34,12 @@ $elseif "%c80_nlp_solver%" == "conopt4+conopt3"
   s80_add_conopt3   = 1;
 $endif
 
-$onecho > conopt4.opt
-Lim_Variable = 1.e25
-$offecho
+put optfile;
+put 'Tol_Optimality = ', s80_toloptimal:12:11 /;
+putclose optfile;
 
 $onecho > conopt4.op2
-Flg_Prep = FALSE
+Lim_Variable = 1.e25
 $offecho
 
 repeat(
@@ -143,7 +143,7 @@ $batinclude "./modules/include.gms" nl_relax
 
 * if solve stopped with an error, try it again with CONOPT4 and OPTFILE
     if((magpie.modelstat = 13),
-      display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
+      display "WARNING: Modelstat 13 | Retry solve with CONOPT4 increasing largest allowable value";
       option nlp = conopt4;
       magpie.optfile = 2
       solve magpie USING nlp MINIMIZING vm_cost_glo;

@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PTax48"
+cfg$info$flag <- "PTax49"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -197,6 +197,8 @@ for (tax in c("T0-CO2",
   cfg$gms$c56_pollutant_prices <- tax
   start_run(cfg, codeCheck = FALSE)
 }
+
+cfg$gms$s58_annual_rewetting_limit <- 1
 
 ## Exo rewet scenarios
 # 15% of currently drained peatland rewetted by 2050 (0.3 * 0.5)

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -115,5 +115,5 @@ $macro m58_LandMerge(land,landForestry,set) \
 $macro m21_baseline_production(supply, excess_prod, self_suff) \
     ((sum(supreg(h2,i2),supply(i2,k_trade)) + excess_prod(h2,k_trade)) \
      $((sum(ct,self_suff(ct,h2,k_trade)) >= 1)) \
-     + (sum(supreg(h2,i2),vm_supply(i2,k_trade)) * sum(ct,self_suff(ct,h2,k_trade))) \
+     + (sum(supreg(h2,i2),supply(i2,k_trade)) * sum(ct,self_suff(ct,h2,k_trade))) \
        $((sum(ct,self_suff(ct,h2,k_trade)) < 1)))

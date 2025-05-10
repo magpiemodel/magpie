@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -48,15 +48,6 @@ elseif s29_treecover_plantation = 1,
  p29_carbon_density_ac(t,j,ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,ag_pools);
 );
 
-** set bii coefficients
-p29_treecover_bii_coeff(bii_class_secd,potnatveg) = 0;
-if(s29_treecover_bii_coeff = 0,
- p29_treecover_bii_coeff(bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg)
-elseif s29_treecover_bii_coeff = 1,
- p29_treecover_bii_coeff(bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg)
-);
-
-
 * Country switch to determine countries for which certain policies shall be applied.
 * In the default case, the policy affects all countries when activated.
 p29_country_switch(iso) = 0;
@@ -72,6 +63,6 @@ vm_fallow.l(j) = 0;
 vm_bv.l(j,"crop_fallow",potnatveg) = 
   vm_fallow.l(j) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
-vm_bv.l(j2,"crop_tree",potnatveg) =
-  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc29_treecover(j2,ac)) * 
-  p29_treecover_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
+vm_bv.l(j,"crop_tree",potnatveg) =
+  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc29_treecover(j,ac)) * 
+  fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);

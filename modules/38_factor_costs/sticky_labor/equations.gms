@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -44,12 +44,35 @@ q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
 *' and corrected to make sure that the annual depreciation of the current time-step is accounted for.
 
 q38_cost_prod_capital(i2).. vm_cost_prod_crop(i2,"capital")=e=(sum((cell(i2,j2),kcr),v38_investment_immobile(j2,kcr))
-                                    +sum((cell(i2,j2)),v38_investment_mobile(j2)))
-                                    *((1-s38_depreciation_rate)*
-                                    sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
-                                        + s38_depreciation_rate)
-                                        ;
+                                    + sum((cell(i2,j2)),v38_investment_mobile(j2)))
+                                    * sum(ct, (pm_interest(ct, i2) + s38_depreciation_rate) / (1+pm_interest(ct,i2)))
+                                    ;
 
+*' The logic behind the annuitization is the following:
+*' MAgPIE should do an investment if the utility it gains from this investment over all future timesteps U_0..n exceeds the Investment costs I_0
+*' Lets assume the utility is a ratio z of the physical capital stock K, such that 
+*' (1) U_t = K_t  * z
+*' NOTE: A big assumption is that z is not time-dependent, so we assume that all future periods have the same benefit from the capital stock.
+
+*' The utility in the next timestep, t+1 should be lower, because the capital depreciates, and because future utility is discounted because 
+*' of time preference or opportunity costs. The result is
+*' (2) U_t+1 = K_t * (1-d) * z / (1+r)
+*' next, we want to sum up all utilities from now until forever, so
+*' (3) U_0..n = U_0 + U_1 + ... U_n
+*' we can enter (2) in (3) to get
+*' (4) I_0 <= K_0 * z + K_0 * z*(1-d)/(1+r) + K_0 * z * (1-d)^2 / (1+r)^2 +...+ K_0 * z * (1-d)^n/((1+r)^n) 
+*' which is then, based on the gemoetric series above
+*' (5) I_0 <= K_0 * z * (1+r) / (r+d) 
+
+*' Now, we have the problem that MAgPIE does not see the future. It only sees the costs and the utility of the current period.
+*' In MAgPIE, the invesment is done if the utiltiy of the current period U_0 exceeds the costs it sees in the current period, C_0.
+*' We know based on equation (1) that U_0 = K_0 * z, which we can enter into (4) such that
+*' (6) I_0 <= U_0 * (1+r) / (r+d) 
+
+*' So, we can compare the investment costs to the utility U_0, the utility that the model gains in the current timestep from making the investement.
+*' It should do the investment when 
+*' (7) U_0 >= I_0 * (r+d) / (1+r) = C_0
+*' The right hand of this equation is therefore the costs C_0 that the model should see to evaluate whether the utility U_0 is sufficient to justify the investment.
 
 *' Each cropping activity requires a certain capital stock that depends on the
 *' production. The following equations make sure that new land expansion is equipped

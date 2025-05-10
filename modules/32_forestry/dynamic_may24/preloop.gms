@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -148,18 +148,21 @@ p32_cdr_ac(t,j,ac) = 0;
 ini32(j,ac) = no;
 ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off < p32_rotation_cellular_harvesting("y1995",j));
 
-** divide initial forestry area by number of age classes within ini32
+** Set minimum share of plantations in planted forest
+p32_plantedforest(i) = f32_plantedforest(i);
+p32_plantedforest(i)$(p32_plantedforest(i) < s32_min_plant_shr) = s32_min_plant_shr;
+
 ** divide initial forestry area by number of age classes within ini32
 if(s32_initial_distribution = 0,
 ** Initialize with highest age class
-  p32_land_start_ac(j,"plant","acx") = pcm_land(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
-  p32_land_start_ac(j,"ndc","acx")   = pcm_land(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i));
+  p32_land_start_ac(j,"plant","acx") = pcm_land(j,"forestry") * sum(cell(i,j),p32_plantedforest(i));
+  p32_land_start_ac(j,"ndc","acx")   = pcm_land(j,"forestry") * sum(cell(i,j),1-p32_plantedforest(i));
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribution among rotation age classes
 ** Plantated forest area is divided into ndcs (other planted forest) and plantations
-    p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
-    p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+  p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = pm_land_start(j,"forestry") * sum(cell(i,j),p32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+  p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- p32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
 
 );
 

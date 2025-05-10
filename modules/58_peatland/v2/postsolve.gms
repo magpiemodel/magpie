@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -31,6 +31,7 @@ pc58_manLand(j,manPeat58) = v58_manLand.l(j,manPeat58);
  oq58_peatland_cost_annuity(t,j,cost58,"marginal")       = q58_peatland_cost_annuity.m(j,cost58);
  oq58_peatland_emis_detail(t,j,land58,emis58,"marginal") = q58_peatland_emis_detail.m(j,land58,emis58);
  oq58_peatland_emis(t,i,poll58,"marginal")               = q58_peatland_emis.m(i,poll58);
+ oq58_peatlandReductionLimit(t,j,"marginal")             = q58_peatlandReductionLimit.m(j);
  ov58_peatlandChange(t,j,land58,"level")                 = v58_peatlandChange.l(j,land58);
  ov_peatland_cost(t,j,"level")                           = vm_peatland_cost.l(j);
  ov58_peatland_emis(t,j,land58,emis58,"level")           = v58_peatland_emis.l(j,land58,emis58);
@@ -53,6 +54,7 @@ pc58_manLand(j,manPeat58) = v58_manLand.l(j,manPeat58);
  oq58_peatland_cost_annuity(t,j,cost58,"level")          = q58_peatland_cost_annuity.l(j,cost58);
  oq58_peatland_emis_detail(t,j,land58,emis58,"level")    = q58_peatland_emis_detail.l(j,land58,emis58);
  oq58_peatland_emis(t,i,poll58,"level")                  = q58_peatland_emis.l(i,poll58);
+ oq58_peatlandReductionLimit(t,j,"level")                = q58_peatlandReductionLimit.l(j);
  ov58_peatlandChange(t,j,land58,"upper")                 = v58_peatlandChange.up(j,land58);
  ov_peatland_cost(t,j,"upper")                           = vm_peatland_cost.up(j);
  ov58_peatland_emis(t,j,land58,emis58,"upper")           = v58_peatland_emis.up(j,land58,emis58);
@@ -75,6 +77,7 @@ pc58_manLand(j,manPeat58) = v58_manLand.l(j,manPeat58);
  oq58_peatland_cost_annuity(t,j,cost58,"upper")          = q58_peatland_cost_annuity.up(j,cost58);
  oq58_peatland_emis_detail(t,j,land58,emis58,"upper")    = q58_peatland_emis_detail.up(j,land58,emis58);
  oq58_peatland_emis(t,i,poll58,"upper")                  = q58_peatland_emis.up(i,poll58);
+ oq58_peatlandReductionLimit(t,j,"upper")                = q58_peatlandReductionLimit.up(j);
  ov58_peatlandChange(t,j,land58,"lower")                 = v58_peatlandChange.lo(j,land58);
  ov_peatland_cost(t,j,"lower")                           = vm_peatland_cost.lo(j);
  ov58_peatland_emis(t,j,land58,emis58,"lower")           = v58_peatland_emis.lo(j,land58,emis58);
@@ -97,4 +100,5 @@ pc58_manLand(j,manPeat58) = v58_manLand.l(j,manPeat58);
  oq58_peatland_cost_annuity(t,j,cost58,"lower")          = q58_peatland_cost_annuity.lo(j,cost58);
  oq58_peatland_emis_detail(t,j,land58,emis58,"lower")    = q58_peatland_emis_detail.lo(j,land58,emis58);
  oq58_peatland_emis(t,i,poll58,"lower")                  = q58_peatland_emis.lo(i,poll58);
+ oq58_peatlandReductionLimit(t,j,"lower")                = q58_peatlandReductionLimit.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

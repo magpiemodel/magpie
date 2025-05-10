@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -101,7 +101,7 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   #note: using gdx files for more than the 1st time step sometimes pushes the model into corner solutions, which might result in infeasibilites.
   cfg$files2export$start <- c(cfg$files2export$start,
                               paste0(cfg$results_folder, "/", "magpie_y*.gdx"))
-  cfg$gms$s_use_gdx   <- 2
+  cfg$gms$s_use_gdx   <- 0
 
   #max resources for parallel runs
   cfg$qos <- "standby_highMem_dayMax"

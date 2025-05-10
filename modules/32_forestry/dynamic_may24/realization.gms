@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,7 +11,7 @@
 *' National policies implemented (NPI) and nationally determined contributions to
 *' the Paris agreement (NDC) for re/afforestation are based on country reports. The
 *' interface `vm_cdr_aff` includes the expected CDR and local bph effects from
-*' re/afforestation depending on the planning horizon `s32_planing_horizon`. The
+*' re/afforestation depending on the planning horizon `s32_planning_horizon`. The
 *' reward for CDR and local bph effects from re/afforestation is calculated in the
 *' [56_ghg_policy] module. In this realization, re/afforestation is modeled by default
 *' as regrowth of natural vegetation (see @humpenoder_investigating_2014 for details on the implemenation).

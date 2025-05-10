@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -147,27 +147,6 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
-* Used data set: rev4.116_h12_magpie.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: rev4.116_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: rev4.116_h12_validation.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: additional_data_rev4.59.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: calibration_H12_27Sep24.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
 * Low resolution: c200
 * High resolution: 0.5
 * 
@@ -178,25 +157,6 @@ $title magpie
 *    14   23   10    7    4   26   21    9   16   23   32   15
 * 
 * Regionscode: 62eff8f7
-* 
-* Regions data revision: 4.114
-* 
-* lpj2magpie settings:
-* * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.114
-* 
-* aggregation settings:
-* * Input resolution: 0.5
-* * Output resolution: c200
-* * Regionscode: 62eff8f7
-* * Number of clusters per region:
-*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    14   23   10    7    4   26   21    9   16   23   32   15
-* * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-* 
-* 
-* Last modification (input data): Sun Oct 27 00:37:36 2024
-* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -249,7 +209,7 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  oct24
 
-$setglobal cropland  simple_apr24
+$setglobal cropland  detail_apr24
 $setglobal croparea  simple_apr24
 $setglobal past  endo_jun13
 
@@ -260,14 +220,14 @@ $setglobal natveg  pot_forest_may24
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  per_ton_fao_may22
+$setglobal factor_costs  sticky_feb18
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
 $setglobal water_demand  all_sectors_aug13
 $setglobal water_availability  total_water_aug13
-$setglobal biodiversity  bii_target_apr24
+$setglobal biodiversity  bii_target
 $setglobal climate  static
 
 $setglobal nr_soil_budget  macceff_aug22
@@ -279,9 +239,9 @@ $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_aug22
 $setglobal maccs  on_aug22
 $setglobal peatland  v2
-$setglobal som  static_jan19
+$setglobal som  cellpool_jan23
 
-$setglobal bioenergy  1stgen_priced_dec18
+$setglobal bioenergy  1st2ndgen_priced_feb24
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 

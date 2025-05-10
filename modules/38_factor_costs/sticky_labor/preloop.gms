@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,7 +8,7 @@
 *   Calibrate the CES function:
 s38_ces_elast_par = (1/s38_ces_elast_subst) - 1 ;
 
-p38_intr_depr(t,i) = (1-s38_depreciation_rate) * pm_interest(t,i)/(1+pm_interest(t,i)) + s38_depreciation_rate;
+p38_intr_depr(t,i) = (pm_interest(t, i) + s38_depreciation_rate) / (1+pm_interest(t,i));
 
 *  calculate capital cost shares from regression
 p38_capital_share_calibration(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f38_historical_share(t_past,iso) - (f38_reg_parameters("slope") * 

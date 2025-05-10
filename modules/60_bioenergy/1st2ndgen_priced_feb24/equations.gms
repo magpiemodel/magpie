@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -71,6 +71,5 @@ q60_res_2ndgenBE(i2) ..
 *' the endogenous technological change in [13_tc] may react very strongly and create a positive feedback loop.
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
-  =e= sum((ct,k1st60), vm_dem_bioen(i2,k1st60) * (-i60_1stgen_bioenergy_subsidy_tdm(ct)))
-  + sum((ct,k1st60), vm_dem_bioen(i2,k1st60) * fm_attributes("ge",k1st60) * (-i60_1stgen_bioenergy_subsidy_gj(ct)))
+  =e= sum((ct,k1st60), vm_dem_bioen(i2,k1st60) * fm_attributes("ge",k1st60) * (-i60_1stgen_bioenergy_subsidy(ct)))
   + sum((ct,kbe60), vm_dem_bioen(i2,kbe60) * fm_attributes("ge",kbe60) * (-i60_2ndgen_bioenergy_subsidy(ct)));

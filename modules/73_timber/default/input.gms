@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,7 +20,7 @@ scalars
   s73_timber_prod_cost_woodfuel        Cost for prodcing one unit of woodfuel (USD17MER per tDM) / 74 /
   s73_free_prod_cost                   Very high cost for settling demand without production (USD17MER per tDM) / 1e+06 /
   s73_timber_demand_switch             Logical switch to turn on or off timber demand 1=on 0=off (1) / 1 /
-  s73_increase_ceiling                 Limiter for not allowing a demand jump between time steps beyond a certain limit (1) / 1.025 /
+  s73_income_threshold                 Threshold for income-elastic industrial roundwood demand (USD17PPP per cap per yr) / 10000 /
   s73_residue_ratio                    Proportion of overall industrial roundwood production which ends up as residue during harvest (1) / 0.15 /
   s73_reisdue_removal_cost             Cost of removing residues left after industrial roundwood harvest (USD17MER per tDM) / 2.5 /
   s73_expansion                        Construction wood demand expansion factor by end of century based on industrial roundwood demand as base (1=100 percent increase) / 0 /

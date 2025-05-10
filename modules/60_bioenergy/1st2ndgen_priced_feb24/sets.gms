@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -60,6 +60,21 @@ sets
       R32M46-SSP5-NPi,
       R32M46-SSP5-PkBudg1050,
       R32M46-SSP5-PkBudg650,
+      R34M410-SSP1-NPi2025,
+      R34M410-SSP1-PkBudg1000,
+      R34M410-SSP1-PkBudg650,
+      R34M410-SSP2_lowEn-NPi2025,
+      R34M410-SSP2_lowEn-PkBudg1000,
+      R34M410-SSP2_lowEn-PkBudg650,
+      R34M410-SSP2-NPi2025,
+      R34M410-SSP2-PkBudg1000,
+      R34M410-SSP2-PkBudg650,
+      R34M410-SSP3-NPi2025,
+      R34M410-SSP3-PkBudg1000,
+      R34M410-SSP3-rollBack,
+      R34M410-SSP5-NPi2025,
+      R34M410-SSP5-PkBudg1000,
+      R34M410-SSP5-PkBudg650,
       SSPDB-SSP1-19-IMAGE,
       SSPDB-SSP1-19-REMIND-MAGPIE,
       SSPDB-SSP1-26-IMAGE,

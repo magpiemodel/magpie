@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: EAT2p0 project simulations 2024
+# description: EAT2p0 simulations for Beier et al. 2025
 # ----------------------------------------------------------
 
 ######################################
@@ -41,7 +41,7 @@ cfg$output <- c(
 )
 
 # Set path to own coupled runs:
-path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif"
+path2MitigationRun <- "/p/projects/magpie/users/beier/EL2_DeepDive_release_v3/remind/output/C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12/REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif"
 
 
 #######################
@@ -92,6 +92,8 @@ bau <- function(cfg) {
   cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi" # default
   cfg$path_to_report_bioenergy <- NA
   cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi" # default
+  # Allow irrigated and rainfed bioenergy production
+  cfg$gms$c30_bioen_water <- "all"
 
   # Setting REMIND scenario for blackmagicc
   cfg$magicc_emis_scen <- "REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif"

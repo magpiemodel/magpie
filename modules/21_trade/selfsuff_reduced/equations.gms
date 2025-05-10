@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -55,7 +55,7 @@
 
  q21_excess_supply(h2,k_trade)..
  v21_excess_prod(h2,k_trade) =e=
- v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,h2,k_trade));
+ v21_excess_dem(k_trade)*sum(ct,i21_exp_shr(ct,h2,k_trade));
 
 * Trade costs are associated with exporting superregions. They are dependent on net exports, trade margin, and tariffs.
 

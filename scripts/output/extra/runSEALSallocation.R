@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,11 +10,12 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
-# Version 1.00 - Patrick v. Jeetze, Pascal Sauer
-# 1.00: first working version
+# Version 1.1.0 - Patrick v. Jeetze, Pascal Sauer
+# 1.0.0: first working version
+# 1.1.0: SEALS coefficients are modified based on scenario settings
 
 library(gms)
-library(gdx)
+library(gdx2)
 library(magpie4)
 library(filelock)
 
@@ -63,9 +64,10 @@ if (length(cfg$seals_years) != 0) {
 }
 
 # Restructure data to conform to SEALS
+sealsInput <- paste0("cell.land_0.5_SEALS_", title, ".nc")
 reportLandUseForSEALS(
   magCellLand = "cell.land_0.5_share.mz",
-  outFile = paste0("cell.land_0.5_SEALS_", title, ".nc"),
+  outFile = sealsInput,
   dir = outputdir, selectyears = rep_years
 )
 
@@ -108,10 +110,12 @@ Sys.chmod(iniLock, mode = "0664")
 # Prepare SEALS start script
 # --------------------------------
 
-.setupSEALSrun <- function(title, dir, dirProject, dirSEALS, dirBaseFiles) {
+.setupSEALSrun <- function(cfg, sealsInput, dir, dirProject, dirSEALS, dirBaseFiles) {
   if (!dir.exists(file.path(dirProject, "scripts"))) {
     dir.create(file.path(dirProject, "scripts"), recursive = TRUE)
   }
+
+  title <- cfg$title
 
   file.copy(
     from = list.files(file.path(dirSEALS, "seals"), full.names = TRUE),
@@ -124,11 +128,102 @@ Sys.chmod(iniLock, mode = "0664")
     dir.create(file.path(dirProject, "inputs"), recursive = TRUE)
   }
 
-  file.copy(
-    from = file.path(dir, paste0("seals_scenario_config_", title, ".csv")),
-    to = file.path(dirProject, "inputs", paste0("seals_scenario_config_", title, ".csv")),
-    overwrite = TRUE
-  )
+  rcp <- unlist(strsplit(cfg$input["cellular"], "_"))[6]
+  rcp <- paste0("rcp", substr(rcp, nchar(rcp) - 1, nchar(rcp)))
+
+  ssp <- tolower(cfg$gms$c09_pop_scenario)
+
+  if (length(cfg$seals_years) != 0) {
+    sealsYears <- cfg$seals_years[cfg$seals_years > 2020]
+    sealsYears <- paste(sealsYears, collapse = " ")
+  } else {
+    sealsYears <- "2050"
+  }
+
+  scenarioType <- ifelse(grepl("default|bau|ssp\\d-ref", tolower(title)), "bau", "policy")
+
+  if (cfg$gms$c22_protect_scenario == "none") {
+    consv <- cfg$gms$c22_base_protect
+  } else {
+    consv <- cfg$gms$c22_protect_scenario
+  }
+
+  ### Modify SEALS model coefficients based on scenario settings
+
+  message("Updating SEALS model coefficients based on scenario settings")
+
+  sealsCoeff <- paste0(c("./", "../", "../../"), "input/seals_global_coefficients.csv")
+  sealsCoeff <- Find(file.exists, sealsCoeff)
+
+  if (!is.null(sealsCoeff)) {
+    sealsCoeff <- read.csv(sealsCoeff)
+    consvRow <- which(sealsCoeff[, "spatial_regressor_name"] == "land_conservation")
+    sealsCoeff[consvRow, "data_location"] <- sub(
+      "WDPA", consv, sealsCoeff[consvRow, "data_location"]
+    )
+
+    if (cfg$gms$s29_snv_shr != 0) {
+      if (cfg$gms$s29_snv_shr == 0.2) {
+        # snv policy reallocation incentive
+        snvRow1 <- which(sealsCoeff[, "spatial_regressor_name"] == "snv20_realloc")
+        sealsCoeff[snvRow1, c("forest", "othernat")] <- -100
+        # snv policy expansion constraint
+        snvRow2 <- which(sealsCoeff[, "spatial_regressor_name"] == "snv20_expan")
+        sealsCoeff[snvRow2, "cropland"] <- 0
+      } else {
+        warning("Only if s29_snv_shr is 0.2 can it be explicitly considered at the 1x1km scale during the SEALS allocation.")
+      }
+    }
+
+    peatArea <- PeatlandArea(file.path(dir, "fulldata.gdx"))[, as.numeric(sealsYears), ]
+    rewetSwitch <- dimSums(peatArea[, , "rewet"], dim = 1) / dimSums(peatArea, dim = c(1, 3)) > 0.01
+    if (any(c(rewetSwitch))) {
+      peatRow <- which(sealsCoeff[, "spatial_regressor_name"] == "peatland_rewetting")
+      # SEALS rewetting coefficient
+      rewetCoeff <- 10000
+      # disincentivise agricultural expansion
+      sealsCoeff[peatRow, c("cropland", "grassland")] <- rewetCoeff
+      # peatland rewetting incentive
+      sealsCoeff[peatRow, c("forest", "othernat")] <- -rewetCoeff
+    }
+
+    sealsCoeffPath <- file.path(
+      dirProject, "inputs",
+      paste0("seals_global_coefficients_", title, ".csv")
+    )
+
+    write.csv(sealsCoeff, sealsCoeffPath,
+      row.names = FALSE, na = "", quote = FALSE # quote = FALSE is critical here!
+    )
+  } else {
+    stop("Could not find seals_global_coefficients.csv file")
+  }
+
+
+  ### Create SEALS scenario definitions CSV
+
+  message("Creating SEALS scenario definitions CSV")
+
+  sealsConfig <- paste0(c("./", "../", "../../"), "input/seals_scenario_config.csv")
+  sealsConfig <- Find(file.exists, sealsConfig)
+
+  if (!is.null(sealsConfig)) {
+    sealsConfig <- read.csv(sealsConfig)
+    sealsConfig[nrow(sealsConfig), "scenario_label"] <- title
+    sealsConfig[nrow(sealsConfig), "scenario_type"] <- scenarioType
+    sealsConfig[nrow(sealsConfig), "exogenous_label"] <- ssp
+    sealsConfig[nrow(sealsConfig), "climate_label"] <- rcp
+    sealsConfig[nrow(sealsConfig), "counterfactual_label"] <- title
+    sealsConfig[nrow(sealsConfig), "comparison_counterfactual_labels"] <- ifelse(scenarioType == "bau", "", "bau")
+    sealsConfig[, "coarse_projections_input_path"] <- normalizePath(file.path(dir, sealsInput))
+    sealsConfig[nrow(sealsConfig), "years"] <- sealsYears
+    sealsConfig[nrow(sealsConfig), "calibration_parameters_source"] <- normalizePath(sealsCoeffPath)
+    write.csv(sealsConfig, file.path(dirProject, "inputs", paste0("seals_scenario_config_", title, ".csv")),
+      row.names = FALSE, na = "", quote = FALSE # quote = FALSE is critical here!
+    )
+  } else {
+    stop("Could not find seals_scenario_config.csv file template")
+  }
 
   main <- readLines(file.path(dirProject, "scripts", "run_test_standard.py"))
 
@@ -200,19 +295,21 @@ Sys.chmod(iniLock, mode = "0664")
 if (!is.null(lockOn)) {
   sealsLock <- file.path(dirProject, "seals.lock")
 
+  .setupSEALSrun(
+    cfg = cfg,
+    sealsInput = sealsInput,
+    dir = outputdir,
+    dirProject = dirProject,
+    dirSEALS = dirSEALS,
+    dirBaseFiles = dirBaseFiles
+  )
+
   if (!file.exists(sealsLock) || file.size(sealsLock) == 0) {
     message(paste(
       "Starting SEALS allocation with input data creation.\n",
       "Stitched SEALS allocation outputs will be written to",
       "'./output/seals/intermediate/stitched_lulc_simplified_scenarios'"
     ))
-    .setupSEALSrun(
-      title = title,
-      dir = outputdir,
-      dirProject = dirProject,
-      dirSEALS = dirSEALS,
-      dirBaseFiles = dirBaseFiles
-    )
 
     id <- .submitSEALS(
       title = title,
@@ -225,21 +322,13 @@ if (!is.null(lockOn)) {
 
     writeLines(id, sealsLock)
   } else {
+    id <- readLines(sealsLock)
+
     message(paste(
       "Starting SEALS allocation using existing input data.\n",
       "Stitched SEALS allocation outputs will be written to",
       "'./output/seals/intermediate/stitched_lulc_simplified_scenarios'"
     ))
-
-    id <- readLines(sealsLock)
-
-    .setupSEALSrun(
-      title = title,
-      dir = outputdir,
-      dirProject = dirProject,
-      dirSEALS = dirSEALS,
-      dirBaseFiles = dirBaseFiles
-    )
 
     .submitSEALS(
       title = title,

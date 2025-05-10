@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -114,6 +114,10 @@ else
 * set restoration to zero
 pm_land_conservation(t,j,land,"restore") = 0;
 
+);
+
+if (m_year(t) >= s22_base_protect_reversal,
+  pm_land_conservation(t,j,land,consv_type) = 0;
 );
 
 

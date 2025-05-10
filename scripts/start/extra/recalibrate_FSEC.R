@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -25,9 +25,8 @@ cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE # required when penality_apr22 activated
 cfg$best_calib                      <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$best_calib_landconversion_cost  <- TRUE
 cfg$output                          <- c("rds_report")
 cfg$force_replace                   <- TRUE
 cfg$qos <- "priority"
 start_run(cfg, codeCheck = FALSE)
-magpie4::submitCalibration("FSEC")
+magpie4::submitCalibration("FSEC_FAO")

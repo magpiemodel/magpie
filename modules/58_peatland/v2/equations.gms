@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -48,6 +48,12 @@
     pc58_peatland(j2,manPeat58) 
     + v58_manLandExp(j2,manPeat58) * sum(ct, p58_scalingFactorExp(ct,j2)) - v58_balance(j2,manPeat58)
     - v58_manLandRed(j2,manPeat58) * sum(ct, p58_scalingFactorRed(ct,j2,manPeat58)) + v58_balance2(j2,manPeat58);
+
+*' Annual limit for peatland rewetting based on `s58_annual_rewetting_limit`.
+
+ q58_peatlandReductionLimit(j2)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
+  v58_peatlandChange(j2,"rewetted") / m_timestep_length =l= 
+  s58_annual_rewetting_limit * sum(drained58, pc58_peatland(j2,drained58));
 
 *' Drained peatland used for agriculture and forestry cannot exceed corresponding managed land.
 

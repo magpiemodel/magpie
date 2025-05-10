@@ -1,4 +1,4 @@
-# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,10 +16,11 @@ library(luscale)
 library(madrat)
 library(raster)
 library(mrcommons)
+library(mstools)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
-  outputdir <- "/p/projects/magpie/data/ISIMIP/ISIMIP_150322/magpie/output/c1000_150322_Calib/ISIMIP_150322_med_ssp585_IPSL-CM6A-LR_cc_c1000/"
+  outputdir <- "output/weeklyTests_SSP2-Ref/"
 
   readArgs("outputdir")
 }
@@ -127,15 +128,14 @@ map_LUHMAg_grid<-setYears(madrat::toolAggregate(mapping[countries,,],rel=mapping
 #### calculates grid cell area of the earths sphere
 land_hr <- read.magpie(land_hr_out_file)
 land_hr <- land_hr[,-1,]
-cal_area <- function(ix,iy,res=0.5,mha=1) { # pixelarea in m2, mha as factor
-  mha*(111.263*1000*res)*(111.263*1000*res)*cos(iy*pi/180.)
+calArea <- function(ix,iy,res=0.5,mha=1) { # pixelarea in m2, mha as factor
+  mha*(111.263*1000*res)*(111.263*1000*res)*cos(iy*pi/180)
 }
 
 # grid cell area as magclass object
-coord <- mrcommons:::magpie_coord
-grarea <- new.magpie(cells_and_regions=mapping_spatial$cell,
-                     fill=cal_area(coord[,"lon"],coord[,"lat"], mha=10^-10))
-#grarea <- round(grarea,6)
+map <- toolGetMappingCoord2Country(pretty = TRUE)
+grarea <- new.magpie(cells_and_regions = map$coords,
+                     fill = calArea(map$lon, map$lat, mha = 10^-10))
 
 # adjust total grid land area so that it is smaller than the gridcell area (some cells have a larger area actually; should be investigated)
 frac <- grarea/dimSums(land_hr, dim=3)
@@ -245,7 +245,7 @@ gc()
 
 #### Protected areas
 
-b <- protectedArea(gdx,level = "grid",dir=outputdir) / dimSums(land_hr, dim=3)
+b <- landConservation(gdx,level = "grid",dir=outputdir) / dimSums(land_hr, dim=3)
 b[is.na(b)] <- 0
 luh2 <- data.frame(matrix(nrow=7,ncol=2))
 names(luh2) <- c("LUH2","MAgPIE")
@@ -267,7 +267,7 @@ gc()
 }
 
 ####### ONLY DYNAMIC FORESTRY ON#############
-#check for dynamic foresty
+#check for dynamic forestry
 if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   message("Start forestry / timber reporting")
 
@@ -284,6 +284,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   luh2[2,] <- c("primf_harv","Primary forest")
   luh2[3,] <- c("secdf_harv","Secondary forest")
   luh2[4,] <- c("primn_secdn_harv","Other land")
+  b <- b[,,luh2[,2]]
   b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
   gc()
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_area.nc"))){
@@ -310,6 +311,7 @@ if(!is.null(harvested_area_timber(gdx,level = "cell"))) {
   luh2[2,] <- c("primf_bioh","Primary forest")
   luh2[3,] <- c("secdf_bioh","Secondary forest")
   luh2[4,] <- c("primn_secdn_bioh","Other land")
+  b <- b[,,luh2[,2]]
   b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
   gc()
   if(!file.exists(paste0(out_dir,"/LUH2_wood_harvest_yields.nc"))){

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,10 +19,16 @@ sets
   ac_to_bii_class_secd(ac,bii_class_secd) Mapping between forest ageclasses and bii coefficent land cover classes 
   / (ac0,ac5,ac10,ac15,ac20,ac25,ac30)    . (secd_young)
     (ac35,ac40,ac45,ac50,ac55,ac60,
-       ac65,ac70,ac75,ac80,ac85,ac90,
+     ac65,ac70,ac75,ac80,ac85,ac90,
      ac95,ac100,ac105,ac110,ac115,
      ac120,ac125,ac130,ac135,ac140,
-     ac145,ac150,ac155,acx)         . (secd_mature) /
+     ac145,ac150,ac155,ac160,ac165,
+     ac170,ac175,ac180,ac185,ac190,
+     ac195,ac200,ac205,ac210,ac215,
+     ac220,ac225,ac230,ac235,ac240,
+     ac245,ac250,ac255,ac260,ac265,
+     ac270,ac275,ac280,ac285,ac290,
+     ac295,ac300,acx)                      . (secd_mature) /
   
   biome44 biomes
   / AA1,AA2,AA4,AA7,AA8,AA10,AA11,AA14,AN11,AT1,AT2,AT7,AT8,AT9,AT10,AT12,AT13,AT14,IM1,

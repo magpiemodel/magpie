@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,7 +19,8 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
                         + (vm_land.l(j,"past") - vm_land.lo(j,"past")) 
                         - pm_land_conservation(t,j,"other","restore"));
 *** NDC/NPI re/afforesation is further constrained by the remaining forest establishment potential
-   p32_aff_pot(t,j)$(p32_aff_pot(t,j) > pm_max_forest_est(t,j)) = pm_max_forest_est(t,j);
+   p32_aff_pot(t,j)$(p32_aff_pot(t,j) > pm_max_forest_est(t,j) * s32_annual_aff_limit * m_timestep_length) = 
+     pm_max_forest_est(t,j) * s32_annual_aff_limit * m_timestep_length;
 * suitable area `p32_aff_pot` can be negative, if land restoration is switched on (level smaller than lower bound), therefore set negative values to 0
    p32_aff_pot(t,j)$(p32_aff_pot(t,j) < 1e-6) = 0;
 * Limit prescribed NPI/NDC afforestation in `p32_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
@@ -43,7 +44,7 @@ p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_plantation_ac
 p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 
 *' CDR from afforestation for each age-class, depending on planning horizon.
-p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
+p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planning_horizon/5)
 = p32_carbon_density_ac(t,j,"aff",ac,"vegc") - p32_carbon_density_ac(t,j,"aff",ac-1,"vegc");
 
 * Disturbance from generic sources to managed and natural forests
@@ -104,8 +105,8 @@ elseif s32_hvarea = 2,
 ** Fix timber plantations until the end of the rotation. "ac.off" identical to "ord(ac)-1".
 ** The offset is needed because the first element of ac is ac0, which is not included in p32_rotation_cellular_harvesting.
   v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
-** After the rotation period, all plantations are harvested.
-  v32_land.fx(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
+** After the rotation period, all plantations can be harvested.
+  v32_land.lo(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
   s32_establishment_static = 0;
   s32_establishment_dynamic = 1;
 );
@@ -127,10 +128,10 @@ if (m_year(t) >= s32_npi_ndc_reversal,
   i32_recurring_cost("ndc") = 0;
 );
 
-** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac_est is free
+** fix c price induced afforestation based on s32_planning_horizon, fixed only until end of s32_planning_horizon, ac_est is free
 if(s32_aff_prot = 0,
-  v32_land.fx(j,"aff",ac)$(ac.off <= s32_planing_horizon/5) = pc32_land(j,"aff",ac);
-  v32_land.up(j,"aff",ac)$(ac.off > s32_planing_horizon/5) = pc32_land(j,"aff",ac);
+  v32_land.fx(j,"aff",ac)$(ac.off <= s32_planning_horizon/5) = pc32_land(j,"aff",ac);
+  v32_land.up(j,"aff",ac)$(ac.off > s32_planning_horizon/5) = pc32_land(j,"aff",ac);
 elseif s32_aff_prot = 1,
   v32_land.fx(j,"aff",ac) = pc32_land(j,"aff",ac);
 );

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -36,7 +36,7 @@ fibreboard,particle_board_and_osb,plywood,veneer_sheets
 
 kforestry_to_woodprod(kforestry,total_wood_products) Mapping between intermediate and end use wood products
 /
-wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwood,other_sawnwood,other_industrial_roundwood)
+wood . (industrial_roundwood)
 woodfuel . (wood_fuel)
 /
 

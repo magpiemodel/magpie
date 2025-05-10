@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,7 +17,7 @@ $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_waste_shr.csv"
 $offdelim;
 
-table fm_attributes(attributes,kall) Conversion factors - where X is ton N P K C DM WM or PJ GE (X per tDM)
+table fm_attributes(attributes,kall) Conversion factors - where X is ton N P K C DM WM or GJ GE (X per tDM)
 $ondelim
 $include "./modules/16_demand/sector_may15/input/fm_attributes.cs3"
 $offdelim;

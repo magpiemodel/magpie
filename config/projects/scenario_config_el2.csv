@@ -17,7 +17,8 @@ gms$s15_exo_brans;0;0;0
 gms$s15_exo_scp;1;1;1
 gms$s15_exo_alcohol;1;1;1
 gms$s15_alc_scen;0;0;0
+gms$c30_bioen_water;all;all;all
 gms$factor_costs;sticky_labor;sticky_labor;sticky_labor
 gms$c70_feed_scen;ssp1;ssp2;ssp2
-input['cellular'];rev4.116EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz;;
+input['cellular'];rev4.118EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz;;
 magicc_emis_scen;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif;REMIND_generic_C_SSP2EU-DSPkB650-DS_betax_DeepDive_noNDC-rem-12.mif

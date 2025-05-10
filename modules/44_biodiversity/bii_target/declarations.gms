@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,9 +14,8 @@ positive variables
 ;
 
 parameters
- p44_bii_lower_bound(t,i,biome44) Interpolated lower bound for BII over time (1)
- p44_start_value(i,biome44)       Start value for BII lower bound (1)
- p44_target_value(i,biome44)      Target value for BII lower bound (1)
+ p44_bii_target(t,i,biome44)      Interpolated target for BII over time (1)
+ p44_start_value(i,biome44)       Start value for BII target (1)
  i44_biome_share(j,biome44)       Share of biome type in each spatial unit (1)
  i44_biome_area_reg(i,biome44)    Area of range-rarity weighted biome type in each region (mio. ha)
 ;

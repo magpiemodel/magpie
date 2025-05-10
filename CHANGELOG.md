@@ -3,9 +3,111 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+
+## [Unreleased]
+
+### changed
+- **21_trade** changed export share calculation to be done at region level in the model
+- **default.cfg** input data upgraded from rev4.117 to rev4.118, default for bioenergy demand and GHG prices changed from R32M46 to R34M410, `rcp4p5` used for SSP2-NPi2025 in line with MAGICC climate outcome and REMIND assumptions.
+- **default.cfg** changed running magpie by default with optfile for specified solver settings (Tol_Optimality)
+- **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410. 
+- **scenario_config.csv** SSP2 food system assumptions for ScenarioMIP VLLO to avoid sudden jump of calorie intake after 2025
+
+### added
+- **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
+- **80_optimization** added writing of conopt opt files with using scalars from input 
+
+### removed
+- **80_optimization** removed older optfile, that should be tried if no optimal solution can be found
+
+### fixed
+- **18_residues** fixed equation for cluster level production of crop residues in flexreg_apr16 realization
+- **44_biodiversity** expanded age-classes from 150 to 300 years in line with `ac` set. This bugfix is crucial for the BII indicator.
+
+
+## [4.10.0] - 2025-04-03
+
+### changed
+- **09_drivers** removed SSP2EU scenario from set
+- **15_food** included a convergence mechanism to support convergence between iterations
+- **15_food** tax recycling for income effect in elastic food demand
+- **21_trade** Cost for additional imports to maintain feasibility reduced from 12300 to 1500 USD17MER per tDM to avoid implausibly high costs and prices for wood and woodfuel
+- **32_forestry** revised plantation establishment assumptions
+- **32_forestry** timber plantation harvest is no longer enforced at rotation age to avoid conflicts with `q21_trade_reg_up`, which can result in huge costs and negative prices for wood
+- **35_natveg** revised wood harvest assumptions
+- **38_factor_costs** code cleanup, documentation
+- **41_area_equipped_for_irrigation** code cleanup
+- **56_ghg_policy** Minimum CO2 price of 1 $ per ton CO2 on emissions from deforestation and other land conversion in all time steps to avoid sudden jumps in carbon stock changes (`cfg$gms$s56_minimum_cprice <- 3.67`)
+- **60_bioenergy** renamed `c60_bioenergy_subsidy` to `s60_bioenergy_1st_subsidy` to more clearly reflect its use and changed its unit to USD17MER per GJ. Adjusted `q60_bioenergy_incentive` accordingly
+- **60_bioenergy** renamed `s60_bioenergy_gj_price_1st` to `s60_bioenergy_1st_price` and `s60_bioenergy_price_2nd` to `s60_bioenergy_2nd_price`
+- **73_timber** revised timber demand calculations
+- **config.cfg** default for `cfg$gms$cropland` changed from "simple_apr24" to "detail_apr24"
+- **config.cfg** default for `cfg$gms$s29_fallow_max ` changed from 0.4 to 0
+- **config.cfg** default for `cfg$gms$s29_treecover_max` changed from 0.4 to 1
+- **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
+- **default.cfg** default for `cfg$gms$bioenergy` change from `1stgen_priced_dec18` to `1st2ndgen_priced_feb24`
+- **default.cfg** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
+- **default.cfg** default for module `44_biodiversity` changed from `bii_target_apr24` to `bii_target
+- **default.cfg** input data upgraded from rev4.116 to rev4.117
+- **default.cfg** Reactivated external scenario for damage from shifting agriculture (`cfg$gms$s35_forest_damage <- 2`)
+- **default.cfg** settings for  land conversion cost calibration updated
+- **scenario_config.csv** `cfg$gms$s56_minimum_cprice` no longer used for `NCD`
+- **scripts** changed c30_bioen_water switch to all in EAT2p0 start script and re-included missing BAU_MITI scenario
+- **scripts** land conversion cost calibration for cropland - FAO as target data set instead of MAgPIEown
+- **scripts** reduced setup information written to main.gms
+
+### added
+- **11_cost** added cost term for soil carbon management
+- **22_land_conservation** added option for base protection reversal
+- **32_forestry** Upper annual limit for re/afforestation (`s32_annual_aff_limit`) applied to NPI/NDC and CO2-price driven re/afforestation (default: 3% of overall forest establishment potential)
+- **58_peatland** Limit for annual peatland rewetting (2% of degraded peatland per year) to avoid adhoc rewetting of degraded peatlands with the introduction of the CO2 price (`cfg$gms$s58_annual_rewetting_limit <- 0.02`)
+- **59_som** added soil carbon management option to cellpool_jan23 realization
+- **default.cfg** added selection of low and middle-income countries `isoCountriesLowMiddleIncome`
+- **default.cfg** added setting for soil carbon management to config and set `cellpool_jan23` realizaton as new default for `59_som` module.
+- **scenario_config.csv** added column `NPI-revert`
+- **scenario_config.csv** added columns `AR-natveg` and `AR-plant` for CO2 price re/afforestation and AgroForestry settings
+- **scenario_config.csv** added scenario `VLLO` based on `SDP-MC`
+- **scripts** output script for testing elastic demand
+- **scripts** start script for ScenarioMIP MAgPIE standalone runs
+- **scripts** The constraint to maintain 20% semi-natural vegetation at the 1x1km scale is passed on to SEALS, if the setting is changed from the `default.cfg`
+
+### removed
+- **15_food/anthropometrics_jan18** removed as outdated
+- **44_biodiversity** realisation `bii_target_apr24` removed because it is identical to `bii_target`. `bii_target` set as new default.
+- **59_som** removed cellpool_aug16 realization (out-dated parameters)
+- **60_bioenergy** removed `s60_bioenergy_1st_subsidy_fix_SSP2`, `s60_2ndgen_bioenergy_dem_min_post_fix` since no longer in use
+- **scenario_config.csv** GDP scenario for VLLO in scenario_config.csv changed from SDP-MC to SSP1 (needed for consistency with REMIND)
+- **scenario_config.csv** removed column `SSP2-EU`
+
+### fixed
+- **29_cropland** identical results for historic period when using `s29_treecover_bii_coeff` 0 and 1 in scenarios.
+- **32_forestry** added contraint `q32_ndc_aff_limit` to make sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
+- **35_natveg** added interface `vm_natforest_reduction`
+- **44_biodiversity** scaling of equation `q44_bii` removed, which caused non-matching LHS and RHS
+- **56_ghg_policy** bugfixes for regional GHG policy fader
+- **59_som** soil carbon reference stock for natural vegetation changed to mean value over cluster ("other_land" lu types)
+- **core/macro** wrong use of `vm_supply` corrected in macro `m21_baseline_production`
+- **scripts/output** peatland share calculation fixed in disaggreagtion.R and minor bugfixes in disaggreagtion_LUH2.R
+
+
+## [4.9.1] - 2025-01-28
+
+### changed
+- **scripts** peatland rewetting now automatically considered in `extra/runSEALSallocation.R`
+
+### added
+- **scripts** added start script for land-based mitigation and biodiversity conservation paper
+- **scripts** release number can be passed as an argument to test_runs.R to tag as release
+- **start_scripts** added `lock_timeout` as option to `start_run` function
+
+### fixed
+- **44_biodiversity** bugfix i44_biome_share, code cleanup, added scaling of `q44_bii`
+
+
 ## [4.9.0] - 2024-12-05
 
 ### changed
+- **scripts** changed EL2 Deep Dive c30_bioen_water switch to all and added sensitivity for paper revision
 - **35_natveg** revised age-class initialization of secondary forest
 - **38_factor_costs** updated use of USDA cost shares
 - **config** changed default input data to use 2017USD
@@ -167,7 +269,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **21_trade** removed interface `pm_selfsuff_ext`, removed `v21_manna_from_heaven`
 - **32_forestry** removed interface `pm_representative_rotation`
 - **35_natveg** removed growing stock calculation and calibration, which is no longer needed.
-- **62_material/16_demand** Removed double structure for forestry products. `pm_demand_foresty` is now used in `62_material`
+- **62_material/16_demand** Removed double structure for forestry products. `pm_demand_forestry` is now used in `62_material`
 - **73_timber** removed interfaces `pm_demand_forestry_future` and `sm_wood_density`
 - **scripts** removed support for spam files in start_functions
 - **scripts/output/extra** removed scripts disaggregation_cropsplit and disaggregation_transitions
@@ -714,7 +816,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
 - **13_tc** different educated guess for vm_tau in 1995
 - **scaling** Update of scaling factors. removed duplicates
-- **32_foresty** Avoid division by zero (observed under higher regional resolutions)
+- **32_forestry** Avoid division by zero (observed under higher regional resolutions)
 - **35_natveg** Avoid division by zero (observed under higher regional resolutions)
 - **70_livestock** Avoid division by zero (observed under higher regional resolutions)
 - **60_bioenergy** Minimum dedicated 2nd generation bioenergy demand assumed in each region raised from 0.01 to 1 mio. GJ per yr, and added as option in the config file (s60_2ndgen_bioenergy_dem_min)
@@ -747,7 +849,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **output.R** added SLURM standby maxMem and SLURM priority maxMem; needed for some output scripts (e.g. disaggregation_LUH2.R)
 
 ### removed
-- **32_foresty** Removed static realization
+- **32_forestry** Removed static realization
 - **35_natveg** Removed static realization
 - **scripts** lpjml_addon script is removed and all calls within dependend starting scripts
 - **scripts** output/extra/disaggregation_transitions_.R moved to deprecated folder
@@ -764,12 +866,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **10_land** fixed rare infeasibility in "landmatrix_dec18" realization
 - **38_factor_costs** For the sticky_feb18 realization correction in initial capital stocks, use of production initial values, and 05USDppp units changed to 05USDMER for sticky so it matches the units of the other realizations
 - **80_optimization** Bug fixes in the nlp_par (parallel optimization) and improved code to collect failing handles.
-- **32_foresty** Avoid division by zero in q32_establishment_dynamic_yield
+- **32_forestry** Avoid division by zero in q32_establishment_dynamic_yield
 - **35_natveg** fixed land protection to SSP2 default (WDPA) for historic period
 - **15_food** New iteration needs to be started before setting food prices for curr_iter15
 - **scripts** scripts/output/extra/highres.R bugfixes
 - **38_factor_costs** units in sticky_feb18
-- **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation;
+- **32_forestry** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation;
 - **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
 - **56_ghg_policy** choose the correct scenario for fixing the GHG prices until sm_fix_SSP2
 
@@ -779,7 +881,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **13_tc** added switch to ignore historic tau patterns in historic time steps (new default)
 - **16_demand** Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**
-- **32_foresty** Added option to choose a rotation length calculation criteria
+- **32_forestry** Added option to choose a rotation length calculation criteria
 - **35_natveg** Calculation of land protection policies revised and moved from presolve.gms to preloop.gms
 - **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization). Bugfix in the yearly update of the variable input requirements. Addition of the time dimension and clean up of names of parameters used in the realization. Removal of the management factor (this factor was not being used, it was being cancelled out in previous calculations). Correction of the costs, they are given in 05USDppp.
 - **39_landconversion** lower costs for expansion of forestry land
@@ -818,10 +920,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **core** removed sets ac_young and ac_mature (no longer needed due to changes in 44_biodiversity)
 
 ### fixed
-- **32_foresty** BII coefficients for CO2 price driven afforestation
-- **32_foresty** growth curve CO2 price driven afforestation
-- **32_foresty** NPI/NDC afforestation infeasibility
-- **32_foresty** Correct distribution from LUH data to plantations and ndcs
+- **32_forestry** BII coefficients for CO2 price driven afforestation
+- **32_forestry** growth curve CO2 price driven afforestation
+- **32_forestry** NPI/NDC afforestation infeasibility
+- **32_forestry** Correct distribution from LUH data to plantations and ndcs
 - **35_natveg** option to fade out damage from shifting agriculture by 2030
 - **44_biodiversity** ac0 included in pricing of biodiversity loss
 
@@ -1051,7 +1153,9 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.9.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.10.0...develop
+[4.10.0]: https://github.com/magpiemodel/magpie/compare/v4.9.1...v4.10.0
+[4.9.1]: https://github.com/magpiemodel/magpie/compare/v4.9.0...v4.9.1
 [4.9.0]: https://github.com/magpiemodel/magpie/compare/v4.8.2...v4.9.0
 [4.8.2]: https://github.com/magpiemodel/magpie/compare/v4.8.1...v4.8.2
 [4.8.1]: https://github.com/magpiemodel/magpie/compare/v4.8.0...v4.8.1

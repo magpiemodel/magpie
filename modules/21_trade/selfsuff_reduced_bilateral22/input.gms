@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -18,7 +18,7 @@ scalars
   s21_trade_tariff_fadeout fadeout scenario setting for trade tariffs              / 0 / 
   s21_trade_tariff_startyear year to start fading out trade tariffs                / 2025 /
   s21_trade_tariff_targetyear year to finish fading out trade tariffs              / 2050 /
-  s21_cost_import Cost for additional imports to maintain feasibility (USD17MER per tDM) / 12300 /
+  s21_cost_import Cost for additional imports to maintain feasibility (USD17MER per tDM) / 1500 /
   s21_min_trade_margin_forestry Minimum trade margin for forestry products (USD17MER per tDM) / 62 /
 ;
 

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -15,7 +15,8 @@ p58_country_switch(policy_countries58) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by total peatland area.
-p58_country_weight(i) = sum(i_to_iso(i,iso), p58_country_switch(iso) * sum(land58, f58_peatland_area_iso(iso,land58))) 
+p58_country_weight(i) = 0;
+p58_country_weight(i)$(sum(i_to_iso(i,iso), sum(land58, f58_peatland_area_iso(iso,land58))) > 0) = sum(i_to_iso(i,iso), p58_country_switch(iso) * sum(land58, f58_peatland_area_iso(iso,land58))) 
   / sum(i_to_iso(i,iso), sum(land58, f58_peatland_area_iso(iso,land58)));
 
 * construct exogenous peatland rewetting scenario

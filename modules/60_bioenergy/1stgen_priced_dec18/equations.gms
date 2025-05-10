@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -69,4 +69,4 @@ q60_res_2ndgenBE(i2) ..
 *' overproduction from couple products.
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
-          =e= sum(k1st60, vm_dem_bioen(i2,k1st60) * (-c60_bioenergy_subsidy));
+          =e= sum(k1st60, vm_dem_bioen(i2,k1st60) * fm_attributes("ge",k1st60) * (-s60_bioenergy_1st_subsidy));
