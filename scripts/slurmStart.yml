@@ -1,4 +1,4 @@
 slurmjobs:
   SLURM priority: "sbatch --job-name=%NAME --output=logs/%NAME-%j.out --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --cpus-per-task=3 --time=24:00:00 --qos=priority"
   SLURM standby:  "sbatch --job-name=%NAME --output=logs/%NAME-%j.out --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --cpus-per-task=3 --time=24:00:00 --qos=standby"
-  SLURM medium:   "sbatch --job-name=%NAME --output=logs/%NAME-%j.out --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --cpus-per-task=3 --time=24:00:00 --qos=medium"
+  SLURM medium:   "sbatch --job-name=%NAME --output=logs/%NAME-%j.out --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --cpus-per-task=3 --qos=medium"
