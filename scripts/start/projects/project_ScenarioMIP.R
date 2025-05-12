@@ -22,7 +22,7 @@ source("config/default.cfg")
 
 # create additional information to describe the runs
 cfg$info$flag <- "SMIP63"
-cfg$qos <- "standby_dayMax"
+cfg$qos <- "standby"
 
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
