@@ -281,7 +281,19 @@ message("Disaggregating conservation land")
 
 land_consv_hr <- NULL
 if (file.exists(wdpa_hr_file)) {
-  land_consv_hr <- .dissagLandConsv(gdx, cfg, map_file, wdpa_hr_file, consv_prio_hr_file)
+  if (file.exists(consv_prio_hr_file)) {
+    conservationPrioHr <- read.magpie(consv_prio_hr_file)
+  } else {
+    warning("Future land conservation used in MAgPIE run but high resolution ",
+            "conservation priority data for disaggregation not found.")
+    conservationPrioHr <- NULL
+  }
+  land_consv_hr <- magpie4::disaggregateLandConservation(gdx, cfg,
+                                                         mapping = readRDS(map_file),
+                                                         wdpaHr = read.magpie(wdpa_hr_file),
+                                                         conservationPrioHr = conservationPrioHr)
+  land_consv_hr2 <- .dissagLandConsv(gdx, cfg, map_file, wdpa_hr_file, consv_prio_hr_file)
+  stopifnot(identical(land_consv_hr, land_consv_hr2))
 
   # Write gridded conservation land
   .writeDisagg(land_consv_hr, land_consv_hr_out_file,
