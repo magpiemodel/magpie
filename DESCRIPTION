@@ -21,7 +21,7 @@ Imports:
     m4fsdp,
     madrat,
     magclass (>= 6.14.0),
-    magpie4 (>= 2.22.9),
+    magpie4 (>= 2.24.0),
     MagpieNCGains,
     magpiesets (>= 0.46.1),
     mip,
