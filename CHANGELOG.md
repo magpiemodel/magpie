@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410. 
 - **scenario_config.csv** SSP2 food system assumptions for ScenarioMIP VLLO to avoid sudden jump of calorie intake after 2025
 - **scripts** request 24h for SLURM jobs (except for medium which still requests 7 days)
+- **scripts** disaggregation.R moved disaggregateLandConservation function to magpie4
 
 ### added
 - **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
