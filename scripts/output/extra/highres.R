@@ -104,7 +104,7 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
   cfg$gms$s_use_gdx   <- 0
 
   #max resources for parallel runs
-  cfg$qos <- "standby_highMem_dayMax"
+  cfg$qos <- "standby_highMem"
 
   # set force download to FALSE
   # otherwise data is download again when calling start_run(), which overwrites

@@ -214,7 +214,7 @@ fsecScenario <- function(scenario) {
   # general
   cfg$title       <- paste(v, scenario, sep = "")
   cfg$recalibrate <- FALSE
-  cfg$qos         <- "standby_highMem_dayMax"
+  cfg$qos         <- "standby_highMem"
   cfg$output      <- c("extra/highres",
                        "extra/disaggregation",
                        "projects/FSEC_nitrogenPollution",

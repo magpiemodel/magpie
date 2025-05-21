@@ -33,11 +33,11 @@ p22_wdpa_baseline(t,j,wdpa_cat22,land) = f22_wdpa_baseline(t,j,wdpa_cat22,land);
 
 ** Trajectory for implementation of land conservation
 * sigmoidal interpolation between 2020 and target year
-m_sigmoid_time_interpol(i22_conservation_fader,s22_conservation_start,s22_conservation_target,0,1);
+m_sigmoid_time_interpol(p22_conservation_fader,s22_conservation_start,s22_conservation_target,0,1);
 
 ** Initialise additional conservation area
 p22_add_consv(t,j,consv22_all,land) = 0;
 
 * Get additional conservation area in conservation priority areas
-p22_add_consv(t,j,consv_prio22,land) = f22_consv_prio(j,consv_prio22,land)*i22_conservation_fader(t);
+p22_add_consv(t,j,consv_prio22,land) = f22_consv_prio(j,consv_prio22,land)*p22_conservation_fader(t);
 

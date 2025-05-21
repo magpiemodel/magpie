@@ -13,8 +13,8 @@
 * remaining natural vegation in current time step
 
 * Include all remaining primary forest areas in IFL conservation target
-p22_add_consv(t,j,"IFL","primforest") = pcm_land(j,"primforest") * i22_conservation_fader(t);
-p22_add_consv(t,j,"BH_IFL","primforest") = pcm_land(j,"primforest") * i22_conservation_fader(t);
+p22_add_consv(t,j,"IFL","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
+p22_add_consv(t,j,"BH_IFL","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
 
 
 if(m_year(t) <= sm_fix_SSP2,
