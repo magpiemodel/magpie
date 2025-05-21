@@ -63,7 +63,7 @@ p13_croparea_consv_tau_factor(h) = (s13_croparea_consv_tau_factor * p13_country_
                             + s13_croparea_consv_tau_factor_noselect * (1-p13_country_wght_supreg(h)));
 
 if (ord(t) = 1,
-  pc13_tau_consv(h,tautype) = p13_croparea_consv_tau_factor(h) * pc13_tau(h,"crop")
+  pc13_tau_consv(h,tautype) = p13_croparea_consv_tau_factor(h) * pc13_tau(h,"crop");
 elseif c13_croparea_consv_tau_increase = 0 AND m_year(t) >= s13_croparea_consv_start,
   v13_tau_consv.fx(h,tautype) = pc13_tau_consv(h,tautype);
 );
