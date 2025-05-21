@@ -10,9 +10,6 @@ positive variable
  vm_tech_cost(i)                      Total Annuitized costs of TC (mio. USD17MER per yr)
  v13_cost_tc(i,tautype)               Technical change costs per region (mio. USD17MER)
  v13_tech_cost(i,tautype)             Annuitized costs of TC for crops and pasture (mio. USD17MER per yr)
-;
-
-variable
  vm_tau(j,tautype)                    Overall agricultural land use intensity tau at cluster level (1)
  v13_tau_consv(h,tautype)             Tau for cropland within conservation priority areas (1)
 ;

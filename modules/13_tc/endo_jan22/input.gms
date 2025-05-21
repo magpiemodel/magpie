@@ -12,7 +12,7 @@ scalars
  c13_croparea_consv                      Switch for crop area conservation either in conservation priority areas or in a given share of the total croparea (0=no 1=yes) / 0 /
  c13_croparea_consv_tau_increase         Switch for tau increase on crop area conservation (0=no 1=yes) / 1 /
  s13_croparea_consv_tau_factor           Tau factor for crop area conservation / 0.8 /
- s13_croparea_consv_tau_factor_noselect  Tau factor for crop area conservation / 0.8 /
+ s13_croparea_consv_tau_factor_noselect  Tau factor for crop area conservation in unselected countries / 0.8 /
  s13_croparea_consv_shr                  Share of crop area in which no endogeneous yield changes are allowed due to  conservation (1) / 0 /
  s13_croparea_consv_shr_noselect         Share of crop area in which no endogeneous yield changes are allowed due to  conservation (1) / 0 /
  s13_croparea_consv_start                Croparea conservation start year        / 2025 /
