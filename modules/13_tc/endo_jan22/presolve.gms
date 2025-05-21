@@ -32,13 +32,16 @@ if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 
 );
 
-** Share of cropland within conservation priority area
+*** Share of cropland within conservation priority area
 p13_cropland_consv_shr(t,j) = 0;
 
 if(c13_croparea_consv = 1,
+* the cropland area within conservation priority areas is provided by the interface `pm_land_conservation`
   p13_cropland_consv_shr(t,j)$(pcm_land(j,"crop") > 0) = sum(consv_type, pm_land_conservation(t,j,"crop",consv_type))/pcm_land(j,"crop");
   p13_cropland_consv_shr(t,j)$(p13_cropland_consv_shr(t,j) > 1) = 1;
 
+* The following lines allow to freely chose a given share of the total cropland
+* area that should be subject to conservation management with a lower land use intensity.
   if(s13_croparea_consv_shr > 0 AND m_year(t) >= s13_croparea_consv_start,
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
@@ -52,8 +55,10 @@ if(c13_croparea_consv = 1,
 
 );
 
+* ISO country weights are calculated based on the available cropland area in each country
 p13_country_wght_supreg(h) = sum((i_to_iso(i,iso), supreg(h,i)), p13_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum((i_to_iso(i,iso), supreg(h,i)), pm_avl_cropland_iso(iso));
 
+* Country-weighted tau reduction factor for conservation land
 p13_croparea_consv_tau_factor(h) = (s13_croparea_consv_tau_factor * p13_country_wght_supreg(h)
                             + s13_croparea_consv_tau_factor_noselect * (1-p13_country_wght_supreg(h)));
 

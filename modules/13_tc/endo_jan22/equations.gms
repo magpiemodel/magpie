@@ -45,9 +45,16 @@ q13_tech_cost_sum(i2) ..
  vm_tech_cost(i2) =e= sum(tautype, v13_tech_cost(i2, tautype));
 
 
+*' The overall land use intensity factor `vm_tau` is a linear combination between the
+*' land use intensity factors `v13_tau` for regular cropland and `v13_tau_consv`
+*' for cropland in conservation priority areas.
 
 q13_tau(j2,tautype)..
     vm_tau(j2,tautype) =e= sum((ct, cell(i2,j2), supreg(h2,i2)), (1-p13_cropland_consv_shr(ct,j2)) * v13_tau(h2,tautype) + p13_cropland_consv_shr(ct,j2) * v13_tau_consv(h2,tautype));
+
+*' `v13_tau_consv` for cropland in conservation priority areas is linked to `v13_tau`
+*' through a multiplication factor that can lower land use intensity in
+*' conservation priority areas.
 
 q13_tau_consv(h2,tautype)$(c13_croparea_consv_tau_increase = 1 OR sum(ct, m_year(ct)) < s13_croparea_consv_start)..
  v13_tau_consv(h2,tautype) =e= p13_croparea_consv_tau_factor(h2) * v13_tau(h2,tautype);

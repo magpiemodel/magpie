@@ -9,7 +9,7 @@
 scalars
  s13_ignore_tau_historical               ignore historical tau (1) or use it as lower bound (0) (binary) / 1 /
  s13_max_gdp_shr                         Maximum tech cost as share of regional GDP / Inf /
- c13_croparea_consv                      Switch for crop area conservation either in conservation priority areas or in a given share of the total croparea (0=no 1=yes) / 1 /
+ c13_croparea_consv                      Switch for crop area conservation either in conservation priority areas or in a given share of the total croparea (0=no 1=yes) / 0 /
  c13_croparea_consv_tau_increase         Switch for tau increase on crop area conservation (0=no 1=yes) / 1 /
  s13_croparea_consv_tau_factor           Tau factor for crop area conservation / 0.8 /
  s13_croparea_consv_tau_factor_noselect  Tau factor for crop area conservation / 0.8 /
