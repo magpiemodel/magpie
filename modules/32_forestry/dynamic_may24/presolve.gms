@@ -31,18 +31,14 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
 * The global (`s32_max_aff_area`) and regional limit (`f32_max_aff_area`) for total afforestation (sum of endogenous and exogenous) is reduced by exogenous NPI/NDC afforestation through (`p32_aff_pol_timestep(t,j)`).
 if(s32_max_aff_area_glo = 1,
   p32_max_aff_area_glo(t) = s32_max_aff_area
-                          - sum((ac,j), p32_land_start_ac(j,"ndc",ac))
-                          - smax(t2, sum(j, p32_aff_pol(t2,j)));
-  p32_max_aff_area_glo(t)$(sum(j, p32_aff_pol_timestep(t,j)) = 0)
-                          = s32_max_aff_area - sum((ac,j), pc32_land(j,"ndc",ac));
+                          - sum((ac,j), pc32_land(j,"ndc",ac))
+                          - sum(j, p32_aff_pol_timestep(t,j));
   p32_max_aff_area_glo(t)$(p32_max_aff_area_glo(t) < 1e-06) = 0;
   p32_max_aff_area_reg(t,i) = 0;
 elseif s32_max_aff_area_glo = 0,
   p32_max_aff_area_reg(t,i) = f32_max_aff_area(i)
-                            - sum((ac,cell(i,j)), p32_land_start_ac(j,"ndc",ac))
-                            - smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)));
-  p32_max_aff_area_reg(t,i)$(sum(cell(i,j), p32_aff_pol_timestep(t,j)) = 0)
-                            = f32_max_aff_area(i) - sum((ac,cell(i,j)), pc32_land(j,"ndc",ac));
+                            - sum((ac,cell(i,j)), pc32_land(j,"ndc",ac))
+                            - sum(cell(i,j), p32_aff_pol_timestep(t,j));
   p32_max_aff_area_reg(t,i)$(p32_max_aff_area_reg(t,i) < 1e-06) = 0;
   p32_max_aff_area_glo(t) = 0;
 );
