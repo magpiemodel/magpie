@@ -36,7 +36,7 @@ if(s32_max_aff_area_glo = 1,
   p32_aff_togo_reg(t,i) = 0;
 elseif s32_max_aff_area_glo = 0,
   p32_aff_togo_reg("y1995",i) = f32_max_aff_area(i) - sum(cell(i,j), p32_aff_pol_timestep("y1995",j));
-  p32_aff_togo_reg(t,i)$(ord(t)>1) = p32_aff_togo_glo(t-1) - sum(cell(i,j), p32_aff_pol_timestep(t,j));
+  p32_aff_togo_reg(t,i)$(ord(t)>1) = p32_aff_togo_reg(t-1,i) - sum(cell(i,j), p32_aff_pol_timestep(t,j));
   p32_aff_togo_reg(t,i)$(p32_aff_togo_reg(t,i) < sum(cell(i,j), p32_aff_pol_timestep(t,j))) = sum(cell(i,j), p32_aff_pol_timestep(t,j));
   i32_max_aff_area_glo(t) = 0;
 );
