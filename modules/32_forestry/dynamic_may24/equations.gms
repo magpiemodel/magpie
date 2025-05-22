@@ -93,11 +93,11 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 
  q32_max_aff$(s32_max_aff_area_glo=1) ..
   sum((j2,ac), v32_land(j2,"aff",ac))
-      =l= sum(ct, p32_aff_togo_glo(ct)) - sum(ac_est, v32_land(j2,"ndc",ac_est));
+      =l= sum(ct, p32_aff_togo_glo(ct)) - sum((ac_est,j2), v32_land(j2,"ndc",ac_est));
 
  q32_max_aff_reg(i2)$(s32_max_aff_area_glo=0) ..
   sum((cell(i2,j2),ac), v32_land(j2,"aff",ac))
-        =l= sum(ct, p32_aff_togo_glo(ct,i2)) - sum((ac_est,cell(i2,j2)) v32_land(j2,"ndc",ac_est));
+        =l= sum(ct, p32_aff_togo_reg(ct,i2)) - sum((ac_est,cell(i2,j2)), v32_land(j2,"ndc",ac_est));
 
 *-----------------------------------------------
 ************** Carbon stock ********************
