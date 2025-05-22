@@ -30,14 +30,24 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
 * Calculate the limit for endogenous afforestation
 * The global (`s32_max_aff_area`) and regional limit (`f32_max_aff_area`) for total afforestation (sum of endogenous and exogenous) is reduced by exogenous NPI/NDC afforestation through (`p32_aff_pol_timestep(t,j)`).
 if(s32_max_aff_area_glo = 1,
-  p32_aff_togo_glo("y1995") = s32_max_aff_area - sum((ac,j), p32_land_start_ac(j,"ndc",ac)) - sum(j, p32_aff_pol_timestep("y1995",j));
-  p32_aff_togo_glo(t)$(ord(t)>1) = p32_aff_togo_glo(t-1) - sum(j, p32_aff_pol_timestep(t,j));
-  p32_aff_togo_glo(t)$(p32_aff_togo_glo(t) < sum(j, p32_aff_pol_timestep(t,j))) = sum(j, p32_aff_pol_timestep(t,j));
+  p32_aff_togo_glo("y1995") = s32_max_aff_area
+                            - sum((ac,j), p32_land_start_ac(j,"ndc",ac))
+                            - sum(j, p32_aff_pol_timestep("y1995",j));
+  p32_aff_togo_glo(t)$(ord(t)>1) = p32_aff_togo_glo(t-1)
+                                 - sum((ac,j), pc32_land(j,"ndc",ac))
+                                 - sum((ac,j), pc32_land(j,"aff",ac))
+                                 - sum(j, p32_aff_pol_timestep(t,j));
+  p32_aff_togo_glo(t)$(p32_aff_togo_glo(t) < 1e-06) = 0;
   p32_aff_togo_reg(t,i) = 0;
 elseif s32_max_aff_area_glo = 0,
-  p32_aff_togo_reg("y1995",i) = f32_max_aff_area(i) - sum((ac,cell(i,j)), p32_land_start_ac(j,"ndc",ac)) - sum(cell(i,j), p32_aff_pol_timestep("y1995",j));
-  p32_aff_togo_reg(t,i)$(ord(t)>1) = p32_aff_togo_reg(t-1,i) - sum(cell(i,j), p32_aff_pol_timestep(t,j));
-  p32_aff_togo_reg(t,i)$(p32_aff_togo_reg(t,i) < sum(cell(i,j), p32_aff_pol_timestep(t,j))) = sum(cell(i,j), p32_aff_pol_timestep(t,j));
+  p32_aff_togo_reg("y1995",i) = f32_max_aff_area(i)
+                              - sum((ac,cell(i,j)), p32_land_start_ac(j,"ndc",ac))
+                              - sum(cell(i,j), p32_aff_pol_timestep("y1995",j));
+  p32_aff_togo_reg(t,i)$(ord(t)>1) = p32_aff_togo_reg(t-1,i)
+                                   - sum((ac,cell(i,j)), pc32_land(j,"ndc",ac))
+                                   - sum((ac,cell(i,j)), pc32_land(j,"aff",ac))
+                                   - sum(cell(i,j), p32_aff_pol_timestep(t,j));
+  p32_aff_togo_reg(t,i)$(p32_aff_togo_reg(t,i) < 1e-06) = 0;
   p32_aff_togo_glo(t) = 0;
 );
 
