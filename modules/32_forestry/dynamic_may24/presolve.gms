@@ -42,7 +42,7 @@ elseif s32_max_aff_area_glo = 0,
                             - sum((ac,cell(i,j)), p32_land_start_ac(j,"ndc",ac))
                             - smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)));
   p32_max_aff_area_reg(t,i)$(sum(cell(i,j), p32_aff_pol_timestep(t,j)) = 0)
-                            = s32_max_aff_area - sum((ac,cell(i,j)), pc32_land(j,"ndc",ac));
+                            = f32_max_aff_area(i) - sum((ac,cell(i,j)), pc32_land(j,"ndc",ac));
   p32_max_aff_area_reg(t,i)$(p32_max_aff_area_reg(t,i) < 1e-06) = 0;
   p32_max_aff_area_glo(t) = 0;
 );
