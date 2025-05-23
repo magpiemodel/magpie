@@ -18,5 +18,6 @@
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/80_optimization/nlp_par/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/80_optimization/nlp_par/input.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/80_optimization/nlp_par/preloop.gms"
 $Ifi "%phase%" == "solve" $include "./modules/80_optimization/nlp_par/solve.gms"
 *######################## R SECTION END (PHASES) ###############################
