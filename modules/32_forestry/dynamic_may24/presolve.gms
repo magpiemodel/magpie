@@ -33,13 +33,13 @@ if(s32_max_aff_area_glo = 1,
   p32_max_aff_area_glo(t) = s32_max_aff_area
                           - sum((ac,j), pc32_land(j,"ndc",ac))
                           - sum(j, p32_aff_pol_timestep(t,j));
-  p32_max_aff_area_glo(t)$(p32_max_aff_area_glo(t) < 1e-06) = 0;
+  p32_max_aff_area_glo(t)$(p32_max_aff_area_glo(t) < sum((ac,j), pc32_land(j,"aff",ac))) = sum((ac,j), pc32_land(j,"aff",ac));
   p32_max_aff_area_reg(t,i) = 0;
 elseif s32_max_aff_area_glo = 0,
   p32_max_aff_area_reg(t,i) = f32_max_aff_area(i)
                             - sum((ac,cell(i,j)), pc32_land(j,"ndc",ac))
                             - sum(cell(i,j), p32_aff_pol_timestep(t,j));
-  p32_max_aff_area_reg(t,i)$(p32_max_aff_area_reg(t,i) < 1e-06) = 0;
+  p32_max_aff_area_reg(t,i)$(p32_max_aff_area_reg(t,i) < sum((ac,cell(i,j)), pc32_land(j,"aff",ac))) = sum((ac,cell(i,j)), pc32_land(j,"aff",ac));
   p32_max_aff_area_glo(t) = 0;
 );
 
