@@ -181,10 +181,16 @@ $offdelim
 /;
 
 
-parameter f15_markup_coef(kfo) Coefficient for value-added on food products (X)
-/
+table f15_markup_coef(kfo, fafh, margincoef) Coefficient for value-added on food products (X)
 $ondelim
 $include "./modules/15_food/input/f15_markup_coef.csv"
+$offdelim
+;
+
+parameter f15_fafh_coef(fafh_regr) Coefficient for regression of food-at-home (X)
+/
+$ondelim
+$include "./modules/15_food/input/f15_fafh_coef.csv"
 $offdelim
 /;
 

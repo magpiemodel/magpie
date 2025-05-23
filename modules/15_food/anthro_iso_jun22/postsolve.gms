@@ -10,13 +10,16 @@
 
 *' food away from home regression 
 
-p15_shr_fafh(t,iso) = 1.045e-01 + 5.603e-06 * im_gdp_pc_mer_iso(t,iso);
+p15_shr_fafh(t,iso) = f15_fafh_coef("a_fafh") + f15_fafh_coef("b_fafh") * im_gdp_pc_mer_iso(t,iso);
 p15_shr_fafh(t,iso)$(p15_shr_fafh(t,iso) > 1) = 1;
 p15_shr_fafh(t,iso)$(p15_shr_fafh(t, iso) < 0) = 0;
 
-p15_price_markup_fah(t,iso,kfo) = (0.0015 * (f15_markup_coef(kfo)**log(im_gdp_pc_mer_iso(t,iso))) + 322) * fm_attributes("wm", kfo);
+p15_price_markup_fah(t,iso,kfo) = (f15_markup_coef(kfo,"fah","a") * (f15_markup_coef(kfo, "fah", "b")**log(im_gdp_pc_mer_iso(t,iso))) +
+                                                                     f15_markup_coef(kfo, "fah", "c")) * fm_attributes("wm", kfo);
 p15_price_markup_fah_kcal(t,iso,kfo) = p15_price_markup_fah(t,iso,kfo) / (fm_nutrition_attributes(t,kfo,"kcal")*10**6);
-p15_price_markup_fafh(t,iso,kfo) = (0.0023 * (f15_markup_coef(kfo)**log(im_gdp_pc_mer_iso(t,iso))) + 322)* fm_attributes("wm", kfo);
+
+p15_price_markup_fafh(t,iso,kfo) = (f15_markup_coef(kfo,"fafh","a") * (f15_markup_coef(kfo, "fafh", "b")**log(im_gdp_pc_mer_iso(t,iso))) +
+                                                                     f15_markup_coef(kfo, "fafh", "c")) * fm_attributes("wm", kfo);
 p15_price_markup_fafh_kcal(t,iso,kfo) = p15_price_markup_fafh(t,iso,kfo)  / (fm_nutrition_attributes(t,kfo,"kcal")*10**6);
 
 p15_value_added_expenditures(t,iso,kfo) = p15_shr_fafh(t,iso) * p15_kcal_pc_iso(t,iso,kfo)*p15_price_markup_fafh_kcal(t,iso,kfo)
