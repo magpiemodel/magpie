@@ -1,5 +1,5 @@
 slurmjobs:
-  SLURM standby: "sbatch --job-name=scripts-output --output=logs/out-%NAME-%j.out --error=logs/out-%NAME-%j.err --mail-type=END,FAIL --time=200 --wrap=\"Rscript %SCRIPT\" --qos=standby --mem-per-cpu=5G --cpus-per-task=3"
-  SLURM standby highMem: "sbatch --job-name=scripts-output --output=logs/out-%NAME-%j.out --error=logs/out-%NAME-%j.err --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --qos=standby --time=24:00:00 --mem-per-cpu=5G --cpus-per-task=16"
-  SLURM priority: "sbatch --job-name=scripts-output --output=logs/out-%NAME-%j.out --error=logs/out-%NAME-%j.err --mail-type=END,FAIL --time=200 --wrap=\"Rscript %SCRIPT\" --qos=priority --mem-per-cpu=5G --cpus-per-task=3"
-  SLURM priority highMem: "sbatch --job-name=scripts-output --output=logs/out-%NAME-%j.out --error=logs/out-%NAME-%j.err --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --qos=priority --time=24:00:00  --mem-per-cpu=5G --cpus-per-task=16"
+  SLURM standby:          "sbatch --job-name=scripts-output --output=logs/out-%NAME-%j.out --error=logs/out-%NAME-%j.err --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --mem-per-cpu=5G --cpus-per-task=3 --qos=standby --time=200"
+  SLURM standby highMem:  "sbatch --job-name=scripts-output --output=logs/out-%NAME-%j.out --error=logs/out-%NAME-%j.err --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --mem-per-cpu=5G --cpus-per-task=16 --qos=standby --time=24:00:00"
+  SLURM priority:         "sbatch --job-name=scripts-output --output=logs/out-%NAME-%j.out --error=logs/out-%NAME-%j.err --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --mem-per-cpu=5G --cpus-per-task=3 --qos=priority --time=200"
+  SLURM priority highMem: "sbatch --job-name=scripts-output --output=logs/out-%NAME-%j.out --error=logs/out-%NAME-%j.err --mail-type=END,FAIL --wrap=\"Rscript %SCRIPT\" --mem-per-cpu=5G --cpus-per-task=16 --qos=priority --time=24:00:00"

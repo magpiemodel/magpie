@@ -10,17 +10,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **21_trade** changed export share calculation to be done at region level in the model
 - **default.cfg** input data upgraded from rev4.117 to rev4.118, default for bioenergy demand and GHG prices changed from R32M46 to R34M410, `rcp4p5` used for SSP2-NPi2025 in line with MAGICC climate outcome and REMIND assumptions.
 - **default.cfg** changed running magpie by default with optfile for specified solver settings (Tol_Optimality)
-- **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410. 
+- **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410.
 - **scenario_config.csv** SSP2 food system assumptions for ScenarioMIP VLLO to avoid sudden jump of calorie intake after 2025
+- **scripts** request 24h for SLURM jobs (except for medium which still requests 7 days)
+- **scripts** disaggregation.R moved disaggregateLandConservation function to magpie4
 
 ### added
 - **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
-- **80_optimization** added writing of conopt opt files with using scalars from input 
+- **80_optimization** added writing of conopt opt files with using scalars from input
 
 ### removed
 - **80_optimization** removed older optfile, that should be tried if no optimal solution can be found
 
 ### fixed
+- **32_forestry** fixed inconsistency in the application of `s32_max_aff_area`
 - **18_residues** fixed equation for cluster level production of crop residues in flexreg_apr16 realization
 - **44_biodiversity** expanded age-classes from 150 to 300 years in line with `ac` set. This bugfix is crucial for the BII indicator.
 
