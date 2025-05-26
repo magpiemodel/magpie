@@ -62,12 +62,12 @@ prefix <- paste(rev, "MitiConsv", cres, sep = "_")
 
 
 scenarios <- c(
-  # "SSP2-PB650-NPi", "SSP2-PB650-NDC",
-  # "SSP2-PB650-NPi-30by30", "SSP2-PB650-NDC-30by30",
-  "SSP2-PB650-AR200",
-  "SSP2-PB650-AR350",
-  "SSP2-PB650-AR500"
-  # "SSP2-REF"
+  "SSP2-PB650-NPi", "SSP2-PB650-NDC",
+  "SSP2-PB650-NPi-30by30", "SSP2-PB650-NDC-30by30",
+  "SSP2-PB650-AR200", "SSP2-PB650-AR200-30by30",
+  "SSP2-PB650-AR350", "SSP2-PB650-AR350-30by30",
+  "SSP2-PB650-AR500", "SSP2-PB650-AR500-30by30",
+  "SSP2-REF"
 )
 
 
@@ -99,7 +99,7 @@ for (scen in scenarios) {
   cfg$gms$land_snv <- "secdforest, other"
 
   # Set path to coupled output
-  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Apr25/remind/output/C_rev8_MitiConsv_SSP2-NPi-rem-12/REMIND_generic_C_rev8_MitiConsv_SSP2-NPi-rem-12.mif"
+  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-NPi-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-NPi-rem-7.mif"
 
   # No ghg price in NPI run
   cfg$gms$c56_mute_ghgprices_until <- "y2100"
