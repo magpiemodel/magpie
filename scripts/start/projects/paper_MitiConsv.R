@@ -107,15 +107,15 @@ for (scen in scenarios) {
   if (any(c("NPi", "NDC") %in% scen)) {
     cfg <- setScenario(cfg, "NDC")
     # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NDC-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NDC-rem-9.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NDC-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NDC-rem-7.mif"
     if ("30by30" %in% scen) {
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NDC-30by30-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NDC-30by30-rem-9.mif"
+      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NDC-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NDC-30by30-rem-7.mif"
     }
     if ("NPi" %in% scen) {
       cfg <- setScenario(cfg, "NPI")
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NPi-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NPi-rem-9.mif"
+      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NPi-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NPi-rem-7.mif"
       if ("30by30" %in% scen) {
-        pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NPi-30by30-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NPi-30by30-rem-9.mif"
+        pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NPi-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NPi-30by30-rem-7.mif"
       }
     }
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
@@ -123,27 +123,27 @@ for (scen in scenarios) {
   }
 
   if ("AR200" %in% scen) {
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR200-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR200-rem-9.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR200-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR200-rem-7.mif"
     if ("30by30" %in% scen) {
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR200-30by30-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR200-30by30-rem-9.mif"
+      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR200-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR200-30by30-rem-7.mif"
     }
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
     cfg <- setScenario(cfg, "AR200", scenario_config = "config/projects/scenario_config_miti_consv.csv")
   }
 
   if ("AR350" %in% scen) {
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR350-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR350-rem-9.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR350-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR350-rem-7.mif"
     if ("30by30" %in% scen) {
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR350-30by30-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR350-30by30-rem-9.mif"
+      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR350-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR350-30by30-rem-7.mif"
     }
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
     cfg <- setScenario(cfg, "AR350", scenario_config = "config/projects/scenario_config_miti_consv.csv")
   }
 
   if ("AR500" %in% scen) {
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR500-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR500-rem-9.mif"
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR500-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR500-rem-7.mif"
     if ("30by30" %in% scen) {
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR500-30by30-rem-9/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR500-30by30-rem-9.mif"
+      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR500-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR500-30by30-rem-7.mif"
     }
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
     cfg <- setScenario(cfg, "AR500", scenario_config = "config/projects/scenario_config_miti_consv.csv")
