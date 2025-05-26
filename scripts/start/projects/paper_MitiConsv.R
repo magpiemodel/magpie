@@ -25,34 +25,34 @@ library(gdx2)
 # Load start functions
 source("scripts/start_functions.R")
 
-# # ====================
-# # Calibration
-# # ====================
+# ====================
+# Calibration
+# ====================
 
-# source("config/default.cfg")
+source("config/default.cfg")
 
-# cfg$title <- paste0(rev, "_calib_MitiConsv")
-# cfg$output <- c("rds_report", "validation_short")
-# cfg$force_replace <- TRUE
+cfg$title <- paste0(rev, "_calib_MitiConsv")
+cfg$output <- c("rds_report", "validation_short")
+cfg$force_replace <- TRUE
 
-# # land conversion cost calibration settings
-# cfg$recalibrate_landconversion_cost <- TRUE
+# land conversion cost calibration settings
+cfg$recalibrate_landconversion_cost <- TRUE
 
-# # cc is new default
-# cfg <- setScenario(cfg, c("SSP2", "nocc_hist", "NPI", "ForestryExo"))
-# cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
+# cc is new default
+cfg <- setScenario(cfg, c("SSP2", "nocc_hist", "NPI", "ForestryExo"))
+cfg <- setScenario(cfg, c("MitiConsv"), scenario_config = "config/projects/scenario_config_miti_consv.csv")
 
-# # sticky
-# cfg$gms$factor_costs <- "sticky_feb18"
+# sticky
+cfg$gms$factor_costs <- "sticky_feb18"
 
-# # SNV habitat defintion
-# cfg$gms$land_snv <- "secdforest, other"
+# SNV habitat defintion
+cfg$gms$land_snv <- "secdforest, other"
 
-# # marginal land scenario
-# cfg$gms$c29_marginal_land <- "q33_marginal"
+# marginal land scenario
+cfg$gms$c29_marginal_land <- "q33_marginal"
 
-# start_run(cfg = cfg)
-# calib_tgz <- magpie4::submitCalibration(paste(rev, "MitiConsv", sep = "_"))
+start_run(cfg = cfg)
+calib_tgz <- magpie4::submitCalibration(paste(rev, "MitiConsv", sep = "_"))
 
 # ====================
 # Scenario runs
@@ -90,7 +90,7 @@ for (scen in scenarios) {
   cfg <- setScenario(cfg, "MitiConsv", scenario_config = "config/projects/scenario_config_miti_consv.csv")
 
   # Calibration settings
-  # cfg$input["calibration"] <- calib_tgz
+  cfg$input["calibration"] <- calib_tgz
 
   # sticky
   cfg$gms$factor_costs <- "sticky_feb18"
