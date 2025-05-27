@@ -4,27 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
-## [Unreleased]
+## [4.10.1] - 2025-05-27
 
 ### changed
 - **21_trade** changed export share calculation to be done at region level in the model
-- **default.cfg** input data upgraded from rev4.117 to rev4.118, default for bioenergy demand and GHG prices changed from R32M46 to R34M410, `rcp4p5` used for SSP2-NPi2025 in line with MAGICC climate outcome and REMIND assumptions.
 - **default.cfg** changed running magpie by default with optfile for specified solver settings (Tol_Optimality)
-- **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410.
+- **default.cfg** input data upgraded from rev4.117 to rev4.118, default for bioenergy demand and GHG prices changed from R32M46 to R34M410, `rcp4p5` used for SSP2-NPi2025 in line with MAGICC climate outcome and REMIND assumptions.
 - **scenario_config.csv** SSP2 food system assumptions for ScenarioMIP VLLO to avoid sudden jump of calorie intake after 2025
-- **scripts** request 24h for SLURM jobs (except for medium which still requests 7 days)
+- **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410.
 - **scripts** disaggregation.R moved disaggregateLandConservation function to magpie4
+- **scripts** request 24h for SLURM jobs (except for medium which still requests 7 days)
 
 ### added
-- **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
 - **80_optimization** added writing of conopt opt files with using scalars from input
+- **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
 
 ### removed
 - **80_optimization** removed older optfile, that should be tried if no optimal solution can be found
 
 ### fixed
-- **32_forestry** fixed inconsistency in the application of `s32_max_aff_area`
 - **18_residues** fixed equation for cluster level production of crop residues in flexreg_apr16 realization
+- **32_forestry** fixed inconsistency in the application of `s32_max_aff_area`
 - **44_biodiversity** expanded age-classes from 150 to 300 years in line with `ac` set. This bugfix is crucial for the BII indicator.
 
 
@@ -1156,7 +1156,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.10.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.10.1...develop
+[4.10.1]: https://github.com/magpiemodel/magpie/compare/v4.10.0...v4.10.1
 [4.10.0]: https://github.com/magpiemodel/magpie/compare/v4.9.1...v4.10.0
 [4.9.1]: https://github.com/magpiemodel/magpie/compare/v4.9.0...v4.9.1
 [4.9.0]: https://github.com/magpiemodel/magpie/compare/v4.8.2...v4.9.0
