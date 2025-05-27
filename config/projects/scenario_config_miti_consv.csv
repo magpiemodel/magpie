@@ -1,3 +1,6 @@
-;MitiConsv;MitiConsv-NoBuff
-gms$s56_buffer_aff;0.2;0
-input['calibration'];calibration_rev17_MitiConsv_19Mar25.tgz;calibration_rev17_MitiConsv_19Mar25.tgz
+;MitiConsv;AR0;AR200;AR350;AR500;30by30
+gms$c22_protect_scenario;;;;;;30by30
+gms$s32_max_aff_area;;;382;532;682;
+gms$s56_c_price_induced_aff ;;0;1;1;1;
+gms$s56_buffer_aff;0;;;;;
+input['calibration'];calibration_rev18_MitiConsv_04Apr25.tgz;;;;;
