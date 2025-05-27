@@ -149,13 +149,13 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    14   23   10    7    4   26   21    9   16   23   32   15
-* 
+*
 * Regionscode: 62eff8f7
 *###################### R SECTION END (VERSION INFO) ###########################
 

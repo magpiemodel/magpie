@@ -27,20 +27,20 @@ if(m_year(t) <= sm_fix_SSP2,
 
 else
 
-** Future land conservation only pertains to natural vegetation classes (land_natveg)
+** Future land conservation
 p22_conservation_area(t,j,land) = sum(cell(i,j),
       p22_wdpa_baseline(t,j,"%c22_base_protect%",land) * p22_country_weight(i)
       + p22_wdpa_baseline(t,j,"%c22_base_protect_noselect%",land) * (1-p22_country_weight(i))
       );
 * future options for land conservation are added to the WDPA baseline
-p22_conservation_area(t,j,land_natveg) =
+p22_conservation_area(t,j,land_consv) =
     sum(cell(i,j),
-      p22_wdpa_baseline(t,j,"%c22_base_protect%",land_natveg) * p22_country_weight(i)
-      + p22_wdpa_baseline(t,j,"%c22_base_protect_noselect%",land_natveg) * (1-p22_country_weight(i))
+      p22_wdpa_baseline(t,j,"%c22_base_protect%",land_consv) * p22_country_weight(i)
+      + p22_wdpa_baseline(t,j,"%c22_base_protect_noselect%",land_consv) * (1-p22_country_weight(i))
       )
     + sum(cell(i,j),
-      p22_add_consv(t,j,"%c22_protect_scenario%",land_natveg) * p22_country_weight(i)
-      + p22_add_consv(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i))
+      p22_add_consv(t,j,"%c22_protect_scenario%",land_consv) * p22_country_weight(i)
+      + p22_add_consv(t,j,"%c22_protect_scenario_noselect%",land_consv) * (1-p22_country_weight(i))
       );
 );
 
