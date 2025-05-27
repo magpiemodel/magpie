@@ -83,7 +83,7 @@ parameters
  p15_marketing_margin_fah(t,iso, kfo)          Value of the marketing margin per tDM consumed  at home (USD17MER per tDM)
  p15_marketing_margin_fafh_kcal(t,iso,kfo)     Value of the marketing margin per calorie away from home (USD17MER per kcal)
  p15_marketing_margin_fafh(t,iso, kfo)         Value of the marketing margin per tDM away from home (USD17MER per tDM)
- p15_value_added_expenditures_pc(t,iso,kfo)    Expenditures on food value-added not including producer expenditures(USD17MER)
+ p15_value_added_expenditures_pc(t,iso,kfo)    Expenditures on food value-added not including producer expenditures (USD17MER)
 
 
 * anthropometrics
