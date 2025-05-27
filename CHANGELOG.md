@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **80_optimization** removed older optfile, that should be tried if no optimal solution can be found
 
 ### fixed
+- **32_forestry** fixed inconsistency in the application of `s32_max_aff_area`
 - **18_residues** fixed equation for cluster level production of crop residues in flexreg_apr16 realization
 - **44_biodiversity** expanded age-classes from 150 to 300 years in line with `ac` set. This bugfix is crucial for the BII indicator.
 
