@@ -27,7 +27,7 @@ cfg$results_folder <- "output/:title::date:"
 cfg$force_download <- TRUE
 
 # Special outputs required for Deep Dive
-cfg$qos <- "standby_highMem_dayMax"
+cfg$qos <- "standby_highMem"
 cfg$output <- c(
   "output_check",
   # "extra/highres", # do manually on last magpie run
@@ -97,7 +97,7 @@ bau <- function(cfg) {
   cfg$gms$c30_bioen_water <- "all"
 
   # Climate Change
-  cfg$input["cellular"] <- "rev4.117EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input["cellular"] <- "rev4.118EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }

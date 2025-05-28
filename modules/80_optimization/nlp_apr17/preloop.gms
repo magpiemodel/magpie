@@ -5,9 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @equations
-*' For all commodites, the regional supply should be larger or equal to the
-*' regional demand.
+File optfile /conopt4.opt/;
 
-q21_notrade(h2,kall)..
-  sum(supreg(h2,i2),vm_prod_reg(i2,kall)) =g= sum(supreg(h2,i2), vm_supply(i2,kall));
