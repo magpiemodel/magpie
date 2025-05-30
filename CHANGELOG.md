@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **scenario_config** update of VLLO scenario to EAT-Lancet 2
 
 ### added
 - **56_ghg_policy** added optional temporal fader for start of C prive driven afforestation
