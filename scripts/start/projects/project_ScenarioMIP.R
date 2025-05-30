@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "SMIP63"
+cfg$info$flag <- "SMIP65"
 cfg$qos <- "standby"
 
 cfg$results_folder <- "output/:title:"
@@ -57,6 +57,8 @@ cfg$gms$s29_treecover_target <- 0
 cfg$gms$s44_bii_target <- 0
 cfg$gms$c44_bii_decrease <- 1
 cfg$gms$s44_start_year <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2030
+cfg$gms$s56_fader_cpriceaff_end <- 2030
 cfg$gms$s59_scm_target <- 0
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
@@ -71,6 +73,8 @@ cfg$gms$s29_treecover_target <- 0
 cfg$gms$s44_bii_target <- 0
 cfg$gms$c44_bii_decrease <- 1
 cfg$gms$s44_start_year <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2030
+cfg$gms$s56_fader_cpriceaff_end <- 2030
 cfg$gms$s59_scm_target <- 0
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
@@ -85,6 +89,8 @@ cfg$gms$s29_treecover_target <- 0
 cfg$gms$s44_bii_target <- 0
 cfg$gms$c44_bii_decrease <- 1
 cfg$gms$s44_start_year <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2030
+cfg$gms$s56_fader_cpriceaff_end <- 2030
 cfg$gms$s59_scm_target <- 0
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
@@ -100,6 +106,8 @@ cfg$gms$s29_treecover_target <- 0.01
 cfg$gms$s44_bii_target <- 0
 cfg$gms$c44_bii_decrease <- 0
 cfg$gms$s44_start_year <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2030
+cfg$gms$s56_fader_cpriceaff_end <- 2030
 cfg$gms$s59_scm_scenario_start <- 2030
 cfg$gms$s59_scm_target <- 0.1
 cfg$gms$c60_1stgen_biodem <- "const2030"
@@ -111,12 +119,14 @@ cfg <- setScenario(cfg,c("SSP2","NPI","AR-plant","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv06-VLHO-SSP2-EcPrice1250-var-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv06-VLHO-SSP2-EcPrice1250-var-rem-7.mif"
-cfg$gms$s29_treecover_scenario_start <- 2030
+cfg$gms$s29_treecover_scenario_start <- 2050
 cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s44_bii_target <- 0
 cfg$gms$c44_bii_decrease <- 0
 cfg$gms$s44_start_year <- 2050
-cfg$gms$s59_scm_scenario_start <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2040
+cfg$gms$s56_fader_cpriceaff_end <- 2050
+cfg$gms$s59_scm_scenario_start <- 2050
 cfg$gms$s59_scm_target <- 0.2
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
@@ -128,12 +138,14 @@ cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv06-VLLO-SSP1-PkPrice500-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv06-VLLO-SSP1-PkPrice500-def-rem-7.mif"
 cfg$gms$s29_treecover_scenario_start <- 2025
-cfg$gms$s29_treecover_target <- 0.02
+cfg$gms$s29_treecover_target <- 0.03
 cfg$gms$s44_bii_target <- 0.7
-cfg$gms$c44_bii_decrease <- 0
+cfg$gms$c44_bii_decrease <- 1
 cfg$gms$s44_start_year <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2030
+cfg$gms$s56_fader_cpriceaff_end <- 2030
 cfg$gms$s59_scm_scenario_start <- 2025
-cfg$gms$s59_scm_target <- 0.2
+cfg$gms$s59_scm_target <- 0.3
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
 
@@ -150,6 +162,8 @@ cfg$gms$s29_treecover_target <- 0
 cfg$gms$s44_bii_target <- 0
 cfg$gms$c44_bii_decrease <- 1
 cfg$gms$s44_start_year <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2030
+cfg$gms$s56_fader_cpriceaff_end <- 2030
 cfg$gms$s59_scm_target <- 0
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
@@ -160,12 +174,14 @@ cfg <- setScenario(cfg,c("SSP2","NPI","AR-natveg","nocc_hist"))
 cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv06-VLHO-SSP2-EcBudg400-var_natveg-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv06-VLHO-SSP2-EcBudg400-var_natveg-rem-7.mif"
-cfg$gms$s29_treecover_scenario_start <- 2030
+cfg$gms$s29_treecover_scenario_start <- 2050
 cfg$gms$s29_treecover_target <- 0.02
 cfg$gms$s44_bii_target <- 0
 cfg$gms$c44_bii_decrease <- 0
 cfg$gms$s44_start_year <- 2050
-cfg$gms$s59_scm_scenario_start <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2040
+cfg$gms$s56_fader_cpriceaff_end <- 2050
+cfg$gms$s59_scm_scenario_start <- 2050
 cfg$gms$s59_scm_target <- 0.2
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg, codeCheck = FALSE)
@@ -177,12 +193,14 @@ cfg$gms$c56_mute_ghgprices_until <- "y2030"
 cfg$path_to_report_ghgprices <- "input/REMIND_generic_C_SMIPv06-VLLO-SSP1-PkPrice500-def-rem-7.mif"
 cfg$path_to_report_bioenergy    <- "input/REMIND_generic_C_SMIPv06-VLLO-SSP1-PkPrice500-def-rem-7.mif"
 cfg$gms$s29_treecover_scenario_start <- 2025
-cfg$gms$s29_treecover_target <- 0.02
+cfg$gms$s29_treecover_target <- 0.03
 cfg$gms$s44_bii_target <- 0.7
-cfg$gms$c44_bii_decrease <- 0
+cfg$gms$c44_bii_decrease <- 1
 cfg$gms$s44_start_year <- 2030
+cfg$gms$s56_fader_cpriceaff_start <- 2030
+cfg$gms$s56_fader_cpriceaff_end <- 2030
 cfg$gms$s59_scm_scenario_start <- 2025
-cfg$gms$s59_scm_target <- 0.2
+cfg$gms$s59_scm_target <- 0.3
 cfg$gms$c60_1stgen_biodem <- "const2030"
 cfg$gms$s32_annual_aff_limit <- 1
 start_run(cfg, codeCheck = FALSE)
