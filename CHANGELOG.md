@@ -7,10 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **scenario_config** update of VLLO scenario to EAT-Lancet 2
 
 ### added
--
+- **56_ghg_policy** added optional temporal fader for start of C prive driven afforestation
 
 ### removed
 -
@@ -65,7 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config.cfg** default for `cfg$gms$s35_forest_damage ` changed from 2 to 0
 - **default.cfg** default for `cfg$gms$bioenergy` change from `1stgen_priced_dec18` to `1st2ndgen_priced_feb24`
 - **default.cfg** default for `s60_bioenergy_1st_subsidy` (formerly `c60_bioenergy_subsidy`) changed from 246 USD17MER per ton to 6.5 USD17MER per GJ based on mean GJ per ton of 1st generation bioenergy products.
-- **default.cfg** default for module `44_biodiversity` changed from `bii_target_apr24` to `bii_target
+- **default.cfg** default for module `44_biodiversity` changed from `bii_target_apr24` to `bii_target`
 - **default.cfg** input data upgraded from rev4.116 to rev4.117
 - **default.cfg** Reactivated external scenario for damage from shifting agriculture (`cfg$gms$s35_forest_damage <- 2`)
 - **default.cfg** settings for  land conversion cost calibration updated
