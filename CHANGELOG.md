@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **15_food** add calculation of consumer margins to the postsolve for calculation in model run
 - **scenario_config** update of VLLO scenario to EAT-Lancet 2
 
 ### added
