@@ -114,6 +114,9 @@ sets
 *######################### R SECTION END (SETS) ################################
 *###############################################################################
 
+set number_order Ensures that numeric values in sets follow ascending order in the GAMS entry order, necessary for using ord() and index lag
+  / 1*2200 /;
+
 sets
         h2(h) Superregional (dynamic set)
         i2(i) World regions (dynamic set)

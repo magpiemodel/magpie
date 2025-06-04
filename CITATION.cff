@@ -130,6 +130,11 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: davidho@pik-potsdam.de
 
+  - family-names: Schröter
+    given-names: Georg
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: georgsc@pik-potsdam.de
+    
   - family-names: Lotze-Campen
     given-names: Hermann
     orcid: https://orcid.org/0000-0002-0003-5508
@@ -156,8 +161,8 @@ abstract: The *Model of Agricultural Production and its Impact on the Environmen
   exogenously given population in 10 food energy categories, based on regional diets.
   Future trends in food demand are derived from a cross-country regression analysis,
   based on future scenarios on GDP and population growth.
-version: 4.10.0dev
-date-released: 2025-04-03
+version: 4.10.1dev
+date-released: 2025-05-27
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse
