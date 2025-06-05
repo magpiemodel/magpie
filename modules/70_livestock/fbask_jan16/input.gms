@@ -24,6 +24,8 @@ $setglobal c70_fac_req_regr  glo
 scalars
   s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
   s70_past_mngmnt_factor_fix  Year until the pasture management factor is fixed to 1    / 2005 /
+  s70_scavenging_ratio                       Ratio to adjust estimated pasture feed demand using scavenged feed sources (1) / 0.385 /
+  s70_intake_balance                         Contribution of feed balance flows for estimating future feed intake (1) / 1 /
   s70_subst_functional_form                  Switch for functional form of feed substitution scenario fader (1) / 1 /
   s70_feed_substitution_start                Feed substitution start year        / 2025 /
   s70_feed_substitution_target               Feed substitution target year       / 2050 /

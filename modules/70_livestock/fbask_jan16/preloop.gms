@@ -5,8 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p70_balanceflow2pasture(i) = 0;
-p70_balanceflow2pasture("IND") = 0.385;
+
+* assignment for the first time step:
+pc70_dem_feed_pasture(i,kli_rum) = 0;
+
 
 loop(t_all,
  if(m_year(t_all) <= sm_fix_SSP2,
