@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "WH06"
+cfg$info$flag <- "WH07"
 
 cfg$results_folder <- "output/:title:"
 cfg$results_folder_highres <- "output"
@@ -104,13 +104,28 @@ while (!success) {
   }
 }
 
+for (ssp in ssps) {
 
-cfg$gms$tc <- "exo"
+  # Ref
+  cfg$title <- .title(cfg, paste(ssp, "Ref", sep = "-"))
+  cfg <- setScenario(cfg, c(ssp, "NPI", "rcp4p5"))
+  cfg$gms$c56_mute_ghgprices_until <- "y2150"
+  cfg$gms$c56_pollutant_prices <- paste0("R34M410-",ssp,"-NPi2025")
+  cfg$gms$c60_2ndgen_biodem    <- paste0("R34M410-",ssp,"-NPi2025")
+  cfg$gms$c56_emis_policy <- "reddnatveg_nosoil"
+  cfg$gms$s58_rewetting_exo <- 0
+  cfg$gms$s58_rewet_exo_start_value <- 0
+  cfg$gms$s58_rewet_exo_target_value <- 0.5
+  cfg$gms$s58_annual_rewetting_limit <- 0.02
+  cfg$gms$s58_intact_prot_exo <- 0
+  cfg$gms$tc <- "endo_jan22"
+  start_run(cfg, codeCheck = FALSE)
+}
 
 for (ssp in ssps) {
   
   if (ssp %in% c("SSP1","SSP2","SSP5")) {
-    
+
     # PkBudg650
     cfg$title <- .title(cfg, paste(ssp, "1p5deg", sep = "-"))
     cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
@@ -125,6 +140,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 0
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
     ## Exo rewet scenarios
@@ -142,6 +158,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
     ## Exo rewet scenarios
@@ -159,6 +176,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
     ## Exo rewet scenarios
@@ -176,6 +194,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
     ## Exo rewet scenarios
@@ -193,7 +212,9 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
+    
   } else {
     # PkBudg1000
     cfg$title <- .title(cfg, paste(ssp, "2deg", sep = "-"))
@@ -209,6 +230,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 0
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
     ## Exo rewet scenarios
@@ -226,6 +248,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
     ## Exo rewet scenarios
@@ -243,6 +266,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
     ## Exo rewet scenarios
@@ -260,6 +284,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
     ## Exo rewet scenarios
@@ -277,6 +302,7 @@ for (ssp in ssps) {
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
     write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
     
   }
