@@ -26,16 +26,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **21_trade** changed export share calculation to be done at region level in the model
-- **default.cfg** changed running magpie by default with optfile for specified solver settings (Tol_Optimality)
+- **70_livestock** pasture feed balance flows dynamically linked to pasture demand in regions with high historical scavenged feed use
 - **default.cfg** input data upgraded from rev4.117 to rev4.118, default for bioenergy demand and GHG prices changed from R32M46 to R34M410, `rcp4p5` used for SSP2-NPi2025 in line with MAGICC climate outcome and REMIND assumptions.
+- **default.cfg** changed running magpie by default with optfile for specified solver settings (Tol_Optimality)
 - **scenario_config.csv** SSP2 food system assumptions for ScenarioMIP VLLO to avoid sudden jump of calorie intake after 2025
 - **script/start/test_runs.R** Test runs adjusted based on availability from coupled runs for R34M410.
 - **scripts** disaggregation.R moved disaggregateLandConservation function to magpie4
 - **scripts** request 24h for SLURM jobs (except for medium which still requests 7 days)
 
 ### added
-- **80_optimization** added writing of conopt opt files with using scalars from input
 - **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
+- **default.cfg** added switch to control the inclusion of feed balance flows in the calculation of future feed intake
+- **70_livestock** added new interfaces `vm_feed_intake` and `vm_feed_balanceflow`
+- **80_optimization** added writing of conopt opt files with using scalars from input
 
 ### removed
 - **80_optimization** removed older optfile, that should be tried if no optimal solution can be found
