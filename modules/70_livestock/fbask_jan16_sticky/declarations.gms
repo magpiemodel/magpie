@@ -7,29 +7,32 @@
 
 
 positive variables
- vm_feed_intake(i,kap,kall)        Regional feed intake including byproducts (mio. tDM per yr)
- vm_dem_feed(i,kap,kall)           Regional feed demand including byproducts (mio. tDM per yr)
- vm_cost_prod_livst(i,factors)     Livestock factor costs (mio. USD17MER per yr)
- vm_cost_prod_fish(i)              Fish factor costs (mio. USD17MER per yr)
- v70_investment(i,kli)             Investment in immobile farm capital (mio USD17MER per yr)
+ v70_feed_intake_pre(i,kap,kall)     Regional feed intake (pre-calculation) including byproducts (mio. tDM per yr)
+ vm_feed_intake(i,kap,kall)          Regional feed intake including byproducts (mio. tDM per yr)
+ vm_dem_feed(i,kap,kall)             Regional feed demand including byproducts (mio. tDM per yr)
+ vm_cost_prod_livst(i,factors)       Livestock factor costs (mio. USD17MER per yr)
+ vm_cost_prod_fish(i)                Fish factor costs (mio. USD17MER per yr)
+ v70_investment(i,kli)               Investment in immobile farm capital (mio USD17MER per yr)
 ;
 
 variables
- vm_feed_balanceflow(i,kap,kall)   Regional feed balance flows (mio. tDM)
+ vm_feed_balanceflow(i,kap,kall)     Regional feed balance flows (mio. tDM)
 ;
 
 equations
- q70_feed(i,kap,kall)              Regional feed demand
- q70_feed_balanceflow(i,kli_rum)   Regional feed balance flow calculations for ruminant products
- q70_feed_intake(i,kap,kall)       Regional feed intake
- q70_cost_prod_liv_labor(i)        Regional labor costs for livestock production
- q70_cost_prod_liv_capital(i)      Regional investment costs in farm capital
- q70_investment(i,kli)             Regional investments into farm capital
- q70_cost_prod_fish(i)             Regional factor input costs for fish production
+ q70_feed_intake_pre(i,kap,kall)     Regional feed intake pre-calculation
+ q70_feed_intake(i,kap,kall)         Regional feed intake
+ q70_feed(i,kap,kall)                Regional feed demand
+ q70_feed_balanceflow(i,kli_rum)     Regional feed balance flow calculations for ruminant products
+ q70_cost_prod_liv_labor(i)          Regional labor costs for livestock production
+ q70_cost_prod_liv_capital(i)        Regional investment costs in farm capital
+ q70_investment(i,kli)               Regional investments into farm capital
+ q70_cost_prod_fish(i)               Regional factor input costs for fish production
 ;
 
 parameters
- p70_balanceflow2pasture(i)                       Share of indefinite feed sources relative to pasture demand (1)
+ p70_endo_scavenging_flag(i,kli_rum)              Flag indicating regions where pasture balance flows (e.g., due to scavenging) exceed threshold relative to pasture demand (1)
+ pc70_dem_feed_pasture(i,kli_rum)                 Pasture feed demand of the previous time step (mio. tDM per yr)
  im_slaughter_feed_share(t_all,i,kap,attributes)  Share of feed that is incorporated in animal biomass (1)
  i70_livestock_productivity(t_all,i,sys)          Productivity indicator for livestock production (t FM per animal per yr)
  im_feed_baskets(t_all,i,kap,kall)                Feed baskets in tDM per tDM livestock product (1)

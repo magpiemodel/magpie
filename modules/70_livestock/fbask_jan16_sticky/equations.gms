@@ -20,19 +20,26 @@ q70_feed(i2,kap,kall) ..
      +sum(ct,vm_feed_balanceflow(i2,kap,kall));
 
 *' Feed balance flows from feed sources that reduce the demand for grazed biomass
-*' like scavenging are assumed to depend on pasture feed demand:
+*' like scavenging are for future time steps assumed to depend on pasture feed demand:
 
 q70_feed_balanceflow(i2,kli_rum) ..
  vm_feed_balanceflow(i2,kli_rum,"pasture") =e=
-     (sum(ct,fm_feed_balanceflow(ct,i2,kli_rum,"pasture")))$(p70_balanceflow2pasture(i2)=0)
+     (sum(ct,fm_feed_balanceflow(ct,i2,kli_rum,"pasture")))$(p70_endo_scavenging_flag(i2,kli_rum)=0)
      - (vm_prod_reg(i2,kli_rum)*sum(ct,im_feed_baskets(ct,i2,kli_rum,"pasture"))
-     *p70_balanceflow2pasture(i2))$(p70_balanceflow2pasture(i2)>0)
-     ;
+     *s70_scavenging_ratio)$(p70_endo_scavenging_flag(i2,kli_rum)>0);
 
+*' In contrast to feed demand, which always accounts for feed balance flows, the inclusion
+*' of feed balance flows to feed intake is reduced or switched off by the use of
+*' `s70_feed_intake_weight_balanceflow`:
+
+q70_feed_intake_pre(i2,kap,kall) ..
+ v70_feed_intake_pre(i2,kap,kall) =e= vm_prod_reg(i2,kap)
+     *sum(ct,im_feed_baskets(ct,i2,kap,kall));
 
 q70_feed_intake(i2,kap,kall) ..
- vm_feed_intake(i2,kap,kall) =e= vm_prod_reg(i2,kap)
-     *sum(ct,im_feed_baskets(ct,i2,kap,kall));
+ vm_feed_intake(i2,kap,kall) =e=
+     v70_feed_intake_pre(i2,kap,kall)*(1-s70_feed_intake_weight_balanceflow)
+     + vm_dem_feed(i2,kap,kall)*s70_feed_intake_weight_balanceflow;
 
 
 *' Factor requirement costs (e.g. labour, capital, but without costs for feed)

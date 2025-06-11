@@ -5,8 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+
+pc70_dem_feed_pasture(i,kli_rum) = vm_dem_feed.l(i,kli_rum,"pasture");
+
+
 *' Capital update from the last investment
 p70_capital(t+1,i,kli) = p70_capital(t,i,kli) + v70_investment.l(i,kli);
+
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
 
