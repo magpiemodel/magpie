@@ -17,6 +17,7 @@ parameters
  p56_fader(t_all)                                 GHG policy fader (1)
  p56_fader_reg(t_all,i)                           Regional GHG policy fader (1)
  pcm_carbon_stock(j,land,c_pools,stockType)       Carbon stock in vegetation soil and litter for different land types (mio. tC)
+ p56_fader_cpriceaff(t_all)                       Fader for C price induced afforestation (1)
 ;
 
 equations

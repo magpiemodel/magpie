@@ -97,7 +97,7 @@ bau <- function(cfg) {
   cfg$gms$c30_bioen_water <- "all"
 
   # Climate Change
-  cfg$input["cellular"] <- "rev4.118EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input["cellular"] <- "rev4.119EL2_h12_c6a7458f_cellularmagpie_c200_IPSL-CM6A-LR-ssp370_lpjml-8e6c5eb1.tgz"
 
   return(cfg)
 }
