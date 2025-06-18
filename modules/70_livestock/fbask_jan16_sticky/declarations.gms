@@ -8,7 +8,6 @@
 
 positive variables
  v70_feed_intake_pre(i,kap,kall)     Regional feed intake (pre-calculation) including byproducts (mio. tDM per yr)
- vm_feed_intake(i,kap,kall)          Regional feed intake including byproducts (mio. tDM per yr)
  vm_dem_feed(i,kap,kall)             Regional feed demand including byproducts (mio. tDM per yr)
  vm_cost_prod_livst(i,factors)       Livestock factor costs (mio. USD17MER per yr)
  vm_cost_prod_fish(i)                Fish factor costs (mio. USD17MER per yr)
@@ -17,6 +16,7 @@ positive variables
 
 variables
  vm_feed_balanceflow(i,kap,kall)     Regional feed balance flows (mio. tDM)
+ vm_feed_intake(i,kap,kall)          Regional feed intake including byproducts (mio. tDM per yr)
 ;
 
 equations
