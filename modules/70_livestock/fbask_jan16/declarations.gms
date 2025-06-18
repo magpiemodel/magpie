@@ -53,11 +53,11 @@ parameters
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov70_feed_intake_pre(t,i,kap,kall,type) Regional feed intake (pre-calculation) including byproducts (mio. tDM per yr)
- ov_feed_intake(t,i,kap,kall,type)       Regional feed intake including byproducts (mio. tDM per yr)
  ov_dem_feed(t,i,kap,kall,type)          Regional feed demand including byproducts (mio. tDM per yr)
  ov_cost_prod_livst(t,i,factors,type)    Livestock factor costs (mio. USD17MER per yr)
  ov_cost_prod_fish(t,i,type)             Fish factor costs (mio. USD17MER per yr)
  ov_feed_balanceflow(t,i,kap,kall,type)  Regional feed balance flows (mio. tDM)
+ ov_feed_intake(t,i,kap,kall,type)       Regional feed intake including byproducts (mio. tDM per yr)
  oq70_feed_intake_pre(t,i,kap,kall,type) Regional feed intake pre-calculation
  oq70_feed_intake(t,i,kap,kall,type)     Regional feed intake
  oq70_feed(t,i,kap,kall,type)            Regional feed demand
