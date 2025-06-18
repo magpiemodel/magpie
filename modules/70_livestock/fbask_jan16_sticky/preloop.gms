@@ -7,7 +7,7 @@
 
 
 * assignment for the first time step:
-pc70_dem_feed_pasture(i,kli_rum) = 0;
+pc70_dem_feed_pasture(i,kli_rum) = 0.001;
 
 
 loop(t_all,
