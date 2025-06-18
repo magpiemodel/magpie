@@ -13,7 +13,7 @@ vm_feed_balanceflow.lo(i,kli_rum,"pasture") = -Inf;
 
 if (sum(sameas(t_past,t),1) = 1,
    p70_endo_scavenging_flag(i,kli_rum) = 0;
-   if (ord(t) = smax(t2, ord(t2)$(t_past(t2))),
+   if (ord(t) = smax(t2, ord(t2)$(t_past(t2))) AND card(t) > sum(t_all$(t(t_all) and t_past(t_all)), 1),
       p70_endo_scavenging_flag(i,kli_rum) = - fm_feed_balanceflow(t-1,i,kli_rum,"pasture")/pc70_dem_feed_pasture(i,kli_rum);
       p70_endo_scavenging_flag(i,kli_rum)$(p70_endo_scavenging_flag(i,kli_rum) < s70_scavenging_ratio) = 0;
    );

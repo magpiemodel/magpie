@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-pc70_dem_feed_pasture(i,kli_rum) = vm_dem_feed.l(i,kli_rum,"pasture");
+pc70_dem_feed_pasture(i,kli_rum) = max(vm_dem_feed.l(i,kli_rum,"pasture"), 0.001);
 
 
 *' Capital update from the last investment
