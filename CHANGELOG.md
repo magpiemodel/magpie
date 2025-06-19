@@ -8,25 +8,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **15_food** add calculation of consumer margins to the postsolve for calculation in model run
+- **70_livestock** pasture feed balance flows dynamically linked to pasture demand in regions with high historical scavenged feed use
+- **53_methane** CH4 emissions from enteric fermentation are now calculated using `vm_feed_intake`
+- **55_awms** Manure excretion is now calculated using `vm_feed_intake`
 - **scenario_config** update of VLLO scenario to EAT-Lancet 2
 - **default.cfg** input data upgraded from rev4.118 to rev4.119 (minor update population and GDP)
 
 ### added
 - **core** added unused set number_order to force number sets like maccs_steps to be ordered
 - **56_ghg_policy** added optional temporal fader for start of C prive driven afforestation
+- **70_livestock** added new interfaces `vm_feed_intake` and `vm_feed_balanceflow`
+- **default.cfg** added switch to control the inclusion of feed balance flows in the calculation of future feed intake
 
 ### removed
 -
 
 ### fixed
--
+- **71_disagg_lvst** added set.gms to the `off` realization to make these sets available for other modules independent of the selected realization
 
 
 ## [4.10.1] - 2025-05-27
 
 ### changed
 - **21_trade** changed export share calculation to be done at region level in the model
-- **70_livestock** pasture feed balance flows dynamically linked to pasture demand in regions with high historical scavenged feed use
 - **default.cfg** input data upgraded from rev4.117 to rev4.118, default for bioenergy demand and GHG prices changed from R32M46 to R34M410, `rcp4p5` used for SSP2-NPi2025 in line with MAGICC climate outcome and REMIND assumptions.
 - **default.cfg** changed running magpie by default with optfile for specified solver settings (Tol_Optimality)
 - **scenario_config.csv** SSP2 food system assumptions for ScenarioMIP VLLO to avoid sudden jump of calorie intake after 2025
@@ -36,8 +40,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### added
 - **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
-- **default.cfg** added switch to control the inclusion of feed balance flows in the calculation of future feed intake
-- **70_livestock** added new interfaces `vm_feed_intake` and `vm_feed_balanceflow`
 - **80_optimization** added writing of conopt opt files with using scalars from input
 
 ### removed
