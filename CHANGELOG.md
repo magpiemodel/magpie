@@ -10,13 +10,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **15_food** add calculation of consumer margins to the postsolve for calculation in model run
 - **scenario_config** update of VLLO scenario to EAT-Lancet 2
 - **default.cfg** input data upgraded from rev4.118 to rev4.119 (minor update population and GDP)
+- **readme** added setup instruction specifics for Linux/macOS
 
 ### added
 - **core** added unused set number_order to force number sets like maccs_steps to be ordered
 - **56_ghg_policy** added optional temporal fader for start of C prive driven afforestation
 
 ### removed
--
+- **main** Removed Dockerfile, as that is no longer supported/maintained
 
 ### fixed
 -
