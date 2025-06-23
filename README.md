@@ -103,7 +103,7 @@ We recommend to NOT have an active conda environment (if you're unsure what this
 
 1. make sure you have a gams license incl. the CONOPT solver
 1. [install gams](https://www.gams.com/46/docs/UG_MAC_INSTALL.html)
-1. install git, R, and pandoc with `brew install git r pandoc`
+1. install git and pandoc with `brew install git pandoc`
 1. install TinyTeX with `Rscript -e 'install.packages("tinytex",repos="https://cloud.r-project.org"); tinytex::install_tinytex()'`
 
 Usually macOS users can download precompiled binary R packages, but in case R package installations fail during compilation, install the following system packages:
