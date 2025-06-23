@@ -100,7 +100,10 @@ This list is highly system specific and most likely incomplete. Pay close attent
 
 #### macOS
 We recommend to NOT have an active conda environment (if you're unsure what this means you likely don't have conda) when working with magpie (`conda deactivate`). We recommend installing system packages via [brew](https://brew.sh/).
-
+Install R from https://cran.r-project.org/bin/macosx/
+Choose the right version: arm for Apple Silicon (M1, M2, …), x86_64 for older Intel-based Macs.
+Install gfortran from https://cran.r-project.org/bin/macosx/tools/
+Direct link: https://mac.r-project.org/tools/gfortran-12.2-universal.pkg
 1. make sure you have a gams license incl. the CONOPT solver
 1. [install gams](https://www.gams.com/46/docs/UG_MAC_INSTALL.html)
 1. install git and pandoc with `brew install git pandoc`
