@@ -92,11 +92,27 @@ version and added to the PATH environment variable, so MAgPIE can use them.
 1. install git, R, and pandoc with `sudo apt install git r-base pandoc`
 1. install TinyTeX with `Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'`
 
+In case R package installations fail during compilation, install the following system packages:
+```
+sudo apt install build-essential cmake gdal-bin libcurl4-gnutls-dev libcurl4-openssl-dev libfontconfig1 libfreetype-dev libfribidi-dev libgdal-dev libgit2-dev libglpk-dev libharfbuzz-dev libjpeg-dev libnetcdf-dev libpng-dev libpoppler-cpp-dev libssl-dev libtiff5-dev libudunits2-dev libxml2-dev pari-gp qpdf
+```
+This list is highly system specific and most likely incomplete. Pay close attention to error messages, usually they state which system package needs to be installed.
+
 #### macOS
+We recommend to NOT have an active conda environment (if you're unsure what this means you likely don't have conda) when working with magpie (`conda deactivate`). We recommend installing system packages via [brew](https://brew.sh/).
+Install R from https://cran.r-project.org/bin/macosx/
+Choose the right version: arm for Apple Silicon (M1, M2, …), x86_64 for older Intel-based Macs.
+Install gfortran from https://cran.r-project.org/bin/macosx/tools/
 1. make sure you have a gams license incl. the CONOPT solver
 1. [install gams](https://www.gams.com/46/docs/UG_MAC_INSTALL.html)
-1. install git, R, and pandoc with `brew install git r pandoc`
-1. install TinyTeX with `Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'`
+1. install git and pandoc with `brew install git pandoc`
+1. install TinyTeX with `Rscript -e 'install.packages("tinytex",repos="https://cloud.r-project.org"); tinytex::install_tinytex()'`
+
+Usually macOS users can download precompiled binary R packages, but in case R package installations fail during compilation, install the following system packages:
+```
+brew install abseil cmake fribidi gdal harfbuzz libgit2 libpng libtiff libxml2 pkg-config
+```
+This list is highly system specific and most likely incomplete. Pay close attention to error messages, usually they state which system package needs to be installed.
 
 #### Windows
 1. make sure you have a gams license incl. the CONOPT solver
@@ -128,23 +144,6 @@ PATH environment variable. Search for a tutorial online if you are unsure how to
 
 ### troubleshooting
 Please check [this discussion](https://github.com/magpiemodel/magpie/discussions/650) for known problems and solutions and to report new problems you encounter while setting up MAgPIE.
-
-## DOCKER
-To use Docker, copy your `gamslice.txt`
-into the MAgPIE main directory, and build the magpie image using the command
-```
-sudo docker build -t magpie .
-```
-Basic usage: Run the container (note the use of an absolute path) using
-```
-sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie
-```
-Note: this will run MAgPIE with the default settings, if you want to change them choose the
-
-Advanced usage: Run the container interactively using
-```
-sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie bash
-```
 
 ## HOW TO CONFIGURE
 Model run settings are set in `config/default.cfg` (or another config file of

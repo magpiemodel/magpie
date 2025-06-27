@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **55_awms** Manure excretion is now calculated using `vm_feed_intake`
 - **scenario_config** update of VLLO scenario to EAT-Lancet 2
 - **default.cfg** input data upgraded from rev4.118 to rev4.119 (minor update population and GDP)
+- **readme** added setup instruction specifics for Linux/macOS
 
 ### added
 - **core** added unused set number_order to force number sets like maccs_steps to be ordered
@@ -21,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **default.cfg** added switch to control the inclusion of feed balance flows in the calculation of future feed intake
 
 ### removed
--
+- **main** Removed Dockerfile, as that is no longer supported/maintained
 
 ### fixed
 - **71_disagg_lvst** added set.gms to the `off` realization to make these sets available for other modules independent of the selected realization
