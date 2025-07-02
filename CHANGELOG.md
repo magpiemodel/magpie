@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scenario_config** update of VLLO scenario to EAT-Lancet 2
 - **default.cfg** input data upgraded from rev4.118 to rev4.119 (minor update population and GDP)
 - **readme** added setup instruction specifics for Linux/macOS
+- **scripts** changed setting in the 'mitigation and conservation' start script.
 
 ### added
 - **core** added unused set number_order to force number sets like maccs_steps to be ordered
