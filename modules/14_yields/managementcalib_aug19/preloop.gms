@@ -1,9 +1,11 @@
-*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
+
+* ISN'T THIS BEING WRITTEN OVER LATER?
 
 i14_yields_calib(t,j,kve,w)   = f14_yields(t,j,kve,w);
 
@@ -96,47 +98,75 @@ loop(t,
 *' on the constant values `i14_modeled_yields_hist`, `i14_fao_yields_hist`, `i14_lambda_yields`
 *' and the uncalibrated, cellular yield `f14_yields` following the idea of eq. (9) in [@Heinke.2013]:
 
-i14_managementcalib(t,j,knbe14,w) =
-  1 + (sum(cell(i,j), i14_fao_yields_hist(t,i,knbe14) - i14_modeled_yields_hist(t,i,knbe14)) /
-                             f14_yields(t,j,knbe14,w) *
-      (f14_yields(t,j,knbe14,w) / (sum(cell(i,j),i14_modeled_yields_hist(t,i,knbe14))+10**(-8))) **
-                             sum(cell(i,j),i14_lambda_yields(t,i,knbe14)))$(f14_yields(t,j,knbe14,w)>0);
+* INSTRUCTIONS:
+* Everywhere where previously f14_yields was used, use i14_yields_combined
+* Everywhere where previously i14_yields_calib was used, replace with i14_yields_calib_combined
+* what are temporary parameters that are being used in the loop that might be needed later on by other
+* modules or within the equations or whatever that I don't want to have changed to some nonsense
 
+* Adding gsadapt/noadapt domain for loop in management calibration
+i14_yields_combined(t,j,"nogsadapt",kve,w) = f14_yields(t,j,kve,w);
+i14_yields_combined(t,j,"gsadapt",kve,w)   = f14_yields_gsadapt(t,j,kve,w);
 
-i14_yields_calib(t,j,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * f14_yields(t,j,knbe14,w);
-pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
+i14_yields_calib_combined(t,j,yldtype,kve,w) = i14_yields_combined(t,j,yldtype,kve,w);
+
+loop(yldtype,
+
+  i14_managementcalib(t,j,knbe14,w) =
+    1 + (sum(cell(i,j), i14_fao_yields_hist(t,i,knbe14) - i14_modeled_yields_hist(t,i,knbe14)) /
+                              i14_yields_combined(t,j,yldtype,knbe14,w) *
+        (i14_yields_combined(t,j,yldtype,knbe14,w) / (sum(cell(i,j),i14_modeled_yields_hist(t,i,knbe14))+10**(-8))) **
+                              sum(cell(i,j),i14_lambda_yields(t,i,knbe14)))$(i14_yields_combined(t,j,yldtype,knbe14,w)>0);
+
+* LPJ2MAGPIE: We believe that we are writing over the same pm_yields_semi_calib with the same data twice. Kristine, is that true? Can we move this out of the loop?
+  i14_yields_calib_combined(t,j,yldtype,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * i14_yields_combined(t,j,yldtype,knbe14,w);
+  pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib_combined("y1995",j,yldtype,knbe14,w);
 
 *' Note that the calculation is split into two parts for better readability.
 
 *' Irrigated yields are calibrated to meet the country-level
 *' ratio between irrigated and rainfed yields reported by Aquastat.
 *' This can be de-activated with the switch `s14_calib_ir2rf`.
-if ((s14_calib_ir2rf = 1),
+  if ((s14_calib_ir2rf = 1),
 
 * Weighted yields
-  i14_calib_yields_hist(i,w)
-     = sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
-       sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14));
+    i14_calib_yields_hist(i,w)
+      = sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) /
+        sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14));
 
 * Use irrigated-rainfed ratio of Aquastat if larger than our calculated ratio
-  i14_calib_yields_ratio(i) = i14_calib_yields_hist(i,"irrigated") / i14_calib_yields_hist(i,"rainfed");
-  i14_target_ratio(i) = max(i14_calib_yields_ratio(i), f14_ir2rf_ratio(i));
-  i14_yields_calib(t,j,knbe14,"irrigated") = sum((cell(i,j)), i14_target_ratio(i) / i14_calib_yields_ratio(i)) *
-                                               i14_yields_calib(t,j,knbe14,"irrigated");
+    i14_calib_yields_ratio(i) = i14_calib_yields_hist(i,"irrigated") / i14_calib_yields_hist(i,"rainfed");
+    i14_target_ratio(i) = max(i14_calib_yields_ratio(i), f14_ir2rf_ratio(i));
+    i14_yields_calib_combined(t,j,yldtype,knbe14,"irrigated") = sum((cell(i,j)), i14_target_ratio(i) / i14_calib_yields_ratio(i)) *
+                                                i14_yields_calib_combined(t,j,yldtype,knbe14,"irrigated");
 
 * Calibrate newly calibrated yields to FAO yields
-  i14_modeled_yields_hist2(i,knbe14)
-   = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
-      sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))>0.00001)
-   + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * f14_yields("y1995",j,knbe14,w)) /
-      sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))<0.00001);
+    i14_modeled_yields_hist2(i,knbe14)
+    = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) /
+        sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))>0.00001)
+    + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) /
+        sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))<0.00001);
 
-  i14_yields_calib(t,j,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) /
-                                                      i14_modeled_yields_hist2(i,knbe14)) *
-                                   i14_yields_calib(t,j,knbe14,w);
+* LPJ2ML we replaced f14_yields with i14_yields_calib_combined. Could it be that this should be i14_yields_calib_combined
 
-  pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
+    i14_yields_calib_combined(t,j,yldtype,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) /
+                                                        i14_modeled_yields_hist2(i,knbe14)) *
+                                    i14_yields_calib_combined(t,j,yldtype,knbe14,w);
+
+* LPJ2MAGPIE: We believe that we are writing over the same pm_yields_semi_calib with the same data twice. Kristine, is that true? Can we move this out of the loop?
+    pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib_combined("y1995",j,yldtype,knbe14,w);
+  );
+
 );
+
+i14_yields_calib_gsadapt(t,j,kve,w) = i14_yields_calib_combined(t,j,"gsadapt",kve,w);
+i14_yields_calib(t,j,kve,w) = i14_yields_calib_combined(t,j,"nogsadapt",kve,w);
+
+* Here we calculate the gsadapt ratio for tau calibration as a weighted mean using croparea as weight
+pm_yields_gsadapt_ratio(t,j,kve,w) = i14_yields_calib_gsadapt(t,j,kve,w) / (i14_yields_calib(t,j,kve,w) + 1e-8);
+
+* Cap the ratio at 5
+pm_yields_gsadapt_ratio(t,j,kve,w) = min(pm_yields_gsadapt_ratio(t,j,kve,w), 2);
 
 *' @stop
 

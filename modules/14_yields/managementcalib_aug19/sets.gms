@@ -33,5 +33,8 @@ sets
   ncp_type14 natures contributions to people (NCP) relevant for agricultural yields
        / soil_intact, poll_suff /
 
+  yldtype Yield LPJmL run type with or without growing season adaptation
+       / gsadapt, nogsadapt /
+       
 ;
 

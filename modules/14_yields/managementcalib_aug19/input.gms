@@ -39,15 +39,31 @@ $offdelim
 ;
 $offEmpty
 
-table f14_yields(t_all,j,kve,w) LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
+* LPJmL2MAGPIE In nocc runs, should one replace the i14_yields variable with the nogsadapt variant?
+* Now that nogsadapt is the "default" this will actually be a different fix, I guess on the tau side?
+* Also, some renaming will need to occur here. The gsadapt nogsadapt file names and variables are inconsistent.
+
+table f14_yields(t_all,j,kve,w) LPJmL potential yields per cell WITHOUT gsadapt (rainfed and irrigated) (tDM per ha per yr)
 $ondelim
-$include "./modules/14_yields/input/lpj_yields.cs3"
+$include "./modules/14_yields/input/lpj_yields_nogsadapt.cs3"
 $offdelim
 ;
+
 * set values to 1995 if nocc scenario is used, or to sm_fix_cc after sm_fix_cc if nocc_hist is used
 $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1995",j,kve,w);
 $if "%c14_yields_scenario%" == "nocc_hist" f14_yields(t_all,j,kve,w)$(m_year(t_all) > sm_fix_cc) = f14_yields(t_all,j,kve,w)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(f14_yields,"j,kve,w");
+
+table f14_yields_gsadapt(t_all,j,kve,w) LPJmL potential yields WITH gsadapt per cell (rainfed and irrigated) (tDM per ha per yr)
+$ondelim
+$include "./modules/14_yields/input/lpj_yields.cs3"
+$offdelim
+;
+
+* set values to 1995 if nocc scenario is used, or to sm_fix_cc after sm_fix_cc if nocc_hist is used
+$if "%c14_yields_scenario%" == "nocc" f14_yields_gsadapt(t_all,j,kve,w) = f14_yields_gsadapt("y1995",j,kve,w);
+$if "%c14_yields_scenario%" == "nocc_hist" f14_yields_gsadapt(t_all,j,kve,w)$(m_year(t_all) > sm_fix_cc) = f14_yields_gsadapt(t_all,j,kve,w)$(m_year(t_all) = sm_fix_cc);
+m_fillmissingyears(f14_yields_gsadapt,"j,kve,w");
 
 table f14_pyld_hist(t_all,i) Modelled regional pasture yields in the past (tDM per ha per yr)
 $ondelim
