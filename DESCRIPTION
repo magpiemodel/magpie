@@ -28,7 +28,7 @@ Imports:
     mrcommons,
     patchwork,
     piamenv (>= 0.5.5),
-    piamInterfaces (>= 0.47.2),
+    piamInterfaces (>= 0.53.4),
     piamutils,
     quitte,
     raster,

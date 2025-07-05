@@ -28,7 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **71_disagg_lvst** added set.gms to the `off` realization to make these sets available for other modules independent of the selected realization
-- **32_forestry** clean-up of switches for rotation length calculation
+- **32_forestry** clean-up of switches for rotation length calculation. Removed `c32_interest_rate`. Merged with `c32_rot_calc_type`.
 
 
 ## [4.10.1] - 2025-05-27
