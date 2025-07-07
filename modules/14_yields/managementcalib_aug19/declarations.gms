@@ -7,10 +7,9 @@
 
 parameters
  i14_yields_calib(t,j,kve,w)                             Calibrated biophysical input yields WITHOUT growing period adaptation (excluding technological change) (tDM per ha per yr)
- i14_yields_calib_gsadapt(t,j,kve,w)                     Calibrated biophysical input yields WITH growing period adapation (excluding technological change) (tDM per ha per yr)
- i14_yields_combined(t,j,yldtype,kve,w)                  Blah blah blah (blah)
- i14_yields_calib_combined(t,j,yldtype,kve,w)            Combined parameter with gsadapt and nogsadapt yields (tDM per ha per yr)
- pm_yields_gsadapt_ratio(t,j,kve,w)                      Ratio between gsadapt and nosadapt yields (1)
+ i14_yields_combined(t,j,yldtype,kcr,w)                  Blah blah blah (blah)
+ i14_yields_calib_combined(t,j,yldtype,kcr,w)            Combined parameter with gsadapt and nogsadapt yields (tDM per ha per yr)
+ pm_yields_gsadapt_ratio(i)                              Ratio between gsadapt and nosadapt yields (1)
  p14_pyield_LPJ_reg(t_all,i)                             Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
  p14_pyield_corr(t,i)                                    Regional pasture management correction for historical time steps (1)
  i14_croparea_total(t_all,w,j)                           Cellular croparea (mio. ha)

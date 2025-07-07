@@ -12,20 +12,7 @@ if (sum(sameas(t_past,t),1) = 1 AND s13_ignore_tau_historical = 0,
   vm_tau.lo(h,"pastr") =   f13_pastr_tau_hist(t,h);
   vm_tau.lo(h,"crop") =    f13_tau_historical(t,h);
 else
-  vm_tau.lo(h, "pastr") = pcm_tau(h,"pastr");
-
-* Setting upper bound to 2 - Claude suggestion
-  vm_tau.lo(h,"crop") = min(2 * pcm_tau(h,"crop"),
-    pcm_tau(h,"crop")
-      * sum((i,j,kcr,w)$(supreg(h,i) AND cell(i,j)),
-            pm_yields_gsadapt_ratio(t,j,kcr,w)
-          * pcm_area(j,w,kcr)
-          )
-      / sum((i,j,kcr,w)$(supreg(h,i) AND cell(i,j)),
-            pcm_area(j,w,kcr)
-          )
-  );
-
+  vm_tau.lo(h, tautype) =    pcm_tau(h, tautype);
 );
 
   vm_tau.up(h,tautype) =  2 * pcm_tau(h,tautype);

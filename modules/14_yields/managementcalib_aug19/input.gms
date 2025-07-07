@@ -10,23 +10,15 @@ $setglobal c14_yields_scenario  cc
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
-scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
-
-scalar s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /;
-
-scalar s14_degradation   Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /;
-
-scalar s14_use_yield_calib  Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /;
-
-scalar s14_minimum_wood_yield Minimum wood yield for timber harvest in natural vegetation (tDM per ha per yr) / 10 /;
-
 scalars
-  s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
+  s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /
+  s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /
+  s14_degradation              Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /
   s14_yld_reduction_soil_loss  Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
-;
-
-scalars
-  s14_carbon_fraction Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
+  s14_use_yield_calib   Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
+  s14_yld_past_switch   Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
+  s14_minimum_wood_yield   Minimum wood yield for timber harvest in natural vegetation (tDM per ha per yr) / 10 /
+  s14_carbon_fraction      Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
 ;
 
 
@@ -43,9 +35,20 @@ $offEmpty
 * Now that nogsadapt is the "default" this will actually be a different fix, I guess on the tau side?
 * Also, some renaming will need to occur here. The gsadapt nogsadapt file names and variables are inconsistent.
 
-table f14_yields(t_all,j,kve,w) LPJmL potential yields per cell WITHOUT gsadapt (rainfed and irrigated) (tDM per ha per yr)
+table f14_yields_nogsadapt(t_all,j,kve,w) LPJmL potential yields per cell WITHOUT gsadapt (rainfed and irrigated) (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/input/lpj_yields_nogsadapt.cs3"
+$offdelim
+;
+
+* set values to 1995 if nocc scenario is used, or to sm_fix_cc after sm_fix_cc if nocc_hist is used
+$if "%c14_yields_scenario%" == "nocc" f14_yields_nogsadapt(t_all,j,kve,w) = f14_yields_nogsadapt("y1995",j,kve,w);
+$if "%c14_yields_scenario%" == "nocc_hist" f14_yields_nogsadapt(t_all,j,kve,w)$(m_year(t_all) > sm_fix_cc) = f14_yields_nogsadapt(t_all,j,kve,w)$(m_year(t_all) = sm_fix_cc);
+m_fillmissingyears(f14_yields_nogsadapt,"j,kve,w");
+
+table f14_yields(t_all,j,kve,w) LPJmL potential yields WITH gsadapt per cell (rainfed and irrigated) (tDM per ha per yr)
+$ondelim
+$include "./modules/14_yields/input/lpj_yields.cs3"
 $offdelim
 ;
 
@@ -53,17 +56,6 @@ $offdelim
 $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1995",j,kve,w);
 $if "%c14_yields_scenario%" == "nocc_hist" f14_yields(t_all,j,kve,w)$(m_year(t_all) > sm_fix_cc) = f14_yields(t_all,j,kve,w)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(f14_yields,"j,kve,w");
-
-table f14_yields_gsadapt(t_all,j,kve,w) LPJmL potential yields WITH gsadapt per cell (rainfed and irrigated) (tDM per ha per yr)
-$ondelim
-$include "./modules/14_yields/input/lpj_yields.cs3"
-$offdelim
-;
-
-* set values to 1995 if nocc scenario is used, or to sm_fix_cc after sm_fix_cc if nocc_hist is used
-$if "%c14_yields_scenario%" == "nocc" f14_yields_gsadapt(t_all,j,kve,w) = f14_yields_gsadapt("y1995",j,kve,w);
-$if "%c14_yields_scenario%" == "nocc_hist" f14_yields_gsadapt(t_all,j,kve,w)$(m_year(t_all) > sm_fix_cc) = f14_yields_gsadapt(t_all,j,kve,w)$(m_year(t_all) = sm_fix_cc);
-m_fillmissingyears(f14_yields_gsadapt,"j,kve,w");
 
 table f14_pyld_hist(t_all,i) Modelled regional pasture yields in the past (tDM per ha per yr)
 $ondelim
