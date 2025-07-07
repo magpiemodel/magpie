@@ -9,3 +9,15 @@ table f21_trade_balance(t_all,h,kall) trade balance of positive exports and nega
 $ondelim
 $include "./modules/21_trade/input/f21_trade_balance.cs3"
 $offdelim;
+
+table f21_trade_margin(h,kall) Costs of freight and insurance (USD17MER per tDM)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_margin.cs3"
+$offdelim
+;
+
+table f21_trade_tariff(h,kall) Specific duty tariffs (USD17MER per tDM)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_tariff.cs3"
+$offdelim
+;
