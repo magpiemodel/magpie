@@ -18,7 +18,10 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)     Regional  trade costs (mio. USD17MER per yr)
- oq21_notrade(t,h,kall,type) Superregional production constraint of non-tradable commodities (mio. tDM per yr)
+ ov_cost_trade(t,i,type)               Regional  trade costs (mio. USD17MER per yr)
+ ov21_cost_trade_reg(t,h,k_trade,type) Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
+ oq21_notrade(t,h,kall,type)           Superregional production constraint of non-tradable commodities (mio. tDM per yr)
+ oq21_cost_trade(t,h,type)             Superregional  trade costs (mio. USD17MER per yr)
+ oq21_cost_trade_reg(t,h,k_trade,type) Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
