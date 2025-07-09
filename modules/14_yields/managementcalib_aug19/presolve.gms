@@ -66,9 +66,15 @@ pm_timber_yield(t,j,ac,land_natveg)$(pm_timber_yield(t,j,ac,land_natveg) < s14_m
 
 
 * Calculate growing period adaption factor based on previous croppping pattern
-pm_yields_gsadapt_ratio(i) = sum((cell(i,j),w,kcr,ct), i14_yields_calib_combined(ct,j,"gsadapt",kcr,w) *
-                                                      pcm_area(j,w,kcr)) /
-                             sum((cell(i,j),w,kcr,ct), i14_yields_calib_combined(ct,j,"nogsadapt",kcr,w) *
-                                                      pcm_area(j,w,kcr));
+p14_yields_gsadapt_ratio(t,i) = 
+  sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
+  sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"nogsadapt",kcr,w) * pcm_area(j,w,kcr));
+
+
+p14_yields_gsadapt_ratio_previous(t,i) = 
+  sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
+  sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"nogsadapt",kcr,w) * pcm_area(j,w,kcr));
+
+p14_yields_gsadapt_ratio_increment(t,i) = p14_yields_gsadapt_ratio(t,i) / p14_yields_gsadapt_ratio_previous(t,i);
 
 ***i14_yields_calib(t,j,kcr,w) = i14_yields_calib(t,j,kcr,w) / sum(cell(i,j),pm_yields_gsadapt_ratio(i));
