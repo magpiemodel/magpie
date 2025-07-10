@@ -74,7 +74,7 @@ s15_convergence_partstep            Share of last iteration for convergence (1=o
 * maximum relative per-capita gdp difference within a region between two iteratios
 s15_exo_waste                       Switch for transition towards exogenous food waste scenario (1)  / 0 /
 s15_waste_scen                      Scenario target for the ratio between food demand and intake (1)  / 1.2 /
-s15_exo_diet                        Switch for transition towards exogenous diet scenario (1)  / 0 /
+s15_exo_diet                        Switch for transition towards exogenous diet scenario (1)  / 3 /
 * The following switches only become active when s15_exo_diet is active
 * They define which components of the diet should become active
 * If the switch is set to 1,the exogenous diets are activated.
