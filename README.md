@@ -5,19 +5,19 @@
 
 ## WHAT IS MAGPIE?
 The *Model of Agricultural Production and its Impact on the Environment* (MAgPIE)
-is a modular open-source framework for modeling global land-systems, which 
-explicitly accounts for both agriculture and forestry. It is coupled to the 
-grid-based dynamic vegetation model LPJmL, with a spatial resolution of 0.5°x0.5°. 
-MAgPIE takes regional economic conditions such as demand for agricultural commodities 
-and timber products, technological development, and production costs into account, 
-as well as spatially explicit data on potential crop yields, forest growth, 
-and land and water constraints (from LPJmL). Based on these, the model derives 
-specific land use patterns, crop yields, timber yields, and total costs of 
-agricultural and forestry production for each grid cell. The objective function of 
-the land use model is to minimize total cost of production for a given amount of 
-regional food, bioenergy, and timber demand. Regional food energy demand is defined 
-for an exogenously given population in 10 food energy categories, based on regional 
-diets. Future trends in food demand are derived from a cross-country regression analysis, 
+is a modular open-source framework for modeling global land-systems, which
+explicitly accounts for both agriculture and forestry. It is coupled to the
+grid-based dynamic vegetation model LPJmL, with a spatial resolution of 0.5°x0.5°.
+MAgPIE takes regional economic conditions such as demand for agricultural commodities
+and timber products, technological development, and production costs into account,
+as well as spatially explicit data on potential crop yields, forest growth,
+and land and water constraints (from LPJmL). Based on these, the model derives
+specific land use patterns, crop yields, timber yields, and total costs of
+agricultural and forestry production for each grid cell. The objective function of
+the land use model is to minimize total cost of production for a given amount of
+regional food, bioenergy, and timber demand. Regional food energy demand is defined
+for an exogenously given population in 10 food energy categories, based on regional
+diets. Future trends in food demand are derived from a cross-country regression analysis,
 based on future scenarios on GDP and population growth.
 
 https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie
@@ -26,8 +26,8 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.10.1 can be found at
-https://rse.pik-potsdam.de/doc/magpie/4.10.1/
+The model documentation for version 4.11.0 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.11.0/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen
@@ -227,7 +227,7 @@ magpie@pik-potsdam.de
 Please contact magpie@pik-potsdam.de
 
 ## CITATION
-See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.10.1/#how-to-cite) in the model documentation for information how to cite the model.
+See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.11.0/#how-to-cite) in the model documentation for information how to cite the model.
 
 ## AUTHORS
 See list of authors in CITATION.cff
