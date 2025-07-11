@@ -1,5 +1,5 @@
 name,type,reason
-vm_dem_feed,input,not needed
+vm_feed_intake,input,not needed
 fm_attributes, input, not needed
 im_development_state, input, new flexreg structure
 im_slaughter_feed_share,input,questionnaire

@@ -6,14 +6,28 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+vm_feed_balanceflow.fx(i,kap,kall) = fm_feed_balanceflow(t,i,kap,kall);
+vm_feed_balanceflow.up(i,kli_rum,"pasture") = Inf;
+vm_feed_balanceflow.lo(i,kli_rum,"pasture") = -Inf;
+
+
+if (sum(sameas(t_past,t),1) = 1,
+   p70_endo_scavenging_flag(i,kli_rum) = 0;
+   if (ord(t) = smax(t2, ord(t2)$(t_past(t2))) AND card(t) > sum(t_all$(t(t_all) and t_past(t_all)), 1),
+      p70_endo_scavenging_flag(i,kli_rum) = - fm_feed_balanceflow(t-1,i,kli_rum,"pasture")/pc70_dem_feed_pasture(i,kli_rum);
+      p70_endo_scavenging_flag(i,kli_rum)$(p70_endo_scavenging_flag(i,kli_rum) < s70_scavenging_ratio) = 0;
+   );
+);
+
+
 *' @code
-*' This realization of the livestock module also estimates an exogenous 
+*' This realization of the livestock module also estimates an exogenous
 *' pasture management factor `pm_past_mngmnt_factor` that is used to scale
 *' biophysical pasture yields in the module [14_yields].
 
 *' The exogenous calculation of pasture management requires information on
 *' changes in the number of cattle reared to fulfil the food demand for ruminant
-*' livestock products: 
+*' livestock products:
 
 p70_cattle_stock_proxy(t,i) = im_pop(t,i)*pm_kcal_pc_initial(t,i,"livst_rum")
                   /i70_livestock_productivity(t,i,"sys_beef");
@@ -43,13 +57,13 @@ else
    p70_incr_cattle(t,i) = 1;
 );
 
-*' The pasture management factor is calculated by applying a linear relationship 
+*' The pasture management factor is calculated by applying a linear relationship
 *' that links changes in pasture management with changes in the number of cattle:
 
 if (m_year(t) <= s70_past_mngmnt_factor_fix,
    pm_past_mngmnt_factor(t,i) = 1;
-else               
-   pm_past_mngmnt_factor(t,i) =   ( (s70_pyld_intercept + f70_pyld_slope_reg(i)*p70_incr_cattle(t,i)**(5/(m_year(t)-m_year(t-1))) 
+else
+   pm_past_mngmnt_factor(t,i) =   ( (s70_pyld_intercept + f70_pyld_slope_reg(i)*p70_incr_cattle(t,i)**(5/(m_year(t)-m_year(t-1)))
            )**((m_year(t)-m_year(t-1))/5) )*pm_past_mngmnt_factor(t-1,i);
  );
 

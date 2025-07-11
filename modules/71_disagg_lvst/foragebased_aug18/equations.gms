@@ -14,7 +14,7 @@
 q71_feed_rum_liv(j2, kforage) ..
                  vm_prod(j2, kforage) =g=
                   sum(kli_rum, v71_prod_rum(j2, kli_rum, kforage)
-                 * sum((ct, cell(i2,j2), kforage2), im_feed_baskets(ct, i2, kli_rum,kforage2)) * 
+                 * sum((ct, cell(i2,j2), kforage2), im_feed_baskets(ct, i2, kli_rum,kforage2)) *
                      v71_feed_balanceflow_share(j2, kli_rum, kforage))
                  ;
 
@@ -22,13 +22,13 @@ q71_feed_rum_liv(j2, kforage) ..
 *' on the intensity level of the livestock production, ruminants will graze on pastures (extensive systems)
 *' or will be fed via harvested fodder crops (intensive systems).
 
-*' A regional balance flow accounts in [70_livestock] `q70_feed(i2,kap,kall)` for inconsistencies with 
-*' the FAO inventory of national feed use. On cellular level we distribute the regional balance flow as 
-*' a multiplicative correction term (introduced in `q71_feed_rum_liv`) that is given by 
+*' A regional balance flow accounts in [70_livestock] `q70_feed(i2,kap,kall)` for inconsistencies with
+*' the FAO inventory of national feed use. On cellular level we distribute the regional balance flow as
+*' a multiplicative correction term (introduced in `q71_feed_rum_liv`) that is given by
 
 q71_balanceflow_constraint(j2, kli_rum, kforage) ..
              v71_feed_balanceflow_share(j2, kli_rum, kforage) =e=
-             1 + sum((ct, cell(i2,j2)), fm_feed_balanceflow(ct, i2, kli_rum, kforage) / 
+             1 + sum((ct, cell(i2,j2)), vm_feed_balanceflow(i2, kli_rum, kforage) /
                      (im_feed_baskets(ct, i2, kli_rum, kforage) * vm_prod_reg(i2, kli_rum) + 10**(-10)))
              ;
 

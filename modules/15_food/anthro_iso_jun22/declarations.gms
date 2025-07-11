@@ -78,6 +78,12 @@ parameters
  p15_rumdairy_scp_subst_fader(t_all)           Ruminant and dairy substitution with SCP fader (1)
  p15_livestock_threshold_subst_fader(t_all)    Fader for livestock threshold target (1)
  p15_exo_food_scenario_fader(t_all)            Exogenous diet scenario fader (1)
+ p15_shr_fafh(t,iso)                           Share of calories consumed away from home (1)
+ p15_marketing_margin_fah_kcal(t,iso,kfo)      Value of the marketing margin per calorie consumed at home (USD17MER per kcal)
+ p15_marketing_margin_fah(t,iso, kfo)          Value of the marketing margin per tDM consumed  at home (USD17MER per tDM)
+ p15_marketing_margin_fafh_kcal(t,iso,kfo)     Value of the marketing margin per calorie away from home (USD17MER per kcal)
+ p15_marketing_margin_fafh(t,iso, kfo)         Value of the marketing margin per tDM away from home (USD17MER per tDM)
+ p15_value_added_expenditures_pc(t,iso,kfo)    Expenditures on food value-added not including producer expenditures (USD17MER)
 
 
 * anthropometrics

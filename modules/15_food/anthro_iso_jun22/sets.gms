@@ -233,6 +233,15 @@ EATtar_kfo15(EAT_mtargets15,kfo) Mapping between EAT Lancet food targets and MAg
       t_oils              . (oils)
     /
 
+fafh food-at-home fah or food-away-from-home fafh pertaining to where food is consumed
+     / fah, fafh /
+
+fafh_regr coefficients for regression of food-at-home fah or food-away-from-home fafh pertaining to where food is consumed
+     / a_fafh, b_fafh /
+
+margincoef added-value margin coefficients 
+     / a, b, c /
+
 ;
 
 alias(kst, kst2);
