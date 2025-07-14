@@ -43,3 +43,10 @@ q13_tech_cost(i2, tautype) ..
 
 q13_tech_cost_sum(i2) ..
  vm_tech_cost(i2) =e= sum(tautype, v13_tech_cost(i2, tautype));
+
+
+* restricting tau to gsadapt levels
+
+q13_lower_bound_tau(h2) ..
+ vm_tau(h2,"crop") =g= pcm_tau(h2,"crop") * sum((ct,supreg(h2,i2)), pm_yields_gsadapt_ratio_increment(ct,i2));
+

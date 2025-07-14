@@ -16,6 +16,7 @@ equations
  q13_tech_cost(i, tautype)            Total annuitized costs for TC (mio. USD17MER)
  q13_cost_tc(i, tautype)              Costs for TC (mio. USD17MER per yr)
  q13_tech_cost_sum(i)                 Total Total annuitized costs for TC (mio. USD17MER per yr)
+ q13_lower_bound_tau(h)               Lower limit constraint for tau (1)
 ;
 
 parameters
@@ -35,5 +36,6 @@ parameters
  oq13_tech_cost(t,i,tautype,type) Total annuitized costs for TC (mio. USD17MER)
  oq13_cost_tc(t,i,tautype,type)   Costs for TC (mio. USD17MER per yr)
  oq13_tech_cost_sum(t,i,type)     Total Total annuitized costs for TC (mio. USD17MER per yr)
+ oq13_lower_bound_tau(t,h,type)   Lower limit constraint for tau (1)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

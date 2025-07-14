@@ -19,6 +19,8 @@ scalars
   s14_yld_past_switch   Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
   s14_minimum_wood_yield   Minimum wood yield for timber harvest in natural vegetation (tDM per ha per yr) / 10 /
   s14_carbon_fraction      Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
+  s14_use_gsadapt          Switch to use including growing period adaption (1) or not (0) for yield pattern (binary) / 1 /
+  s14_gsadapt2tau          Switch to account for growing period adaption in tau (1) or not (0) (binary) / 1 /
 ;
 
 
