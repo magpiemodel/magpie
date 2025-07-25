@@ -14,6 +14,7 @@
 *' each other
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "sets" $include "./modules/21_trade/exo/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/21_trade/exo/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/21_trade/exo/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/21_trade/exo/equations.gms"

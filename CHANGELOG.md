@@ -42,6 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **main** Removed Dockerfile, as that is no longer supported/maintained
 
 ### fixed
+- **21_trade** included trade costs into exo realization
 - **32_forestry** clean-up of switches for rotation length calculation. Removed `c32_interest_rate`. Merged with `c32_rot_calc_type`.
 - **71_disagg_lvst** added set.gms to the `off` realization to make these sets available for other modules independent of the selected realization
 
