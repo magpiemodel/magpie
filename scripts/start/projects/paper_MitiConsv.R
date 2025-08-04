@@ -9,7 +9,7 @@
 # description: Land-based mitigation and habitat conservation
 # -------------------------------------------------------------
 
-rev <- "rev19"
+rev <- "rev21"
 
 cres <- "c200"
 
@@ -48,9 +48,6 @@ cfg$gms$factor_costs <- "sticky_feb18"
 # SNV habitat defintion
 cfg$gms$land_snv <- "secdforest, other"
 
-# marginal land scenario
-cfg$gms$c29_marginal_land <- "q33_marginal"
-
 start_run(cfg = cfg)
 calib_tgz <- magpie4::submitCalibration(paste(rev, "MitiConsv", sep = "_"))
 
@@ -60,16 +57,15 @@ calib_tgz <- magpie4::submitCalibration(paste(rev, "MitiConsv", sep = "_"))
 
 prefix <- paste(rev, "MitiConsv", cres, sep = "_")
 
-
 scenarios <- c(
-  "SSP2-PB650-NPi", "SSP2-PB650-NDC",
-  "SSP2-PB650-NPi-30by30", "SSP2-PB650-NDC-30by30",
-  "SSP2-PB650-AR200", "SSP2-PB650-AR200-30by30",
-  "SSP2-PB650-AR350", "SSP2-PB650-AR350-30by30",
-  "SSP2-PB650-AR500", "SSP2-PB650-AR500-30by30",
+  "SSP2-PB750-NPi", "SSP2-PB750-NDC",
+  "SSP2-PB750-AR150",  "SSP2-PB750-AR250", "SSP2-PB750-AR350",
+  "SSP2-PB750-NPi-BH", "SSP2-PB750-NDC-BH",
+  "SSP2-PB750-AR250-BH", "SSP2-PB750-AR350-BH", "SSP2-PB750-AR150-BH",
+  "SSP2-PB750-NPi-KBA", "SSP2-PB750-NDC-KBA",
+  "SSP2-PB750-AR250-KBA", "SSP2-PB750-AR350-KBA", "SSP2-PB750-AR150-KBA",
   "SSP2-REF"
 )
-
 
 for (scen in scenarios) {
   scen <- unlist(strsplit(scen, "-"))
@@ -99,58 +95,53 @@ for (scen in scenarios) {
   cfg$gms$land_snv <- "secdforest, other"
 
   # Set path to coupled output
-  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-NPi-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-NPi-rem-7.mif"
+  pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jun25/remind/output/C_rev11_MitiConsv_SSP2-NPi-rem-9/REMIND_generic_C_rev11_MitiConsv_SSP2-NPi-rem-9.mif"
 
   # No ghg price in NPI run
   cfg$gms$c56_mute_ghgprices_until <- "y2100"
 
-  if (any(c("NPi", "NDC") %in% scen)) {
-    cfg <- setScenario(cfg, "NDC")
-    # Update path to coupled output
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NDC-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NDC-rem-7.mif"
-    if ("30by30" %in% scen) {
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NDC-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NDC-30by30-rem-7.mif"
-    }
-    if ("NPi" %in% scen) {
-      cfg <- setScenario(cfg, "NPI")
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NPi-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NPi-rem-7.mif"
-      if ("30by30" %in% scen) {
-        pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-NPi-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-NPi-30by30-rem-7.mif"
-      }
-    }
+  if ("NPi" %in% scen) {
+    cfg <- setScenario(cfg, "NPI")
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jun25/remind/output/C_rev11_MitiConsv_SSP2-PB750-NPi-rem-9/REMIND_generic_C_rev11_MitiConsv_SSP2-PB750-NPi-rem-9.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
     cfg <- setScenario(cfg, "AR0", scenario_config = "config/projects/scenario_config_miti_consv.csv")
   }
 
-  if ("AR200" %in% scen) {
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR200-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR200-rem-7.mif"
-    if ("30by30" %in% scen) {
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR200-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR200-30by30-rem-7.mif"
-    }
+  if ("NDC" %in% scen) {
+    cfg <- setScenario(cfg, "NDC")
+    # Update path to coupled output
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jun25/remind/output/C_rev11_MitiConsv_SSP2-PB750-NDC-rem-9/REMIND_generic_C_rev11_MitiConsv_SSP2-PB750-NDC-rem-9.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
-    cfg <- setScenario(cfg, "AR200", scenario_config = "config/projects/scenario_config_miti_consv.csv")
+    cfg <- setScenario(cfg, "AR0", scenario_config = "config/projects/scenario_config_miti_consv.csv")
+  }
+
+  if ("AR150" %in% scen) {
+    cfg <- setScenario(cfg, "NDC")
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jun25/remind/output/C_rev11_MitiConsv_SSP2-PB750-AR150-rem-9/REMIND_generic_C_rev11_MitiConsv_SSP2-PB750-AR150-rem-9.mif"
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
+    cfg <- setScenario(cfg, "AR150", scenario_config = "config/projects/scenario_config_miti_consv.csv")
+  }
+
+  if ("AR250" %in% scen) {
+    cfg <- setScenario(cfg, "NDC")
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jun25/remind/output/C_rev11_MitiConsv_SSP2-PB750-AR250-rem-9/REMIND_generic_C_rev11_MitiConsv_SSP2-PB750-AR250-rem-9.mif"
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
+    cfg <- setScenario(cfg, "AR250", scenario_config = "config/projects/scenario_config_miti_consv.csv")
   }
 
   if ("AR350" %in% scen) {
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR350-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR350-rem-7.mif"
-    if ("30by30" %in% scen) {
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR350-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR350-30by30-rem-7.mif"
-    }
+    cfg <- setScenario(cfg, "NDC")
+    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_Jun25/remind/output/C_rev11_MitiConsv_SSP2-PB750-AR350-rem-9/REMIND_generic_C_rev11_MitiConsv_SSP2-PB750-AR350-rem-9.mif"
     cfg$gms$c56_mute_ghgprices_until <- "y2030"
     cfg <- setScenario(cfg, "AR350", scenario_config = "config/projects/scenario_config_miti_consv.csv")
   }
 
-  if ("AR500" %in% scen) {
-    pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR500-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR500-rem-7.mif"
-    if ("30by30" %in% scen) {
-      pathToCoupledOutput <- "/p/projects/magpie/users/vjeetze/magpie/projects/MitiConsv/C_MitiConsv_May25/remind/output/C_rev9_MitiConsv_SSP2-PB650-AR500-30by30-rem-7/REMIND_generic_C_rev9_MitiConsv_SSP2-PB650-AR500-30by30-rem-7.mif"
-    }
-    cfg$gms$c56_mute_ghgprices_until <- "y2030"
-    cfg <- setScenario(cfg, "AR500", scenario_config = "config/projects/scenario_config_miti_consv.csv")
+  if ("BH" %in% scen) {
+    cfg <- setScenario(cfg, "BH", scenario_config = "config/projects/scenario_config_miti_consv.csv")
   }
 
-  if ("30by30" %in% scen) {
-    cfg <- setScenario(cfg, "30by30", scenario_config = "config/projects/scenario_config_miti_consv.csv")
+  if ("KBA" %in% scen) {
+    cfg$gms$c22_protect_scenario <- "KBA"
   }
 
   # Settings taken from coupled runs

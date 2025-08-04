@@ -5,17 +5,19 @@
 
 ## WHAT IS MAGPIE?
 The *Model of Agricultural Production and its Impact on the Environment* (MAgPIE)
-is a modular open source framework for modeling global land-systems, which is
-coupled to the grid-based dynamic vegetation model LPJmL, with a spatial resolution
-of 0.5°x0.5°. It takes regional economic conditions such as demand for agricultural
-commodities, technological development and production costs as well as spatially
-explicit data on potential crop yields, land and water constraints (from LPJmL) into
-account. Based on these, the model derives specific land use patterns, yields and
-total costs of agricultural production for each grid cell. The objective function of
+is a modular open-source framework for modeling global land-systems, which
+explicitly accounts for both agriculture and forestry. It is coupled to the
+grid-based dynamic vegetation model LPJmL, with a spatial resolution of 0.5°x0.5°.
+MAgPIE takes regional economic conditions such as demand for agricultural commodities
+and timber products, technological development, and production costs into account,
+as well as spatially explicit data on potential crop yields, forest growth,
+and land and water constraints (from LPJmL). Based on these, the model derives
+specific land use patterns, crop yields, timber yields, and total costs of
+agricultural and forestry production for each grid cell. The objective function of
 the land use model is to minimize total cost of production for a given amount of
-regional food and bioenergy demand. Regional food energy demand is defined for an
-exogenously given population in 10 food energy categories, based on regional diets.
-Future trends in food demand are derived from a cross-country regression analysis,
+regional food, bioenergy, and timber demand. Regional food energy demand is defined
+for an exogenously given population in 10 food energy categories, based on regional
+diets. Future trends in food demand are derived from a cross-country regression analysis,
 based on future scenarios on GDP and population growth.
 
 https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie
@@ -24,8 +26,8 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.10.1 can be found at
-https://rse.pik-potsdam.de/doc/magpie/4.10.1/
+The model documentation for version 4.11.0 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.11.0/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen
@@ -92,11 +94,27 @@ version and added to the PATH environment variable, so MAgPIE can use them.
 1. install git, R, and pandoc with `sudo apt install git r-base pandoc`
 1. install TinyTeX with `Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'`
 
+In case R package installations fail during compilation, install the following system packages:
+```
+sudo apt install build-essential cmake gdal-bin libcurl4-gnutls-dev libcurl4-openssl-dev libfontconfig1 libfreetype-dev libfribidi-dev libgdal-dev libgit2-dev libglpk-dev libharfbuzz-dev libjpeg-dev libnetcdf-dev libpng-dev libpoppler-cpp-dev libssl-dev libtiff5-dev libudunits2-dev libxml2-dev pari-gp qpdf
+```
+This list is highly system specific and most likely incomplete. Pay close attention to error messages, usually they state which system package needs to be installed.
+
 #### macOS
+We recommend to NOT have an active conda environment (if you're unsure what this means you likely don't have conda) when working with magpie (`conda deactivate`). We recommend installing system packages via [brew](https://brew.sh/).
+Install R from https://cran.r-project.org/bin/macosx/
+Choose the right version: arm for Apple Silicon (M1, M2, …), x86_64 for older Intel-based Macs.
+Install gfortran from https://cran.r-project.org/bin/macosx/tools/
 1. make sure you have a gams license incl. the CONOPT solver
 1. [install gams](https://www.gams.com/46/docs/UG_MAC_INSTALL.html)
-1. install git, R, and pandoc with `brew install git r pandoc`
-1. install TinyTeX with `Rscript -e 'install.packages("tinytex"); tinytex::install_tinytex()'`
+1. install git and pandoc with `brew install git pandoc`
+1. install TinyTeX with `Rscript -e 'install.packages("tinytex",repos="https://cloud.r-project.org"); tinytex::install_tinytex()'`
+
+Usually macOS users can download precompiled binary R packages, but in case R package installations fail during compilation, install the following system packages:
+```
+brew install abseil cmake fribidi gdal harfbuzz libgit2 libpng libtiff libxml2 pkg-config
+```
+This list is highly system specific and most likely incomplete. Pay close attention to error messages, usually they state which system package needs to be installed.
 
 #### Windows
 1. make sure you have a gams license incl. the CONOPT solver
@@ -128,23 +146,6 @@ PATH environment variable. Search for a tutorial online if you are unsure how to
 
 ### troubleshooting
 Please check [this discussion](https://github.com/magpiemodel/magpie/discussions/650) for known problems and solutions and to report new problems you encounter while setting up MAgPIE.
-
-## DOCKER
-To use Docker, copy your `gamslice.txt`
-into the MAgPIE main directory, and build the magpie image using the command
-```
-sudo docker build -t magpie .
-```
-Basic usage: Run the container (note the use of an absolute path) using
-```
-sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie
-```
-Note: this will run MAgPIE with the default settings, if you want to change them choose the
-
-Advanced usage: Run the container interactively using
-```
-sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie bash
-```
 
 ## HOW TO CONFIGURE
 Model run settings are set in `config/default.cfg` (or another config file of
@@ -226,7 +227,7 @@ magpie@pik-potsdam.de
 Please contact magpie@pik-potsdam.de
 
 ## CITATION
-See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.10.1/#how-to-cite) in the model documentation for information how to cite the model.
+See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.11.0/#how-to-cite) in the model documentation for information how to cite the model.
 
 ## AUTHORS
 See list of authors in CITATION.cff
