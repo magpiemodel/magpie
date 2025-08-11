@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **21_trade** included trade costs into exo realization
+- **default.cfg** input data upgraded to rev4.120 to use corrected clusters using aligned population data
 
 
 ## [4.11.0] - 2025-07-11
