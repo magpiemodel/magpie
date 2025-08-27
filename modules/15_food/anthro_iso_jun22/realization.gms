@@ -46,13 +46,17 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' [@willett_food_2019].
 *'
 *' Note that, as of 08.2025 (v4.11 onwards), updated FAO food balances were
-*' included in the input data. As FAOSTAT introduced a break in the food
-*' balances break in 2010, with inconsistencies between the pre-2010 and
-*' post-2010 data, the model sees a shift in food demand due to switching
-*' from matching the old to the new data. This is especially apparent in
-*' food demand for livestock products in Mt, as some regional Mt/kcal
-*' conversion ratios in FAOSTAT seem to have changed.
-*' Future dynamics (i.e. EUR dropping and re-gaining in demand) 
-*' also stem from the household balance flow fading out default by 2050.
+*' included in the input data. As FAOSTAT introduced a methodological 
+*' break in the food balances break in 2010, with inconsistencies
+*' between the pre-2010 and post-2010 data, the model sees a shift in
+*' food demand due to switching from matching the old to the new data.
+*' This is especially apparent in food demand for livestock products
+*' in Mt, as some regional Mt/kcal conversion ratios in FAOSTAT,
+*' seem to have changed, especially for EUR (lower livestock demand).
+*' Future dynamics (i.e. EUR re-gaining livestock demand) 
+*' also stem from the household balance flow, which is the difference between 
+*' our regional and FAO global household kcal intake.
+*' This balance flow fades out, in a default model run, by 2050, leading 
+*' to EUR re-increasing livestock demand by 2050.
 *'
 *' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Felicitas Beier, Jan Philipp Dietrich
