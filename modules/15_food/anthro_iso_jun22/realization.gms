@@ -45,7 +45,7 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' diet scenarios, most importantly the shift to the Planetary Health diet
 *' [@willett_food_2019].
 *'
-*' Note that, as of 08.2025 (v4.11 onwards), updated FAO food balances were
+*' Note that, as of v4.12 onwards, updated FAO food balances were
 *' included in the input data. As FAOSTAT introduced a methodological 
 *' break in the food balances break in 2010, with inconsistencies
 *' between the pre-2010 and post-2010 data, the model sees a shift in
