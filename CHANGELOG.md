@@ -7,10 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **readme** added detailed Windows instructions and common installation issues
 
 ### added
--
+- 
 
 ### removed
 -
