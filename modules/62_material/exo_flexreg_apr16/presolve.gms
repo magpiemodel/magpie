@@ -40,6 +40,6 @@ else
 * FAO data for material demand does not cover begr and betr.
 * Therefore, in contrast to the other crops, begr and betr demand as bioplastic substrate
 * is not already included in the general material demand.
-* Thus, we set the double counted demand to zero for begr and betr."
+* Thus, we set the double counted demand to zero for begr and betr.
 p62_bioplastic_substrate_double_counted(t,i,"begr") = 0;
 p62_bioplastic_substrate_double_counted(t,i,"betr") = 0;
