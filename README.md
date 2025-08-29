@@ -76,9 +76,9 @@ Commands formatted as `code` should generally be run in a terminal (PowerShell o
 
 ### List of Requirements
 - license for gams incl. CONOPT solver
-- gams >= 43.4.1
-- git >= 2.16.1
-- R >= 4.1.2 (+ matching Rtools on Windows)
+- gams >= 50.1.0
+- git >= 2.23
+- R >= 4.3 (+ matching Rtools on Windows)
 - pandoc >= 2.14.2
 - TeX >= 3.14159265
 
@@ -117,6 +117,7 @@ brew install abseil cmake fribidi gdal harfbuzz libgit2 libpng libtiff libxml2 p
 This list is highly system specific and most likely incomplete. Pay close attention to error messages, usually they state which system package needs to be installed.
 
 #### Windows
+Most of the installation steps require administrator rights.
 1. make sure you have a gams license incl. the CONOPT solver
 1. [install gams](https://www.gams.com/46/docs/UG_WIN_INSTALL.html)
 1. [download .msi pandoc file](https://github.com/jgm/pandoc/releases/latest) and run installer (`choco install pandoc` did not work in testing)
@@ -126,7 +127,7 @@ This list is highly system specific and most likely incomplete. Pay close attent
 1. install R and Rtools with `rig add release; rig add rtools`
 
 ### check setup is complete
-- restart terminal
+- restart terminal (now without administrator privileges)
 - `gams` should print many lines including "The installed license is valid."
 - `git --version`
 - `Rscript --version`
@@ -134,8 +135,9 @@ This list is highly system specific and most likely incomplete. Pay close attent
 - `tex --version`
 
 If any of these are not found: Find the path to that executable
-(gams/git/Rscript/pandoc/tex, on Windows ending in '.exe') and add it to your
-PATH environment variable. Search for a tutorial online if you are unsure how to do that.
+(gams/git/Rscript/pandoc/tex, on Windows ending in '.exe') and add it to your account's
+PATH environment variable. Search for a tutorial online if you are unsure how to do that,
+or take a look at the detailed Windows instructions and troubleshooting below.
 
 ### download and run MAgPIE
 1. download MAgPIE with `git clone https://github.com/magpiemodel/magpie.git`
@@ -224,7 +226,14 @@ magpie@pik-potsdam.de
 ## KNOWN BUGS
 
 ## TROUBLESHOOTING
-Please contact magpie@pik-potsdam.de
+Please contact magpie@pik-potsdam.de if you're having troubles installing or running a MAgPIE release version.
+
+### Common issues with installing MAgPIE under Windows
+- To modify the `Path` environment variable, you can use the Windows search by pressing the Windows key, start typing "environment" and select the option "Edit environment variables for your account". Edit the `Path` variable by adding the paths to executables which aren't yet found when testing them in the terminal (via the `New` button). You can also display the currently used path variable in the terminal via `echo %PATH%` (regular terminal) and `$env:PATH`(PowerShell) to check what is already included.
+- Check if `rtools` was installed successfully: Open an `R` session from a terminal, and run `install.packages("pkgbuild")` followed by `pkgbuild::has_rtools()`. This should report `TRUE`.
+- Neither downloading nor running MAgPIE requires administrator privileges, and you'll likely run into issues when trying to run MAgPIE in a folder where `git clone` has been run from an administrator terminal. If you did this by accident, delete the MAgPIE folder and redo the `git clone` from a terminal without administrator privileges.
+- Before running `git clone` in the terminal, make sure that you're in a folder where you have write access and not in a Windows system path. If you're using Windows 11, you can access the terminal by right-clicking and starting a terminal from Windows explorer after navigating to the location where you want to download MAgPIE into.
+- If you're using PowerShell, starting an interactive R session with `R` doesn't work, and you need to type `R.exe` (or `R.bat` if `R.exe` isn't found) instead. The reason behind this is that `r` is a reserved shortcut for repeating the previous command, which is why you'll be getting a cryptic `Invoke-History: Cannot locate most recent history.` error message when trying to start R in a fresh PowerShell session.
 
 ## CITATION
 See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.11.0/#how-to-cite) in the model documentation for information how to cite the model.
