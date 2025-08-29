@@ -45,9 +45,14 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' diet scenarios, most importantly the shift to the Planetary Health diet
 *' [@willett_food_2019].
 *'
-*' Note that, as of v4.12 onwards, updated FAO food balances were
-*' included in the input data. As FAOSTAT introduced a methodological 
-*' break in the food balances break in 2010, with inconsistencies
+*' Note that, as of MAgPIE v4.12 onwards, FAO food balances
+*' were changed from the deprecated FAO food balances
+*' (referred to online as Food Balances -2013, old methodology and
+*' population) to the current Food Balances and Supply Utilization
+*' Accounts which are currently maintained, 2010 onwards,
+*' see download date in source folder of FAO_online,
+*' FB2010 and SUA2010 folder. As this introduced a methodological
+*' break in the food balances in 2010, with inconsistencies
 *' between the pre-2010 and post-2010 data, the model sees a shift in
 *' food demand due to switching from matching the old to the new data.
 *' This is especially apparent in food demand for livestock products
