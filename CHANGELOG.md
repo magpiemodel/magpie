@@ -7,7 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **inputdata** updated input data to include new FAO food balances, allowing for a new set of past years "coup_2015", i.e. past held until 2015 instead of 2010. To be updated once LUH3 input data comes in, to 2020.
 - **readme** added detailed Windows instructions and common installation issues
+- **renv/activate.R** updated to version 1.1.5
 
 ### added
 -
@@ -16,7 +18,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **21_trade** included trade costs into exo realization
+- **default.cfg** input data upgraded to rev4.120 to use corrected clusters using aligned population data
 
 
 ## [4.11.0] - 2025-07-11
