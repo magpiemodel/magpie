@@ -28,7 +28,7 @@ p62_scaling_factor(i)$(p62_dem_food_lastcalibyear(i) > 0) = sum(kfo, vm_dem_food
 * it in the final biomass demand equation. 
 if (sum(sameas(t_past,t),1) = 1,
   p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate(t,i,kall);
-  p62_bioplastic_substrate_lastcalibyear(i,kall) = p62_bioplastic_substrate(t,i,kall);
+  p62_bioplastic_substrate_lastcalibyear(i,kall) = max(p62_bioplastic_substrate(t,i,kall), f62_dem_material(t,i,kall));
 else
   if (s62_include_bioplastic = 0,
     p62_bioplastic_substrate_double_counted(t,i,kall) = 0;
