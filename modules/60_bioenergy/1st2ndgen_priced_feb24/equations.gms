@@ -56,12 +56,12 @@ q60_bioenergy_reg(i2).. sum(kbe60, v60_2ndgen_bioenergy_dem_dedicated(i2,kbe60))
 *' $i60\_res\_2ndgenBE\_dem$, which is exogenously provided by the estimation that
 *' roughly 33% of available residues for recycling on cropland can be used for 2nd
 *' generation bioenergy depending on the SSP scenario, since residue stock and use
-*' is mainly driven by population and GDP.
+*' is mainly driven by population and GDP. Residue potential is an upper limit that
+*' is provided by:
 
 q60_res_2ndgenBE(i2) ..
   sum(kres, v60_2ndgen_bioenergy_dem_residues(i2,kres))
-  =g=
-  sum(ct,i60_res_2ndgenBE_dem(ct,i2));
+  =l= sum(ct,i60_res_2ndgenBE_dem(ct,i2));
 
 *' Finally, an incentive is provided for the production of 1st and 2nd generation
 *' bioenergy beyond the exogeneous minimum demand. 1st generation bioenergy can be incentivized
@@ -69,7 +69,12 @@ q60_res_2ndgenBE(i2) ..
 *' The energy-based incentive can take different forms and is applied to both 1st and 2nd generation. 
 *' Combined with low or fade-out exogenous demands, this is useful to assess bioenergy production potentials, however
 *' the endogenous technological change in [13_tc] may react very strongly and create a positive feedback loop.
+*' For residues that can be extracted for 2nd generation bioenergy production a subsidy 
+*' is provided, so all "free" residues are extracted.
+*' The `i60_res2ndgen_bioenergy_subsidy` needs to be balanced in a way that it counteracts 
+*' residue production costs without incentivising additional crop production: 
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
   =e= sum((ct,k1st60), vm_dem_bioen(i2,k1st60) * fm_attributes("ge",k1st60) * (-i60_1stgen_bioenergy_subsidy(ct)))
-  + sum((ct,kbe60), vm_dem_bioen(i2,kbe60) * fm_attributes("ge",kbe60) * (-i60_2ndgen_bioenergy_subsidy(ct)));
+  + sum((ct,kbe60), vm_dem_bioen(i2,kbe60) * fm_attributes("ge",kbe60) * (-i60_2ndgen_bioenergy_subsidy(ct)))
+  + sum( kres, v60_2ndgen_bioenergy_dem_residues(i2, kres) * (-s60_bioenergy_res2nd_subsidy));
