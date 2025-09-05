@@ -4,22 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
-## [Unreleased]
+## [4.12.0] - 2025-09-05
 
 ### changed
 - **inputdata** updated input data to include new FAO food balances, allowing for a new set of past years "coup_2015", i.e. past held until 2015 instead of 2010. To be updated once LUH3 input data comes in, to 2020.
 - **readme** added detailed Windows instructions and common installation issues
 - **renv/activate.R** updated to version 1.1.5
 
-### added
--
-
-### removed
--
-
 ### fixed
-- **62_material** fixed inconsistency for historical bioplastic substrate demand
 - **21_trade** included trade costs into exo realization
+- **62_material** fixed inconsistency for historical bioplastic substrate demand
 - **default.cfg** input data upgraded to rev4.120 to use corrected clusters using aligned population data
 
 
@@ -1202,7 +1196,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.11.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.12.0...develop
+[4.12.0]: https://github.com/magpiemodel/magpie/compare/v4.11.0...v4.12.0
 [4.11.0]: https://github.com/magpiemodel/magpie/compare/v4.10.1...v4.11.0
 [4.10.1]: https://github.com/magpiemodel/magpie/compare/v4.10.0...v4.10.1
 [4.10.0]: https://github.com/magpiemodel/magpie/compare/v4.9.1...v4.10.0
