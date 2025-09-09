@@ -60,7 +60,7 @@ q60_bioenergy_reg(i2).. sum(kbe60, v60_2ndgen_bioenergy_dem_dedicated(i2,kbe60))
 
 q60_res_2ndgenBE(i2) ..
   sum(kres, v60_2ndgen_bioenergy_dem_residues(i2,kres))
-  =g=
+  =l=
   sum(ct,i60_res_2ndgenBE_dem(ct,i2));
 
 *' Finally, an incentive is provided for the production of 1st generation
@@ -69,4 +69,5 @@ q60_res_2ndgenBE(i2) ..
 *' overproduction from couple products.
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
-          =e= sum(k1st60, vm_dem_bioen(i2,k1st60) * fm_attributes("ge",k1st60) * (-s60_bioenergy_1st_subsidy));
+          =e= sum(k1st60, vm_dem_bioen(i2,k1st60) * fm_attributes("ge",k1st60) * (-s60_bioenergy_1st_subsidy))
+              + sum(kres, v60_2ndgen_bioenergy_dem_residues(i2, kres) * (-s60_bioenergy_res2nd_subsidy));
