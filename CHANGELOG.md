@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - updated renv/activate.R to version 1.1.5
 - **inputdata** updated input data to include new FAO food balances, allowing for a new set of past years "coup_2015", i.e. past held until 2015 instead of 2010. To be updated once LUH3 input data comes in, to 2020.
+- **config** input data upgraded from rev4.121 to rev4.122, incorporating new bioenergy demand and GHG price trajectories from REMIND standalone runs with biochar (R34BC).
+- **56_ghg_policy** extended set of available ghg price scenarios
+- **60_bioenergy** extended set of available second generation bioenergy scenarios
 
 ### added
 -
