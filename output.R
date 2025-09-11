@@ -15,13 +15,13 @@ if (!is.null(renv::project()) && !exists("source_include") && Sys.getenv("SLURM_
     return(tolower(gms::getLine()) %in% c("", "y", "yes"))
   }
 
-  message("Checking for updates... ", appendLF = FALSE)
-  if (getOption("autoRenvUpdates", FALSE) ||
-        (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
-    updates <- piamenv::updateRenv()
-    piamenv::stopIfLoaded(names(updates))
-  }
-  message("Update check done.")
+  # message("Checking for updates... ", appendLF = FALSE)
+  # if (getOption("autoRenvUpdates", FALSE) ||
+  #       (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
+  #   updates <- piamenv::updateRenv()
+  #   piamenv::stopIfLoaded(names(updates))
+  # }
+  # message("Update check done.")
 
   message("Checking package version requirements... ", appendLF = FALSE)
   updates <- piamenv::fixDeps(ask = TRUE)
@@ -82,13 +82,14 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       identifier <- 2:length(dirs)
       return(paste0("./output/",dirs[identifier]))
     } else {
+      print(paste0("./output/",dirs[identifier]))
       return(paste0("./output/",dirs[identifier]))
     }
   }
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("SLURM standby", "SLURM standby maxMem", "SLURM priority", "SLURM priority maxMem","Direct execution", "Background execution", "Debug mode")
+    modes <- c("SLURM standby", "SLURM standby highMem", "SLURM priority", "SLURM priority highMem","Direct execution", "Background execution", "Debug mode")
     if(slurm) {
       cat("\nCurrent cluster utilization:\n")
       system("sclass")
@@ -105,9 +106,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       system("sclass")
       comp <- switch(identifier,
                      "1" = "slurm standby",
-                     "2" = "slurm standby maxMem",
+                     "2" = "slurm standby highMem",
                      "3" = "slurm priority",
-                     "4" = "slurm priority maxMem",
+                     "4" = "slurm priority highMem",
                      "5" = "direct",
                      "6" = "background",
                      "7" = "debug")
@@ -150,9 +151,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
                                  "--job-name=scripts-output ",
                                  "--output=logs/out-", rout_name, "-%j.out ",
                                  "--error=logs/out-", rout_name, "-%j.err ",
-                                 "--mail-type=END ",
+                                 "--mail-type=END,FAIL ",
                                  "--time=200 ",
-                                 "--mem-per-cpu=8000 ",
+                                 "--mem-per-cpu=5G ",
                                  "--wrap=\"Rscript ", r_command, "\"")
         if(submit=="direct") {
           tmp.env <- new.env()
@@ -164,12 +165,12 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
           system2("Rscript", r_command, stderr = log, stdout = log, wait=FALSE)
         } else if(submit=="slurm standby") {
           system(paste(sbatch_command, "--qos=standby --time=24:00:00"))
-        } else if(submit=="slurm standby maxMem") {
-          system(paste(sbatch_command, "--qos=standby --time=24:00:00 --mem-per-cpu=0 --cpus-per-task=16"))
+        } else if(submit=="slurm standby highMem") {
+          system(paste(sbatch_command, "--qos=standby --time=24:00:00 --mem-per-cpu=5G --cpus-per-task=16"))
         } else if(submit=="slurm priority") {
           system(paste(sbatch_command, "--qos=priority"))
-        } else if(submit=="slurm priority maxMem") {
-          system(paste(sbatch_command, "--qos=priority --mem-per-cpu=0 --cpus-per-task=16"))
+        } else if(submit=="slurm priority highMem") {
+          system(paste(sbatch_command, "--qos=priority --mem-per-cpu=5G --cpus-per-task=16"))
         } else if(submit=="debug") {
           tmp.env <- new.env()
           sys.source(script,envir=tmp.env)
