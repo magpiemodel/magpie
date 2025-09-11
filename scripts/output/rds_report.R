@@ -59,6 +59,6 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   saveRDS(q, file = paste0(resultsarchive, "/", stats$id, ".rds"), version = 2)
   cwd <- getwd()
   setwd(resultsarchive)
-  system("ls 1*.rds > files")
+  system("find -type f -name '1*.rds' -printf '%f\n' | sort > fileListForShinyresults")
   setwd(cwd)
 }
