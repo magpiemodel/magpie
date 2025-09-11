@@ -7,7 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **config** input data upgraded from rev4.121 to rev4.122, incorporating new bioenergy demand and GHG price trajectories from REMIND standalone runs with biochar (R34BC).
+- **56_ghg_policy** extended set of available ghg price scenarios
+- **60_bioenergy** extended set of available second generation bioenergy scenarios
 
 ### added
 -
