@@ -15,13 +15,13 @@ if (!is.null(renv::project())) {
     return(tolower(gms::getLine()) %in% c("", "y", "yes"))
   }
 
-  message("Checking for updates... ", appendLF = FALSE)
-  if (getOption("autoRenvUpdates", FALSE) ||
-        (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
-    updates <- piamenv::updateRenv()
-    piamenv::stopIfLoaded(names(updates))
-  }
-  message("Update check done.")
+  # message("Checking for updates... ", appendLF = FALSE)
+  # if (getOption("autoRenvUpdates", FALSE) ||
+  #       (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
+  #   updates <- piamenv::updateRenv()
+  #   piamenv::stopIfLoaded(names(updates))
+  # }
+  # message("Update check done.")
 
   message("Checking package version requirements... ", appendLF = FALSE)
   updates <- piamenv::fixDeps(ask = TRUE)
@@ -87,7 +87,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
       cat("Executing",name,"\n")
       rout_name <- sub("\\.R$","",sub("/","_",rout))
-      sbatch_command <- paste0("sbatch --job-name=",rout_name," --output=logs/",rout_name,"-%j.out --mail-type=END --wrap=\"Rscript ",name,"\"")
+      sbatch_command <- paste0("sbatch --job-name=",rout_name," --output=logs/",rout_name,"-%j.out --cpus-per-task=3 --mail-type=FAIL,END --wrap=\"Rscript ",name,"\"")
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(name,envir=tmp.env))
@@ -97,10 +97,10 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
         log <- format(Sys.time(), paste0("logs/", rout_name, "-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
       } else if(submit=="slurmpriority") {
-        system(paste(sbatch_command,"--qos=priority"))
+        system(paste(sbatch_command,"--qos=priority --time=24:00:00"))
         Sys.sleep(1)
       } else if(submit=="slurmstandby") {
-        system(paste(sbatch_command,"--qos=standby"))
+        system(paste(sbatch_command,"--qos=standby --time=24:00:00"))
         Sys.sleep(1)
       } else if(submit=="slurmmedium") {
         system(paste(sbatch_command,"--qos=medium"))
