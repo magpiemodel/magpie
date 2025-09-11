@@ -1,4 +1,4 @@
-# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -109,7 +109,10 @@ if (length(map_file) > 1) {
       )
       iso <- readGDX(gdx, "iso")
       consv_iso <- readGDX(gdx, "policy_countries22")
-      consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.1)]
+      consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.3)]
+      if (length(consv_iso) == 0) {
+        warning("No countries selected in land conservation disaggregation. Results may be erroneous")
+      }
       consv_select <- cfg$gms$c22_protect_scenario
       consv_noselect <- cfg$gms$c22_protect_scenario_noselect
 
