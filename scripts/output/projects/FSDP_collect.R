@@ -17,7 +17,7 @@ library(magclass)
 library(gms)
 library(magpiesets)
 library(data.table)
-library(gdx)
+library(gdx2)
 library(quitte)
 library(m4fsdp)
 library(stringr)
@@ -47,13 +47,14 @@ hi_datasets_path <- "/p/projects/magpie/data/FSEC_healthImpactsDatasets_raw"
 if (dir.exists(hi_datasets_path)) {
 
   hi_datasets      <- list.files(hi_datasets_path)
-  hi_versionToUse  <- grep(rev, hi_datasets, value = TRUE)
+  hi_rev <- sub(".*(v\\d+).*", "\\1", rev)
+  hi_versionToUse  <- grep(hi_rev, hi_datasets, value = TRUE)
 
   if (length(hi_versionToUse) == 0) {
 
     message("No corresponding version ID was found within the health impacts datasets. Using the latest available.")
 
-    highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")))
+    highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")),na.rm=T)
     hi_versionToUse <- grep(paste0("v", highestVersionNr), hi_datasets, value = TRUE)
 
   } else if (length(hi_versionToUse) >= 2) {
@@ -61,7 +62,39 @@ if (dir.exists(hi_datasets_path)) {
   }
 
   hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
-  hi_gdx <- suppressWarnings(readGDX(hi_versionToUse_path))
+
+  if (hi_rev == "v39") {
+      gdx <- suppressMessages(gdx2::readGDX(hi_versionToUse_path, "report_health_s", spatial = "uni_7", temporal = "uni_9"))
+      getSets(gdx) <- c("region", "year", "mergeScenario", "scenario", "metric", "TMREL", "riskFactor", "causeOfDeath", "sex", "stat")
+      gdx <- collapseDim(gdx, dim = "mergeScenario")
+
+      gdx[is.na(gdx)] <- 0
+      test <- dimSums(gdx, dim = 3)
+
+      if (length(where(test == 0)$true$regions) > 0) {
+          warning("Some countries have NAs and are therefore filled with other timesteps.",
+                  " Please manually check in case of data update")
+      }
+
+      # Inspect the problematic regions
+      # test[where(test == 0)$true$regions, , ]
+
+      tmp <- where(test[, "y2005", ] == 0)$true$regions
+      gdx[tmp, c("y1995", "y2000", "y2005"), ] <- setYears(gdx[tmp, "y2010", ], NULL)
+
+      tmp <- where(test[, "y1995", ] == 0)$true$regions
+      gdx[tmp, "y1995", ] <- setYears(gdx[tmp, "y2000", ], NULL)
+
+      tmp <- where(test[, "y2020", ] == 0)$true$regions
+      gdx[tmp, c("y2020", "y2030", "y2040", "y2050"), ] <- setYears(gdx[tmp, "y2015", ], NULL)
+
+      tmp <- where(test[, "y2015", ] == 0)$true$regions
+      gdx[tmp, c("y2015", "y2020", "y2030", "y2040", "y2050"), ] <- setYears(gdx[tmp, "y2010", ], NULL)
+
+  } else {
+      gdx <- suppressMessages(gdx2::readGDX(hi_versionToUse_path, "report_health_s", spatial = "uni_6", temporal = "uni_8"))
+      getSets(gdx) <- c("region", "year", "scenario", "metric", "TMREL", "riskFactor", "causeOfDeath", "sex", "stat")
+  }
 
   .appendHealthImpacts <- function(.x) {
     cfg <- gms::loadConfig(file.path(.x, "config.yml"))
@@ -70,7 +103,7 @@ if (dir.exists(hi_datasets_path)) {
     message("Appending health impact report: ", title)
     tryCatch(
       expr = {
-        appendReportHealthImpacts(healthImpacts_gdx = hi_gdx, scenario = title, dir = .x)
+        appendReportHealthImpacts(gdx = gdx, scenario = title, dir = .x)
       }, error = function(e) {
         message("Unable to append health impacts for scenario: ", title, ". Likely it is non-dietary.")
       }
@@ -135,7 +168,8 @@ indicators_main <- getVariables()
 names(indicators_main) <- NULL
 var_reg <- c(indicators_main,
              ### Validation
-             "Biodiversity|Agricultural landscape intactness",
+"Production|Bioenergy|2nd generation|++|Bioenergy crops",             
+"Biodiversity|Agricultural landscape intactness",
              "Biodiversity|Biodiversity hotspot intactness",
              "Biodiversity|BII in areas outside Biodiversity Hotspots, Intact Forest & Cropland Landscapes",
              "Biodiversity|Biodiversity Hotspot and Intact Forest Landscapes BII",
@@ -145,7 +179,9 @@ var_reg <- c(indicators_main,
              "Biodiversity|Key Biodiversity Area BII",
              "Biodiversity|Inverted Simpson crop area diversity index",
              "Population",
-             "Income",
+#             "Income",
+             "Income MER",
+             "Total income MER",
              "Nutrition|Calorie Supply|+|Crops",
              "Nutrition|Calorie Supply|+|Livestock products",
              "Demand|++|Crops",
@@ -158,6 +194,7 @@ var_reg <- c(indicators_main,
              "Demand|Material|+|Crops",
              "Demand|Processing|+|Crops",
              "Demand|++|Livestock products",
+             "Demand|++|Secondary products",
              "Production|+|Crops",
              "Production|Crops|+|Cereals",
              "Production|Crops|+|Oil crops",
@@ -172,13 +209,14 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|+|Cropland",
              "Resources|Land Cover|+|Pastures and Rangelands",
              "Resources|Land Cover|+|Forest",
-             "Resources|Land Cover|Forest|+|Managed Forest",
+             "Resources|Land Cover|Forest|+|Planted Forest",
+#             "Resources|Land Cover|Forest|+|Managed Forest",
              "Resources|Land Cover|Forest|Natural Forest|+|Primary Forest",
              "Resources|Land Cover|Forest|Natural Forest|+|Secondary Forest",
              "Resources|Land Cover|+|Other Land",
              "Resources|Land Cover|+|Urban Area",
              "Resources|Land Cover|Cropland|+|Croparea",
-             "Resources|Land Cover|Cropland|+|Fallow Cropland",
+             "Resources|Land Cover|Cropland|+|fallow",
              "Resources|Land Cover|Cropland|Croparea|Crops|+|Cereals",
              "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Maize",
              "Resources|Land Cover|Cropland|Croparea|Crops|Cereals|+|Rice",
@@ -203,6 +241,7 @@ var_reg <- c(indicators_main,
              "Productivity|Feed conversion",
              "Productivity|Feed conversion|Ruminant meat and dairy",
              "Productivity|Feed conversion|Poultry meat and eggs",
+             "Productivity|Feed conversion|Pig meat",
              "Productivity|Feed conversion|Monogastric meat",
              "Productivity|Feed conversion|+|Cereal Intensity",
              "Productivity|Feed conversion|+|Oilcrop intensity",
@@ -283,7 +322,8 @@ var_reg <- c(indicators_main,
              "Nutrition|Calorie Intake|Crops|Sugar crops|+|Sugar cane",
              "Nutrition|Calorie Intake|Livestock products|+|Dairy",
              "Nutrition|Calorie Intake|Livestock products|+|Eggs",
-             "Nutrition|Calorie Intake|Livestock products|+|Monogastric meat",
+#             "Nutrition|Calorie Intake|Livestock products|+|Monogastric meat",
+             "Nutrition|Calorie Intake|Livestock products|+|Pig meat",
              "Nutrition|Calorie Intake|Livestock products|+|Poultry meat",
              "Nutrition|Calorie Intake|Livestock products|+|Ruminant meat",
              "Nutrition|Calorie Intake|Secondary products|+|Alcoholic beverages",
@@ -316,7 +356,8 @@ var_reg <- c(indicators_main,
              "Nutrition|Calorie Supply|Crops|Sugar crops|+|Sugar cane",
              "Nutrition|Calorie Supply|Livestock products|+|Dairy",
              "Nutrition|Calorie Supply|Livestock products|+|Eggs",
-             "Nutrition|Calorie Supply|Livestock products|+|Monogastric meat",
+#             "Nutrition|Calorie Supply|Livestock products|+|Monogastric meat",
+             "Nutrition|Calorie Supply|Livestock products|+|Pig meat",
              "Nutrition|Calorie Supply|Livestock products|+|Poultry meat",
              "Nutrition|Calorie Supply|Livestock products|+|Ruminant meat",
              "Nutrition|Calorie Supply|Secondary products|+|Alcoholic beverages",
@@ -362,10 +403,12 @@ var_reg <- c(indicators_main,
              "Trade|Net-Trade|Forest products|+|Wood fuel",
              "Trade|Net-Trade|Livestock products|+|Dairy",
              "Trade|Net-Trade|Livestock products|+|Eggs",
-             "Trade|Net-Trade|Livestock products|+|Monogastric meat",
+#             "Trade|Net-Trade|Livestock products|+|Monogastric meat",
+             "Trade|Net-Trade|Livestock products|+|Pig meat",
              "Trade|Net-Trade|Livestock products|+|Poultry meat",
              "Trade|Net-Trade|Livestock products|+|Ruminant meat",
              "Trade|Net-Trade|Secondary products|+|Sugar",
+             "Trade|Self-sufficiency|Crops",
              "Trade|Self-sufficiency|Crops|Cereals",
              "Trade|Self-sufficiency|Crops|Cereals|Maize",
              "Trade|Self-sufficiency|Crops|Cereals|Rice",
@@ -381,7 +424,8 @@ var_reg <- c(indicators_main,
              "Trade|Self-sufficiency|Livestock products",
              "Trade|Self-sufficiency|Livestock products|Dairy",
              "Trade|Self-sufficiency|Livestock products|Eggs",
-             "Trade|Self-sufficiency|Livestock products|Monogastric meat",
+#             "Trade|Self-sufficiency|Livestock products|Monogastric meat",
+             "Trade|Self-sufficiency|Livestock products|Pig meat",
              "Trade|Self-sufficiency|Livestock products|Poultry meat",
              "Trade|Self-sufficiency|Livestock products|Ruminant meat",
              "Trade|Self-sufficiency|Secondary products",
@@ -405,6 +449,9 @@ var_reg <- c(indicators_main,
              "Resources|Land Cover|Forest|Managed Forest|+|Plantations",
              "Resources|Land Cover|Forest|Managed Forest|+|NPI/NDC",
              "Resources|Land Cover|Forest|Managed Forest|+|Afforestation",
+             "Resources|Land Cover|Forest|Planted Forest|+|Plantations",
+             "Resources|Land Cover|Forest|Planted Forest|+|NPI/NDC",
+             "Resources|Land Cover|Forest|Planted Forest|+|Afforestation",
              "Resources|Land Cover|Cropland|+|Bioenergy crops",
              "Resources|Land Cover|+|Other Land",
              "Resources|Land Cover|+|Urban Area",
@@ -654,12 +701,7 @@ var_reg <- c(indicators_main,
              "Health|Years of life lost|Disease|+|Cancer",
              "Health|Years of life lost|Disease|+|Type-2 Diabetes",
              "Health|Years of life lost|Disease|+|Respiratory Disease",
-             "Health|Percent change in Years of life lost|Disease",
-             "Health|Percent change in Years of life lost|Disease|+|Congenital Heart Disease",
-             "Health|Percent change in Years of life lost|Disease|+|Stroke",
-             "Health|Percent change in Years of life lost|Disease|+|Cancer",
-             "Health|Percent change in Years of life lost|Disease|+|Type-2 Diabetes",
-             "Health|Percent change in Years of life lost|Disease|+|Respiratory Disease"
+             "Health|Attributable deaths|Disease"
 )
 var_reg <- unique(var_reg)
 
@@ -861,13 +903,20 @@ saveRDS(reg2iso, file = file.path("output", "reg2iso.rds"), version = 2, compres
 # save validation file
 val <- file.path("input", "validation.mif")
 val <- as.data.table(read.quitte(val))
+# rename variables
+val[variable == "Resources|Land Cover|Forest|+|Managed Forest", variable := "Resources|Land Cover|Forest|+|Planted Forest"]
+val[variable == "Productivity|Feed conversion|Monogastric meat", variable := "Productivity|Feed conversion|Pig meat"]
+val[variable == "Nutrition|Calorie Intake|Livestock products|+|Monogastric meat", variable := "Nutrition|Calorie Intake|Livestock products|+|Pig meat"]
+val[variable == "Nutrition|Calorie Supply|Livestock products|+|Monogastric meat", variable := "Nutrition|Calorie Supply|Livestock products|+|Pig meat"]
+val[variable == "Trade|Net-Trade|Livestock products|+|Monogastric meat", variable := "Trade|Net-Trade|Livestock products|+|Pig meat"]
+val[variable == "Trade|Self-sufficiency|Livestock products|Monogastric meat", variable := "Trade|Self-sufficiency|Livestock products|Pig meat"]
 saveRDS(val, file = file.path("output", paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
 #Add new plots here:
 #https://github.com/pik-piam/m4fsdp/blob/master/R/plotFSDP.R
 plotFSDP(outputfolder = "output",
-         reg = reg,
+         reg = file.path("output", paste0(rev, "_FSDP_reg.rds")),
          iso = iso,
          grid = grid,
          val = val,

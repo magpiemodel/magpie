@@ -10,7 +10,14 @@
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
+
+
+#
+# This script is not used anymore and only preserved for archival purposes
 # Version 1.0, Florian Humpenoeder
+#
+
+
 
 library(lucode2)
 library(magclass)
@@ -358,11 +365,8 @@ var_reg_LR <- c(
              "Health|Years of life lost|Disease|+|Type-2 Diabetes",
              "Health|Years of life lost|Disease|+|Respiratory Disease",
              "Health|Percent change in Years of life lost|Disease",
-             "Health|Percent change in Years of life lost|Disease|+|Congenital Heart Disease",
-             "Health|Percent change in Years of life lost|Disease|+|Stroke",
-             "Health|Percent change in Years of life lost|Disease|+|Cancer",
-             "Health|Percent change in Years of life lost|Disease|+|Type-2 Diabetes",
-             "Health|Percent change in Years of life lost|Disease|+|Respiratory Disease"
+             "Health|Attributable deaths|Disease",
+             "Production|Bioenergy|2nd generation|++|Bioenergy crops"
 )
 
 var_reg_HR <- c(
