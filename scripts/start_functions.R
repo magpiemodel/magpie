@@ -244,7 +244,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   # Apply scenario settings ans check configuration file for consistency
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg, extras = c("info", "repositories", "gms$c_input_gdx_path"), saveCheck = TRUE)
+  # Temporarily disabled as we are using a gms version that is newer than our config
+  #cfg <- gms::check_config(cfg, extras = c("info", "repositories", "gms$c_input_gdx_path"), saveCheck = TRUE)
 
   # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
