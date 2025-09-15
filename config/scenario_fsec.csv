@@ -1,4 +1,4 @@
-;FSEC;population;institutions;energy;bioplastics;capitalSubst;minWage;noUnderweight;halfOverweight;fruitsNutsVegSeeds;monogastrics;ruminants;pulses;processed;fish;waste;awms;livestock;cropefficiency;nueMAC;riceMAC;biodiversity;fairTrade;timberCities;REDDaff;REDD;landscapeElements;landSharing;landSparing;waterSparing;peatland;soil;allDiet;allDietAndWaste;allEnvPrice;allEmisPrice;SSP1;SSP2;SSP3;SSP4;SSP5;RCP19;RCP26;RCP34;RCP45;RCP60;RCP70;RCP85;SSP1energy;labor8p5;labor1p9
+;FSEC;population;institutions;energy;bioplastics;capitalSubst;minWage;noUnderweight;halfOverweight;fruitsNutsVegSeeds;monogastrics;ruminants;pulses;processed;fish;waste;awms;livestock;cropefficiency;nueMAC;riceMAC;biodiversity;fairTrade;timberCities;REDDaff;REDD;landscapeElements;landSharing;landSparing;waterSparing;peatland;soil;allDiet;allDietAndWaste;allEnvPrice;allEmisPrice;SSP1;SSP2;SSP3;SSP4;SSP5;RCP19;RCP26;RCP34;RCP45;RCP60;RCP70;RCP85;SDPenergy;labor8p5;labor1p9
 gms$c09_pop_scenario;;SSP1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c09_gdp_scenario;;;SSP1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c09_pal_scenario;;;SDP;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -68,7 +68,7 @@ gms$s57_maxmac_ch4_entferm;-1;;;;;;;;;;;;;;;;;201;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s57_maxmac_ch4_awms;-1;;;;;;;;;;;;;;;;201;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s58_rewetting_switch;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Inf;;;;;;;;;;;;;;;;;;;;
 gms$som;cellpool_aug16;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-gms$c60_2ndgen_biodem;R21M42-SSP2-NDC;;;R21M42-SSP2-PkBudg900;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;R21M42-SSP1-PkBudg900;;
+gms$c60_2ndgen_biodem;R21M42-SSP2-NDC;;;R21M42-SSP2-PkBudg900;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;R21M42-SDP-PkBudg900;;
 gms$c60_res_2ndgenBE_dem;;;;sdp;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s62_max_dem_bioplastic;0;;;;400;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c70_fac_req_regr;reg;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -79,4 +79,4 @@ input['regional'];rev4.104_FSEC_magpie.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['validation'];rev4.104_FSEC_validation.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['additional'];additional_data_rev4.48.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['calibration'];calibration_FSEC_26Mar24.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-magicc_emis_scen;bjoernAR6_C_SSP2-NDC.mif;;;bjoernAR6_C_SSP2-PkBudg900.mif;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;bjoernAR6_C_SSP1-NDC.mif;;;;;;;;;;;;bjoernAR6_C_SSP1-PkBudg900.mif;;
+magicc_emis_scen;bjoernAR6_C_SSP2-NDC.mif;;;bjoernAR6_C_SSP2-PkBudg900.mif;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;bjoernAR6_C_SSP1-NDC.mif;;;;;;;;;;;;bjoernAR6_C_RemSDP-900-MagSSP1.mif;;
