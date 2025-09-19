@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,13 +19,12 @@ magpie.holdfixed = 1 ;
 * linear solver
 option lp         = cplex ;
 option qcp        = cplex ;
+option threads = 1;
 $onecho > cplex.opt
 $offecho
 
 * non-linear solver
-$ifthen "%c80_nlp_solver%" == "conopt3"
-  option nlp        = conopt ;
-$elseif "%c80_nlp_solver%" == "conopt4"
+$ifthen "%c80_nlp_solver%" == "conopt4"
   option nlp        = conopt4;
 $elseif "%c80_nlp_solver%" == "conopt4+cplex"
   option nlp        = conopt4;
@@ -35,15 +34,12 @@ $elseif "%c80_nlp_solver%" == "conopt4+conopt3"
   s80_add_conopt3   = 1;
 $endif
 
-$onecho > conopt4.opt
-Tol_Obj_Change = 3.0e-6
-Tol_Feas_Min = 4.0e-10
-Tol_Feas_Max = 4.0e-6
-Tol_Feas_Tria = 4.0e-6
-$offecho
+put optfile;
+put 'Tol_Optimality = ', s80_toloptimal:12:11 /;
+putclose optfile;
 
 $onecho > conopt4.op2
-Flg_Prep = FALSE
+Lim_Variable = 1.e25
 $offecho
 
 repeat(
@@ -67,7 +63,7 @@ $batinclude "./modules/include.gms" nl_fix
 *' in particular for matching LHS and RHS of equations.
 
     solve magpie USING nlp MINIMIZING vm_cost_glo;
-    solve magpie USING nlp MINIMIZING vm_cost_glo;
+    if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
 
 *' A second optimization makes sure that in case of a flat optimum that solution
 *' is chosen for which the difference in land changes compared to the previous
@@ -78,7 +74,7 @@ $batinclude "./modules/include.gms" nl_fix
     if ((magpie.modelstat=1 or magpie.modelstat = 7),
       vm_cost_glo.up = vm_cost_glo.l;
       solve magpie USING nlp MINIMIZING vm_landdiff;
-      solve magpie USING nlp MINIMIZING vm_landdiff;
+      if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_landdiff; );
       vm_cost_glo.up = Inf;
     );
 
@@ -132,36 +128,37 @@ $batinclude "./modules/include.gms" nl_relax
 *' the nonlinear optimization of the model in its full complexity.
 
   solve magpie USING nlp MINIMIZING vm_cost_glo;
-  solve magpie USING nlp MINIMIZING vm_cost_glo;
+  if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
 
 *' @stop
 
 * if s80_add_conopt3 is 1 add additional solve statement for conopt3
     if((s80_add_conopt3 = 1),
       display "Additional solve with CONOPT3!";
-      option nlp = conopt;
+      option nlp = conopt3;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
       option nlp = conopt4;
     );
 
-* if solve stopped with an error, try it again without pre-processing
+* if solve stopped with an error, try it again with CONOPT4 and OPTFILE
     if((magpie.modelstat = 13),
-      display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
-    magpie.optfile = 2
+      display "WARNING: Modelstat 13 | Retry solve with CONOPT4 increasing largest allowable value";
+      option nlp = conopt4;
+      magpie.optfile = 2
       solve magpie USING nlp MINIMIZING vm_cost_glo;
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
       magpie.optfile   = s80_optfile ;
     );
 
 * if solve stopped with an error, try it again with conopt3
-  if ((magpie.modelstat = 13),
-    display "WARNING: Modelstat 13 | retry with CONOPT3!";
-    option nlp = conopt;
-    solve magpie USING nlp MINIMIZING vm_cost_glo;
-    solve magpie USING nlp MINIMIZING vm_cost_glo;
-    option nlp = conopt4;
-  );
+    if ((magpie.modelstat = 13),
+      display "WARNING: Modelstat 13 | retry with CONOPT3!";
+      option nlp = conopt3;
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
+      option nlp = conopt4;
+    );
 
   p80_modelstat(t) = magpie.modelstat;
   p80_num_nonopt(t) = magpie.numNOpt;
@@ -190,13 +187,14 @@ magpie.trylinear = 1;
 $batinclude "./modules/include.gms" nl_fix
 
 solve magpie USING nlp MINIMIZING vm_cost_glo;
-solve magpie USING nlp MINIMIZING vm_cost_glo;
+if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
 
 $batinclude "./modules/include.gms" nl_release
 
 if((magpie.modelstat=1 or magpie.modelstat = 7),
   vm_cost_glo.up = vm_cost_glo.l;
   solve magpie USING nlp MINIMIZING vm_landdiff;
+  if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_landdiff; );
   vm_cost_glo.up = Inf;
 );
 

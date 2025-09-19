@@ -1,4 +1,4 @@
-*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,7 +11,6 @@ parameters
 ;
 
 scalars
-  s80_counter           counter (1)
-  s80_modelstat_previter  modelstat of previous iteration (1)
-  s80_optfile_previter    optfile used in previous iteration (1)
+  s80_counter          counter (1)
+  s80_resolve_option   option for resolve (1)
 ;
