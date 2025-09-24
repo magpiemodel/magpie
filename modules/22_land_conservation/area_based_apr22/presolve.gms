@@ -48,8 +48,9 @@ p22_conservation_area(t,j,land_natveg) =
 * Protect remaining land
 * -----------------------
 
-* Note: Protected area targets for each land pool prescribed through 
-* the WDPA data can be higher than reported land pools in LUH.
+* Note: The prescribed conservation area for each land pool can be smaller, equal or 
+* higher than the land pools of the previous time step. If the conservation area is 
+* larger and s22_restore_land = 1, missing land will be restored.
 pm_land_conservation(t,j,land,"protect") = p22_conservation_area(t,j,land);
 pm_land_conservation(t,j,land,"protect")$(pm_land_conservation(t,j,land,"protect") > pcm_land(j,land)) = pcm_land(j,land);
 
