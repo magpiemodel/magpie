@@ -48,8 +48,8 @@ p22_conservation_area(t,j,land_natveg) =
 * Protect remaining land
 * -----------------------
 
-* Note: protected area reported in the WDPA baseline data can be higher
-* than what is reported in the LUH data.
+* Note: Protected area targets for each land pool prescribed through 
+* the WDPA data can be higher than reported land pools in LUH.
 pm_land_conservation(t,j,land,"protect") = p22_conservation_area(t,j,land);
 pm_land_conservation(t,j,land,"protect")$(pm_land_conservation(t,j,land,"protect") > pcm_land(j,land)) = pcm_land(j,land);
 
