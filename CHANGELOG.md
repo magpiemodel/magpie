@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **60_bioenergy** Harmonize 2nd gen bioenergy demand for historic period based on default trajectory "R34M410-SSP2-NPi2025"
 
 
 ## [4.12.0] - 2025-09-08
