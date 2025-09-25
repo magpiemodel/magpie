@@ -3,7 +3,6 @@
 [![DOI](https://zenodo.org/badge/135430060.svg)](https://zenodo.org/badge/latestdoi/135430060)
 [![R build status](https://github.com/magpiemodel/magpie/workflows/check/badge.svg)](https://github.com/magpiemodel/magpie/actions)
 
-## WHAT IS MAGPIE?
 The *Model of Agricultural Production and its Impact on the Environment* (MAgPIE)
 is a modular open source framework for modeling global land-systems, which is
 coupled to the grid-based dynamic vegetation model LPJmL, with a spatial resolution
@@ -20,7 +19,68 @@ based on future scenarios on GDP and population growth.
 
 https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie
 
-## DOCUMENTATION
+## Contents
+<!--toc-->
+1. [Installing MAgPIE](#installing-magpie)
+1. [Running MAgPIE](#running-magpie)
+1. [Documentation](#documentation)
+1. [Re-using the Model](#re-using-the-model)
+1. [How to Contribute](#how-to-contribute)
+<!--toc-->
+
+## [Installing MAgPIE](#installing)
+
+### Hardware Requirements
+The model is quite resource heavy and works best on machines with high CPU clock
+and memory. Recommended is a machine with Windows, MacOS or Linux, with at least
+16GB of memory and a Core i7 CPU or similar.
+
+### Software Requirements
+The two main software requirements are *GAMS* and *R*.
+R dependencies are managed through *renv* and can be found in the *renv.lock* file. 
+
+MAgPIE requires *GAMS* (https://www.gams.com/) including licenses for the
+solvers *CONOPT* and (optionally) *CPLEX* for its core calculations. As the model
+benefits significantly of recent improvements in *GAMS* and *CONOPT4* it is
+recommended to work with the most recent versions of both.
+Please make sure that the GAMS installation path is added to the PATH variable
+of the system.
+
+In addition *R* (https://www.r-project.org/) is required for pre- and
+postprocessing and run management (needs to be added to the PATH variable
+as well).
+
+Several R packages are required to run MAgPIE. Under Windows you first need to install
+Rtools (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
+variable. When running R from the MAgPIE folder for the first time all
+required packages are automatically installed into an isolated,
+project specific R package environment (renv).
+For post-processing model outputs *Latex* is required
+(https://www.latex-project.org/get/). To be seen by the model it also needs to
+added to the PATH variable of your system.
+
+
+## [Running MAgPIE](#running)
+
+### How to Configure the Model
+Model run settings are set in `config/default.cfg` (or another config file of
+the same structure). New model scenarios can be created by adding a column to
+`config/scenario_config.csv`
+
+### How to Run the Model
+To run the model execute `Rscript start.R` (or `source("start.R")` from within
+R) in the main folder of the model.
+This will give you a list of available run scripts you can choose from. You can
+also add your own run scripts by saving them in the folder scripts/start. To run
+a single model run with settings as stated in default.cfg you can choose start
+script "default". Make sure that the config file has been set correctly before
+starting the model.
+
+### Model Output
+
+By default the results of a model run are written to an individual results folder within the "output/" folder of the model. The two most important output files are the fulldata.gdx and the report.mif. The fulldata.gdx is the technical output of the GAMS optimization and contains all quantities that were used during the optimization in unchanged form. The mif-file is a csv file of a specific format and is synthetized from the fulldata.gdx by post-processing scripts. It can be read in any text editor or spreadsheet program and is well suited for a quick look at the results and for further analysis.
+
+## Documentation
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
@@ -42,10 +102,12 @@ The Coding Etiquette you find at the beginning of the documentation mentioned ab
 The Coding Etiquette explains also the naming conventions and other
 structural characteristics.
 
-## COPYRIGHT
+## Re-using the Model
+
+### COPYRIGHT
 Copyright 2008-2022 Potsdam Institute for Climate Impact Research (PIK)
 
-## LICENSE
+### LICENSE
 This program is free software: you can redistribute it and/or modify
 it under the terms of the **GNU Affero General Public License** as published by
 the Free Software Foundation, **version 3** of the License or later. You should
@@ -56,7 +118,7 @@ https://www.gnu.org/licenses/agpl.txt
 Under Section 7 of AGPL-3.0, you are granted additional permissions described
 in the MAgPIE License Exception, version 1.0 (see LICENSE file).
 
-## NOTES
+### NOTES
 Following the principles of good scientific practice it is recommended
 to make the source code available in the events of model based publications
 or model-based consulting.
@@ -65,64 +127,7 @@ When using a modified version of **MAgPIE** which is not identical to versions
 in the official main repository at https://github.com/magpiemodel add a suffix
 to the name to allow distinguishing versions (format **MAgPIE-suffix**).
 
-## SYSTEM REQUIREMENTS
-The model is quite resource heavy and works best on machines with high CPU clock
-and memory. Recommended is a machine with Windows, MacOS or Linux, with at least
-16GB of memory and a Core i7 CPU or similar.
-
-## HOW TO INSTALL
-MAgPIE requires *GAMS* (https://www.gams.com/) including licenses for the
-solvers *CONOPT* and (optionally) *CPLEX* for its core calculations. As the model
-benefits significantly of recent improvements in *GAMS* and *CONOPT4* it is
-recommended to work with the most recent versions of both.
-Please make sure that the GAMS installation path is added to the PATH variable
-of the system.
-
-In addition *R* (https://www.r-project.org/) is required for pre- and
-postprocessing and run management (needs to be added to the PATH variable
-as well).
-
-Several R packages are required to run MAgPIE. Under Windows you first need to install
-Rtools (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
-variable. When running R from the MAgPIE folder for the first time all
-required packages are automatically installed into an isolated,
-project specific R package environment (renv).
-For post-processing model outputs *Latex* is required
-(https://www.latex-project.org/get/). To be seen by the model it also needs to
-added to the PATH variable of your system.
-
-## DOCKER
-To use Docker, copy your `gamslice.txt`
-into the MAgPIE main directory, and build the magpie image using the command
-```
-sudo docker build -t magpie .
-```
-Basic usage: Run the container (note the use of an absolute path) using
-```
-sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie
-```
-Note: this will run MAgPIE with the default settings, if you want to change them choose the
-
-Advanced usage: Run the container interactively using
-```
-sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie bash
-```
-
-## HOW TO CONFIGURE
-Model run settings are set in `config/default.cfg` (or another config file of
-the same structure). New model scenarios can be created by adding a column to
-`config/scenario_config.csv`
-
-## HOW TO RUN
-To run the model execute `Rscript start.R` (or `source("start.R")` from within
-R) in the main folder of the model.
-This will give you a list of available run scripts you can choose from. You can
-also add your own run scripts by saving them in the folder scripts/start. To run
-a single model run with settings as stated in default.cfg you can choose start
-script "default". Make sure that the config file has been set correctly before
-starting the model.
-
-## HOW TO CONTRIBUTE
+## [How to Contribute](#contributing)
 We are interested in working with you! Just contact us through GitHub
 (https://github.com/magpiemodel) or by mail (magpie@pik-potsdam.de) if you have
 found and/or fixed a bug, developed a new model feature, have ideas for further
@@ -132,7 +137,7 @@ meaningful model of the agricultural land use sector to get a better
 understanding of the underlying processes and possible futures. Join us doing
 so!
 
-## DEPENDENCIES
+### DEPENDENCIES
 Model dependencies **must be publicly available** and should be Open Source.
 Development aim is to rather minimize than expand dependencies on non-free
 and/or non open source software. That means that besides currently existing
@@ -155,7 +160,7 @@ how it can be installed). If not all requirements can be fulfilled by the new
 dependency this case should be discussed with the model maintainer
 (magpie@pik-potsdam.de) to find a good solution for it.
 
-## INPUT DATA
+### INPUT DATA
 
 In order to allow other researchers to reproduce and use work done with MAgPIE
 one needs to make sure that all components necessary to perform a run can be
@@ -175,23 +180,14 @@ In case that these recommendations can not be followed we would be happy if you
 could discuss that issue with the MAgPIE development team
 (magpie@pik-potsdam.de).
 
-## MODEL OUTPUT
-
-By default the results of a model run are written to an individual results folder within the "output/" folder of the model. The two most important output files are the fulldata.gdx and the report.mif. The fulldata.gdx is the technical output of the GAMS optimization and contains all quantities that were used during the optimization in unchanged form. The mif-file is a csv file of a specific format and is synthetized from the fulldata.gdx by post-processing scripts. It can be read in any text editor or spreadsheet program and is well suited for a quick look at the results and for further analysis.
-
-## CONTACT
-magpie@pik-potsdam.de
-
-## KNOWN BUGS
-
-## TROUBLESHOOTING
+## Contact and Troubleshooting
 Please contact magpie@pik-potsdam.de
 
-## CITATION
+## Citation
 See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.7.1/#how-to-cite) in the model documentation for information how to cite the model.
 
-## AUTHORS
+## Authors
 See list of authors in CITATION.cff
 
-## CHANGELOG
+## Changelog
 See log on GitHub (https://github.com/magpiemodel)
