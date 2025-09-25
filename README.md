@@ -28,7 +28,7 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 1. [How to Contribute](#how-to-contribute)
 <!--toc-->
 
-## [Installing MAgPIE](#installing)
+## Installing MAgPIE
 
 ### Hardware Requirements
 The model is quite resource heavy and works best on machines with high CPU clock
@@ -63,7 +63,7 @@ For post-processing model outputs *Latex* is required
 added to the PATH variable of your system.
 
 
-## [Running MAgPIE](#running)
+## Running MAgPIE
 
 ### How to Configure the Model
 Model run settings are set in `config/default.cfg` (or another config file of
@@ -130,7 +130,7 @@ When using a modified version of **MAgPIE** which is not identical to versions
 in the official main repository at https://github.com/magpiemodel add a suffix
 to the name to allow distinguishing versions (format **MAgPIE-suffix**).
 
-## [How to Contribute](#contributing)
+## How to Contribute
 We are interested in working with you! Just contact us through GitHub
 (https://github.com/magpiemodel) or by mail (magpie@pik-potsdam.de) if you have
 found and/or fixed a bug, developed a new model feature, have ideas for further
