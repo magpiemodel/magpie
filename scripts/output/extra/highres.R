@@ -142,7 +142,7 @@ highres <- function(cfg) {
 
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
-  cfg$gms$optimization <- "nlp_par"
+  cfg$gms$optimization <- "nlp_apr17"
   cfg$gms$s15_elastic_demand <- 0
 
   #get exogenous bioenergy demand and GHG prices from c200 run because these files may have been overwritten
