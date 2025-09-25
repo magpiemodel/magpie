@@ -54,7 +54,10 @@ Several R packages are required to run MAgPIE. Under Windows you first need to i
 Rtools (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
 variable. When running R from the MAgPIE folder for the first time all
 required packages are automatically installed into an isolated,
-project specific R package environment (renv).
+project specific R package environment (renv). The installation of R packages might
+require additional OS-level packages which will be listed by *renv* during the 
+installation process.
+
 For post-processing model outputs *Latex* is required
 (https://www.latex-project.org/get/). To be seen by the model it also needs to
 added to the PATH variable of your system.
@@ -104,10 +107,10 @@ structural characteristics.
 
 ## Re-using the Model
 
-### COPYRIGHT
+### Copyright
 Copyright 2008-2022 Potsdam Institute for Climate Impact Research (PIK)
 
-### LICENSE
+### License
 This program is free software: you can redistribute it and/or modify
 it under the terms of the **GNU Affero General Public License** as published by
 the Free Software Foundation, **version 3** of the License or later. You should
@@ -118,7 +121,7 @@ https://www.gnu.org/licenses/agpl.txt
 Under Section 7 of AGPL-3.0, you are granted additional permissions described
 in the MAgPIE License Exception, version 1.0 (see LICENSE file).
 
-### NOTES
+### Notes
 Following the principles of good scientific practice it is recommended
 to make the source code available in the events of model based publications
 or model-based consulting.
@@ -137,7 +140,7 @@ meaningful model of the agricultural land use sector to get a better
 understanding of the underlying processes and possible futures. Join us doing
 so!
 
-### DEPENDENCIES
+### Dependencies
 Model dependencies **must be publicly available** and should be Open Source.
 Development aim is to rather minimize than expand dependencies on non-free
 and/or non open source software. That means that besides currently existing
@@ -160,7 +163,7 @@ how it can be installed). If not all requirements can be fulfilled by the new
 dependency this case should be discussed with the model maintainer
 (magpie@pik-potsdam.de) to find a good solution for it.
 
-### INPUT DATA
+### Input Data
 
 In order to allow other researchers to reproduce and use work done with MAgPIE
 one needs to make sure that all components necessary to perform a run can be
