@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **inputdata** updated input data to rev4.124, which includes two fixes, one with nitrogen emissions being to low and one about accounting for starches in FAO processing data
+- **inputdata** updated input data to rev4.123, which uses LUH3 instead of LUH2v2
 - **config** input data upgraded from rev4.121 to rev4.122, incorporating new bioenergy demand and GHG price trajectories from REMIND standalone runs with biochar (R34BC).
 - **56_ghg_policy** extended set of available ghg price scenarios
 - **60_bioenergy** extended set of available second generation bioenergy scenarios

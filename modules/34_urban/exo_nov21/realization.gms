@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description Urban Land based on LUH2v2 (Hurtt 2020) cellular (0.5 degree) input dataset, varying with SSP. 
+*' @description Urban Land based on LUH3 (LUH2v2: Hurtt 2020, LUH3: publication not yet available) cellular (0.5 degree) input dataset, varying with SSP. 
 *' Cellular level is prescribed via a very high punishment term for deviating from original input values.
 *' Regional sums of urban land must add be equal for both model and input data.
 
