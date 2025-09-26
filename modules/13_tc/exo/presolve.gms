@@ -54,6 +54,10 @@ elseif c13_croparea_consv_tau_increase = 0 AND m_year(t) >= s13_croparea_consv_s
   p13_tau_consv(h,tautype) = pc13_tau_consv(h,tautype);
 );
 
+* The overall land use intensity factor `vm_tau` is a linear combination between the
+* land use intensity factors `v13_tau` for regular cropland and `v13_tau_consv`
+* for cropland in conservation priority areas.
+
 vm_tau.fx(j,tautype) = sum((cell(i,j), supreg(h,i)), (1-p13_cropland_consv_shr(t,j)) * p13_tau(h,tautype) + p13_cropland_consv_shr(t,j) * p13_tau_consv(h,tautype));
 
 * The costs are shifted over 15 years (exponent 15) to reflect the average
