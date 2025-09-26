@@ -10,13 +10,13 @@ pc13_land(i,"pastr") = sum(cell(i,j),pcm_land(j,"past"));
 pc13_land(i,"crop") = sum(cell(i,j),pcm_land(j,"crop"));
 
 if (sum(sameas(t_past,t),1) = 1 AND s13_ignore_tau_historical = 0,
-  v13_tau.lo(h,"pastr") =   f13_pastr_tau_hist(t,h);
-  v13_tau.lo(h,"crop") =    f13_tau_historical(t,h);
+  v13_tau_core.lo(h,"pastr") =   f13_pastr_tau_hist(t,h);
+  v13_tau_core.lo(h,"crop") =    f13_tau_historical(t,h);
 else
-  v13_tau.lo(h, tautype) =    pc13_tau(h, tautype);
+  v13_tau_core.lo(h, tautype) =    pc13_tau(h, tautype);
 );
 
-  v13_tau.up(h,tautype) = 2 * pc13_tau(h,tautype);
+  v13_tau_core.up(h,tautype) = 2 * pc13_tau(h,tautype);
 
 if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 
@@ -71,11 +71,11 @@ elseif c13_croparea_consv_tau_increase = 0 AND m_year(t) >= s13_croparea_consv_s
 
 * educated guess for tau levels:
 if(ord(t) = 1,
-  v13_tau.l(h,tautype) = pc13_tau(h,tautype);
+  v13_tau_core.l(h,tautype) = pc13_tau(h,tautype);
   v13_tau_consv.l(h,tautype) = pc13_tau_consv(h,tautype);
-  vm_tau.l(j,tautype) = sum((cell(i,j), supreg(h,i)),(1-p13_cropland_consv_shr(t,j)) * v13_tau.l(h,tautype) + p13_cropland_consv_shr(t,j) * v13_tau_consv.l(h,tautype));
+  vm_tau.l(j,tautype) = sum((cell(i,j), supreg(h,i)),(1-p13_cropland_consv_shr(t,j)) * v13_tau_core.l(h,tautype) + p13_cropland_consv_shr(t,j) * v13_tau_consv.l(h,tautype));
   pcm_tau(j,tautype) = vm_tau.l(j,tautype);
 else
-  v13_tau.l(h,tautype) = pc13_tau(h,tautype)*(1+pc13_tcguess(h,tautype))**m_yeardiff(t);
-  v13_tau_consv.l(h,tautype) = p13_croparea_consv_tau_factor(h) * v13_tau.l(h,tautype);
+  v13_tau_core.l(h,tautype) = pc13_tau(h,tautype)*(1+pc13_tcguess(h,tautype))**m_yeardiff(t);
+  v13_tau_consv.l(h,tautype) = p13_croparea_consv_tau_factor(h) * v13_tau_core.l(h,tautype);
 );

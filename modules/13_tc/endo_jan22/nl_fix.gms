@@ -7,4 +7,4 @@
 
 * ### nl_fix ###
 
-v13_tau.fx(h,tautype) = max(v13_tau.lo(h,tautype), min(v13_tau.up(h,tautype), v13_tau.l(h,tautype)));
+v13_tau_core.fx(h,tautype) = max(v13_tau_core.lo(h,tautype), min(v13_tau_core.up(h,tautype), v13_tau_core.l(h,tautype)));

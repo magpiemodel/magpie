@@ -19,7 +19,7 @@ parameters
  i13_tc_factor(t)                     Regression factor (USD17MER per ha)
  i13_tc_exponent(t)                   Regression exponent (1)
  p13_tech_cost(i,tautype)             Annuitized costs of TC for crops and pasture (mio. USD17MER per yr)
- p13_tau(h,tautype)                   Agricultural land use intensity tau for conventional cropland (1)
+ p13_tau_core(h,tautype)                   Agricultural land use intensity tau for conventional cropland (1)
  p13_tau_consv(h,tautype)             Tau for cropland within conservation priority areas (1)
  p13_cropland_consv_shr(t,j)          Share of cropland within conservation priority areas(1)
  p13_croparea_consv_tau_factor(h)     Regional tau factor for crop area conservation (1)

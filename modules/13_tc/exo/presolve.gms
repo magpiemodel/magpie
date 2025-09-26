@@ -43,9 +43,9 @@ if (smin((h,tautype), f13_tau_scenario(t,h,tautype)) <= 0,
   abort "tau value of 0 detected in at least one region!";
 );
 
-p13_tau(h,tautype) = f13_tau_scenario(t,h,tautype);
+p13_tau_core(h,tautype) = f13_tau_scenario(t,h,tautype);
 
-* p13_tau_consv is linked to p13_tau through the
+* p13_tau_consv is linked to p13_tau_core through the
 * reduction factor for conservation land
 if (c13_croparea_consv_tau_increase = 1 OR m_year(t) < s13_croparea_consv_start,
   p13_tau_consv(h,tautype) = p13_croparea_consv_tau_factor(h) * f13_tau_scenario(t,h,tautype);
@@ -55,19 +55,19 @@ elseif c13_croparea_consv_tau_increase = 0 AND m_year(t) >= s13_croparea_consv_s
 );
 
 * The overall land use intensity factor `vm_tau` is a linear combination between the
-* land use intensity factors `v13_tau` for regular cropland and `v13_tau_consv`
+* land use intensity factors `p13_tau` for regular cropland and `p13_tau_consv`
 * for cropland in conservation priority areas.
 
-vm_tau.fx(j,tautype) = sum((cell(i,j), supreg(h,i)), (1-p13_cropland_consv_shr(t,j)) * p13_tau(h,tautype) + p13_cropland_consv_shr(t,j) * p13_tau_consv(h,tautype));
+vm_tau.fx(j,tautype) = sum((cell(i,j), supreg(h,i)), (1-p13_cropland_consv_shr(t,j)) * p13_tau_core(h,tautype) + p13_cropland_consv_shr(t,j) * p13_tau_consv(h,tautype));
 
 * The costs are shifted over 15 years (exponent 15) to reflect the average
 * time it takes investments in tc to pay off.
 
 p13_cost_tc(i,tautype) = pc13_land(i,tautype) * i13_tc_factor(t)
-                     * sum(supreg(h,i), p13_tau(h,tautype))**i13_tc_exponent(t)
+                     * sum(supreg(h,i), p13_tau_core(h,tautype))**i13_tc_exponent(t)
                      * (1+pm_interest(t,i))**15;
 
-p13_tech_cost(i,tautype) = (sum(supreg(h,i),p13_tau(h,tautype)/pc13_tau(h,tautype))-1) * p13_cost_tc(i,tautype)
+p13_tech_cost(i,tautype) = (sum(supreg(h,i),p13_tau_core(h,tautype)/pc13_tau(h,tautype))-1) * p13_cost_tc(i,tautype)
                                * pm_interest(t,i)/(1+pm_interest(t,i));
 
 vm_tech_cost.fx(i) = sum(tautype, p13_tech_cost(i,tautype));

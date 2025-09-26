@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variable
- v13_tau(h,tautype)                   Agricultural land use intensity tau for conventional cropland (1)
+ v13_tau_core(h,tautype)                   Agricultural land use intensity tau for conventional cropland (1)
  vm_tech_cost(i)                      Total Annuitized costs of TC (mio. USD17MER per yr)
  v13_cost_tc(i,tautype)               Technical change costs per region (mio. USD17MER)
  v13_tech_cost(i,tautype)             Annuitized costs of TC for crops and pasture (mio. USD17MER per yr)
@@ -41,7 +41,7 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov13_tau(t,h,tautype,type)       Agricultural land use intensity tau for conventional cropland (1)
+ ov13_tau_core(t,h,tautype,type)       Agricultural land use intensity tau for conventional cropland (1)
  ov_tech_cost(t,i,type)           Total Annuitized costs of TC (mio. USD17MER per yr)
  ov13_cost_tc(t,i,tautype,type)   Technical change costs per region (mio. USD17MER)
  ov13_tech_cost(t,i,tautype,type) Annuitized costs of TC for crops and pasture (mio. USD17MER per yr)
