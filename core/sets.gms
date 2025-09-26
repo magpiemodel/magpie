@@ -55,32 +55,32 @@ sets
       VEN, VGB, VIR, VNM, VUT, WLF, WSM, YEM, ZAF, ZMB, ZWE /
 
   j number of LPJ cells
-    / CAZ_1*CAZ_14,
-      CHA_15*CHA_37,
-      EUR_38*EUR_47,
-      IND_48*IND_54,
-      JPN_55*JPN_58,
-      LAM_59*LAM_84,
-      MEA_85*MEA_105,
-      NEU_106*NEU_114,
-      OAS_115*OAS_130,
-      REF_131*REF_153,
-      SSA_154*SSA_185,
-      USA_186*USA_200 /
+    / CAZ_1*CAZ_5,
+      CHA_6*CHA_24,
+      EUR_25*EUR_36,
+      IND_37*IND_48,
+      JPN_49*JPN_55,
+      LAM_56*LAM_88,
+      MEA_89*MEA_113,
+      NEU_114*NEU_121,
+      OAS_122*OAS_137,
+      REF_138*REF_149,
+      SSA_150*SSA_182,
+      USA_183*USA_200 /
 
   cell(i,j) number of LPJ cells per region i
-    / CAZ . (CAZ_1*CAZ_14)
-      CHA . (CHA_15*CHA_37)
-      EUR . (EUR_38*EUR_47)
-      IND . (IND_48*IND_54)
-      JPN . (JPN_55*JPN_58)
-      LAM . (LAM_59*LAM_84)
-      MEA . (MEA_85*MEA_105)
-      NEU . (NEU_106*NEU_114)
-      OAS . (OAS_115*OAS_130)
-      REF . (REF_131*REF_153)
-      SSA . (SSA_154*SSA_185)
-      USA . (USA_186*USA_200) /
+    / CAZ . (CAZ_1*CAZ_5)
+      CHA . (CHA_6*CHA_24)
+      EUR . (EUR_25*EUR_36)
+      IND . (IND_37*IND_48)
+      JPN . (JPN_49*JPN_55)
+      LAM . (LAM_56*LAM_88)
+      MEA . (MEA_89*MEA_113)
+      NEU . (NEU_114*NEU_121)
+      OAS . (OAS_122*OAS_137)
+      REF . (REF_138*REF_149)
+      SSA . (SSA_150*SSA_182)
+      USA . (USA_183*USA_200) /
 
   i_to_iso(i,iso) mapping regions to iso countries
     / CAZ . (AUS, CAN, HMD, NZL, SPM)
@@ -113,6 +113,9 @@ sets
 ;
 *######################### R SECTION END (SETS) ################################
 *###############################################################################
+
+set number_order Ensures that numeric values in sets follow ascending order in the GAMS entry order, necessary for using ord() and index lag
+  / 1*2200 /;
 
 sets
         h2(h) Superregional (dynamic set)
@@ -173,6 +176,8 @@ sets time_annual Annual extended time steps
 
 set t_past(t_all) Timesteps with observed data
 $If "%c_past%"== "till_2010" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010/;
+$If "%c_past%"== "till_2015" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010, y2015/;
+$If "%c_past%"== "till_2020" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010, y2015, y2020/;
 $If "%c_past%"== "till_1965" /y1965/;
 $If "%c_past%"== "till_1975" /y1965, y1970, y1975/;
 $If "%c_past%"== "till_1995" /y1965, y1970, y1975, y1980, y1985, y1990, y1995/;

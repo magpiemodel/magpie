@@ -28,7 +28,7 @@ p62_scaling_factor(i)$(p62_dem_food_lastcalibyear(i) > 0) = sum(kfo, vm_dem_food
 * it in the final biomass demand equation. 
 if (sum(sameas(t_past,t),1) = 1,
   p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate(t,i,kall);
-  p62_bioplastic_substrate_lastcalibyear(i,kall) = p62_bioplastic_substrate(t,i,kall);
+  p62_bioplastic_substrate_lastcalibyear(i,kall) = min(p62_bioplastic_substrate(t,i,kall), f62_dem_material(t,i,kall));
 else
   if (s62_include_bioplastic = 0,
     p62_bioplastic_substrate_double_counted(t,i,kall) = 0;
@@ -36,3 +36,10 @@ else
     p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate_lastcalibyear(i,kall) * p62_scaling_factor(i);
   );
 );
+
+* FAO data for material demand does not cover begr and betr.
+* Therefore, in contrast to the other crops, begr and betr demand as bioplastic substrate
+* is not already included in the general material demand.
+* Thus, we set the double counted demand to zero for begr and betr.
+p62_bioplastic_substrate_double_counted(t,i,"begr") = 0;
+p62_bioplastic_substrate_double_counted(t,i,"betr") = 0;

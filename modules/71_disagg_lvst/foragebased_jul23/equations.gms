@@ -8,7 +8,7 @@
 *' @equations
 
 *' Ruminant livestock production within a cell is determined by the production of the non-transportable
-*' feed items grazed pasture and fodder (`kforage`). Forage production must be larger than the ruminant feed requirements 
+*' feed items grazed pasture and fodder (`kforage`). Forage production must be larger than the ruminant feed requirements
 *' (`v71_feed_forage`) adjusted by a balance flow (`v71_feed_forage`).
 
 q71_feed_rum_liv(j2,kforage) ..
@@ -23,17 +23,17 @@ q71_feed_forage(j2) ..
                   sum((kli_rum,kforage), vm_prod(j2,kli_rum)
                  * sum((ct,cell(i2,j2)),im_feed_baskets(ct,i2,kli_rum,kforage)));
 
-*' The above equation contains a split of pasture and fodder fed ruminant feed requirements, since we assume 
+*' The above equation contains a split of pasture and fodder fed ruminant feed requirements, since we assume
 *' that depending on the intensity level of the livestock production, ruminants will graze on pastures (extensive systems)
 *' or will be fed via harvested fodder crops (intensive systems).
 
-*' The balance flow for pasture and fodder production (`kforage`) accounts as in [70_livestock] `q70_feed(i2,kap,kall)` 
-*' for inconsistencies with the FAO inventory of national feed use. In each cluster the balance flow is constrained by 
+*' The balance flow for pasture and fodder production (`kforage`) accounts as in [70_livestock] `q70_feed(i2,kap,kall)`
+*' for inconsistencies with the FAO inventory of national feed use. In each cluster the balance flow is constrained by
 *' its share of livestock production regarding the regional level by
 
 q71_feed_balanceflow_nlp(j2)$(s71_lp_fix=0) ..
              sum(kforage, v71_feed_balanceflow(j2,kforage)) =e=
-             sum((ct,cell(i2,j2),kli_rum,kforage), fm_feed_balanceflow(ct,i2,kli_rum,kforage) 
+             sum((ct,cell(i2,j2),kli_rum,kforage), vm_feed_balanceflow(i2,kli_rum,kforage)
              * (vm_prod(j2,kli_rum) / (vm_prod_reg(i2,kli_rum))));
 
 *' @stop
@@ -43,7 +43,7 @@ q71_feed_balanceflow_nlp(j2)$(s71_lp_fix=0) ..
 
 q71_feed_balanceflow_lp(i2)$(s71_lp_fix=1) ..
             sum((cell(i2,j2),kforage), v71_feed_balanceflow(j2,kforage)) =e=
-            sum((ct,kli_rum,kforage), fm_feed_balanceflow(ct,i2,kli_rum,kforage));
+            sum((ct,kli_rum,kforage), vm_feed_balanceflow(i2,kli_rum,kforage));
 
 * Note that for fixation to linear behaviour `q71_feed_balanceflow_lp` replaces `q71_feed_balanceflow_nlp`.
 
