@@ -63,7 +63,8 @@ if (dir.exists(hi_datasets_path)) {
 
   hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
 
-  if (hi_rev == "v39") {
+  hi_rev_num <- as.integer(substring(hi_rev, 2, 3))
+  if (hi_rev_num >= 39) {
       gdx <- suppressMessages(gdx2::readGDX(hi_versionToUse_path, "report_health_s", spatial = "uni_7", temporal = "uni_9"))
       getSets(gdx) <- c("region", "year", "mergeScenario", "scenario", "metric", "TMREL", "riskFactor", "causeOfDeath", "sex", "stat")
       gdx <- collapseDim(gdx, dim = "mergeScenario")
@@ -900,17 +901,18 @@ names(reg2iso) <- c("region", "iso_a3")
 write.csv(reg2iso, file.path("output", "reg2iso.csv"))
 saveRDS(reg2iso, file = file.path("output", "reg2iso.rds"), version = 2, compress = "xz")
 
-# save validation file
-val <- file.path("input", "validation.mif")
-val <- as.data.table(read.quitte(val))
-# rename variables
-val[variable == "Resources|Land Cover|Forest|+|Managed Forest", variable := "Resources|Land Cover|Forest|+|Planted Forest"]
-val[variable == "Productivity|Feed conversion|Monogastric meat", variable := "Productivity|Feed conversion|Pig meat"]
-val[variable == "Nutrition|Calorie Intake|Livestock products|+|Monogastric meat", variable := "Nutrition|Calorie Intake|Livestock products|+|Pig meat"]
-val[variable == "Nutrition|Calorie Supply|Livestock products|+|Monogastric meat", variable := "Nutrition|Calorie Supply|Livestock products|+|Pig meat"]
-val[variable == "Trade|Net-Trade|Livestock products|+|Monogastric meat", variable := "Trade|Net-Trade|Livestock products|+|Pig meat"]
-val[variable == "Trade|Self-sufficiency|Livestock products|Monogastric meat", variable := "Trade|Self-sufficiency|Livestock products|Pig meat"]
-saveRDS(val, file = file.path("output", paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
+# # save validation file
+# Deactivated as manually corrected FSDP_validation is already present
+# val <- file.path("input", "validation.mif")
+# val <- as.data.table(read.quitte(val))
+# # rename variables
+# val[variable == "Resources|Land Cover|Forest|+|Managed Forest", variable := "Resources|Land Cover|Forest|+|Planted Forest"]
+# val[variable == "Productivity|Feed conversion|Monogastric meat", variable := "Productivity|Feed conversion|Pig meat"]
+# val[variable == "Nutrition|Calorie Intake|Livestock products|+|Monogastric meat", variable := "Nutrition|Calorie Intake|Livestock products|+|Pig meat"]
+# val[variable == "Nutrition|Calorie Supply|Livestock products|+|Monogastric meat", variable := "Nutrition|Calorie Supply|Livestock products|+|Pig meat"]
+# val[variable == "Trade|Net-Trade|Livestock products|+|Monogastric meat", variable := "Trade|Net-Trade|Livestock products|+|Pig meat"]
+# val[variable == "Trade|Self-sufficiency|Livestock products|Monogastric meat", variable := "Trade|Self-sufficiency|Livestock products|Pig meat"]
+# saveRDS(val, file = file.path("output", paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
 #Add new plots here:
