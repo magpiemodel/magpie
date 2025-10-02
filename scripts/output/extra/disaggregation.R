@@ -87,11 +87,11 @@ if (length(map_file) > 1) {
   return(area_shr_hr)
 }
 
-.dissagBII <- function(gdx, map_file, dir) {
+.dissagBII <- function(gdx, map_file) {
   # Biodiversity intactness indicator (BII) at cluster level
   bii_lr <- BII(gdx,
     file = NULL, level = "cell", mode = "auto", landClass = "all",
-    bii_coeff = NULL, side_layers = NULL, dir = dir
+    bii_coeff = NULL, side_layers = NULL
   )
 
   # add BII values for primary other land (BII = 1)
