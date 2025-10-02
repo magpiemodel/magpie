@@ -477,7 +477,7 @@ land_ini_hr <- land_ini_hr[, , getNames(land_ini_lr)]
 getSets(land_ini_hr)["d3.1"] <- "land"
 
 # Disaggregate BII values to high resolution
-bii_hr <- .dissagBII(gdx, map_file = map_file, dir = outputdir)
+bii_hr <- .dissagBII(gdx, map_file = map_file)
 
 # Disaggregate land pools for BII estimation
 land_bii_hr <- interpolateAvlCroplandWeighted(
