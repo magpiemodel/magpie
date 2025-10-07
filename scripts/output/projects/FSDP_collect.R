@@ -921,6 +921,6 @@ plotFSDP(outputfolder = "output",
          reg = file.path("output", paste0(rev, "_FSDP_reg.rds")),
          iso = iso,
          grid = grid,
-         val = val,
+         val = file.path("output", paste0(rev, "_FSDP_validation.rds")),
          reg2iso = reg2iso,
          rev = rev)

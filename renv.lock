@@ -5052,7 +5052,7 @@
       "RemoteUsername": "pik-piam",
       "RemoteRepo": "magpie4",
       "RemoteRef": "FSEC-2024",
-      "RemoteSha": "33ed051b836bcb5a4b6243ed6e28d9ab45057484",
+      "RemoteSha": "3cc81f14e674d072af3faca04ceb0d4c0a66e819",
       "RemoteHost": "api.github.com"
     },
     "magpiesets": {
