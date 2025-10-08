@@ -296,6 +296,11 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
 
     createResultsfolderRenv <- function() {
       renv::init() # will overwrite renv.lock if existing...
+      if (!identical(Sys.info()[["sysname"]], "Windows")) {
+        # the renv package installation folder is copied from the renv cache, where it might
+        # be write protected, but we don't want write protection in the results folder
+        system("chmod ug+w -R renv/library/R-*/*")
+      }
       file.rename("_renv.lock", "renv.lock") # so we need this rename
       renv::restore(prompt = FALSE)
       message("renv creation done.")
