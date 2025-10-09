@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **14_yield** avoid division by zero for special cases
+- **14_yield** avoid too high yields in edge cases (in case of data mismatches between FAO/LUH croparea and LPJmL yield data avoid zero references yields that lead to overestimated yields)
 - **60_bioenergy** Harmonize 2nd gen bioenergy demand for historic period based on default trajectory "R34M410-SSP2-NPi2025"
 - **scripts/output** removed deprecated `dir` option from `disaggBII` in `disaggregation.R`
 
