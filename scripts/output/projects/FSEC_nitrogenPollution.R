@@ -38,5 +38,4 @@ message("Generating nitrogen pollution output for the run: ", title)
 
 # Grid-level nitrogen pollution
 out <- getReportFSECPollution(reportOutputDir = outputdir,
-                              magpieOutputDir = outputdir,
                               scenario = title)

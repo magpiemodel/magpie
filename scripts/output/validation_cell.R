@@ -43,7 +43,7 @@ LU <- plotCorrHist2D(
 ######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with LUH ########
 magpie <- croparea(gdx, level = "cell", product_aggr = FALSE, water_aggr = TRUE)[, , crops]
 historical1 <- read.magpie(paste0(outputdir, "/LUH2_croparea_0.5.mz"))
-historical1 <- magpiesort((gdxAggregate(gdx, historical1, to = "cell", absolute = TRUE, dir = outputdir)))[, , crops]
+historical1 <- magpiesort((gdxAggregate(gdx, historical1, to = "cell", absolute = TRUE)))[, , crops]
 historical1 <- dimSums(historical1, dim = 3.1)
 
 intYears <- intersect(getYears(magpie, as.integer = TRUE), getYears(historical1, as.integer = TRUE))
@@ -55,7 +55,7 @@ Crops <- plotCorrHist2D(
 
 ######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with MAPSPAM ########
 historical <- read.magpie(paste0(outputdir, "/MAPSPAM_croparea_0.5.mz"))
-historical <- magpiesort(gdxAggregate(gdx, historical, to = "cell", absolute = TRUE, dir = outputdir))[,,crops] 
+historical <- magpiesort(gdxAggregate(gdx, historical, to = "cell", absolute = TRUE))[,,crops] 
 historical <- dimSums(historical, dim = 3.2)
 intYears2 <- intersect(getYears(magpie, as.integer = TRUE), getYears(historical, as.integer = TRUE))
 
