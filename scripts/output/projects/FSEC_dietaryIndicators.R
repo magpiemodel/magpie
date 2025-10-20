@@ -37,7 +37,7 @@ title <- cfg$title
 
 message("Generating DietaryIndicators output for the run: ", title)
 gdx <- file.path(outputdir, "fulldata.gdx")
-report <- getReportDietaryIndicators(gdx, scenario = title)
+report <- getReportDietaryIndicators(gdx = gdx, scenario = title)
 
 Map(f = function(x, i) write.csv(x, file = file.path(outputdir, paste0(title, "_", i, ".csv")),
                                  row.names = FALSE, quote = TRUE),
