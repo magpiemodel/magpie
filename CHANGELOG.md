@@ -4,26 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
-## [Unreleased]
+## [4.13.0] - 2025-10-21
 
 ### changed
-- **inputdata** updated input data to rev4.126, including fixes related to inconsistencies as part of LUH3 update and growing primary forest
-- **inputdata** updated input data to rev4.124, which includes two fixes, one with nitrogen emissions being to low and one about accounting for starches in FAO processing data
-- **inputdata** updated input data to rev4.123, which uses LUH3 instead of LUH2v2
-- **config** input data upgraded from rev4.121 to rev4.122, incorporating new bioenergy demand and GHG price trajectories from REMIND standalone runs with biochar (R34BC).
 - **56_ghg_policy** extended set of available ghg price scenarios
 - **60_bioenergy** extended set of available second generation bioenergy scenarios
-
-### added
--
-
-### removed
--
+- **config** input data upgraded from rev4.121 to rev4.122, incorporating new bioenergy demand and GHG price trajectories from REMIND standalone runs with biochar (R34BC).
+- **inputdata** updated input data to rev4.123, which uses LUH3 instead of LUH2v2
 
 ### fixed
 - **14_yield** avoid division by zero for special cases
 - **14_yield** avoid too high yields in edge cases (in case of data mismatches between FAO/LUH croparea and LPJmL yield data avoid zero references yields that lead to overestimated yields)
 - **60_bioenergy** Harmonize 2nd gen bioenergy demand for historic period based on default trajectory "R34M410-SSP2-NPi2025"
+- **inputdata** updated input data to rev4.124, which includes two fixes, one with nitrogen emissions being to low and one about accounting for starches in FAO processing data
+- **inputdata** updated input data to rev4.126, including fixes related to inconsistencies as part of LUH3 update and growing primary forest
 - **scripts/output** removed deprecated `dir` option from `disaggBII` in `disaggregation.R`
 
 
@@ -1219,7 +1213,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.12.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.13.0...develop
+[4.13.0]: https://github.com/magpiemodel/magpie/compare/v4.12.0...v4.13.0
 [4.12.0]: https://github.com/magpiemodel/magpie/compare/v4.11.0...v4.12.0
 [4.11.0]: https://github.com/magpiemodel/magpie/compare/v4.10.1...v4.11.0
 [4.10.1]: https://github.com/magpiemodel/magpie/compare/v4.10.0...v4.10.1
