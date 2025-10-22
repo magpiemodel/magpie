@@ -12,6 +12,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **config** input data upgraded from rev4.121 to rev4.122, incorporating new bioenergy demand and GHG price trajectories from REMIND standalone runs with biochar (R34BC).
 - **inputdata** updated input data to rev4.123, which uses LUH3 instead of LUH2v2
 
+### added
+- **renv/archive** store `renv.lock` for release versions
+
 ### fixed
 - **14_yield** avoid division by zero for special cases
 - **14_yield** avoid too high yields in edge cases (in case of data mismatches between FAO/LUH croparea and LPJmL yield data avoid zero references yields that lead to overestimated yields)
