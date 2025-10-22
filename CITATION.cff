@@ -162,7 +162,7 @@ abstract: The *Model of Agricultural Production and its Impact on the Environmen
   Future trends in food demand are derived from a cross-country regression analysis,
   based on future scenarios on GDP and population growth.
 version: 4.13.0
-date-released: 2025-10-21
+date-released: 2025-10-22
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse
