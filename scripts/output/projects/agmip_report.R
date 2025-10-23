@@ -31,7 +31,7 @@ mif <- paste0(outputdir, "/agmip_report.mif")
 rds <- paste0(outputdir, "/agmip_report.rds")
 ###############################################################################
 
-report <- getReportAgMIP(gdx, scenario = cfg$title, dir = outputdir)
+report <- getReportAgMIP(gdx, scenario = cfg$title)
 
 for (mapping in c("AgMIP")) {
   missingVariables <- sort(setdiff(unique(deletePlus(getMappingVariables(mapping,"M"))),unique(deletePlus(getNames(report,dim="variable")))))

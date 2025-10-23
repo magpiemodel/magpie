@@ -26,8 +26,8 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.12.0 can be found at
-https://rse.pik-potsdam.de/doc/magpie/4.12.0/
+The model documentation for version 4.13.0 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.13.0/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen
@@ -236,7 +236,7 @@ Please contact magpie@pik-potsdam.de if you're having troubles installing or run
 - If you're using PowerShell, starting an interactive R session with `R` doesn't work, and you need to type `R.exe` (or `R.bat` if `R.exe` isn't found) instead. The reason behind this is that `r` is a reserved shortcut for repeating the previous command, which is why you'll be getting a cryptic `Invoke-History: Cannot locate most recent history.` error message when trying to start R in a fresh PowerShell session.
 
 ## CITATION
-See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.12.0/#how-to-cite) in the model documentation for information how to cite the model.
+See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.13.0/#how-to-cite) in the model documentation for information how to cite the model.
 
 ## AUTHORS
 See list of authors in CITATION.cff

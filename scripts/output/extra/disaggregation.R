@@ -87,11 +87,11 @@ if (length(map_file) > 1) {
   return(area_shr_hr)
 }
 
-.dissagBII <- function(gdx, map_file, dir) {
+.dissagBII <- function(gdx, map_file) {
   # Biodiversity intactness indicator (BII) at cluster level
   bii_lr <- BII(gdx,
     file = NULL, level = "cell", mode = "auto", landClass = "all",
-    bii_coeff = NULL, side_layers = NULL, dir = dir
+    bii_coeff = NULL, side_layers = NULL
   )
 
   # add BII values for primary other land (BII = 1)
@@ -477,7 +477,7 @@ land_ini_hr <- land_ini_hr[, , getNames(land_ini_lr)]
 getSets(land_ini_hr)["d3.1"] <- "land"
 
 # Disaggregate BII values to high resolution
-bii_hr <- .dissagBII(gdx, map_file = map_file, dir = outputdir)
+bii_hr <- .dissagBII(gdx, map_file = map_file)
 
 # Disaggregate land pools for BII estimation
 land_bii_hr <- interpolateAvlCroplandWeighted(
