@@ -40,5 +40,4 @@ gdx <- file.path(outputdir, "fulldata.gdx")
 # Grid-level nitrogen pollution
 out <- getReportFSECCropDiversityGrid(gdx = gdx,
                                       reportOutputDir = outputdir,
-                                      magpieOutputDir = outputdir,
                                       scenario = title)
