@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
--
+- **scripts/start_functions.R** added all extra `cfg` arguments in `start_run()` to the config check call
 
 
 ## [4.13.0] - 2025-10-23
