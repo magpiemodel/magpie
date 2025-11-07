@@ -15,7 +15,7 @@ if(m_year(t) <= sm_fix_SSP2,
   i60_1stgen_bioenergy_dem(t,i,kall) = 
     f60_1stgen_bioenergy_dem(t,i,"const2020",kall);
   i60_res_2ndgenBE_dem(t,i) =
-    f60_res_2ndgenBE_dem(t,i,"ssp2");
+    f60_res_2ndgenBE_dem(t,i,"off");
   i60_1stgen_bioenergy_subsidy(t) =
     s60_bioenergy_1st_subsidy;
   i60_2ndgen_bioenergy_subsidy(t) = 0;
