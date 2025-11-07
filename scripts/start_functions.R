@@ -239,7 +239,9 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
 
   # Apply scenario settings ans check configuration file for consistency
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg, extras = c("info", "repositories", "gms$c_input_gdx_path"), saveCheck = TRUE)
+  cfg <- gms::check_config(cfg, extras = c("info", "repositories", "gms$c_input_gdx_path",
+                                           "val_workspace", "magpie_folder", "gms$c_title"),
+                           saveCheck = TRUE)
 
   # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
@@ -296,6 +298,11 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
 
     createResultsfolderRenv <- function() {
       renv::init() # will overwrite renv.lock if existing...
+      if (!identical(Sys.info()[["sysname"]], "Windows")) {
+        # the renv package installation folder is copied from the renv cache, where it might
+        # be write protected, but we don't want write protection in the results folder
+        system("chmod ug+w -R renv/library/R-*/*")
+      }
       file.rename("_renv.lock", "renv.lock") # so we need this rename
       renv::restore(prompt = FALSE)
       message("renv creation done.")
