@@ -125,5 +125,6 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 cfg <- fsecScenario(scenario = "e_FSDP")
 cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
-cfg$results_folder_highres <- "output"
+cfg$results_folder_highres <- NULL
+cfg$output <- setdiff(cfg$output, "extra/highres")
 start_run(cfg = cfg, codeCheck = codeCheck)
