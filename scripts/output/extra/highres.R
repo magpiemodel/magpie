@@ -64,7 +64,9 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
       #read html index file and extract file names
       h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
       con <- curl::curl(paste0(repo,"/"), handle = h)
-      dat <- try(readLines(con), silent = TRUE)
+      suppressSpecificWarnings({
+        dat <- try(readLines(con), silent = TRUE)
+      }, "Failed to connect to")
       close(con)
       dat <- grep("href",dat,value = T)
       dat <- unlist(lapply(strsplit(dat, "\\]\\] <a href\\=\\\"|\\\">"),function(x) x[2]))
