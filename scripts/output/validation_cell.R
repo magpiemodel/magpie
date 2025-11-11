@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Comparison at cellular level of land and crop types with LUH2 and MAPSPAM
+# description: Comparison at cellular level of land and crop types with LUH3 and MAPSPAM
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -18,7 +18,7 @@ library(magpiesets)
 library(gdx2)
 
 ############################# BASIC CONFIGURATION ##############################
-if (!file.exists(paste0(outputdir, "/LUH2_croparea_0.5.mz"))) stop("Cell validation is not possible. LUH2_croparea_0.5.mz and MAPSPAM_croparea_0.5.mz files are missing")
+if (!file.exists(paste0(outputdir, "/LUH3_croparea_0.5.mz"))) stop("Cell validation is not possible. LUH3_croparea_0.5.mz and MAPSPAM_croparea_0.5.mz files are missing")
 map_file <- Sys.glob(file.path(outputdir, "/clustermap_*.rds"))
 gdx <- file.path(outputdir, "/fulldata.gdx")
 cfg <- gms::loadConfig(file.path(outputdir, "/config.yml"))
@@ -35,27 +35,27 @@ magpie_LU <- land(gdx, level = "cell")
 historical_LU <- readGDX(gdx, "f10_land")
 
 LU <- plotCorrHist2D(
-    x = historical_LU, y = magpie_LU, xlab = "LUH2 \n (mio.ha)", ylab = "MAgPIE \n (mio.ha)", bins = 35,
+    x = historical_LU, y = magpie_LU, xlab = "LUH3 \n (mio.ha)", ylab = "MAgPIE \n (mio.ha)", bins = 35,
     folder = out_dir, file = "/validationLUcell", breaks = c(1, 10, 100), nrows = 2, ncols = 2, axisFont = 10,
     axisTitleFont = 11, TitleFontSize = 12, legendTitleFont = 10, legendTextFont = 8, statFont = 2, stat = FALSE, table = TRUE, tag = "year"
 )
 
 ######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with LUH ########
 magpie <- croparea(gdx, level = "cell", product_aggr = FALSE, water_aggr = TRUE)[, , crops]
-historical1 <- read.magpie(paste0(outputdir, "/LUH2_croparea_0.5.mz"))
-historical1 <- magpiesort((gdxAggregate(gdx, historical1, to = "cell", absolute = TRUE, dir = outputdir)))[, , crops]
+historical1 <- read.magpie(paste0(outputdir, "/LUH3_croparea_0.5.mz"))
+historical1 <- magpiesort((gdxAggregate(gdx, historical1, to = "cell", absolute = TRUE)))[, , crops]
 historical1 <- dimSums(historical1, dim = 3.1)
 
 intYears <- intersect(getYears(magpie, as.integer = TRUE), getYears(historical1, as.integer = TRUE))
 Crops <- plotCorrHist2D(
-    x = historical1[,intYears,], y = magpie[,intYears,], xlab = "LUH2 \n (mio.ha)", ylab = "MAgPIE \n (mio.ha)", bins = 35,
+    x = historical1[,intYears,], y = magpie[,intYears,], xlab = "LUH3 \n (mio.ha)", ylab = "MAgPIE \n (mio.ha)", bins = 35,
     folder = out_dir, file = "/validationCropCell", breaks = c(1, 10, 50), nrows = 2, ncols = 2, axisFont = 10,
     axisTitleFont = 11, TitleFontSize = 12, legendTitleFont = 10, legendTextFont = 8, statFont = 2, stat = FALSE, table = TRUE, tag = "year"
 )
 
 ######## Crop types ("maiz","rice_pro","soybean","tece") comparison  with MAPSPAM ########
 historical <- read.magpie(paste0(outputdir, "/MAPSPAM_croparea_0.5.mz"))
-historical <- magpiesort(gdxAggregate(gdx, historical, to = "cell", absolute = TRUE, dir = outputdir))[,,crops] 
+historical <- magpiesort(gdxAggregate(gdx, historical, to = "cell", absolute = TRUE))[,,crops] 
 historical <- dimSums(historical, dim = 3.2)
 intYears2 <- intersect(getYears(magpie, as.integer = TRUE), getYears(historical, as.integer = TRUE))
 
@@ -105,7 +105,7 @@ namesReport <- as.character(magpiesets::reportingnames(getNames(magpie_LU)))
 
 sw <- swopen(outfile = paste0(outputdir, "/CellValidation.pdf"), template = template)
 swlatex(sw, c("\\title{MAgPIE Validation on Cellular level}", "\\maketitle", "\\tableofcontents"))
-swlatex(sw, "\\section{Land use between 1995-2020 compared to LUH2}")
+swlatex(sw, "\\section{Land use between 1995-2020 compared to LUH3}")
 
 b <- 0
 
@@ -116,14 +116,14 @@ for (i in 1:length(namesReport)) {
     swfigure(sw, tmpplot, x = x, c(a:b))
     swtable(sw, collapseNames(as.magpie(y[a:b, ])),
         table.placement = "H", caption.placement = "top",
-        transpose = FALSE, caption = paste0("Compilation of error measurements for ", namesReport[i], " data comparing MAgPIE outputs \\& the LUH2 set at cluster level"), vert.lines = 0, align = "c"
+        transpose = FALSE, caption = paste0("Compilation of error measurements for ", namesReport[i], " data comparing MAgPIE outputs \\& the LUH3 set at cluster level"), vert.lines = 0, align = "c"
     )
     swlatex(sw, "\\newpage")
 }
 
 
 ############################## Plots LUH vs. magpie crop types ##########################################################
-swlatex(sw, "\\section{", paste0("MAgPIE crop types compared to LUH2 (", intYears[1], "-", intYears[length(intYears)], ")"), "}")
+swlatex(sw, "\\section{", paste0("MAgPIE crop types compared to LUH3 (", intYears[1], "-", intYears[length(intYears)], ")"), "}")
 
 namesReport1 <- as.character(magpiesets::reportingnames(getNames(magpie)))
 x1 <- Crops[[1]]
@@ -149,7 +149,7 @@ for (i in 1:length(namesReport1)) {
     swfigure(sw, tmpplot1, x = x1, c(a1:b1))
     swtable(sw, collapseNames(as.magpie(y1[a1:b1, ])),
         table.placement = "H", caption.placement = "top",
-        transpose = FALSE, caption = paste0("Compilation of error measurements for ", namesReport1[i], " data comparing MAgPIE outputs \\& the LUH2 set at cluster level"), vert.lines = 0, align = "c"
+        transpose = FALSE, caption = paste0("Compilation of error measurements for ", namesReport1[i], " data comparing MAgPIE outputs \\& the LUH3 set at cluster level"), vert.lines = 0, align = "c"
     )
     swlatex(sw, "\\newpage")
 }
@@ -181,7 +181,7 @@ for (i in 1:length(namesReport1)) {
     b2 <- 0
     for (i in 1:length(namesReport1)) {
         swlatex(sw, paste0("\\subsection{", namesReport1[i], "}"))
-        swlatex(sw, "\\qquad \\textbf{MAPSPAM} \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\textbf{LUH2}")
+        swlatex(sw, "\\qquad \\textbf{MAPSPAM} \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\qquad \\textbf{LUH3}")
         a2 <- b2 + 1
         b2 <- a2 + length(intYears2) - 1
         swfigure(sw, tmpplot2, x2 = x2, x3 = x3, range = c(a2:b2))

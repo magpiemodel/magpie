@@ -39,11 +39,11 @@ gdx     <- file.path(outputdir, "fulldata.gdx")
 
 ### Grid-level water indicators ###
 # Volume of environmental flow violations (EFV) (in km^3)
-efvViolation <- waterEFViolation(gdx, level = "grid", dir = outputdir)
+efvViolation <- waterEFViolation(gdx, level = "grid")
 write.magpie(efvViolation, file_name = file.path(outputdir, "efvVolume.mz"))
 
 # Total land (in mio. ha)
-gridLand  <- reportGridLand(gdx, dir = outputdir)
+gridLand  <- reportGridLand(gdx)
 # transform to ha
 totalLand <- dimSums(gridLand, dim = 3) * 1e6
 # Environmental flow violations per hectare of total area (in m3/ha)
@@ -54,12 +54,12 @@ write.magpie(efvViolation_ha, file_name = file.path(outputdir, "efvVolume_ha.mz"
 efvViolation[efvViolation > 0] <- 1
 
 # Water stress indicator (use-to-availability ratio)
-watStress <- waterStressRatio(gdx, level = "grid", dir = outputdir)
+watStress <- waterStressRatio(gdx, level = "grid")
 watStressViolations <- watStress
 # mark violations in different color
 watStressViolations[efvViolation == 1] <- 100
 write.magpie(watStressViolations, file_name = file.path(outputdir, "watStressViolations.mz"))
 
 # Water EFV ratio (EFV to EFR)
-watEFVratio <- waterEFVratio(gdx, level = "grid", dir = outputdir)
+watEFVratio <- waterEFVratio(gdx, level = "grid")
 write.magpie(watEFVratio, file_name = file.path(outputdir, "watEFVratio.mz"))

@@ -72,7 +72,7 @@
 
  q56_reward_cdr_aff(j2) ..
                  v56_reward_cdr_aff(j2) =e=
-               s56_c_price_induced_aff*
+               sum(ct, p56_fader_cpriceaff(ct)) *
                sum(ac,
                (sum(aff_effect,(1-s56_buffer_aff)*vm_cdr_aff(j2,ac,aff_effect)) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
                / ((1+sum((cell(i2,j2),ct),pm_interest(ct,i2)))**(ac.off*5)))

@@ -30,7 +30,7 @@ gdx     <- file.path(outputdir,"fulldata.gdx")
 rds_iso <- paste0(outputdir, "/report_iso.rds")
 ###############################################################################
 
-report <- getReportIso(gdx, scenario = cfg$title, dir = outputdir)
+report <- getReportIso(gdx, scenario = cfg$title)
 
 mif <- sub(".rds",".mif",rds_iso)
 write.report(report, file = mif, scenario = cfg$title)

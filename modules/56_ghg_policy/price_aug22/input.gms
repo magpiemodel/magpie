@@ -77,6 +77,8 @@ scalars
   s56_fader_end                   End year of GHG policy fade-in (1) / 2050 /
   s56_fader_target                Target value of GHG policy fade-in in end year / 1 /
   s56_fader_functional_form       Switch for functional form of GHG policy fader (1=linear 2=sigmoid) / 1 /
+  s56_fader_cpriceaff_start       Start year of C price induced afforestation fade-in (1) / 2030 /
+  s56_fader_cpriceaff_end         End year of C price induced afforestation fade-in (1) / 2030 /
 ;
 
 $setglobal c56_pollutant_prices  R34M410-SSP2-NPi2025

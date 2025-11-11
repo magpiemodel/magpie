@@ -12,12 +12,35 @@
 *' inconsistencies with the FAO inventory of national feed use in the case of
 *' crops as well as consideration of alternative feed sources that reduce e.g.
 *' the demand for grazed biomass like scavenging and roadside grazing are
-*' balanced out by the parameter `fm_feed_balanceflow`.
+*' balanced out by the variable `vm_feed_balanceflow`.
 
 q70_feed(i2,kap,kall) ..
  vm_dem_feed(i2,kap,kall) =g= vm_prod_reg(i2,kap)
      *sum(ct,im_feed_baskets(ct,i2,kap,kall))
-     +sum(ct,fm_feed_balanceflow(ct,i2,kap,kall));
+     +sum(ct,vm_feed_balanceflow(i2,kap,kall));
+
+*' Feed balance flows from feed sources that reduce the demand for grazed biomass
+*' like scavenging are for future time steps assumed to depend on pasture feed demand:
+
+q70_feed_balanceflow(i2,kli_rum) ..
+ vm_feed_balanceflow(i2,kli_rum,"pasture") =e=
+     (sum(ct,fm_feed_balanceflow(ct,i2,kli_rum,"pasture")))$(p70_endo_scavenging_flag(i2,kli_rum)=0)
+     - (vm_prod_reg(i2,kli_rum)*sum(ct,im_feed_baskets(ct,i2,kli_rum,"pasture"))
+     *s70_scavenging_ratio)$(p70_endo_scavenging_flag(i2,kli_rum)>0);
+
+*' In contrast to feed demand, which always accounts for feed balance flows, the inclusion
+*' of feed balance flows to feed intake is reduced or switched off by the use of
+*' `s70_feed_intake_weight_balanceflow`:
+
+q70_feed_intake_pre(i2,kap,kall) ..
+ v70_feed_intake_pre(i2,kap,kall) =e= vm_prod_reg(i2,kap)
+     *sum(ct,im_feed_baskets(ct,i2,kap,kall));
+
+q70_feed_intake(i2,kap,kall) ..
+ vm_feed_intake(i2,kap,kall) =e=
+     v70_feed_intake_pre(i2,kap,kall)*(1-s70_feed_intake_weight_balanceflow)
+     + vm_dem_feed(i2,kap,kall)*s70_feed_intake_weight_balanceflow;
+
 
 *' Factor requirement costs (e.g. labour, capital, but without costs for feed)
 *' of livestock production depend on the amount of production and the per-unit
@@ -29,17 +52,17 @@ q70_feed(i2,kap,kall) ..
 *' `i70_cost_regr(i,kli,"cost_regr_b")` is set to zero in the case of livestock
 *' products generated in monogastric systems.
 
-*' To account for increased hourly labor costs and producitivity in case of an external 
+*' To account for increased hourly labor costs and producitivity in case of an external
 *' wage scenario, the total labor costs are scaled by the corresponding increase in hourly
 *' labor costs and the related productivity gain from [36_employment].
 
 q70_cost_prod_liv_labor(i2) ..
- vm_cost_prod_livst(i2,"labor") =e= sum(kli, vm_prod_reg(i2,kli) * sum(ct, i70_fac_req_livst(ct,i2,kli))) 
-     *sum(ct, pm_factor_cost_shares(ct,i2,"labor")) 
+ vm_cost_prod_livst(i2,"labor") =e= sum(kli, vm_prod_reg(i2,kli) * sum(ct, i70_fac_req_livst(ct,i2,kli)))
+     *sum(ct, pm_factor_cost_shares(ct,i2,"labor"))
      *sum(ct, (1/pm_productivity_gain_from_wages(ct,i2)) * (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
-  
+
 q70_cost_prod_liv_capital(i2) ..
- vm_cost_prod_livst(i2,"capital") =e= sum(kli, vm_prod_reg(i2,kli) * sum(ct, i70_fac_req_livst(ct,i2,kli))) 
+ vm_cost_prod_livst(i2,"capital") =e= sum(kli, vm_prod_reg(i2,kli) * sum(ct, i70_fac_req_livst(ct,i2,kli)))
      *sum(ct, pm_factor_cost_shares(ct,i2,"capital"));
 
 q70_cost_prod_fish(i2) ..

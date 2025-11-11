@@ -25,10 +25,10 @@
 
  q55_bal_intake_confinement(i2,kli,npk) ..
          v55_feed_intake(i2, kli, "confinement",npk) =e=
-         sum(kcr,vm_dem_feed(i2,kli,kcr) * fm_attributes(npk,kcr))
-         + sum(kap,vm_dem_feed(i2,kli,kap) * fm_attributes(npk,kap))
-         + sum(ksd,vm_dem_feed(i2,kli,ksd) * fm_attributes(npk,ksd))
-         + sum(kres,vm_dem_feed(i2,kli,kres) * fm_attributes(npk,kres)
+         sum(kcr,vm_feed_intake(i2,kli,kcr) * fm_attributes(npk,kcr))
+         + sum(kap,vm_feed_intake(i2,kli,kap) * fm_attributes(npk,kap))
+         + sum(ksd,vm_feed_intake(i2,kli,ksd) * fm_attributes(npk,ksd))
+         + sum(kres,vm_feed_intake(i2,kli,kres) * fm_attributes(npk,kres)
      *(1-(1-sum(ct,im_development_state(ct,i2)))*0.25))
          ;
 
@@ -36,14 +36,14 @@
 
  q55_bal_intake_grazing_pasture(i2,kli,npk) ..
          v55_feed_intake(i2, kli, "grazing",npk) =e=
-         (vm_dem_feed(i2,kli,"pasture")) * fm_attributes(npk,"pasture")
+         (vm_feed_intake(i2,kli,"pasture")) * fm_attributes(npk,"pasture")
          *(1-ic55_manure_fuel_shr(i2,kli))
          ;
 *' c) grazing animals on pastures where the manure is collected as household fuel
 
  q55_bal_intake_fuel(i2,kli,npk) ..
          v55_feed_intake(i2, kli, "fuel",npk) =e=
-         (vm_dem_feed(i2,kli,"pasture")) * fm_attributes(npk,"pasture")
+         (vm_feed_intake(i2,kli,"pasture")) * fm_attributes(npk,"pasture")
          *sum(ct,ic55_manure_fuel_shr(i2,kli))
          ;
 
@@ -51,7 +51,7 @@
 
  q55_bal_intake_grazing_cropland(i2,kli,npk) ..
          v55_feed_intake(i2, kli, "stubble_grazing",npk) =e=
-         sum(kres,vm_dem_feed(i2,kli,kres) * fm_attributes(npk,kres)
+         sum(kres,vm_feed_intake(i2,kli,kres) * fm_attributes(npk,kres)
          *(1 - sum(ct,im_development_state(ct,i2)))*0.25)
          ;
 

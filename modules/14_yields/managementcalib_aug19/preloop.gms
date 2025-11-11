@@ -1,4 +1,4 @@
-*** |  (C) 2008-2024 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -62,9 +62,11 @@ i14_croparea_total(t_all,w,j) = sum(kcr, fm_croparea(t_all,j,w,kcr));
 
 i14_modeled_yields_hist(t_past,i,yldtype,knbe14)
    = (sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) /
-      sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))>0.00001)
+      sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)) > 0.00001 AND
+                                                           sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) > 0.00001)
    + (sum((cell(i,j),w), i14_croparea_total(t_past,w,j) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) /
-      sum((cell(i,j),w), i14_croparea_total(t_past,w,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))<0.00001);
+      sum((cell(i,j),w), i14_croparea_total(t_past,w,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)) <= 0.00001 OR
+                                                           sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) <= 0.00001);
 
 *' The factor `i14_lambda_yields` is calculated for the initial time step depending
 *' on the setting `s14_limit_calib` and is then held constant for all other time steps.
@@ -97,12 +99,6 @@ loop(t,
 *' The calibrated cellular yield `i14_yields_calib_combined` is calculated for each time step depending
 *' on the constant values `i14_modeled_yields_hist`, `i14_fao_yields_hist`, `i14_lambda_yields`
 *' and the uncalibrated, cellular yield `f14_yields` following the idea of eq. (9) in [@Heinke.2013]:
-
-* INSTRUCTIONS:
-* Everywhere where previously f14_yields was used, use i14_yields_combined
-* Everywhere where previously i14_yields_calib was used, replace with i14_yields_calib_combined
-* what are temporary parameters that are being used in the loop that might be needed later on by other
-* modules or within the equations or whatever that I don't want to have changed to some nonsense
 
 ***YIELD CORRECTION FOR 2ND GENERATION BIOENERGY CROPS*************************************
 i14_yields_calib_combined(t,j,yldtype,"begr",w) = i14_yields_combined(t,j,yldtype,"begr",w) * 
@@ -140,9 +136,12 @@ if ((s14_calib_ir2rf = 1),
 * Calibrate newly calibrated yields to FAO yields
   i14_modeled_yields_hist2(i,yldtype,knbe14)
   = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) /
-      sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))>0.00001)
-  + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) /
-      sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))<0.00001);
+      sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)) > 0.00001 AND
+                                                            sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) > 0.00001)
+   + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * f14_yields("y1995",j,knbe14,w)) /
+      sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)) <= 0.00001 OR
+                                                                 sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) <= 0.00001);
+
 
   i14_yields_calib_combined(t,j,yldtype,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) /
                                                       i14_modeled_yields_hist2(i,yldtype,knbe14)) *
@@ -160,6 +159,7 @@ if(s14_use_gsadapt = 1,
 );
 
 *' @stop
+
 
 ***YIELD CALIBRATION***********************************************************************
 

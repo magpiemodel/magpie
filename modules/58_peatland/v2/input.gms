@@ -71,7 +71,7 @@ $offdelim
 ;
 
 *Wetland GHG emission factors based on IPCC Wetlands 2014 and Tiemeyer et al. 2020 
-table f58_ipcc_wetland_ef(clcl58,land58,emis58) Wetland emission factors (Tg per yr)
+table f58_ipcc_wetland_ef(clcl58,land58,emis58) Wetland emission factors (Tg per ha per yr)
 $ondelim
 $include "./modules/58_peatland/input/f58_ipcc_wetland_ef2.cs3"
 $offdelim

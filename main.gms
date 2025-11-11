@@ -154,7 +154,7 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    14   23   10    7    4   26   21    9   16   23   32   15
+*     5   19   12   12    7   33   25    8   16   12   33   18
 * 
 * Regionscode: 62eff8f7
 *###################### R SECTION END (VERSION INFO) ###########################
@@ -180,7 +180,7 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
-$setglobal c_past  till_2010
+$setglobal c_past  till_2015
 $setglobal c_title  default
 
 scalars

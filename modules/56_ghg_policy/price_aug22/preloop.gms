@@ -57,6 +57,8 @@ elseif s56_fader_functional_form = 2,
   m_sigmoid_time_interpol(p56_fader,s56_fader_start,s56_fader_end,0,s56_fader_target);
 );
 
+m_linear_time_interpol(p56_fader_cpriceaff,s56_fader_cpriceaff_start,s56_fader_cpriceaff_end,0,s56_c_price_induced_aff);
+
 p56_fader_reg(t_all,i) = p56_fader(t_all) * p56_region_fader_shr(t_all,i) + p56_fader(t_all) * (1-p56_region_fader_shr(t_all,i));
 im_pollutant_prices(t_all,i,pollutants_fader,emis_source)$(s56_ghgprice_fader = 1) = im_pollutant_prices(t_all,i,pollutants_fader,emis_source) * p56_fader_reg(t_all,i);
 

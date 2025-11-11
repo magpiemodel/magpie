@@ -15,16 +15,34 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
    p32_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
 * Suitable area (`p32_aff_pot`) for NPI/NDC afforestation
    p32_aff_pot(t,j) = 0.95 * (sum((kcr,w),vm_area.l(j,kcr,w) - vm_area.lo(j,kcr,w))
-                        + (vm_fallow.l(j) - vm_fallow.lo(j)) 
-                        + (vm_land.l(j,"past") - vm_land.lo(j,"past")) 
+                        + (vm_fallow.l(j) - vm_fallow.lo(j))
+                        + (vm_land.l(j,"past") - vm_land.lo(j,"past"))
                         - pm_land_conservation(t,j,"other","restore"));
 *** NDC/NPI re/afforesation is further constrained by the remaining forest establishment potential
-   p32_aff_pot(t,j)$(p32_aff_pot(t,j) > pm_max_forest_est(t,j) * s32_annual_aff_limit * m_timestep_length) = 
+   p32_aff_pot(t,j)$(p32_aff_pot(t,j) > pm_max_forest_est(t,j) * s32_annual_aff_limit * m_timestep_length) =
      pm_max_forest_est(t,j) * s32_annual_aff_limit * m_timestep_length;
 * suitable area `p32_aff_pot` can be negative, if land restoration is switched on (level smaller than lower bound), therefore set negative values to 0
    p32_aff_pot(t,j)$(p32_aff_pot(t,j) < 1e-6) = 0;
 * Limit prescribed NPI/NDC afforestation in `p32_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
    p32_aff_pol_timestep(t,j)$(p32_aff_pol_timestep(t,j) > p32_aff_pot(t,j)) = p32_aff_pot(t,j);
+
+
+* Calculate the limit for endogenous afforestation
+* The global (`s32_max_aff_area`) and regional limit (`f32_max_aff_area`) for total afforestation (sum of endogenous and exogenous) is reduced by exogenous NPI/NDC afforestation through (`p32_aff_pol_timestep(t,j)`).
+if(s32_max_aff_area_glo = 1,
+  p32_max_aff_area_glo(t) = s32_max_aff_area
+                          - sum((ac,j), pc32_land(j,"ndc",ac))
+                          - (smax(t2, sum(j, p32_aff_pol(t2,j))) - sum(j, p32_aff_pol(t-1,j)));
+  p32_max_aff_area_glo(t)$(p32_max_aff_area_glo(t) < 1e-06) = 0;
+  p32_max_aff_area_reg(t,i) = 0;
+elseif s32_max_aff_area_glo = 0,
+  p32_max_aff_area_reg(t,i) = f32_max_aff_area(i)
+                            - sum((ac,cell(i,j)), pc32_land(j,"ndc",ac))
+                            - (smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))) - sum(cell(i,j), p32_aff_pol(t-1,j)));
+  p32_max_aff_area_reg(t,i)$(p32_max_aff_area_reg(t,i) < 1e-06) = 0;
+  p32_max_aff_area_glo(t) = 0;
+);
+
 ** END ndc **
 
 *' @code
@@ -192,15 +210,15 @@ pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secd
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") <= sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + p32_aff_pol_timestep(t,j)) = 0;
 
 * Update biodiversity value
-vm_bv.l(j,"aff_co2p",potnatveg) = 
+vm_bv.l(j,"aff_co2p",potnatveg) =
   sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"aff",ac)) *
   p32_bii_coeff("aff",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
 
-vm_bv.l(j,"aff_ndc",potnatveg) = 
+vm_bv.l(j,"aff_ndc",potnatveg) =
   sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"ndc",ac)) *
   p32_bii_coeff("ndc",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
 
-vm_bv.l(j,"plant",potnatveg) = 
+vm_bv.l(j,"plant",potnatveg) =
   sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"plant",ac)) *
   p32_bii_coeff("plant",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
 

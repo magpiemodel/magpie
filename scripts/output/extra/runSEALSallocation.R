@@ -92,7 +92,7 @@ if (length(list.files(dirBaseFiles)) == 0) {
 }
 
 ### Path to miniforge installation
-miniforgePath <- "/p/projects/rd3mod/miniforge3/bin/activate"
+miniforgePath <- "/p/projects/rd3mod/miniforge3/v25-3-0_3/bin/activate"
 
 # create output directory
 dirProject <- "./output/seals"

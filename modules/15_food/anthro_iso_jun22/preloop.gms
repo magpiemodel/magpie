@@ -142,3 +142,6 @@ i15_prices_initial_kcal(iso,kfo)$(fm_nutrition_attributes("y1995",kfo,"kcal")>0)
 
 p15_tax_recycling(t,iso) = 0;
 p15_convergence_measure(t,iter15) = NA;
+
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"SSP2","saturation");

@@ -11,12 +11,11 @@ scalars
 ;
 
 parameters
- i32_max_aff_area_glo(t)                            Maximum global endogenous afforestation area (mio. ha)
- i32_max_aff_area_reg(t,i)                          Maximum regional endogenous afforestation area (mio. ha)
  p32_aff_pol(t,j)                                   NDC forest stock (mio. ha)
  p32_aff_pol_timestep(t,j)                          NDC afforestation per time step (mio. ha)
  p32_aff_pot(t,j)                                   Potential afforestation area (mio. ha)
- p32_aff_togo(t,i)                                  Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
+ p32_max_aff_area_glo(t)                            Remaining afforestation area wrt to the maximum exogenous target over time (mio. ha)
+ p32_max_aff_area_reg(t,i)                          Remaining regional afforestation area wrt to the maximum exogenous target over time (mio. ha)
  p32_carbon_density_ac(t,j,type32,ac,ag_pools)      Carbon density for ac and ag_pools (tC per ha)
  p32_carbon_density_ac_forestry(t_all,j,ac)         Above ground carbon density for age classes and carbon pools (tC per ha)
  p32_carbon_density_ac_marg(t_all,j,ac)             Marginal above ground carbon density for age classes and carbon pools (tC per ha)
