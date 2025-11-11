@@ -101,30 +101,25 @@ source("scripts/projects/fsec.R")
 codeCheck <- FALSE
 
 ### Business-as-usual
-cfg <- fsecScenario(scenario = "c_BAU")
+cfg <- fsecScenario(scenario = "c_BAU", highres = FALSE)
 cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
-cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### NatureSparing
-cfg <- fsecScenario(scenario = "b_NatureSparing")
+cfg <- fsecScenario(scenario = "b_NatureSparing", highres = FALSE)
 cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
-cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### LandscapeElements
-cfg <- fsecScenario(scenario = "a_LandscapeElements")
+cfg <- fsecScenario(scenario = "a_LandscapeElements", highres = FALSE)
 cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
-cfg$results_folder_highres <- "output"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### FSDP Scenario
-cfg <- fsecScenario(scenario = "e_FSDP")
+cfg <- fsecScenario(scenario = "e_FSDP", highres = FALSE)
 cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
-cfg$results_folder_highres <- NULL
-cfg$output <- setdiff(cfg$output, "extra/highres")
 start_run(cfg = cfg, codeCheck = codeCheck)
