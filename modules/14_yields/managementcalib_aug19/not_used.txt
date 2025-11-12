@@ -1,0 +1,3 @@
+name,type,reason
+pm_yields_gsadapt_ratio_increment, interface, not needed
+pcm_area, interface, not needed

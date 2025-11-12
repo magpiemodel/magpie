@@ -63,3 +63,33 @@ pm_timber_yield(t,j,ac,"other") =
 pm_timber_yield(t,j,ac,land_timber) = pm_timber_yield(t,j,ac,land_timber)$(pm_timber_yield(t,j,ac,land_timber) > 0) + 0.0001$(pm_timber_yield(t,j,ac,land_timber) = 0);
 ** Put yields to 0 where they dont exceed a minimum yield for harvest
 pm_timber_yield(t,j,ac,land_natveg)$(pm_timber_yield(t,j,ac,land_natveg) < s14_minimum_wood_yield) = 0;
+
+* Calculate growing period adaption factor based on previous croppping pattern
+if (ord(t) = 1,
+
+  p14_yields_gsadapt_ratio(t,i) = 1;
+  p14_yields_gsadapt_ratio_previous(t,i) = 1;
+  pm_yields_gsadapt_ratio_increment(t,i) = 1;
+  p14_yields_gsadapt_ratio_cummulative(t,i) = 1;
+
+else 
+
+  p14_yields_gsadapt_ratio(t,i) =
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr));
+
+  p14_yields_gsadapt_ratio_previous(t,i) =
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr));
+
+  pm_yields_gsadapt_ratio_increment(t,i) = p14_yields_gsadapt_ratio(t,i) / p14_yields_gsadapt_ratio_previous(t,i);
+  p14_yields_gsadapt_ratio_cummulative(t,i) = max(1,pm_yields_gsadapt_ratio_increment(t,i)) * p14_yields_gsadapt_ratio_cummulative(t-1,i); 
+  
+);
+
+if(s14_gsadapt2tau = 0 OR s14_use_gsadapt = 0,
+  pm_yields_gsadapt_ratio_increment(t,i) = 1;
+  p14_yields_gsadapt_ratio_cummulative(t,i) = 1;
+);
+
+i14_yields_calib(t,j,kcr,w) = i14_yields_calib(t,j,kcr,w)/sum(cell(i,j), p14_yields_gsadapt_ratio_cummulative(t,i));

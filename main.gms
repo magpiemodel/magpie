@@ -154,7 +154,7 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     5   19   12   12    7   33   25    8   16   12   33   18
+*    13   17   12   14    9   33   17    9   26   11   24   15
 * 
 * Regionscode: 62eff8f7
 *###################### R SECTION END (VERSION INFO) ###########################
@@ -181,7 +181,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2015
-$setglobal c_title  default
+$setglobal c_title  LPJmL_5p9.16-m2_NOgsadapt
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -194,8 +194,8 @@ $setglobal drivers  aug17
 $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
-$setglobal tc  endo_jan22
-$setglobal yields  managementcalib_aug19
+$setglobal tc  endo_nov25
+$setglobal yields  gsadapt_nov25
 
 $setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15

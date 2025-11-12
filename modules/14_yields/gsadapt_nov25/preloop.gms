@@ -5,19 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i14_yields_calib(t,j,kve,w)   = f14_yields(t,j,kve,w);
-
-***YIELD CORRECTION FOR 2ND GENERATION BIOENERGY CROPS*************************************
-i14_yields_calib(t,j,"begr",w) = f14_yields(t,j,"begr",w) * sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
-i14_yields_calib(t,j,"betr",w) = f14_yields(t,j,"betr",w) * sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
-
 ***YIELD CORRECTION FOR PASTURE ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
-p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j),i14_yields_calib(t,j,"pasture","rainfed") * pm_land_start(j,"past")) /
+p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j),f14_yields(t,j,"pasture","rainfed") * pm_land_start(j,"past")) /
                             sum(cell(i,j),pm_land_start(j,"past")) );
 
 p14_pyield_corr(t,i) = (f14_pyld_hist(t,i)/p14_pyield_LPJ_reg(t,i))$(sum(sameas(t_past,t),1) = 1)
       + sum(t_past,(f14_pyld_hist(t_past,i)/(p14_pyield_LPJ_reg(t_past,i)+0.000001))$(ord(t_past)=card(t_past)))$(sum(sameas(t_past,t),1) <> 1);
-i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell(i,j),p14_pyield_corr(t,i));
+i14_yields_calib(t,j,"pasture",w) = f14_yields(t,j,"pasture",w) * sum(cell(i,j),p14_pyield_corr(t,i));
 
 
 ***YIELD MANAGEMENT CALIBRATION************************************************************
@@ -50,6 +44,15 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' to an additive term in case of a strongly underestimated baseline. The scalar
 *' `s14_limit_calib` can be used to switch limited calibration on (1) and off (0).
 
+*' To be able to assess the impacts of growing period adaption, both type of yields
+*' (with and without adapted growing perdiods and varieties) have to be calibrated.
+*' The joint parameter `i14_yields_combined(t,j,yldtype,kcr,w)` is used to calibrate
+*' both types individually as even so the growing seasons are held constant from 1995
+*' onwards, due to long term averaging the yields already differ in 1995.
+
+i14_yields_combined(t,j,"constgsadapt",kcr,w) = f14_yields_constgsadapt(t,j,kcr,w);
+i14_yields_combined(t,j,"gsadapt",kcr,w)   = f14_yields(t,j,kcr,w);
+
 i14_croparea_total(t_all,w,j) = sum(kcr, fm_croparea(t_all,j,w,kcr));
 
 *' Historic crop area patterns (`fm_croprea`) are used to calculate regional yields
@@ -57,14 +60,13 @@ i14_croparea_total(t_all,w,j) = sum(kcr, fm_croparea(t_all,j,w,kcr));
 *' a region has no crop area reported for a given crop type, the total crop area is
 *' used to calculate a proxy yield for the calibration, given by the following equation:
 
-i14_modeled_yields_hist(t_past,i,knbe14)
-   = (sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * f14_yields(t_past,j,knbe14,w)) /
+i14_modeled_yields_hist(t_past,i,yldtype,knbe14)
+   = (sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) /
       sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)) > 0.00001 AND
-                                                           sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * f14_yields(t_past,j,knbe14,w)) > 0.00001)
-   + (sum((cell(i,j),w), i14_croparea_total(t_past,w,j) * f14_yields(t_past,j,knbe14,w)) /
+                                                           sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) > 0.00001)
+   + (sum((cell(i,j),w), i14_croparea_total(t_past,w,j) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) /
       sum((cell(i,j),w), i14_croparea_total(t_past,w,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)) <= 0.00001 OR
-                                                           sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * f14_yields(t_past,j,knbe14,w)) <= 0.00001);
-
+                                                           sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) <= 0.00001);
 
 *' The factor `i14_lambda_yields` is calculated for the initial time step depending
 *' on the setting `s14_limit_calib` and is then held constant for all other time steps.
@@ -76,37 +78,42 @@ loop(t,
      if(sum(sameas(t,"y1995"),1)=1,
 
           if    ((s14_limit_calib = 0),
-               i14_lambda_yields(t,i,knbe14) = 1;
+               i14_lambda_yields(t,i,yldtype,knbe14) = 1;
 
           Elseif (s14_limit_calib =1 ),
-               i14_lambda_yields(t,i,knbe14) =
-                    1$(f14_fao_yields_hist(t,i,knbe14) <= i14_modeled_yields_hist(t,i,knbe14))
-                    + sqrt(i14_modeled_yields_hist(t,i,knbe14)/f14_fao_yields_hist(t,i,knbe14))$
-                    (f14_fao_yields_hist(t,i,knbe14) > i14_modeled_yields_hist(t,i,knbe14));
+               i14_lambda_yields(t,i,yldtype,knbe14) =
+                    1$(f14_fao_yields_hist(t,i,knbe14) <= i14_modeled_yields_hist(t,i,yldtype,knbe14))
+                    + sqrt(i14_modeled_yields_hist(t,i,yldtype,knbe14)/f14_fao_yields_hist(t,i,knbe14))$
+                    (f14_fao_yields_hist(t,i,knbe14) > i14_modeled_yields_hist(t,i,yldtype,knbe14));
           );
 
           i14_fao_yields_hist(t,i,knbe14) = f14_fao_yields_hist(t,i,knbe14);
 
      Else
-          i14_modeled_yields_hist(t,i,knbe14) = i14_modeled_yields_hist(t-1,i,knbe14);
-          i14_FAO_yields_hist(t,i,knbe14)  = i14_fao_yields_hist(t-1,i,knbe14);
-          i14_lambda_yields(t,i,knbe14)   = i14_lambda_yields(t-1,i,knbe14);
+          i14_modeled_yields_hist(t,i,yldtype,knbe14) = i14_modeled_yields_hist(t-1,i,yldtype,knbe14);
+          i14_fao_yields_hist(t,i,knbe14)  = i14_fao_yields_hist(t-1,i,knbe14);
+          i14_lambda_yields(t,i,yldtype,knbe14)   = i14_lambda_yields(t-1,i,yldtype,knbe14);
      );
 );
 
-*' The calibrated cellular yield `i14_yields_calib` is calculated for each time step depending
+*' The calibrated cellular yield `i14_yields_calib_combined` is calculated for each time step depending
 *' on the constant values `i14_modeled_yields_hist`, `i14_fao_yields_hist`, `i14_lambda_yields`
 *' and the uncalibrated, cellular yield `f14_yields` following the idea of eq. (9) in [@Heinke.2013]:
 
-i14_managementcalib(t,j,knbe14,w) =
-  1 + (sum(cell(i,j), i14_fao_yields_hist(t,i,knbe14) - i14_modeled_yields_hist(t,i,knbe14)) /
-                             f14_yields(t,j,knbe14,w) *
-      (f14_yields(t,j,knbe14,w) / (sum(cell(i,j),i14_modeled_yields_hist(t,i,knbe14))+10**(-8))) **
-                             sum(cell(i,j),i14_lambda_yields(t,i,knbe14)))$(f14_yields(t,j,knbe14,w)>0);
+***YIELD CORRECTION FOR 2ND GENERATION BIOENERGY CROPS*************************************
+i14_yields_calib_combined(t,j,yldtype,"begr",w) = i14_yields_combined(t,j,yldtype,"begr",w) * 
+                                                    sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
+i14_yields_calib_combined(t,j,yldtype,"betr",w) = i14_yields_combined(t,j,yldtype,"betr",w) * 
+                                                    sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
+*******************************************************************************************
 
+i14_managementcalib(t,j,yldtype,knbe14,w) =
+   1 + (sum(cell(i,j), i14_fao_yields_hist(t,i,knbe14) - i14_modeled_yields_hist(t,i,yldtype,knbe14)) /
+                            i14_yields_combined(t,j,yldtype,knbe14,w) *
+      (i14_yields_combined(t,j,yldtype,knbe14,w) / (sum(cell(i,j),i14_modeled_yields_hist(t,i,yldtype,knbe14))+10**(-8))) **
+                            sum(cell(i,j),i14_lambda_yields(t,i,yldtype,knbe14)))$(i14_yields_combined(t,j,yldtype,knbe14,w)>0);
 
-i14_yields_calib(t,j,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * f14_yields(t,j,knbe14,w);
-pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
+i14_yields_calib_combined(t,j,yldtype,knbe14,w) = i14_managementcalib(t,j,yldtype,knbe14,w) * i14_yields_combined(t,j,yldtype,knbe14,w);
 
 *' Note that the calculation is split into two parts for better readability.
 
@@ -116,30 +123,39 @@ pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
 if ((s14_calib_ir2rf = 1),
 
 * Weighted yields
-  i14_calib_yields_hist(i,w)
-     = sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
-       sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14));
+  i14_calib_yields_hist(i,yldtype,w)
+    = sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) /
+      sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14));
 
 * Use irrigated-rainfed ratio of Aquastat if larger than our calculated ratio
-  i14_calib_yields_ratio(i) = i14_calib_yields_hist(i,"irrigated") / i14_calib_yields_hist(i,"rainfed");
-  i14_target_ratio(i) = max(i14_calib_yields_ratio(i), f14_ir2rf_ratio(i));
-  i14_yields_calib(t,j,knbe14,"irrigated") = sum((cell(i,j)), i14_target_ratio(i) / i14_calib_yields_ratio(i)) *
-                                               i14_yields_calib(t,j,knbe14,"irrigated");
+  i14_calib_yields_ratio(i,yldtype) = i14_calib_yields_hist(i,yldtype,"irrigated") / i14_calib_yields_hist(i,yldtype,"rainfed");
+  i14_target_ratio(i,yldtype) = max(i14_calib_yields_ratio(i,yldtype), f14_ir2rf_ratio(i));
+  i14_yields_calib_combined(t,j,yldtype,knbe14,"irrigated") = sum((cell(i,j)), i14_target_ratio(i,yldtype) / i14_calib_yields_ratio(i,yldtype)) *
+                                              i14_yields_calib_combined(t,j,yldtype,knbe14,"irrigated");
 
 * Calibrate newly calibrated yields to FAO yields
-  i14_modeled_yields_hist2(i,knbe14)
-   = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
+  i14_modeled_yields_hist2(i,yldtype,knbe14)
+  = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) /
       sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)) > 0.00001 AND
-                                                            sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib("y1995",j,knbe14,w)) > 0.00001)
-   + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * i14_yields_calib("y1995",j,knbe14,w)) /
+                                                            sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) > 0.00001)
+   + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * f14_yields("y1995",j,knbe14,w)) /
       sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)) <= 0.00001 OR
-                                                                 sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib("y1995",j,knbe14,w)) <= 0.00001);
+                                                                 sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) <= 0.00001);
 
-  i14_yields_calib(t,j,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) /
-                                                      i14_modeled_yields_hist2(i,knbe14)) *
-                                   i14_yields_calib(t,j,knbe14,w);
 
-  pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
+  i14_yields_calib_combined(t,j,yldtype,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) /
+                                                      i14_modeled_yields_hist2(i,yldtype,knbe14)) *
+                                  i14_yields_calib_combined(t,j,yldtype,knbe14,w);
+);
+
+* Set yields to gsadapt values (pasture yields are not effected by growing period adaption)
+
+if(s14_use_gsadapt = 1,
+    pm_yields_semi_calib(j,knbe14,w) = i14_yields_calib_combined("y1995",j,"gsadapt",knbe14,w);
+    i14_yields_calib(t,j,kcr,w) = i14_yields_calib_combined(t,j,"gsadapt",kcr,w);
+  else
+    pm_yields_semi_calib(j,knbe14,w) = i14_yields_calib_combined("y1995",j,"constgsadapt",knbe14,w);
+    i14_yields_calib(t,j,kcr,w) = i14_yields_calib_combined(t,j,"constgsadapt",kcr,w);
 );
 
 *' @stop

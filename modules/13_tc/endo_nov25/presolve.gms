@@ -5,7 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
 pc13_land(i,"pastr") = sum(cell(i,j),pcm_land(j,"past"));
 pc13_land(i,"crop") = sum(cell(i,j),pcm_land(j,"crop"));
 
