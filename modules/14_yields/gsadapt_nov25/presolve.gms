@@ -91,5 +91,3 @@ if(s14_gsadapt2tau = 0 OR s14_use_gsadapt = 0,
   pm_yields_gsadapt_ratio_increment(t,i) = 1;
   p14_yields_gsadapt_ratio_cummulative(t,i) = 1;
 );
-
-i14_yields_calib(t,j,kcr,w) = i14_yields_calib(t,j,kcr,w)/sum(cell(i,j), p14_yields_gsadapt_ratio_cummulative(t,i));
