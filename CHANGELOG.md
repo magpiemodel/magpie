@@ -7,7 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **inputdata** updated input data to rev4.127, including fix of FAO mass balance and processing shares where maiz to ethanol values were missing for some countries
+
 
 ### added
 -
