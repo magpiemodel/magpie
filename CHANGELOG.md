@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### fixed
+- **32_forestry** fixed parenthesis placement in discounting formula for establishment costs
 - **scripts/start_functions.R** added all extra `cfg` arguments in `start_run()` to the config check call
 - **highres.R** temporary f32_max_aff_area.cs4 is now deleted in case of error
 

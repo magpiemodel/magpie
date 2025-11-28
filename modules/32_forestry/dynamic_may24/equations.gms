@@ -161,7 +161,7 @@ q32_cost_establishment(i2)..
    (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * p32_est_cost(type32)))
      * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
    + sum((ct,kforestry), v32_prod_forestry_future(i2) * p32_forestry_product_dist(ct,i2,kforestry) * im_timber_prod_cost(kforestry))
-     / ((1+sum(ct,pm_interest(ct,i2))**sum(ct, p32_rotation_regional(ct,i2)*5)));
+     / ((1+sum(ct,pm_interest(ct,i2)))**sum(ct, p32_rotation_regional(ct,i2)*5));
 
 
 *' Recurring costs are paid for plantations where the trees have to be regularly monitored
