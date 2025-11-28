@@ -26,7 +26,7 @@
 *'
 *' @limitations Land cover in the WDPA baseline data is estimated based on ESA-CCI
 *' land-use/land-cover maps from 1995 to 2020, while land pools in MAgPIE are intialised
-*' based on LUH2v2 data (forest areas are additionally harmonised with FAO data).
+*' based on LUH data (forest areas are additionally harmonised with FAO data).
 *' This leads to slight mismatches in some areas.
 
 *####################### R SECTION START (PHASES) ##############################

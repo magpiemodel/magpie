@@ -64,7 +64,9 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
       #read html index file and extract file names
       h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
       con <- curl::curl(paste0(repo,"/"), handle = h)
-      dat <- try(readLines(con), silent = TRUE)
+      suppressSpecificWarnings({
+        dat <- try(readLines(con), silent = TRUE)
+      }, "Failed to connect to")
       close(con)
       dat <- grep("href",dat,value = T)
       dat <- unlist(lapply(strsplit(dat, "\\]\\] <a href\\=\\\"|\\\">"),function(x) x[2]))
@@ -171,6 +173,11 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
     aff_max[r,,] <- max(aff[r,,])
   }
   aff_max[aff_max < 0] <- 0
+  withr::defer({
+    if (file.exists("modules/32_forestry/input/f32_max_aff_area.cs4")) {
+      file.remove("modules/32_forestry/input/f32_max_aff_area.cs4")
+    }
+  })
   write.magpie(aff_max,"modules/32_forestry/input/f32_max_aff_area.cs4")
   cfg$gms$s32_max_aff_area_glo <- 0
   #check if regional AR exceeds global AR limit
@@ -179,13 +186,12 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
     if(indicator > 1e-06) warning(paste("Regional AR exceeds global AR limit by",indicator,"Mha"))
   }
 
+  # sleep to prevent issues with creating full.gms
   Sys.sleep(2)
 
   start_run(cfg, codeCheck = FALSE, lock_model = FALSE)
 
+  # sleep to prevent issues with creating full.gms
   Sys.sleep(1)
-
-  if (file.exists("modules/32_forestry/input/f32_max_aff_area.cs4")) file.remove("modules/32_forestry/input/f32_max_aff_area.cs4")
-
 }
 highres(cfg)

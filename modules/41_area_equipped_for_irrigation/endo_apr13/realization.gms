@@ -8,7 +8,7 @@
 
 *' @description This realization allows the model to endogenously decide on investments to deploy additional
 *' irrigation infrastructure, i.e. to increase the area equipped for irrigation (AEI).
-*' Initial values for AEI are areas that are irrigated in the initial time step in LUH2v2.
+*' Initial values for AEI are areas that are irrigated in the initial time step in LUH3.
 *' Depreciation of AEI can be set via `s41_AEI_depreciation`.
 *' Irrigated crop production can only take place where irrigation infrastructure is present.
 *'

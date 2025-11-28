@@ -9,7 +9,8 @@
 # Define internal functions
 ################################################################################
 
-fsecScenario <- function(scenario) {
+fsecScenario <- function(scenario,
+                         highres = TRUE) { # run highres output script afterwards?
 
   source("config/default.cfg")
 
@@ -215,7 +216,7 @@ fsecScenario <- function(scenario) {
   cfg$title       <- paste(v, scenario, sep = "")
   cfg$recalibrate <- FALSE
   cfg$qos         <- "standby_highMem"
-  cfg$output      <- c("extra/highres",
+  cfg$output      <- c(if (highres) "extra/highres",
                        "extra/disaggregation",
                        "projects/FSEC_nitrogenPollution",
                        "projects/FSEC_cropDiversityGrid",

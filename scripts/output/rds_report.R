@@ -36,7 +36,7 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 ###############################################################################
 
 
-report <- getReport(gdx, scenario = cfg$title, dir = outputdir)
+report <- getReport(gdx, scenario = cfg$title)
 if (!all(grepl(" \\(([^\\()]*)\\)($|\\.)", getNames(report, fulldim = TRUE)$variable))) {
   warning("Variables should be in the format 'name (unit)' (the space between name and unit is important), ",
           "but the following are not:\n",
