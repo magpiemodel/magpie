@@ -43,6 +43,12 @@ elseif s32_max_aff_area_glo = 0,
   p32_max_aff_area_glo(t) = 0;
 );
 
+* make sure that the historic period is identical in all cases
+if(m_year(t) <= sm_fix_SSP2,
+   p32_max_aff_area_reg(t,i) = 0;
+   p32_max_aff_area_glo(t) = 0;
+);
+
 ** END ndc **
 
 *' @code
