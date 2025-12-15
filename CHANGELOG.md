@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **inputdata** updated input data to rev4.127, including fix of FAO mass balance and processing shares where maiz to ethanol values were missing for some countries
+- **inputdata** updated input data to rev4.128, including fix for mismatch between historic urban land in LUH3 and projected future urban land, which is still based on LUH2
 
 
 ### added
