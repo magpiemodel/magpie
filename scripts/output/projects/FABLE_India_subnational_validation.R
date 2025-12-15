@@ -6,12 +6,13 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: India subnational validation 
+# description: India subnational validation
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
-#Version 1.00 - Miodrag Stevanovic, Prantika Das
+#Version 1.01 - Miodrag Stevanovic, Ankit Saha
 # 1.00: first working version
+# 1.01: Second version after including new data
 
 library(lucode2)
 library(magpie4)
@@ -27,9 +28,9 @@ print("Start India state level validation output runscript")
 ############################# BASIC CONFIGURATION #######################################
 
 if(!exists("source_include")) {
-  
+
   outputdir <- "output/v4p77/h12_2022-12-15_22.09.46"
-  
+
   ###Define arguments that can be read from command line
   readArgs("outputdir")
 }
@@ -41,6 +42,7 @@ print(paste0("Script started for output directory: ",outputdir))
 # Determine cells for India
 mapping <- toolGetMapping("scripts/npi_ndc/policies/country2cell.rds")
 mapping$iso_mag <- paste(mapping$iso,mapping$cell,sep=".")
+mapping$lon_lat_iso <- paste(sub(".", "p", mapping$lon, fixed = T), sub(".","p",mapping$lat,fixed = T), mapping$iso, sep = ".")
 # load Indian states
 indStates <- toolGetMapping(system.file("extdata", "regional/india_state_code.csv", package = "mrfable"))
 indCells <- which(mapping$ind %in% indStates$State_code)
@@ -49,40 +51,35 @@ indCells <- which(mapping$ind %in% indStates$State_code)
 landHr <- read.magpie(file.path(outputdir,"cell.land_0.5.mz"))[indCells,,]
 cropareaHrShare <- read.magpie(file.path(outputdir,"cell.croparea_0.5_share.mz"))[indCells,,]
 cellHr <- dimSums(landHr, dim=3)
-cropareaHr <- cropareaHrShare[,,]*setItems(cell_hr[,1,], dim=2, NULL)
+cropareaHr <- cropareaHrShare[,,]*setItems(cellHr[,1,], dim=2, NULL)
 cropareaHr <- dimSums(cropareaHr, dim=3.2)
 
 # aggregate land from grid to state level
 mappingInd <- mapping[indCells,]
-cropareaState <- toolAggregate(cropareaHr, rel=mappingInd, from="iso_mag", to="ind")
+cropareaState <- toolAggregate(cropareaHr, rel=mappingInd, from="lon_lat_iso", to="ind")
 
 # Observed data from mrfable
-setConfig(extramappings = "mappingIndiaAPY.csv")
-indApyMapping <- toolGetMapping(system.file("extdata", "regional/mappingIndiaAPY.csv", package = "mrfable"))
-h <- calcOutput("IndiaFoodcrop", subtype = "Area", aggregate = "Region")
+setConfig(extramappings = "mappingIndiaStateAPY.csv")
+indApyMapping <- toolGetMapping(system.file("extdata", "regional/mappingIndiaStateAPY.csv", package = "mrfable"))
+h <- calcOutput("IndiaStateFoodcrop", subtype = "Area", aggregate = "Region")
 # Data cleaning:
 h <- h[indStates$State_code,,]
 h <- collapseNames(h)
-h <- collapseNames(h[,,"total"])
 h <- h/1000
-# Crops in the APY database:
-mappingCropsAPY <- as.matrix(data.frame(APYcrop=c("Bajra", "Barley", "Gram",
-                                                  "Jowar",  "Tur", "Maize",
-                                                  "Wheat", "Ragi", "Rice"), 
-                                              k=c("trce", "tece", "puls_pro", 
-                                                  "trce", "puls_pro", "maiz",
-                                                  "tece", "trce", "rice_pro")))
-# Aggregate to magpie crops:
-h <- toolAggregate(h, rel=mappingCropsAPY, from="APYcrop", to="k", dim=3)
+
+kCrops <- getItems(h, dim=3.1)
+
+
 h <- add_dimension(h, dim=3.1, add="scenario", nm="historical")
 h <- add_dimension(h, dim=3.2, add="model", nm="APY")
 h <- setItems(h, dim=3.3, reportingnames(getItems(h,dim=3.3)))
 
-cropareaState <- cropareaState[,,unique(mappingCropsAPY[,"k"])]
+cropareaState <- cropareaState[,,kCrops]
 names(dimnames(cropareaState)) <- c("state","year","crop")
-cropareaState <- add_dimension(cropareaState, dim=3.1, add="scenario", nm="")
+cropareaState <- add_dimension(cropareaState, dim=3.1, add="scenario", nm="default")
 cropareaState <- add_dimension(cropareaState, dim=3.2, add="model", nm="MAgPIE")
 cropareaState <- setItems(cropareaState, dim=3.3, reportingnames(getItems(cropareaState,dim=3.3)))
+
 
 sw <- swopen(file)
 swlatex(sw,"\\huge")
@@ -100,5 +97,3 @@ for(k in getItems(h, dim=3.3)){
 }
 
 swclose(sw,clean_output=TRUE)
-
-

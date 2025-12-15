@@ -47,7 +47,8 @@ if (dir.exists(reportOutputDir)) {
 suppressWarnings(dir.create(reportOutputDir))
 
 message("Generating Steven Lord's output for the run: ", title)
+gdx <- file.path(outputdir, "fulldata.gdx")
 
-out <- getReportFSECStevenLord(magpieOutputDir = outputdir,
+out <- getReportFSECStevenLord(gdx = gdx,
                                reportOutputDir = reportOutputDir,
                                scenario = title)

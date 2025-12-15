@@ -45,4 +45,23 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' diet scenarios, most importantly the shift to the Planetary Health diet
 *' [@willett_food_2019].
 *'
+*' Note that, as of MAgPIE v4.12 onwards, FAO food balances
+*' were changed from the deprecated FAO food balances
+*' (referred to online as Food Balances -2013, old methodology and
+*' population) to the current Food Balances and Supply Utilization
+*' Accounts which are currently maintained, 2010 onwards,
+*' see download date in source folder of FAO_online,
+*' FB2010 and SUA2010 folder. As this introduced a methodological
+*' break in the food balances in 2010, with inconsistencies
+*' between the pre-2010 and post-2010 data, the model sees a shift in
+*' food demand due to switching from matching the old to the new data.
+*' This is especially apparent in food demand for livestock products
+*' in Mt, as some regional Mt/kcal conversion ratios in FAOSTAT,
+*' seem to have changed, especially for EUR (lower livestock demand).
+*' Future dynamics (i.e. EUR re-gaining livestock demand) 
+*' also stem from the household balance flow, which is the difference between 
+*' our regional and FAO global household kcal intake.
+*' This balance flow fades out, in a default model run, by 2050, leading 
+*' to EUR re-increasing livestock demand by 2050.
+*'
 *' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Felicitas Beier, Jan Philipp Dietrich

@@ -5,11 +5,19 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c41_initial_irrigation_area  LUH3
+sets
+   kli_rum(kli) Ruminant livestock
+   /
+   livst_rum, livst_milk
+   /
 
-table
-f41_irrig(t_ini41,j,aei41) Available area equipped for irrigation [AVL] (mio. ha)
-$ondelim
-$include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs3"
-$offdelim
-;
+   kli_mon(kli) Monogastric livestock
+   /
+   livst_pig, livst_chick, livst_egg
+   /
+   
+   kforage(k) Forage feed categories
+   /
+  pasture, foddr
+   / 
+; 

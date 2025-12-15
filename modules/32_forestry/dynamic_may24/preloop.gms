@@ -31,35 +31,33 @@ p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
 p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0)
                       + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)=0);
 
-** For each cluster in MAgPIE ("j") we calculate how long the prevailing interest rates stay lower than the IGR.
-** As long as the prevailing interest rates are lower than IGR, plantations shall be kept standing.
-** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
-** keep his/her investment in bank rather than in keeping the forest standing.
-** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
-$ifthen "%c32_interest_rate%" == "regional"
+** Rotation length can be calculated based on Instantaneous Growth Rates (regional and global), current_annual_increment and mean_annual_increment.
+** The binary parameter p32_rot_flg indicates if a plantation should be kept (1) or harvested (0).
+** Example for Instantaneous Growth Rates (IGR):
+** If IGR > interest rate, plantations should be kept (1).
+** If IGR < interest rate, plantations should be harvested (0).
+
+$ifthen "%c32_rot_calc_type%" == "instantaneous_growth_rate_reg"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) >  0)
                           + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) <= 0);
   display "Rotation lengths are calculated based on equating instantaneous growth rate to regional interest rate.";
-$elseif "%c32_interest_rate%" == "global"
+
+$elseif "%c32_rot_calc_type%" == "instantaneous_growth_rate_glo"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate  >  0)
                           + 0$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate <= 0);
   display "Rotation lengths are calculated based on equating instantaneous growth rate to global interest rate.";
-$endif
 
-$ifthen "%c32_rot_calc_type%" == "current_annual_increment"
+$elseif "%c32_rot_calc_type%" == "current_annual_increment"
   p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) >  0)
                           + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) <= 0);
   display "Rotation lengths are calculated based on maximizing current annual increment in this run.";
-$endif
 
-$ifthen "%c32_rot_calc_type%" == "mean_annual_increment"
+$elseif "%c32_rot_calc_type%" == "mean_annual_increment"
   p32_avg_increment(t_all,j,ac) = pm_carbon_density_plantation_ac(t_all,j,ac,"vegc") / ((ord(ac)+1)*5);
   p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) >  0)
                           + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) <= 0);
   display "Rotation lengths are calculated based on maximizing mean annual increment in this run.";
 $endif
-
-** From the above calculation, now it is easier to count how many age-classes can be sustained before IGR falls below interest rate.
 
 *********************************************************************************
 

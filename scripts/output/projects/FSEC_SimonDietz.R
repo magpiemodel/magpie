@@ -47,8 +47,9 @@ if (dir.exists(reportOutputDir)) {
 suppressWarnings(dir.create(reportOutputDir))
 
 message("Generating Simon Dietz's output for the run: ", title)
+gdx <- file.path(outputdir, "fulldata.gdx")
 
-out <- getReportFSECSimonDietz(magpieOutputDir = outputdir,
+out <- getReportFSECSimonDietz(gdx = gdx,
                                reportOutputDir = reportOutputDir,
                                scenario = title)
 

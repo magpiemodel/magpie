@@ -1,6 +1,6 @@
-;MitiConsv;AR0;AR200;AR350;AR500;30by30
-gms$c22_protect_scenario;;;;;;30by30
-gms$s32_max_aff_area;;;382;532;682;
+;MitiConsv;AR0;AR150;AR250;AR350;BH
+gms$c22_protect_scenario;;;;;;BH
+gms$s32_max_aff_area;;;332;432;532;
 gms$s56_c_price_induced_aff ;;0;1;1;1;
 gms$s56_buffer_aff;0;;;;;
-input['calibration'];calibration_rev18_MitiConsv_04Apr25.tgz;;;;;
+input['calibration'];calibration_rev21_MitiConsv_01Jul25.tgz;;;;;

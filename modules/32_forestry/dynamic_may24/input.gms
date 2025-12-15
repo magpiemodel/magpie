@@ -12,12 +12,8 @@ $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
-$setglobal c32_interest_rate  regional
-* options regional, global
 $setglobal c32_rot_calc_type  current_annual_increment
-* option  max_increment, max_npv
-$setglobal c32_rot_calc_type  current_annual_increment
-* options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
+* options mean_annual_increment, current_annual_increment, instantaneous_growth_rate_reg, instantaneous_growth_rate_glo
 $setglobal c32_shock_scenario  none
 * options none 002lin2030 004lin2030 008lin2030 016lin2030
 
