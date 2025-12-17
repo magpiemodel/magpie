@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **inputdata** updated input data to rev4.127, including fix of FAO mass balance and processing shares where maiz to ethanol values were missing for some countries
 - **inputdata** updated input data to rev4.128, including fix for mismatch between historic urban land in LUH3 and projected future urban land, which is still based on LUH2
+- **inputdata** updated input data to rev4.129, which now includes new protected area data for China not covered in the WDPA data base.
 
 
 ### added
@@ -65,7 +66,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **55_awms** Manure excretion is now calculated using `vm_feed_intake`
 - **70_livestock** pasture feed balance flows dynamically linked to pasture demand in regions with high historical scavenged feed use
 - **default.cfg** input data upgraded from rev4.118 to rev4.119 (minor update population and GDP)
-- **README** added forestry to model description 
+- **README** added forestry to model description
 - **readme** added setup instruction specifics for Linux/macOS
 - **scenario_config** update of VLLO scenario to EAT-Lancet 2
 - **scripts** changed setting in the 'mitigation and conservation' start script.
