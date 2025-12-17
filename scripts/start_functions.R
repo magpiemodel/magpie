@@ -74,6 +74,17 @@
 .update_sets_modules <- function() {
   require(gms)
 
+  ### 30_croparea
+  
+  incentscen30 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
+  incentscen30 <- magclass::getNames(incentscen30,dim=1)
+
+  sets <- list(list(name = "incentscen30",
+                    desc = "rotation inventive scenarios",
+                    items = incentscen30))
+
+  gms::writeSets(sets , "modules/30_croparea/detail_apr24/sets.gms")
+
   ### 56_ghg_policy
   ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
   ghgscen56 <- magclass::getNames(ghgscen56,dim=2)
@@ -484,10 +495,9 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
     #if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
     cat("Starting land conversion cost calibration factor calculation!\n")
     source("scripts/calibration/landconversion_cost.R")
-    calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
+    calibrate_landconversion(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
                      restart = cfg$restart_landconversion_cost,
                      calib_accuracy = cfg$calib_accuracy_landconversion_cost,
-                     lowpass_filter = cfg$lowpass_filter_landconversion_cost,
                      cost_max = cfg$cost_calib_max_landconversion_cost,
                      cost_min = cfg$cost_calib_min_landconversion_cost,
                      calib_file = land_calib_file,
@@ -495,7 +505,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
                      logoption = 3,
                      debug = cfg$debug,
                      best_calib = cfg$best_calib_landconversion_cost,
-                     histData = cfg$cost_calib_hist_data)
+                     histData = cfg$cost_calib_hist_data,
+					 levelGradientMix = cfg$level_gradient_mix)
     cat("Land conversion cost calibration factor calculated!\n")
   }
 
