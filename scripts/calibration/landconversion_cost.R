@@ -129,7 +129,7 @@ getCalibFactor <- function(gdx_file, mode, histData) {
   cat(paste0("Mode: ", mode, ", histData: ", histData, "\n"))
 
   valdata <- getValData(histData = histData, gdx_file = gdx_file)
-  magpie <- land(gdx_file)[, y, "crop"]
+  magpie <- land(gdx_file)[, getYears(valdata, "crop"]
 
   if (mode == "gradient") {
     cat(">>> gradient calibration \n")
@@ -187,7 +187,7 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
 
   if (!(modelstat(gdx_file)[1, 1, 1] %in% c(1, 2, 7))) stop("Calibration run infeasible")
 
-  y <- readGDX(gdx_file,"t")
+
   
   # we calculate two different divergence measures: divergence of level (cropland and divergence of gradient (cropland expansion)
   calib_divergence_level <- getCalibFactor(gdx_file, mode = "level", histData = histData)
@@ -207,10 +207,10 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
   ### -> in case it is the first step, it forces the initial factors to be equal to 1
   if (file.exists(calib_file)) {
   	cat(">>> Starting with existing calibration file\n")
-    old_calib <- magpiesort(read.magpie(calib_file))[,y,]
+    old_calib <- magpiesort(read.magpie(calib_file))[,getYears(calib_divergence),]
   } else {
 	cat(">>> First iteration - initializing calibration factors (cost=1 for expanding countries, cost=2.5 for contracting, reward=0)\n")
-    old_calib <- new.magpie(cells_and_regions = getCells(calib_divergence), years = y, names = c("cost", "reward"), fill = NA)
+    old_calib <- new.magpie(cells_and_regions = getCells(calib_divergence), years = getYears(calib_divergence), names = c("cost", "reward"), fill = NA)
     old_calib[,,"cost"] <- (expandHist(getValData(histData = histData, gdx_file = gdx_file)) < 0) * (cost_max - 1) + 1
 	old_calib[,,"reward"] <- 0
   }
