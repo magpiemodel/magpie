@@ -249,13 +249,13 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
     try(write.magpie(round(x, 3), file, append = (calibration_step != 1)))
   }
 
-  write_log(calib_divergence_level, "land_conversion_divergence_level.cs3", calibration_step)
-  write_log(calib_divergence_gradient, "land_conversion_divergence_gradient.cs3", calibration_step)
-  write_log(calib_divergence, "land_conversion_divergence.cs3", calibration_step)
-  write_log(calib_factor_cost, "land_conversion_cost_next_calib_factor.cs3", calibration_step)
-  write_log(calib_factor_reward, "land_conversion_reward_next_calib_factor.cs3", calibration_step)
-  write_log(setNames(old_calib[, , "reward"], NULL), "land_conversion_reward_current_calib_factor.cs3", calibration_step)
-  write_log(setNames(old_calib[, , "cost"], NULL), "land_conversion_cost_current_calib_factor.cs3", calibration_step)
+  write_log(calib_divergence_level, paste0(putfolder, "/land_conversion_divergence_level.cs3"), calibration_step)
+  write_log(calib_divergence_gradient, paste0(putfolder,  "/land_conversion_divergence_gradient.cs3"), calibration_step)
+  write_log(calib_divergence, paste0(putfolder,  "/land_conversion_divergence.cs3"), calibration_step)
+  write_log(calib_factor_cost, paste0(putfolder,  "/land_conversion_cost_next_calib_factor.cs3"), calibration_step)
+  write_log(calib_factor_reward, paste0(putfolder,  "/land_conversion_reward_next_calib_factor.cs3"), calibration_step)
+  write_log(setNames(old_calib[, , "reward"], NULL), paste0(putfolder,  "/land_conversion_reward_current_calib_factor.cs3"), calibration_step)
+  write_log(setNames(old_calib[, , "cost"], NULL), paste0(putfolder,  "/land_conversion_cost_current_calib_factor.cs3"), calibration_step)
 
   # in case of sufficient convergence, stop here (no additional update of calibration factors!)
 
@@ -266,9 +266,9 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
     # or the "best" based on the iteration value with the lowest standard deviation of regional divergence.
     if (best_calib == TRUE) {
 	  cat("Choosing the best calibration...\n")
-      divergence_data <- read.magpie("land_conversion_calib_divergence.cs3")
-      factors_cost <- read.magpie("land_conversion_cost_current_calib_factor.cs3")
-      factors_reward <- read.magpie("land_conversion_reward_current_calib_factor.cs3")
+      divergence_data <- read.magpie( paste0(putfolder, "/land_conversion_calib_divergence.cs3"))
+      factors_cost <- read.magpie( paste0(putfolder, "/land_conversion_cost_current_calib_factor.cs3"))
+      factors_reward <- read.magpie( paste0(putfolder, "/land_conversion_reward_current_calib_factor.cs3"))
 	  # The best iteration is chosen for each region as the calibration factors where the sum of divergence over all timesteps is minimal.
 	  # In case multiple iterations have the same value, the first value is returned by which.min
 	  calib_cost_best <- calib_reward_best <- factors_cost[,,1] * 0
@@ -281,8 +281,8 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
       getNames(calib_cost_best) <- NULL
       getNames(calib_reward_best) <- NULL
 	  
-	  write_log(calib_cost_best, "land_conversion_cost_current_calib_factor.cs3", "best")
-      write_log(calib_reward_best, "land_conversion_reward_current_calib_factor.cs3", "best")
+	  write_log(calib_cost_best,  paste0(putfolder, "/land_conversion_cost_current_calib_factor.cs3"), "best")
+      write_log(calib_reward_best,  paste0(putfolder, "/land_conversion_reward_current_calib_factor.cs3"), "best")
 	  
       calib_cost_best <- time_series_cost(calib_cost_best)
       calib_reward_best <- time_series_reward(calib_reward_best)
@@ -377,9 +377,9 @@ calibrate_landconversion <- function(n_maxcalib = 20,
       if (debug) {
         # Copy listing file with iteration number for debugging
         if (file.exists(paste0(calib_magpie_name, ".lst"))) {
-          file.copy(paste0(calib_magpie_name, ".lst"), paste0(putfolder, calib_magpie_name, "_iter", i, ".lst"), overwrite = TRUE)
+          file.copy(paste0(calib_magpie_name, ".lst"), paste0(putfolder, "/", calib_magpie_name, "_iter", i, ".lst"), overwrite = TRUE)
         }
-        file.copy(paste0(putfolder, "/fulldata.gdx"), paste0(putfolder, "fulldata_calib", i, ".gdx"), overwrite = TRUE)
+        file.copy(paste0(putfolder, "/fulldata.gdx"), paste0(putfolder, "/", "fulldata_calib", i, ".gdx"), overwrite = TRUE)
       }
 
       done <- update_calib(gdx_file = paste0(putfolder, "/fulldata.gdx"), calib_accuracy = calib_accuracy, cost_max = cost_max, cost_min = cost_min, calib_file = calib_file, calibration_step = i, n_maxcalib = n_maxcalib, best_calib = best_calib, histData = histData)
