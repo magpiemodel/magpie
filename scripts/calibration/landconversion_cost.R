@@ -109,12 +109,12 @@ getValData <- function(histData, gdx_file) {
   return(valdata)
 }
 
-expandHist <- function(valData){
+expandHist <- function(valdata){
   require(magclass)
   # test whether land has expanded or contracted in validation data
-  expandHist <- valData
-  for (i in 2:length(getYears(valData))) {
-    expandHist[ , y[i], ] <- setYears(valdata[, y[i], ], NULL) - setYears(valdata[, y[i-1], ], NULL)
+  expandHist <- valdata
+  for (i in 2:length(getYears(valdata))) {
+    expandHist[ , i, ] <- setYears(valdata[, i, ], NULL) - setYears(valdata[, i-1, ], NULL)
   }
   return(expandHist)
 }
