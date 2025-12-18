@@ -12,9 +12,14 @@
 
 # Wrapper function that executes code with comprehensive logging
 # Captures cat(), messages, warnings, and errors
-with_logging <- function(expr, logfile) {
+with_logging <- function(expr, logfile, putfolder) {
+  # create putfolder for the calib run
+  cat(paste0("Deleting putfolder: ", putfolder, "\n"))
+  unlink(putfolder, recursive = TRUE)
+  cat(paste0("Creating putfolder: ", putfolder, "\n"))
+  dir.create(putfolder)
   # Open file connection for logging
-  logfile_conn <- file(logfile, open = "a")
+  logfile_conn <- file(paste0(putfolder, logfile), open = "a")
 
   # Redirect both stdout and stderr to the same log file
   sink(logfile_conn)
@@ -50,12 +55,6 @@ calibration_run <- function(putfolder, calib_magpie_name, logoption, s_use_gdx) 
 
   cat("=== CALIBRATION_RUN START ===\n")
   cat(paste0("Putfolder: ", putfolder, ", s_use_gdx: ", s_use_gdx, "\n"))
-
-  # create putfolder for the calib run
-  cat(paste0("Deleting putfolder: ", putfolder, "\n"))
-  unlink(putfolder, recursive = TRUE)
-  cat(paste0("Creating putfolder: ", putfolder, "\n"))
-  dir.create(putfolder)
 
   # create a modified magpie.gms for the calibration run
   unlink(paste(calib_magpie_name, ".gms", sep = ""))
@@ -382,7 +381,7 @@ calibrate_landconversion <- function(n_maxcalib = 20,
         file.copy(paste0(putfolder, "/fulldata.gdx"), paste0(putfolder, "/", "fulldata_calib", i, ".gdx"), overwrite = TRUE)
       }
 
-      done <- update_calib(gdx_file = paste0(putfolder, "/fulldata.gdx"), calib_accuracy = calib_accuracy, cost_max = cost_max, cost_min = cost_min, calib_file = calib_file, calibration_step = i, n_maxcalib = n_maxcalib, best_calib = best_calib, histData = histData)
+      done <- update_calib(gdx_file = "fulldata.gdx", calib_accuracy = calib_accuracy, cost_max = cost_max, cost_min = cost_min, calib_file = calib_file, calibration_step = i, n_maxcalib = n_maxcalib, best_calib = best_calib, histData = histData)
 
       if (done & s_use_gdx == 2) {
         s_use_gdx <- 0
@@ -400,5 +399,5 @@ calibrate_landconversion <- function(n_maxcalib = 20,
     unlink("calib_data.rds")
 
     cat("\nLand conversion cost calibration finished\n")
-  }, logfile = "calibration_debug.log")
+  }, logfile = "calibration_debug.log", putfolder = putfolder)
 }
