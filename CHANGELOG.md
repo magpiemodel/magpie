@@ -18,6 +18,8 @@ Now uses both the reward and the costs from the timestep with best fit, as the o
 Saves divergences in log with sign instead of absolute error to make oscillations visible.
 Removed lowpass filter and stopped improvement once accuracy threshold has been reached as both are not used and I see only limited utility, so better simplify.
 Previously, land expansion cost calibration was also done for the first timestep, even though a mismatch here should rather be dealt with in yield calibration.
+Added a further iteration break criterium, which is that there is no convergence in a region, e.g. because it reached a lower or upper bound.
+Made sure that all output files are placed in the calibration run "putfolder" and not in the main directory.
 
 ### added
 -
