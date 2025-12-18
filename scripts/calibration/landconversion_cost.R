@@ -19,7 +19,7 @@ with_logging <- function(expr, logfile, putfolder) {
   cat(paste0("Creating putfolder: ", putfolder, "\n"))
   dir.create(putfolder)
   # Open file connection for logging
-  logfile_conn <- file(paste0(putfolder, logfile), open = "a")
+  logfile_conn <- file(paste0(putfolder, "/", logfile), open = "a")
 
   # Redirect both stdout and stderr to the same log file
   sink(logfile_conn)
