@@ -216,9 +216,9 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
   }
 
   ### use first steps to calibrate stronger, such that calibration factors can also achieve low/high levels
-  if(calibration_step <= 4) {
+  if(calibration_step <= 8) {
     reinforcement <- 10
-  } else if (calibration_step <= 7) {
+  } else if (calibration_step <= 11) {
     reinforcement <- 5 
   } else {
     reinforcement <- 1
@@ -257,8 +257,11 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
   write_log(setNames(old_calib[, , "cost"], NULL), paste0(putfolder,  "/land_conversion_cost_current_calib_factor.cs3"), calibration_step)
 
   # in case of sufficient convergence, stop here (no additional update of calibration factors!)
+  # also stop in case there is no convergence, e.g. because the calib factors are at upper or lower bounds.
+  convergence_reached <- abs(calib_divergence - 1) <= calib_accuracy
+  no_convergence <- (calib_factor_cost == old_calib[, , "cost"]) & (calib_factor_reward == old_calib[, , "reward"])
 
-  if (all(abs(calib_divergence - 1) <= calib_accuracy) | calibration_step == n_maxcalib) {
+  if (all(convergence_reached|no_convergence) | calibration_step == n_maxcalib) {
 
     ### Depending on the selected calibration selection type (best_calib FALSE or TRUE)
     # the reported and used regional calibration factors can be either the ones of the last iteration,
