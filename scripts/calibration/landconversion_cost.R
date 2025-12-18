@@ -113,7 +113,7 @@ expandHist <- function(valData){
   require(magclass)
   # test whether land has expanded or contracted in validation data
   expandHist <- valData
-  for (i in 2:length(getYears(valData)) {
+  for (i in 2:length(getYears(valData))) {
     expandHist[ , y[i], ] <- setYears(valdata[, y[i], ], NULL) - setYears(valdata[, y[i-1], ], NULL)
   }
   return(expandHist)
@@ -136,7 +136,7 @@ getCalibFactor <- function(gdx_file, mode, histData) {
     # Calibration should not target absolute difference to goal, but matching the increase over time.
     # Otherwise, calibration of first timestep will implicitly also calibrate all further timesteps.
     expansion_magpie <- expansion_valdata <- valdata * 0
-    for (timestep in 2:length(getYears(expansion_magpie)) {
+    for (timestep in 2:length(getYears(expansion_magpie))) {
       expansion_magpie[,timestep,] <- magpie[,timestep,] / setYears(magpie[,timestep - 1,], NULL)
       expansion_valdata[,timestep,] <- valdata[,timestep,] / setYears(valdata[,timestep - 1,], NULL)
     }
