@@ -80,7 +80,7 @@ calibration_run <- function(putfolder, calib_magpie_name, logoption, s_use_gdx) 
   cat("=== CALIBRATION_RUN END ===\n")
 }
 
-getValData <- function(histData) {
+getValData <- function(histData, gdx_file) {
   require(magpie4)
   require(magclass)
   require(gdx2)
@@ -128,7 +128,7 @@ getCalibFactor <- function(gdx_file, mode, histData) {
   cat(paste0("GDX file: ", gdx_file, "\n"))
   cat(paste0("Mode: ", mode, ", histData: ", histData, "\n"))
 
-  valdata <- getValData(histData)
+  valdata <- getValData(histData = histData, gdx_file = gdx_file)
   magpie <- land(gdx_file)[, y, "crop"]
 
   if (mode == "gradient") {
@@ -211,7 +211,7 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
   } else {
 	cat(">>> First iteration - initializing calibration factors (cost=1 for expanding countries, cost=2.5 for contracting, reward=0)\n")
     old_calib <- new.magpie(cells_and_regions = getCells(calib_divergence), years = y, names = c("cost", "reward"), fill = NA)
-    old_calib[,,"cost"] <- (expandHist(getValData(histData)) < 0) * (cost_max - 1) + 1
+    old_calib[,,"cost"] <- (expandHist(getValData(histData = histData, gdx_file = gdx_file)) < 0) * (cost_max - 1) + 1
 	old_calib[,,"reward"] <- 0
   }
 
@@ -228,7 +228,7 @@ update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_mi
   calib_factor_cost <- setNames(old_calib[, , "cost"], NULL) * calib_correction ^ reinforcement
   calib_factor_reward <- setNames(old_calib[, , "reward"], NULL) + (calib_correction - 1) * reinforcement
   # no rewards in case that validation data shows no contraction
-  calib_factor_reward[expandHist(getValData(histData)) >= 0] <- 0
+  calib_factor_reward[expandHist(getValData(histData = histData, gdx_file = gdx_file)) >= 0] <- 0
   calib_factor_reward[calib_factor_reward < 0] <- 0
 
   cat(">>> Account for cost_max and cost_min\n")
