@@ -176,7 +176,7 @@ time_series_reward <- function(calib_factor) {
 }
 
 # Calculate the correction factor and save it
-update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_min, calibration_step, n_maxcalib, best_calib, histData, levelGradientMix) {
+update_calib <- function(gdx_file, calib_accuracy, calib_file, cost_max, cost_min, calibration_step, n_maxcalib, best_calib, histData, putfolder, levelGradientMix) {
   require(magclass)
   require(magpie4)
   require(gdx2)
@@ -366,9 +366,10 @@ calibrate_landconversion <- function(n_maxcalib = 20,
     cat("##################################################################\n")
     cat("### CALIBRATE_MAGPIE START ###\n")
     cat("##################################################################\n")
-
+	
+	s_use_gdx <- 0
     for (i in 1:n_maxcalib) {
-      if (i == 1) s_use_gdx <- 0
+      
       cat(paste0("### ITERATION ", i, " START (s_use_gdx = ", s_use_gdx, ") ###\n"))
 
       calibration_run(putfolder = putfolder, calib_magpie_name = calib_magpie_name, logoption = logoption, s_use_gdx = s_use_gdx)
@@ -383,7 +384,7 @@ calibrate_landconversion <- function(n_maxcalib = 20,
 
       done <- update_calib(gdx_file = "fulldata.gdx", calib_accuracy = calib_accuracy, cost_max = cost_max, cost_min = cost_min, 
                            calib_file = calib_file, calibration_step = i, n_maxcalib = n_maxcalib, best_calib = best_calib, histData = histData,
-                           levelGradientMix = levelGradientMix)
+                           putfolder = putfolder, levelGradientMix = levelGradientMix)
 
       if (done & s_use_gdx == 2) {
         s_use_gdx <- 0
