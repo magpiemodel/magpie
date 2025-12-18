@@ -20,6 +20,9 @@ Removed lowpass filter and stopped improvement once accuracy threshold has been 
 Previously, land expansion cost calibration was also done for the first timestep, even though a mismatch here should rather be dealt with in yield calibration.
 Added a further iteration break criterium, which is that there is no convergence in a region, e.g. because it reached a lower or upper bound.
 Made sure that all output files are placed in the calibration run "putfolder" and not in the main directory.
+New config parameter cfg$level_gradient_mix allows for selection of level or gradient calibration, with the default being 0.3 level and 0.7 gradient, leading to smooth results and fast convergence.
+Removed unused options in code and config e.g. lowpass filter in config.cfg
+Correction factor in first iteration rounds gets a multiplier to reach faster convergence.
 
 ### added
 -
