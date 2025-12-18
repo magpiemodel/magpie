@@ -74,16 +74,6 @@
 .update_sets_modules <- function() {
   require(gms)
 
-  ### 30_croparea
-  
-  incentscen30 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
-  incentscen30 <- magclass::getNames(incentscen30,dim=1)
-
-  sets <- list(list(name = "incentscen30",
-                    desc = "rotation inventive scenarios",
-                    items = incentscen30))
-
-  gms::writeSets(sets , "modules/30_croparea/detail_apr24/sets.gms")
 
   ### 56_ghg_policy
   ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
