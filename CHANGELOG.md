@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **inputdata** updated input data to rev4.127, including fix of FAO mass balance and processing shares where maiz to ethanol values were missing for some countries
+- **13_tc** the interface variable `vm_tau` now represents a linear combination of tau on regular cropland (`v13_tau_core`) and tau on cropland in conservation priority areas (`v13_tau_consv`). Per default values in `vm_tau` are equal to `v13_tau_core`.
 - **inputdata** updated input data to rev4.128, including fix for mismatch between historic urban land in LUH3 and projected future urban land, which is still based on LUH2
 
 
@@ -65,7 +66,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **55_awms** Manure excretion is now calculated using `vm_feed_intake`
 - **70_livestock** pasture feed balance flows dynamically linked to pasture demand in regions with high historical scavenged feed use
 - **default.cfg** input data upgraded from rev4.118 to rev4.119 (minor update population and GDP)
-- **README** added forestry to model description 
+- **README** added forestry to model description
 - **readme** added setup instruction specifics for Linux/macOS
 - **scenario_config** update of VLLO scenario to EAT-Lancet 2
 - **scripts** changed setting in the 'mitigation and conservation' start script.
@@ -96,6 +97,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** request 24h for SLURM jobs (except for medium which still requests 7 days)
 
 ### added
+- **default.cfg** added options for tau scenarios on conservation priority land in `13_tc`.
 - **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
 - **80_optimization** added writing of conopt opt files with using scalars from input
 
