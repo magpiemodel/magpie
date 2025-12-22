@@ -10,7 +10,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **inputdata** updated input data to rev4.127, including fix of FAO mass balance and processing shares where maiz to ethanol values were missing for some countries
 - **13_tc** the interface variable `vm_tau` now represents a linear combination of tau on regular cropland (`v13_tau_core`) and tau on cropland in conservation priority areas (`v13_tau_consv`). Per default values in `vm_tau` are equal to `v13_tau_core`.
 - **inputdata** updated input data to rev4.128, including fix for mismatch between historic urban land in LUH3 and projected future urban land, which is still based on LUH2
-
+- scripts/calibration/landconversion_cost.R: 
+Debug mode now saves listing files with iteration numbers for detailed analysis. 
+Comprehensive logging system for calibration workflow. 
+Improved tracking distinguishes between current and next calibration factors in output files.
+Simplified code.
+Now uses both the reward and the costs from the timestep with best fit, as the outcome can be influenced by both.
+Saves divergences in log with sign instead of absolute error to make oscillations visible.
+Removed lowpass filter and stopped improvement once accuracy threshold has been reached as both are not used and I see only limited utility, so better simplify.
+Previously, land expansion cost calibration was also done for the first timestep, even though a mismatch here should rather be dealt with in yield calibration.
+Added a further iteration break criterium, which is that there is no convergence in a region, e.g. because it reached a lower or upper bound.
+Made sure that all output files are placed in the calibration run "putfolder" and not in the main directory.
+New config parameter cfg$level_gradient_mix allows for selection of level or gradient calibration, with the default being 0.3 level and 0.7 gradient, leading to smooth results and fast convergence.
+Removed unused options in code and config e.g. lowpass filter in config.cfg
+Correction factor in first iteration rounds gets a multiplier to reach faster convergence.
 
 ### added
 -
@@ -23,7 +36,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/start_functions.R** added all extra `cfg` arguments in `start_run()` to the config check call
 - **32_forestry** bugfix limit for endogenous re/afforestation in historical time steps
 - **highres.R** temporary f32_max_aff_area.cs4 is now deleted in case of error
-
+- **scripts/calibration/landconversion_cost.R**: 
+Fixed a bug where the calibration factors were used not from the best iteration, but from best iteration +1. To do so, we now distingzugs distinguish between "current" vs "next" calibration factors. 
+Fixed a bug where the parameter histData was not passed on to `getCalibFactor` (commit af42903). 
+Fixed sign error in calibration preventing downward correction of reward values (commit f8e1fad). 
+Fixed a bug where cached magpie4 results where used by adding automatic cache clearing of magpie4 after GAMS runs to prevent stale data issues.
+Fixed a bug where divergence was set to 0 in case that max values where reached, distorting the selection of best_calib factors.
 
 ## [4.13.0] - 2025-10-23
 
