@@ -369,8 +369,8 @@ calibrate_landconversion <- function(n_maxcalib = 20,
     cat("##################################################################\n")
     cat("### CALIBRATE_MAGPIE START ###\n")
     cat("##################################################################\n")
-	
-	s_use_gdx <- 0
+
+    s_use_gdx <- 0
     for (i in 1:n_maxcalib) {
       
       cat(paste0("### ITERATION ", i, " START (s_use_gdx = ", s_use_gdx, ") ###\n"))
