@@ -29,7 +29,7 @@ source("scripts/start_functions.R")
 calc_bioen <- function(x) {
   #B0
   B0 <- new.magpie("GLO",seq(1995,2150,by=5),NULL,fill = 0)
-  
+
   #B50
   #50 EJ in 2050 globally, linear interpolation
   B50 <- new.magpie("GLO",c(seq(1995,2020,by=5),2050,2100,2150),NULL,fill = 0)
@@ -39,11 +39,11 @@ calc_bioen <- function(x) {
   B50 <- time_interpolate(B50,seq(2020,2050,by=5),TRUE)
   B50 <- time_interpolate(B50,seq(2050,2100,by=5),TRUE)
   B50 <- time_interpolate(B50,seq(2100,2150,by=5),TRUE)
-  
+
   #B100
   #100 EJ in 2050 globally, linear interpolation
   B100 <- B50*2
-  
+
   if (x == "B0") {
     return(B0)
   } else if (x == "B50") {
@@ -56,7 +56,7 @@ calc_ghgprice <- function(x) {
   T0 <- read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
   T0 <- collapseNames(T0[,,getNames(T0,dim=2)[1]])
   T0[,,] <- 0
-  
+
   #T200 200 USD/tCO2 in 2050
   T200 <- new.magpie(getRegions(T0),c(seq(1995,2025,by=5),2050,2100,2150),getNames(T0),fill = 0)
   T200[,"y2025","co2_c"] <- 25
@@ -69,9 +69,9 @@ calc_ghgprice <- function(x) {
   T200[,,"n2o_n_direct"] <- T200[,,"co2_c"]*265*44/28
   T200[,,"n2o_n_indirect"] <- T200[,,"co2_c"]*265*44/28
   T200[,,"co2_c"] <- T200[,,"co2_c"]*44/12
-  
+
   T40 <- T200*0.2
-  
+
   if (x == "T0") {
     return(T0)
   } else if (x == "T40") {
@@ -168,7 +168,7 @@ for (rcp in rcps) {
             cfg$gms$c30_bioen_type <- bioen_type
             cfg$gms$c30_bioen_water <- bioen_water
             download_and_update(cfg)
-            write.magpie(readGDX(file.path("output",paste("TAU",ssp,rcp,tau_scen,sep="-"),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+            write.magpie(magpie4::tau(file.path("output",paste("TAU",ssp,rcp,tau_scen,sep="-"),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
             write.magpie(calc_bioen(biodem),"modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
             write.magpie(calc_ghgprice(ghgprice),"modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3")
             start_run(cfg,codeCheck=FALSE)

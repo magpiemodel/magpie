@@ -34,5 +34,5 @@ $Ifi "%phase%" == "sets" $include "./modules/22_land_conservation/area_based_apr
 $Ifi "%phase%" == "declarations" $include "./modules/22_land_conservation/area_based_apr22/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/22_land_conservation/area_based_apr22/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/22_land_conservation/area_based_apr22/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/22_land_conservation/area_based_apr22/presolve.gms"
+$Ifi "%phase%" == "presolve_ini" $include "./modules/22_land_conservation/area_based_apr22/presolve_ini.gms"
 *######################## R SECTION END (PHASES) ###############################
