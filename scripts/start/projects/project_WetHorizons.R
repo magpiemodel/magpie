@@ -123,7 +123,7 @@ for (ssp in ssps) {
 }
 
 for (ssp in ssps) {
-  
+
   if (ssp %in% c("SSP1","SSP2","SSP5")) {
 
     # PkBudg650
@@ -139,10 +139,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 0.02
     cfg$gms$s58_intact_prot_exo <- 0
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
     ## Exo rewet scenarios
     # 15% of currently drained peatland rewetted by 2050
     cfg$title <- .title(cfg, paste(ssp, "1p5deg", "NRL15", sep = "-"))
@@ -157,10 +157,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 1
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
     ## Exo rewet scenarios
     # 25% of currently drained peatland rewetted by 2050
     cfg$title <- .title(cfg, paste(ssp, "1p5deg", "NRL25", sep = "-"))
@@ -175,10 +175,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 1
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
     ## Exo rewet scenarios
     # 50% of currently drained peatland rewetted by 2050
     cfg$title <- .title(cfg, paste(ssp, "1p5deg", "NRL50", sep = "-"))
@@ -193,10 +193,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 1
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
     ## Exo rewet scenarios
     # 100% of currently drained peatland rewetted by 2050
     cfg$title <- .title(cfg, paste(ssp, "1p5deg", "NRL100", sep = "-"))
@@ -211,10 +211,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 1
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "1p5deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
   } else {
     # PkBudg1000
     cfg$title <- .title(cfg, paste(ssp, "2deg", sep = "-"))
@@ -229,10 +229,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 0.02
     cfg$gms$s58_intact_prot_exo <- 0
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
     ## Exo rewet scenarios
     # 15% of currently drained peatland rewetted by 2050
     cfg$title <- .title(cfg, paste(ssp, "2deg", "NRL15", sep = "-"))
@@ -247,10 +247,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 1
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
     ## Exo rewet scenarios
     # 25% of currently drained peatland rewetted by 2050
     cfg$title <- .title(cfg, paste(ssp, "2deg", "NRL25", sep = "-"))
@@ -265,10 +265,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 1
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
     ## Exo rewet scenarios
     # 50% of currently drained peatland rewetted by 2050
     cfg$title <- .title(cfg, paste(ssp, "2deg", "NRL50", sep = "-"))
@@ -283,10 +283,10 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 1
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
     ## Exo rewet scenarios
     # 100% of currently drained peatland rewetted by 2050
     cfg$title <- .title(cfg, paste(ssp, "2deg", "NRL100", sep = "-"))
@@ -301,9 +301,9 @@ for (ssp in ssps) {
     cfg$gms$s58_annual_rewetting_limit <- 1
     cfg$gms$s58_intact_prot_exo <- 1
     download_and_update(cfg)
-    write.magpie(readGDX(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), "ov_tau", select=list(type="level")),"modules/13_tc/input/f13_tau_scenario.csv")
+    write.magpie(magpie4::tau(file.path("output",.title(cfg, paste(ssp, "2deg", "noPeatland", sep = "-")),"fulldata.gdx"), type = "both"),"modules/13_tc/input/f13_tau_scenario.csv")
     cfg$gms$tc <- "exo"
     start_run(cfg, codeCheck = FALSE)
-    
+
   }
 }

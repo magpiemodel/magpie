@@ -43,11 +43,13 @@ loop (t$(m_year(t) > %TIMESTEP%),
     ct(t) = yes;
     pt(t) = yes$(ord(t) = 1);
     pt(t-1) = yes$(ord(t) > 1);
-    
+
       display "Year";
       display ct;
       display "Previous Year";
       display pt;
+
+$batinclude "./modules/include.gms" presolve_ini
 
 $batinclude "./modules/include.gms" presolve
 
