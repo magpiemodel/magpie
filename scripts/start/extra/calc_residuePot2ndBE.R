@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Test routine for standardized test runs
+# description: Calculate residue potential for 2nd generation bioenergy for multiple SSP/NPi2025 scenarios
 # position: 5
 # ----------------------------------------------------------
 
