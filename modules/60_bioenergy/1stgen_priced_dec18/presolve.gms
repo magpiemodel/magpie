@@ -23,6 +23,9 @@ else
              f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
 );
 
+* for residues used as bioenergy feedstock switch off
+* overwrite the scenario harmonization for the historical period
+* and set the residue demand to "off" for the whole period
 $if "%c60_res_2ndgenBE_dem%" == "off" i60_res_2ndgenBE_dem(t,i) = f60_res_2ndgenBE_dem(t,i,"off");
 
 * Add minimal bioenergy demand in case of zero demand or very small demand to avoid zero prices
