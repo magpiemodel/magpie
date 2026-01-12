@@ -39,7 +39,7 @@ If a point is not applicable check the checkbox anyway and write "not-applicable
 
 - [ ] Reporting produces no errors and no new warnings
 
-- Get two approving reviews, one from RSE
+- Get two approving reviews (at least one from RSE)
 
 ### :chart_with_downwards_trend: Performance :chart_with_upwards_trend:
 
