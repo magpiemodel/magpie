@@ -186,10 +186,12 @@ highres <- function(cfg = cfg, res = "c1000", tc = NULL) {
     if(indicator > 1e-06) warning(paste("Regional AR exceeds global AR limit by",indicator,"Mha"))
   }
 
+  # sleep to prevent issues with creating full.gms
   Sys.sleep(2)
 
   start_run(cfg, codeCheck = FALSE, lock_model = FALSE)
 
+  # sleep to prevent issues with creating full.gms
   Sys.sleep(1)
 }
 highres(cfg)
