@@ -1,0 +1,18 @@
+on:
+  pull_request:
+    types: [opened, reopened, edited, ready_for_review]
+
+jobs:
+  check-pr-template:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    env:
+      PR_DESCRIPTION: ${{ github.event.pull_request.body }}
+    steps:
+      - name: Check PR description
+        id: check_pr_description
+        run: |
+            if echo "$PR_DESCRIPTION" | grep -q "\[ \]"; then
+              echo "Found unchecked checkboxes in pull request description."
+              exit 1
+            fi
