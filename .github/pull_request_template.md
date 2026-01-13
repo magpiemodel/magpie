@@ -27,7 +27,7 @@ If a point is not applicable check the checkbox anyway and write "not-applicable
   - **Low risk**: 
     - Run a compilation check via `Rscript start.R --> "compilation check"`
   - **Medium risk**: 
-    - Run test runs via `Rscript start.R --> "test runs"`
+    - Run default run via `Rscript start.R --> "default"`
     - Check logs for errors/warnings
     - Fill in performance section below
   - **High risk**:
