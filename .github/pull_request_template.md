@@ -4,7 +4,7 @@
 
 ## :wrench: Checklist for PR creator :wrench:
 
-If a point is not applicable check the checkbox anyway and write "not-applicable" next to the checkbox.
+If a point is not applicable, check the checkbox anyway and write "non-applicable" next to the checkbox.
 
 - [ ] Label pull request [from the label list](https://github.com/magpiemodel/magpie/labels).
   - **Low risk**: Simple bugfixes (missing files, updated documentation, typos) or changes  in start or output scripts
