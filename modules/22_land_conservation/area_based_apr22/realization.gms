@@ -11,7 +11,8 @@
 *' based on observed protected area designation. In 1995, the total area under
 *' land conservation (across all land types) in the input data set is 954.9 Mha and,
 *' by 5-year time steps, increases to 1855.7 Mha in 2020 (14.3 % of the total land area, excluding
-*' inland water bodies under protection). After 2020 land conservation is held constant at 2020 values. *' The protected area based on WDPA includes all areas under legal protection meeting the
+*' inland water bodies under protection). After 2020 land conservation is held constant at 2020 values.
+*' The protected area based on WDPA includes all areas under legal protection meeting the
 *' IUCN and CBD protected area definitions (including IUCN categories Ia, Ib, III, IV, V, VI
 *' and 'not assigned' but legally designated areas). Natural vegetation (natveg) and
 *' grassland ('past') within protected areas cannot be converted to other land types.
