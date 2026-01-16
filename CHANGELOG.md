@@ -8,9 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **inputdata** updated input data to rev4.127, including fix of FAO mass balance and processing shares where maiz to ethanol values were missing for some countries
+- **PR template** minor changes, require all checkboxes to be checked
+- **13_tc** the interface variable `vm_tau` now represents a linear combination of tau on regular cropland (`v13_tau_core`) and tau on cropland in conservation priority areas (`v13_tau_consv`). Per default values in `vm_tau` are equal to `v13_tau_core`.
 - **inputdata** updated input data to rev4.128, including fix for mismatch between historic urban land in LUH3 and projected future urban land, which is still based on LUH2
 - **inputdata** updated input data to rev4.129, which now includes new protected area data for China not covered in the WDPA data base.
-
+- **60_bioenergy** set `i60_res_2ndgenBE_dem` also for historical period to `off` if `c60_res_2ndgenBE_dem` is set to `off` (do not apply scenario harmonization on it)
 
 ### added
 -
@@ -97,6 +99,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts** request 24h for SLURM jobs (except for medium which still requests 7 days)
 
 ### added
+- **default.cfg** added options for tau scenarios on conservation priority land in `13_tc`.
 - **default.cfg** added option to set Tol_Optimality (GAMS solver setting) to a certain value (GAMS-default 1e-7, new MAgPIE-default 1e-8)
 - **80_optimization** added writing of conopt opt files with using scalars from input
 

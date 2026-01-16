@@ -46,7 +46,13 @@ sets
                       TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
                       UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                       VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+
+
+  land_consv(land) land types to which in future conservation (protection and restoration) is applied
+    / primforest, secdforest, other /
+
 ;
+
 
 table f22_wdpa_baseline(t_all,j,wdpa_cat22,land) Initial protected area as derived from WDPA until 2020 (mio. ha)
 $ondelim
