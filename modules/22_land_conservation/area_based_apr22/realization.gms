@@ -7,16 +7,17 @@
 
 *' @description The realization initialises land stocks reserved for land conservation across
 *' grassland, forest and other land pools.
-*' Land reserved for area-based conservation is derived from WDPA and is based on observed
-*' land conservation trends. In 1995, the total area under land conservation (across all land
-*' types) in the input data set is 864.31 Mha and, by 5-year time steps, increases to
-*' 1662.02 Mha in 2020 (13.06 % of the total land area, excluding inland water bodies under
-*' protection). After 2020 land conservation is held constant at 2020 values. The protected area
-*' based on WDPA includes all areas under legal protection meeting the IUCN and CBD protected
-*' area definitions (including IUCN categories Ia, Ib, III, IV, V, VI and 'not assigned' but
-*' legally designated areas). Natural vegetation (natveg) and grassland ('past') within protected
-*' areas cannot be converted to other land types. On top of the WDPA baseline protection, there are
-*' future options to protect different conservation priority areas such as biodiversity hotspots (BH),
+*' Land reserved for area-based conservation is derived from WDPA and @wang_over_2024 and is
+*' based on observed protected area designation. In 1995, the total area under
+*' land conservation (across all land types) in the input data set is 954.9 Mha and,
+*' by 5-year time steps, increases to 1855.7 Mha in 2020 (14.3 % of the total land area, excluding
+*' inland water bodies under protection). After 2020 land conservation is held constant at 2020 values.
+*' The protected area based on WDPA includes all areas under legal protection meeting the
+*' IUCN and CBD protected area definitions (including IUCN categories Ia, Ib, III, IV, V, VI
+*' and 'not assigned' but legally designated areas). Natural vegetation (natveg) and
+*' grassland ('past') within protected areas cannot be converted to other land types.
+*' On top of the WDPA and China baseline protection, there are future options to protect
+*' different conservation priority areas such as biodiversity hotspots (BH),
 *' centers of plant diversity (CBD), Intact Forest Landscapes (IFL) and last of the wild (LW),
 *' taken from @brooks_global_2006.
 *' Future land conservation is distributed proportionally across natural vegetation types
@@ -34,5 +35,5 @@ $Ifi "%phase%" == "sets" $include "./modules/22_land_conservation/area_based_apr
 $Ifi "%phase%" == "declarations" $include "./modules/22_land_conservation/area_based_apr22/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/22_land_conservation/area_based_apr22/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/22_land_conservation/area_based_apr22/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/22_land_conservation/area_based_apr22/presolve.gms"
+$Ifi "%phase%" == "presolve_ini" $include "./modules/22_land_conservation/area_based_apr22/presolve_ini.gms"
 *######################## R SECTION END (PHASES) ###############################
