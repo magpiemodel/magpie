@@ -17,117 +17,122 @@ source("scripts/start_functions.R")
 
 # source default configuration
 source("config/default.cfg")
-cfg$title <- title <- "l2m"
+title <- "l2m_feb26"
+cfg$recalibrate_landconversion_cost <- "ifneeded" #### Should I change this to TRUE?
 
-for (ir2rf in c(0, 1)) {
-    for (limitCalib in c(0, 1)) {
-        # Default runs
-        cfg$title <- paste0(title, "_Default_mngtcalib_", 
-                            "ir2rf_", ifelse(ir2rf == 0, "Off", "On"),
-                            ifelse(limitCalib == 0, "_noLimitCalib", "_limitCalib"))
-        # input data
-        cfg$input <- c(regional    = "rev4.125+griddedL2Mcomp_v1_default_h12_magpie.tgz",
-                       cellular    = "rev4.125+griddedL2Mcomp_v1_default_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-                       validation  = "rev4.125+griddedL2Mcomp_v1_default_h12_validation.tgz",
+##############################################
+### Current default (i.e., old lpjml data) ###
+##############################################
+cfg$gms$yields <- "managementcalib_aug19"
+cfg$gms$tc     <- "endo_jan22"
+
+# RCP2.6
+cfg$title <- paste0(title, "_Default_mngtcalib_", "rcp26")
+cfg$input <- c(regional    = "rev4.130l2m_default_feb2026_h12_magpie.tgz",
+               cellular    = "rev4.130l2m_default_feb2026_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz",
+               validation  = "rev4.130l2m_default_feb2026_h12_92e02314_validation.tgz",
+               additional  = "additional_data_rev4.63.tgz",
+               calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
+# start MAgPIE run
+start_run(cfg, codeCheck = TRUE)
+
+# RCP7.0
+cfg$title <- paste0(title, "_Default_mngtcalib_", "rcp70")
+cfg$input <- c(regional    = "rev4.130l2m_default_feb2026_h12_magpie.tgz",
+               cellular    = "rev4.130l2m_default_feb2026_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+               validation  = "rev4.130l2m_default_feb2026_h12_92e02314_validation.tgz",
+               additional  = "additional_data_rev4.63.tgz",
+               calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
+# start MAgPIE run
+start_run(cfg, codeCheck = TRUE)
+
+#####################
+### Newlpjml data ###
+#####################
+
+### Different RCPs (2x) ###
+for (rcp in c("2p6", "7p0")) {
+
+    if (rcp == "2p6") {
+        # RCP2.6
+        cfg$input <- c(regional    = "rev4.130l2m_v5-10-0m2_feb2026_h12_magpie.tgz",
+                       cellular    = "WARNINGS1_rev4.130l2m_v5-10-0m2_feb2026_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-a0c283bd.tgz",
+                       validation  = "rev4.130l2m_v5-10-0m2_feb2026_h12_92e02314_validation.tgz",
                        additional  = "additional_data_rev4.63.tgz",
-                       calibration = "calibration_H12_FAO_18Sep25.tgz")
-        # old yield realization
+                       calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
+    } else if (rcp == "7p0") {
+        # RCP7.0
+        cfg$input <- c(regional    = "rev4.130l2m_v5-10-0m2_feb2026_h12_magpie.tgz",
+                       cellular    = "WARNINGS1_rev4.130l2m_v5-10-0m2_feb2026_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-a0c283bd.tgz",
+                       validation  = "rev4.130l2m_v5-10-0m2_feb2026_h12_92e02314_validation.tgz",
+                       additional  = "additional_data_rev4.63.tgz",
+                       calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
+    } else {
+      stop("selected rcp not available")
+    }
+
+    ### Different realizations (2x) ###
+    for (realization in c("mngt", "gsadapt")) {
+
+        if (realization == "mngt") {
+        # default realizations
         cfg$gms$yields <- "managementcalib_aug19"
         cfg$gms$tc     <- "endo_jan22"
-        # irrigated2rainfed setting
-        cfg$gms$s14_calib_ir2rf <- ir2rf
-        # limited calibration setting
-        cfg$gms$s14_limit_calib <- limitCalib
+
+        # title 
+        cfg$title <- paste0(title, "_LPJmL5-10-0m2", "_", "rcp", rcp, "_", realization)
         # start MAgPIE run
         start_run(cfg, codeCheck = TRUE)
 
-        # New LPJmL Versions
-        for (gsadaptOption in c("gsadapt", "NOgsadapt")) {
+        } else if (realization == "gsadpat") {
+        # new realizations
+        cfg$gms$yields <- "gsadapt_nov25"
+        cfg$gms$tc     <- "endo_nov25"
 
-            # LPJmL Version runs_lpjml5.10.0-m2
-            # +griddedL2Mcomp_v10_2_l2m
-            cfg$title <- paste0(title, "_v5.10.0-2_", gsadaptOption, "_",
-                            "ir2rf_", ifelse(ir2rf == 0, "Off", "On"),
-                            ifelse(limitCalib == 0, "_noLimC", "_limC"))
-            # input data
-            cfg$input <- c(regional    = "rev4.125+griddedL2Mcomp_v10_2_l2m_h12_magpie.tgz",
-                            cellular    = "rev4.125+griddedL2Mcomp_v10_2_l2m_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-a0c283bd.tgz",
-                            validation  = "rev4.125+griddedL2Mcomp_v10_2_l2m_h12_validation.tgz",
-                            additional  = "additional_data_rev4.63.tgz",
-                            calibration = "calibration_H12_FAO_18Sep25.tgz")
-            # new yield realization
-            cfg$gms$yields <- "gsadapt_nov25"
-            cfg$gms$tc     <- "endo_nov25"
-            # irrigated2rainfed setting
-            cfg$gms$s14_calib_ir2rf <- ir2rf
-            # limited calibration setting
-            cfg$gms$s14_limit_calib <- limitCalib
-            # gsadapt settings
-            if (gsadaptOption == "NOgsadapt") {
+        for (gsadapt in c("const", "adapt")) {
+            if (gsadapt == "const") {
+                # no growing period adaptation
                 cfg$gms$s14_use_gsadapt <- 0
                 cfg$gms$s14_gsadapt2tau <- 0
-            } else {
-                cfg$gms$s14_use_gsadapt <- 1
-                cfg$gms$s14_gsadapt2tau <- 1
-            }
-            # start MAgPIE run
-            start_run(cfg, codeCheck = TRUE)
 
-            # LPJmL Version runs_lpjml5.10.0-m1
-            cfg$title <- paste0(title, "_v5.10.0-1_", gsadaptOption, "_",
-                            "ir2rf_", ifelse(ir2rf == 0, "Off", "On"),
-                            ifelse(limitCalib == 0, "_noLimC", "_limC"))
-            # input data
-            cfg$input <- c(regional    = "rev4.125+griddedL2Mcomp_v2_l2m_h12_magpie_debug.tgz",
-                            cellular    = "rev4.125+griddedL2Mcomp_v2_l2m_h12_4ad25a7f_cellularmagpie_debug_c200_MRI-ESM2-0-ssp370_lpjml-351193fc.tgz",
-                            validation  = "rev4.125+griddedL2Mcomp_v2_l2m_h12_validation_debug.tgz",
-                            additional  = "additional_data_rev4.63.tgz",
-                            calibration = "calibration_H12_FAO_18Sep25.tgz")
-            # new yield realization
-            cfg$gms$yields <- "gsadapt_nov25"
-            cfg$gms$tc     <- "endo_nov25"
-            # irrigated2rainfed setting
-            cfg$gms$s14_calib_ir2rf <- ir2rf
-            # limited calibration setting
-            cfg$gms$s14_limit_calib <- limitCalib
-            # gsadapt settings
-            if (gsadaptOption == "NOgsadapt") {
-                cfg$gms$s14_use_gsadapt <- 0
-                cfg$gms$s14_gsadapt2tau <- 0
-            } else {
-                cfg$gms$s14_use_gsadapt <- 1
-                cfg$gms$s14_gsadapt2tau <- 1
-            }
-            # start MAgPIE run
-            start_run(cfg, codeCheck = TRUE)
+                # title 
+                cfg$title <- paste0(title, "_LPJmL5-10-0m2", "_", "rcp", rcp, "_", realization, "_gs", gsadapt)
+                # start MAgPIE run
+                start_run(cfg, codeCheck = TRUE)
 
-            # LPJmL Version runs_lpjml5.9.16-m2
-            cfg$title <- paste0(title, "_v5.9.16-2_", gsadaptOption, "_",
-                            "ir2rf_", ifelse(ir2rf == 0, "Off", "On"),
-                            ifelse(limitCalib == 0, "_noLimC", "_limC"))
-            # input data
-            cfg$input <- c(regional    = "rev4.125+griddedL2Mcomp_v2_l2m_h12_magpie_debug.tgz",
-                        cellular    = "rev4.125+griddedL2Mcomp_v2_l2m_h12_4ad25a7f_cellularmagpie_debug_c200_MRI-ESM2-0-ssp370_lpjml-351193fc.tgz",
-                        validation  = "rev4.125+griddedL2Mcomp_v2_l2m_h12_validation_debug.tgz",
-                        additional  = "additional_data_rev4.63.tgz",
-                        calibration = "calibration_H12_FAO_18Sep25.tgz")
-            # new yield realization
-            cfg$gms$yields <- "gsadapt_nov25"
-            cfg$gms$tc     <- "endo_nov25"
-            # irrigated2rainfed setting
-            cfg$gms$s14_calib_ir2rf <- ir2rf
-            # limited calibration setting
-            cfg$gms$s14_limit_calib <- limitCalib
-            # gsadapt settings
-            if (gsadaptOption == "NOgsadapt") {
-                cfg$gms$s14_use_gsadapt <- 0
-                cfg$gms$s14_gsadapt2tau <- 0
+            } else if (gsadapt == "adapt") {
+
+                for (tauspillover in c("TCspill0", "TCspill1")) {
+                  if (tauspillover == "TCspill0") {
+                    # growing period adaptation
+                    cfg$gms$s14_use_gsadapt <- 1
+                    cfg$gms$s14_gsadapt2tau <- 0
+
+                    # title 
+                    cfg$title <- paste0(title, "_LPJmL5-10-0m2", "_", "rcp", rcp, "_", realization, "_gs", gsadapt, tauspillover)
+                    # start MAgPIE run
+                    start_run(cfg, codeCheck = TRUE)
+
+                  } else if (tauspillover == "TCspill1") {
+                    # growing period adaptation
+                    cfg$gms$s14_use_gsadapt <- 1
+                    cfg$gms$s14_gsadapt2tau <- 1
+
+                    # title 
+                    cfg$title <- paste0(title, "_LPJmL5-10-0m2", "_", "rcp", rcp, "_", realization, "_gs", gsadapt, tauspillover)
+                    # start MAgPIE run
+                    start_run(cfg, codeCheck = TRUE)
+
+                  } else {
+                    stop("Selected tauspillover is not available.")
+                  }
+                }
             } else {
-                cfg$gms$s14_use_gsadapt <- 1
-                cfg$gms$s14_gsadapt2tau <- 1
+                stop("gsadapt setting does not exist")
             }
-            # start MAgPIE run
-            start_run(cfg, codeCheck = TRUE)
+        }
+        } else {
+          stop("selected realization is not available.")
         }
     }
 }
