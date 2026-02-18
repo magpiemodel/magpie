@@ -92,3 +92,5 @@ if(s14_gsadapt2tau = 0 OR s14_use_gsadapt = 0,
   pm_yields_gsadapt_ratio_increment(t,i) = 1;
   p14_yields_gsadapt_ratio_cumulative(t,i) = 1;
 );
+
+*** EOF presolve.gms ***
