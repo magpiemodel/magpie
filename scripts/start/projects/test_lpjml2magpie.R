@@ -84,7 +84,7 @@ for (rcp in c("2p6", "7p0")) {
         # start MAgPIE run
         start_run(cfg, codeCheck = TRUE)
 
-        } else if (realization == "gsadpat") {
+        } else if (realization == "gsadapt") {
         # new realizations
         cfg$gms$yields <- "gsadapt_nov25"
         cfg$gms$tc     <- "endo_nov25"

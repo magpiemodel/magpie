@@ -33,5 +33,5 @@ vm_bv.l(j,"crop_per",potnatveg) =
   sum((crop_per30,w), fm_croparea("y1995",j,w,crop_per30)) * fm_bii_coeff("crop_per",potnatveg) 
   * fm_luh2_side_layers(j,potnatveg);
 
-* Initialize pcm_land
+* Initialize pcm_area
 pcm_area(j,w,kcr) = fm_croparea("y1995",j,w,kcr);
