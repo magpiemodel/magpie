@@ -29,7 +29,7 @@ cfg$gms$tc     <- "endo_jan22"
 # RCP2.6
 cfg$title <- paste0(title, "_Default_mngtcalib_", "rcp26")
 cfg$input <- c(regional    = "rev4.130l2m_default_feb2026_h12_magpie.tgz",
-               cellular    = "rev4.130l2m_default_feb2026_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz",
+               cellular    = "rev4.130l2m_default_feb2026_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz",
                validation  = "rev4.130l2m_default_feb2026_h12_92e02314_validation.tgz",
                additional  = "additional_data_rev4.63.tgz",
                calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
@@ -56,14 +56,14 @@ for (rcp in c("2p6", "7p0")) {
     if (rcp == "2p6") {
         # RCP2.6
         cfg$input <- c(regional    = "rev4.130l2m_v5-10-0m2_feb2026_h12_magpie.tgz",
-                       cellular    = "WARNINGS1_rev4.130l2m_v5-10-0m2_feb2026_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-a0c283bd.tgz",
+                       cellular    = "rev4.130l2m_v5-10-0m2_feb2026_h12_e3aebc2e_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-a0c283bd.tgz",
                        validation  = "rev4.130l2m_v5-10-0m2_feb2026_h12_92e02314_validation.tgz",
                        additional  = "additional_data_rev4.63.tgz",
                        calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
     } else if (rcp == "7p0") {
         # RCP7.0
         cfg$input <- c(regional    = "rev4.130l2m_v5-10-0m2_feb2026_h12_magpie.tgz",
-                       cellular    = "WARNINGS1_rev4.130l2m_v5-10-0m2_feb2026_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-a0c283bd.tgz",
+                       cellular    = "rev4.130l2m_v5-10-0m2_feb2026_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-a0c283bd.tgz",
                        validation  = "rev4.130l2m_v5-10-0m2_feb2026_h12_92e02314_validation.tgz",
                        additional  = "additional_data_rev4.63.tgz",
                        calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
@@ -84,7 +84,7 @@ for (rcp in c("2p6", "7p0")) {
         # start MAgPIE run
         start_run(cfg, codeCheck = TRUE)
 
-        } else if (realization == "gsadpat") {
+        } else if (realization == "gsadapt") {
         # new realizations
         cfg$gms$yields <- "gsadapt_nov25"
         cfg$gms$tc     <- "endo_nov25"
