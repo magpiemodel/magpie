@@ -74,11 +74,11 @@ else
 
   p14_yields_gsadapt_ratio(t,i) =
     sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
-   (sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr)) + 10**(-8));
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr));
 
   p14_yields_gsadapt_ratio_previous(t,i) =
     sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
-   (sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr)) + 10**(-8));
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr));
 
   pm_yields_gsadapt_ratio_increment(t,i) = p14_yields_gsadapt_ratio(t,i) / p14_yields_gsadapt_ratio_previous(t,i);
 * The max(1,...) ensures the cumulative factor can only grow, never shrink.
