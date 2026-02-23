@@ -83,7 +83,6 @@ cfg$gms$disagg_lvst <- "off"                  # def = foragebased_jul23
     cfg$gms$s21_tariff_factor <- 1
     cfg$gms$s21_stddev_lib_factor <- ssp_params$stddev_lib[ssp_params$ssp == ssp]
     cfg$gms$s21_import_supply_scenario <- ssp_params$import_supply[ssp_params$ssp == ssp]
-    cfg$gms$s21_stddev_lib_factor <- 1
     cfg$gms$s21_trade_scenario_adjustments <- 0
 
     #cfg$gms$s21_trade_tariff_fadeout <- 1

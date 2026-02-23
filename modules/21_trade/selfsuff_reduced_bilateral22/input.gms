@@ -24,7 +24,7 @@ scalars
   s21_stddev_lib_factor       Multplicative factor on the window                     / 1 /
   s21_cost_import             Cost for additional imports to maintain feasibility (USD17MER per tDM) / 1500 /
   s21_min_trade_margin_forestry Minimum trade margin for forestry products (USD17MER per tDM) / 62 /
-  s21_trade_scenario_adjustments Switch to apply scenario adjustments to import supply (0=off 1=on) / 0 /
+  s21_trade_scenario_adjustments Switch to apply scenario adjustments to import supply (0=off 1=on) / 1 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)
@@ -47,10 +47,12 @@ $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_export_balanceflow.cs3"
 $offdelim;
 
-table f21_trade_scenario_adjustments(i_ex,i_im,k_trade,*) Scenario adjustments to import supply historical (1)
+parameter f21_trade_scenario_adjustments(i_ex,i_im,t_all,k_trade) Scenario adjustments to import supply historical (1)
+/
 $ondelim
-$include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_scenario_adjustments.cs3"
-$offdelim;
+$include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_scenario_adjustments.cs5"
+$offdelim
+/;
 
 parameter f21_import_supply_historical(i_ex,i_im,t_all,k_trade)  Historical import to domestic supply ratio (1)
 /

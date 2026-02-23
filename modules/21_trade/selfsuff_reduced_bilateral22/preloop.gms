@@ -22,8 +22,8 @@ i21_import_supply_historical(i_ex,i_im,t_all,k_trade) = f21_import_supply_histor
 *** for all time periods after sm_fix_SSP2
 if (s21_trade_scenario_adjustments = 1,
   loop(t_all$(m_year(t_all) > sm_fix_SSP2),
-    i21_import_supply_historical(i_ex,i_im,t_all,k_trade)$(f21_trade_scenario_adjustments(i_ex,i_im,k_trade,"diff")) = 
-      i21_import_supply_historical(i_ex,i_im,t_all,k_trade) + f21_trade_scenario_adjustments(i_ex,i_im,k_trade,"diff");
+    i21_import_supply_historical(i_ex,i_im,t_all,k_trade)$(f21_trade_scenario_adjustments(i_ex,i_im,k_trade)) = 
+      i21_import_supply_historical(i_ex,i_im,t_all,k_trade) + f21_trade_scenario_adjustments(i_ex,i_im,k_trade);
   );
 );
 
