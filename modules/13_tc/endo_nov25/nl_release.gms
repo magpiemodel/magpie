@@ -7,5 +7,5 @@
 
 * ### nl_release ###
 
-vm_tau.lo(h,tautype) =    pcm_tau(h,tautype);
-vm_tau.up(h,tautype) =  2*pcm_tau(h,tautype);
+v13_tau_core.lo(h,tautype) =    pc13_tau(h,tautype);
+v13_tau_core.up(h,tautype) =  2*pc13_tau(h,tautype);
