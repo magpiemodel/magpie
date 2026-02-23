@@ -5,8 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*** EOF presolve.gms ***
-
 * calculate carbon density
 
 *** YIELDS
@@ -70,7 +68,7 @@ if (ord(t) = 1,
   p14_yields_gsadapt_ratio(t,i) = 1;
   p14_yields_gsadapt_ratio_previous(t,i) = 1;
   pm_yields_gsadapt_ratio_increment(t,i) = 1;
-  p14_yields_gsadapt_ratio_cummulative(t,i) = 1;
+  p14_yields_gsadapt_ratio_cumulative(t,i) = 1;
 
 else 
 
@@ -83,11 +81,16 @@ else
     sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr));
 
   pm_yields_gsadapt_ratio_increment(t,i) = p14_yields_gsadapt_ratio(t,i) / p14_yields_gsadapt_ratio_previous(t,i);
-  p14_yields_gsadapt_ratio_cummulative(t,i) = max(1,pm_yields_gsadapt_ratio_increment(t,i)) * p14_yields_gsadapt_ratio_cummulative(t-1,i); 
+* The max(1,...) ensures the cumulative factor can only grow, never shrink.
+* This means declining adaptation opportunities are not represented — once
+* adaptation gains are accounted for via tau, they cannot be reversed.
+  p14_yields_gsadapt_ratio_cumulative(t,i) = max(1,pm_yields_gsadapt_ratio_increment(t,i)) * p14_yields_gsadapt_ratio_cumulative(t-1,i); 
   
 );
 
 if(s14_gsadapt2tau = 0 OR s14_use_gsadapt = 0,
   pm_yields_gsadapt_ratio_increment(t,i) = 1;
-  p14_yields_gsadapt_ratio_cummulative(t,i) = 1;
+  p14_yields_gsadapt_ratio_cumulative(t,i) = 1;
 );
+
+*** EOF presolve.gms ***

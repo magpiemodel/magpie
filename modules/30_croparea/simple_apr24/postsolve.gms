@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*** Are Patterns are transferred to next timestep
+*** Area patterns are transferred to next timestep
 pcm_area(j,w,kcr) = vm_area.l(j,kcr,w);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
