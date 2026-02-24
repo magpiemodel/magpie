@@ -58,8 +58,8 @@ p29_country_switch(policy_countries29) = 1;
 pm_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
 p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
 
-* Initialize biodiversity value
-vm_fallow.l(j) = 0;
+* Initialize rough fallow and biodiversity start value
+vm_fallow.l(j) = pm_land_hist("y1995",j,"crop")*0.1;
 vm_bv.l(j,"crop_fallow",potnatveg) = 
   vm_fallow.l(j) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 

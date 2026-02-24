@@ -28,8 +28,11 @@
   q29_cost_cropland(j2) ..
     vm_cost_cropland(j2) =e= 
       v29_cost_treecover_est(j2) + v29_cost_treecover_recur(j2)
-      + v29_fallow_missing(j2) * sum(ct, i29_fallow_penalty(ct))
+      + sum((kcr,w), vm_area(j2,kcr,w)) * sum(ct, i29_fallow_long_penalty(ct))
+      + v29_fallow_short_missing(j2) * sum(ct, i29_fallow_short_penalty(ct))
       + v29_treecover_missing(j2) * sum(ct, i29_treecover_penalty(ct));
+
+
 
 
 *' The carbon stocks of total cropland are calculated as the sum of carbon stocks in 
@@ -63,11 +66,11 @@
 *' The penalty applies to the missing fallow land, i.e. where fallow land 
 *' is lower than a certain fraction of total cropland.
 
-  q29_fallow_min(j2)$(sum(ct, i29_fallow_penalty(ct)) > 0) ..
-    v29_fallow_missing(j2) =g=
-      vm_land(j2,"crop") * sum(ct, i29_fallow_target(ct)) - vm_fallow(j2);
+  q29_fallow_min(j2)$(s29_fallow_max > 0) ..
+    v29_fallow_short_missing(j2) =g=
+      vm_land(j2,"crop") * sum(ct, s29_fallow_short_threshold) - vm_fallow(j2);
 
-  q29_fallow_max(j2) ..
+  q29_fallow_max(j2)$(s29_fallow_max > 0) ..
     vm_fallow(j2) =l=
       vm_land(j2,"crop") * s29_fallow_max;
 

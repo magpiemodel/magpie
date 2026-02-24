@@ -30,8 +30,8 @@ parameters
  pc29_treecover_share(j)                Share of treecover on total cropland (1)
 
  i29_fallow_scenario_fader(t_all)      Fallow land scenario fader (1)
- i29_fallow_target(t)                  Target share for fallow land on total cropland (1)
- i29_fallow_penalty(t)                 Penalty for violation of fallow target (USD17MER per ha)
+ i29_fallow_long_penalty(t)           Penalty for skipping long fallow (USD17MER per ha)
+ i29_fallow_short_penalty(t)           Penalty for also skipping short fallow (USD17MER per ha)
 ;
 
 positive variables
@@ -42,7 +42,7 @@ positive variables
  v29_cost_treecover_est(j)          Establishment cost for cropland tree cover (mio. USD17MER per yr)
  v29_cost_treecover_recur(j)        Recurring cost for cropland tree cover (mio. USD17MER per yr)
  vm_fallow(j)                       Fallow land is temporarily fallow cropland (mio. ha)
- v29_fallow_missing(j)              Missing fallow land towards target (mio. ha)
+ v29_fallow_short_missing(j)        Missing fallow towards short fallow threshold (mio. ha)
 ;
 
 equations
@@ -73,7 +73,7 @@ parameters
  ov29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD17MER per yr)
  ov29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD17MER per yr)
  ov_fallow(t,j,type)                      Fallow land is temporarily fallow cropland (mio. ha)
- ov29_fallow_missing(t,j,type)            Missing fallow land towards target (mio. ha)
+ ov29_fallow_short_missing(t,j,type)      Missing fallow towards short fallow threshold (mio. ha)
  oq29_cropland(t,j,type)                  Total cropland calculation (mio. ha)
  oq29_avl_cropland(t,j,type)              Available cropland constraint (mio. ha)
  oq29_cost_cropland(t,j,type)             Costs and benefits related to agroforestry (mio. USD17MER per yr)
