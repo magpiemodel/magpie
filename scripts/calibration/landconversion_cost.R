@@ -183,8 +183,6 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
     stop("Calibration run infeasible")
   }
 
-
-  
   # we calculate two different divergence measures: divergence of level (cropland and divergence of gradient (cropland expansion)
   calibDivergenceLevel <- getCalibFactor(gdxFile, mode = "level", histData = histData)
   calibDivergenceGradient <- getCalibFactor(gdxFile, mode = "gradient", histData = histData)
@@ -207,15 +205,17 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
   } else {
     cat(">>> First iteration - initializing calibration factors (cost=1 for expanding countries, cost=2.5 for contracting, reward=0)\n")
     oldCalib <- new.magpie(cells_and_regions = getCells(calibDivergence), years = getYears(calibDivergence), names = c("cost", "reward"), fill = NA)
-    oldCalib[,,"cost"] <- (expandHist(getValData(histData = histData, gdxFile = gdxFile)) < 0) * (costMax - 1) + 1
+    oldCalib[,,"cost"] <- 1
     oldCalib[,,"reward"] <- 0
   }
 
   ### use first steps to calibrate stronger, such that calibration factors can also achieve low/high levels
-  if(calibrationStep <= 8) {
+  if(calibrationStep <= 5) {
     reinforcement <- 10
+  } else if (calibrationStep <= 8) {
+    reinforcement <- 5
   } else if (calibrationStep <= 11) {
-    reinforcement <- 5 
+    reinforcement <- 2
   } else {
     reinforcement <- 1
   } 
