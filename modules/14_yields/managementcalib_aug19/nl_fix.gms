@@ -7,5 +7,5 @@
 
 * ### nl_fix ###
 
-vm_yld.fx(j,kcr,w) = sum(ct,i14_yields_calib(ct,j,kcr,w)) * sum((cell(i,j), supreg(h,i)),vm_tau.l(h, "crop") / fm_tau1995(h));
-vm_yld.fx(j,"pasture",w) = sum(ct,(i14_yields_calib(ct,j,"pasture",w)) * sum(cell(i,j), pm_past_mngmnt_factor(ct,i))) * (1 + s14_yld_past_switch * (sum((cell(i,j), supreg(h,i)), pcm_tau(h, "crop") / fm_tau1995(h)) - 1));
+vm_yld.fx(j,kcr,w) = sum(ct,i14_yields_calib(ct,j,kcr,w)) * vm_tau.l(j, "crop") / sum((cell(i,j), supreg(h,i)), fm_tau1995(h));
+vm_yld.fx(j,"pasture",w) = sum(ct,(i14_yields_calib(ct,j,"pasture",w)) * sum(cell(i,j), pm_past_mngmnt_factor(ct,i))) * (1 + s14_yld_past_switch * (pcm_tau(j, "crop") / sum((cell(i,j), supreg(h,i)), fm_tau1995(h)) - 1));
