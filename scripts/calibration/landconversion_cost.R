@@ -222,7 +222,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
   
   cat(">>> Calib factors are adjusted where needed\n")
   calibFactorCost <- setNames(oldCalib[, , "cost"], NULL) * calib_correction ^ reinforcement
-  calibFactorReward <- setNames(oldCalib[, , "reward"], NULL) + (calib_correction - 1) * reinforcementn / 5
+  calibFactorReward <- setNames(oldCalib[, , "reward"], NULL) + (calib_correction - 1) * reinforcement / 5
   # no rewards in case that validation data shows no contraction
   calibFactorReward[expandHist(getValData(histData = histData, gdxFile = gdxFile)) >= 0] <- 0
   calibFactorReward[calibFactorReward < 0] <- 0
