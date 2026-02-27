@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **60_bioenergy** set `i60_res_2ndgenBE_dem` also for historical period to `off` if `c60_res_2ndgenBE_dem` is set to `off` (do not apply scenario harmonization on it)
 - **renv/activate.R** updated to version 1.1.7
 - **scripts/start** updated biomass collection start script; renamed from `calc_residuePot2ndBE.R` to `generate_biomassForEnergyData.R`
+- scripts/calibration/landconversion_cost.R: Simplified code, code improved to speed up and improve convergence.
+- **config** New default switched from calibrating to FAO to LanduseInitialisation. Update of calibration parameters and removal of lowpass filter setting in line with simplified script.
 
 ### added
 -
@@ -28,7 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/start_functions.R** added all extra `cfg` arguments in `start_run()` to the config check call
 - **32_forestry** bugfix limit for endogenous re/afforestation in historical time steps
 - **highres.R** temporary f32_max_aff_area.cs4 is now deleted in case of error
-
+- **scripts/calibration/landconversion_cost.R**: Bugfixes, see https://github.com/magpiemodel/magpie/pull/858
 
 ## [4.13.0] - 2025-10-23
 
