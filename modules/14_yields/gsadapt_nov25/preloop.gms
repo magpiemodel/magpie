@@ -148,7 +148,7 @@ if ((s14_calib_ir2rf = 1),
                                   i14_yields_calib_combined(t,j,yldtype,knbe14,w);
 );
 
-* Set yields to gsadapt values (pasture yields are not effected by growing period adaption)
+* Set yields to gsadapt values (pasture yields are not affected by growing period adaption)
 
 if(s14_use_gsadapt = 1,
     pm_yields_semi_calib(j,knbe14,w) = i14_yields_calib_combined("y1995",j,"gsadapt",knbe14,w);

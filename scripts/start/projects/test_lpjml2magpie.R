@@ -17,8 +17,8 @@ source("scripts/start_functions.R")
 
 # source default configuration
 source("config/default.cfg")
-title <- "l2m_feb26"
-cfg$recalibrate_landconversion_cost <- "ifneeded" #### Should I change this to TRUE?
+title <- "l2m_mar26"
+cfg$recalibrate_landconversion_cost <- TRUE
 
 ##############################################
 ### Current default (i.e., old lpjml data) ###
