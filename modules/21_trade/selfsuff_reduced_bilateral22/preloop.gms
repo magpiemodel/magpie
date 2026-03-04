@@ -18,13 +18,67 @@ i21_trade_margin(i_ex,i_im,k_trade)$(i21_trade_margin(i_ex,i_im,k_trade) < 1e-6)
 i21_import_supply_historical(i_ex,i_im,t_all,k_trade) = f21_import_supply_historical(i_ex,i_im,t_all,k_trade);
 
 *** Apply scenario adjustments if switch is on
-*** The diff column from f21_trade_scenario_adjustments is added to i21_import_supply_historical
-*** for all time periods after sm_fix_SSP2
+*** Adjustments are hardcoded here and written into f21_trade_scenario_adjustments
+*** which is initialized to 0 from the input file. Applied for all t >= s21_trade_adj_startyear.
 if (s21_trade_scenario_adjustments = 1,
-  loop(t_all$(m_year(t_all) > sm_fix_SSP2),
-    i21_import_supply_historical(i_ex,i_im,t_all,k_trade)$(f21_trade_scenario_adjustments(i_ex,i_im,k_trade)) = 
-      i21_import_supply_historical(i_ex,i_im,t_all,k_trade) + f21_trade_scenario_adjustments(i_ex,i_im,k_trade);
-  );
+
+*** Soybean adjustments
+  f21_trade_scenario_adjustments("USA","CHA",t_all,"soybean")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.2;
+  f21_trade_scenario_adjustments("LAM","CHA",t_all,"soybean")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.4;
+  f21_trade_scenario_adjustments("IND","CHA",t_all,"soybean")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.2;
+  f21_trade_scenario_adjustments("SSA","CHA",t_all,"soybean")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.2;
+
+*** Maize adjustments
+  f21_trade_scenario_adjustments("USA","MEA",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
+  f21_trade_scenario_adjustments("USA","OAS",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
+  f21_trade_scenario_adjustments("REF","EUR",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("REF","MEA",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("USA","SSA",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
+
+*** Wheat (tece) adjustments
+  f21_trade_scenario_adjustments("REF","MEA",t_all,"tece")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("REF","NEU",t_all,"tece")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.2;
+  f21_trade_scenario_adjustments("USA","MEA",t_all,"tece")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
+
+*** Oilcakes adjustments
+  f21_trade_scenario_adjustments("LAM","EUR",t_all,"oilcakes")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("REF","EUR",t_all,"oilcakes")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
+
+*** Sugar adjustments
+  f21_trade_scenario_adjustments("LAM","EUR",t_all,"sugar")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
+  f21_trade_scenario_adjustments("LAM","CHA",t_all,"sugar")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("OAS","CHA",t_all,"sugar")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.05;
+  f21_trade_scenario_adjustments("IND","CHA",t_all,"sugar")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.05;
+
+*** Other crop adjustments
+  f21_trade_scenario_adjustments("USA","CHA",t_all,"trce")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.3;
+  f21_trade_scenario_adjustments("REF","NEU",t_all,"sunflower")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("CAZ","CHA",t_all,"puls_pro")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.2;
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"groundnut")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.2;
+
+*** Livestock milk adjustments
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
+  f21_trade_scenario_adjustments("EUR","EUR",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("CAZ","CHA",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("EUR","CHA",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
+  f21_trade_scenario_adjustments("IND","CHA",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
+
+*** Livestock ruminant meat adjustments
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_rum")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
+  f21_trade_scenario_adjustments("EUR","EUR",t_all,"livst_rum")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
+  f21_trade_scenario_adjustments("LAM","CHA",t_all,"livst_rum")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
+
+*** Livestock chicken adjustments
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_chick")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.05;
+
+*** Livestock pig adjustments
+  f21_trade_scenario_adjustments("EUR","CHA",t_all,"livst_pig")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
+
+*** Now apply adjustments to import supply historical
+  i21_import_supply_historical(i_ex,i_im,t_all,k_trade) =
+    i21_import_supply_historical(i_ex,i_im,t_all,k_trade) + f21_trade_scenario_adjustments(i_ex,i_im,t_all,k_trade);
+
 );
 
 
