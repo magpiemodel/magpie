@@ -12,7 +12,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **13_tc** the interface variable `vm_tau` now represents a linear combination of tau on regular cropland (`v13_tau_core`) and tau on cropland in conservation priority areas (`v13_tau_consv`). Per default values in `vm_tau` are equal to `v13_tau_core`.
 - **inputdata** updated input data to rev4.128, including fix for mismatch between historic urban land in LUH3 and projected future urban land, which is still based on LUH2
 - **inputdata** updated input data to rev4.129, which now includes new protected area data for China not covered in the WDPA data base.
+- **inputdata** updated input data to rev4.130, where product attribute `ge` for `wood` and `woodfuel` is changed to 18 (instead of 15.36) to be in line with crop type values for `betr` and `begr`
 - **60_bioenergy** set `i60_res_2ndgenBE_dem` also for historical period to `off` if `c60_res_2ndgenBE_dem` is set to `off` (do not apply scenario harmonization on it)
+- **renv/activate.R** updated to version 1.1.7
+- **scripts/start** updated biomass collection start script; renamed from `calc_residuePot2ndBE.R` to `generate_biomassForEnergyData.R`
+- scripts/calibration/landconversion_cost.R: Simplified code, code improved to speed up and improve convergence.
+- **config** New default switched from calibrating to FAO to LanduseInitialisation. Update of calibration parameters and removal of lowpass filter setting in line with simplified script.
 
 ### added
 -
@@ -25,7 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/start_functions.R** added all extra `cfg` arguments in `start_run()` to the config check call
 - **32_forestry** bugfix limit for endogenous re/afforestation in historical time steps
 - **highres.R** temporary f32_max_aff_area.cs4 is now deleted in case of error
-
+- **scripts/calibration/landconversion_cost.R**: Bugfixes, see https://github.com/magpiemodel/magpie/pull/858
 
 ## [4.13.0] - 2025-10-23
 

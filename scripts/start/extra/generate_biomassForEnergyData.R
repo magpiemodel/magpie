@@ -6,29 +6,29 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Calculate residue potential for 2nd generation bioenergy for multiple SSP/NPi2025 scenarios
+# description: Calculate biomass potential for energy use 
+#              (wood fuel, crop residues, manure) for multiple 
+#              SSP/NPi2025 scenarios
 # position: 5
 # ----------------------------------------------------------
 
-## Load lucode2 and gms to use setScenario later
 library(lucode2)
 library(gms)
 
-# Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
-
-# Source default cfg. This loads the object "cfg" in R environment
 source("config/default.cfg")
 
-#download default input data
 download_and_update(cfg)
 
-cfg$info$flag <- "residuePot" 
+cfg$info$flag <- "biomassEnergy"
 
-# support function to create standardized title
-.title <- function(cfg, ...) return(paste(cfg$info$flag, sep = "_", ...))
+# Read MAgPIE version from CITATION.cff (machine-readable source)
+magpieVersion <- citation::read_cff("CITATION.cff")$version
 
-# Define scenarios and their specific parameters, then iterate over them
+.title <- function(cfg, version = magpieVersion, scenario) {
+  return(paste(cfg$info$flag, version, scenario, sep = "_"))
+}
+
 scenarios <- list(
     list(
         name        = "SSP1",
@@ -55,7 +55,7 @@ scenarios <- list(
         name        = "SSP4",
         titleSuffix = "NPi2025",
         scen        = c("SSP4", "NPI", "nocc_hist"),
-        # Note: pollString and bioString intentionally match original SSP4 block (SSP2 strings)
+        # Note: SSP2 default assumptions used here to fill missing SSP4 scenario info
         pollString  = "R34M410-SSP2-NPi2025",
         bioString   = "R34M410-SSP2-NPi2025"
     ),
@@ -76,7 +76,7 @@ scenarios <- list(
 )
 
 for (s in scenarios) {
-    cfg$title <- .title(cfg, paste(s$name, s$titleSuffix, sep = "-"))
+    cfg$title <- .title(cfg, scenario = paste(s$name, s$titleSuffix, sep = "-"))
     cfg <- setScenario(cfg, s$scen)
     cfg$gms$c60_res_2ndgenBE_dem    <- "off"
     cfg$gms$c56_mute_ghgprices_until <- "y2150"
