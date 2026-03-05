@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/start** updated biomass collection start script; renamed from `calc_residuePot2ndBE.R` to `generate_biomassForEnergyData.R`
 - scripts/calibration/landconversion_cost.R: Simplified code, code improved to speed up and improve convergence.
 - **config** New default switched from calibrating to FAO to LanduseInitialisation. Update of calibration parameters and removal of lowpass filter setting in line with simplified script.
+- **21_trade** New implementation of bilateral trade realization, based on import-supply-ratio instead of redistributing bilateral flows in a unconstrained manner.
 
 ### added
 -
