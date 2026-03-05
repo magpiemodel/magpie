@@ -34,8 +34,11 @@
 *' and assigned to the exporting region.
 *'
 *' Scenario-specific adjustments to individual bilateral ratios can be applied
-*' via `f21_trade_scenario_adjustments` (controlled by switch
-*' `s21_trade_scenario_adjustments`), enabling targeted policy experiments such
+*' via `f21_trade_scenario_adjustments` (controlled by `c21_trade_scenario`),
+*' selecting a named geopolitical scenario (USAex, CHAdom, EURex) or "off".
+*' When a scenario is selected, hardcoded additive perturbations are written
+*' into the zero-initialized adjustment table and applied to the historical
+*' ratios from sm_fix_SSP2 onward, enabling targeted policy experiments such
 *' as reducing a country's import dependence on a specific trading partner.
 *'
 *' The standard deviation bounds open from the simulation year (sm_fix_SSP2) onwards,
@@ -47,10 +50,12 @@
 *' after which the window remains fixed at the maximum observed historical standard deviation,
 *' allowing the flexibility window to evolve over time.
 *'
-*' The scenario adjustement switch upon activation applies exogenous additive adjustments
-*' to the bilateral import supply ratios for specific importer-exporter-product combinations,
-* allowing for targeted policy experiments such as reducing a country's import dependence on a
-*' specific trading partner. The adjustments are applied on top of the historical ratio and any scenario scaling factor, and are bounded by the same standard deviation window.
+*' The scenario adjustment switch (`c21_trade_scenario`) selects a named geopolitical
+*' trade scenario. Available scenarios are: USAex (USA export expansion), CHAdom
+*' (China domestication/import reduction), and EURex (EU trade restructuring).
+*' When set to "off", the zero-initialized adjustment table has no effect.
+*' The adjustments are applied on top of the historical ratio and any scenario
+*' scaling factor, and are bounded by the same standard deviation window.
 *' Non-tradable commodities (fodder, pasture, residues, bioenergy crops) are
 *' constrained to be produced within the super-region where they are consumed.
 *' A global production constraint ensures that total world production covers

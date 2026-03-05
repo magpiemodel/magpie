@@ -8,6 +8,9 @@
 $setglobal c21_trade_liberalization  l909090r808080
 *   options are "regionalized" and "globalized" and "fragmented"
 
+$setglobal c21_trade_scenario  off
+*   options: off, USAex, CHAdom, EURex
+
 sets
   k_import21(k_trade) Commodities that can have additional imports to maintain feasibility
                     / wood, woodfuel /
@@ -24,8 +27,6 @@ scalars
   s21_stddev_lib_factor       Post-calibration multiplicative factor on the flexibility window width (1) / 1 /
   s21_cost_import             Penalty cost for additional forestry imports to maintain feasibility (USD17MER per tDM) / 1500 /
   s21_min_trade_margin_forestry Minimum transport margin for forestry products to prevent unrealistic trade (USD17MER per tDM) / 62 /
-  s21_trade_scenario_adjustments Switch to apply exogenous scenario adjustments to bilateral import supply ratios (0=off 1=on) / 1 /
-  s21_trade_adj_startyear         Year from which scenario adjustments take effect (year) / 2030 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)

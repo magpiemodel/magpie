@@ -26,72 +26,7 @@ i21_trade_margin(i_ex,i_im,k_trade)$(i21_trade_margin(i_ex,i_im,k_trade) < 1e-6)
 ** imported from that particular exporter).
 i21_import_supply_historical(i_ex,i_im,t_all,k_trade) = f21_import_supply_historical(i_ex,i_im,t_all,k_trade);
 
-** Optionally apply exogenous scenario adjustments to specific bilateral
-** ratios. These are additive perturbations (positive = increase imports from
-** that exporter, negative = decrease). Adjustments take effect from
-** s21_trade_adj_startyear onward. The hardcoded values below represent
-** example policy scenarios (e.g. reducing China's soybean dependence on
-** USA/LAM, shifting maize trade toward USA, etc.).
-if (s21_trade_scenario_adjustments = 1,
 
-** Soybean adjustments
-  f21_trade_scenario_adjustments("USA","CHA",t_all,"soybean")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.2;
-  f21_trade_scenario_adjustments("LAM","CHA",t_all,"soybean")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.4;
-  f21_trade_scenario_adjustments("IND","CHA",t_all,"soybean")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.2;
-  f21_trade_scenario_adjustments("SSA","CHA",t_all,"soybean")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.2;
-
-** Maize adjustments
-  f21_trade_scenario_adjustments("USA","MEA",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
-  f21_trade_scenario_adjustments("USA","OAS",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
-  f21_trade_scenario_adjustments("USA","EUR",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
-  f21_trade_scenario_adjustments("REF","EUR",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("REF","MEA",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("USA","SSA",t_all,"maiz")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
-
-** Wheat (tece) adjustments
-  f21_trade_scenario_adjustments("REF","MEA",t_all,"tece")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("REF","NEU",t_all,"tece")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.2;
-  f21_trade_scenario_adjustments("USA","MEA",t_all,"tece")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
-
-** Oilcakes adjustments
-  f21_trade_scenario_adjustments("LAM","EUR",t_all,"oilcakes")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("REF","EUR",t_all,"oilcakes")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
-
-** Sugar adjustments
-  f21_trade_scenario_adjustments("LAM","EUR",t_all,"sugar")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
-  f21_trade_scenario_adjustments("LAM","CHA",t_all,"sugar")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("OAS","CHA",t_all,"sugar")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.05;
-  f21_trade_scenario_adjustments("IND","CHA",t_all,"sugar")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.05;
-
-** Other crop adjustments
-  f21_trade_scenario_adjustments("USA","CHA",t_all,"trce")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.3;
-  f21_trade_scenario_adjustments("REF","NEU",t_all,"sunflower")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("CAZ","CHA",t_all,"puls_pro")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.2;
-  f21_trade_scenario_adjustments("USA","EUR",t_all,"groundnut")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.2;
-
-** Livestock milk adjustments
-  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
-  f21_trade_scenario_adjustments("EUR","EUR",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("CAZ","CHA",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("EUR","CHA",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
-  f21_trade_scenario_adjustments("IND","CHA",t_all,"livst_milk")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
-
-** Livestock ruminant meat adjustments
-  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_rum")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.1;
-  f21_trade_scenario_adjustments("EUR","EUR",t_all,"livst_rum")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.1;
-  f21_trade_scenario_adjustments("LAM","CHA",t_all,"livst_rum")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
-
-** Livestock chicken adjustments
-  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_chick")$(m_year(t_all) >= s21_trade_adj_startyear) = 0.05;
-
-** Livestock pig adjustments
-  f21_trade_scenario_adjustments("EUR","CHA",t_all,"livst_pig")$(m_year(t_all) >= s21_trade_adj_startyear) = -0.05;
-
-** Now apply adjustments to import supply historical
-  i21_import_supply_historical(i_ex,i_im,t_all,k_trade) =
-    i21_import_supply_historical(i_ex,i_im,t_all,k_trade) + f21_trade_scenario_adjustments(i_ex,i_im,t_all,k_trade);
-
-);
 ** FLEXIBILITY WINDOW (STANDARD DEVIATION BOUNDS)
 ** The flexibility window around historical import supply ratios is defined
 ** by the observed standard deviation of these ratios. Three rolling windows
@@ -149,6 +84,107 @@ if ((s21_trade_tariff=1),
   i21_import_supply_scenario(t_all) = 1;
 
  m_linear_time_interpol(i21_import_supply_scenario,sm_fix_SSP2,s21_import_supply_scenario_targetyear,1,s21_import_supply_scenario);
+
+** SCENARIO ADJUSTMENTS TO BILATERAL IMPORT SUPPLY RATIOS
+** Optionally apply exogenous scenario adjustments to specific bilateral
+** ratios. Controlled by c21_trade_scenario (off, USAex, CHAdom, EURex).
+** Adjustments are additive perturbations written into the zero-initialized
+** f21_trade_scenario_adjustments table and applied to i21_import_supply_historical
+** for time steps after sm_fix_SSP2.
+
+$ifthen "%c21_trade_scenario%" == "USAex"
+** USA export expansion: USA increases exports of key commodities to
+** major importing regions.
+
+** Soybean and crop adjustments
+  f21_trade_scenario_adjustments("USA","CHA",t_all,"soybean") = 0.15;
+  f21_trade_scenario_adjustments("USA","OAS",t_all,"maiz") = 0.15;
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"maiz") = 0.15;
+  f21_trade_scenario_adjustments("USA","SSA",t_all,"maiz") = 0.15;
+  f21_trade_scenario_adjustments("USA","MEA",t_all,"tece") = 0.15;
+  f21_trade_scenario_adjustments("USA","CHA",t_all,"trce") = 0.15;
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"groundnut") = 0.15;
+
+** Livestock adjustments
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_milk") = 0.10;
+  f21_trade_scenario_adjustments("USA","OAS",t_all,"livst_milk") = 0.10;
+  f21_trade_scenario_adjustments("USA","LAM",t_all,"livst_milk") = 0.10;
+  f21_trade_scenario_adjustments("USA","JPN",t_all,"livst_milk") = 0.10;
+  f21_trade_scenario_adjustments("USA","CAZ",t_all,"livst_milk") = 0.10;
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_rum") = 0.10;
+  f21_trade_scenario_adjustments("USA","MEA",t_all,"livst_rum") = 0.10;
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"livst_chick") = 0.10;
+  f21_trade_scenario_adjustments("USA","OAS",t_all,"livst_chick") = 0.10;
+  f21_trade_scenario_adjustments("USA","SSA",t_all,"livst_chick") = 0.10;
+  f21_trade_scenario_adjustments("USA","LAM",t_all,"livst_pig") = 0.10;
+  f21_trade_scenario_adjustments("USA","JPN",t_all,"livst_pig") = 0.10;
+  f21_trade_scenario_adjustments("USA","CAZ",t_all,"livst_pig") = 0.10;
+  f21_trade_scenario_adjustments("USA","CHA",t_all,"livst_pig") = 0.10;
+
+$elseif "%c21_trade_scenario%" == "CHAdom"
+** China domestication: China reduces import dependence on major
+** exporters, diversifying or reducing key bilateral flows.
+
+** Soybean adjustments
+  f21_trade_scenario_adjustments("USA","CHA",t_all,"soybean") = -0.15;
+  f21_trade_scenario_adjustments("LAM","CHA",t_all,"soybean") = -0.3;
+  f21_trade_scenario_adjustments("IND","CHA",t_all,"soybean") = 0.10;
+  f21_trade_scenario_adjustments("SSA","CHA",t_all,"soybean") = 0.10;
+
+** Sugar adjustments
+  f21_trade_scenario_adjustments("LAM","CHA",t_all,"sugar") = -0.10;
+  f21_trade_scenario_adjustments("OAS","CHA",t_all,"sugar") = 0.05;
+  f21_trade_scenario_adjustments("IND","CHA",t_all,"sugar") = 0.05;
+
+** Other crop adjustments
+  f21_trade_scenario_adjustments("USA","CHA",t_all,"trce") = -0.3;
+  f21_trade_scenario_adjustments("CAZ","CHA",t_all,"puls_pro") = -0.3;
+  f21_trade_scenario_adjustments("CAZ","CHA",t_all,"rapeseed") = -0.1;
+  f21_trade_scenario_adjustments("SSA","CHA",t_all,"rapeseed") = 0.05;
+  f21_trade_scenario_adjustments("OAS","CHA",t_all,"cassav_sp") = -0.1;
+  f21_trade_scenario_adjustments("LAM","CHA",t_all,"cassav_sp") = 0.05;
+
+** Livestock adjustments
+  f21_trade_scenario_adjustments("CAZ","CHA",t_all,"livst_milk") = -0.15;
+  f21_trade_scenario_adjustments("EUR","CHA",t_all,"livst_milk") = -0.1;
+  f21_trade_scenario_adjustments("EUR","USA",t_all,"livst_milk") = -0.03;
+  f21_trade_scenario_adjustments("CAZ","CHA",t_all,"livst_rum") = -0.05;
+  f21_trade_scenario_adjustments("LAM","CHA",t_all,"livst_rum") = -0.05;
+  f21_trade_scenario_adjustments("OAS","CHA",t_all,"livst_rum") = -0.03;
+  f21_trade_scenario_adjustments("EUR","CHA",t_all,"livst_pig") = -0.05;
+
+$elseif "%c21_trade_scenario%" == "EURex"
+** EU trade restructuring: Shifts in European and REF region trade
+** patterns, reducing REF exports and adjusting EU trade flows.
+
+** Wheat (tece) adjustments
+  f21_trade_scenario_adjustments("REF","MEA",t_all,"tece") = -0.1;
+  f21_trade_scenario_adjustments("EUR","MEA",t_all,"tece") = 0.1;
+  f21_trade_scenario_adjustments("REF","NEU",t_all,"tece") = -0.2;
+
+** Oilcakes and sugar adjustments
+  f21_trade_scenario_adjustments("LAM","EUR",t_all,"oilcakes") = -0.15;
+  f21_trade_scenario_adjustments("LAM","EUR",t_all,"sugar") = -0.05;
+
+** Other crop adjustments
+  f21_trade_scenario_adjustments("REF","NEU",t_all,"sunflower") = -0.03;
+  f21_trade_scenario_adjustments("USA","EUR",t_all,"groundnut") = -0.2;
+
+** Livestock adjustments
+  f21_trade_scenario_adjustments("EUR","CHA",t_all,"livst_pig") = 0.12;
+
+$endif
+
+** Apply scenario adjustments to import supply historical for future periods.
+** When c21_trade_scenario is "off", f21_trade_scenario_adjustments remains
+** all zeros so this addition has no effect.
+  loop(t_all$(m_year(t_all) > sm_fix_SSP2),
+    i21_import_supply_historical(i_ex,i_im,t_all,k_trade) =
+      i21_import_supply_historical(i_ex,i_im,t_all,k_trade)
+      + f21_trade_scenario_adjustments(i_ex,i_im,t_all,k_trade);
+  );
+
+
 
 ** Enforce minimum transport margin for forestry products to prevent
 ** unrealistically cheap long-distance wood trade.
