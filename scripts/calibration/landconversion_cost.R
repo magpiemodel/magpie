@@ -158,7 +158,7 @@ timeSeriesCost <- function(calibFactor) {
   out2050 <- setYears(calibFactor[,"y2015",],NULL)
   out2050[out2050 < 1] <- 1
   out2[, seq(2050, 2150, by = 5), ] <- out2050
-  out2 <- time_interpolate(out2, seq(2025, 2050, by = 5), integrate_interpolated_years = T)
+  out2 <- time_interpolate(out2, seq(2020, 2050, by = 5), integrate_interpolated_years = T)
   return(out2)
 }
 
