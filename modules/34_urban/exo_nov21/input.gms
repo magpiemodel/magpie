@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c34_urban_scenario  SSP2
+$setglobal c34_urban_scenario  SSP1
 *   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5"
 
 

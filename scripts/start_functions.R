@@ -484,10 +484,9 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
     #if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
     cat("Starting land conversion cost calibration factor calculation!\n")
     source("scripts/calibration/landconversion_cost.R")
-    calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
+      calibrate_landconversion(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
                      restart = cfg$restart_landconversion_cost,
                      calib_accuracy = cfg$calib_accuracy_landconversion_cost,
-                     lowpass_filter = cfg$lowpass_filter_landconversion_cost,
                      cost_max = cfg$cost_calib_max_landconversion_cost,
                      cost_min = cfg$cost_calib_min_landconversion_cost,
                      calib_file = land_calib_file,
@@ -495,7 +494,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
                      logoption = 3,
                      debug = cfg$debug,
                      best_calib = cfg$best_calib_landconversion_cost,
-                     histData = cfg$cost_calib_hist_data)
+                     histData = cfg$cost_calib_hist_data,
+                     levelGradientMix = cfg$level_gradient_mix)
     cat("Land conversion cost calibration factor calculated!\n")
   }
 

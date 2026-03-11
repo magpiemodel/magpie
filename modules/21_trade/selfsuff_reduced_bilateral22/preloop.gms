@@ -22,18 +22,21 @@ i21_import_supply_historical(i_ex,i_im,t_all,k_trade) = f21_import_supply_histor
 *** for all time periods after sm_fix_SSP2
 if (s21_trade_scenario_adjustments = 1,
   loop(t_all$(m_year(t_all) > sm_fix_SSP2),
-    i21_import_supply_historical(i_ex,i_im,t_all,k_trade)$(f21_trade_scenario_adjustments(i_ex,i_im,k_trade,"diff")) = 
-      i21_import_supply_historical(i_ex,i_im,t_all,k_trade) + f21_trade_scenario_adjustments(i_ex,i_im,k_trade,"diff");
+    i21_import_supply_historical(i_ex,i_im,t_all,k_trade)$(f21_trade_scenario_adjustments(i_ex,i_im,k_trade,"%c21_bilat_trade_scen%")) = 
+      i21_import_supply_historical(i_ex,i_im,t_all,k_trade) + f21_trade_scenario_adjustments(i_ex,i_im,k_trade,"%c21_bilat_trade_scen%");
   );
 );
 
 
+
   loop(t_all,
-     i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 5) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"minsd5");
-     i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 10) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"minsd10");
-    i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all)  >= sm_fix_SSP2 + 15) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"minsd15");
+     i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 5) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd5");
+     i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 10) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd10");
+    i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all)  >= sm_fix_SSP2 + 15) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd15");
   );
 
+*** Remove intra-regional trade standard deviations (e.g. EUR.EUR)
+  i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(sameas(i_ex,i_im)) = 0;
 
 
 if ((s21_trade_tariff=1),

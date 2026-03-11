@@ -63,7 +63,7 @@ set    kfo_rd(kfo) Ruminant meat and dairy food products / livst_rum /;
 $offMulti
 
 scalars
-s15_elastic_demand                  Elastic demand switch (1=elastic 0=exogenous) (1) / 0 /
+s15_elastic_demand                  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /
 s15_tax_recycling                   Tax recycling multiplier (1=distribution neutral) (1) / 1 / 
 s15_calibrate                       Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
@@ -71,9 +71,9 @@ s15_maxiter                         Scalar defining maximum number of iterations
 s15_convergence                     Convergence criterion (1) / 0.005 /
 s15_convergence_partstep            Share of last iteration for convergence (1=only current iteration 0.5=half last iteration) / 0.5 /
 * maximum relative per-capita gdp difference within a region between two iteratios
-s15_exo_waste                       Switch for transition towards exogenous food waste scenario (1)  / 0 /
-s15_waste_scen                      Scenario target for the ratio between food demand and intake (1)  / 1.2 /
-s15_exo_diet                        Switch for transition towards exogenous diet scenario (1)  / 0 /
+s15_exo_waste                       Switch for transition towards exogenous food waste scenario (1)  / 1 /
+s15_waste_scen                      Scenario target for the ratio between food demand and intake (1)  / 1.25 /
+s15_exo_diet                        Switch for transition towards exogenous diet scenario (1)  / 3 /
 * The following switches only become active when s15_exo_diet is active
 * They define which components of the diet should become active
 * If the switch is set to 1,the exogenous diets are activated.
@@ -87,7 +87,7 @@ s15_exo_roots                       Exogenous EAT Lancet root target on (1) / 1 
 s15_exo_pulses                      Exogenous pulses target on  (1) / 1 /
 s15_exo_sugar                       Exogenous sugar target on  (1) / 1 /
 s15_exo_oils                        Exogenous oils (1) / 1 /
-s15_exo_brans                       Exogenous brans (1) / 0 /
+s15_exo_brans                       Exogenous brans (1) / 1 /
 s15_exo_scp                         Exogenous microbial protein target on  (1) / 1 /
 * The EAT-Lancet diet only allows for added sugars, but does not include processed food or
 * alcohol. Via 's15_alc_scen' a maximum target for alcohol consumption can be defined.
@@ -109,7 +109,7 @@ s15_rumdairy_scp_substitution       Ruminant meat and dairy substitution with SC
 s15_livescen_target                 Switch for livestock food calorie supply target (1) / 0 /
 s15_exo_foodscen_functional_form    Switch for functional form of exogenous food scenario fader (1) / 1 /
 s15_exo_foodscen_start              Food substitution start year        / 2025 /
-s15_exo_foodscen_target             Food substitution target year       / 2050 /
+s15_exo_foodscen_target             Food substitution target year       / 2070 /
 s15_exo_foodscen_convergence        Convergence to exogenous food scenario (1) / 1 /
 s15_scp_supplement_fat_meat         Switch for supplemental fat needed as ingredient for scp-based meat alternatives (1) / 0 /
 ;

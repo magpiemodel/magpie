@@ -9,10 +9,10 @@ $setglobal c29_marginal_land  q33_marginal
 * options: all_marginal, q33_marginal, no_marginal
 
 scalars
- s29_snv_shr                     Share of available cropland that is witheld for other land cover types (1) / 0 /
+ s29_snv_shr                     Share of available cropland that is witheld for other land cover types (1) / 0.2 /
  s29_snv_shr_noselect            Share of available cropland that is witheld for other land cover types (1) / 0 /
  s29_snv_scenario_start          SNV scenario start year       / 2025 /
- s29_snv_scenario_target         SNV scenario target year      / 2050 /
+ s29_snv_scenario_target         SNV scenario target year      / 2070 /
  s29_snv_relocation_data_x1      First reference value in SNV target cropland data (1) / 0.2 /
  s29_snv_relocation_data_x2      Second reference value in SNV target cropland data (1) / 0.5 /
 ;

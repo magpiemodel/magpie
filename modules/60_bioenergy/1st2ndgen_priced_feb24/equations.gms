@@ -60,7 +60,7 @@ q60_bioenergy_reg(i2).. sum(kbe60, v60_2ndgen_bioenergy_dem_dedicated(i2,kbe60))
 
 q60_res_2ndgenBE(i2) ..
   sum(kres, v60_2ndgen_bioenergy_dem_residues(i2,kres))
-  =n=
+  =g=
   sum(ct,i60_res_2ndgenBE_dem(ct,i2));
 
 *' Finally, an incentive is provided for the production of 1st and 2nd generation

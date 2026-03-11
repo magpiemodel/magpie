@@ -4,9 +4,9 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
-$setglobal c32_aff_mask  noboreal
+$setglobal c32_aff_mask  onlytropical
 * options: unrestricted, noboreal, onlytropical
-$setglobal c32_aff_policy  npi
+$setglobal c32_aff_policy  ndc
 * options: none, npi, ndc
 $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
@@ -30,7 +30,7 @@ scalars
   s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution / 1 /
   s32_price                       Price for timber (USD17MER)      / 55 /
   s32_free_land_cost              Penalty for technial area balance term (USD17MER per ha) / 1e+06 /
-  s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
+  s32_max_aff_area                Maximum total global afforestation (mio. ha)    / 700 /
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
   s32_tcre_local                  Switch for local (1) or global (0) TRCE factors (1) / 1 /
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /

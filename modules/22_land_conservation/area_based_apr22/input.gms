@@ -7,7 +7,7 @@
 
 $setglobal c22_base_protect  WDPA
 $setglobal c22_base_protect_noselect  WDPA
-$setglobal c22_protect_scenario  none
+$setglobal c22_protect_scenario  BH
 $setglobal c22_protect_scenario_noselect  none
 
 scalars

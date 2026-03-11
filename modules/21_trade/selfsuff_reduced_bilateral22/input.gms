@@ -5,8 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c21_trade_liberalization  l909090r808080
+$setglobal c21_trade_liberalization  l908080r807070
 *   options are "regionalized" and "globalized" and "fragmented"
+
+$setglobal c21_bilat_trade_scen  USAex
+*options: USAex, CHAdom, EURex
 
 sets
   k_import21(k_trade) Commodities that can have additional imports to maintain feasibility
@@ -19,12 +22,12 @@ scalars
   s21_trade_tariff_startyear  Year to start fading out trade tariffs                / 2025 /
   s21_trade_tariff_targetyear Year to finish fading out trade tariffs              / 2050 /
   s21_tariff_factor           Multiplicative factor on the trade tariff                      / 1 /
-  s21_import_supply_scenario  Multiplicative factor on the line                     / 1 /
+  s21_import_supply_scenario  Multiplicative factor on the line                     / 0.5 /
   s21_import_supply_scenario_targetyear Target year for fade in                    / 2050 /
-  s21_stddev_lib_factor       Multplicative factor on the window                     / 1 /
+  s21_stddev_lib_factor       Multplicative factor on the window                     / 2 /
   s21_cost_import             Cost for additional imports to maintain feasibility (USD17MER per tDM) / 1500 /
   s21_min_trade_margin_forestry Minimum trade margin for forestry products (USD17MER per tDM) / 62 /
-  s21_trade_scenario_adjustments Switch to apply scenario adjustments to import supply (0=off 1=on) / 1 /
+  s21_trade_scenario_adjustments Switch to apply scenario adjustments to import supply (0=off 1=on) / 0 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)
@@ -47,10 +50,12 @@ $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_export_balanceflow.cs3"
 $offdelim;
 
-table f21_trade_scenario_adjustments(i_ex,i_im,k_trade,*) Scenario adjustments to import supply historical (1)
+parameter f21_trade_scenario_adjustments(i_ex,i_im,k_trade,scen_bilat21) Scenario adjustments to import supply historical (1)
+/
 $ondelim
-$include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_scenario_adjustments.cs3"
-$offdelim;
+$include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_scenario_adjustments.cs5"
+$offdelim
+/;
 
 parameter f21_import_supply_historical(i_ex,i_im,t_all,k_trade)  Historical import to domestic supply ratio (1)
 /

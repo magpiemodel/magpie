@@ -30,7 +30,7 @@ s42_env_flow_scenario            EFP scenario.     (1)          / 2 /
 
 * Linear fading in of environmental flow policy between startyear and targetyear
 s42_efp_startyear                  Environmental flow policy start year   / 2025 /
-s42_efp_targetyear                 Environmental flow policy target year  / 2040 /
+s42_efp_targetyear                 Environmental flow policy target year  / 2070 /
 
 s42_env_flow_base_fraction         Fraction of available water that is reserved for the environment where no EFP policy is implemented (1) / 0.05 /
 s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 /
@@ -39,7 +39,7 @@ s42_multiplier_startyear           Year from which pumping costs multiplier will
 s42_multiplier                     multiplier to change pumping costs for sensitivity analysis takes numeric values (1)  / 0 /
 ;
 
-$setglobal c42_watdem_scenario  cc
+$setglobal c42_watdem_scenario  nocc_hist
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
@@ -64,7 +64,7 @@ $offdelim
 
 
 * Environmental flow policy
-$setglobal c42_env_flow_policy  off
+$setglobal c42_env_flow_policy  on
 
 parameter f42_env_flows(t_all,j) Environmental flow requirements from LPJ and Smakhtin algorithm (mio. m^3)
 /

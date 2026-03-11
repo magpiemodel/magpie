@@ -7,6 +7,8 @@
 
 sets
 
+  scen_bilat21 Geopolitical trade scenario / USAex, CHAdom, EURex /
+
 *sets need to be adopted to new categories
    k_notrade(kall) Production activities of non-tradable commodites
        / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous,begr,betr /
