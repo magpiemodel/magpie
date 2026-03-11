@@ -266,7 +266,7 @@ Sys.chmod(iniLock, mode = "0664")
     "#SBATCH --output=outfile_%j.out",
     "#SBATCH --error=outfile_%j.err",
     "#SBATCH --mail-type=END,FAIL",
-    "#SBATCH --time=3:00:00",
+    ifelse(!is.null(dependsID), "#SBATCH --time=5:00:00", "#SBATCH --time=0:20:00"), "\n",
     "#SBATCH --nodes=1",
     "#SBATCH --ntasks=1",
     ifelse(!is.null(dependsID), paste0(
@@ -275,7 +275,7 @@ Sys.chmod(iniLock, mode = "0664")
     ),
     "#SBATCH --dependency=singleton"
     ), "\n",
-    ifelse(qos == "priority", "#SBATCH --cpus-per-task=64", "#SBATCH --cpus-per-task=128"), "\n",
+    "#SBATCH --cpus-per-task=64", "\n",
     paste("source", miniforgePath),
     paste("conda activate", sealsEnv), "\n",
     paste("python", paste0("run_seals_", title, ".py"))

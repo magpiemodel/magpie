@@ -50,21 +50,21 @@ $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_export_balanceflow.cs3"
 $offdelim;
 
-parameter f21_trade_scenario_adjustments(i_ex,i_im,k_trade,scen_bilat21) Scenario adjustments to import supply historical (1)
+parameter f21_trade_scenario_adjustments(i_ex,i_im,t_all,k_trade) Exogenous additive adjustments to bilateral import supply ratios for policy scenarios (1)
 /
 $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_scenario_adjustments.cs5"
 $offdelim
 /;
 
-parameter f21_import_supply_historical(i_ex,i_im,t_all,k_trade)  Historical import to domestic supply ratio (1)
+parameter f21_import_supply_historical(i_ex,i_im,t_all,k_trade)  Share of importer domestic supply sourced from each exporter derived from FAOSTAT (1)
 /
 $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_import_supply_historical.cs5"
 $offdelim
 /;
 
-parameter f21_trade_bilat_stddev(i_ex,i_im,k_trade,trade_stddev21)  Historical standard deviations observed as share of domestic supply (1)
+parameter f21_trade_bilat_stddev(i_ex,i_im,k_trade,trade_stddev21)  Standard deviation of import supply ratios over rolling windows of 5 10 and 15 years (1)
 /
 $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_bilat_stddev.cs5"
@@ -72,14 +72,14 @@ $offdelim
 /;
 
 
-parameter f21_trade_margin(i_ex,i_im,kall) Costs of freight and insurance (USD05MER per tDM)
+parameter f21_trade_margin(i_ex,i_im,kall) Bilateral freight and insurance costs between region pairs (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_margin_bilat.cs5"
 $offdelim
 /;
 
-parameter f21_trade_tariff(i_ex,i_im,kall) Specific duty tariffs (USD17MER per tDM)
+parameter f21_trade_tariff(i_ex,i_im,kall) Bilateral specific duty tariff rates by region pair (USD17MER per tDM)
 /
 $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_tariff_bilat.cs5"

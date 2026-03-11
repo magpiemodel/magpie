@@ -20,9 +20,9 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- FALSE
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$title <- "calib_run_H12"
+cfg$title <- "calib_run_H15"
 cfg$output <- c("rds_report")
 cfg$force_replace <- TRUE
 cfg$qos <- "priority"
 start_run(cfg,codeCheck=FALSE)
-magpie4::submitCalibration("H12_FAO")
+magpie4::submitCalibration("H15_FAO")
