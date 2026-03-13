@@ -15,7 +15,7 @@ option nlp = ipopt;
 option threads = 1;
 magpie.optfile   = s80_optfile;
 magpie.scaleopt  = 1 ;
-magpie.solprint  = 1 ;
+magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
 
 put optfile;
