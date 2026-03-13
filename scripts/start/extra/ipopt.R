@@ -14,7 +14,7 @@ source("scripts/start_functions.R")
 
 #start MAgPIE run
 source("config/default.cfg")
-cfg$title <- "default"
+cfg$title <- "default_ipopt"
 cfg$gms$optimization <- "nlp_ipopt"
 cfg$gms$food <- "anthro_iso_jun22_ipopt"
 cfg$gms$s80_toloptimal <- 1.0e-8
