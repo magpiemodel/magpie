@@ -22,6 +22,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### added
 - Scaling now also includes equations based on level and marginals from `gdx2::calcScaling()`. Upscaling (scaling factors below 1) suggestions commented out per default.
+- **80_optimization/nlp_ipopt** New realization, using IPOPT instead of CONOPT4 (and the fallback CONOPT3) as the NLP solver for the MAgPIE model.
+- **15_food/anthro_iso_jun22_ipopt** Created realization for solving the food demand model with IPOPT.
+- **scripts/start/extra/ipopt.R** Start script for solving MAgPIE with IPOPT.
 
 ### removed
 -
