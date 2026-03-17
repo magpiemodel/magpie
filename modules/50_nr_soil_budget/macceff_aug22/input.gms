@@ -8,7 +8,7 @@
 * Scenario for nr efficiency on croplands or pastures for selected (and
 * respectively non-selected) countries in cropneff_countries and pastneff_countries
 
-$setglobal c50_scen_neff  baseeff_add3_add15_add25_max75
+$setglobal c50_scen_neff  baseeff_add3_add5_add10_max65
 $setglobal c50_scen_neff_noselect  baseeff_add3_add5_add10_max65
 * constant, baseeff_add3_add15_add25_max75,
 * baseeff_add3_add15_add25_max65, baseeff_add3_add10_add20_max75,

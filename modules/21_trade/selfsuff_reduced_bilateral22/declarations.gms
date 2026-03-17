@@ -29,7 +29,7 @@ positive variables
 equations
  q21_trade_glo(k_trade)                  Global production must cover global supply plus balance flows (mio. tDM per yr)
  q21_notrade(h,k_notrade)                Non-tradable commodities must be produced within their super-region (mio. tDM per yr)
- q21_trade_bilat(h,k_trade)              Regional material balance: production covers supply adjusted for net bilateral trade (mio. tDM per yr)
+ q21_trade_reg(h,k_trade)              Regional material balance: production covers supply adjusted for net bilateral trade (mio. tDM per yr)
  q21_trade_lower(i_ex,i_im,k_trade)      Lower bound on bilateral trade from historical import supply ratio minus flexibility (mio. tDM per yr)
  q21_trade_upper(i_ex,i_im,k_trade)      Upper bound on bilateral trade from historical import supply ratio plus flexibility (mio. tDM per yr)
  q21_costs_tariffs(i,k_trade)            Bilateral tariff costs assigned to exporting region (mio. USD05MER per yr)
@@ -40,19 +40,19 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov21_cost_tariff_reg(t,i,k_trade,type)     Regional trade tariffs for each tradable commodity (mio. USD05MER per yr)
- ov21_cost_trade_reg(t,i,k_trade,type)      Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
- ov_cost_trade(t,i,type)                    Regional  trade costs (mio. USD05MER per yr)
- ov21_trade(t,i_ex,i_im,k_trade,type)       Amounts traded bilaterally (mio. tDM per yr)
- ov21_cost_margin_reg(t,i,k_trade,type)     Regional trade margins for each tradable commodity (mio. USD05MER per yr)
- oq21_trade_glo(t,k_trade,type)             Global production constraint (mio. tDM per yr)
- oq21_notrade(t,h,k_notrade,type)           Superregional production constraint of non-tradable commodities (mio. tDM per yr)
- oq21_trade_bilat(t,h,k_trade,type)         Superregional bilateral trade requirements (mio. tDM per yr)
- oq21_trade_lower(t,i_ex,i_im,k_trade,type) Trade Lower Bound (mio. tDM per yr)
- oq21_trade_upper(t,i_ex,i_im,k_trade,type) Trade Upper Bound (mio. tDM per yr)
- oq21_costs_tariffs(t,i,k_trade,type)       Regional trade tariff costs (mio. USD05MER per yr)
- oq21_costs_margins(t,i,k_trade,type)       Regional trade margin costs (mio. USD05MER per yr)
- oq21_cost_trade_reg(t,i,k_trade,type)      Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- oq21_cost_trade(t,i,type)                  Superregional trade costs (mio. USD05MER per yr)
+ ov21_cost_tariff_reg(t,i,k_trade,type)     Regional tariff costs summed over all bilateral partners (mio. USD05MER per yr)
+ ov21_cost_trade_reg(t,i,k_trade,type)      Regional total trade costs per commodity: tariffs plus margins (mio. USD05MER per yr)
+ ov_cost_trade(t,i,type)                    Regional total trade costs across all commodities entering objective (mio. USD05MER per yr)
+ ov21_trade(t,i_ex,i_im,k_trade,type)       Bilateral trade flow from exporter to importer (mio. tDM per yr)
+ ov21_cost_margin_reg(t,i,k_trade,type)     Regional transport margin costs summed over all bilateral partners (mio. USD05MER per yr)
+ oq21_trade_glo(t,k_trade,type)             Global production must cover global supply plus balance flows (mio. tDM per yr)
+ oq21_notrade(t,h,k_notrade,type)           Non-tradable commodities must be produced within their super-region (mio. tDM per yr)
+ oq21_trade_reg(t,h,k_trade,type)           Regional material balance: production covers supply adjusted for net bilateral trade (mio. tDM per yr)
+ oq21_trade_lower(t,i_ex,i_im,k_trade,type) Lower bound on bilateral trade from historical import supply ratio minus flexibility (mio. tDM per yr)
+ oq21_trade_upper(t,i_ex,i_im,k_trade,type) Upper bound on bilateral trade from historical import supply ratio plus flexibility (mio. tDM per yr)
+ oq21_costs_tariffs(t,i,k_trade,type)       Bilateral tariff costs assigned to exporting region (mio. USD05MER per yr)
+ oq21_costs_margins(t,i,k_trade,type)       Bilateral transport margin costs assigned to exporting region (mio. USD05MER per yr)
+ oq21_cost_trade_reg(t,i,k_trade,type)      Total trade costs per region and commodity: tariffs plus margins (mio. USD05MER per yr)
+ oq21_cost_trade(t,i,type)                  Total trade costs per region across all commodities (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

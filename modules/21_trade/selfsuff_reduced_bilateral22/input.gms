@@ -5,11 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c21_trade_liberalization  l908080r807070
+$setglobal c21_trade_liberalization  l909090r808080
 *   options are "regionalized" and "globalized" and "fragmented"
-
-$setglobal c21_bilat_trade_scen  USAex
-*options: USAex, CHAdom, EURex
 
 sets
   k_import21(k_trade) Commodities that can have additional imports to maintain feasibility
@@ -22,9 +19,9 @@ scalars
   s21_trade_tariff_startyear  Year to start fading out trade tariffs                / 2025 /
   s21_trade_tariff_targetyear Year to finish fading out trade tariffs              / 2050 /
   s21_tariff_factor           Multiplicative factor on the trade tariff                      / 1 /
-  s21_import_supply_scenario  Multiplicative factor on the line                     / 0.5 /
+  s21_import_supply_scenario  Multiplicative factor on the line                     / 1 /
   s21_import_supply_scenario_targetyear Target year for fade in                    / 2050 /
-  s21_stddev_lib_factor       Multplicative factor on the window                     / 2 /
+  s21_stddev_lib_factor       Multplicative factor on the window                     / 1 /
   s21_cost_import             Cost for additional imports to maintain feasibility (USD17MER per tDM) / 1500 /
   s21_min_trade_margin_forestry Minimum trade margin for forestry products (USD17MER per tDM) / 62 /
   s21_trade_scenario_adjustments Switch to apply scenario adjustments to import supply (0=off 1=on) / 0 /

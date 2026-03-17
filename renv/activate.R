@@ -3,7 +3,6 @@ local({
 
   # the requested version of renv
   version <- "1.1.7"
-  attr(version, "md5") <- NULL
   attr(version, "sha") <- NULL
 
   # the project directory
@@ -169,16 +168,6 @@ local({
     if (quiet)
       return(invisible())
   
-    # also check for config environment variables that should suppress messages
-    # https://github.com/rstudio/renv/issues/2214
-    enabled <- Sys.getenv("RENV_CONFIG_STARTUP_QUIET", unset = NA)
-    if (!is.na(enabled) && tolower(enabled) %in% c("true", "1"))
-      return(invisible())
-  
-    enabled <- Sys.getenv("RENV_CONFIG_SYNCHRONIZED_CHECK", unset = NA)
-    if (!is.na(enabled) && tolower(enabled) %in% c("false", "0"))
-      return(invisible())
-  
     msg <- sprintf(fmt, ...)
     cat(msg, file = stdout(), sep = if (appendLF) "\n" else "")
   
@@ -226,16 +215,6 @@ local({
     section <- header(sprintf("Bootstrapping renv %s", friendly))
     catf(section)
   
-    # try to install renv from cache
-    md5 <- attr(version, "md5", exact = TRUE)
-    if (length(md5)) {
-      pkgpath <- renv_bootstrap_find(version)
-      if (length(pkgpath) && file.exists(pkgpath)) {
-        file.copy(pkgpath, library, recursive = TRUE)
-        return(invisible())
-      }
-    }
-  
     # attempt to download renv
     catf("- Downloading renv ... ", appendLF = FALSE)
     withCallingHandlers(
@@ -261,6 +240,7 @@ local({
   
     # add empty line to break up bootstrapping from normal output
     catf("")
+  
     return(invisible())
   }
   
@@ -277,20 +257,12 @@ local({
     repos <- Sys.getenv("RENV_CONFIG_REPOS_OVERRIDE", unset = NA)
     if (!is.na(repos)) {
   
-      # split on ';' if present
-      parts <- strsplit(repos, ";", fixed = TRUE)[[1L]]
+      # check for RSPM; if set, use a fallback repository for renv
+      rspm <- Sys.getenv("RSPM", unset = NA)
+      if (identical(rspm, repos))
+        repos <- c(RSPM = rspm, CRAN = cran)
   
-      # split into named repositories if present
-      idx <- regexpr("=", parts, fixed = TRUE)
-      keys <- substring(parts, 1L, idx - 1L)
-      vals <- substring(parts, idx + 1L)
-      names(vals) <- keys
-  
-      # if we have a single unnamed repository, call it CRAN
-      if (length(vals) == 1L && identical(keys, ""))
-        names(vals) <- "CRAN"
-  
-      return(vals)
+      return(repos)
   
     }
   
@@ -539,51 +511,6 @@ local({
   
   }
   
-  renv_bootstrap_find <- function(version) {
-  
-    path <- renv_bootstrap_find_cache(version)
-    if (length(path) && file.exists(path)) {
-      catf("- Using renv %s from global package cache", version)
-      return(path)
-    }
-  
-  }
-  
-  renv_bootstrap_find_cache <- function(version) {
-  
-    md5 <- attr(version, "md5", exact = TRUE)
-    if (is.null(md5))
-      return()
-  
-    # infer path to renv cache
-    cache <- Sys.getenv("RENV_PATHS_CACHE", unset = "")
-    if (!nzchar(cache)) {
-      root <- Sys.getenv("RENV_PATHS_ROOT", unset = NA)
-      if (!is.na(root))
-        cache <- file.path(root, "cache")
-    }
-  
-    if (!nzchar(cache)) {
-      tools <- asNamespace("tools")
-      if (is.function(tools$R_user_dir)) {
-        root <- tools$R_user_dir("renv", "cache")
-        cache <- file.path(root, "cache")
-      }
-    }
-  
-    # start completing path to cache
-    file.path(
-      cache,
-      renv_bootstrap_cache_version(),
-      renv_bootstrap_platform_prefix(),
-      "renv",
-      version,
-      md5,
-      "renv"
-    )
-  
-  }
-  
   renv_bootstrap_download_tarball <- function(version) {
   
     # if the user has provided the path to a tarball via
@@ -768,19 +695,11 @@ local({
   
   }
   
-  renv_bootstrap_platform_prefix_default <- function() {
+  renv_bootstrap_platform_prefix <- function() {
   
-    # read version component
-    version <- Sys.getenv("RENV_PATHS_VERSION", unset = "R-%v")
-  
-    # expand placeholders
-    placeholders <- list(
-      list("%v", format(getRversion()[1, 1:2])),
-      list("%V", format(getRversion()[1, 1:3]))
-    )
-  
-    for (placeholder in placeholders)
-      version <- gsub(placeholder[[1L]], placeholder[[2L]], version, fixed = TRUE)
+    # construct version prefix
+    version <- paste(R.version$major, R.version$minor, sep = ".")
+    prefix <- paste("R", numeric_version(version)[1, 1:2], sep = "-")
   
     # include SVN revision for development versions of R
     # (to avoid sharing platform-specific artefacts with released versions of R)
@@ -789,19 +708,10 @@ local({
       identical(R.version[["nickname"]], "Unsuffered Consequences")
   
     if (devel)
-      version <- paste(version, R.version[["svn rev"]], sep = "-r")
-  
-    version
-  
-  }
-  
-  renv_bootstrap_platform_prefix <- function() {
-  
-    # construct version prefix
-    version <- renv_bootstrap_platform_prefix_default()
+      prefix <- paste(prefix, R.version[["svn rev"]], sep = "-r")
   
     # build list of path components
-    components <- c(version, R.version$platform)
+    components <- c(prefix, R.version$platform)
   
     # include prefix if provided by user
     prefix <- renv_bootstrap_platform_prefix_impl()
@@ -1040,19 +950,19 @@ local({
   }
   
   renv_bootstrap_validate_version_dev <- function(version, description) {
-  
+    
     expected <- description[["RemoteSha"]]
     if (!is.character(expected))
       return(FALSE)
-  
+    
     pattern <- sprintf("^\\Q%s\\E", version)
     grepl(pattern, expected, perl = TRUE)
-  
+    
   }
   
   renv_bootstrap_validate_version_release <- function(version, description) {
     expected <- description[["Version"]]
-    is.character(expected) && identical(c(expected), c(version))
+    is.character(expected) && identical(expected, version)
   }
   
   renv_bootstrap_hash_text <- function(text) {
@@ -1254,18 +1164,6 @@ local({
   
   }
   
-  renv_bootstrap_cache_version <- function() {
-    # NOTE: users should normally not override the cache version;
-    # this is provided just to make testing easier
-    Sys.getenv("RENV_CACHE_VERSION", unset = "v5")
-  }
-  
-  renv_bootstrap_cache_version_previous <- function() {
-    version <- renv_bootstrap_cache_version()
-    number <- as.integer(substring(version, 2L))
-    paste("v", number - 1L, sep = "")
-  }
-  
   renv_json_read <- function(file = NULL, text = NULL) {
   
     jlerr <- NULL
@@ -1300,89 +1198,86 @@ local({
   }
   
   renv_json_read_patterns <- function() {
-  
+    
     list(
-  
+      
       # objects
-      list("{", "\t\n\tobject(\t\n\t", TRUE),
-      list("}", "\t\n\t)\t\n\t",       TRUE),
-  
+      list("{", "\t\n\tobject(\t\n\t"),
+      list("}", "\t\n\t)\t\n\t"),
+      
       # arrays
-      list("[", "\t\n\tarray(\t\n\t", TRUE),
-      list("]", "\n\t\n)\n\t\n",      TRUE),
-  
+      list("[", "\t\n\tarray(\t\n\t"),
+      list("]", "\n\t\n)\n\t\n"),
+      
       # maps
-      list(":", "\t\n\t=\t\n\t", TRUE),
-  
-      # newlines
-      list("\\u000a", "\n", FALSE)
-  
+      list(":", "\t\n\t=\t\n\t")
+      
     )
-  
+    
   }
   
   renv_json_read_envir <- function() {
   
     envir <- new.env(parent = emptyenv())
-  
+    
     envir[["+"]] <- `+`
     envir[["-"]] <- `-`
-  
+    
     envir[["object"]] <- function(...) {
       result <- list(...)
       names(result) <- as.character(names(result))
       result
     }
-  
+    
     envir[["array"]] <- list
-  
+    
     envir[["true"]]  <- TRUE
     envir[["false"]] <- FALSE
     envir[["null"]]  <- NULL
-  
+    
     envir
-  
+    
   }
   
   renv_json_read_remap <- function(object, patterns) {
-  
+    
     # repair names if necessary
     if (!is.null(names(object))) {
-  
+      
       nms <- names(object)
       for (pattern in patterns)
         nms <- gsub(pattern[[2L]], pattern[[1L]], nms, fixed = TRUE)
       names(object) <- nms
-  
+      
     }
-  
+    
     # repair strings if necessary
     if (is.character(object)) {
       for (pattern in patterns)
         object <- gsub(pattern[[2L]], pattern[[1L]], object, fixed = TRUE)
     }
-  
+    
     # recurse for other objects
     if (is.recursive(object))
       for (i in seq_along(object))
         object[i] <- list(renv_json_read_remap(object[[i]], patterns))
-  
+    
     # return remapped object
     object
-  
+    
   }
   
   renv_json_read_default <- function(file = NULL, text = NULL) {
   
     # read json text
     text <- paste(text %||% readLines(file, warn = FALSE), collapse = "\n")
-  
+    
     # convert into something the R parser will understand
     patterns <- renv_json_read_patterns()
     transformed <- text
     for (pattern in patterns)
       transformed <- gsub(pattern[[1L]], pattern[[2L]], transformed, fixed = TRUE)
-  
+    
     # parse it
     rfile <- tempfile("renv-json-", fileext = ".R")
     on.exit(unlink(rfile), add = TRUE)
@@ -1392,10 +1287,9 @@ local({
     # evaluate in safe environment
     result <- eval(json, envir = renv_json_read_envir())
   
-    # fix up strings if necessary -- do so only with reversible patterns
-    patterns <- Filter(function(pattern) pattern[[3L]], patterns)
+    # fix up strings if necessary
     renv_json_read_remap(result, patterns)
-  
+    
   }
   
 

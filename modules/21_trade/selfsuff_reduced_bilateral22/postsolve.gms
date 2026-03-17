@@ -13,7 +13,7 @@
  ov21_cost_margin_reg(t,i,k_trade,"marginal")     = v21_cost_margin_reg.m(i,k_trade);
  oq21_trade_glo(t,k_trade,"marginal")             = q21_trade_glo.m(k_trade);
  oq21_notrade(t,h,k_notrade,"marginal")           = q21_notrade.m(h,k_notrade);
- oq21_trade_bilat(t,h,k_trade,"marginal")         = q21_trade_bilat.m(h,k_trade);
+ oq21_trade_reg(t,h,k_trade,"marginal")           = q21_trade_reg.m(h,k_trade);
  oq21_trade_lower(t,i_ex,i_im,k_trade,"marginal") = q21_trade_lower.m(i_ex,i_im,k_trade);
  oq21_trade_upper(t,i_ex,i_im,k_trade,"marginal") = q21_trade_upper.m(i_ex,i_im,k_trade);
  oq21_costs_tariffs(t,i,k_trade,"marginal")       = q21_costs_tariffs.m(i,k_trade);
@@ -27,7 +27,7 @@
  ov21_cost_margin_reg(t,i,k_trade,"level")        = v21_cost_margin_reg.l(i,k_trade);
  oq21_trade_glo(t,k_trade,"level")                = q21_trade_glo.l(k_trade);
  oq21_notrade(t,h,k_notrade,"level")              = q21_notrade.l(h,k_notrade);
- oq21_trade_bilat(t,h,k_trade,"level")            = q21_trade_bilat.l(h,k_trade);
+ oq21_trade_reg(t,h,k_trade,"level")              = q21_trade_reg.l(h,k_trade);
  oq21_trade_lower(t,i_ex,i_im,k_trade,"level")    = q21_trade_lower.l(i_ex,i_im,k_trade);
  oq21_trade_upper(t,i_ex,i_im,k_trade,"level")    = q21_trade_upper.l(i_ex,i_im,k_trade);
  oq21_costs_tariffs(t,i,k_trade,"level")          = q21_costs_tariffs.l(i,k_trade);
@@ -41,7 +41,7 @@
  ov21_cost_margin_reg(t,i,k_trade,"upper")        = v21_cost_margin_reg.up(i,k_trade);
  oq21_trade_glo(t,k_trade,"upper")                = q21_trade_glo.up(k_trade);
  oq21_notrade(t,h,k_notrade,"upper")              = q21_notrade.up(h,k_notrade);
- oq21_trade_bilat(t,h,k_trade,"upper")            = q21_trade_bilat.up(h,k_trade);
+ oq21_trade_reg(t,h,k_trade,"upper")              = q21_trade_reg.up(h,k_trade);
  oq21_trade_lower(t,i_ex,i_im,k_trade,"upper")    = q21_trade_lower.up(i_ex,i_im,k_trade);
  oq21_trade_upper(t,i_ex,i_im,k_trade,"upper")    = q21_trade_upper.up(i_ex,i_im,k_trade);
  oq21_costs_tariffs(t,i,k_trade,"upper")          = q21_costs_tariffs.up(i,k_trade);
@@ -55,7 +55,7 @@
  ov21_cost_margin_reg(t,i,k_trade,"lower")        = v21_cost_margin_reg.lo(i,k_trade);
  oq21_trade_glo(t,k_trade,"lower")                = q21_trade_glo.lo(k_trade);
  oq21_notrade(t,h,k_notrade,"lower")              = q21_notrade.lo(h,k_notrade);
- oq21_trade_bilat(t,h,k_trade,"lower")            = q21_trade_bilat.lo(h,k_trade);
+ oq21_trade_reg(t,h,k_trade,"lower")              = q21_trade_reg.lo(h,k_trade);
  oq21_trade_lower(t,i_ex,i_im,k_trade,"lower")    = q21_trade_lower.lo(i_ex,i_im,k_trade);
  oq21_trade_upper(t,i_ex,i_im,k_trade,"lower")    = q21_trade_upper.lo(i_ex,i_im,k_trade);
  oq21_costs_tariffs(t,i,k_trade,"lower")          = q21_costs_tariffs.lo(i,k_trade);

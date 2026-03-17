@@ -153,10 +153,10 @@ $title magpie
 * Total number of cells: 200
 * 
 * Number of cells per region:
-*   ANZ  BRA  CAM  CAN  CHA  EUR  IND  JKO  MEA  NEU  OAS  REF  SAM  SSA  USA
-*     5   10   13    3   17   12   12    9   23    8   13   11   18   29   17
+*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
+*     5   19   12   12    7   33   25    8   16   12   33   18
 * 
-* Regionscode: 36ac4cfd
+* Regionscode: 62eff8f7
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -181,7 +181,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2015
-$setglobal c_title  0903Bilat_ScenMIP_VLLO-SSP1-PkBudg650
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -204,7 +204,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_may21
 
-$setglobal trade  selfsuff_reduced_bilateral22
+$setglobal trade  selfsuff_reduced
 $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  oct24

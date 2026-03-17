@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-s42_watdem_nonagr_scenario         Scenario for non agricultural water demand from WATERGAP     (1)             / 1 /
+s42_watdem_nonagr_scenario         Scenario for non agricultural water demand from WATERGAP     (1)             / 2 /
 *                                                                                1: SSP1
 *                                                                                2: SSP2
 *                                                                                3: SSP3
@@ -33,7 +33,7 @@ s42_env_flow_scenario              Environmental flow protection scenario       
 
 * Linear fading in of environmental flow policy between startyear and targetyear
 s42_efp_startyear                  Environmental flow policy start year   / 2025 /
-s42_efp_targetyear                 Environmental flow policy target year  / 2070 /
+s42_efp_targetyear                 Environmental flow policy target year  / 2040 /
 s42_env_flow_base_fraction         Fraction of available water that is reserved for the environment if no EFR protection policy is implemented (1)           / 0.05 /
 s42_env_flow_fraction              Fraction of available water that is reserved under protection policies (1) / 0.2 /
 s42_pumping                        Switch to activate pumping cost settings (1) / 0 /
@@ -41,7 +41,7 @@ s42_multiplier_startyear           Year from which pumping costs multiplier will
 s42_multiplier                     multiplier to change pumping costs for sensitivity analysis takes numeric values (1)  / 0 /
 ;
 
-$setglobal c42_watdem_scenario  nocc_hist
+$setglobal c42_watdem_scenario  cc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
@@ -119,7 +119,7 @@ $if "%c42_watdem_scenario%" == "nocc" f42_env_flows(t_all,j) = f42_env_flows("y1
 $if "%c42_watdem_scenario%" == "nocc_hist" f42_env_flows(t_all,j)$(m_year(t_all) > sm_fix_cc) = f42_env_flows(t_all,j)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(f42_env_flows,"j");
 
-$setglobal c42_env_flow_policy  on
+$setglobal c42_env_flow_policy  off
 
 * Costs of pumping are calculated for India as per methodology in forthcoming paper by Singh et.al.
 parameter
