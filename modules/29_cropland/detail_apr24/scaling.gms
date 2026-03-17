@@ -5,8 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v60_2ndgen_bioenergy_dem_residues.scale(i,kall) = 1e3;
-vm_bioenergy_utility.scale(i) = 1e2;
-q60_bioenergy_glo.scale = 1e4;
-q60_bioenergy_reg.scale(i) = 1e2;
-q60_res_2ndgenBE.scale(i) = 1e3;
+*q29_avl_cropland.scale(j) = 1e-3;
+*q29_cropland.scale(j) = 1e-2;
+*q29_fallow_max.scale(j) = 1e-2;
+*q29_fallow_min.scale(j) = 1e-3;
+*q29_land_snv_trans.scale(j) = 1e-5;
+*q29_treecover.scale(j) = 1e-2;
+*q29_treecover_est.scale(j,ac) = 1e-2;

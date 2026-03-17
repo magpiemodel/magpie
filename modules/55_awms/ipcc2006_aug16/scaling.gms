@@ -5,8 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v60_2ndgen_bioenergy_dem_residues.scale(i,kall) = 1e3;
-vm_bioenergy_utility.scale(i) = 1e2;
-q60_bioenergy_glo.scale = 1e4;
-q60_bioenergy_reg.scale(i) = 1e2;
-q60_res_2ndgenBE.scale(i) = 1e3;
+*q55_bal_intake_confinement.scale(i,kli,npk) = 1e-3;
+*q55_bal_intake_grazing_cropland.scale(i,kli,npk) = 1e-3;
+*q55_bal_intake_grazing_pasture.scale(i,kli,npk) = 1e-3;
+*q55_bal_manure.scale(i,kli,awms,npk) = 1e-3;
+*q55_manure_confinement.scale(i,kli,awms_conf,npk) = 1e-3;
+*q55_manure_recycling.scale(i,npk) = 1e-3;
+

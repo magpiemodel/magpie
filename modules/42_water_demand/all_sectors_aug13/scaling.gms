@@ -5,4 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_watdem.scale(wat_dem,j) = 10e4;
+vm_watdem.scale(wat_dem,j) = 1e4;

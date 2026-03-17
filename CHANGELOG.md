@@ -18,10 +18,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/start** updated biomass collection start script; renamed from `calc_residuePot2ndBE.R` to `generate_biomassForEnergyData.R`
 - scripts/calibration/landconversion_cost.R: Simplified code, code improved to speed up and improve convergence.
 - **config** New default switched from calibrating to FAO to LanduseInitialisation. Update of calibration parameters and removal of lowpass filter setting in line with simplified script.
+- **30_croparea/simple_apr24** Fixed rotation penalty to 0 instead of relying on the solver to not produce small positive values within the tolerance.
 - **21_trade** New implementation of bilateral trade realization, based on import-supply-ratio instead of redistributing bilateral flows in a unconstrained manner.
 
 ### added
--
+- **scaling** Scaling now also includes equations based on level and marginals from `gdx2::calcScaling()`. Upscaling (scaling factors below 1) suggestions commented out per default.
 
 ### removed
 -
@@ -32,6 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **32_forestry** bugfix limit for endogenous re/afforestation in historical time steps
 - **highres.R** temporary f32_max_aff_area.cs4 is now deleted in case of error
 - **scripts/calibration/landconversion_cost.R**: Bugfixes, see https://github.com/magpiemodel/magpie/pull/858
+- **scaling** Replaced scaling factors like `10e3` with the intended `1e3`
 
 ## [4.13.0] - 2025-10-23
 

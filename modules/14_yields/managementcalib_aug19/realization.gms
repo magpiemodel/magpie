@@ -31,6 +31,7 @@ $Ifi "%phase%" == "sets" $include "./modules/14_yields/managementcalib_aug19/set
 $Ifi "%phase%" == "declarations" $include "./modules/14_yields/managementcalib_aug19/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/14_yields/managementcalib_aug19/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/14_yields/managementcalib_aug19/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/14_yields/managementcalib_aug19/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/14_yields/managementcalib_aug19/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/14_yields/managementcalib_aug19/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/14_yields/managementcalib_aug19/postsolve.gms"
