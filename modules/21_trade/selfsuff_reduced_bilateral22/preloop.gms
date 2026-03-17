@@ -88,16 +88,16 @@ if ((s21_trade_tariff=1),
 
  m_linear_time_interpol(i21_import_supply_scenario,sm_fix_SSP2,s21_import_supply_scenario_targetyear,1,s21_import_supply_scenario);
 
-
 ** Apply scenario adjustments to import supply historical for future periods.
 ** f21_trade_scenario_adjustments currently remains
-** all zeros so this addition has no effect.
-  loop(t_all$(m_year(t_all) > sm_fix_SSP2),
+** all zeros so this addition has no effect until changes made in preprocessing
+if ((s21_trade_scenario_adjustments = 1),
+    loop(t_all$(m_year(t_all) > sm_fix_SSP2),
     i21_import_supply_historical(i_ex,i_im,t_all,k_trade) =
       i21_import_supply_historical(i_ex,i_im,t_all,k_trade)
       + f21_trade_scenario_adjustments(i_ex,i_im,t_all,k_trade);
   );
-
+);
 
 
 ** Enforce minimum transport margin for forestry products to prevent

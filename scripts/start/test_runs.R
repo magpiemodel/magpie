@@ -49,19 +49,51 @@ cfg$gms$c_timesteps <- timeSteps
 # PkBudg1000: ambitious climate policy broadly in line with 2deg C Paris target
 # PkBudg650: ambitious climate policy broadly in line with 1.5deg C Paris target
 # SSP3-PkBudg650 is not feasible, therefore only PkBudg1000 is used.
-for (ssp in c("SSP1", "SSP2", "SSP3", "SSP4", "SSP5")) {
-    cfg$title <- .title(cfg, paste("ONbT2110", ssp, "NPi2025", sep = "-"))
+for (ssp in c("SSP1", "SSP2", "SSP3")) {
+  if (ssp %in% c("SSP1", "SSP2")) {
+    cfg$title <- .title(cfg, paste(ssp, "NPi2025", sep = "-"))
     cfg <- setScenario(cfg, c(ssp, "NPI", "rcp4p5"))
     cfg$gms$c56_mute_ghgprices_until <- "y2150"
     cfg$gms$c56_pollutant_prices <- paste0("R34M410-", ssp, "-NPi2025")
     cfg$gms$c60_2ndgen_biodem    <- paste0("R34M410-", ssp, "-NPi2025")
     start_run(cfg, codeCheck = FALSE)
 
-    cfg$title <- .title(cfg, paste("ONbT2110", ssp, "NPi2025", sep = "-"))
+    cfg$title <- .title(cfg, paste(ssp, "PkBudg1000", sep = "-"))
+    cfg <- setScenario(cfg, c(ssp, "NDC", "rcp2p6"))
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
+    cfg$gms$c56_pollutant_prices <- paste0("R34M410-", ssp, "-PkBudg1000")
+    cfg$gms$c60_2ndgen_biodem    <- paste0("R34M410-", ssp, "-PkBudg1000")
+    start_run(cfg, codeCheck = FALSE)
 
+    cfg$title <- .title(cfg, paste(ssp, "PkBudg650", sep = "-"))
+    cfg <- setScenario(cfg, c(ssp, "NDC", "rcp1p9"))
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
+    cfg$gms$c56_pollutant_prices <- paste0("R34M410-", ssp, "-PkBudg650")
+    cfg$gms$c60_2ndgen_biodem    <- paste0("R34M410-", ssp, "-PkBudg650")
+    start_run(cfg, codeCheck = FALSE)
+  } else if (ssp == "SSP3") {
+    cfg$title <- .title(cfg, paste(ssp, "NPi2025", sep = "-"))
+    cfg <- setScenario(cfg, c(ssp, "NPI", "rcp6p0"))
+    cfg$gms$c56_mute_ghgprices_until <- "y2150"
+    cfg$gms$c56_pollutant_prices <- paste0("R34M410-", ssp, "-NPi2025")
+    cfg$gms$c60_2ndgen_biodem    <- paste0("R34M410-", ssp, "-NPi2025")
+    start_run(cfg, codeCheck = FALSE)
 
+    cfg$title <- .title(cfg, paste(ssp, "rollBack", sep = "-"))
+    cfg <- setScenario(cfg, c(ssp, "NPI-revert", "rcp7p0"))
+    cfg$gms$c56_mute_ghgprices_until <- "y2150"
+    cfg$gms$c56_pollutant_prices <- paste0("R34M410-", ssp, "-rollBack")
+    cfg$gms$c60_2ndgen_biodem    <- paste0("R34M410-", ssp, "-rollBack")
+    start_run(cfg, codeCheck = FALSE)
+
+    cfg$title <- .title(cfg, paste(ssp, "PkBudg1000", sep = "-"))
+    cfg <- setScenario(cfg, c(ssp, "NDC", "rcp2p6"))
+    cfg$gms$c56_mute_ghgprices_until <- "y2030"
+    cfg$gms$c56_pollutant_prices <- paste0("R34M410-", ssp, "-PkBudg1000")
+    cfg$gms$c60_2ndgen_biodem    <- paste0("R34M410-", ssp, "-PkBudg1000")
+    start_run(cfg, codeCheck = FALSE)
   }
-
+}
 
 # test FSEC setup (even though FSEC is no longer ongoing) as that checks many important switches
 source("scripts/projects/fsec.R")
