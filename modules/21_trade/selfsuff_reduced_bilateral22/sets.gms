@@ -42,8 +42,7 @@ sets
    a809090,
    l909090r808080,
    l908080r807070,
-   l909595r809090,
-   test50
+   l909595r809090
    /
 
    trade_groups21 Trade groups

@@ -29,7 +29,7 @@ positive variables
 equations
  q21_trade_glo(k_trade)                  Global production must cover global supply plus balance flows (mio. tDM per yr)
  q21_notrade(h,k_notrade)                Non-tradable commodities must be produced within their super-region (mio. tDM per yr)
- q21_trade_reg(h,k_trade)              Regional material balance: production covers supply adjusted for net bilateral trade (mio. tDM per yr)
+ q21_trade_reg(h,k_trade)                Regional material balance: production covers supply adjusted for net bilateral trade (mio. tDM per yr)
  q21_trade_lower(i_ex,i_im,k_trade)      Lower bound on bilateral trade from historical import supply ratio minus flexibility (mio. tDM per yr)
  q21_trade_upper(i_ex,i_im,k_trade)      Upper bound on bilateral trade from historical import supply ratio plus flexibility (mio. tDM per yr)
  q21_costs_tariffs(i,k_trade)            Bilateral tariff costs assigned to exporting region (mio. USD05MER per yr)
