@@ -42,7 +42,7 @@
 *' as reducing a country's import dependence on a specific trading partner.
 *'
 *' The standard deviation bounds open from the simulation year (sm_fix_SSP2) onwards,
-* with the level opening based on historically observed standard deviations, with
+*' with the level opening based on historically observed standard deviations, with
 *' the first 5 year time step at the max std observed over the all 5 years moving windows 
 *' of the historical period for the exporter-importer and product combination. 
 *' 10 years into the simulation period, the std dev window opens to the max std dev observed

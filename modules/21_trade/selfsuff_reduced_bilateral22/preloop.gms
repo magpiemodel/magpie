@@ -34,11 +34,11 @@ i21_import_supply_historical(i_ex,i_im,t_all,k_trade) = f21_import_supply_histor
 ** These are assigned to successive time steps after the calibration year
 ** (sm_fix_SSP2), giving progressively wider flexibility as the projection
 ** moves further from the historical period.
-  loop(t_all,
-     i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 5) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd5");
-     i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 10) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd10");
-    i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all)  >= sm_fix_SSP2 + 15) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd15");
-  );
+loop(t_all,
+  i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 5) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd5");
+  i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 10) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd10");
+  i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all)  >= sm_fix_SSP2 + 15) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd15");
+);
 
 *** Remove intra-regional trade standard deviations (e.g. EUR.EUR)
   i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(sameas(i_ex,i_im)) = 0;
@@ -49,53 +49,54 @@ i21_import_supply_historical(i_ex,i_im,t_all,k_trade) = f21_import_supply_histor
 ** year. Post-calibration, tariffs can be further scaled by s21_tariff_factor.
 
 if ((s21_trade_tariff=1),
-    i21_trade_tariff(t_all, i_ex,i_im,k_trade) = f21_trade_tariff(i_ex,i_im,k_trade);
-  elseif (s21_trade_tariff=0),
-     i21_trade_tariff(t_all, i_ex,i_im,k_trade) = 0;
- );
+  i21_trade_tariff(t_all, i_ex,i_im,k_trade) = f21_trade_tariff(i_ex,i_im,k_trade);
+elseif (s21_trade_tariff=0),
+  i21_trade_tariff(t_all, i_ex,i_im,k_trade) = 0;
+);
 
- if ((s21_trade_tariff_fadeout=1),
- loop(t_all,
-    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > s21_trade_tariff_startyear and m_year(t_all) < s21_trade_tariff_targetyear) = (1-((m_year(t_all)-s21_trade_tariff_startyear) /
-                                                                                                                                            (s21_trade_tariff_targetyear-s21_trade_tariff_startyear))) * 
-                                                                                                                                            i21_trade_tariff(t_all,i_ex,i_im,k_trade);
- i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= s21_trade_tariff_startyear) = i21_trade_tariff(t_all,i_ex,i_im,k_trade); 
- i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear) = 0 ; 
- );
- );
+if ((s21_trade_tariff_fadeout=1),
+  loop(t_all,
+    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > 
+    s21_trade_tariff_startyear and
+    m_year(t_all) < s21_trade_tariff_targetyear) = (1-((m_year(t_all)-s21_trade_tariff_startyear) /
+                                                  (s21_trade_tariff_targetyear-s21_trade_tariff_startyear))) * 
+                                                   i21_trade_tariff(t_all,i_ex,i_im,k_trade);
+    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= s21_trade_tariff_startyear) = i21_trade_tariff(t_all,i_ex,i_im,k_trade); 
+    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear) = 0; 
+  );
+);
 
 ** Apply post-calibration tariff scaling factor
- loop(t_all,
-    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= sm_fix_SSP2) =  i21_trade_tariff(t_all,i_ex,i_im,k_trade);
-    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > sm_fix_SSP2)=  i21_trade_tariff(t_all,i_ex,i_im,k_trade) * s21_tariff_factor;
-  );
+loop(t_all,
+  i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= sm_fix_SSP2) =  i21_trade_tariff(t_all,i_ex,i_im,k_trade);
+  i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > sm_fix_SSP2) = i21_trade_tariff(t_all,i_ex,i_im,k_trade) * s21_tariff_factor;
+);
 
 ** FLEXIBILITY AND SCENARIO SCALARS
 ** i21_stddev_lib_factor scales the width of the flexibility window.
 ** Before the calibration year it is 1 (historical bounds). After, it can be
 ** increased (more flexibility, trade liberalization) or decreased (more rigid
 ** trade patterns). Controlled by s21_stddev_lib_factor.
- loop(t_all,
-    i21_stddev_lib_factor(t_all)$(m_year(t_all) <= sm_fix_SSP2) =  1;
-    i21_stddev_lib_factor(t_all)$(m_year(t_all) > sm_fix_SSP2)=  s21_stddev_lib_factor;
-   );
+loop(t_all,
+  i21_stddev_lib_factor(t_all)$(m_year(t_all) <= sm_fix_SSP2) =  1;
+  i21_stddev_lib_factor(t_all)$(m_year(t_all) > sm_fix_SSP2)=  s21_stddev_lib_factor;
+);
 
 ** i21_import_supply_scenario scales the historical import supply ratios.
 ** Linearly interpolated from 1 at calibration year to the target value
 ** (s21_import_supply_scenario) at the target year. Values >1 amplify
 ** historical trade dependence; <1 reduce it (autarky scenario).
-  i21_import_supply_scenario(t_all) = 1;
-
- m_linear_time_interpol(i21_import_supply_scenario,sm_fix_SSP2,s21_import_supply_scenario_targetyear,1,s21_import_supply_scenario);
+i21_import_supply_scenario(t_all) = 1;
+m_linear_time_interpol(i21_import_supply_scenario,sm_fix_SSP2,s21_import_supply_scenario_targetyear,1,s21_import_supply_scenario);
 
 ** Apply scenario adjustments to import supply historical for future periods.
 ** f21_trade_scenario_adjustments currently remains
 ** all zeros so this addition has no effect until changes made in preprocessing
 if ((s21_trade_scenario_adjustments = 1),
-    loop(t_all$(m_year(t_all) > sm_fix_SSP2),
-    i21_import_supply_historical(i_ex,i_im,t_all,k_trade) =
-      i21_import_supply_historical(i_ex,i_im,t_all,k_trade)
-      + f21_trade_scenario_adjustments(i_ex,i_im,t_all,k_trade);
+  loop(t_all$(m_year(t_all) > sm_fix_SSP2),
+   i21_import_supply_historical(i_ex,i_im,t_all,k_trade) =
+    i21_import_supply_historical(i_ex,i_im,t_all,k_trade)
+    + f21_trade_scenario_adjustments(i_ex,i_im,t_all,k_trade);
   );
 );
 
