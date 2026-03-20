@@ -6,7 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description
-*' In this realization the model is solved directly using nonlinear optimization.
+*' In this realization the model is solved directly using nonlinear optimization,
+*' more specifically the interior point method using the Ipopt solver.
 *' If the optimization returns an infeasible solution the solve is repeated,
 *' either until a feasible solution is found or the maximum number of iterations
 *' as defined in `s80_maxiter` is reached.
