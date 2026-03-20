@@ -16,14 +16,14 @@ parameters
 ;
 
 variables
- v21_cost_tariff_reg(i,k_trade)          Regional tariff costs summed over all bilateral partners (mio. USD05MER per yr)
- v21_cost_trade_reg(i,k_trade)           Regional total trade costs per commodity: tariffs plus margins (mio. USD05MER per yr)
- vm_cost_trade(i)                        Regional total trade costs across all commodities entering objective (mio. USD05MER per yr)
+ v21_cost_tariff_reg(i,k_trade)          Regional tariff costs summed over all bilateral partners (mio. USD17MER per yr)
+ v21_cost_trade_reg(i,k_trade)           Regional total trade costs per commodity: tariffs plus margins (mio. USD17MER per yr)
+ vm_cost_trade(i)                        Regional total trade costs across all commodities entering objective (mio. USD17MER per yr)
 ;
 
 positive variables
  v21_trade(i_ex,i_im,k_trade)            Bilateral trade flow from exporter to importer (mio. tDM per yr)
- v21_cost_margin_reg(i,k_trade)          Regional transport margin costs summed over all bilateral partners (mio. USD05MER per yr)
+ v21_cost_margin_reg(i,k_trade)          Regional transport margin costs summed over all bilateral partners (mio. USD17MER per yr)
 ;
 
 equations
