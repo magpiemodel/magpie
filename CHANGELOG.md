@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **renv/activate.R** updated to version 1.1.7
 - **scripts/start** updated biomass collection start script; renamed from `calc_residuePot2ndBE.R` to `generate_biomassForEnergyData.R`
 - scripts/calibration/landconversion_cost.R: Simplified code, code improved to speed up and improve convergence.
+- **scripts/output** Refactored report output scripts and moved several repeated parts to magpie4 and quitte. As a result, `piamutils` is not a dependency anymore.
 - **config** New default switched from calibrating to FAO to LanduseInitialisation. Update of calibration parameters and removal of lowpass filter setting in line with simplified script.
 - **30_croparea/simple_apr24** Fixed rotation penalty to 0 instead of relying on the solver to not produce small positive values within the tolerance.
 
@@ -25,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **80_optimization/nlp_ipopt** New realization, using IPOPT instead of CONOPT4 (and the fallback CONOPT3) as the NLP solver for the MAgPIE model.
 - **15_food/anthro_iso_jun22_ipopt** Created realization for solving the food demand model with IPOPT.
 - **scripts/start/extra/ipopt.R** Start script for solving MAgPIE with IPOPT.
+- **scripts/output** new output script rds_report_agg_region.R, which generates report files with aggregated regions based on the mapping used in the validation input data; useful, e.g., for generating a report that contains an EUR region aggregated from H16/21 EU sub-regions
 
 ### removed
 -

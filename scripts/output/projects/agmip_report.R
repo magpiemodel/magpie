@@ -16,7 +16,6 @@ library(lucode2)
 library(quitte)
 library(gms)
 library(piamInterfaces)
-library(piamutils)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -33,14 +32,7 @@ rds <- paste0(outputdir, "/agmip_report.rds")
 
 report <- getReportAgMIP(gdx, scenario = cfg$title)
 
-for (mapping in c("AgMIP")) {
-  missingVariables <- sort(setdiff(unique(deletePlus(getMappingVariables(mapping,"M"))),unique(deletePlus(getNames(report,dim="variable")))))
-  if (length(missingVariables) > 0) {
-    warning("# The following ", length(missingVariables), " variables are expected in the piamInterfaces package ",
-            "for mapping ", mapping, ", but cannot be found in the MAgPIE report.\nPlease either fix in magpie4 or adjust the mapping in piamInterfaces.\n- ",
-            paste(missingVariables, collapse = ",\n- "), "\n")
-  }
-}
+expectVariablesPresent(report, getMappingVariables("AgMIP", "M"))
 
 ### regional aggregation
 write.report(report, file = mif, skipempty = FALSE)
