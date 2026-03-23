@@ -5,18 +5,26 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' Global production must cover global supply plus calibration balance flows.
+*' Regional production must cover regional supply plus bilateral trade flows plus
+*' historic balance flows.
+
+*' Regional material balance: production within a super-region must cover
+*' domestic supply minus imports plus exports, adjusted by historic balance
+*' flows as described above. Regional Imports are the sum of trade flowing
+*' into region i from all exporters; exports are the sum of trade flowing
+*' out of region i to all importers as recorded in trade matrix v21_trade.
+
+*' Balanceflows include a regional balanceflow, where production and supply 
+*' including trade are not equal in the historic data, potentially from trade 
+*' (time spent in travel), storage (also during travel), or other inventory
+*' or data reporting discrepancies. The export balanceflow adjusts the regional
+*' production in order to match FAO mass balance exports and imports, which 
+*' differ from the reported bilateral trade flows, which are more detailed but 
+*' likely less reliable than mass balance. Both balance flows are included to
+*' ensure that the global mass balance is consistent with FAO historic data.
 *' This ensures that total world production is sufficient to meet all demand,
 *' regardless of how trade distributes products across regions.
- q21_trade_glo(k_trade)..
-  sum(i2, vm_prod_reg(i2,k_trade)) =g=
-  sum(i2, vm_supply(i2,k_trade)) + sum((ct, i2), f21_trade_regional_balanceflow(ct, i2, k_trade));
 
- 
-*' Regional material balance: production within a super-region must cover
-*' domestic supply minus imports plus exports, adjusted by calibration balance
-*' flows. Imports are the sum of trade flowing into region i from all exporters;
-*' exports are the sum of trade flowing out of region i to all importers.
 q21_trade_reg(h2,k_trade)..
  sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), vm_supply(i2, k_trade) -
                               sum(i_ex, v21_trade(i_ex, i2, k_trade))  + sum(i_im, v21_trade(i2, i_im, k_trade)) +
@@ -63,19 +71,19 @@ q21_costs_tariffs(i2,k_trade)..
 
 *' Transport margin costs (freight and insurance) for each exporting region are
 *' the sum of bilateral margin rates times traded volumes across all importers.
-*' Margins are defined at the region-pair level, reflecting actual transport
-*' distances between specific world regions.
+*' Margins are defined at the bilateral region-pair level, reflecting region-to-region
+*' trade costs'.
+
 q21_costs_margins(i2,k_trade)..
  v21_cost_margin_reg(i2,k_trade) =g=
   sum(i_im, i21_trade_margin(i2,i_im,k_trade) * v21_trade(i2,i_im,k_trade));
 
-*' Regional trade costs per commodity are the sum of tariff and transport margin
-*' costs. These feed into the objective function via `vm_cost_trade`.
-q21_cost_trade_reg(i2,k_trade)..
-  v21_cost_trade_reg(i2,k_trade) =g=
-  v21_cost_tariff_reg(i2,k_trade) + v21_cost_margin_reg(i2,k_trade);
-
-*' Total trade costs per region, aggregated over all tradable commodities.
+*' Tariff costs per region aggregated over all tradable commodities.
 *' This variable enters the global objective function.
- q21_cost_trade(i2)..
- vm_cost_trade(i2) =e= sum(k_trade, v21_cost_trade_reg(i2,k_trade));
+ q21_cost_trade_tariff(i2)..
+ vm_cost_trade_tariff(i2) =e= sum(k_trade, v21_cost_tariff_reg(i2,k_trade));
+
+*' Transport margin costs per region aggregated over all tradable commodities.
+*' This variable enters the global objective function.
+ q21_cost_trade_margin(i2)..
+ vm_cost_trade_margin(i2) =e= sum(k_trade, v21_cost_margin_reg(i2,k_trade));

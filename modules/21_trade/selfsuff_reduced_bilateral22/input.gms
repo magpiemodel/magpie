@@ -27,22 +27,17 @@ scalars
   s21_trade_scenario_adjustments          Switch to apply scenario adjustments to import supply (0=off 1=on)     / 0 /
 ;
 
-table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)
-$ondelim
-$include "./modules/21_trade/input/f21_trade_bal_reduction.cs3"
-$offdelim;
-
 table f21_self_suff(t_all,h,kall) Superregional self-sufficiency rates (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_self_suff.cs3"
 $offdelim;
 
-table f21_trade_regional_balanceflow(t_all,i,kall) Domestic balance flows (mio. tDM per yr)
+table f21_trade_regional_balanceflow(t_all,i,kall) Balanceflow to match historic inconsistencies between supply and demand (mio. tDM per yr)
 $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_regional_balanceflow.cs3"
 $offdelim;
 
-table f21_trade_export_balanceflow(t_all,i,k_trade) Regional export balance flows (mio. tDM per yr)
+table f21_trade_export_balanceflow(t_all,i,k_trade) Balanceflow to match historic inconsistencies between trade matrix exports and FAO massbalance  (mio. tDM per yr)
 $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_export_balanceflow.cs3"
 $offdelim;
@@ -61,13 +56,18 @@ $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_import_suppl
 $offdelim
 /;
 
+** Standard deviation of import supply ratios are calculated based on historic trade matrix, by taking standard deviations
+** of all 5-year, 10-year, and 15-year windows via rolling windows from 1990 onwards. This allows for taking the min, mean, max
+** of all observed std. devs for each window length. This allows for a data-driven approach to defining the flexibility window 
+** for future trade, as 5 years into simulation the model can deviate based on the max observed variability for within 5 years in the past,
+** and so on for 10 and 15 years. The amount of variability can also be set in the preloop, if mean, min is preferred. 
+
 parameter f21_trade_bilat_stddev(i_ex,i_im,k_trade,trade_stddev21)  Standard deviation of import supply ratios over rolling windows of 5 10 and 15 years (1)
 /
 $ondelim
 $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_bilat_stddev.cs5"
 $offdelim
 /;
-
 
 parameter f21_trade_margin(i_ex,i_im,kall) Bilateral freight and insurance costs between region pairs (USD05MER per tDM)
 /

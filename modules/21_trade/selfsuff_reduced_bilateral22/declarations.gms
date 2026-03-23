@@ -6,7 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i21_trade_bal_reduction(t_all,k_trade)                    Reduction factor for inelastic trade pool share over time (1)
  i21_trade_margin(i_ex,i_im,k_trade)                       Bilateral freight and insurance costs between region pairs (USD17MER per tDM)
  i21_trade_tariff(t_all,i_ex,i_im,k_trade)                 Bilateral specific duty tariff rates (USD17MER per tDM)
  i21_import_supply_historical(i_ex,i_im,t_all,k_trade)     Share of importer domestic supply sourced from each exporter - historical and projected (1)
@@ -17,32 +16,35 @@ parameters
 
 variables
  v21_cost_tariff_reg(i,k_trade)          Regional tariff costs summed over all bilateral partners (mio. USD17MER per yr)
- v21_cost_trade_reg(i,k_trade)           Regional total trade costs per commodity: tariffs plus margins (mio. USD17MER per yr)
- vm_cost_trade(i)                        Regional total trade costs across all commodities entering objective (mio. USD17MER per yr)
 ;
 
 positive variables
  v21_trade(i_ex,i_im,k_trade)            Bilateral trade flow from exporter to importer (mio. tDM per yr)
  v21_cost_margin_reg(i,k_trade)          Regional transport margin costs summed over all bilateral partners (mio. USD17MER per yr)
+ vm_cost_trade_tariff(i)                 Regional tariff costs across all commodities entering objective (mio. USD17MER per yr)
+ vm_cost_trade_margin(i)                 Regional transport margin costs across all commodities entering objective (mio. USD17MER per yr)
+ vm_cost_trade_feasibility(i)            Regional feasibility penalty costs across all commodities entering objective (mio. USD17MER per yr)
 ;
 
 equations
- q21_trade_glo(k_trade)                  Global production must cover global supply plus balance flows (mio. tDM per yr)
  q21_notrade(h,k_notrade)                Non-tradable commodities must be produced within their super-region (mio. tDM per yr)
  q21_trade_reg(h,k_trade)                Regional material balance: production covers supply adjusted for net bilateral trade (mio. tDM per yr)
  q21_trade_lower(i_ex,i_im,k_trade)      Lower bound on bilateral trade from historical import supply ratio minus flexibility (mio. tDM per yr)
  q21_trade_upper(i_ex,i_im,k_trade)      Upper bound on bilateral trade from historical import supply ratio plus flexibility (mio. tDM per yr)
  q21_costs_tariffs(i,k_trade)            Bilateral tariff costs assigned to exporting region (mio. USD05MER per yr)
  q21_costs_margins(i,k_trade)            Bilateral transport margin costs assigned to exporting region (mio. USD05MER per yr)
- q21_cost_trade_reg(i,k_trade)           Total trade costs per region and commodity: tariffs plus margins (mio. USD05MER per yr)
- q21_cost_trade(i)                       Total trade costs per region across all commodities (mio. USD05MER per yr)
+ q21_cost_trade_tariff(i)                Regional tariff costs aggregated over all commodities (mio. USD05MER per yr)
+ q21_cost_trade_margin(i)                Regional margin costs aggregated over all commodities (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov21_cost_tariff_reg(t,i,k_trade,type)     Regional tariff costs summed over all bilateral partners (mio. USD05MER per yr)
  ov21_cost_trade_reg(t,i,k_trade,type)      Regional total trade costs per commodity: tariffs plus margins (mio. USD05MER per yr)
- ov_cost_trade(t,i,type)                    Regional total trade costs across all commodities entering objective (mio. USD05MER per yr)
+ ov_cost_trade(t,i,type)                    Regional total trade costs across all commodities (mio. USD05MER per yr)
+ ov_cost_trade_tariff(t,i,type)             Regional tariff costs across all commodities entering objective (mio. USD05MER per yr)
+ ov_cost_trade_margin(t,i,type)             Regional transport margin costs across all commodities entering objective (mio. USD05MER per yr)
+ ov_cost_trade_feasibility(t,i,type)        Regional feasibility penalty costs across all commodities entering objective (mio. USD05MER per yr)
  ov21_trade(t,i_ex,i_im,k_trade,type)       Bilateral trade flow from exporter to importer (mio. tDM per yr)
  ov21_cost_margin_reg(t,i,k_trade,type)     Regional transport margin costs summed over all bilateral partners (mio. USD05MER per yr)
  oq21_trade_glo(t,k_trade,type)             Global production must cover global supply plus balance flows (mio. tDM per yr)
@@ -53,6 +55,7 @@ parameters
  oq21_costs_tariffs(t,i,k_trade,type)       Bilateral tariff costs assigned to exporting region (mio. USD05MER per yr)
  oq21_costs_margins(t,i,k_trade,type)       Bilateral transport margin costs assigned to exporting region (mio. USD05MER per yr)
  oq21_cost_trade_reg(t,i,k_trade,type)      Total trade costs per region and commodity: tariffs plus margins (mio. USD05MER per yr)
- oq21_cost_trade(t,i,type)                  Total trade costs per region across all commodities (mio. USD05MER per yr)
+ oq21_cost_trade_tariff(t,i,type)           Regional tariff costs aggregated over all commodities (mio. USD05MER per yr)
+ oq21_cost_trade_margin(t,i,type)           Regional margin costs aggregated over all commodities (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

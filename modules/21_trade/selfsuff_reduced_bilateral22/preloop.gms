@@ -5,11 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** TRADE BALANCE REDUCTION
-** Map trade liberalization regime to easy/hard trade product groups
-i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
-i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
-
 ** BILATERAL TRANSPORT MARGINS
 ** Initialize bilateral margins from input; set minimum threshold for very
 ** small values to avoid near-zero transport costs that could cause
@@ -28,12 +23,17 @@ i21_import_supply_historical(i_ex,i_im,t_all,k_trade) = f21_import_supply_histor
 
 
 ** FLEXIBILITY WINDOW (STANDARD DEVIATION BOUNDS)
-** The flexibility window around historical import supply ratios is defined
-** by the observed standard deviation of these ratios. Three rolling windows
-** are available from the input data: 5-year, 10-year, and 15-year.
-** These are assigned to successive time steps after the calibration year
-** (sm_fix_SSP2), giving progressively wider flexibility as the projection
-** moves further from the historical period.
+** 
+** Standard deviation of import supply ratios are calculated based on the historic trade matrix,
+**  by taking standard deviations of all 5-year, 10-year, and 15-year windows via rolling windows
+** from 1990 onwards,for each importer-exporter-product combination.
+** This allows for a vector of all observed std. devs for each window length in history,
+** showing how variable trade flows were over shorter and longer periods of time.
+**  5/10/15 year historic windows  are assigned to equivalent time steps after the calibration year
+** (sm_fix_SSP2), giving progressively wider flexibility as the projection moves further
+** from the historical period. The amount of flexibility is also set to the max observed variability
+** for each windown length, allowing for equvialent amount of future change change as observed in the past for each window length.
+** Options for mean and min also exist for less flexibility, implying less future . 
 loop(t_all,
   i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 5) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd5");
   i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 10) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd10");
