@@ -31,12 +31,7 @@ put 'honor_original_bounds yes' /;
 put 'constr_viol_tol 1e-6' /;
 put 'print_timing_statistics yes' /;
 put 'dependency_detector mumps' /;
-* put 'dependency_detection_with_rhs yes' /;
 putclose optfile;
-
-$onecho > ipopt.op2
-Lim_Variable = 1.e25
-$offecho
 
 if(execerror > 0, 
   abort "Execution error. Check your .lst file.";
@@ -44,8 +39,6 @@ if(execerror > 0,
 
 *' @code
 solve magpie USING nlp MINIMIZING vm_cost_glo;
-*' Optional second solve statement
-if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
 *' @stop
 
 display "vm_cost_glo.l";
@@ -62,9 +55,6 @@ if (magpie.modelstat > 2,
     s80_resolve_option = s80_resolve_option + 1;
 
     solve magpie USING nlp MINIMIZING vm_cost_glo;
-    if(s80_secondsolve = 1, solve magpie USING nlp MINIMIZING vm_cost_glo; );
-    option nlp = ipopt;
-    magpie.optfile = s80_optfile;
 
     display "vm_cost_glo.l";
     display vm_cost_glo.l;
