@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c21_trade_liberalization  l909090r808080
+$setglobal c21_trade_liberalization  l909595r809090
 *   options are "regionalized" and "globalized" and "fragmented"
 
 sets

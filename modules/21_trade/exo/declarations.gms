@@ -27,11 +27,10 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)               Regional  trade costs (mio. USD17MER per yr)
- ov_cost_trade_tariff(t,i,type)        Regional tariff costs across all commodities (mio. USD17MER per yr)
- ov_cost_trade_margin(t,i,type)        Regional transport margin costs across all commodities (mio. USD17MER per yr)
- ov_cost_trade_feasibility(t,i,type)   Regional feasibility penalty costs across all commodities (mio. USD17MER per yr)
  ov21_cost_trade_reg(t,h,k_trade,type) Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
+ ov_cost_trade_tariff(t,i,type)        Regional tariff costs across all commodities entering objective (mio. USD17MER per yr)
+ ov_cost_trade_margin(t,i,type)        Regional transport margin costs across all commodities entering objective (mio. USD17MER per yr)
+ ov_cost_trade_feasibility(t,i,type)   Regional feasibility penalty costs across all commodities entering objective (mio. USD17MER per yr)
  oq21_notrade(t,h,kall,type)           Superregional production constraint of non-tradable commodities (mio. tDM per yr)
  oq21_cost_trade_reg(t,h,k_trade,type) Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
  oq21_cost_trade_tariff(t,h,type)      Superregional tariff costs (mio. USD17MER per yr)
