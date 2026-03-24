@@ -45,31 +45,30 @@ loop(t_all,
 
 ** BILATERAL TARIFFS
 ** Initialize tariffs from input data or set to zero depending on switch.
-** Optional linear fadeout reduces tariffs to zero between start and target
-** year. Post-calibration, tariffs can be further scaled by s21_tariff_factor.
-
-if ((s21_trade_tariff=1),
-  i21_trade_tariff(t_all, i_ex,i_im,k_trade) = f21_trade_tariff(i_ex,i_im,k_trade);
-elseif (s21_trade_tariff=0),
-  i21_trade_tariff(t_all, i_ex,i_im,k_trade) = 0;
+if ((s21_trade_tariff = 1),
+  i21_trade_tariff(t_all, i_ex, i_im, k_trade) = f21_trade_tariff(i_ex, i_im, k_trade);
+elseif (s21_trade_tariff = 0),
+  i21_trade_tariff(t_all, i_ex, i_im, k_trade) = 0;
 );
 
-if ((s21_trade_tariff_fadeout=1),
-  loop(t_all,
-    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > 
-    s21_trade_tariff_startyear and
-    m_year(t_all) < s21_trade_tariff_targetyear) = (1-((m_year(t_all)-s21_trade_tariff_startyear) /
-                                                  (s21_trade_tariff_targetyear-s21_trade_tariff_startyear))) * 
-                                                   i21_trade_tariff(t_all,i_ex,i_im,k_trade);
-    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= s21_trade_tariff_startyear) = i21_trade_tariff(t_all,i_ex,i_im,k_trade); 
-    i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear) = 0; 
-  );
-);
-
-** Apply post-calibration tariff scaling factor
+** Optional linear fade of tariffs towards a target multiplier between start
+** and target year. s21_trade_tariff_factor is the target multiplier:
+** 1 = no change, 0 = full fadeout, 0.5 = halve tariffs, 2 = double tariffs.
+** Before the start year, tariffs are unchanged. After the target year, tariffs
+** are held at the target multiplier level. Between start and target, a linear
+** interpolation is applied. Only affects post-calibration periods.
 loop(t_all,
-  i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= sm_fix_SSP2) =  i21_trade_tariff(t_all,i_ex,i_im,k_trade);
-  i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > sm_fix_SSP2) = i21_trade_tariff(t_all,i_ex,i_im,k_trade) * s21_tariff_factor;
+  i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= sm_fix_SSP2) = i21_trade_tariff(t_all,i_ex,i_im,k_trade);
+  i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > sm_fix_SSP2
+    and m_year(t_all) <= s21_trade_tariff_startyear) = i21_trade_tariff(t_all,i_ex,i_im,k_trade);
+  i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > s21_trade_tariff_startyear
+    and m_year(t_all) < s21_trade_tariff_targetyear) =
+    i21_trade_tariff(t_all,i_ex,i_im,k_trade)
+    * (1 + (s21_trade_tariff_factor - 1)
+       * (m_year(t_all) - s21_trade_tariff_startyear)
+       / (s21_trade_tariff_targetyear - s21_trade_tariff_startyear));
+  i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear) =
+    i21_trade_tariff(t_all,i_ex,i_im,k_trade) * s21_trade_tariff_factor;
 );
 
 ** FLEXIBILITY AND SCENARIO SCALARS
