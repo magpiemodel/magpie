@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' The bilateral realization has no feasibility penalty term. Fix to zero so
-*' that the cost module can unconditionally sum all three trade cost interfaces.
+* The bilateral realization has no feasibility penalty term. Fix to zero so
+* that the cost module can unconditionally sum all three trade cost interfaces.
 
 vm_cost_trade_feasibility.fx(i) = 0;

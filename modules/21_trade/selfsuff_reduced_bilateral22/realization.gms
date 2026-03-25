@@ -50,16 +50,10 @@
 *' after which the window remains fixed at the maximum observed historical standard deviation,
 *' allowing the flexibility window to evolve over time.
 *'
-*' The scenario adjustment switch (`c21_trade_scenario`) selects a named geopolitical
-*' trade scenario. Available scenarios are: USAex (USA export expansion), CHAdom
-*' (China domestication/import reduction), and EURex (EU trade restructuring).
-*' When set to "off", the zero-initialized adjustment table has no effect.
-*' The adjustments are applied on top of the historical ratio and any scenario
-*' scaling factor, and are bounded by the same standard deviation window.
 *' Non-tradable commodities (fodder, pasture, residues, bioenergy crops) are
 *' constrained to be produced within the super-region where they are consumed.
-*' A global production constraint ensures that total world production covers
-*' total world supply plus any balance flows.
+*' A regional production constraint including trade flows ensures that 
+*' world production covers total world supply plus any balance flows.
 
 *' @limitations Trade patterns are anchored to historically observed bilateral
 *' import supply ratios, so structural shifts in trade partnerships beyond

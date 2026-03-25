@@ -14,16 +14,18 @@
 *' into region i from all exporters; exports are the sum of trade flowing
 *' out of region i to all importers as recorded in trade matrix v21_trade.
 
-*' Balanceflows include a regional balanceflow, where production and supply 
-*' including trade are not equal in the historic data, potentially from trade 
+*' Two balance flows are included to ensure that historic values are consistent
+*' with FAO mass balance data. First balanceflow is a regional balanceflow
+*' as in the FAO mass balance  data to which we calibrate, regional production
+*' and supply including net-trade are not equal. This can potentially stem from trade 
 *' (time spent in travel), storage (also during travel), or other inventory
-*' or data reporting discrepancies. The export balanceflow adjusts the regional
-*' production in order to match FAO mass balance exports and imports, which 
-*' differ from the reported bilateral trade flows, which are more detailed but 
-*' likely less reliable than mass balance. Both balance flows are included to
-*' ensure that the global mass balance is consistent with FAO historic data.
-*' This ensures that total world production is sufficient to meet all demand,
-*' regardless of how trade distributes products across regions.
+*' or data reporting discrepancies, and the regional balanceflow adjusts production
+*' to match this discrepancy. Furthermore, because the bilateral trade import supply 
+*' ratios to which we calibrate are based on the FAO bilateral trade matrix, 
+*' which is not harmonzied to FAO mass balance exports, we need to balance total regional
+*' exports to match non-bilateral exports as recorded in FAO mass balance. This shows up
+*' as extra production required in the model, although we can not trace this balanceflow
+*' bilaterally.
 
 q21_trade_reg(h2,k_trade)..
  sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), vm_supply(i2, k_trade) -

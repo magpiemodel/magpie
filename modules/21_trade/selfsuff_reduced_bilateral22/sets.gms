@@ -38,8 +38,8 @@ sets
    /
 
    trade_stddev21 Standard deviation of observed bilateral trade
-   /  meansd5, maxsd5, minsd5, meansd10, maxsd10,  minsd10,  meansd15,
-    maxsd15,  minsd15 /
+   / meansd5, maxsd5, minsd5, meansd10, maxsd10, minsd10, meansd15,
+    maxsd15, minsd15 /
 ;
 
 alias(h,h3);

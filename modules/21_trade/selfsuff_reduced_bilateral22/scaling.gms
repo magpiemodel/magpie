@@ -8,3 +8,10 @@
 vm_cost_trade_tariff.scale(i) = 1e5;
 vm_cost_trade_margin.scale(i) = 1e5;
 vm_cost_trade_feasibility.scale(i) = 1e5;
+*v21_cost_trade_reg.scale(i,k_trade) = 1e2;
+*q21_cost_trade_reg.scale(i,k_trade) = 1e2;
+*q21_excess_supply.scale(h,k_trade) = 1e-2;
+*q21_notrade.scale(h,k_notrade) = 1e-2;
+*q21_trade_glo.scale(k_trade) = 1e-3;
+*q21_trade_reg.scale(h,k_trade) = 1e-2;
+*q21_trade_reg_up.scale(h,k_trade) = 1e-2;
