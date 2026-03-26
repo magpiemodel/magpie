@@ -16,7 +16,6 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 cfg$title <- "default_ipopt"
 cfg$gms$optimization <- "nlp_ipopt"
-cfg$gms$food <- "anthro_iso_jun22_ipopt"
 cfg$gms$s80_toloptimal <- 1.0e-8
 
 start_run(cfg, codeCheck = FALSE)
