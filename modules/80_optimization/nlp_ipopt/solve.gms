@@ -8,12 +8,11 @@
 
 s80_counter = 0;
 p80_modelstat(t) = 14;
-s80_resolve_option = 0;
 
 *** solver settings
 option nlp = ipopt;
 option threads = 1;
-magpie.optfile   = s80_optfile;
+magpie.optfile   = 1;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
@@ -48,11 +47,10 @@ display magpie.modelstat;
 * set modelstat to 13 in case of NA for continuation
 magpie.modelStat$(magpie.modelStat=NA) = 13;
 
-* in case of problems try different solvers and optfile settings
+* in case of problems restart the solver with the same optfile settings
 if (magpie.modelstat > 2,
   repeat(
     s80_counter = s80_counter + 1 ;
-    s80_resolve_option = s80_resolve_option + 1;
 
     solve magpie USING nlp MINIMIZING vm_cost_glo;
 
@@ -69,8 +67,6 @@ if (magpie.modelstat > 2,
 *   Set modelstat to 13 in case of NA for the `until` check of the repeat loop.
 *   Otherwise, the repeat loop will never end.
     magpie.modelStat$(magpie.modelStat=NA) = 13;
-
-    s80_resolve_option$(s80_resolve_option >= 4) = 0;
 
     until (magpie.modelstat <= 2 or s80_counter >= s80_maxiter)
   );
