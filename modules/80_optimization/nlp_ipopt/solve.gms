@@ -19,14 +19,12 @@ put optfile;
 put 'tol ', s80_toloptimal:12:11 /;
 put 'mu_strategy monotone' /;
 put 'mu_init 1e-5' /;
-put 'print_level 5' /;
 put 'mu_linear_decrease_factor 0.85' /;
 put 'mu_superlinear_decrease_power 1.02' /;
 put 'nlp_scaling_method none' /;
 put 'bound_relax_factor 1e-7' /;
 put 'honor_original_bounds yes' /;
 put 'constr_viol_tol 1e-6' /;
-put 'print_timing_statistics yes' /;
 put 'dependency_detector mumps' /;
 putclose optfile;
 
