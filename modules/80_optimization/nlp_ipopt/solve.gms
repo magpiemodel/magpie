@@ -12,11 +12,9 @@ p80_modelstat(t) = 14;
 *** solver settings
 option nlp = ipopt;
 option threads = 1;
-magpie.optfile   = 1;
-magpie.scaleopt  = 1 ;
-magpie.solprint  = 0 ;
-magpie.holdfixed = 1 ;
 
+* Default optfile, starting immediately with the monotone mu_strategy to make
+* the behavior more consistent.
 put optfile;
 put 'tol ', s80_toloptimal:12:11 /;
 put 'mu_strategy monotone' /;
@@ -31,6 +29,36 @@ put 'constr_viol_tol 1e-6' /;
 put 'print_timing_statistics yes' /;
 put 'dependency_detector mumps' /;
 putclose optfile;
+
+* Alternative optfile, making use of the adaptive mu_strategy which starts faster
+* but is less reliable. Seems to behave better for values near zero.
+put optfile2;
+put 'tol ', s80_toloptimal:12:11 /;
+put 'constr_viol_tol 1e-6' /;
+put 'mu_strategy adaptive' /;
+put 'mu_oracle quality-function' /;
+put 'quality_function_max_section_steps 4' /;
+put 'nlp_scaling_method gradient-based' /;
+put 'nlp_scaling_max_gradient 100' /;
+put 'acceptable_tol 1e-6' /;
+put 'acceptable_iter 10' /;
+put 'acceptable_constr_viol_tol 1e-3' /;
+put 'acceptable_dual_inf_tol 1e-2' /;
+put 'acceptable_compl_inf_tol 1e-2' /;
+put 'bound_relax_factor 1e-7' /;
+put 'honor_original_bounds yes' /;
+put 'max_iter 10000' /;
+put 'linear_solver mumps' /;
+put 'dependency_detector mumps' /;
+put 'print_level 5' /;
+put 'print_timing_statistics yes' /;
+put 'print_info_string yes' /;
+putclose optfile2;
+
+magpie.optfile   = s80_optfile;
+magpie.scaleopt  = 1 ;
+magpie.solprint  = 0 ;
+magpie.holdfixed = 1 ;
 
 if(execerror > 0, 
   abort "Execution error. Check your .lst file.";

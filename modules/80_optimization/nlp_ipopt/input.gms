@@ -7,5 +7,6 @@
 
 scalars
     s80_maxiter         maximal solve iterations if modelstat is > 2 (1)    / 30 /
+    s80_optfile         switch to use specfied solver settings (1)          / 1 /
     s80_toloptimal      Ipopt solver tolerance (parameter "tol")            / 1e-08 /
 ;
