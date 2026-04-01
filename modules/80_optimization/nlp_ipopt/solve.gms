@@ -38,7 +38,6 @@ put 'mu_oracle quality-function' /;
 put 'quality_function_max_section_steps 4' /;
 put 'nlp_scaling_method gradient-based' /;
 put 'nlp_scaling_max_gradient 100' /;
-put 'acceptable_tol 1e-6' /;
 put 'acceptable_iter 10' /;
 put 'acceptable_constr_viol_tol 1e-3' /;
 put 'acceptable_dual_inf_tol 1e-2' /;
@@ -48,9 +47,6 @@ put 'honor_original_bounds yes' /;
 put 'max_iter 10000' /;
 put 'linear_solver mumps' /;
 put 'dependency_detector mumps' /;
-put 'print_level 5' /;
-put 'print_timing_statistics yes' /;
-put 'print_info_string yes' /;
 putclose optfile2;
 
 magpie.optfile   = s80_optfile;
