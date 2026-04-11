@@ -100,13 +100,6 @@ loop(t,
 *' on the constant values `i14_modeled_yields_hist`, `i14_fao_yields_hist`, `i14_lambda_yields`
 *' and the uncalibrated, cellular yield `f14_yields` following the idea of eq. (9) in [@Heinke.2013]:
 
-***YIELD CORRECTION FOR 2ND GENERATION BIOENERGY CROPS*************************************
-i14_yields_calib_combined(t,j,yldtype,"begr",w) = i14_yields_combined(t,j,yldtype,"begr",w) * 
-                                                    sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
-i14_yields_calib_combined(t,j,yldtype,"betr",w) = i14_yields_combined(t,j,yldtype,"betr",w) * 
-                                                    sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
-*******************************************************************************************
-
 i14_managementcalib(t,j,yldtype,knbe14,w) =
    1 + (sum(cell(i,j), i14_fao_yields_hist(t,i,knbe14) - i14_modeled_yields_hist(t,i,yldtype,knbe14)) /
                             i14_yields_combined(t,j,yldtype,knbe14,w) *
@@ -147,6 +140,48 @@ if ((s14_calib_ir2rf = 1),
                                                       i14_modeled_yields_hist2(i,yldtype,knbe14)) *
                                   i14_yields_calib_combined(t,j,yldtype,knbe14,w);
 );
+
+***BIOPHYSICAL CALIBRATION FOR 2ND GENERATION BIOENERGY CROPS (Li2020)*******************
+*' Step 1: Compute LPJmL weighted mean rainfed yields for bioenergy crops at y1995 —
+*'         regional (weighted by cropland area per cluster) and global, per yldtype.
+*'         To-Do-NOTE: "y2010" index in f14_cluster_be_croparea_weights is a workaround — the data
+*'         are actually y1995 cropland areas mislabelled during preprocessing. Once preprocessing
+*'         is rerun the weights file will be timeless; remove "y2010" index and t_all from the
+*'         parameter declaration then.
+i14_be_LPJ_reg(i,yldtype,kbe14) =
+  sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
+  (sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
+
+i14_be_LPJ_glo(yldtype,kbe14) =
+  sum(j, f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
+  (sum(j, f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
+
+*' Step 2: Compute calibration factors as Li2020 / LPJmL mean — regional and global.
+*'         Fall back to 1 where LPJmL mean is zero.
+i14_be_calib_reg(i,yldtype,kbe14)$(i14_be_LPJ_reg(i,yldtype,kbe14) > 0) =
+  f14_region_be_yields("y2010",i,kbe14) / i14_be_LPJ_reg(i,yldtype,kbe14);
+i14_be_calib_reg(i,yldtype,kbe14)$(i14_be_LPJ_reg(i,yldtype,kbe14) = 0) = 1;
+
+i14_be_calib_glo(yldtype,kbe14)$(i14_be_LPJ_glo(yldtype,kbe14) > 0) =
+  f14_global_be_yields("y2010","GLO",kbe14) / i14_be_LPJ_glo(yldtype,kbe14);
+i14_be_calib_glo(yldtype,kbe14)$(i14_be_LPJ_glo(yldtype,kbe14) = 0) = 1;
+
+*' Step 3: Apply Li2020 biophysical calibration to i14_yields_calib_combined.
+$ifthen "%c14_be_calib%" == "regional"
+  i14_yields_calib_combined(t,j,yldtype,kbe14,w) =
+    i14_yields_combined(t,j,yldtype,kbe14,w) * sum(cell(i,j), i14_be_calib_reg(i,yldtype,kbe14));
+$elseif "%c14_be_calib%" == "global"
+  i14_yields_calib_combined(t,j,yldtype,kbe14,w) =
+    i14_yields_combined(t,j,yldtype,kbe14,w) * i14_be_calib_glo(yldtype,kbe14);
+$else
+  i14_yields_calib_combined(t,j,yldtype,kbe14,w) = i14_yields_combined(t,j,yldtype,kbe14,w);
+$endif
+
+***MANAGEMENT CALIBRATION FOR 2ND GENERATION BIOENERGY CROPS (tau scaling)****************
+*' Tau-based management calibration applied on top of the Li2020 biophysical calibration.
+i14_yields_calib_combined(t,j,yldtype,kbe14,w) = i14_yields_calib_combined(t,j,yldtype,kbe14,w) *
+                                                    sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
+*******************************************************************************************
 
 * Set yields to gsadapt values (pasture yields are not affected by growing period adaption)
 

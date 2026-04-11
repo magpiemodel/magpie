@@ -30,6 +30,9 @@ sets
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, cottn_pro /
 
+  kbe14(kcr) Bioenergy cropping activities
+       / begr, betr /
+
   ncp_type14 natures contributions to people (NCP) relevant for agricultural yields
        / soil_intact, poll_suff /
 

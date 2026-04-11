@@ -5,6 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c14_be_calib  regional
+*   options:  regional  (biophysical calibration using Li2020 regional means)
+*             global    (biophysical calibration using Li2020 global mean)
+*             off       (no Li2020 biophysical calibration)
+
 $setglobal c14_yields_scenario  cc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
@@ -108,4 +113,22 @@ $ondelim
 $include "./modules/14_yields/input/f14_kcr_pollinator_dependence.csv"
 $offdelim
 /
+;
+
+table f14_region_be_yields(t_all,i,kbe14) Li2020 reference yields for bioenergy crops per region (tDM per ha per yr)
+$ondelim
+$include "./modules/14_yields/gsadapt_nov25/input/f14_region_be_yields.cs3"
+$offdelim
+;
+
+table f14_global_be_yields(t_all,*,kbe14) Li2020 reference yields for bioenergy crops at global level (tDM per ha per yr)
+$ondelim
+$include "./modules/14_yields/gsadapt_nov25/input/f14_global_be_yields.cs3"
+$offdelim
+;
+
+table f14_cluster_be_croparea_weights(t_all,j,kbe14) Cropland area weights per cluster for Li2020 bioenergy yield aggregation (mio. ha)
+$ondelim
+$include "./modules/14_yields/gsadapt_nov25/input/f14_cluster_be_croparea_weights.cs3"
+$offdelim
 ;
