@@ -21,7 +21,7 @@ parameters
  i14_lambda_yields(t,i,yldtype,kcr)                      Scaling factor for non-linear management calibration (1)
  i14_managementcalib(t,j,yldtype,kcr,w)                  Regional management calibration factor accounting for FAO yield levels (1)
  f14_region_be_yields(t_all,i,kbe14)                     Li2020 reference yields for bioenergy crops aggregated to regions (tDM per ha per yr)
- f14_global_be_yields(t_all,*,kbe14)                     Li2020 reference yields for bioenergy crops aggregated to global level (tDM per ha per yr)
+ f14_global_be_yields(t_all,kbe14)                        Li2020 reference yields for bioenergy crops aggregated to global level (tDM per ha per yr)
  f14_cluster_be_croparea_weights(t_all,j,kbe14)          Cropland area weights per cluster used for Li2020 bioenergy yield aggregation (mio. ha)
 *' TODO: once preprocessing is rerun, this parameter will be timeless (no t_all dimension).
 *'       Remove t_all here and update the "y2010" index in preloop.gms accordingly.

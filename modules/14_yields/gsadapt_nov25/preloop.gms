@@ -163,7 +163,7 @@ i14_be_calib_reg(i,yldtype,kbe14)$(i14_be_LPJ_reg(i,yldtype,kbe14) > 0) =
 i14_be_calib_reg(i,yldtype,kbe14)$(i14_be_LPJ_reg(i,yldtype,kbe14) = 0) = 1;
 
 i14_be_calib_glo(yldtype,kbe14)$(i14_be_LPJ_glo(yldtype,kbe14) > 0) =
-  f14_global_be_yields("y2010","GLO",kbe14) / i14_be_LPJ_glo(yldtype,kbe14);
+  f14_global_be_yields("y2010",kbe14) / i14_be_LPJ_glo(yldtype,kbe14);
 i14_be_calib_glo(yldtype,kbe14)$(i14_be_LPJ_glo(yldtype,kbe14) = 0) = 1;
 
 *' Step 3: Apply Li2020 biophysical calibration to i14_yields_calib_combined.

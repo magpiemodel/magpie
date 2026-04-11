@@ -121,7 +121,7 @@ $include "./modules/14_yields/gsadapt_nov25/input/f14_region_be_yields.cs3"
 $offdelim
 ;
 
-table f14_global_be_yields(t_all,*,kbe14) Li2020 reference yields for bioenergy crops at global level (tDM per ha per yr)
+table f14_global_be_yields(t_all,kbe14) Li2020 reference yields for bioenergy crops at global level (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/gsadapt_nov25/input/f14_global_be_yields.cs3"
 $offdelim
