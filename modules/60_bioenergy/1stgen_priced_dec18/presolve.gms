@@ -5,7 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+vm_dem_bioen.fx(i,"pasture") = 0;
 vm_dem_bioen.fx(i,kap) = 0;
+vm_dem_bioen.fx(i,kforestry) = 0;
 v60_2ndgen_bioenergy_dem_dedicated.fx(i,kall) = 0;
 v60_2ndgen_bioenergy_dem_dedicated.up(i,kbe60) = Inf;
 v60_2ndgen_bioenergy_dem_residues.fx(i,kall) = 0;

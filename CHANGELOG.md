@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **inputdata** inputdata updated calibraion of land conversion costs in the input data for H12, based on the recent development of the calibration procedure
+- **inputdata** updated input data to rev4.131, including IPCC wood density, FAO woodfuel stacking correction, FRA2025 growing stock targets, and FRA2025 validation data
 - **inputdata** updated input data to rev4.127, including fix of FAO mass balance and processing shares where maiz to ethanol values were missing for some countries
 - **PR template** minor changes, require all checkboxes to be checked
 - **13_tc** the interface variable `vm_tau` now represents a linear combination of tau on regular cropland (`v13_tau_core`) and tau on cropland in conservation priority areas (`v13_tau_consv`). Per default values in `vm_tau` are equal to `v13_tau_core`.
@@ -17,20 +19,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **renv/activate.R** updated to version 1.1.7
 - **scripts/start** updated biomass collection start script; renamed from `calc_residuePot2ndBE.R` to `generate_biomassForEnergyData.R`
 - scripts/calibration/landconversion_cost.R: Simplified code, code improved to speed up and improve convergence.
+- **scripts/output** Refactored report output scripts and moved several repeated parts to magpie4 and quitte. As a result, `piamutils` is not a dependency anymore.
 - **config** New default switched from calibrating to FAO to LanduseInitialisation. Update of calibration parameters and removal of lowpass filter setting in line with simplified script.
+- **30_croparea/simple_apr24** Fixed rotation penalty to 0 instead of relying on the solver to not produce small positive values within the tolerance.
 
 ### added
--
+- **52_carbon** growing stock calibration: bisection of Chapman-Richards growth rate k to match FRA 2025 targets for secdforest (NRF) and plantations; uncalibrated curves preserved for aff/ndc
+- **73_timber** FAO woodfuel stacking correction (`s73_woodfuel_stacking_factor = 0.65`) applied before density conversion
+- **73_timber** regionalized timber production costs: costs specified in USD/m3 (UNECE source), converted to regional USD/tDM via `im_vol_conv(i)`; natveg cost premium as single scalar `s73_natveg_cost_premium`
+- **73_timber** residues from woodfuel harvest added to residue base (justified by BEF-based stem-only yields)
+- **32_forestry** reduced re-establishment cost for replanted plantations (`s32_est_cost_plant_reest`)
+- **scripts/output** new start script to report land use in a thematic resolution specific for the Bending the Curve 2 initiative.
+- **scaling** Scaling now also includes equations based on level and marginals from `gdx2::calcScaling()`. Upscaling (scaling factors below 1) suggestions commented out per default.
+- **scripts/output** new output script rds_report_agg_region.R, which generates report files with aggregated regions based on the mapping used in the validation input data; useful, e.g., for generating a report that contains an EUR region aggregated from H16/21 EU sub-regions
 
 ### removed
 -
 
 ### fixed
+- **14_yields** replaced BCEF_S values with proper BEF in `fm_ipcc_bef.cs3` (was `f14_ipcc_bce.cs3`); `pm_growing_stock` (was `pm_timber_yield`) now in true tDM/ha instead of m3/ha
+- **73_timber/52_carbon** replaced global wood density (0.6/0.3) with IPCC climate-zone-specific values; file moved from `f73_volumetric_conversion.csv` (M73, product-indexed) to `f52_volumetric_conversion.csv` (M52, climate-class-indexed); same density for both products
+- **14_yields, 32_forestry, 35_natveg, 52_carbon, 73_timber** converted local input parameters to shared interfaces to avoid duplicate files across modules (`f14_aboveground_fraction` → `fm_aboveground_fraction`, `f14_ipcc_bef` → `fm_ipcc_bef`, `s14_carbon_fraction` → `sm_carbon_fraction`); renamed parameters for clarity and consistency with coding guidelines (`pm_timber_yield` → `im_growing_stock`, `p32_yield_forestry_future` → `i32_growing_stock_at_harvest`, `pm_vol_conv` → `im_vol_conv`, `p52_*` → `i52_*`, `pm_carbon_density_*_default` → `*_uncalib`, `s14_minimum_wood_yield` → `s14_minimum_growing_stock`, `s73_reisdue_removal_cost` → `s73_residue_removal_cost`); fixed ~25 typos in descriptions; updated realization.gms descriptions
 - **32_forestry** fixed parenthesis placement in discounting formula for establishment costs
 - **scripts/start_functions.R** added all extra `cfg` arguments in `start_run()` to the config check call
 - **32_forestry** bugfix limit for endogenous re/afforestation in historical time steps
 - **highres.R** temporary f32_max_aff_area.cs4 is now deleted in case of error
 - **scripts/calibration/landconversion_cost.R**: Bugfixes, see https://github.com/magpiemodel/magpie/pull/858
+- **scaling** Replaced scaling factors like `10e3` with the intended `1e3`
 
 ## [4.13.0] - 2025-10-23
 

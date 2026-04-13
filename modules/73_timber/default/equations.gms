@@ -7,18 +7,26 @@
 
 *' @equations
 
-*' Timber production cost include the cost for producing wood, woodfuel and residues,
-*' and technical costs for a slack variable ('v73_prod_heaven_timber').
-*' The slack variable (high costs) 
-*' is only used as a last resort when there is no other way to meet the timber
-*' demand. The purpose of the slack variable is to assure technically feasibility
-*' of the model under all conditions and to indicate shortage of wood supply, if any.
+*' Timber production cost has four components:
+*' 1. Base production cost: all timber (plantation + natveg) pays `im_timber_prod_cost(i)`
+*'    per tDM, regionalized via wood density (source: 89/44 USD17MER/m3 for wood/woodfuel).
+*' 2. Natveg cost premium: natveg timber pays an additional `s73_natveg_cost_premium` (15%)
+*'    on top of the base cost. This reflects higher processing costs for heterogeneous
+*'    natural forest timber. When premium is zero, the term vanishes.
+*' 3. Residue removal cost: `s73_residue_removal_cost` (2.7 USD17MER/tDM) for
+*'    collecting logging residues (branches, tops) from the harvest site.
+*' 4. Slack variable cost: `s73_free_prod_cost` (1e6 USD17MER/tDM) — prohibitively
+*'    high cost for the slack variable `v73_prod_heaven_timber`, used only as a last
+*'    resort to ensure technical feasibility when timber demand cannot be met from
+*'    available forest resources.
 
 q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
-                      sum((cell(i2,j2),kforestry), vm_prod(j2,kforestry) * im_timber_prod_cost(kforestry))
-                    + sum(cell(i2,j2), v73_prod_residues(j2)) * s73_reisdue_removal_cost
+                      sum((cell(i2,j2),kforestry), vm_prod(j2,kforestry) * im_timber_prod_cost(i2,kforestry))
+                    + sum((cell(i2,j2),land_natveg,kforestry), vm_prod_natveg(j2,land_natveg,kforestry)
+                        * (i73_timber_prod_cost_natveg(i2,kforestry) - im_timber_prod_cost(i2,kforestry)))
+                    + sum(cell(i2,j2), v73_prod_residues(j2)) * s73_residue_removal_cost
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
                     ;
 
@@ -53,17 +61,23 @@ q73_prod_woodfuel(j2)..
   v73_prod_heaven_timber(j2,"woodfuel");
 
 *' Production of residues is calculated based on `s73_residue_ratio`. This fraction
-*' of industrial roundwood production is assumed to be lost during harvesting processes.
-*' USDA reports that ca. 30% of roundwood harvested are residues (@oswalt2019forest).
-*' Not all of this residue is recovered from forest and we assume 50% of residue
-*' removal based on @pokharel2017factors. These numbers (residue levels and residude
-*' removals vary strongly among different studies, the numbers used here are from
-*' a USDA report on state of forests in USA which has consistent reporting over years)
+*' of total timber harvest is assumed to be recoverable as harvest residues
+*' (branches, tops, bark). The theoretical potential of logging residues is 27%
+*' of stem harvest [@oswalt2019forest]. The average technical recovery rate is
+*' 52% [@thiffault2015recovery], giving 0.27 * 0.52 = 0.14 ~ 0.15.
+*' Independently, [@difulvio2016logging] report technically recoverable logging
+*' residues at 13.5% of roundwood volume for the EU28.
+*' Residues are generated from all real harvest sources (forestry plantations and
+*' natural vegetation) for both products. The slack variable `v73_prod_heaven_timber`
+*' is excluded (no real harvest = no residues). `v73_prod_residues` itself is also
+*' excluded to avoid circularity.
 
 q73_prod_residues(j2)..
   v73_prod_residues(j2)
   =l=
-  vm_prod(j2,"wood") * s73_residue_ratio
+  (sum(kforestry, vm_prod_forestry(j2,kforestry))
+  + sum((land_natveg,kforestry), vm_prod_natveg(j2,land_natveg,kforestry)))
+  * s73_residue_ratio
   ;
 
 *** EOF equations.gms ***

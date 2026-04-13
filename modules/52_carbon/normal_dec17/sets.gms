@@ -7,5 +7,8 @@
 
 sets
  rcp52 climate change impact sceanrios
-    / RCP19, RCP26, RCP34, RCP45, RCP60, RCPBU /     
+    / RCP19, RCP26, RCP34, RCP45, RCP60, RCPBU /
+
+ iter52 bisection iterations for growth curve calibration
+    / iter1*iter25 /
 ;

@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_tech_cost.scale(i) = 10e3;
-v13_cost_tc.scale(i,tautype) = 10e6;
-v13_tech_cost.scale(i,tautype) = 10e3;
+vm_tech_cost.scale(i) = 1e3;
+v13_cost_tc.scale(i,tautype) = 1e6;
+v13_tech_cost.scale(i,tautype) = 1e3;
+q13_cost_tc.scale(i,tautype) = 1e4;
