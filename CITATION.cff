@@ -134,6 +134,12 @@ authors:
     given-names: Georg
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: georgsc@pik-potsdam.de
+
+  - family-names: Rein
+    given-names: Patrick
+    orcid: https://orcid.org/0000-0001-9454-8381
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: patrick.rein@pik-potsdam.de
     
   - family-names: Lotze-Campen
     given-names: Hermann

@@ -42,6 +42,34 @@ $offdelim
 /
 ;
 
+scalars
+  s52_growingstock_calib Switch for growing stock calibration of secdforest growth curves 1=on 0=off (1) / 1 /
+;
+
+parameter f52_fra_nrf_gs(i) FRA growing stock target for naturally regenerating forests (m3 per ha)
+/
+$ondelim
+$include "./modules/52_carbon/input/f52_fra_nrf_gs.cs4"
+$offdelim
+/
+;
+
+parameter f52_fra_pla_gs(i) FRA growing stock target for plantations (m3 per ha)
+/
+$ondelim
+$include "./modules/52_carbon/input/f52_fra_pla_gs.cs4"
+$offdelim
+/
+;
+
+parameter f52_volumetric_conversion(clcl) Basic wood density by climate class (tDM per m3)
+/
+$ondelim
+$include "./modules/52_carbon/input/f52_volumetric_conversion.csv"
+$offdelim
+/
+;
+
 * Note: Land carbon sink adjustment factors from Grassie et al 2021 (DOI 10.1038/s41558-021-01033-6)
 * are needed in the post-processing in https://github.com/pik-piam/magpie4/blob/master/R/reportEmissions.R
 * To facilitate the choice of the corresponding RCP, the adjustment factors are read-in here and
