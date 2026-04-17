@@ -15,17 +15,17 @@
 *' out of region i to all importers as recorded in trade matrix v21_trade.
 
 *' Two balance flows are included to ensure that historic values are consistent
-*' with FAO mass balance data. First balanceflow is a regional balanceflow
-*' as in the FAO mass balance  data to which we calibrate, regional production
-*' and supply including net-trade are not equal. This can potentially stem from trade 
-*' (time spent in travel), storage (also during travel), or other inventory
-*' or data reporting discrepancies, and the regional balanceflow adjusts production
-*' to match this discrepancy. Furthermore, because the bilateral trade import supply 
-*' ratios to which we calibrate are based on the FAO bilateral trade matrix, 
-*' which is not harmonzied to FAO mass balance exports, we need to balance total regional
-*' exports to match non-bilateral exports as recorded in FAO mass balance. This shows up
-*' as extra production required in the model, although we can not trace this balanceflow
-*' bilaterally.
+*' with FAO mass balance data. First balanceflow is a regional balanceflow,
+*' as in the FAO mass balance data to which we calibrate, regional production
+*' and supply including net-trade are not equal. This can potentially stem from storage
+*' (not included in our accounting), or other inventory
+*' and data reporting discrepancies. Furthermore, the bilateral trade import supply 
+*' ratios to which we calibrate are based on the FAO bilateral trade matrix, which
+*' was scaled to match FAO mass balance imports. However, it thus can't be scaled 
+*' to also match FAO mass balance exports, and therefore we need to calibrate total regional
+*' exports to match non-bilateral exports. This amount may also stem from time spent in 
+*' transit (also stored in transit), along with data discrepancies in FAOSTAT. Both balance
+*' flows are faeded to 0 by 2030, only ensuring historic consistency with FAO mass balance data.
 
 q21_trade_reg(h2,k_trade)..
  sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), vm_supply(i2, k_trade) -
