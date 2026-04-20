@@ -37,9 +37,6 @@ equations
  q21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
 ;
 
-*' vm_cost_trade is no longer an optimization variable — its level is assigned
-*' in postsolve.gms for backwards compatibility with older magpie4 functions.
-
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov21_excess_dem(t,k_trade,type)               Global excess demand (mio. tDM per yr)
