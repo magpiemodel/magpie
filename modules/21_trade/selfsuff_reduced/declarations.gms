@@ -17,7 +17,6 @@ parameters
 positive variables
  v21_excess_dem(k_trade)                 Global excess demand (mio. tDM per yr)
  v21_excess_prod(h,k_trade)              Superregional excess production (mio. tDM per yr)
- v21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
  v21_import_for_feasibility(h,k_trade)   Additional imports to maintain feasibility (mio. tDM per yr)
  vm_cost_trade_tariff(i)                 Regional tariff costs across all commodities entering objective (mio. USD17MER per yr)
  vm_cost_trade_margin(i)                 Regional transport margin costs across all commodities entering objective (mio. USD17MER per yr)
@@ -34,7 +33,6 @@ equations
  q21_cost_trade_tariff(h)                Superregional tariff costs (mio. USD17MER per yr)
  q21_cost_trade_margin(h)                Superregional margin costs (mio. USD17MER per yr)
  q21_cost_trade_feasibility(h)           Superregional feasibility penalty costs (mio. USD17MER per yr)
- q21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
