@@ -39,7 +39,6 @@ equations
 parameters
  ov21_excess_dem(t,k_trade,type)               Global excess demand (mio. tDM per yr)
  ov21_excess_prod(t,h,k_trade,type)            Superregional excess production (mio. tDM per yr)
- ov21_cost_trade_reg(t,h,k_trade,type)         Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
  ov21_import_for_feasibility(t,h,k_trade,type) Additional imports to maintain feasibility (mio. tDM per yr)
  ov_cost_trade_tariff(t,i,type)                Regional tariff costs across all commodities entering objective (mio. USD17MER per yr)
  ov_cost_trade_margin(t,i,type)                Regional transport margin costs across all commodities entering objective (mio. USD17MER per yr)
@@ -53,6 +52,5 @@ parameters
  oq21_cost_trade_tariff(t,h,type)              Superregional tariff costs (mio. USD17MER per yr)
  oq21_cost_trade_margin(t,h,type)              Superregional margin costs (mio. USD17MER per yr)
  oq21_cost_trade_feasibility(t,h,type)         Superregional feasibility penalty costs (mio. USD17MER per yr)
- oq21_cost_trade_reg(t,h,k_trade,type)         Superregional trade costs for each tradable commodity (mio. USD17MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

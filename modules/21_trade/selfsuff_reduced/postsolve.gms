@@ -21,10 +21,8 @@
  oq21_cost_trade_tariff(t,h,"marginal")              = q21_cost_trade_tariff.m(h);
  oq21_cost_trade_margin(t,h,"marginal")              = q21_cost_trade_margin.m(h);
  oq21_cost_trade_feasibility(t,h,"marginal")         = q21_cost_trade_feasibility.m(h);
- oq21_cost_trade_reg(t,h,k_trade,"marginal")         = q21_cost_trade_reg.m(h,k_trade);
  ov21_excess_dem(t,k_trade,"level")                  = v21_excess_dem.l(k_trade);
  ov21_excess_prod(t,h,k_trade,"level")               = v21_excess_prod.l(h,k_trade);
- ov21_cost_trade_reg(t,h,k_trade,"level")            = v21_cost_trade_reg.l(h,k_trade);
  ov21_import_for_feasibility(t,h,k_trade,"level")    = v21_import_for_feasibility.l(h,k_trade);
  ov_cost_trade_tariff(t,i,"level")                   = vm_cost_trade_tariff.l(i);
  ov_cost_trade_margin(t,i,"level")                   = vm_cost_trade_margin.l(i);
@@ -38,10 +36,8 @@
  oq21_cost_trade_tariff(t,h,"level")                 = q21_cost_trade_tariff.l(h);
  oq21_cost_trade_margin(t,h,"level")                 = q21_cost_trade_margin.l(h);
  oq21_cost_trade_feasibility(t,h,"level")            = q21_cost_trade_feasibility.l(h);
- oq21_cost_trade_reg(t,h,k_trade,"level")            = q21_cost_trade_reg.l(h,k_trade);
  ov21_excess_dem(t,k_trade,"upper")                  = v21_excess_dem.up(k_trade);
  ov21_excess_prod(t,h,k_trade,"upper")               = v21_excess_prod.up(h,k_trade);
- ov21_cost_trade_reg(t,h,k_trade,"upper")            = v21_cost_trade_reg.up(h,k_trade);
  ov21_import_for_feasibility(t,h,k_trade,"upper")    = v21_import_for_feasibility.up(h,k_trade);
  ov_cost_trade_tariff(t,i,"upper")                   = vm_cost_trade_tariff.up(i);
  ov_cost_trade_margin(t,i,"upper")                   = vm_cost_trade_margin.up(i);
@@ -55,10 +51,8 @@
  oq21_cost_trade_tariff(t,h,"upper")                 = q21_cost_trade_tariff.up(h);
  oq21_cost_trade_margin(t,h,"upper")                 = q21_cost_trade_margin.up(h);
  oq21_cost_trade_feasibility(t,h,"upper")            = q21_cost_trade_feasibility.up(h);
- oq21_cost_trade_reg(t,h,k_trade,"upper")            = q21_cost_trade_reg.up(h,k_trade);
  ov21_excess_dem(t,k_trade,"lower")                  = v21_excess_dem.lo(k_trade);
  ov21_excess_prod(t,h,k_trade,"lower")               = v21_excess_prod.lo(h,k_trade);
- ov21_cost_trade_reg(t,h,k_trade,"lower")            = v21_cost_trade_reg.lo(h,k_trade);
  ov21_import_for_feasibility(t,h,k_trade,"lower")    = v21_import_for_feasibility.lo(h,k_trade);
  ov_cost_trade_tariff(t,i,"lower")                   = vm_cost_trade_tariff.lo(i);
  ov_cost_trade_margin(t,i,"lower")                   = vm_cost_trade_margin.lo(i);
@@ -72,5 +66,4 @@
  oq21_cost_trade_tariff(t,h,"lower")                 = q21_cost_trade_tariff.lo(h);
  oq21_cost_trade_margin(t,h,"lower")                 = q21_cost_trade_margin.lo(h);
  oq21_cost_trade_feasibility(t,h,"lower")            = q21_cost_trade_feasibility.lo(h);
- oq21_cost_trade_reg(t,h,k_trade,"lower")            = q21_cost_trade_reg.lo(h,k_trade);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
