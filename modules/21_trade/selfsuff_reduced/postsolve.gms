@@ -8,7 +8,6 @@
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov21_excess_dem(t,k_trade,"marginal")               = v21_excess_dem.m(k_trade);
  ov21_excess_prod(t,h,k_trade,"marginal")            = v21_excess_prod.m(h,k_trade);
- ov21_cost_trade_reg(t,h,k_trade,"marginal")         = v21_cost_trade_reg.m(h,k_trade);
  ov21_import_for_feasibility(t,h,k_trade,"marginal") = v21_import_for_feasibility.m(h,k_trade);
  ov_cost_trade_tariff(t,i,"marginal")                = vm_cost_trade_tariff.m(i);
  ov_cost_trade_margin(t,i,"marginal")                = vm_cost_trade_margin.m(i);
