@@ -20,8 +20,10 @@ options(renv.config.synchronized.check = FALSE,
 
 source("renv/activate.R")
 
-if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
-  options(repos = c(getOption("repos"), pik = "https://rse.pik-potsdam.de/r/packages"))
+if (!"https://pik-piam.r-universe.dev" %in% getOption("repos")) {
+  options(repos = c(pik = "https://pik-piam.r-universe.dev",
+                    CRAN = "https://cloud.r-project.org",
+                    getOption("repos")))
 }
 
 # bootstrapping, will only run once after this repo is freshly cloned

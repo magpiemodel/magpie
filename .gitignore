@@ -6,6 +6,7 @@ magpie_calib.*
 #ignore input files
 *.cs*
 !/data-changelog.csv
+!/projects/*/*.csv
 *.mz
 *.rds
 /input/
@@ -40,3 +41,4 @@ gamslice.txt
 
 /renv.lock
 .Rproj.user
+.DS_Store
