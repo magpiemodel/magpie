@@ -3,7 +3,7 @@ pm_land_hist,input,not needed
 fm_luh2_side_layers,input,not needed
 pm_interest,input,not needed
 fm_bii_coeff,input,not needed
-pm_carbon_density_secdforest_ac,input,not needed
-pm_carbon_density_plantation_ac,input,not needed
+pm_carbon_density_secdforest_ac_uncalib,input,not needed
+pm_carbon_density_plantation_ac_uncalib,input,not needed
 fm_carbon_density,input,not needed
 sm_fix_SSP2,input,not needed

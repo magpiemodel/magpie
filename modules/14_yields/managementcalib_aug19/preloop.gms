@@ -15,8 +15,15 @@ i14_yields_calib(t,j,"betr",w) = f14_yields(t,j,"betr",w) * sum((supreg(h,i),cel
 p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j),i14_yields_calib(t,j,"pasture","rainfed") * pm_land_start(j,"past")) /
                             sum(cell(i,j),pm_land_start(j,"past")) );
 
-p14_pyield_corr(t,i) = (f14_pyld_hist(t,i)/p14_pyield_LPJ_reg(t,i))$(sum(sameas(t_past,t),1) = 1)
-      + sum(t_past,(f14_pyld_hist(t_past,i)/(p14_pyield_LPJ_reg(t_past,i)+0.000001))$(ord(t_past)=card(t_past)))$(sum(sameas(t_past,t),1) <> 1);
+*' Pasture yield correction: use historical data for all years where available
+*' (f14_pyld_hist covers y1965–y2020), freeze at the last available value beyond.
+*' This avoids a discontinuity at the t_past boundary by using observed data
+*' through y2020 instead of freezing at the last t_past year (y2015).
+p14_pyield_corr(t,i)$(f14_pyld_hist(t,i) > 0) = f14_pyld_hist(t,i) / (p14_pyield_LPJ_reg(t,i) + 0.000001);
+loop(t,
+  p14_pyield_corr(t,i)$(p14_pyield_corr(t,i) = 0) = p14_pyield_corr(t-1,i);
+);
+
 i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell(i,j),p14_pyield_corr(t,i));
 
 

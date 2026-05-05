@@ -41,6 +41,14 @@ i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - 
 p35_land_other(t,j,othertype35,ac) = 0;
 p35_secdforest(t,j,ac) = 0;
 
+* Natural-origin tracking: secdforest from natural succession on abandoned
+* cropland uses the uncalibrated natveg growth curve (Braakhekke et al.).
+* Legacy/managed secdforest uses the FRA-calibrated curve (module 52).
+* All initial secdforest is existing/managed (natural = 0); new natural-origin area
+* enters through youngsecdf maturation in presolve.
+p35_secdforest_natural(t,j,ac) = 0;
+pc35_secdforest_natural(j,ac) = 0;
+
 * initialize forest disturbance losses
 p35_disturbance_loss_secdf(t,j,ac) = 0;
 p35_disturbance_loss_primf(t,j) = 0;

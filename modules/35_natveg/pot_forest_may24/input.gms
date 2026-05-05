@@ -15,7 +15,7 @@ $setglobal c35_pot_forest_scenario  cc
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
 scalars
-s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous) / 2 /
+s35_hvarea Flag for harvested area and establishment (0=zero 1=exogenous 2=endogenous) / 2 /
 s35_hvarea_secdforest annual secdforest harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
 s35_hvarea_primforest annual primforest harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
 s35_hvarea_other annual other land harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
@@ -29,7 +29,7 @@ s35_forest_damage_end   Year of forest damage end  (1)              / 2050 /
 s35_npi_ndc_reversal    Year in which NPI NDC reversal should take place (1) / Inf /
 ;
 
-table f35_forest_lost_share(i,driver_source) Share of area damanged by forest fires (1)
+table f35_forest_lost_share(i,driver_source) Share of area damaged by forest fires (1)
 $ondelim
 $include "./modules/35_natveg/input/f35_forest_lost_share.cs3"
 $offdelim
@@ -47,7 +47,7 @@ $include "./modules/35_natveg/input/f35_forest_shock.csv"
 $offdelim
 ;
 
-parameter f35_forest_disturbance_share(i) Share of area damanged by forest disturbances (1)
+parameter f35_forest_disturbance_share(i) Share of area damaged by forest disturbances (1)
 /
 $ondelim
 $include "./modules/35_natveg/input/f35_forest_disturbance_share.cs4"

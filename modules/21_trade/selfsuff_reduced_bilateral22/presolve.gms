@@ -5,10 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
- rcp52 climate change impact sceanrios
-    / RCP19, RCP26, RCP34, RCP45, RCP60, RCPBU /
+* The bilateral realization has no feasibility penalty term. Fix to zero so
+* that the cost module can unconditionally sum all three trade cost interfaces.
 
- iter52 bisection iterations for growth curve calibration
-    / iter1*iter25 /
-;
+vm_cost_trade_feasibility.fx(i) = 0;

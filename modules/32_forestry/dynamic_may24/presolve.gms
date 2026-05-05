@@ -56,16 +56,16 @@ if(m_year(t) <= sm_fix_SSP2,
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation
 *' 1 = Use plantation growth curve (faster than natveg) towards LPJmL natural vegetation
 if(s32_aff_plantation = 0,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_secdforest_ac_uncalib(t,j,ac,ag_pools);
 elseif s32_aff_plantation = 1,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,ag_pools);
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_plantation_ac_uncalib(t,j,ac,ag_pools);
 );
 
 *' Timber plantations carbon densities:
 p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,ag_pools);
 
 *' NDC carbon densities are natveg carbon densities.
-p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
+p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_secdforest_ac_uncalib(t,j,ac,ag_pools);
 
 *' CDR from afforestation for each age-class, depending on planning horizon.
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planning_horizon/5)
@@ -177,12 +177,12 @@ v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0
 
 m_boundfix(v32_land,(j,type32,ac_sub),up,1e-6);
 
-** Calculate future yield based on rotation length
-p32_yield_forestry_future(t,j) = sum(ac$(ac.off = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
+** Calculate expected growing stock at rotation age
+i32_growing_stock_at_harvest(t,j) = sum(ac$(ac.off = p32_rotation_cellular_estb(t,j)), im_growing_stock(t,j,ac,"forestry"));
 
 * Fader for plantation share in establishment decision
 if(ord(t) = 1,
-  pc32_prod_forestry_ini(i) = sum(cell(i,j), sum(ac$(ac.off = p32_rotation_cellular_harvesting(t,j)), pm_timber_yield(t,j,ac,"forestry") * p32_land(t,j,"plant",ac))) / m_timestep_length_forestry;
+  pc32_prod_forestry_ini(i) = sum(cell(i,j), sum(ac$(ac.off = p32_rotation_cellular_harvesting(t,j)), im_growing_stock(t,j,ac,"forestry") * p32_land(t,j,"plant",ac))) / m_timestep_length_forestry;
   pc32_plant_contr_ini(i)$(sum(kforestry, pm_demand_forestry(t,i,kforestry)) > 0) = pc32_prod_forestry_ini(i) / sum(kforestry, pm_demand_forestry(t,i,kforestry));
   pc32_plant_contr_ini(i)$(sum(kforestry, pm_demand_forestry(t,i,kforestry)) = 0) = 0;
   p32_plant_contr(t,i) = pc32_plant_contr_ini(i);

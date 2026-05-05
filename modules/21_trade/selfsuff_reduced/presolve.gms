@@ -5,10 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
- rcp52 climate change impact sceanrios
-    / RCP19, RCP26, RCP34, RCP45, RCP60, RCPBU /
+* Release the fix on vm_cost_trade_feasibility each time step so the solver
+* can freely set its level via q21_cost_trade_feasibility.
 
- iter52 bisection iterations for growth curve calibration
-    / iter1*iter25 /
-;
+vm_cost_trade_feasibility.lo(i) = 0;
+vm_cost_trade_feasibility.up(i) = Inf;

@@ -30,6 +30,8 @@
 *' e.g. if a plantation has been established with a rotation length of 30 years
 *' it will be harvested after 30 years, even so the rotation length in the prevailing
 *' time step, used for establishment, is shorter or longer. See @mishra_forestry_2021 for more details.
+*' Replanted plantations receive a reduced establishment cost (`s32_est_cost_plant_reest`)
+*' reflecting lower costs for re-establishment on recently harvested plantation land.
 
 *' @limitations Rotation lengths for timber plantations are not endogenous.
 
