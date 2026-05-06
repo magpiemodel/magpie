@@ -27,9 +27,10 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' @code
 
 *' The following equations calibrate the cellular yield patterns (`f14_yields`) to match
-*' FAO historical yields (`f14_fao_yields_hist`) by calculating a calibration term called
+*' historical reference yields (`i14_calib_target_yields_hist`) by calculating a calibration term called
 *' 'i14_managementcalib'. For most cases, 'i14_managementcalib' is the ratio of the historical
-*' yields reported by FAO (`f14_fao_yields_hist`) and regional mean yields (`i14_modeled_yields_hist`)
+*' yields reported by FAO for croplands (`f14_fao_yields_hist`) or Li2020 for bioenergy crops
+*' (`f14_region_be_yields` / `f14_global_be_yields`) and regional mean yields (`i14_modeled_yields_hist`)
 *' given historic crop area patterns ('fm_croparea') and cellular yields coming from crop models
 *' like LPJmL (`f14_yields`). In these cases, 'i14_managementcalib' represents a purely relative
 *' calibration factor that depends only on the initial conditions of the starting year.
@@ -57,10 +58,15 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' both types individually as even so the growing seasons are held constant from 1995
 *' onwards, due to long term averaging the yields already differ in 1995.
 
+*** INITIALIZATION of crop yield parameters
+
 i14_yields_combined(t,j,"constgsadapt",kcr,w) = f14_yields_constgsadapt(t,j,kcr,w);
 i14_yields_combined(t,j,"gsadapt",kcr,w)   = f14_yields(t,j,kcr,w);
 
 i14_croparea_total(t_all,w,j) = sum(kcr, fm_croparea(t_all,j,w,kcr));
+
+**************************************************************************************
+*** STEP 1: CALCULATE modeled regional historical yields
 
 *' Historic crop area patterns (`fm_croprea`) are used to calculate regional yields
 *' (`i14_modeled_yields_hist`) from the given cellular input pattern. In rare cases where
@@ -75,51 +81,101 @@ i14_modeled_yields_hist(t_past,i,yldtype,knbe14)
       sum((cell(i,j),w), i14_croparea_total(t_past,w,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)) <= 0.00001 OR
                                                            sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) <= 0.00001);
 
+*' Compute LPJmL weighted mean rainfed yields for bioenergy crops at y1995 —
+*' regional (weighted by cropland area per cluster) and global, per yldtype.
+*' To-Do-NOTE: "y2010" index in f14_cluster_be_croparea_weights is a workaround — the data
+*'             are actually y1995 cropland areas mislabelled during preprocessing. Once preprocessing
+*'             is rerun the weights file will be timeless; remove "y2010" index and t_all from the
+*'              parameter declaration then.
+*' NOTE: For BE yield calibration "off" calibration target will be set to `i14_modeled_yields_hist`,
+*'       so calibration factors are always 1. Modeled yield has to be calculated therefore.
+
+$ifthen "%c14_be_calib%" == "regional"
+  i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
+    sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
+    (sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
+$elseif "%c14_be_calib%" == "global"
+  i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
+    sum(j, f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
+    (sum(j, f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
+$else
+  i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
+    sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
+    (sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
+$endif
+
+**************************************************************************************
+*** STEP 2: SET CALIB TARGET with FAO for knbe14 and Li historical data for kbe14
+
+i14_calib_target_yields_hist(t,i,knbe14) = f14_fao_yields_hist(t,i,knbe14);
+
+$ifthen "%c14_be_calib%" == "regional"
+  i14_calib_target_yields_hist(t,i,kbe14) = f14_region_be_yields("y2010",i,kbe14);
+$elseif "%c14_be_calib%" == "global"
+  i14_calib_target_yields_hist(t,i,kbe14) = f14_global_be_yields("y2010",kbe14);
+$else
+  i14_calib_target_yields_hist(t,i,kbe14) = i14_modeled_yields_hist("y1995",i,"gsadapt",kbe14);
+$endif
+
+*' NOTE: For BE yield calibration "off" calibration target will be set to `i14_modeled_yields_hist`,
+*'       so calibration factors are always 1.
+
+**************************************************************************************
+*** STEP 3: LOOP OVER TIME calculating calibration parameters for all time steps
+
 *' The factor `i14_lambda_yields` is calculated for the initial time step depending
 *' on the setting `s14_limit_calib` and is then held constant for all other time steps.
-*' The regional FAO yield and regional yield of the crop model input of the initial
-*' time step is kept constant in the two parameters `i14_fao_yields_hist` and
-*' `i14_modeled_yields_hist`:
+*' The regional calibration target yield and regional yield of the crop model input of
+*' the initial time step is kept constant in the two parameters `i14_calib_target_yields_hist`
+*' and `i14_modeled_yields_hist`:
 
 loop(t,
      if(sum(sameas(t,"y1995"),1)=1,
 
-          if    ((s14_limit_calib = 0),
-               i14_lambda_yields(t,i,yldtype,knbe14) = 1;
+          if ((s14_limit_calib = 0),
+               i14_lambda_yields(t,i,yldtype,kcr) = 1;
 
-          Elseif (s14_limit_calib =1 ),
-               i14_lambda_yields(t,i,yldtype,knbe14) =
-                    1$(f14_fao_yields_hist(t,i,knbe14) <= i14_modeled_yields_hist(t,i,yldtype,knbe14))
-                    + sqrt(i14_modeled_yields_hist(t,i,yldtype,knbe14)/f14_fao_yields_hist(t,i,knbe14))$
-                    (f14_fao_yields_hist(t,i,knbe14) > i14_modeled_yields_hist(t,i,yldtype,knbe14));
+          Elseif (s14_limit_calib = 1 ),
+               i14_lambda_yields(t,i,yldtype,kcr) =
+                    1$(i14_calib_target_yields_hist(t,i,kcr) <= i14_modeled_yields_hist(t,i,yldtype,kcr))
+                    + sqrt(i14_modeled_yields_hist(t,i,yldtype,kcr)/i14_calib_target_yields_hist(t,i,kcr))$
+                    (i14_calib_target_yields_hist(t,i,kcr) > i14_modeled_yields_hist(t,i,yldtype,kcr));
           );
 
-          i14_fao_yields_hist(t,i,knbe14) = f14_fao_yields_hist(t,i,knbe14);
-
      Else
-          i14_modeled_yields_hist(t,i,yldtype,knbe14) = i14_modeled_yields_hist(t-1,i,yldtype,knbe14);
-          i14_fao_yields_hist(t,i,knbe14)  = i14_fao_yields_hist(t-1,i,knbe14);
-          i14_lambda_yields(t,i,yldtype,knbe14)   = i14_lambda_yields(t-1,i,yldtype,knbe14);
+          i14_modeled_yields_hist(t,i,yldtype,kcr) = i14_modeled_yields_hist(t-1,i,yldtype,kcr);
+          i14_calib_target_yields_hist(t,i,kcr)    = i14_calib_target_yields_hist(t-1,i,kcr);
+          i14_lambda_yields(t,i,yldtype,kcr)       = i14_lambda_yields(t-1,i,yldtype,kcr);
      );
 );
 
+**************************************************************************************
+*** STEP 4: APPLY calculated calibration factors for all time steps
+
 *' The calibrated cellular yield `i14_yields_calib_combined` is calculated for each time step depending
-*' on the constant values `i14_modeled_yields_hist`, `i14_fao_yields_hist`, `i14_lambda_yields`
+*' on the constant values `i14_modeled_yields_hist`, `i14_calib_target_yields_hist`, `i14_lambda_yields`
 *' and the uncalibrated, cellular yield `f14_yields` following the idea of eq. (9) in [@Heinke.2013]:
 
-i14_managementcalib(t,j,yldtype,knbe14,w) =
-   1 + (sum(cell(i,j), i14_fao_yields_hist(t,i,knbe14) - i14_modeled_yields_hist(t,i,yldtype,knbe14)) /
-                            i14_yields_combined(t,j,yldtype,knbe14,w) *
-      (i14_yields_combined(t,j,yldtype,knbe14,w) / (sum(cell(i,j),i14_modeled_yields_hist(t,i,yldtype,knbe14))+10**(-8))) **
-                            sum(cell(i,j),i14_lambda_yields(t,i,yldtype,knbe14)))$(i14_yields_combined(t,j,yldtype,knbe14,w)>0);
+i14_managementcalib(t,j,yldtype,kcr,w) =
+   1 + (sum(cell(i,j), i14_calib_target_yields_hist(t,i,kcr) - i14_modeled_yields_hist(t,i,yldtype,kcr)) /
+                            i14_yields_combined(t,j,yldtype,kcr,w) *
+      (i14_yields_combined(t,j,yldtype,kcr,w) / (sum(cell(i,j),i14_modeled_yields_hist(t,i,yldtype,kcr))+10**(-8))) **
+                            sum(cell(i,j),i14_lambda_yields(t,i,yldtype,kcr)))$(i14_yields_combined(t,j,yldtype,kcr,w)>0);
 
-i14_yields_calib_combined(t,j,yldtype,knbe14,w) = i14_managementcalib(t,j,yldtype,knbe14,w) * i14_yields_combined(t,j,yldtype,knbe14,w);
+$ifthen "%c14_be_calib%" == "off"
+  i14_managementcalib(t,j,yldtype,kbe14,w) = 1;
+$endif
+
+i14_yields_calib_combined(t,j,yldtype,kcr,w) = i14_managementcalib(t,j,yldtype,kcr,w) * i14_yields_combined(t,j,yldtype,kcr,w);
 
 *' Note that the calculation is split into two parts for better readability.
+
+**************************************************************************************
 
 *' Irrigated yields are calibrated to meet the country-level
 *' ratio between irrigated and rainfed yields reported by Aquastat.
 *' This can be de-activated with the switch `s14_calib_ir2rf`.
+*' This calibration in only done for knbe14 (all crops excluding bioenergy crops)
 if ((s14_calib_ir2rf = 1),
 
 * Weighted yields
@@ -133,7 +189,7 @@ if ((s14_calib_ir2rf = 1),
   i14_yields_calib_combined(t,j,yldtype,knbe14,"irrigated") = sum((cell(i,j)), i14_target_ratio(i,yldtype) / i14_calib_yields_ratio(i,yldtype)) *
                                               i14_yields_calib_combined(t,j,yldtype,knbe14,"irrigated");
 
-* Calibrate newly calibrated yields to FAO yields
+* Calibrate newly calibrated yields to calib target yields
   i14_modeled_yields_hist2(i,yldtype,knbe14)
   = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) /
       sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)) > 0.00001 AND
@@ -143,46 +199,10 @@ if ((s14_calib_ir2rf = 1),
                                                                  sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib_combined("y1995",j,yldtype,knbe14,w)) <= 0.00001);
 
 
-  i14_yields_calib_combined(t,j,yldtype,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) /
+  i14_yields_calib_combined(t,j,yldtype,knbe14,w) = sum((cell(i,j)), i14_calib_target_yields_hist("y1995",i,knbe14) /
                                                       i14_modeled_yields_hist2(i,yldtype,knbe14)) *
                                   i14_yields_calib_combined(t,j,yldtype,knbe14,w);
 );
-
-***BIOPHYSICAL CALIBRATION FOR 2ND GENERATION BIOENERGY CROPS (Li2020)*******************
-*' Step 1: Compute LPJmL weighted mean rainfed yields for bioenergy crops at y1995 —
-*'         regional (weighted by cropland area per cluster) and global, per yldtype.
-*'         To-Do-NOTE: "y2010" index in f14_cluster_be_croparea_weights is a workaround — the data
-*'         are actually y1995 cropland areas mislabelled during preprocessing. Once preprocessing
-*'         is rerun the weights file will be timeless; remove "y2010" index and t_all from the
-*'         parameter declaration then.
-i14_be_LPJ_reg(i,yldtype,kbe14) =
-  sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
-  (sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
-
-i14_be_LPJ_glo(yldtype,kbe14) =
-  sum(j, f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
-  (sum(j, f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
-
-*' Step 2: Compute calibration factors as Li2020 / LPJmL mean — regional and global.
-*'         Fall back to 1 where LPJmL mean is zero.
-i14_be_calib_reg(i,yldtype,kbe14)$(i14_be_LPJ_reg(i,yldtype,kbe14) > 0) =
-  f14_region_be_yields("y2010",i,kbe14) / i14_be_LPJ_reg(i,yldtype,kbe14);
-i14_be_calib_reg(i,yldtype,kbe14)$(i14_be_LPJ_reg(i,yldtype,kbe14) = 0) = 1;
-
-i14_be_calib_glo(yldtype,kbe14)$(i14_be_LPJ_glo(yldtype,kbe14) > 0) =
-  f14_global_be_yields("y2010",kbe14) / i14_be_LPJ_glo(yldtype,kbe14);
-i14_be_calib_glo(yldtype,kbe14)$(i14_be_LPJ_glo(yldtype,kbe14) = 0) = 1;
-
-*' Step 3: Apply Li2020 biophysical calibration to i14_yields_calib_combined.
-$ifthen "%c14_be_calib%" == "regional"
-  i14_yields_calib_combined(t,j,yldtype,kbe14,w) =
-    i14_yields_combined(t,j,yldtype,kbe14,w) * sum(cell(i,j), i14_be_calib_reg(i,yldtype,kbe14));
-$elseif "%c14_be_calib%" == "global"
-  i14_yields_calib_combined(t,j,yldtype,kbe14,w) =
-    i14_yields_combined(t,j,yldtype,kbe14,w) * i14_be_calib_glo(yldtype,kbe14);
-$else
-  i14_yields_calib_combined(t,j,yldtype,kbe14,w) = i14_yields_combined(t,j,yldtype,kbe14,w);
-$endif
 
 ***MANAGEMENT CALIBRATION FOR 2ND GENERATION BIOENERGY CROPS (tau scaling)****************
 *' Tau-based management calibration applied on top of the Li2020 biophysical calibration.
