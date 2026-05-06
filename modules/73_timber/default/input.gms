@@ -12,23 +12,17 @@ $setglobal c73_build_demand  BAU
 * options BAU, 10pc, 50pc, 90pc
 
 scalars
-* 60 EUR/m3 = 72 USD/m3
-* 72 USD/m3 / 0.6 = 120 USD/tDM
-* https://unece.org/forests/prices
-* inflated using USD05 --> USD17 rate of 1.23
-  s73_timber_prod_cost_wood            Cost for producing one unit of wood (USD17MER per tDM) / 148 /
-  s73_timber_prod_cost_woodfuel        Cost for prodcing one unit of woodfuel (USD17MER per tDM) / 74 /
+  s73_timber_prod_cost_wood            Cost for producing one unit of wood (USD17MER per m3) / 89 /
+  s73_timber_prod_cost_woodfuel        Cost for producing one unit of woodfuel (USD17MER per m3) / 44 /
   s73_free_prod_cost                   Very high cost for settling demand without production (USD17MER per tDM) / 1e+06 /
   s73_timber_demand_switch             Logical switch to turn on or off timber demand 1=on 0=off (1) / 1 /
   s73_income_threshold                 Threshold for income-elastic industrial roundwood demand (USD17PPP per cap per yr) / 10000 /
-  s73_residue_ratio                    Proportion of overall industrial roundwood production which ends up as residue during harvest (1) / 0.15 /
-  s73_reisdue_removal_cost             Cost of removing residues left after industrial roundwood harvest (USD17MER per tDM) / 2.5 /
+  s73_residue_ratio                    Proportion of timber harvest recoverable as logging residues such as branches and tops (1) / 0.15 /
+  s73_residue_removal_cost             Cost of removing residues left after industrial roundwood harvest (USD17MER per tDM) / 2.7 /
   s73_expansion                        Construction wood demand expansion factor by end of century based on industrial roundwood demand as base (1=100 percent increase) / 0 /
+  s73_natveg_cost_premium              Cost premium for natveg timber production relative to plantation (1) / 0.15 /
+  s73_woodfuel_stacking_factor         Stacking factor to convert stere to solid m3 (1) / 0.65 /
 ;
-
-** Residue numbers from
-** "Spatially explicit assessment of roundwood and logging residues availability and costs for the EU28"
-** "The total potential volume of logging residues in the “Reference scenario” is estimated to be 79 Mm3, corresponding to 13.5% of the roundwood potential volume. "
 
 table f73_prod_specific_timber(t_all,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
 $ondelim
@@ -40,14 +34,6 @@ parameter f73_income_elasticity(total_wood_products) Income elasticities of wood
 /
 $ondelim
 $include "./modules/73_timber/input/f73_income_elasticity.csv"
-$offdelim
-/
-;
-
-parameter f73_volumetric_conversion(kforestry) Volumetric conversion from mio t to m3 of wood (1)
-/
-$ondelim
-$include "./modules/73_timber/input/f73_volumetric_conversion.csv"
 $offdelim
 /
 ;

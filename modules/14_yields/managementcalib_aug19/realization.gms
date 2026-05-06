@@ -16,9 +16,10 @@
 *' ratio as provided by AQUASTAT [@fao_aquastat_2016].
 *' Finally, crop yields are calibrated to FAO [@FAOSTAT] regional yield levels of the
 *' initial time step. An additional feature of this realization is to allow crop yields
-*' technological change from the precedent times step to spillover to pasture areas. This
-*' realization also calculates the growth stocks in commercial plantations and natural
-*' vegetation using LPJmL Carbon stocks.
+*' technological change from the precedent times step to spillover to pasture areas.
+*' This realization also calculates harvestable growing stock (`im_growing_stock`) as
+*' stem biomass (tDM/ha) by dividing aboveground biomass by the IPCC biomass expansion
+*' factor (BEF). BEF is always > 1 and converts total aboveground biomass to stem-only biomass.
 
 *' @limitations The exogenous implementation of pasture intensification cannot
 *' capture feedbacks between land scarcity and efforts to improve pasture
@@ -31,6 +32,7 @@ $Ifi "%phase%" == "sets" $include "./modules/14_yields/managementcalib_aug19/set
 $Ifi "%phase%" == "declarations" $include "./modules/14_yields/managementcalib_aug19/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/14_yields/managementcalib_aug19/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/14_yields/managementcalib_aug19/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/14_yields/managementcalib_aug19/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/14_yields/managementcalib_aug19/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/14_yields/managementcalib_aug19/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/14_yields/managementcalib_aug19/postsolve.gms"

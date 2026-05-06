@@ -26,8 +26,8 @@ p15_marketing_margin_fafh(t,iso,kfo) = (f15_markup_coef(kfo,"fafh","a") * (f15_m
                                                                      f15_markup_coef(kfo, "fafh", "c")) * fm_attributes("wm", kfo);
 p15_marketing_margin_fafh_kcal(t,iso,kfo) = p15_marketing_margin_fafh(t,iso,kfo)  / (fm_nutrition_attributes(t,kfo,"kcal")*10**6);
 
-p15_value_added_expenditures_pc(t,iso,kfo) = p15_shr_fafh(t,iso) * p15_kcal_pc_iso(t,iso,kfo)*p15_marketing_margin_fafh_kcal(t,iso,kfo)
-                                         + (1-p15_shr_fafh(t,iso)) * p15_kcal_pc_iso(t,iso,kfo)*p15_marketing_margin_fah_kcal(t,iso,kfo);
+p15_value_added_expenditures_pc(t,iso,kfo) = p15_shr_fafh(t,iso) * p15_kcal_pc_iso(t,iso,kfo)*p15_marketing_margin_fafh_kcal(t,iso,kfo) +
+                                         (1-p15_shr_fafh(t,iso)) * p15_kcal_pc_iso(t,iso,kfo)*p15_marketing_margin_fah_kcal(t,iso,kfo);
 
 
 

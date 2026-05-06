@@ -154,13 +154,22 @@ q32_bv_plant(j2,potnatveg) .. vm_bv(j2,"plant",potnatveg)
 *' patterns over time. Present value of harvesting costs is (1+`pm_interest`)^`p32_rotation_regional`
 *' and annuity factor of `pm_interest`/(1+`pm_interest`) averages the cost of this
 *' investment over time.
+*'
+*' Replanted plantation area (`v32_land_replant`) receives a reduced establishment cost
+*' (`s32_est_cost_plant_reest` = 1230 USD/ha, 50% of full `p32_est_cost("plant")` = 2460 USD/ha).
+*' This reflects that replanting on recently harvested plantation land is cheaper than
+*' new establishment: no land clearing needed, existing road infrastructure, known site
+*' productivity. The cost reduction is implemented by subtracting the difference
+*' `(p32_est_cost("plant") - s32_est_cost_plant_reest)` for replanted area from the
+*' total establishment cost.
 
 q32_cost_establishment(i2)..
   v32_cost_establishment(i2)
   =e=
-   (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * p32_est_cost(type32)))
-     * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
-   + sum((ct,kforestry), v32_prod_forestry_future(i2) * p32_forestry_product_dist(ct,i2,kforestry) * im_timber_prod_cost(kforestry))
+   (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * p32_est_cost(type32))
+    - sum(cell(i2,j2), v32_land_replant(j2)) * (p32_est_cost("plant") - s32_est_cost_plant_reest)
+   ) * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
+   + sum((ct,kforestry), v32_prod_forestry_future(i2) * p32_forestry_product_dist(ct,i2,kforestry) * im_timber_prod_cost(i2,kforestry))
      / ((1+sum(ct,pm_interest(ct,i2)))**sum(ct, p32_rotation_regional(ct,i2)*5));
 
 
@@ -178,17 +187,17 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' New plantations are established in the optimization step based on a certain
 *' percentage (`p32_plant_contr`) of expected future demand (`p32_demand_forestry_future`).
 *' As plantation establishment decisions should
-*' also know some indication of expected future yields, we calculate how much yield
-*' newly established plantation can realize based on rotation lengths. This is defined as
-*' the expected future yield (`p32_yield_forestry_future`) at harvest.
+*' also know some indication of expected future growing stock, we calculate how much
+*' harvestable biomass newly established plantations can realize based on rotation lengths.
+*' This is defined as the expected growing stock at harvest (`i32_growing_stock_at_harvest`).
 
 *' Future expected production is calculated for the establishment decision below and the costs above
-*' based on newly established areas and expected future yields.
+*' based on newly established areas and expected growing stock at harvest.
 
 q32_prod_forestry_future(i2) ..
               v32_prod_forestry_future(i2)
               =e=
-              sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) * sum(ct, p32_yield_forestry_future(ct,j2))) / m_timestep_length_forestry
+              sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) * sum(ct, i32_growing_stock_at_harvest(ct,j2))) / m_timestep_length_forestry
               ;
 
 *' Future expected production has to be equal or larger than future demand multiplied with the plantation contribution factor.
@@ -232,12 +241,12 @@ q32_hvarea_forestry(j2,ac_sub) ..
 
 ** Timber plantation
 *' Woody biomass production from timber plantations is calculated by multiplying the
-*' area under production with corresponding yields of plantation forests, divided by the timestep length.
+*' area under production with corresponding growing stock of plantation forests, divided by the timestep length.
 
 q32_prod_forestry(j2)..
                          sum(kforestry, vm_prod_forestry(j2,kforestry))
                          =e=
-                         sum(ac_sub, v32_hvarea_forestry(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"))) / m_timestep_length_forestry;
+                         sum(ac_sub, v32_hvarea_forestry(j2,ac_sub) * sum(ct, im_growing_stock(ct,j2,ac_sub,"forestry"))) / m_timestep_length_forestry;
 
 *' Harvesting cost in plantations is defined as the cost incurred while removing
 *' biomass from such forests.

@@ -20,14 +20,6 @@ sets
    oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
    livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish, wood, woodfuel /
 
-* We limit trade of secondary products as this allows for extreme specialisation
-* in the implementation. Exception is sugar, where we allow the secondary product
-* trade but not the primary as primaries are hardly traded in reality
-   k_hardtrade21(k_trade) Products where trade should be limited
-   / sugr_cane,sugr_beet,
-   oils,oilcakes,alcohol,ethanol,distillers_grain,brans,scp,fibres,
-   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish /
-
    trade_regime21 Trade scenarios
    /
    free2000,
@@ -45,9 +37,9 @@ sets
    l909595r809090
    /
 
-   trade_groups21 Trade groups
-   / easytrade,hardtrade /
-
+   trade_stddev21 Standard deviation of observed bilateral trade
+   / meansd5, maxsd5, minsd5, meansd10, maxsd10, minsd10, meansd15,
+    maxsd15, minsd15 /
 ;
 
 alias(h,h3);

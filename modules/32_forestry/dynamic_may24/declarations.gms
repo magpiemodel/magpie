@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 scalars
  s32_shift                                          Number of 5-year age-classes corresponding to current time step length (1)
- s32_establishment_dynamic                          If plantations should be dynamic (including establishment and harvest decsions)
- s32_establishment_static                           Static plantations with no establishmnet no harvest no regrowth
+ s32_establishment_dynamic                          If plantations should be dynamic (including establishment and harvest decisions)
+ s32_establishment_static                           Static plantations with no establishment no harvest no regrowth
 ;
 
 parameters
@@ -21,7 +21,7 @@ parameters
  p32_carbon_density_ac_marg(t_all,j,ac)             Marginal above ground carbon density for age classes and carbon pools (tC per ha)
  p32_land(t,j,type32,ac)                            Forestry land pools before optimization (mio. ha)
  pc32_land(j,type32,ac)                             Forestry land pools in current time step (mio. ha)
- p32_yield_forestry_future(t,j)                     Cellular timber yield expected in the future (m3 per ha per year)
+ i32_growing_stock_at_harvest(t,j)                  Expected growing stock at rotation age for new plantations (tDM per ha)
  p32_IGR(t_all,j,ac)                                Instantaneous growth rate or periodic annual increment of forest growth (1)
  p32_rot_flg(t_all,j,ac)                            Identifier flag when calculating rotation length (1)
  p32_rotation_regional(t_all,i)                     Regional average rotation length of plantations translated to age class equivalent for future (1)
@@ -46,8 +46,8 @@ parameters
  p32_bii_coeff(type32,bii_class_secd,potnatveg)     bii coeff (1)
  p32_disturbance_loss_ftype32(t,j,type32,ac)        Loss due to disturbances in all plantation type forests (mio. ha)
  pcm_land_forestry(j,type32)                        Forestry land pools (mio. ha)
- pc32_prod_forestry_ini(i)                          Initial procution from timber plantations (mio. tDM per yr)
- pc32_plant_contr_ini(i)                            Inital share of roundwood production coming from timber plantations (percent)
+ pc32_prod_forestry_ini(i)                          Initial production from timber plantations (mio. tDM per yr)
+ pc32_plant_contr_ini(i)                            Initial share of roundwood production coming from timber plantations (percent)
  i32_plant_contr_growth_fader(t_all)                Fader for growth rate of timber plantation share (percent)
  p32_plant_contr(t,i)                               Share of roundwood production coming from timber plantations (percent)
  p32_forestry_product_dist(t,i,kforestry)           Distribution of wood products (1)
@@ -56,6 +56,7 @@ parameters
  p32_est_cost(type32)                               Establishment cost (USD17MER per ha)
  i32_recurring_cost(type32)                         Recurring costs (USD17MER per ha)
  p32_plantedforest(i)                               Planted forest (mio. ha)
+ pm_land_plantation(j,ac)                           Plantation land by age class for growing stock calibration (mio. ha)
 ;
 
 positive variables
@@ -95,7 +96,7 @@ equations
  q32_ndc_aff_limit(j)                               Constraint for avoiding that NPI NDC re-afforestation happens at the cost of forests and other natural vegetation (mio. ha)
  q32_aff_est(j)                                     Afforestation constraint for establishment age classes (mio. ha)
  q32_hvarea_forestry(j,ac)                          Plantations area harvest (mio. ha)
- q32_cost_recur(i)                                  Recurruing costs (mio. USD)
+ q32_cost_recur(i)                                  Recurring costs (mio. USD)
  q32_prod_forestry_future(i)                       Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
  q32_establishment_demand(i)                       Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
  q32_establishment_hvarea(j)                       Establishment in current time step for future demand (mio. ha)
@@ -149,7 +150,7 @@ parameters
  oq32_ndc_aff_limit(t,j,type)                  Constraint for avoiding that NPI NDC re-afforestation happens at the cost of forests and other natural vegetation (mio. ha)
  oq32_aff_est(t,j,type)                        Afforestation constraint for establishment age classes (mio. ha)
  oq32_hvarea_forestry(t,j,ac,type)             Plantations area harvest (mio. ha)
- oq32_cost_recur(t,i,type)                     Recurruing costs (mio. USD)
+ oq32_cost_recur(t,i,type)                     Recurring costs (mio. USD)
  oq32_prod_forestry_future(t,i,type)           Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
  oq32_establishment_demand(t,i,type)           Future expected production of woody biomass from commercial plantations (mio. tDM per yr)
  oq32_establishment_hvarea(t,j,type)           Establishment in current time step for future demand (mio. ha)

@@ -8,6 +8,13 @@
 *secdforest age class calculation
 pc35_secdforest(j,ac) = v35_secdforest.l(j,ac);
 
+* Natural-origin area stays at its presolve value: the lower bound prevents
+* the solver from reducing it, and any area increases (harvest cycling into
+* ac_est, primforest reclassification, restoration) are not natural origin.
+* Clamp to ensure natural never exceeds total after solve.
+pc35_secdforest_natural(j,ac)$(pc35_secdforest_natural(j,ac) > pc35_secdforest(j,ac)) = pc35_secdforest(j,ac);
+p35_secdforest_natural(t,j,ac) = pc35_secdforest_natural(j,ac);
+
 *other land age class calculation
 pc35_land_other(j,othertype35,ac) = vm_land_other.l(j,othertype35,ac);
 

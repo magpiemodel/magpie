@@ -22,10 +22,9 @@
 *' constraints and therefore are non-additive, if the land protection targets as provided by
 *' the module `22_land_conservation` and the interface `pm_land_conservation` are larger.
 *' Additionally, this module includes forest damage and provides the ability to
-*' harvest natural vegetation for timber. Both wood and woodfuel can be produceed
+*' harvest natural vegetation for timber. Both wood and woodfuel can be produced
 *' from primary and secondary forest but other land is only allowed to be harvested
 *' for woodfuel.
-*' @stop
 
 *'
 *' @limitations Initialization of both primary and secondary forest in highest

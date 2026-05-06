@@ -43,9 +43,12 @@
     vm_carbon_stock(j2,"primforest",ag_pools,stockType) =e=
       m_carbon_stock(vm_land,fm_carbon_density,"primforest");
 
+*' Secondary forest carbon stock uses a blended carbon density that weights the
+*' FRA-calibrated and uncalibrated natveg curves (Braakhekke et al.) by the
+*' natural-origin area share per age class. The blend is computed in presolve.
  q35_carbon_secdforest(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"secdforest",ag_pools,stockType) =e=
-      m_carbon_stock_ac(v35_secdforest,pm_carbon_density_secdforest_ac,"ac","ac_sub");
+      m_carbon_stock_ac(v35_secdforest,p35_carbon_density_secdforest,"ac","ac_sub");
 
  q35_carbon_other(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
@@ -68,7 +71,7 @@
           fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 *' NPI/NDC land protection policies based on country reports are implemented as
-*' minium forest and other land stocks. They are not interchangeable (as compared to
+*' minimum forest and other land stocks. They are not interchangeable (as compared to
 *' the natural land conservation constraint) and specifically formulated for forest and
 *' other land stocks.
 
@@ -125,6 +128,7 @@
 *' are paid everytime natural vegetation is harvested. The "real" harvested area
 *' are received from the timber module [73_timber].
 
+
 q35_cost_hvarea(i2)..
                     vm_cost_hvarea_natveg(i2)
                     =e=
@@ -135,31 +139,31 @@ q35_cost_hvarea(i2)..
 
 ** Secondary forest
 *' Woody biomass production from secondary forests is calculated by multiplying the
-*' area under production with corresponding yields of secondary forests, divided by the timestep length.
+*' area under production with corresponding growing stock of secondary forests, divided by the timestep length.
 
 q35_prod_secdforest(j2)..
                sum(kforestry, vm_prod_natveg(j2,"secdforest",kforestry))
                =e=
-               sum(ac_sub, v35_hvarea_secdforest(j2,ac_sub) * sum(ct,pm_timber_yield(ct,j2,ac_sub,"secdforest"))) / m_timestep_length_forestry;
+               sum(ac_sub, v35_hvarea_secdforest(j2,ac_sub) * sum(ct,im_growing_stock(ct,j2,ac_sub,"secdforest"))) / m_timestep_length_forestry;
 
 ** Primary forest
 *' Woody biomass production from primary forests is calculated by multiplying the
-*' area under production with corresponding yields of primary forests, divided by the timestep length.
+*' area under production with corresponding growing stock of primary forests, divided by the timestep length.
 
 q35_prod_primforest(j2)..
               sum(kforestry, vm_prod_natveg(j2,"primforest",kforestry))
               =e=
-              v35_hvarea_primforest(j2) * sum(ct, pm_timber_yield(ct,j2,"acx","primforest")) / m_timestep_length_forestry;
+              v35_hvarea_primforest(j2) * sum(ct, im_growing_stock(ct,j2,"acx","primforest")) / m_timestep_length_forestry;
 
 ** Other land
 *' Woody biomass production from other land is calculated by multiplying the area under
-*' production with corresponding yields of other land, divided by the timestep length.
+*' production with corresponding growing stock of other land, divided by the timestep length.
 
 q35_prod_other(j2)..
               sum(kforestry, vm_prod_natveg(j2,"other",kforestry))
                =e=
-               (sum(ac_sub, v35_hvarea_other(j2,"othernat",ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other")))
-              + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"))))
+               (sum(ac_sub, v35_hvarea_other(j2,"othernat",ac_sub) * sum(ct, im_growing_stock(ct,j2,ac_sub,"other")))
+              + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, im_growing_stock(ct,j2,ac_sub,"secdforest"))))
               / m_timestep_length_forestry
                 ;
 
