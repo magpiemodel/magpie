@@ -8,9 +8,9 @@
 $setglobal c18_burn_scen  phaseout
 *   options:    phaseout,constant
 
-table f18_multicropping(t_all,i) Multicropping indicator as ratio of area harvested by physical area (1)
+table f18_multicropping_cluster(t_all,j,kcr) Multicropping indicator as ratio of area harvested by physical area (1)
 $ondelim
-$include "./modules/18_residues/input/f18_multicropping.csv"
+$include "./modules/18_residues/input/fm_multicropping_j.cs3"
 $offdelim;
 
 table f18_attributes_residue_ag(attributes,kve) Nutrient content of aboveground crop residues in respective attribute units DM GJ Nr P K WM C (X per DM)
