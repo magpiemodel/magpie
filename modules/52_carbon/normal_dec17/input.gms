@@ -44,6 +44,8 @@ $offdelim
 
 scalars
   s52_growingstock_calib Switch for growing stock calibration of secdforest growth curves 1=on 0=off (1) / 1 /
+  s52_k_high_secdf       Upper bound for secdforest k bisection - kept low because FRA NRF growing stock is below LPJmL potential in most regions (1) / 0.1 /
+  s52_k_high_plant       Upper bound for plantation k bisection - slightly higher than secdf because plantations can exceed natural growth rates (1) / 0.15 /
 ;
 
 parameter f52_fra_nrf_gs(i) FRA growing stock target for naturally regenerating forests (m3 per ha)

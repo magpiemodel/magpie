@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_trade_tariff.scale(i) = 1e4;
-vm_cost_trade_margin.scale(i) = 1e4;
-vm_cost_trade_feasibility.scale(i) = 1e4;
+* Release the fix on vm_cost_trade_feasibility each time step so the solver
+* can freely set its level via q21_cost_trade_feasibility.
+
+vm_cost_trade_feasibility.lo(i) = 0;
+vm_cost_trade_feasibility.up(i) = Inf;

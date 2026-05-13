@@ -43,9 +43,12 @@
     vm_carbon_stock(j2,"primforest",ag_pools,stockType) =e=
       m_carbon_stock(vm_land,fm_carbon_density,"primforest");
 
+*' Secondary forest carbon stock uses a blended carbon density that weights the
+*' FRA-calibrated and uncalibrated natveg curves (Braakhekke et al.) by the
+*' natural-origin area share per age class. The blend is computed in presolve.
  q35_carbon_secdforest(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"secdforest",ag_pools,stockType) =e=
-      m_carbon_stock_ac(v35_secdforest,pm_carbon_density_secdforest_ac,"ac","ac_sub");
+      m_carbon_stock_ac(v35_secdforest,p35_carbon_density_secdforest,"ac","ac_sub");
 
  q35_carbon_other(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"other",ag_pools,stockType) =e=

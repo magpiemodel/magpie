@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_trade_tariff.scale(i) = 1e4;
-vm_cost_trade_margin.scale(i) = 1e4;
-vm_cost_trade_feasibility.scale(i) = 1e4;
+scalars
+    s80_maxiter         maximal solve iterations if modelstat is > 2 (1)    / 30 /
+    s80_optfile         switch to use specfied solver settings (1)          / 1 /
+    s80_toloptimal      Ipopt solver tolerance (parameter "tol")            / 1e-08 /
+;

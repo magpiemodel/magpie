@@ -39,6 +39,11 @@ pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - p35_disturbance_loss_sec
 pcm_land(j,"primforest") = pcm_land(j,"primforest") - p35_disturbance_loss_primf(t,j);
 vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 
+* Reduce natural-origin tracking proportionally with disturbance losses.
+* Damaged area keeps its origin mix (natural vs existing ratio preserved).
+pc35_secdforest_natural(j,ac_sub)$(pc35_secdforest(j,ac_sub) > 1e-6) =
+  pc35_secdforest_natural(j,ac_sub) * (1 - p35_disturbance_loss_secdf(t,j,ac_sub) / (pc35_secdforest(j,ac_sub) + p35_disturbance_loss_secdf(t,j,ac_sub)));
+
 
 * -------------------------------------------------
 * Calculate area of secondary forest recovery
@@ -91,6 +96,11 @@ s35_shift = m_timestep_length_forestry/5;
     p35_secdforest(t,j,"acx") = p35_secdforest(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_secdforest(j,ac));
 
+* Natural-origin area ages in lockstep with the secdforest age classes
+    p35_secdforest_natural(t,j,ac)$(ord(ac) > s35_shift) = pc35_secdforest_natural(j,ac-s35_shift);
+    p35_secdforest_natural(t,j,"acx") = p35_secdforest_natural(t,j,"acx")
+                  + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_secdforest_natural(j,ac));
+
 
 * -------------------------------------------------------
 * Carbon threshold for secondary forest maturation
@@ -100,13 +110,22 @@ s35_shift = m_timestep_length_forestry/5;
 *' If the vegetation carbon density in a simulation unit due to regrowth
 *' exceeds a threshold of 20 tC/ha the respective area is shifted from young secondary
 *' forest, which is still considered other land, to secondary forest land.
+*' Uses the uncalibrated natveg growth curve (Braakhekke et al.) so that
+*' natural succession from abandoned cropland matures at realistic rates,
+*' independent of the FRA 2025 calibration applied in module 52.
 p35_maturesecdf(t,j,ac)$(not sameas(ac,"acx")) =
-      p35_land_other(t,j,"youngsecdf",ac)$(pm_carbon_density_secdforest_ac(t,j,ac,"vegc") > 20);
+      p35_land_other(t,j,"youngsecdf",ac)$(pm_carbon_density_secdforest_ac_uncalib(t,j,ac,"vegc") > 20);
 p35_land_other(t,j,"youngsecdf",ac) = p35_land_other(t,j,"youngsecdf",ac) - p35_maturesecdf(t,j,ac);
 p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_maturesecdf(t,j,ac);
+
+* Freshly matured youngsecdf is natural-origin (uncalibrated natveg curve).
+p35_secdforest_natural(t,j,ac) = p35_secdforest_natural(t,j,ac) + p35_maturesecdf(t,j,ac);
 *' @stop
 
 pc35_secdforest(j,ac) = p35_secdforest(t,j,ac);
+pc35_secdforest_natural(j,ac) = p35_secdforest_natural(t,j,ac);
+* Safety clamp: natural area cannot exceed total area (ensures bounds are consistent)
+pc35_secdforest_natural(j,ac)$(pc35_secdforest_natural(j,ac) > pc35_secdforest(j,ac)) = pc35_secdforest(j,ac);
 v35_secdforest.l(j,ac) = pc35_secdforest(j,ac);
 vm_land.l(j,"secdforest") = sum(ac, pc35_secdforest(j,ac));
 pcm_land(j,"secdforest") = sum(ac, pc35_secdforest(j,ac));
@@ -153,10 +172,11 @@ v35_secdforest.up(j,ac) = Inf;
 p35_protection_dist(j,ac_sub) = 0;
 p35_protection_dist(j,ac_sub)$(sum(ac_sub2,pc35_secdforest(j,ac_sub2)) > 0) = pc35_secdforest(j,ac_sub) / sum(ac_sub2,pc35_secdforest(j,ac_sub2));
 pm_land_conservation(t,j,"secdforest","protect")$(pm_land_conservation(t,j,"secdforest","protect") > sum(ac_sub, pc35_secdforest(j,ac_sub))) = sum(ac_sub, pc35_secdforest(j,ac_sub));
+* Natural-origin area is protected from harvest (uncalibrated natveg curve).
 if (sum(sameas(t_past,t),1) = 1,
-v35_secdforest.lo(j,ac_sub) = pm_land_conservation(t,j,"secdforest","protect") * p35_protection_dist(j,ac_sub);
+v35_secdforest.lo(j,ac_sub) = max(pm_land_conservation(t,j,"secdforest","protect") * p35_protection_dist(j,ac_sub), pc35_secdforest_natural(j,ac_sub));
 else
-v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), pm_land_conservation(t,j,"secdforest","protect") * p35_protection_dist(j,ac_sub));
+v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), pm_land_conservation(t,j,"secdforest","protect") * p35_protection_dist(j,ac_sub), pc35_secdforest_natural(j,ac_sub));
 );
 * upper bound
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
@@ -188,6 +208,7 @@ vm_land_other.up(j,"othernat",ac) = Inf;
 vm_land_other.lo(j,"youngsecdf",ac) = 0;
 *set upper bound
 vm_land_other.up(j,"othernat",ac_sub) = pc35_land_other(j,"othernat",ac_sub);
+* No shr limit on other (only secdforest)
 vm_land_other.up(j,"youngsecdf",ac_sub) = pc35_land_other(j,"youngsecdf",ac_sub);
 vm_land_other.fx(j,"youngsecdf",ac_est) = 0;
 m_boundfix(vm_land_other,(j,othertype35,ac_sub),l,1e-6);
@@ -217,7 +238,18 @@ m_boundfix(vm_land,(j,land_natveg),up,1e-6);
 * ------------------------------
 
 p35_carbon_density_other(t,j,"othernat",ac,ag_pools) = pm_carbon_density_other_ac(t,j,ac,ag_pools);
-p35_carbon_density_other(t,j,"youngsecdf",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
+* Youngsecdf uses the uncalibrated natveg curve (Braakhekke et al.).
+p35_carbon_density_other(t,j,"youngsecdf",ac,ag_pools) = pm_carbon_density_secdforest_ac_uncalib(t,j,ac,ag_pools);
+
+* Blended secdforest carbon density: weighted average of FRA-calibrated curve
+* (existing/managed) and uncalibrated natveg curve (natural-origin from succession).
+* Where natural=0 the blend equals the calibrated curve; where natural=total
+* it equals the uncalibrated natveg curve.
+p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
+p35_carbon_density_secdforest(t,j,ac,ag_pools)$(pc35_secdforest(j,ac) > 1e-10) =
+  pm_carbon_density_secdforest_ac(t,j,ac,ag_pools)
+  - (pm_carbon_density_secdforest_ac(t,j,ac,ag_pools) - pm_carbon_density_secdforest_ac_uncalib(t,j,ac,ag_pools))
+    * pc35_secdforest_natural(j,ac) / pc35_secdforest(j,ac);
 
 * ----------------------------
 * NPI/NDC protection policy

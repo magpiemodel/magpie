@@ -44,7 +44,7 @@ if(s52_growingstock_calib = 1,
 
 * Initialize bisection bounds
   i52_k_low(i) = 0.001;
-  i52_k_high(i) = 0.3;
+  i52_k_high(i) = s52_k_high_secdf;
 
   loop(iter52,
     i52_k_calib_secdf(i) = (i52_k_low(i) + i52_k_high(i)) / 2;
@@ -79,7 +79,7 @@ if(s52_growingstock_calib = 1,
 
 * Initialize bisection bounds
   i52_k_low(i) = 0.001;
-  i52_k_high(i) = 0.3;
+  i52_k_high(i) = s52_k_high_plant;
 
   loop(iter52,
     i52_k_calib_plant(i) = (i52_k_low(i) + i52_k_high(i)) / 2;
