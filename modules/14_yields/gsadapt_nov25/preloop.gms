@@ -83,25 +83,21 @@ i14_modeled_yields_hist(t_past,i,yldtype,knbe14)
 
 *' Compute LPJmL weighted mean rainfed yields for bioenergy crops at y1995 —
 *' regional (weighted by cropland area per cluster) and global, per yldtype.
-*' To-Do-NOTE: "y2010" index in f14_cluster_be_croparea_weights is a workaround — the data
-*'             are actually y1995 cropland areas mislabelled during preprocessing. Once preprocessing
-*'             is rerun the weights file will be timeless; remove "y2010" index and t_all from the
-*'              parameter declaration then.
 *' NOTE: For BE yield calibration "off" calibration target will be set to `i14_modeled_yields_hist`,
 *'       so calibration factors are always 1. Modeled yield has to be calculated therefore.
 
 $ifthen "%c14_be_calib%" == "regional"
   i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
-    sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
-    (sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
+    sum((cell(i,j),w) f14_cluster_be_croparea_weights(j,kbe14,w) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
+    (sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w)) + 1e-8);
 $elseif "%c14_be_calib%" == "global"
   i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
-    sum(j, f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
-    (sum(j, f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
+    sum((j,w), f14_cluster_be_croparea_weights(j,kbe14,w) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
+    (sum((j,w), f14_cluster_be_croparea_weights(j,kbe14,w)) + 1e-8);
 $else
   i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
-    sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14) * i14_yields_combined("y1995",j,yldtype,kbe14,"rainfed")) /
-    (sum(cell(i,j), f14_cluster_be_croparea_weights("y2010",j,kbe14)) + 1e-8);
+    sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
+    (sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w)) + 1e-8);
 $endif
 
 **************************************************************************************
@@ -110,9 +106,9 @@ $endif
 i14_calib_target_yields_hist(t,i,knbe14) = f14_fao_yields_hist(t,i,knbe14);
 
 $ifthen "%c14_be_calib%" == "regional"
-  i14_calib_target_yields_hist(t,i,kbe14) = f14_region_be_yields("y2010",i,kbe14);
+  i14_calib_target_yields_hist(t,i,kbe14) = f14_region_be_yields(i,kbe14);
 $elseif "%c14_be_calib%" == "global"
-  i14_calib_target_yields_hist(t,i,kbe14) = f14_global_be_yields("y2010",kbe14);
+  i14_calib_target_yields_hist(t,i,kbe14) = f14_global_be_yields(kbe14);
 $else
   i14_calib_target_yields_hist(t,i,kbe14) = i14_modeled_yields_hist("y1995",i,"gsadapt",kbe14);
 $endif
