@@ -3,7 +3,7 @@
 {
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "magpiemodel/magpie-image:latest",
+	"image": "ghcr.io/magpiemodel/magpie-image:latest",
 
 	"hostRequirements": {
 		"cpus": 2,
