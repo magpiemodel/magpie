@@ -17,7 +17,7 @@ source("scripts/start_functions.R")
 
 # source default configuration
 source("config/default.cfg")
-title <- "l2m_mar26"
+title <- "l2m_may26"
 cfg$recalibrate_landconversion_cost <- TRUE
 
 ##############################################
@@ -27,52 +27,52 @@ cfg$gms$yields <- "managementcalib_aug19"
 cfg$gms$tc     <- "endo_jan22"
 
 # RCP2.6
-cfg$title <- paste0(title, "_Default_mngtcalib_", "rcp26")
-cfg$input <- c(regional    = "rev4.130l2m_default_feb2026_h12_magpie.tgz",
-               cellular    = "rev4.130l2m_default_feb2026_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz",
-               validation  = "rev4.130l2m_default_feb2026_h12_92e02314_validation.tgz",
-               additional  = "additional_data_rev4.63.tgz",
-               calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
+#cfg$title <- paste0(title, "_Default_mngtcalib_", "rcp26")
+#cfg$input <- c(regional    = "rev4.130l2m_default_feb2026_h12_magpie.tgz",
+#               cellular    = "rev4.130l2m_default_feb2026_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz",
+#               validation  = "rev4.130l2m_default_feb2026_h12_92e02314_validation.tgz",
+#               additional  = "additional_data_rev4.65.tgz",
+#               calibration = "calibration_H12_FAO_01Apr26.tgz")      #### Do I need to change this when I recalibrate?
 # start MAgPIE run
-start_run(cfg, codeCheck = TRUE)
+#start_run(cfg, codeCheck = TRUE)
 
 # RCP7.0
-cfg$title <- paste0(title, "_Default_mngtcalib_", "rcp70")
-cfg$input <- c(regional    = "rev4.130l2m_default_feb2026_h12_magpie.tgz",
-               cellular    = "rev4.130l2m_default_feb2026_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-               validation  = "rev4.130l2m_default_feb2026_h12_92e02314_validation.tgz",
-               additional  = "additional_data_rev4.63.tgz",
-               calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
+#cfg$title <- paste0(title, "_Default_mngtcalib_", "rcp70")
+#cfg$input <- c(regional    = "rev4.131_h12_magpie.tgz",
+#               cellular    = "rev4.131_h12_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz",
+#               validation  = "rev4.131_h12_92e02314_validation.tgz",
+#               additional  = "additional_data_rev4.65.tgz",
+      #         calibration = "calibration_H12_FAO_01Apr26.tgz")    #### Do I need to change this when I recalibrate?
 # start MAgPIE run
-start_run(cfg, codeCheck = TRUE)
+#start_run(cfg, codeCheck = TRUE)
 
 #####################
 ### Newlpjml data ###
 #####################
 
 ### Different RCPs (2x) ###
-for (rcp in c("2p6", "7p0")) {
+for (rcp in c("7p0")) { # 2p6
 
     if (rcp == "2p6") {
         # RCP2.6
         cfg$input <- c(regional    = "rev4.130l2m_v5-10-0m2_feb2026_h12_magpie.tgz",
                        cellular    = "rev4.130l2m_v5-10-0m2_feb2026_h12_e3aebc2e_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-a0c283bd.tgz",
                        validation  = "rev4.130l2m_v5-10-0m2_feb2026_h12_92e02314_validation.tgz",
-                       additional  = "additional_data_rev4.63.tgz",
-                       calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
+                       additional  = "additional_data_rev4.65.tgz",
+                       calibration = "calibration_H12_FAO_01Apr26.tgz")    #### Do I need to change this when I recalibrate?
     } else if (rcp == "7p0") {
         # RCP7.0
-        cfg$input <- c(regional    = "rev4.130l2m_v5-10-0m2_feb2026_h12_magpie.tgz",
-                       cellular    = "rev4.130l2m_v5-10-0m2_feb2026_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-a0c283bd.tgz",
-                       validation  = "rev4.130l2m_v5-10-0m2_feb2026_h12_92e02314_validation.tgz",
-                       additional  = "additional_data_rev4.63.tgz",
-                       calibration = "calibration_H12_FAO_18Sep25.tgz")      #### Do I need to change this when I recalibrate?
+        cfg$input <- c(regional    = "rev4.131l2m_v5-10-0m2_may2026+BEdata_h12_magpie.tgz",
+                       cellular    = "rev4.131l2m_v5-10-0m2_may2026+BEdata_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-a0c283bd.tgz",
+                       validation  = "rev4.131l2m_v5-10-0m2_may2026+BEdata_h12_92e02314_validation.tgz",
+                       additional  = "additional_data_rev4.65.tgz",
+                       calibration = "calibration_H12_FAO_01Apr26.tgz") #### Do I need to change this when I recalibrate?
     } else {
       stop("selected rcp not available")
     }
 
     ### Different realizations (2x) ###
-    for (realization in c("mngt", "gsadapt")) {
+    for (realization in c("gsadapt")) { # "mngt", 
 
         if (realization == "mngt") {
         # default realizations
