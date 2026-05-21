@@ -20,9 +20,10 @@
 			"settings": {},
 			"extensions": ["reditorsupport.r"],
 		}
-	}
+	},
 
   	"postCreateCommand": "bash .devcontainer/setup.sh",
+	"postAttachCommand": "code /workspaces/magpie/.devcontainer/magpie-tutorial.code-workspace",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
