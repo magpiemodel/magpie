@@ -2,3 +2,8 @@
 
 git clone https://github.com/pik-piam/mrtutorial.git /workspaces/mrtutorial
 mkdir /workspaces/madrat-main-folder
+
+if [ -n "$GAMS_LICENSE" ]; then
+  mkdir -p /opt/var/gams
+  echo "$GAMS_LICENSE" > /opt/var/gams/gamslice.txt
+fi
