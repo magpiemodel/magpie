@@ -22,7 +22,7 @@
 		}
 	},
 
-  	"postCreateCommand": "bash .devcontainer/setup.sh",
+  	"postCreateCommand": "bash magpie/.devcontainer/setup.sh",
 	"workspaceFolder" : "/workspaces"
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
