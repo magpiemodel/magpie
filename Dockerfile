@@ -99,7 +99,7 @@ echo "options(repos = c(pikpiam = 'https://pik-piam.r-universe.dev',
 EOF
 
 RUN Rscript -e 'install.packages("pak")'
-
+RUN Rscript -e 'pak::pkg_install("languageserver")'
 
 # Set working directory
 WORKDIR /opt/magpie
