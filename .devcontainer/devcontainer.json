@@ -22,8 +22,7 @@
 		}
 	},
 
-	"postCreateCommand": "bash magpie/.devcontainer/setup.sh",
-	"workspaceFolder" : "/workspaces"
+	"postCreateCommand": "bash magpie/.devcontainer/setup.sh"
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
