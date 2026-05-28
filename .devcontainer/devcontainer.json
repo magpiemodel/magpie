@@ -22,12 +22,8 @@
 		}
 	},
 
-  	"postCreateCommand": "bash magpie/.devcontainer/setup.sh",
-	"workspaceFolder" : "/workspaces",
-
-	"features": {
-    	"ghcr.io/devcontainers/features/github-cli:1": {}
-	}
+	"postCreateCommand": "bash magpie/.devcontainer/setup.sh",
+	"workspaceFolder" : "/workspaces"
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
