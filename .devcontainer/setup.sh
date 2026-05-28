@@ -16,3 +16,7 @@ Rscript -e 'pak::pak(".")'
 echo "" >> ~/.bashrc
 echo "export MADRAT_MAINFOLDER='/workspaces/madrat-main-folder'" >> ~/.bashrc
 echo "" >> ~/.bashrc
+
+# Also set the mainfolder for the current session already,
+# as the .bashrc is only loaded later.
+MADRAT_MAINFOLDER='/workspaces/madrat-main-folder'
