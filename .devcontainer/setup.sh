@@ -10,3 +10,9 @@ fi
 
 cd /workspaces/magpie
 Rscript -e '2 + 2; "dummy evaluation to trigger renv install"'
+
+cd /workspaces/mrtutorial
+Rscript -e 'pak::pak(".")'
+echo "" >> ~/.bashrc
+echo "export MADRAT_MAINFOLDER='/workspaces/madrat-main-folder'" >> ~/.bashrc
+echo "" >> ~/.bashrc
