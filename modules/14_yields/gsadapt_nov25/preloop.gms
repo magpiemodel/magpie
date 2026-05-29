@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ***YIELD CORRECTION FOR PASTURE ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
-p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j),f14_yields(t,j,"pasture","rainfed") * pm_land_start(j,"past")) /
-                            sum(cell(i,j),pm_land_start(j,"past")) );
+p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j), f14_yields(t,j,"pasture","rainfed") * pm_land_start(j,"past")) /
+                            sum(cell(i,j), pm_land_start(j,"past")) );
 
 *' Pasture yield correction: use historical data for all years where available
 *' (f14_pyld_hist covers y1965–y2020), freeze at the last available value beyond.
@@ -19,7 +19,7 @@ loop(t,
   p14_pyield_corr(t,i)$(p14_pyield_corr(t,i) = 0) = p14_pyield_corr(t-1,i);
 );
 
-i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell(i,j),p14_pyield_corr(t,i));
+i14_yields_calib(t,j,"pasture",w) = f14_yields(t,j,"pasture",w) * sum(cell(i,j),p14_pyield_corr(t,i));
 
 
 ***YIELD MANAGEMENT CALIBRATION************************************************************

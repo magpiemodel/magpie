@@ -38,10 +38,6 @@ $offdelim
 ;
 $offEmpty
 
-* LPJmL2MAGPIE In nocc runs, should one replace the i14_yields variable with the constgsadapt variant?
-* Now that constgsadapt is the "default" this will actually be a different fix, I guess on the tau side?
-* Also, some renaming will need to occur here. The gsadapt constgsadapt file names and variables are inconsistent.
-
 table f14_yields_constgsadapt(t_all,j,kve,w) LPJmL potential yields per cell WITHOUT gsadapt (rainfed and irrigated) (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/input/lpj_yields_constgsadapt.cs3"
