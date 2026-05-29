@@ -45,10 +45,8 @@ q13_tech_cost_sum(i2) ..
  vm_tech_cost(i2) =e= sum(tautype, v13_tech_cost(i2, tautype));
 
 *' Enforce gsadapt yield increases in tau, so that tc costs apply
-
 q13_lower_bound_tau(j2) ..
   vm_tau(j2,"crop") =g= pcm_tau(j2,"crop") * sum((ct, cell(i2,j2)), pm_yields_gsadapt_ratio_increment(ct,i2));
-
 
 *' The overall land use intensity factor `vm_tau` is a linear combination between the
 *' land use intensity factors `v13_tau_core` for regular cropland and `v13_tau_consv`

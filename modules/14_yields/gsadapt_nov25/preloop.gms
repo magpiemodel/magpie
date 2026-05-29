@@ -13,6 +13,7 @@ p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j),f14_yields(t,j,"pasture","rainfed") * p
 *' (f14_pyld_hist covers y1965–y2020), freeze at the last available value beyond.
 *' This avoids a discontinuity at the t_past boundary by using observed data
 *' through y2020 instead of freezing at the last t_past year (y2015).
+p14_pyield_corr(t,i) = 0;
 p14_pyield_corr(t,i)$(f14_pyld_hist(t,i) > 0) = f14_pyld_hist(t,i) / (p14_pyield_LPJ_reg(t,i) + 0.000001);
 loop(t,
   p14_pyield_corr(t,i)$(p14_pyield_corr(t,i) = 0) = p14_pyield_corr(t-1,i);
@@ -52,11 +53,13 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' to an additive term in case of a strongly underestimated baseline. The scalar
 *' `s14_limit_calib` can be used to switch limited calibration on (1) and off (0).
 
-*' To be able to assess the impacts of growing period adaption, both type of yields
-*' (with and without adapted growing perdiods and varieties) have to be calibrated.
+*' To account for growing period adaption to climate change, two types of yields
+*' (one with adaption of growing periods and varieties to changes in climatic conditions (gsadapt)
+*' and one with no changes in growing periods and varieties in the future (constgsadapt)) 
+*' have to be calibrated.
 *' The joint parameter `i14_yields_combined(t,j,yldtype,kcr,w)` is used to calibrate
-*' both types individually as even so the growing seasons are held constant from 1995
-*' onwards, due to long term averaging the yields already differ in 1995.
+*' both types individually as even though the growing seasons are held constant from 1995
+*' onwards, the yields already differ in 1995 due to long term averaging.
 
 *** INITIALIZATION of crop yield parameters
 
@@ -88,7 +91,7 @@ i14_modeled_yields_hist(t_past,i,yldtype,knbe14)
 
 $ifthen "%c14_be_calib%" == "regional"
   i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
-    sum((cell(i,j),w) f14_cluster_be_croparea_weights(j,kbe14,w) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
+    sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
     (sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w)) + 1e-8);
 $elseif "%c14_be_calib%" == "global"
   i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
@@ -126,7 +129,7 @@ $endif
 *' and `i14_modeled_yields_hist`:
 
 loop(t,
-     if(sum(sameas(t,"y1995"),1)=1,
+     if (sum(sameas(t,"y1995"),1) = 1,
 
           if ((s14_limit_calib = 0),
                i14_lambda_yields(t,i,yldtype,kcr) = 1;
@@ -208,7 +211,7 @@ i14_yields_calib_combined(t,j,yldtype,kbe14,w) = i14_yields_calib_combined(t,j,y
 
 * Set yields to gsadapt values (pasture yields are not affected by growing period adaption)
 
-if(s14_use_gsadapt = 1,
+if (s14_use_gsadapt = 1,
     pm_yields_semi_calib(j,knbe14,w) = i14_yields_calib_combined("y1995",j,"gsadapt",knbe14,w);
     i14_yields_calib(t,j,kcr,w) = i14_yields_calib_combined(t,j,"gsadapt",kcr,w);
   else
@@ -229,7 +232,7 @@ if(s14_use_gsadapt = 1,
 
 * set yield calib factors to 1 in case of no use of yield calibration factors (s14_use_yield_calib = 0)
 * or missing input file
-if(s14_use_yield_calib = 0 OR sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
+if (s14_use_yield_calib = 0 OR sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
   f14_yld_calib(i,ltype14) = 1;
 );
 
@@ -250,7 +253,7 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)
 *' deficiency on non-intact land.
 
 * set default values in case of missing input file.
-if(sum((t,j,ncp_type14),f14_yld_ncp_report(t,j,ncp_type14)) = 0,
+if (sum((t,j,ncp_type14),f14_yld_ncp_report(t,j,ncp_type14)) = 0,
   f14_yld_ncp_report(t,j,ncp_type14) = 1;
 );
 

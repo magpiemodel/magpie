@@ -6,18 +6,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i14_yields_calib(t,j,kve,w)                             Calibrated biophysical input yields WITHOUT growing period adaptation (excluding technological change) (tDM per ha per yr)
+ i14_yields_calib(t,j,kve,w)                             Calibrated biophysical input yields without growing period adaptation excluding technological change (tDM per ha per yr)
  i14_yields_combined(t_all,j,yldtype,kcr,w)              Combined biophysical yields for gsadapt and constgsadapt before calibration (tDM per ha per yr)
  i14_yields_calib_combined(t,j,yldtype,kcr,w)            Combined parameter with gsadapt and constgsadapt yields (tDM per ha per yr)
- p14_yields_gsadapt_ratio(t,i)                           Ratio between regional aggregated gsadapt and nosadapt yields (1)
- p14_yields_gsadapt_ratio_previous(t,i)                  Ratio between regional aggregated gsadapt and nosadapt yields for the previous time-step (1)
+ p14_yields_gsadapt_ratio(t,i)                           Ratio between regional aggregated gsadapt and constgsadapt yields (1)
+ p14_yields_gsadapt_ratio_previous(t,i)                  Ratio between regional aggregated gsadapt and constgsadapt yields for the previous time-step (1)
  pm_yields_gsadapt_ratio_increment(t,i)                  Incremental change of growing period adaption from this time step (1)
  p14_yields_gsadapt_ratio_cumulative(t,i)                Cumulative effect of growing period adaption from the first to the current timestep (1)
  p14_pyield_LPJ_reg(t_all,i)                             Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
  p14_pyield_corr(t,i)                                    Regional pasture management correction for historical time steps (1)
  i14_croparea_total(t_all,w,j)                           Cellular croparea (mio. ha)
  i14_modeled_yields_hist(t_all,i,yldtype,kcr)            Biophysical input yields average over region and water supply type at the historical reference year (tDM per ha per yr)
- i14_calib_target_yields_hist(t,i,kcr)              Calibration target yields per region at the historical reference year (FAO for crops, Li2020 for bioenergy crops) (tDM per ha per yr)
+ i14_calib_target_yields_hist(t,i,kcr)                   Calibration target yields per region at the historical reference year using FAO for crops and Li2020 for bioenergy crops (tDM per ha per yr)
  i14_lambda_yields(t,i,yldtype,kcr)                      Scaling factor for non-linear management calibration (1)
  i14_managementcalib(t,j,yldtype,kcr,w)                  Regional management calibration factor accounting for FAO yield levels (1)
  im_growing_stock(t,j,ac,land_timber)                    Harvestable stem biomass per ha by age class (tDM per ha)
@@ -29,7 +29,7 @@ parameters
  ;
 
 positive variables
- vm_yld(j,kve,w)                     Yields (variable because of technical change) (tDM per ha per yr)
+ vm_yld(j,kve,w)                     Yields declared as variable because of technological change (tDM per ha per yr)
 ;
 
 equations

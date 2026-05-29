@@ -16,16 +16,16 @@ $setglobal c14_yields_scenario  cc
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
 scalars
-  s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /
-  s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /
+  s14_limit_calib              Relative managament calibration switch (1=limited 0=pure relative) / 1 /
+  s14_calib_ir2rf              Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /
   s14_degradation              Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /
   s14_yld_reduction_soil_loss  Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
-  s14_use_yield_calib   Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
-  s14_yld_past_switch   Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
-  s14_minimum_growing_stock     Minimum growing stock for timber harvest in natural vegetation (tDM per ha) / 5 /
-  sm_carbon_fraction             Carbon fraction of dry matter (tC per tDM) / 0.5 /
-  s14_use_gsadapt          Switch to use including growing period adaption (1) or not (0) for yield pattern (binary) / 0 /
-  s14_gsadapt2tau          Switch to account for growing period adaption in tau (1) or not (0) (binary) / 0 /
+  s14_use_yield_calib          Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
+  s14_yld_past_switch          Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
+  s14_minimum_growing_stock    Minimum growing stock for timber harvest in natural vegetation (tDM per ha) / 5 /
+  sm_carbon_fraction           Carbon fraction of dry matter (tC per tDM) / 0.5 /
+  s14_use_gsadapt              Switch to use including growing period adaption (1) or not (0) for yield pattern (binary) / 0 /
+  s14_gsadapt2tau              Switch to account for growing period adaption in tau (1) or not (0) (binary) / 0 /
 ;
 
 
@@ -123,10 +123,12 @@ $include "./modules/14_yields/gsadapt_nov25/input/f14_region_be_yields.cs3"
 $offdelim
 ;
 
-table f14_global_be_yields(kbe14) Li2020 reference yields for bioenergy crops at global level (tDM per ha per yr)
+parameter f14_global_be_yields(kbe14) Li2020 reference yields for bioenergy crops at global level (tDM per ha per yr)
+/
 $ondelim
-$include "./modules/14_yields/gsadapt_nov25/input/f14_global_be_yields.cs3"
+$include "./modules/14_yields/gsadapt_nov25/input/f14_global_be_yields.csv"
 $offdelim
+/
 ;
 
 table f14_cluster_be_croparea_weights(j,kbe14,w) Cropland area weights per cluster for Li2020 bioenergy yield aggregation (mio. ha)

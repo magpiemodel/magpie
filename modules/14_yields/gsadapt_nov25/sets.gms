@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  ltype14 calibration land types
+  ltype14 Calibration land types
        / crop, past /
 
   k(kall) Primary products
@@ -33,7 +33,7 @@ sets
   kbe14(kcr) Bioenergy cropping activities
        / begr, betr /
 
-  ncp_type14 natures contributions to people (NCP) relevant for agricultural yields
+  ncp_type14 Natures contributions to people (NCP) relevant for agricultural yields
        / soil_intact, poll_suff /
 
   yldtype Yield LPJmL run type with or without growing season adaptation

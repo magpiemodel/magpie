@@ -17,7 +17,7 @@ source("scripts/start_functions.R")
 
 # source default configuration
 source("config/default.cfg")
-title <- "l2m_may26"
+title <- "l2m_jun26"
 cfg$recalibrate_landconversion_cost <- TRUE
 
 ##############################################
@@ -47,7 +47,7 @@ cfg$gms$tc     <- "endo_jan22"
 #start_run(cfg, codeCheck = TRUE)
 
 #####################
-### Newlpjml data ###
+### New lpjml data ###
 #####################
 
 ### Different RCPs (2x) ###
@@ -55,6 +55,7 @@ for (rcp in c("7p0")) { # 2p6
 
     if (rcp == "2p6") {
         # RCP2.6
+        # To Do: need to run preprocessing for RCP2p6!!!
         cfg$input <- c(regional    = "rev4.130l2m_v5-10-0m2_feb2026_h12_magpie.tgz",
                        cellular    = "rev4.130l2m_v5-10-0m2_feb2026_h12_e3aebc2e_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-a0c283bd.tgz",
                        validation  = "rev4.130l2m_v5-10-0m2_feb2026_h12_92e02314_validation.tgz",
@@ -62,9 +63,9 @@ for (rcp in c("7p0")) { # 2p6
                        calibration = "calibration_H12_FAO_01Apr26.tgz")    #### Do I need to change this when I recalibrate?
     } else if (rcp == "7p0") {
         # RCP7.0
-        cfg$input <- c(regional    = "rev4.131l2m_v5-10-0m2_may2026+BEdata_h12_magpie.tgz",
-                       cellular    = "rev4.131l2m_v5-10-0m2_may2026+BEdata_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-a0c283bd.tgz",
-                       validation  = "rev4.131l2m_v5-10-0m2_may2026+BEdata_h12_92e02314_validation.tgz",
+        cfg$input <- c(regional    = "rev4.131l2m_v5-10-0m2_may2026+BEdata3_h12_magpie.tgz",
+                       cellular    = "rev4.131l2m_v5-10-0m2_may2026+BEdata3_h12_00e02813_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-a0c283bd.tgz",
+                       validation  = "rev4.131l2m_v5-10-0m2_may2026+BEdata3_h12_92e02314_validation.tgz",
                        additional  = "additional_data_rev4.65.tgz",
                        calibration = "calibration_H12_FAO_01Apr26.tgz") #### Do I need to change this when I recalibrate?
     } else {
@@ -102,29 +103,29 @@ for (rcp in c("7p0")) { # 2p6
 
             } else if (gsadapt == "adapt") {
 
-                for (tauspillover in c("TCspill0", "TCspill1")) {
-                  if (tauspillover == "TCspill0") {
+                for (gsad_in_tau in c("TCgsad0", "TCgsad1")) {
+                  if (gsad_in_tau == "TCgsad0") {
                     # growing period adaptation
                     cfg$gms$s14_use_gsadapt <- 1
                     cfg$gms$s14_gsadapt2tau <- 0
 
                     # title 
-                    cfg$title <- paste0(title, "_LPJmL5-10-0m2", "_", "rcp", rcp, "_", realization, "_gs", gsadapt, tauspillover)
+                    cfg$title <- paste0(title, "_LPJmL5-10-0m2", "_", "rcp", rcp, "_", realization, "_gs", gsadapt, gsad_in_tau)
                     # start MAgPIE run
                     start_run(cfg, codeCheck = TRUE)
 
-                  } else if (tauspillover == "TCspill1") {
+                  } else if (gsad_in_tau == "TCgsad1") {
                     # growing period adaptation
                     cfg$gms$s14_use_gsadapt <- 1
                     cfg$gms$s14_gsadapt2tau <- 1
 
                     # title 
-                    cfg$title <- paste0(title, "_LPJmL5-10-0m2", "_", "rcp", rcp, "_", realization, "_gs", gsadapt, tauspillover)
+                    cfg$title <- paste0(title, "_LPJmL5-10-0m2", "_", "rcp", rcp, "_", realization, "_gs", gsadapt, gsad_in_tau)
                     # start MAgPIE run
                     start_run(cfg, codeCheck = TRUE)
 
                   } else {
-                    stop("Selected tauspillover is not available.")
+                    stop("Selected gsad_in_tau is not available.")
                   }
                 }
             } else {

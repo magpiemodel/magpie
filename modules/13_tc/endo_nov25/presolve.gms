@@ -19,8 +19,9 @@ else
 
 if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 
-* We constrain tech cost to a defined share of regional GDP to avoid unrealistically
-* high endogenous tech investments
+*' Technological change costs are constrainted to a 
+*' pre-defined share of regional GDP to avoid unrealistically
+*' high endogenous tech investments
   vm_tech_cost.up(i) =
     sum((i_to_iso(i,iso),ct), im_gdp_pc_ppp_iso(ct,iso) * im_pop_iso(ct,iso)) * s13_max_gdp_shr;
 
