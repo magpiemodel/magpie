@@ -33,6 +33,7 @@ q21_trade_reg(h2,k_trade)..
                               sum(ct, f21_trade_export_balanceflow(ct, i2, k_trade)) +
                               sum(ct, f21_trade_regional_balanceflow(ct, i2, k_trade)));
 
+
 *' For non-tradable commodities, the regional supply should be larger or equal to the regional demand.
  q21_notrade(h2,k_notrade)..
   sum(supreg(h2,i2),vm_prod_reg(i2,k_notrade)) =g= sum(supreg(h2,i2), vm_supply(i2,k_notrade));
@@ -60,8 +61,9 @@ q21_trade_lower(i_ex,i_im,k_trade)..
 q21_trade_upper(i_ex,i_im,k_trade)..
  v21_trade(i_ex,i_im,k_trade) =l=
     vm_supply(i_im,k_trade)
-    * sum(ct, i21_import_supply_historical(i_ex,i_im,ct,k_trade)
-       + i21_stddev_lib_factor(ct) * i21_trade_bilat_stddev(ct,i_ex,i_im,k_trade));
+    * sum(ct, i21_import_supply_historical(i_ex,i_im,ct,k_trade) * i21_import_supply_scenario(ct)
+       + i21_stddev_lib_factor(ct) * i21_trade_bilat_stddev(ct,i_ex,i_im,k_trade))
+       + v21_import_for_feasibility(i_ex,i_im,k_trade);
 
 
 *' Tariff costs for each exporting region are the sum over all bilateral flows
@@ -89,3 +91,9 @@ q21_costs_margins(i2,k_trade)..
 *' This variable enters the global objective function.
  q21_cost_trade_margin(i2)..
  vm_cost_trade_margin(i2) =e= sum(k_trade, v21_cost_margin_reg(i2,k_trade));
+
+* Regional feasibility penalty costs aggregated over all tradable commodities.
+
+ q21_cost_trade_feasibility(i2)..
+ vm_cost_trade_feasibility(i2) =g=
+ sum((i_im,k_trade), v21_import_for_feasibility(i2,i_im,k_trade) * s21_cost_import);

@@ -100,7 +100,29 @@ if ((s21_trade_scenario_adjustments = 1),
 );
 
 
+* CAP IMPORT SUPPLY RATIOS AT 1
+* When i21_import_supply_scenario > 1, the scenario-scaled sum of import supply
+* ratios across all exporters can exceed 1 for some importers and commodities,
+* meaning modelled imports would exceed 100% of domestic supply, causing
+* overproduction. We rescale i21_import_supply_historical proportionally for
+* each (i_im, t_all, k_trade) combination where the scaled sum exceeds 1,
+* preserving the relative bilateral shares while capping the total at 1.
+p21_import_supply_sum(i_im,t_all,k_trade) =
+  sum(i_ex, i21_import_supply_historical(i_ex,i_im,t_all,k_trade))
+  * i21_import_supply_scenario(t_all);
+
+i21_import_supply_historical(i_ex,i_im,t_all,k_trade)
+  $(p21_import_supply_sum(i_im,t_all,k_trade) > 1) =
+  i21_import_supply_historical(i_ex,i_im,t_all,k_trade)
+  / p21_import_supply_sum(i_im,t_all,k_trade);
+
+
+
 * Enforce minimum transport margin for forestry products to prevent
 * unrealistically cheap long-distance wood trade.
 i21_trade_margin(i_ex, i_im,"wood")$(i21_trade_margin(i_ex, i_im,"wood") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
 i21_trade_margin(i_ex, i_im,"woodfuel")$(i21_trade_margin(i_ex, i_im,"woodfuel") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
+
+v21_import_for_feasibility.fx(i_ex,i_im,k_trade) = 0;
+v21_import_for_feasibility.lo(i_ex,i_im,k_import21) = 0;
+v21_import_for_feasibility.up(i_ex,i_im,k_import21) = Inf;

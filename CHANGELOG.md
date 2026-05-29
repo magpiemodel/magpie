@@ -7,17 +7,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **scripts** saveToResultsArchive saves to inbox folder if available
+- **renv/activate.R** updated to version 1.2.2
 
 ### added
 - **80_optimization/nlp_ipopt** New realization, using IPOPT instead of CONOPT4 (and the fallback CONOPT3) as the NLP solver for the MAgPIE model.
 - **scripts/start/extra/ipopt.R** Start script for solving MAgPIE with IPOPT.
+- **Dockerfile** Re-added a Dockerfile, which can be used to build a local docker image as well as a GH codespace
+- **.devcontainer/devcontainer.json** A new configuration for development containers, which allow for reproducible, prepared development environments
 
 ### removed
 -
 
 ### fixed
--
+- **21_trade** Bugfix and refinement of bilateral trade realization to avoid infeasibiliteis in SSP4 and SSP5.
 
 
 ## [4.14.0] - 2026-05-05
