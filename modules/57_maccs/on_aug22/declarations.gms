@@ -6,18 +6,22 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s57_step_length                    Step length in MACC data (USD17MER)
+ s57_step_length          Step length in MACC data (USD17MER)
+;
+
+parameter
+ p57_fader(t_all)         MACCs policy fader (1)
 ;
 
 parameters
  im_maccs_mitigation(t,i,emis_source,pollutants)        Technical mitigation of GHG emissions (percent)
- i57_mac_step_n2o(t,i,emis_source)                                  Helper to map N2O prices and maccs_steps (1)
- i57_mac_step_ch4(t,i,emis_source)                                  Helper to map CH4 prices and maccs_steps (1)
+ i57_mac_step_n2o(t,i,emis_source)                      Helper to map N2O prices and maccs_steps (1)
+ i57_mac_step_ch4(t,i,emis_source)                      Helper to map CH4 prices and maccs_steps (1)
  p57_maccs_costs_integral(t,i,emis_source,pollutants)   Costs of technical mitigation (USD17MER per Tg N CH4 C)
 ;
 
 equations
- q57_labor_costs(i)  Calculation of labor costs of technical mitigation (mio. USD17MER per yr)
+ q57_labor_costs(i)    Calculation of labor costs of technical mitigation (mio. USD17MER per yr)
  q57_capital_costs(i)  Calculation of capital costs of technical mitigation (mio. USD17MER per yr)
 ;
 

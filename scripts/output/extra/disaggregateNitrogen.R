@@ -1,0 +1,43 @@
+# |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
+# |  authors, and contributors see CITATION.cff file. This file is part
+# |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+# |  AGPL-3.0, you are granted additional permissions described in the
+# |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+# |  Contact: magpie@pik-potsdam.de
+
+# --------------------------------------------------------------
+# description: Create grid-level nitrogen disaggregations
+# comparison script: FALSE
+# ---------------------------------------------------------------
+
+# Version 1.00 - Michael Crawford
+# 1.00: first working version
+
+library(gms)
+library(magpie4)
+
+message("Starting nitrogen disaggregation output runscript")
+
+############################# BASIC CONFIGURATION #######################################
+if (!exists("source_include")) {
+
+    title       <- NULL
+    outputdir   <- NULL
+
+    # Define arguments that can be read from command line
+    readArgs("outputdir", "title")
+
+}
+#########################################################################################
+
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
+title <- cfg$title
+
+message("Generating nitrogen disaggregation output for the run: ", title)
+
+# Grid-level nitrogen pollution
+gdx <- file.path(outputdir, "fulldata.gdx")
+
+out <- getReportGridNitrogenPollution(gdx = gdx,
+                                      reportOutputDir = outputdir,
+                                      scenario = title)

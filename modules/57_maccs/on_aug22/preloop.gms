@@ -5,6 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+if (s57_fader_functional_form = 1,
+    m_linear_time_interpol(p57_fader,s57_fader_start,s57_fader_end,0,s57_fader_target);
+elseif s57_fader_functional_form = 2,
+    m_sigmoid_time_interpol(p57_fader,s57_fader_start,s57_fader_end,0,s57_fader_target);
+);
+      
 * inflated using USD05 --> USD17 MER rate: 5 * 1.23
 $if "%c57_macc_version%" == "PBL_2007" s57_step_length = 6.15;
 * inflated using USD10 --> USD17 MER rate: 20 * 1.12
@@ -65,6 +71,11 @@ im_maccs_mitigation(t,i,emis_source_awms_ch4,"ch4") =
         sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i,emis_source_awms_ch4) AND ord(maccs_steps) > 1),
               f57_maccs_ch4(t,i,"awms_ch4",maccs_steps));
 
+* scale mitigation share
+if (s57_maccs_fader = 1,
+    im_maccs_mitigation(t,i,emis_source,pollutants) = im_maccs_mitigation(t,i,emis_source,pollutants)*p57_fader(t);
+);
+
 $ontext
 The costs associated with technical abatement of GHG emissions are reflected by the area under the mac curve, i.e. the integral.
 Abatement options at zero cost are in the first step. Therefore an offset of -1 is used.
@@ -103,6 +114,11 @@ loop(maccs_steps$(ord(maccs_steps) > 1),
     p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i,emis_source_awms_ch4)) =
     p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") +
     (f57_maccs_ch4(t,i,"awms_ch4",maccs_steps) - f57_maccs_ch4(t,i,"awms_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
+);
+
+* scale cost integral
+if (s57_maccs_fader = 1,
+    p57_maccs_costs_integral(t,i,emis_source,pollutants) = p57_maccs_costs_integral(t,i,emis_source,pollutants)*p57_fader(t);
 );
 
 *Conversion from USD per ton C to USD per ton N and USD per ton CH4, using the old IPCC AR4 GWP factors.

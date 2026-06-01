@@ -11,13 +11,18 @@ $setglobal c57_macc_version  PBL_2022
 $setglobal c57_macc_scenario  Default
 
 scalars
-  s57_maxmac_n_soil    activate soil N mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
-  s57_maxmac_n_awms    activate awms N mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
-  s57_maxmac_ch4_rice    activate rice CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive)/ -1 /
-  s57_maxmac_ch4_entferm activate enteric fermentation CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
-  s57_maxmac_ch4_awms  activate awms CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
-  s57_implicit_emis_factor emission factor for direct soil emissions implicit to MACC curves (tN2ON per tN) / 0.01 /
-  s57_implicit_fert_cost fertilizer costs implicit to MACC curves (USD17MER per ton N) / 738 /
+  s57_maxmac_n_soil          Activate soil N mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
+  s57_maxmac_n_awms          Activate awms N mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
+  s57_maxmac_ch4_rice        Activate rice CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive)/ -1 /
+  s57_maxmac_ch4_entferm     Activate enteric fermentation CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
+  s57_maxmac_ch4_awms        Activate awms CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
+  s57_implicit_emis_factor   Emission factor for direct soil emissions implicit to MACC curves (tN2ON per tN) / 0.01 /
+  s57_implicit_fert_cost     fertilizer costs implicit to MACC curves (USD17MER per ton N) / 738 /
+  s57_maccs_fader            Switch for MACCs fader (1=on 0=off) / 1 /
+  s57_fader_start            Start year of MACCs fade-in (1) / 2030 /
+  s57_fader_end              End year of MACCs fade-in (1) / 2050 /
+  s57_fader_target           Target value of MACCs fade-in in end year / 1 /
+  s57_fader_functional_form  Switch for functional form of MACCs fader (1=linear 2=sigmoid) / 1 /
 ;
 
 $onEmpty

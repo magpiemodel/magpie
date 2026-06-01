@@ -9,15 +9,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### changed
 - **scripts** saveToResultsArchive saves to inbox folder if available
 - **renv/activate.R** updated to version 1.2.2
+- **55_awms/ipcc2006_aug16** Replaced `scen_conf55` set: removed `sdp, a1, a2, b1, b2, GoodPractice`, added `transformation`.
 
 ### added
 - **80_optimization/nlp_ipopt** New realization, using IPOPT instead of CONOPT4 (and the fallback CONOPT3) as the NLP solver for the MAgPIE model.
 - **scripts/start/extra/ipopt.R** Start script for solving MAgPIE with IPOPT.
 - **Dockerfile** Re-added a Dockerfile, which can be used to build a local docker image as well as a GH codespace
 - **.devcontainer/devcontainer.json** A new configuration for development containers, which allow for reproducible, prepared development environments
+- **57_maccs/on_aug22** Configurable temporal fader for technical mitigation. New parameter `p57_fader(t_all)` scales both `im_maccs_mitigation` and `p57_maccs_costs_integral`. Controlled by new scalars `s57_maccs_fader` (on/off), `s57_fader_functional_form` (1=linear, 2=sigmoid), `s57_fader_start`, `s57_fader_end`, `s57_fader_target`. Default ramp: linear from 2030 to 2050 with target 1.
+- **config/default.cfg** Added `criticalNitrogenSurplus_0.5.mz` to `cfg$files2export$start` and exposed the MACCs fader switches at the config level.
+- **scripts/output/extra/disaggregateNitrogen.R** New post-processing script for nitrogen disaggregation.
+- **scripts/start/projects/run_NitrogenBoundaries.R** New start script for the Nitrogen-Boundaries project, paired with `scripts/start/projects/scenario_config_Nitrogen-Boundaries.csv`.
 
 ### removed
--
+- **scripts/start/projects/project_inms2.R** Removed superseded INMS2 start script (it used the `GoodPractice` AWMS scenario dropped from `scen_conf55`; INMS sensitivity scenarios now live in the Nitrogen-Boundaries scenario config).
 
 ### fixed
 - **21_trade** Bugfix and refinement of bilateral trade realization to avoid infeasibiliteis in SSP4 and SSP5.
