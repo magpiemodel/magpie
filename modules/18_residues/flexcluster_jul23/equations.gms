@@ -14,7 +14,7 @@
  q18_prod_res_ag_clust(j2,kcr) ..
                  v18_res_biomass_ag_clust(j2,kcr)
                  =e=
-                 (sum(w, vm_area(j2,kcr,w)) * f18_multicropping_cluster(ct,j,kcr) * f18_cgf("intercept",kcr)
+                 (sum(w, vm_area(j2,kcr,w) * fm_multicropping(ct,j2,w,kcr)) * f18_cgf("intercept",kcr)
                  + vm_prod(j2,kcr) * f18_cgf("slope",kcr));
 
  q18_prod_res_ag_reg(i2,kcr,attributes) ..
