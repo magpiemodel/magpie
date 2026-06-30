@@ -73,7 +73,7 @@ $endif
 
 ********* CROPAREA INITIALISATION **********************************************
 
-table fm_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
+table fm_croparea(t_past,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
 $include "./modules/30_croparea/detail_apr24/input/f30_croparea_w_initialisation.cs3"
 $offdelim
