@@ -163,7 +163,7 @@ q35_prod_other(j2)..
               sum(kforestry, vm_prod_natveg(j2,"other",kforestry))
                =e=
                (sum(ac_sub, v35_hvarea_other(j2,"othernat",ac_sub) * sum(ct, im_growing_stock(ct,j2,ac_sub,"other")))
-              + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, im_growing_stock(ct,j2,ac_sub,"secdforest"))))
+              + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, im_growing_stock_ysf(ct,j2,ac_sub))))
               / m_timestep_length_forestry
                 ;
 

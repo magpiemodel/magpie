@@ -121,7 +121,7 @@ sets
    res_cereals, res_fibrous, res_nonfibrous,
    wood, woodfuel /
 
-   nutrition Nutrition attributes
+   nutrition "Nutrition attributes"
     / kcal, protein/
 
    par15 Parameters for food module

@@ -17,7 +17,7 @@ sets
  / aff, ndc, plant /
 
  pol32 afforestation policy type
- / none, npi, ndc /
+ / none, npi, ndc, affexp /
 
  ini32(j,ac) subset for initialization of timber plantations
 
@@ -44,6 +44,7 @@ scen32 Scenario for development of roundwood production share from plantations
  shock_scen32 Scenario name of forest carbon shock
  / none, 002lin2030,004lin2030,008lin2030,016lin2030
   /
+
 
 ;
 

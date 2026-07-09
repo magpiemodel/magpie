@@ -96,7 +96,7 @@ loop(t,
 
      Else
           i14_modeled_yields_hist(t,i,knbe14) = i14_modeled_yields_hist(t-1,i,knbe14);
-          i14_FAO_yields_hist(t,i,knbe14)  = i14_fao_yields_hist(t-1,i,knbe14);
+          i14_fao_yields_hist(t,i,knbe14)  = i14_fao_yields_hist(t-1,i,knbe14);
           i14_lambda_yields(t,i,knbe14)   = i14_lambda_yields(t-1,i,knbe14);
      );
 );

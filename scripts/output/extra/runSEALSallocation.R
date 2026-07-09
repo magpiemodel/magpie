@@ -68,7 +68,7 @@ sealsInput <- paste0("cell.land_0.5_SEALS_", title, ".nc")
 reportLandUseForSEALS(
   magCellLand = "cell.land_0.5_share.mz",
   outFile = sealsInput,
-  dir = outputdir, selectyears = rep_years
+  outputdir = outputdir, selectyears = rep_years
 )
 
 
@@ -257,6 +257,35 @@ Sys.chmod(iniLock, mode = "0664")
                          slurmID = FALSE, dependsID = NULL) {
   submitFile <- file.path(dirProject, "run_submit", paste0("submit_seals_", title, ".sh"))
 
+  # Check job status if dependsID is provided
+  useDependency <- FALSE
+  inputDataExists <- FALSE
+  if (!is.null(dependsID)) {
+    # check if job is still in SLURM memory using scontrol
+    scontrolCheck <- system(paste("scontrol show job", dependsID),
+                            intern = TRUE, ignore.stderr = TRUE)
+
+    if (length(scontrolCheck) > 0 && !any(grepl("Invalid job id", scontrolCheck))) {
+      # Job is still in SLURM memory - use dependency
+      useDependency <- TRUE
+    } else {
+      # Job purged from SLURM memory - check completion status with sacct
+      sacctCheck <- system(paste("sacct -j", dependsID, "-o State -n -X"),
+                           intern = TRUE, ignore.stderr = TRUE)
+      if (length(sacctCheck) > 0) {
+        jobState <- trimws(sacctCheck[1])
+        if (jobState == "COMPLETED") {
+          inputDataExists <- TRUE
+        } else {
+          stop("Initial data preparation run (Job ID: ",
+               dependsID, ") did not complete successfully. Status: ", jobState)
+        }
+      } else {
+        stop("Could not find initial data preparation run (Job ID: ", dependsID, ") in SLURM history")
+      }
+    }
+  }
+
   submit <- c(
     "#!/bin/bash", "\n",
     paste0("#SBATCH --qos=", qos),
@@ -266,15 +295,13 @@ Sys.chmod(iniLock, mode = "0664")
     "#SBATCH --output=outfile_%j.out",
     "#SBATCH --error=outfile_%j.err",
     "#SBATCH --mail-type=END,FAIL",
-    ifelse(!is.null(dependsID), "#SBATCH --time=5:00:00", "#SBATCH --time=0:20:00"), "\n",
+    ifelse(useDependency || inputDataExists, "#SBATCH --time=0:20:00", "#SBATCH --time=5:00:00"), "\n",
     "#SBATCH --nodes=1",
     "#SBATCH --ntasks=1",
-    ifelse(!is.null(dependsID), paste0(
+    ifelse(useDependency, paste0(
       "#SBATCH --dependency=afterok:", dependsID,
       "\n#SBATCH --kill-on-invalid-dep=yes"
-    ),
-    "#SBATCH --dependency=singleton"
-    ), "\n",
+    ), "") , "\n",
     "#SBATCH --cpus-per-task=64", "\n",
     paste("source", miniforgePath),
     paste("conda activate", sealsEnv), "\n",

@@ -7,7 +7,7 @@
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  npi
-* options: none, npi, ndc
+* options: none, npi, ndc, affexp
 $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
@@ -68,7 +68,7 @@ $offdelim
 /;
 $offEmpty
 
-table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
+table f32_aff_pol(t_all,j,pol32) npi+ndc+affexp afforestation policy (Mha new forest wrt to 2010)
 $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim
