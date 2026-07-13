@@ -58,7 +58,7 @@
 
  q53_emissionbal_ch4_rice(i2) ..
    vm_emissions_reg(i2,"rice","ch4") =e=
-          sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w) * fm_multicropping(ct,j2,w,"rice_pro"))
+          sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w) * sum(ct, fm_multicropping(ct,j2,w,"rice_pro")))
               * sum(ct,f53_ef_ch4_rice(ct,i2))
               * (1-sum(ct, im_maccs_mitigation(ct,i2,"rice","ch4")));
 

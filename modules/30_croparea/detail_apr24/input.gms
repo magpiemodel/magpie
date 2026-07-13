@@ -78,7 +78,6 @@ $ondelim
 $include "./modules/30_croparea/detail_apr24/input/f30_croparea_w_initialisation.cs3"
 $offdelim
 ;
-m_fillmissingyears(fm_croparea,"j,w,kcr");
 
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************
 
