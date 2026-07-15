@@ -105,6 +105,7 @@ else
 if (s29_fallow_max = 0,
     vm_fallow.fx(j) = 0;
     v29_fallow_short_missing.fx(j) = 0;
+    v29_fallow_long_missing.fx(j) = 0;
     i29_fallow_long_penalty(t) = 0;
     i29_fallow_short_penalty(t) = 0;
 else
@@ -114,6 +115,9 @@ else
     v29_fallow_short_missing.lo(j) = 0;
     v29_fallow_short_missing.up(j) = p29_avl_cropland(t,j);
     m_boundfix(v29_fallow_short_missing,(j),l,1e-6);
+    v29_fallow_long_missing.lo(j) = 0;
+    v29_fallow_long_missing.up(j) = p29_avl_cropland(t,j);
+    m_boundfix(v29_fallow_long_missing,(j),l,1e-6);
 
     i29_fallow_long_penalty(t) = (1-i29_fallow_scenario_fader(t)) * s29_fallow_long_penalty +
                                   i29_fallow_scenario_fader(t) * s29_fallow_long_penalty_target;
