@@ -27,11 +27,11 @@
 
   q30_rotation_max(j2,rotamax_red30)$(s30_implementation = 1) ..
     sum((rota_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) =l=
-      sum((kcr,w),vm_area(j2,kcr,w)) * sum((ct, cell(i2,j2)), i30_rotation_rules(ct,i2,rotamax_red30));
+      vm_land(j2,"crop") * sum((ct, cell(i2,j2)), i30_rotation_rules(ct,i2,rotamax_red30));
 
   q30_rotation_min(j2,rotamin_red30)$(s30_implementation = 1) ..
     sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
-      sum((kcr,w),vm_area(j2,kcr,w)) * sum((ct, cell(i2,j2)), i30_rotation_rules(ct,i2,rotamin_red30));
+      vm_land(j2,"crop") * sum((ct, cell(i2,j2)), i30_rotation_rules(ct,i2,rotamin_red30));
 
 * 'Penalty-based rotational constraints (s30_implementation = 0):
 
@@ -50,7 +50,7 @@
   q30_rotation_max2(j2,rotamax_red30)$(s30_implementation = 0) ..
     v30_penalty(j2,rotamax_red30) =g=
       sum((rota_kcr30(rotamax_red30,kcr),w),vm_area(j2,kcr,w))
-      - sum((kcr,w),vm_area(j2,kcr,w)) * sum((ct, cell(i2,j2)), i30_rotation_rules(ct,i2,rotamax_red30));
+      - vm_land(j2,"crop") * sum((ct, cell(i2,j2)), i30_rotation_rules(ct,i2,rotamax_red30));
 
 
 *' Minimum constraints apply penalties when a certain mimimum
@@ -59,7 +59,7 @@
 
   q30_rotation_min2(j2,rotamin_red30)$(s30_implementation = 0) ..
     v30_penalty(j2,rotamin_red30) =g=
-      sum((kcr,w),vm_area(j2,kcr,w)) * sum((ct, cell(i2,j2)),i30_rotation_rules(ct,i2,rotamin_red30))
+      vm_land(j2,"crop") * sum((ct, cell(i2,j2)),i30_rotation_rules(ct,i2,rotamin_red30))
       - sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w));
 
 

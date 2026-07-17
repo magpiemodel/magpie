@@ -58,8 +58,13 @@ p29_country_switch(policy_countries29) = 1;
 pm_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
 p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
 
-* Initialize rough fallow and biodiversity start value
-vm_fallow.l(j) = pm_land_hist("y1995",j,"crop")*0.1;
+* Initialize fallow and biodiversity start value.
+* Consistent starting level: fallow = cropland initialisation - croparea
+* initialisation, so the base-year optimization starts from a state consistent
+* with vm_land = initialisation. The inner max(0,..) guards against negative raw
+* fm_croparea values (module 30 preloop cleans these, but runs after module 29).
+vm_fallow.l(j)$(s29_fallow_max > 0) =
+  max(0, pm_land_hist("y1995",j,"crop") - sum((kcr,w), max(0, fm_croparea("y1995",j,w,kcr))));
 vm_bv.l(j,"crop_fallow",potnatveg) = 
   vm_fallow.l(j) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 

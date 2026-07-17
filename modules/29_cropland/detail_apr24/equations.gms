@@ -71,7 +71,7 @@
 
   q29_fallow_long(j2)$(s29_fallow_max > 0) ..
     v29_fallow_long_missing(j2) =g=
-      vm_land(j2,"crop") * s29_fallow_max - vm_fallow(j2);
+      vm_land(j2,"crop") * s29_fallow_long_threshold - vm_fallow(j2);
 
   q29_fallow_max(j2)$(s29_fallow_max > 0) ..
     vm_fallow(j2) =l=

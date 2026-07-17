@@ -33,7 +33,7 @@
 
  q30_rotation_max(j2,crpmax30,w) ..
    sum((crp_kcr30(crpmax30,kcr)), vm_area(j2,kcr,w)) =l=
-     sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_max_shr(crpmax30);
+     vm_land(j2,"crop") * f30_rotation_max_shr(crpmax30);
 
 
 *' On the other hand, it reflects boundary conditions such as minimum self
@@ -41,7 +41,7 @@
 
  q30_rotation_min(j2,crpmin30,w) ..
    sum((crp_kcr30(crpmin30,kcr)), vm_area(j2,kcr,w)) =g=
-     sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_min_shr(crpmin30);
+     vm_land(j2,"crop")  * f30_rotation_min_shr(crpmin30);
 
 
 *' The carbon stocks of the above ground carbon pools are calculated based on croparea and related carbon density.

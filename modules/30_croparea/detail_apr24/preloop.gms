@@ -34,6 +34,11 @@ i30_rotation_incentives(t_all,i,rota30) =
 *cannot be smaller than 0!
 fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 
+* Consistent starting level for croparea (physical croparea initialisation), so
+* the base-year optimization starts from a state consistent with vm_land =
+* initialisation. Later time steps warm-start from the previous solution.
+vm_area.l(j,kcr,w) = fm_croparea("y1995",j,w,kcr);
+
 * fix penalty to zero in case of rule-based rotational contraints
 if(s30_implementation = 1,
   v30_penalty.fx(j,rota30) = 0;
