@@ -14,7 +14,7 @@
 *' managed Land) [@bondeau_lpjml_2007]. In the initial year of the simulation
 *' period, crop yields and pasture productivity are calibrated at the regional
 *' level to meet the observed cropland and pasture area as reported by FAO
-*' [@FAOSTAT] or in the case of bioenergy crops Li et al. [@li_mapping_2020] [@li_global_2018]. 
+*' [@FAOSTAT].
 *' For the simulation of the temporal development of agricultural
 *' yields beyond biophysical processes, the module receives information about the agricultural land use
 *' intensity represented by the $\tau$ factor coming from the module [13_tc].

@@ -17,7 +17,7 @@ parameters
  p14_pyield_corr(t,i)                                    Regional pasture management correction for historical time steps (1)
  i14_croparea_total(t_all,w,j)                           Cellular croparea (mio. ha)
  i14_modeled_yields_hist(t_all,i,yldtype,kcr)            Biophysical input yields average over region and water supply type at the historical reference year (tDM per ha per yr)
- i14_calib_target_yields_hist(t,i,kcr)                   Calibration target yields per region at the historical reference year using FAO for crops and Li2020 for bioenergy crops (tDM per ha per yr)
+ i14_calib_target_yields_hist(t,i,kcr)                   Calibration target yields per region at the historical reference year (tDM per ha per yr)
  i14_lambda_yields(t,i,yldtype,kcr)                      Scaling factor for non-linear management calibration (1)
  i14_managementcalib(t,j,yldtype,kcr,w)                  Regional management calibration factor accounting for FAO yield levels (1)
  im_growing_stock(t,j,ac,land_timber)                    Harvestable stem biomass per ha by age class (tDM per ha)

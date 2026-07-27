@@ -30,8 +30,7 @@ i14_yields_calib(t,j,"pasture",w) = f14_yields(t,j,"pasture",w) * sum(cell(i,j),
 *' The following equations calibrate the cellular yield patterns (`f14_yields`) to match
 *' historical reference yields (`i14_calib_target_yields_hist`) by calculating a calibration term called
 *' 'i14_managementcalib'. For most cases, 'i14_managementcalib' is the ratio of the historical
-*' yields reported by FAO for croplands (`f14_fao_yields_hist`) or Li2020 for bioenergy crops
-*' (`f14_region_be_yields` / `f14_global_be_yields`) and regional mean yields (`i14_modeled_yields_hist`)
+*' yields reported by FAO for croplands (`f14_fao_yields_hist`) and regional mean yields (`i14_modeled_yields_hist`)
 *' given historic crop area patterns ('fm_croparea') and cellular yields coming from crop models
 *' like LPJmL (`f14_yields`). In these cases, 'i14_managementcalib' represents a purely relative
 *' calibration factor that depends only on the initial conditions of the starting year.
@@ -55,7 +54,7 @@ i14_yields_calib(t,j,"pasture",w) = f14_yields(t,j,"pasture",w) * sum(cell(i,j),
 
 *' To account for growing period adaption to climate change, two types of yields
 *' (one with adaption of growing periods and varieties to changes in climatic conditions (gsadapt)
-*' and one with no changes in growing periods and varieties in the future (constgsadapt)) 
+*' and one with no changes in growing periods and varieties in the future (constgsadapt))
 *' have to be calibrated.
 *' The joint parameter `i14_yields_combined(t,j,yldtype,kcr,w)` is used to calibrate
 *' both types individually as even though the growing seasons are held constant from 1995
@@ -84,40 +83,24 @@ i14_modeled_yields_hist(t_past,i,yldtype,knbe14)
       sum((cell(i,j),w), i14_croparea_total(t_past,w,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)) <= 0.00001 OR
                                                            sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * i14_yields_combined(t_past,j,yldtype,knbe14,w)) <= 0.00001);
 
-*' Compute LPJmL weighted mean rainfed yields for bioenergy crops at y1995 —
-*' regional (weighted by cropland area per cluster) and global, per yldtype.
-*' NOTE: For BE yield calibration "off" calibration target will be set to `i14_modeled_yields_hist`,
-*'       so calibration factors are always 1. Modeled yield has to be calculated therefore.
-
-$ifthen "%c14_be_calib%" == "regional"
-  i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
-    sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
-    (sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w)) + 1e-8);
-$elseif "%c14_be_calib%" == "global"
-  i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
-    sum((j,w), f14_cluster_be_croparea_weights(j,kbe14,w) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
-    (sum((j,w), f14_cluster_be_croparea_weights(j,kbe14,w)) + 1e-8);
-$else
-  i14_modeled_yields_hist(t_past,i,yldtype,kbe14) =
-    sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
-    (sum((cell(i,j),w), f14_cluster_be_croparea_weights(j,kbe14,w)) + 1e-8);
-$endif
+i14_modeled_yields_hist(t_past,i,yldtype,kbe14)
+   = sum((cell(i,j),w), i14_croparea_total(t_past,w,j) * i14_yields_combined("y1995",j,yldtype,kbe14,w)) /
+     sum((cell(i,j),w), i14_croparea_total(t_past,w,j));
 
 **************************************************************************************
-*** STEP 2: SET CALIB TARGET with FAO for knbe14 and Li historical data for kbe14
+*** STEP 2: SET CALIB TARGET with FAO for knbe14 and modeled yields for kbe14
 
+*' Use FAO data as calibration data for all crop types except bioenergy crops:
 i14_calib_target_yields_hist(t,i,knbe14) = f14_fao_yields_hist(t,i,knbe14);
 
-$ifthen "%c14_be_calib%" == "regional"
-  i14_calib_target_yields_hist(t,i,kbe14) = f14_region_be_yields(i,kbe14);
-$elseif "%c14_be_calib%" == "global"
-  i14_calib_target_yields_hist(t,i,kbe14) = f14_global_be_yields(kbe14);
-$else
-  i14_calib_target_yields_hist(t,i,kbe14) = i14_modeled_yields_hist("y1995",i,"gsadapt",kbe14);
-$endif
-
-*' NOTE: For BE yield calibration "off" calibration target will be set to `i14_modeled_yields_hist`,
-*'       so calibration factors are always 1.
+*' For bioenergy crops, no meaningful calibration target is currently available. The calibration target
+*' is set to the regional modeled yield, which results in a calibration factor of 1 and effectively
+*' performs no calibration. This is a placeholder implementation that can be replaced with actual
+*' calibration data when it becomes available.
+i14_calib_target_yields_hist(t,i,kbe14) = i14_modeled_yields_hist("y1995",i,"gsadapt",kbe14);
+if (s14_use_gsadapt = 0,
+    i14_calib_target_yields_hist(t,i,kbe14) = i14_modeled_yields_hist("y1995",i,"constgsadapt",kbe14);
+);
 
 **************************************************************************************
 *** STEP 3: LOOP OVER TIME calculating calibration parameters for all time steps
@@ -161,9 +144,7 @@ i14_managementcalib(t,j,yldtype,kcr,w) =
       (i14_yields_combined(t,j,yldtype,kcr,w) / (sum(cell(i,j),i14_modeled_yields_hist(t,i,yldtype,kcr))+10**(-8))) **
                             sum(cell(i,j),i14_lambda_yields(t,i,yldtype,kcr)))$(i14_yields_combined(t,j,yldtype,kcr,w)>0);
 
-$ifthen "%c14_be_calib%" == "off"
-  i14_managementcalib(t,j,yldtype,kbe14,w) = 1;
-$endif
+
 
 i14_yields_calib_combined(t,j,yldtype,kcr,w) = i14_managementcalib(t,j,yldtype,kcr,w) * i14_yields_combined(t,j,yldtype,kcr,w);
 
@@ -204,7 +185,7 @@ if ((s14_calib_ir2rf = 1),
 );
 
 ***MANAGEMENT CALIBRATION FOR 2ND GENERATION BIOENERGY CROPS (tau scaling)****************
-*' Tau-based management calibration applied on top of the Li2020 biophysical calibration.
+*' Tau-based management calibration applied on top of the biophysical yields.
 i14_yields_calib_combined(t,j,yldtype,kbe14,w) = i14_yields_calib_combined(t,j,yldtype,kbe14,w) *
                                                     sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
 *******************************************************************************************

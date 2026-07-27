@@ -5,11 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The gsadapt_nov25 realization reads in the LPJmL data 
+*' @description The gsadapt_nov25 realization reads in the LPJmL data
 *' accounts for growing period adaption to climate change and also
-*' performs a number of calibrations. 
-*' Crop yields are calibrated to FAO [@FAOSTAT] regional yield levels of the initial time step
-*' and bioenergy crops (betr, begr) are calibrated to global data by Li et al. [@li_mapping_2020] [@li_global_2018].
+*' performs a number of calibrations.
+*' Crop yields are calibrated to FAO [@FAOSTAT] regional yield levels of the initial time step.
 *' Bioenergy yields are corrected using the $\tau$ factor
 *' representing agricultural land-use intensity.
 *' Pasture yields are calculated based on pasture demand to account for

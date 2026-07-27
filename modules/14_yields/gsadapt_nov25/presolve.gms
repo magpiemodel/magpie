@@ -72,7 +72,7 @@ if (ord(t) = 1,
   pm_yields_gsadapt_ratio_increment(t,i) = 1;
   p14_yields_gsadapt_ratio_cumulative(t,i) = 1;
 
-else 
+else
 
   p14_yields_gsadapt_ratio(t,i) =
     sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
@@ -86,8 +86,8 @@ else
 * The max(1,...) ensures the cumulative factor can only grow, never shrink.
 * This means declining adaptation opportunities are not represented — once
 * adaptation gains are accounted for via tau, they cannot be reversed.
-  p14_yields_gsadapt_ratio_cumulative(t,i) = max(1,pm_yields_gsadapt_ratio_increment(t,i)) * p14_yields_gsadapt_ratio_cumulative(t-1,i); 
-  
+  p14_yields_gsadapt_ratio_cumulative(t,i) = max(1,pm_yields_gsadapt_ratio_increment(t,i)) * p14_yields_gsadapt_ratio_cumulative(t-1,i);
+
 );
 
 if(s14_gsadapt2tau = 0 OR s14_use_gsadapt = 0,
