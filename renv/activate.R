@@ -2,7 +2,7 @@
 local({
 
   # the requested version of renv
-  version <- "1.2.2"
+  version <- "1.2.3"
   attr(version, "md5") <- NULL
   attr(version, "sha") <- NULL
 

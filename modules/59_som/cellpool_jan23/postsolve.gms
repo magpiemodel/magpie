@@ -9,6 +9,9 @@ pc59_som_pool(j,land) = v59_som_pool.l(j,land);
 pc59_land_before(j,land) = vm_land.l(j,land);
 pc59_carbon_density(j,land)$(pc59_land_before(j,land) > 1e-10) = pc59_som_pool(j,land) / pc59_land_before(j,land);
 
+*** Carry the soil carbon stock forward to the next timestep (as done for the above-ground pools in 56_ghg_policy).
+pcm_carbon_stock(j,land,"soilc",stockType) = vm_carbon_stock.l(j,land,"soilc",stockType);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov59_som_target(t,j,land,"marginal")                      = v59_som_target.m(j,land);
  ov59_som_pool(t,j,land,"marginal")                        = v59_som_pool.m(j,land);

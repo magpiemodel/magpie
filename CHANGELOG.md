@@ -7,20 +7,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **inputdata** updated input data to rev4.132, added f14_yld_past_switch.csv
 - **scripts** saveToResultsArchive saves to inbox folder if available
-- **renv/activate.R** updated to version 1.2.2
+- **renv/activate.R** updated to version 1.2.3
+- **CI** test-code.yaml: use ubuntu-latest and checkout@v7
+- **Makefile** `make reset-renv` resets renv
+- **.Rprofile** add r-universe repo, use envvars if present
+- **Dockerfile** now based on ubuntu 26.04, R 4.6, gams 54.1
 
 ### added
+- **scenario_config_susmip.csv** A set of sceanrios for the SusMIP excercise in the PRISMA project
+- **calc_npi_ndc.R** New policy, AFFEXP, on defining afforestation targets based on the share of potential forest land and speed of afforestation.
+- **14_yields/dynRegPastrTau_apr26** New realization, allows changing tau factor spillover to pastures by region and timestep.
+- **calc_npi_ndc.R** New afforestation policy `ndcdelay` (PRISMA T6.4 "Asymmetric Roll-back"): the `ndc` afforestation targets with future milestone target-years delayed by country categorization.
 - **80_optimization/nlp_ipopt** New realization, using IPOPT instead of CONOPT4 (and the fallback CONOPT3) as the NLP solver for the MAgPIE model.
 - **scripts/start/extra/ipopt.R** Start script for solving MAgPIE with IPOPT.
 - **Dockerfile** Re-added a Dockerfile, which can be used to build a local docker image as well as a GH codespace
 - **.devcontainer/devcontainer.json** A new configuration for development containers, which allow for reproducible, prepared development environments
+- **scripts** added $RSCRIPT_SLURM_HOOK to run on slurm compute nodes via apptainer
+- **22_land_conservation** new options for IPLC land conservation
 
 ### removed
--
+- **scripts/projects/fsec.R** Removed FSEC_nitrogenPollution (grid-level nitrogen pollution downscaling) from the FSEC run output pipeline.
 
 ### fixed
+- **35_natveg/14_yields** Fix `youngsecdf` wood production: derive its growing stock (`im_growing_stock_ysf`) from the *uncalibrated* secondary-forest carbon curve — the same curve its carbon density uses — instead of the FRA-2025-calibrated `im_growing_stock(...,"secdforest")`. Previously young secondary forest on other land yielded calibrated (high) wood volumes while booking uncalibrated (low) carbon, letting the optimiser evade land-CO2 caps/prices by relocating wood harvest onto `youngsecdf`. Result-changing for scenarios with land-CO2 pricing or AFOLU caps; explains the "other-land wood harvest" anomaly flagged under PR #876's Known limitations.
+- **59_som** Carry the soil carbon stock (`pcm_carbon_stock(...,"soilc",...)`) forward each timestep in `postsolve` (both `cellpool_jan23` and `static_jan19`), so the soil term in `vm_emissions_reg` (`q52_emis_co2_actual`) is a per-timestep flux instead of a cumulative-since-initialisation change.
 - **21_trade** Bugfix and refinement of bilateral trade realization to avoid infeasibiliteis in SSP4 and SSP5.
+- **09_drivers**, **14_yields**, **15_food** Minor stylistic improvements to GAMS code following capitalization consistency rules in `gms::codeCheck`.
 
 
 ## [4.14.0] - 2026-05-05

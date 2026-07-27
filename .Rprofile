@@ -20,7 +20,11 @@ options(renv.config.synchronized.check = FALSE,
 
 source("renv/activate.R")
 
-if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
+# unique strips names which breaks renv, so use duplicated
+if (!"pikpiam" %in% names(getOption("repos"))) {
+  options(repos = c(getOption("repos"), pikpiam = Sys.getenv("R_UNIVERSE_URL", "https://pik-piam.r-universe.dev")))
+}
+if (!"pik" %in% names(getOption("repos"))) {
   options(repos = c(getOption("repos"), pik = "https://rse.pik-potsdam.de/r/packages"))
 }
 
