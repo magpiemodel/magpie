@@ -16,12 +16,12 @@ scalars
   s14_degradation              Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /
   s14_yld_reduction_soil_loss  Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
   s14_use_yield_calib          Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
-  s14_past_spillover_mode      Switch for pasture spillover mode: 0 = static scalar - 1 = regional dynamic= / 1 /
+  s14_past_spillover_mode      Switch for pasture spillover mode: 0 = static scalar - 1 = regional dynamic= / 0 /
   s14_yld_past_switch          Spillover parameter for translating technological change in the crop sector into pasture yield increases in static mode (1) / 0.25 /
   s14_minimum_growing_stock    Minimum growing stock for timber harvest in natural vegetation (tDM per ha) / 5 /
   sm_carbon_fraction           Carbon fraction of dry matter (tC per tDM) / 0.5 /
-  s14_use_gsadapt              Switch to use including growing period adaption (1) or not (0) for yield pattern (binary) / 0 /
-  s14_gsadapt2tau              Switch to account for growing period adaption in tau (1) or not (0) (binary) / 0 /
+  s14_use_gsadapt              Switch to use including growing period adaption (1) or not (0) for yield pattern (binary) / 1 /
+  s14_gsadapt2tau              Switch to account for growing period adaption in tau (1) or not (0) (binary) / 1 /
 ;
 
 

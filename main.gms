@@ -181,7 +181,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2015
-$setglobal c_title  LPJmL_5p9.16-m2_NOgsadapt
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -195,7 +195,7 @@ $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jan22
-$setglobal yields  gsadapt_nov25
+$setglobal yields  gsadapt_dynPastrTau_jul26
 
 $setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
