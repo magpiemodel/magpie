@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The endo_nov25 realization stands for endogenous implementation of
+*' @description The endo_jan22 realization stands for endogenous implementation of
 *' technological change and land use intensification. The intensification rates
 *' are calculated endogenously based on an interplay between land use intensity
 *' $\tau$ and technological change costs (as shown schematically in the figure
@@ -41,15 +41,15 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/13_tc/endo_nov25/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/13_tc/endo_nov25/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/13_tc/endo_nov25/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/13_tc/endo_nov25/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/13_tc/endo_nov25/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/13_tc/endo_nov25/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/13_tc/endo_nov25/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/13_tc/endo_nov25/postsolve.gms"
-$Ifi "%phase%" == "nl_fix" $include "./modules/13_tc/endo_nov25/nl_fix.gms"
-$Ifi "%phase%" == "nl_release" $include "./modules/13_tc/endo_nov25/nl_release.gms"
-$Ifi "%phase%" == "nl_relax" $include "./modules/13_tc/endo_nov25/nl_relax.gms"
+$Ifi "%phase%" == "sets" $include "./modules/13_tc/endo_jan22/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/13_tc/endo_jan22/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/13_tc/endo_jan22/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/13_tc/endo_jan22/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/13_tc/endo_jan22/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/13_tc/endo_jan22/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/13_tc/endo_jan22/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/13_tc/endo_jan22/postsolve.gms"
+$Ifi "%phase%" == "nl_fix" $include "./modules/13_tc/endo_jan22/nl_fix.gms"
+$Ifi "%phase%" == "nl_release" $include "./modules/13_tc/endo_jan22/nl_release.gms"
+$Ifi "%phase%" == "nl_relax" $include "./modules/13_tc/endo_jan22/nl_relax.gms"
 *######################## R SECTION END (PHASES) ###############################
