@@ -27,6 +27,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%yields%" == "gsadapt_nov25" $include "./modules/14_yields/gsadapt_nov25/realization.gms"
-$Ifi "%yields%" == "dynRegPastrTau_apr26" $include "./modules/14_yields/dynRegPastrTau_apr26/realization.gms"
-$Ifi "%yields%" == "managementcalib_aug19" $include "./modules/14_yields/managementcalib_aug19/realization.gms"
+$Ifi "%yields%" == "gsadapt_dynPastrTau_jul26" $include "./modules/14_yields/gsadapt_dynPastrTau_jul26/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
