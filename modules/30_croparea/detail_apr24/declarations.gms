@@ -14,7 +14,8 @@ parameters
  i30_betr_target(t,j)                   Target share for bioenergy land on total cropland (1)
  i30_betr_penalty(t)                    Penalty for violation of betr target (USD17MER per ha)
  p30_country_weight(i)                  Policy country weight per region (1)
- p30_country_switch(iso)                 Switch indicating whether country is affected by selected policy (1)
+ p30_country_switch(iso)                Switch indicating whether country is affected by selected policy (1)
+ pcm_area(j,w,kcr)                      Croparea from previous time step (mio. ha)
 ;
 
 positive variables

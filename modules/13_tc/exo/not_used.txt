@@ -1,3 +1,4 @@
 name,type,reason
 im_pop_iso,input,questionnaire
 im_gdp_pc_ppp_iso,input,questionnaire
+pm_yields_gsadapt_ratio_increment,input,questionnaire
