@@ -223,7 +223,7 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)
                                     * sum(cell(i,j),f14_yld_calib(i,"past"));
 
 * Set effective pasture spillover parameter to regional dynamic value
-	i14_yld_past_switch_eff(t,i) = f14_yld_past_switch(t,i);
+    i14_yld_past_switch_eff(t,i) = f14_yld_past_switch(t,i);
 
 * If static spillover mode, override with scalar value
 if (s14_past_spillover_mode = 0,
