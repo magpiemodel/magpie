@@ -179,9 +179,9 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  quicktest
+$setglobal c_timesteps  coup2100
 $setglobal c_past  till_2015
-$setglobal c_title  default
+$setglobal c_title  landCalib_recalibrated
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -239,7 +239,7 @@ $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_aug22
 $setglobal maccs  on_aug22
 $setglobal peatland  v2
-$setglobal som  static_jan19
+$setglobal som  cellpool_jan23
 
 $setglobal bioenergy  1st2ndgen_priced_feb24
 $setglobal material  exo_flexreg_apr16

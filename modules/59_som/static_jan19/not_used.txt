@@ -5,3 +5,5 @@ pm_avl_cropland_iso,input,questionnaire
 vm_landexpansion,input,questionnaire
 vm_lu_transitions,input,questionnaire
 pm_climate_class,input,questionnaire
+pm_treecover_start,input,questionnaire
+im_fallow_start,input,questionnaire

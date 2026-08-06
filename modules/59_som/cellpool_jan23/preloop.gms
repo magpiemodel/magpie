@@ -21,20 +21,6 @@ pc59_som_pool(j,noncropland59) =
 
 
 *****************************
-*** carbon initialisation ***
-****************************
-
-* starting value of carbon stocks 1995 is only an estimate.
-* ATTENTION: emissions in 1995 are not meaningful
-
-pcm_carbon_stock(j,"crop","soilc",stockType) =
-  pc59_som_pool(j,"crop") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
-vm_carbon_stock.l(j,"crop","soilc",stockType) = pcm_carbon_stock(j,"crop","soilc",stockType);
-pcm_carbon_stock(j,noncropland59,"soilc",stockType) =
-  fm_carbon_density("y1995",j,noncropland59,"soilc") * pm_land_start(j,noncropland59);
-vm_carbon_stock.l(j,noncropland59,"soilc",stockType) = pcm_carbon_stock(j,noncropland59,"soilc",stockType);
-
-*****************************
 *** cshare calculation    ***
 *****************************
 
@@ -66,15 +52,22 @@ i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
                  * f59_cratio_inputs(climate59,inputs59)
                  * f59_cratio_irrigation(climate59,w,kcr));
 
-*' For fallow we assume annual crops with bare fallow - therefor low input -
-*' and reduced tillage. Assumed to have no irrigation, so irrigation multiplier
-*' is 1.
 
-i59_cratio_fallow(j) = sum((cell(i,j),climate59),
+*' Fallow management: for dry regions, assume bare fallow and full tillage to save water
+*' For moist regions, assume set-aside with medium C input and reduced tillage at end of fallow.
+*' Assumed to have no irrigation, so irrigation multiplier is 1.
+
+i59_cratio_fallow_climate(climate59) = f59_cratio_landuse_fallow(climate59)
+                * f59_cratio_tillage(climate59,"full_tillage")
+                * f59_cratio_inputs(climate59,"low_input");
+
+i59_cratio_fallow_climate(climate59moist) = f59_cratio_landuse_fallow(climate59moist)
+                * f59_cratio_tillage(climate59moist,"reduced_tillage")
+                * f59_cratio_inputs(climate59moist,"medium_input");
+
+i59_cratio_fallow(j) = sum(climate59,
                 sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
-                * f59_cratio_landuse(i,climate59,"maiz")
-                * f59_cratio_tillage(climate59,"reduced_tillage")
-                * f59_cratio_inputs(climate59,"low_input"));
+                * i59_cratio_fallow_climate(climate59));
 
 *' For treecover in cropland (e.g. agroforestry areas) we assume natural soil carbon
 *' values as target value, and thus set the value to `1`:
@@ -90,6 +83,36 @@ i59_cratio_scm(j) = sum(climate59, sum(clcl_climate59(clcl,climate59),
                        f59_cratio_inputs(climate59,"high_input_nomanure"));
 
 *' @stop
+
+*********************************************
+*** fallow and tree cover initialisation  ***
+*********************************************
+
+*' @code The cropland pool initialised above only covers the croparea. Fallow
+*' land and tree cover carry no croparea, but do enter the cropland target stock
+*' `q59_som_target_cropland`. Their soil carbon is therefore initialized here with the
+*' same stock change factors the target uses:
+
+pc59_som_pool(j,"crop") = pc59_som_pool(j,"crop")
+  + (im_fallow_start(j) * i59_cratio_fallow(j)
+     + pm_treecover_start(j) * i59_cratio_treecover)
+    * f59_topsoilc_density("y1995",j);
+
+*' @stop
+
+*****************************
+*** carbon initialisation ***
+****************************
+
+* starting value of carbon stocks 1995 is only an estimate.
+* ATTENTION: emissions in 1995 are not meaningful
+
+pcm_carbon_stock(j,"crop","soilc",stockType) =
+  pc59_som_pool(j,"crop") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
+vm_carbon_stock.l(j,"crop","soilc",stockType) = pcm_carbon_stock(j,"crop","soilc",stockType);
+pcm_carbon_stock(j,noncropland59,"soilc",stockType) =
+  fm_carbon_density("y1995",j,noncropland59,"soilc") * pm_land_start(j,noncropland59);
+vm_carbon_stock.l(j,noncropland59,"soilc",stockType) = pcm_carbon_stock(j,noncropland59,"soilc",stockType);
 
 ** Trajectory for cropland scenarios
 * linear or sigmoidal interpolation between start year and target year

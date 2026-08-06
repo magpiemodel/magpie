@@ -28,7 +28,9 @@ parameters
  p29_treecover(t,j,ac)                  Cropland tree cover per age class (mio. ha)
  pc29_treecover(j,ac)                   Cropland tree cover per age class in current time step (mio. ha)
  pc29_treecover_share(j)                Share of treecover on total cropland (1)
+ pm_treecover_start(j)                  Cropland tree cover in the initial time step (mio. ha)
 
+ im_fallow_start(j)                     Fallow land in the initial time step (mio. ha)
  i29_fallow_scenario_fader(t_all)      Fallow land scenario fader (1)
  i29_fallow_long_penalty(t)           Penalty for skipping long fallow (USD17MER per ha)
  i29_fallow_short_penalty(t)           Penalty for also skipping short fallow (USD17MER per ha)
