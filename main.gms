@@ -181,7 +181,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2015
-$setglobal c_title  landCalib_recalibrated
+$setglobal c_title  fallowPenalty_long300_short500
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
