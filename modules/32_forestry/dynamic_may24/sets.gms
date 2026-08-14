@@ -17,7 +17,7 @@ sets
  / aff, ndc, plant /
 
  pol32 afforestation policy type
- / none, npi, ndc, affexp /
+ / none, npi, ndc, affexp, ndcdelay /
 
  ini32(j,ac) subset for initialization of timber plantations
 

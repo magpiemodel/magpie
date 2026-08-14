@@ -44,3 +44,7 @@ if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
 if (tryCatch(utils::packageVersion("piamenv") < "0.5.5", error = function(error) TRUE)) {
   renv::install("piamenv", prompt = FALSE)
 }
+
+if (requireNamespace("rlang", quietly = TRUE)) {
+  rlang::global_entrace()
+}

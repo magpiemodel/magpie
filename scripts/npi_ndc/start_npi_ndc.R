@@ -232,6 +232,66 @@ calc_NPI_NDC <- function(policyregions = "iso",
   getNames(none_aff_pol) <- "none"
   cat(paste0(" (time elapsed: ", format(proc.time()["elapsed"] - ptm, width = 6, nsmall = 2, digits = 2), "s)\n"))
 
+  cat("Compute NDCDELAY AFF policy")
+  addline("")
+  addline("####################")
+  addline("### NDCDELAY AFF ###")
+  addline("####################")
+  # PRISMA "Asymmetric Roll-back": take the ndc afforestation targets and delay every
+  # future milestone (targetyear >= 2030) by a country-cluster-specific number of years:
+  #   Transition leaders +10, Diversifying economies +20, Fossil-dependent economies +30.
+  # Country categories are coded below. Brazil iscarried by its biome policy-regions 
+  # (LAX/CEX/ATX/OTX).
+  prisma_delay10 <- c(   # Transition leaders  (+10y)
+    "AFG", "AND", "AUT", "BGD", "BGR", "BRB", "CHE", "CHL", "CZE", "DEU", "DNK", "ESP", "EST",
+    "FIN", "FRA", "GBR", "GRC", "GTM", "HRV", "HUN", "IRL", "ISL", "ISR", "ITA", "JOR", "JPN",
+    "KOR", "LTU", "LUX", "MCO", "MDA", "NLD", "PER", "PHL", "POL", "PRK", "PRT", "ROU", "SGP",
+    "SVK", "SVN", "SWE", "SWZ", "TUR", "UKR")
+  prisma_delay20 <- c(   # Diversifying economies  (+20y)
+    "ALB", "ARG", "ARM", "ATG", "AUS", "BDI", "BEL", "BEN", "BHS", "BIH", "BLR", "BLZ", "BMU",
+    "BOL", "BRA", "BTN", "BWA", "CAN", "CHN", "CIV", "COD", "COL", "COM", "CPV", "CRI", "CUB",
+    "CYM", "CYP", "DMA", "DOM", "ECU", "EGY", "ERI", "ETH", "FJI", "FSM", "GEO", "GHA", "GIN",
+    "GMB", "GNB", "GRD", "GUY", "HND", "HTI", "IDN", "IND", "JAM", "KEN", "KGZ", "KHM", "KIR",
+    "KNA", "LAO", "LBR", "LCA", "LIE", "LKA", "LSO", "LVA", "MAR", "MDG", "MDV", "MEX", "MHL",
+    "MLI", "MLT", "MMR", "MNE", "MRT", "MUS", "MWI", "MYS", "NAM", "NIC", "NPL", "NRU", "NZL",
+    "PAK", "PAN", "PLW", "PRY", "PSE", "RWA", "SEN", "SLB", "SLE", "SLV", "SMR", "SOM", "SRB",
+    "SSD", "STP", "SUR", "SYC", "TGO", "THA", "TJK", "TON", "TUN", "TUV", "TZA", "UGA", "URY",
+    "USA", "VCT", "VNM", "VUT", "WSM", "YEM", "ZAF", "ZMB", "ZWE")
+  prisma_delay30 <- c(   # Fossil-dependent economies  (+30y)
+    "AGO", "ARE", "AZE", "BFA", "BHR", "BRN", "CAF", "CMR", "COG", "DJI", "DZA", "GAB", "GNQ",
+    "IRN", "IRQ", "KAZ", "KWT", "LBN", "LBY", "MNG", "MOZ", "NER", "NGA", "NOR", "OMN", "PNG",
+    "QAT", "RUS", "SAU", "SDN", "SYR", "TCD", "TKM", "TLS", "TTO", "UZB", "VEN")
+
+  # derive ndcdelay from the ndc afforestation definitions by shifting future targetyears
+  ndcdelay_def <- droplevels(subset(pol_def, policy=="ndc" & landpool=="affore"))
+  ndcdelay_aff <- NULL
+  if (nrow(ndcdelay_def) > 0) {
+    iso   <- ifelse(ndcdelay_def$dummy %in% c("LAX","CEX","ATX","OTX"), "BRA",
+                    as.character(ndcdelay_def$dummy))
+    delay <- ifelse(iso %in% prisma_delay10, 10L,
+             ifelse(iso %in% prisma_delay20, 20L,
+             ifelse(iso %in% prisma_delay30, 30L, 0L)))
+    ty    <- as.integer(as.character(ndcdelay_def$targetyear))
+    ndcdelay_def$targetyear <- as.character(ty + ifelse(!is.na(ty) & ty >= 2030, delay, 0L))
+    ndcdelay_def$policy     <- "ndcdelay"
+    addtable(ndcdelay_def[,c(-2,-3)])
+    ndcdelay_aff <- calc_policy(ndcdelay_def, land_stock, pol_type="aff", pol_mapping=pol_mapping,
+                                weight=dimSums(land_stock[,2005,c("crop","past")]) + 10^-10,
+                                map_file=map_file)
+    getNames(ndcdelay_aff) <- "ndcdelay"
+    # mirror ndc: years <= 2025 follow the NPI baseline
+    ndcdelay_aff[,which(getYears(ndcdelay_aff,as.integer=TRUE)<=2025),] <-
+      npi_aff[,which(getYears(npi_aff,as.integer=TRUE)<=2025),]
+    # Floor at the NPI baseline. Without this, the delayed (slower) ndc ramp can sit below the
+    # npi-2025 level at 2030, so the cumulative target decreases making negative per-timestep
+    # afforestation flow. NPI is already-implemented policy, so the
+    # roll-back delays the extra NDC ambition but never afforests less than NPI.
+    npi_floor <- npi_aff
+    getNames(npi_floor) <- "ndcdelay"
+    ndcdelay_aff <- pmax(ndcdelay_aff, npi_floor)
+  }
+  cat(paste0(" (time elapsed: ", format(proc.time()["elapsed"] - ptm, width = 6, nsmall = 2, digits = 2), "s)\n"))
+
   addline("")
   addline("##----------------------------------------------------------------------------")
   addline("## Afforestation Expansion - AFFEXP (Mha)")
@@ -282,8 +342,11 @@ calc_NPI_NDC <- function(policyregions = "iso",
   }
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
 
-  # Write AFF policies: none / npi / ndc / affexp (affexp included only when defined)
-  aff_pol <- if (!is.null(affexp)) mbind(none_aff_pol, npi_aff, ndc_aff, affexp) else mbind(none_aff_pol, npi_aff, ndc_aff)
+  # Write AFF policies: none / npi / ndc / affexp / ndcdelay (affexp & ndcdelay included only when defined)
+  aff_list <- list(none_aff_pol, npi_aff, ndc_aff)
+  if (!is.null(affexp))       aff_list <- c(aff_list, list(affexp))
+  if (!is.null(ndcdelay_aff)) aff_list <- c(aff_list, list(ndcdelay_aff))
+  aff_pol <- do.call(mbind, aff_list)
   afffiles <- paste0(outfolder_aff, out_aff_file)
   write.magpie(round(aff_pol, 6), afffiles[1])
   if(length(afffiles) > 1) for (i in 2:length(afffiles)) file.copy(afffiles[1],afffiles[i], overwrite=TRUE)
