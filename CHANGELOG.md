@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
--
+- **39_landconversion/calib_cluster** New realization extending `calib` with cluster-level land conversion cost calibration for selected regions. For cropland and pasture, a cluster-specific factor overrides the regional calibration value, enabling finer spatial control within heterogeneous model regions. Cropland costs are calibrated (via `f39_calib_past_cluster`), while pasture costs are calibrated independently via a dedicated factor (`f39_calib_past_cluster`), decoupled from the cropland calibration. Clusters with no cluster-level data fall back to the regional value; countries not in `policy_countries39` are unaffected. Currently, cluster calibration factors must be provided by the user (automation may come in future releases).
 
 ### added
 - **15_food** Added flexible source-to-target food substitution with configurable food baskets and kcal/protein replacement basis
