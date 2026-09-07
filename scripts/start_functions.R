@@ -74,6 +74,7 @@
 .update_sets_modules <- function() {
   require(gms)
 
+
   ### 56_ghg_policy
   ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
   ghgscen56 <- magclass::getNames(ghgscen56,dim=2)
@@ -372,13 +373,19 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
   ###########################################################################################################
 
   if(cfg$recalc_npi_ndc=="ifneeded") {
-    aff_pol     <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
-    ad_aolc_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3")
-    ad_pol     <- ad_aolc_pol[,,"forest"]
-    aolc_pol    <- ad_aolc_pol[,,"other"]
-    if((all(aff_pol == 0)   & (cfg$gms$c32_aff_policy != "none")) |
-       (all(ad_pol == 0)    & (cfg$gms$c35_ad_policy != "none"))  |
-       (all(aolc_pol == 0) & (cfg$gms$c35_aolc_policy != "none")))
+    aff_pol        <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
+    ad_aolc_pol    <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3")
+    ad_pol         <- ad_aolc_pol[,,"forest"]
+    aolc_pol       <- ad_aolc_pol[,,"other"]
+    affexp_missing <- (cfg$gms$c32_aff_policy == "affexp") &&
+                        !("affexp" %in% magclass::getNames(aff_pol))
+    ndcdelay_missing <- (cfg$gms$c32_aff_policy == "ndcdelay") &&
+                        !("ndcdelay" %in% magclass::getNames(aff_pol))
+
+    if((all(aff_pol == 0)  && (cfg$gms$c32_aff_policy != "none"))  ||
+       (all(ad_pol == 0)   && (cfg$gms$c35_ad_policy != "none"))   ||
+       (all(aolc_pol == 0) && (cfg$gms$c35_aolc_policy != "none")) ||
+       affexp_missing || ndcdelay_missing)
     {
       cfg$recalc_npi_ndc <- TRUE
     } else cfg$recalc_npi_ndc <- FALSE
@@ -484,18 +491,18 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
     #if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
     cat("Starting land conversion cost calibration factor calculation!\n")
     source("scripts/calibration/landconversion_cost.R")
-    calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
-                     restart = cfg$restart_landconversion_cost,
-                     calib_accuracy = cfg$calib_accuracy_landconversion_cost,
-                     lowpass_filter = cfg$lowpass_filter_landconversion_cost,
-                     cost_max = cfg$cost_calib_max_landconversion_cost,
-                     cost_min = cfg$cost_calib_min_landconversion_cost,
-                     calib_file = land_calib_file,
-                     data_workspace = cfg$val_workspace,
-                     logoption = 3,
-                     debug = cfg$debug,
-                     best_calib = cfg$best_calib_landconversion_cost,
-                     histData = cfg$cost_calib_hist_data)
+    calibrateLandconversion(nMaxcalib = cfg$calib_maxiter_landconversion_cost,
+                            restart = cfg$restart_landconversion_cost,
+                            calibAccuracy = cfg$calib_accuracy_landconversion_cost,
+                            costMax = cfg$cost_calib_max_landconversion_cost,
+                            costMin = cfg$cost_calib_min_landconversion_cost,
+                            calibFile = land_calib_file,
+                            dataWorkspace = cfg$val_workspace,
+                            logoption = 3,
+                            debug = cfg$debug,
+                            bestCalib = cfg$best_calib_landconversion_cost,
+                            histData = cfg$cost_calib_hist_data,
+                            levelGradientMix = cfg$level_gradient_mix)
     cat("Land conversion cost calibration factor calculated!\n")
   }
 

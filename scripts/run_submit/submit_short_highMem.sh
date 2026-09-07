@@ -8,5 +8,4 @@
 #SBATCH --mem-per-cpu=5G
 #SBATCH --time=24:00:00
 
-Rscript submit.R
-
+$RSCRIPT_SLURM_HOOK Rscript submit.R

@@ -57,15 +57,22 @@
  v21_excess_prod(h2,k_trade) =e=
  v21_excess_dem(k_trade)*sum(ct,i21_exp_shr(ct,h2,k_trade));
 
-* Trade costs are associated with exporting superregions. They are dependent on net exports, trade margin, and tariffs.
+* Regional tariff costs aggregated over all tradable commodities.
 
- q21_cost_trade_reg(h2,k_trade)..
- v21_cost_trade_reg(h2,k_trade) =g=
- (i21_trade_margin(h2,k_trade) + i21_trade_tariff(h2,k_trade))
- *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade)) 
- + v21_import_for_feasibility(h2,k_trade) * s21_cost_import;
+ q21_cost_trade_tariff(h2)..
+ sum(supreg(h2,i2),vm_cost_trade_tariff(i2)) =g=
+ sum(k_trade, i21_trade_tariff(h2,k_trade)
+  * sum(supreg(h2,i2), vm_prod_reg(i2,k_trade) - vm_supply(i2,k_trade)));
 
-* Superregional trade costs are the costs for each superregion aggregated over all the tradable commodities.
+* Regional transport margin costs aggregated over all tradable commodities.
 
- q21_cost_trade(h2)..
- sum(supreg(h2,i2),vm_cost_trade(i2)) =e= sum(k_trade,v21_cost_trade_reg(h2,k_trade));
+ q21_cost_trade_margin(h2)..
+ sum(supreg(h2,i2),vm_cost_trade_margin(i2)) =g=
+ sum(k_trade, i21_trade_margin(h2,k_trade)
+  * sum(supreg(h2,i2), vm_prod_reg(i2,k_trade) - vm_supply(i2,k_trade)));
+
+* Regional feasibility penalty costs aggregated over all tradable commodities.
+
+ q21_cost_trade_feasibility(h2)..
+ sum(supreg(h2,i2),vm_cost_trade_feasibility(i2)) =g=
+ sum(k_trade, v21_import_for_feasibility(h2,k_trade) * s21_cost_import);

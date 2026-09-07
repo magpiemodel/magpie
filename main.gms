@@ -279,7 +279,8 @@ $batinclude "./modules/include.gms" equations
 model magpie / all - m15_food_demand /;
 
 option iterlim    = 1000000 ;
-option reslim     = 1000000 ;
+* reslim is a wall-clock limit in seconds per solve; exceeding it triggers the retry loop in module 80
+option reslim     = 900 ;
 option sysout     = Off ;
 option limcol     = 0 ;
 option limrow     = 0 ;

@@ -4,6 +4,8 @@
 
 ## :wrench: Checklist for PR creator :wrench:
 
+If a point is not applicable, check the checkbox anyway and write "non-applicable" next to the checkbox.
+
 - [ ] Label pull request [from the label list](https://github.com/magpiemodel/magpie/labels).
   - **Low risk**: Simple bugfixes (missing files, updated documentation, typos) or changes  in start or output scripts
   - **Medium risk**: Uncritical changes in the model core (e.g. moderate modifications in non-default realizations)
@@ -25,18 +27,24 @@
   - **Low risk**: 
     - Run a compilation check via `Rscript start.R --> "compilation check"`
   - **Medium risk**: 
-    - Run test runs via `Rscript start.R --> "test runs"`
+    - Run default run via `Rscript start.R --> "default"`
     - Check logs for errors/warnings
+    - Fill in performance section below
   - **High risk**:
     - Run test runs via `Rscript start.R --> "test runs"`
     - Check logs for errors/warnings
     - Default run from the PR target branch for comparison
     - Provide relevant comparison plots (land-use, emissions, food prices, land-use intensity,...)
+    - Fill in performance section below
 
-### :chart_with_downwards_trend: Performance changes :chart_with_upwards_trend:
-  
-  - Current develop branch default : ** mins
+- [ ] Reporting produces no errors and no new warnings
+
+- Get two approving reviews (at least one from RSE)
+
+### :chart_with_downwards_trend: Performance :chart_with_upwards_trend:
+
   - This PR's default :  ** mins
+  - For comparison: [runtimes](https://gitlab.pik-potsdam.de/landuse/testing_suite) of weekly test
 
 ## :rotating_light: Checklist for reviewer :rotating_light:
 
@@ -49,5 +57,3 @@
   - `CHANGELOG` is updated correctly
   - Updates in interfaces have been properly addressed in the module documentations
   - In-code documentation looks appropriate
-- [ ] content review done (at least 1)
-- [ ] RSE review done (at least 1)

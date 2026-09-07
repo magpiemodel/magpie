@@ -9,57 +9,73 @@
 
 * calculate carbon density
 
-*** YIELDS
+*** HARVESTABLE GROWING STOCK
 
-*` `pm_carbon_density_plantation_ac` for vegetation Carbon is above- and belowground
+*' `pm_carbon_density_plantation_ac` for vegetation carbon is above- and belowground
 *' carbon density. We convert Carbon density in tC/ha to tDM/ha by using carbon
-*' fraction of `s14_carbon_fraction` in tC/tDM. For assessing wood harvesting
+*' fraction of `sm_carbon_fraction` in tC/tDM. For assessing wood harvesting
 *' we need only aboveground biomass information, therefore we multiply with
-*' aboveground `f14_aboveground_fraction`. Additionally, we divide aboveground
-*' tree biomass by biomass conversion and expansion (BCE) factor to get stem
-*' biomass in tDM/ha.
+*' aboveground `fm_aboveground_fraction`. Additionally, we divide aboveground
+*' tree biomass by the Biomass Expansion Factor (BEF, dimensionless) to get
+*' stem biomass in tDM/ha. BEF = AGB (aboveground biomass) / stem_biomass (always > 1).
 
-*` @code
+*' @code
 
-pm_timber_yield(t,j,ac,"forestry") =
+im_growing_stock(t,j,ac,"forestry") =
     (
      pm_carbon_density_plantation_ac(t,j,ac,"vegc")
-     / s14_carbon_fraction
-     * f14_aboveground_fraction("forestry")
-     / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations"))
+     / sm_carbon_fraction
+     * fm_aboveground_fraction("forestry")
+     / sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bef(clcl))
     )
     ;
 
-pm_timber_yield(t,j,ac,"primforest") =
+im_growing_stock(t,j,ac,"primforest") =
     (
      fm_carbon_density(t,j,"primforest","vegc")
-     / s14_carbon_fraction
-     * f14_aboveground_fraction("primforest")
-     / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
+     / sm_carbon_fraction
+     * fm_aboveground_fraction("primforest")
+     / sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bef(clcl))
     )
     ;
 
-pm_timber_yield(t,j,ac,"secdforest") =
+im_growing_stock(t,j,ac,"secdforest") =
     (
      pm_carbon_density_secdforest_ac(t,j,ac,"vegc")
-     / s14_carbon_fraction
-     * f14_aboveground_fraction("secdforest")
-     / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
+     / sm_carbon_fraction
+     * fm_aboveground_fraction("secdforest")
+     / sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bef(clcl))
     )
     ;
 
-pm_timber_yield(t,j,ac,"other") =
+im_growing_stock(t,j,ac,"other") =
     (
      pm_carbon_density_other_ac(t,j,ac,"vegc")
-     / s14_carbon_fraction
-     * f14_aboveground_fraction("other")
-     / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
+     / sm_carbon_fraction
+     * fm_aboveground_fraction("other")
+     / sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bef(clcl))
     )
     ;
 
-*` @stop
+*' Growing stock for young secondary forest (youngsecdf) regrowing on other land.
+*' It is derived from the *uncalibrated* secondary-forest carbon curve (the same
+*' curve youngsecdf carbon uses in 35_natveg), with the secondary-forest aboveground
+*' fraction, so that its wood yield and its carbon stock are consistent.
+im_growing_stock_ysf(t,j,ac) =
+    (
+     pm_carbon_density_secdforest_ac_uncalib(t,j,ac,"vegc")
+     / sm_carbon_fraction
+     * fm_aboveground_fraction("secdforest")
+     / sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bef(clcl))
+    )
+    ;
 
-** Hard constraint to always have a positive number in pm_timber_yield
-pm_timber_yield(t,j,ac,land_timber) = pm_timber_yield(t,j,ac,land_timber)$(pm_timber_yield(t,j,ac,land_timber) > 0) + 0.0001$(pm_timber_yield(t,j,ac,land_timber) = 0);
-** Put yields to 0 where they dont exceed a minimum yield for harvest
-pm_timber_yield(t,j,ac,land_natveg)$(pm_timber_yield(t,j,ac,land_natveg) < s14_minimum_wood_yield) = 0;
+*' @stop
+
+** Hard constraint to always have a positive number in im_growing_stock
+im_growing_stock(t,j,ac,land_timber) = im_growing_stock(t,j,ac,land_timber)$(im_growing_stock(t,j,ac,land_timber) > 0) + 0.0001$(im_growing_stock(t,j,ac,land_timber) = 0);
+** Set growing stock to 0 where it does not exceed a minimum for harvest
+im_growing_stock(t,j,ac,land_natveg)$(im_growing_stock(t,j,ac,land_natveg) < s14_minimum_growing_stock) = 0;
+** Apply the same positivity and minimum-growing-stock clamps to the youngsecdf growing stock
+im_growing_stock_ysf(t,j,ac) = im_growing_stock_ysf(t,j,ac)$(im_growing_stock_ysf(t,j,ac) > 0) + 0.0001$(im_growing_stock_ysf(t,j,ac) = 0);
+im_growing_stock_ysf(t,j,ac)$(im_growing_stock_ysf(t,j,ac) < s14_minimum_growing_stock) = 0;

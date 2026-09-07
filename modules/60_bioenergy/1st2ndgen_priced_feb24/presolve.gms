@@ -5,7 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+vm_dem_bioen.fx(i,"pasture") = 0;
 vm_dem_bioen.fx(i,kap) = 0;
+vm_dem_bioen.fx(i,kforestry) = 0;
 v60_2ndgen_bioenergy_dem_dedicated.fx(i,kall) = 0;
 v60_2ndgen_bioenergy_dem_dedicated.up(i,kbe60) = Inf;
 v60_2ndgen_bioenergy_dem_residues.fx(i,kall) = 0;
@@ -25,6 +27,11 @@ else
   i60_res_2ndgenBE_dem(t,i) =
     f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
 );
+
+* for residues used as bioenergy feedstock switch off
+* overwrite the scenario harmonization for the historical period
+* and set the residue demand to "off" for the whole period
+$if "%c60_res_2ndgenBE_dem%" == "off" i60_res_2ndgenBE_dem(t,i) = f60_res_2ndgenBE_dem(t,i,"off");
 
 $ifthen "%c60_price_implementation%" == "exp"
   if(m_year(t) > sm_fix_SSP2,

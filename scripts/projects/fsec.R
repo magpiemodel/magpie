@@ -218,7 +218,6 @@ fsecScenario <- function(scenario,
   cfg$qos         <- "standby_highMem"
   cfg$output      <- c(if (highres) "extra/highres",
                        "extra/disaggregation",
-                       "projects/FSEC_nitrogenPollution",
                        "projects/FSEC_cropDiversityGrid",
                        "projects/FSEC_dietaryIndicators",
                        "projects/FSEC_costs",

@@ -6,4 +6,4 @@
 #SBATCH --mail-type=END,FAIL
 #SBATCH --cpus-per-task=3
 
-Rscript submit.R
+$RSCRIPT_SLURM_HOOK Rscript submit.R

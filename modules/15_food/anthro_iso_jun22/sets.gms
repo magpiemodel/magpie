@@ -121,7 +121,7 @@ sets
    res_cereals, res_fibrous, res_nonfibrous,
    wood, woodfuel /
 
-   nutrition Nutrition attributes
+   nutrition "Nutrition attributes"
     / kcal, protein/
 
    par15 Parameters for food module
@@ -154,6 +154,12 @@ sets
 * The set kfo_rd can be defined in default.cfg and is used in the food substitution scenarios s15_rumdairy_scp_substitution and s15_rumdairy_substitution
   kfo_rd(kfo) Ruminant meat and dairy food products
        / livst_rum,livst_milk /
+
+* kfo_sf and kfo_tf can be defined in default.cfg and are used in s15_flexfood_substitution scenario.
+  kfo_sf(kfo) Source foods for flexible food substitution
+       / livst_pig,livst_chick,livst_egg /
+  kfo_tf(kfo) Target foods for flexible food substitution
+       / soybean,puls_pro,groundnut /
 
   fadeoutscen15  Food substitution scenarios including functional forms with targets and transition periods
        / constant,

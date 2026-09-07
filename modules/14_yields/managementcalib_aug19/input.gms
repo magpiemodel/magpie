@@ -16,10 +16,10 @@ s14_limit_calib                    Relative managament calibration switch (1=lim
 s14_calib_ir2rf                    Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /
 s14_degradation                    Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /
 s14_use_yield_calib                Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
-s14_minimum_wood_yield             Minimum wood yield for timber harvest in natural vegetation (tDM per ha per yr) / 10 /
+s14_minimum_growing_stock          Minimum growing stock for timber harvest in natural vegetation (tDM per ha) / 5 /
 s14_yld_past_switch                Spillover parameter for translating technological change in the crop sector into pasture yieldincreases  (1)     / 0.25 /
 s14_yld_reduction_soil_loss        Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
-s14_carbon_fraction                Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
+sm_carbon_fraction                 Carbon fraction of dry matter (tC per tDM) / 0.5 /
 ;
 
 
@@ -63,13 +63,15 @@ $offdelim
 /
 ;
 
-table f14_ipcc_bce(clcl,forest_type) IPCC Biomass Conversion and Expansion factors (1)
+parameter fm_ipcc_bef(clcl) IPCC biomass expansion factor BEF (1)
+/
 $ondelim
-$include "./modules/14_yields/input/f14_ipcc_bce.cs3"
+$include "./modules/14_yields/input/f14_ipcc_bef.cs3"
 $offdelim
+/
 ;
 
-parameter f14_aboveground_fraction(land_timber) Root to shoot ratio (1)
+parameter fm_aboveground_fraction(land_timber) Aboveground fraction of total biomass (1)
 /
 $ondelim
 $include "./modules/14_yields/input/f14_aboveground_fraction.csv"

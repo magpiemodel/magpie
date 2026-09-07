@@ -38,7 +38,7 @@ title <- cfg$title
 reportLandUseForSEALS(
   magCellLand = "cell.land_0.5_share.mz",
   outFile = paste0("cell.land_0.5_SEALS_", title, ".nc"),
-  dir = outputdir, selectyears = c(2020, 2030, 2040, 2050)
+  outputdir = outputdir, selectyears = c(2020, 2030, 2040, 2050)
 )
 
 # In case of reforestation using plantation growth curves set forestry to zero
@@ -52,6 +52,6 @@ if (plantation) {
   reportLandUseForSEALS(
     magCellLand = land_hr,
     outFile = paste0("cell.land_0.5_SEALS_", title, "_noForestry.nc"),
-    dir = outputdir, selectyears = c(2020, 2030, 2040, 2050)
+    outputdir = outputdir, selectyears = c(2020, 2030, 2040, 2050)
   )
 }

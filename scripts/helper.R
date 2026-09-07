@@ -1,5 +1,50 @@
 # Collection of helper functions
 
+#' Save a quitte report to the results archive
+#'
+#' Ensures that run statistics have a valid id, saves the quitte object as an
+#' RDS file named after that id in the results archive, and updates the file
+#' list used by shinyresults.
+#' If an inbox folder (`paste0(normalizePath(resultsarchive), "-inbox")`)
+#' exists the rds file is put there instead. This is useful to then sync only
+#' the inbox files to another machine, before moving them to the actual
+#' results archive, potentially via cronjob.
+#'
+#' @param qu A quitte object to be saved.
+#' @param runstatistics Path to the runstatistics.rda file.
+#' @param submit Value passed to \code{lucode2::runstatistics(submit = ...)},
+#'   typically \code{cfg$runstatistics}.
+#' @param resultsarchive Path to the results archive directory. Can also be set
+#' via the env variable MAGPIE_RESULTS_ARCHIVE_PATH
+saveToResultsArchive <- function(qu, runstatistics, submit,
+                                 resultsarchive = Sys.getenv("MAGPIE_RESULTS_ARCHIVE_PATH")) {
+  if (!(file.exists(runstatistics) && dir.exists(resultsarchive))) {
+    # We only run in environments that are set up with a results archive
+    return(NULL)
+  }
+
+  stats <- list()
+  load(runstatistics)
+  if (is.null(stats$id)) {
+    # create an id if it does not exist (which means that statistics have not
+    # been saved to the archive before) and save statistics to the archive
+    message("No id found in runstatistics.rda. Calling lucode2::runstatistics() to create one.")
+    stats <- lucode2::runstatistics(file = runstatistics, submit = submit)
+    message("Created the id ", stats$id)
+    # save stats locally (including id) otherwise it would generate a new id (and
+    # resubmit the results and the statistics) next time rds_report is executed
+    save(stats, file = runstatistics, compress = "xz")
+  }
+
+  inbox <- paste0(normalizePath(resultsarchive), "-inbox")
+  if (dir.exists(inbox)) {
+    resultsarchive <- inbox
+  }
+
+  # Save report to results archive
+  saveRDS(qu, file = paste0(resultsarchive, "/", stats$id, ".rds"), version = 2)
+}
+
 chooseSubmit <- function(title, slurmModes) {
   modes <- c("Direct execution",
              "Background execution",

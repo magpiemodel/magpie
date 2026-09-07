@@ -5,6 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_urban.scale(j) = 10e3;
-*v34_cost1.scale(j) = 10e-4;
-*v34_cost2.scale(j) = 10e-4;
+vm_cost_urban.scale(j) = 1e3;
+*v34_cost1.scale(j) = 1e-4;
+*v34_cost2.scale(j) = 1e-4;
+*q34_urban_cost1.scale(j) = 1e-2;
+*q34_urban_cost2.scale(j) = 1e-2;
+*q34_urban_land.scale(i) = 1e-3;

@@ -24,9 +24,10 @@
 *' by the modules [30_crop] and [31_past].
 *'
 *' @authors Jan Philipp Dietrich, Isabelle Weindl, Florian Humpenöder,
-*' Anne Biewald, Kristine Karstens
+*' Anne Biewald, Kristine Karstens, Alexandre Köberle
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%yields%" == "dynRegPastrTau_apr26" $include "./modules/14_yields/dynRegPastrTau_apr26/realization.gms"
 $Ifi "%yields%" == "managementcalib_aug19" $include "./modules/14_yields/managementcalib_aug19/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
