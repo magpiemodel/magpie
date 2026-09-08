@@ -7,35 +7,53 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
-- **14_yields** pasture yield correction added to dynRegPastrTau_apr26 realization to match managementcalib_aug19
-- **inputdata** updated input data to rev4.132, added f14_yld_past_switch.csv
-- **scripts** saveToResultsArchive saves to inbox folder if available
-- **renv/activate.R** updated to version 1.2.4
-- **CI** test-code.yaml: use ubuntu-latest and checkout@v7
-- **Makefile** `make reset-renv` resets renv
-- **.Rprofile** add r-universe repo, use envvars if present
-- **Dockerfile** now based on ubuntu 26.04, R 4.6, gams 54.1
+-
 
 ### added
-- **scenario_config_susmip.csv** A set of sceanrios for the SusMIP excercise in the PRISMA project
-- **calc_npi_ndc.R** New policy, AFFEXP, on defining afforestation targets based on the share of potential forest land and speed of afforestation.
-- **14_yields/dynRegPastrTau_apr26** New realization, allows changing tau factor spillover to pastures by region and timestep.
-- **calc_npi_ndc.R** New afforestation policy `ndcdelay` (PRISMA T6.4 "Asymmetric Roll-back"): the `ndc` afforestation targets with future milestone target-years delayed by country categorization.
-- **80_optimization/nlp_ipopt** New realization, using IPOPT instead of CONOPT4 (and the fallback CONOPT3) as the NLP solver for the MAgPIE model.
-- **scripts/start/extra/ipopt.R** Start script for solving MAgPIE with IPOPT.
-- **Dockerfile** Re-added a Dockerfile, which can be used to build a local docker image as well as a GH codespace
+- **15_food** Added flexible source-to-target food substitution with configurable food baskets and kcal/protein replacement basis
+- **scenario_config_ec.csv** A set of scenarios for the Earth Commission
+- **scripts/start/projects/project_EC.R** Start script for EC scenarios.
+
+### removed
+-
+
+### fixed
+-
+
+
+## [4.14.1] - 2026-08-25
+
+### changed
+- **.Rprofile** add r-universe repo, use envvars if present
+- **14_yields** pasture yield correction added to dynRegPastrTau_apr26 realization to match managementcalib_aug19
+- **CI** test-code.yaml: use ubuntu-latest and checkout@v7
+- **Dockerfile** now based on ubuntu 26.04, R 4.6, gams 54.1
+- **inputdata** updated input data to rev4.132, repairing a FAO item-name mapping mismatch in the preprocessing (present since rev4.121): factor requirements in `f38_fac_req_fao.csv` for `others`, `cottn_pro`, `groundnut`, `cassav_sp`, `puls_pro` and `oilpalm` return to pre-rev4.121 levels; added `f14_yld_past_switch.csv`
+- **main.gms** `reslim` reduced from 1000000 to 900 seconds, so a solver stuck inside one iteration is interrupted and retried instead of consuming the whole job allocation
+- **Makefile** `make reset-renv` resets renv
+- **renv/activate.R** updated to version 1.2.4
+- **scripts** saveToResultsArchive saves to inbox folder if available
+
+### added
 - **.devcontainer/devcontainer.json** A new configuration for development containers, which allow for reproducible, prepared development environments
-- **scripts** added $RSCRIPT_SLURM_HOOK to run on slurm compute nodes via apptainer
+- **14_yields/dynRegPastrTau_apr26** New realization, allows changing tau factor spillover to pastures by region and timestep.
 - **22_land_conservation** new options for IPLC land conservation
+- **80_optimization/nlp_ipopt** New realization, using IPOPT instead of CONOPT4 (and the fallback CONOPT3) as the NLP solver for the MAgPIE model.
+- **Dockerfile** Re-added a Dockerfile, which can be used to build a local docker image as well as a GH codespace
+- **scenario_config_susmip.csv** A set of sceanrios for the SusMIP excercise in the PRISMA project
+- **scripts** added $RSCRIPT_SLURM_HOOK to run on slurm compute nodes via apptainer
+- **scripts/npi_ndc/start_npi_ndc.R** Added `ndcdelay` afforestation policy (PRISMA T6.4 "Asymmetric Roll-back") applying `ndc` targets with milestone target-years delayed by country categorization. Plus, added `AFFEXP` which derives afforestation targets based on the share of potential forest land and speed of afforestation.
+- **scripts/start/extra/ipopt.R** Start script for solving MAgPIE with IPOPT.
 
 ### removed
 - **scripts/projects/fsec.R** Removed FSEC_nitrogenPollution (grid-level nitrogen pollution downscaling) from the FSEC run output pipeline.
 
 ### fixed
+- **09_drivers**, **14_yields**, **15_food** Minor stylistic improvements to GAMS code following capitalization consistency rules in `gms::codeCheck`.
+- **21_trade** Bugfix and refinement of bilateral trade realization to avoid infeasibiliteis in SSP4 and SSP5.
 - **35_natveg/14_yields** Fix `youngsecdf` wood production: derive its growing stock (`im_growing_stock_ysf`) from the *uncalibrated* secondary-forest carbon curve — the same curve its carbon density uses — instead of the FRA-2025-calibrated `im_growing_stock(...,"secdforest")`. Previously young secondary forest on other land yielded calibrated (high) wood volumes while booking uncalibrated (low) carbon, letting the optimiser evade land-CO2 caps/prices by relocating wood harvest onto `youngsecdf`. Result-changing for scenarios with land-CO2 pricing or AFOLU caps; explains the "other-land wood harvest" anomaly flagged under PR #876's Known limitations.
 - **59_som** Carry the soil carbon stock (`pcm_carbon_stock(...,"soilc",...)`) forward each timestep in `postsolve` (both `cellpool_jan23` and `static_jan19`), so the soil term in `vm_emissions_reg` (`q52_emis_co2_actual`) is a per-timestep flux instead of a cumulative-since-initialisation change.
-- **21_trade** Bugfix and refinement of bilateral trade realization to avoid infeasibiliteis in SSP4 and SSP5.
-- **09_drivers**, **14_yields**, **15_food** Minor stylistic improvements to GAMS code following capitalization consistency rules in `gms::codeCheck`.
+- **scripts/output/projects** `FSDP_collect.R`, `FSDP_collect2.R` and `peatland.R` selected yield variables under names magpie4 no longer emits, so their yield series were silently empty (FSDP since 2024-04-25, peatland since 2024-02-26). Updated to the `Productivity|Yields` tree; `magpie4` dependency raised to >= 2.80.0 accordingly.
 
 
 ## [4.14.0] - 2026-05-05
@@ -1295,7 +1313,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.14.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.14.1...develop
+[4.14.1]: https://github.com/magpiemodel/magpie/compare/v4.14.0...v4.14.1
 [4.14.0]: https://github.com/magpiemodel/magpie/compare/v4.13.0...v4.14.0
 [4.13.0]: https://github.com/magpiemodel/magpie/compare/v4.12.0...v4.13.0
 [4.12.0]: https://github.com/magpiemodel/magpie/compare/v4.11.0...v4.12.0
