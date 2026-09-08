@@ -33,7 +33,11 @@ i59_lossrate(t)=1-0.85**m_yeardiff(t);
 *' The stock change factors are implemented for cropland subsystems divided by
 *' MAgPIE crop types as well as potentially for tillage and input management.
 *' So far it just tracks the subsystem component due to missing data for the
-*' other categories. They are set to the following default values:
+*' other categories. They are set to the default values from @ipcc_2019_ch5 
+*' IPCC (2019), Table 5.5.
+*' Careful when diverging from default values: Rice and perennial crops should
+*' not be varied by input and tillage modifiers as they are classified as 
+*' unique management systems @ipcc_2019_ch5 (IPCC 2019, Figure 5.1).
 
 i59_tillage_share(i,tillage59)=0;
 i59_tillage_share(i,"full_tillage")=1;
@@ -53,17 +57,17 @@ i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
                  * f59_cratio_irrigation(climate59,w,kcr));
 
 
-*' Fallow management: for dry regions, assume bare fallow and full tillage to save water
-*' For moist regions, assume set-aside with medium C input and reduced tillage at end of fallow.
+*' Fallow management: for dry regions, assume bare fallow and full tillage to save water, 
+*' implemented through IPCC F_LU factor for long-term cultivated cropland with full tillage
+*' and low inputs @ipcc_2019_ch5 (IPCC 2019, Table 5.5).
+*' For moist regions, assume F_LU factor of set-aside.
 *' Assumed to have no irrigation, so irrigation multiplier is 1.
 
 i59_cratio_fallow_climate(climate59) = f59_cratio_landuse_fallow(climate59)
                 * f59_cratio_tillage(climate59,"full_tillage")
                 * f59_cratio_inputs(climate59,"low_input");
 
-i59_cratio_fallow_climate(climate59moist) = f59_cratio_landuse_fallow(climate59moist)
-                * f59_cratio_tillage(climate59moist,"reduced_tillage")
-                * f59_cratio_inputs(climate59moist,"medium_input");
+i59_cratio_fallow_climate(climate59moist) = f59_cratio_landuse_fallow(climate59moist);
 
 i59_cratio_fallow(j) = sum(climate59,
                 sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
