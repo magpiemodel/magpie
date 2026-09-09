@@ -33,9 +33,9 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' @code
 
 *' The following equations calibrate the cellular yield patterns (`f14_yields`) to match
-*' FAO yields (`f14_yields_hist`) by calculating a calibration term called
+*' FAO yields (`f14_fao_yields_hist`) by calculating a calibration term called
 *' 'i14_managementcalib'. For most cases, 'i14_managementcalib' is the ratio of the harmonized
-*' historical yields (`f14_yields_hist`) and regional mean yields (`i14_modeled_yields_hist`)
+*' historical yields (`f14_fao_yields_hist`) and regional mean yields (`i14_modeled_yields_hist`)
 *' given historic crop area patterns ('fm_croparea') and cellular yields coming from crop models
 *' like LPJmL (`f14_yields`). In these cases, 'i14_managementcalib' represents a purely relative
 *' calibration factor that depends only on the initial conditions of the starting year.
@@ -87,12 +87,12 @@ loop(t,
 
           Elseif (s14_limit_calib =1 ),
                i14_lambda_yields(t,i,knbe14) =
-                    1$(f14_yields_hist(t,i,knbe14) <= i14_modeled_yields_hist(t,i,knbe14))
-                    + sqrt(i14_modeled_yields_hist(t,i,knbe14)/f14_yields_hist(t,i,knbe14))$
-                    (f14_yields_hist(t,i,knbe14) > i14_modeled_yields_hist(t,i,knbe14));
+                    1$(f14_fao_yields_hist(t,i,knbe14) <= i14_modeled_yields_hist(t,i,knbe14))
+                    + sqrt(i14_modeled_yields_hist(t,i,knbe14)/f14_fao_yields_hist(t,i,knbe14))$
+                    (f14_fao_yields_hist(t,i,knbe14) > i14_modeled_yields_hist(t,i,knbe14));
           );
 
-          i14_fao_yields_hist(t,i,knbe14) = f14_yields_hist(t,i,knbe14);
+          i14_fao_yields_hist(t,i,knbe14) = f14_fao_yields_hist(t,i,knbe14);
 
      Else
           i14_modeled_yields_hist(t,i,knbe14) = i14_modeled_yields_hist(t-1,i,knbe14);
