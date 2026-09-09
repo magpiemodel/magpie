@@ -43,6 +43,12 @@ if (s15_run_diet_postprocessing = 1,
 *###############################################################################
 * ###### Food substitution scenarios
 
+* Protein-to-kcal ratio used for protein-based food substitutions:
+  i15_protein_to_kcal_ratio(t,kfo) =
+      fm_nutrition_attributes(t,kfo,"protein")
+      / fm_nutrition_attributes(t,kfo,"kcal");
+
+
 * Substitution of ruminant beef with poultry:
   p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
   p15_kcal_pc_iso(t,iso,"livst_rum") =
@@ -112,9 +118,6 @@ if (s15_run_diet_postprocessing = 1,
 *' After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted 
 *' back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
 *'
-*' Protein to kcal ratio:
-i15_protein_to_kcal_ratio(t,kfo) = fm_nutrition_attributes(t,kfo,"protein") / fm_nutrition_attributes(t,kfo,"kcal");
-*'
 *' Increase of single-cell protein (SCP):
 p15_protein_pc_iso_scp(t,iso,kfo_rd) = p15_kcal_pc_iso(t,iso,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,iso)) * i15_protein_to_kcal_ratio(t,kfo_rd);
 p15_kcal_pc_iso(t,iso,"scp") = p15_kcal_pc_iso(t,iso,"scp") + sum(kfo_rd, p15_protein_pc_iso_scp(t,iso,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
@@ -161,6 +164,131 @@ p15_kcal_pc_iso(t,iso,"oils")$(s15_scp_supplement_fat_meat = 1) = p15_kcal_pc_is
      s15_scp_fat_protein_ratio_meat - s15_scp_fat_content) * fm_nutrition_attributes(t,"oils", "kcal");
 *' 
 *' @stop
+
+
+*' @code
+*' Flexible source-to-target food substitution ("flexfood").
+*' The source foods are defined by `kfo_sf` and the target foods by `kfo_tf`. The
+*' substitution share always refers to the fraction of source-food calories that
+*' is displaced. The replacement amount is defined by `c15_flexfood_subst_basis`:
+*' "kcal" replaces displaced calories, while "protein" replaces the protein
+*' contained in the displaced source foods. Target foods are distributed using
+*' their country-specific composition in the selected metric. If a country has no
+*' consumption of the selected target foods, the population-weighted global
+*' composition of the target basket is used as fallback.
+*'
+*' The flexfood substitution is applied sequentially after the preceding food substitution
+*' scenarios. Overlaps between `kfo_sf` and source foods of earlier substitution scenarios
+*' are allowed and lead to sequential, compounded substitution effects, e.g. in
+*' combination with substituting ruminant products by single-cell protein.
+*' A main application is substitution of selected livestock foods by plant-based
+*' alternatives, but source and target sets are fully configurable.
+*'
+*' The flexfood substitution can also be combined with exogenous diet scenarios
+*' (`s15_exo_diet > 0`). Food substitution scenarios, including flexfood, are applied
+*' first. The subsequent waste and intake calculations and exogenous diet scenarios use
+*' the resulting diet as their starting point. For `s15_exo_diet = 3`, flexfood can
+*' therefore influence whether lower or upper EAT-Lancet constraints become binding,
+*' while these constraints can in turn further modify the result of the flexfood
+*' substitution.
+*'
+*' Save the current diet as reference for the flexfood substitution:
+p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+*'
+*' Calories displaced from the configured source-food basket:
+p15_flexfood_kcal_removed(t,iso) = sum(kfo_sf,
+    p15_kcal_pc_iso_orig(t,iso,kfo_sf) * (1-i15_flexfood_fadeout(t,iso)));
+*'
+*'
+$ifthen "%c15_flexfood_subst_basis%" == "kcal"
+*'
+*' Country-specific target-food composition based on calories:
+p15_flexfood_target_kcal_orig(t,iso) = sum(kfo_tf, p15_kcal_pc_iso_orig(t,iso,kfo_tf));
+p15_flexfood_target_structure(t,iso,kfo) = 0;
+p15_flexfood_target_structure(t,iso,kfo_tf)$(p15_flexfood_target_kcal_orig(t,iso)>0) =
+    p15_kcal_pc_iso_orig(t,iso,kfo_tf) / p15_flexfood_target_kcal_orig(t,iso);
+*'
+*' Population-weighted global target-food composition as fallback:
+p15_flexfood_target_structure_global(t,kfo) = 0;
+p15_flexfood_target_structure_global(t,kfo_tf)$(
+    sum((iso,kfo2)$kfo_tf(kfo2), p15_kcal_pc_iso_orig(t,iso,kfo2) * im_pop_iso(t,iso))>0) =
+    sum(iso, p15_kcal_pc_iso_orig(t,iso,kfo_tf) * im_pop_iso(t,iso))
+    / sum((iso,kfo2)$kfo_tf(kfo2), p15_kcal_pc_iso_orig(t,iso,kfo2) * im_pop_iso(t,iso));
+*'
+*' If the complete target basket has zero global consumption, use equal calorie
+*' shares among all selected target foods:
+p15_flexfood_target_structure_global(t,kfo_tf)$(
+    sum((iso,kfo2)$kfo_tf(kfo2), p15_kcal_pc_iso_orig(t,iso,kfo2) * im_pop_iso(t,iso))=0
+    and card(kfo_tf)>0) =
+    1 / card(kfo_tf);
+*'
+*' For countries without consumption of the target basket, use the
+*' population-weighted global target-food composition:
+p15_flexfood_target_structure(t,iso,kfo_tf)$(
+    p15_flexfood_target_kcal_orig(t,iso)=0) =
+    p15_flexfood_target_structure_global(t,kfo_tf);
+*'
+*' Reduce source foods and replace displaced calories with target-food calories:
+p15_kcal_pc_iso(t,iso,kfo_sf) =
+    p15_kcal_pc_iso_orig(t,iso,kfo_sf) * i15_flexfood_fadeout(t,iso);
+p15_kcal_pc_iso(t,iso,kfo_tf) =
+    p15_kcal_pc_iso(t,iso,kfo_tf)
+    + p15_flexfood_kcal_removed(t,iso) * p15_flexfood_target_structure(t,iso,kfo_tf);
+*'
+$elseif "%c15_flexfood_subst_basis%" == "protein"
+*'
+*' Protein displaced from the configured source-food basket:
+p15_flexfood_protein_removed(t,iso) = sum(kfo_sf,
+    p15_kcal_pc_iso_orig(t,iso,kfo_sf) * (1-i15_flexfood_fadeout(t,iso))
+    * i15_protein_to_kcal_ratio(t,kfo_sf));
+*'
+*' Country-specific target-food composition based on protein:
+p15_flexfood_target_protein_orig(t,iso) = sum(kfo_tf,
+        p15_kcal_pc_iso_orig(t,iso,kfo_tf) * i15_protein_to_kcal_ratio(t,kfo_tf));
+p15_flexfood_target_structure(t,iso,kfo) = 0;
+p15_flexfood_target_structure(t,iso,kfo_tf)$(p15_flexfood_target_protein_orig(t,iso)>0) =
+    p15_kcal_pc_iso_orig(t,iso,kfo_tf) * i15_protein_to_kcal_ratio(t,kfo_tf)
+    / p15_flexfood_target_protein_orig(t,iso);
+*'
+*' Population-weighted global target-food composition as fallback:
+p15_flexfood_target_structure_global(t,kfo) = 0;
+p15_flexfood_target_structure_global(t,kfo_tf)$(
+    sum((iso,kfo2)$kfo_tf(kfo2), p15_kcal_pc_iso_orig(t,iso,kfo2) * i15_protein_to_kcal_ratio(t,kfo2)
+        * im_pop_iso(t,iso))>0) =
+    sum(iso,
+        p15_kcal_pc_iso_orig(t,iso,kfo_tf) * i15_protein_to_kcal_ratio(t,kfo_tf) * im_pop_iso(t,iso))
+    / sum((iso,kfo2)$kfo_tf(kfo2),
+        p15_kcal_pc_iso_orig(t,iso,kfo2) * i15_protein_to_kcal_ratio(t,kfo2) * im_pop_iso(t,iso));
+*'
+*' If the complete target basket has zero global protein consumption, use equal
+*' protein shares among selected target foods with positive protein content:
+p15_flexfood_target_structure_global(t,kfo_tf)$(
+    i15_protein_to_kcal_ratio(t,kfo_tf)>0
+    and sum((iso,kfo2)$kfo_tf(kfo2), p15_kcal_pc_iso_orig(t,iso,kfo2) * i15_protein_to_kcal_ratio(t,kfo2)
+        * im_pop_iso(t,iso))=0
+    and sum(kfo2$(kfo_tf(kfo2) and i15_protein_to_kcal_ratio(t,kfo2)>0),1)>0) =
+    1 / sum(kfo2$(kfo_tf(kfo2) and i15_protein_to_kcal_ratio(t,kfo2)>0),1);
+*'
+*' For countries without protein consumption from the target basket, use the
+*' population-weighted global target-food composition:
+p15_flexfood_target_structure(t,iso,kfo_tf)$(p15_flexfood_target_protein_orig(t,iso)=0) =
+    p15_flexfood_target_structure_global(t,kfo_tf);
+*'
+*' Reduce source foods and replace displaced protein with target-food protein:
+p15_kcal_pc_iso(t,iso,kfo_sf) =
+    p15_kcal_pc_iso_orig(t,iso,kfo_sf) * i15_flexfood_fadeout(t,iso);
+*'
+p15_kcal_pc_iso(t,iso,kfo_tf)$(i15_protein_to_kcal_ratio(t,kfo_tf)>0) =
+    p15_kcal_pc_iso(t,iso,kfo_tf) 
+    + p15_flexfood_protein_removed(t,iso)
+    * p15_flexfood_target_structure(t,iso,kfo_tf) / i15_protein_to_kcal_ratio(t,kfo_tf);
+*'
+$else
+$abort Invalid c15_flexfood_subst_basis. Choose "kcal" or "protein".
+$endif
+*'
+*' @stop
+
 
 * Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_supply_target.
 * Optional substitution with plant-based products depending on s15_livescen_target_subst.

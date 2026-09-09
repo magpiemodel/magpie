@@ -18,6 +18,9 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rum_share  mixed
 *   options:   constant, halving2050, mixed
 
+$setglobal c15_flexfood_subst_basis  protein
+*   options:   kcal, protein
+
 $setglobal c15_kcal_scen  healthy_BMI
 *   options:    healthy_BMI, 2100kcal, 2500kcal,
 *              endo, no_underweight, no_overweight
@@ -60,6 +63,8 @@ sets
 
 $onMultiR
 set    kfo_rd(kfo) Ruminant meat and dairy food products / livst_rum /;
+set    kfo_sf(kfo) Source foods for flexible food substitution / livst_pig,livst_chick,livst_egg /;
+set    kfo_tf(kfo) Target foods for flexible food substitution / soybean,puls_pro,groundnut /;
 $offMulti
 
 scalars
@@ -106,6 +111,7 @@ s15_alcohol_substitution            Alcohol substitution share (1) / 0 /
 s15_livestock_substitution          Livestock substitution share (1) / 0 /
 s15_rumdairy_substitution           Ruminant meat and dairy substitution share (1) / 0 /
 s15_rumdairy_scp_substitution       Ruminant meat and dairy substitution with SCP share (1) / 0 /
+s15_flexfood_substitution           Flexible source-to-target food substitution share (1) / 0 /
 s15_livescen_target                 Switch for livestock food calorie supply target (1) / 0 /
 s15_exo_foodscen_functional_form    Switch for functional form of exogenous food scenario fader (1) / 1 /
 s15_exo_foodscen_start              Food substitution start year        / 2025 /
