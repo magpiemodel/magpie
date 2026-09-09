@@ -48,7 +48,7 @@ $include "./modules/14_yields/input/f14_pasture_yields_hist.csv"
 $offdelim;
 
 
-table f14_yields_hist(t_all,i,kcr) Harmonized historical yields per region (tDM per ha per yr)
+table f14_yields_hist(t_all,i,kcr) FAO yields per region (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/managementcalib_aug19/input/f14_region_yields.cs3"
 $offdelim

@@ -53,7 +53,7 @@ $offdelim
 ;
 m_fillmissingyears(f14_yld_past_switch,"i");
 
-table f14_yields_hist(t_all,i,kcr) Harmonized historical yields per region (tDM per ha per yr)
+table f14_yields_hist(t_all,i,kcr) FAO yields per region (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/dynRegPastrTau_apr26/input/f14_region_yields.cs3"
 $offdelim
