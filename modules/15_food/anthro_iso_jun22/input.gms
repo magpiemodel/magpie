@@ -29,7 +29,8 @@ $setglobal c15_kcal_scen  healthy_BMI
 $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
 
-
+$setglobal c15_exodiet_scen EL2
+*   options:   EL2, NIN
 
 * Set-switch for countries affected by country-specific exogenous diet scenario
 * Default: all iso countries selected
@@ -78,7 +79,7 @@ s15_convergence_partstep            Share of last iteration for convergence (1=o
 * maximum relative per-capita gdp difference within a region between two iteratios
 s15_exo_waste                       Switch for transition towards exogenous food waste scenario (1)  / 0 /
 s15_waste_scen                      Scenario target for the ratio between food demand and intake (1)  / 1.2 /
-s15_exo_diet                        Switch for transition towards exogenous diet scenario (1)  / 0 /
+s15_exo_diet                        Switch for transition towards exogenous diet scenario (1)  / 3 /
 * The following switches only become active when s15_exo_diet is active
 * They define which components of the diet should become active
 * If the switch is set to 1,the exogenous diets are activated.
@@ -257,7 +258,7 @@ $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
 *** EAT Lancet diet recommendation
-table f15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15)   Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
+table f15_rec_EATLancet(iso,exodiettype,EAT_targets15,EAT_targettype15)   Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
 $ondelim
 $include "./modules/15_food/input/f15_targets_EATLancet_iso.cs3"
 $offdelim;
