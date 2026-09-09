@@ -9,7 +9,7 @@
 *' by replacing the global scalar spillover parameter for pasture yield increases
 *' with a regional, time-varying input parameter `f14_yld_past_switch` (t_all x i).
 *' All other yield calibration logic — bioenergy correction, pasture management
-*' correction, historical yield calibration, irrigated-to-rainfed ratio calibration, yield
+*' correction, FAO calibration, irrigated-to-rainfed ratio calibration, yield
 *' calibration factors, and land degradation effects — is identical to
 *' managementcalib_aug19.
 *'

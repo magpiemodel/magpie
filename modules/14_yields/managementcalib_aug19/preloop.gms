@@ -33,23 +33,23 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' @code
 
 *' The following equations calibrate the cellular yield patterns (`f14_yields`) to match
-*' FAO yields (`f14_fao_yields_hist`) by calculating a calibration term called
-*' 'i14_managementcalib'. For most cases, 'i14_managementcalib' is the ratio of the harmonized
-*' historical yields (`f14_fao_yields_hist`) and regional mean yields (`i14_modeled_yields_hist`)
+*' FAO historical yields (`f14_fao_yields_hist`) by calculating a calibration term called
+*' 'i14_managementcalib'. For most cases, 'i14_managementcalib' is the ratio of the historical
+*' yields reported by FAO (`f14_fao_yields_hist`) and regional mean yields (`i14_modeled_yields_hist`)
 *' given historic crop area patterns ('fm_croparea') and cellular yields coming from crop models
 *' like LPJmL (`f14_yields`). In these cases, 'i14_managementcalib' represents a purely relative
 *' calibration factor that depends only on the initial conditions of the starting year.
 *'
-*' However, when the historical yields are significantly higher than given by the cellular yield inputs
+*' However, when FAO yields are significantly higher than given by the cellular yield inputs
 *' (underestimated baseline), the relative calibration terms can lead to unrealistically large
 *' yields in the case of future yield increases within the cellular yield patterns.
 *'
 *' To address this issue, the factor `i14_lambda_yields` determines the degree
-*' to which the baseline (historical yields) is under- or overestimated and therefore controls
+*' to which the baseline (FAO) is under- or overestimated and therefore controls
 *' whether the calibration factor is applied as an absolute or relative change.
-*' For overestimated historical yields, `i14_lambda_yields` is 1, which is equivalent
+*' For overestimated FAO yields, `i14_lambda_yields` is 1, which is equivalent
 *' to an entirely relative calibration. For underestimated yields, `i14_lambda_yields`
-*' is calculated as the squared root of the ratio between LPJmL yields and harmonized historical
+*' is calculated as the squared root of the ratio between LPJmL yields and FAO historical
 *' yields, and as `i14_lambda_yields`  approaches 0, it reduces the applied relative change
 *' resulting in a mean change increasingly similar to an additive term (@Heinke.2013).
 
@@ -75,7 +75,7 @@ i14_modeled_yields_hist(t_past,i,knbe14)
 
 *' The factor `i14_lambda_yields` is calculated for the initial time step depending
 *' on the setting `s14_limit_calib` and is then held constant for all other time steps.
-*' The regional historical yield and regional yield of the crop model input of the initial
+*' The regional FAO yield and regional yield of the crop model input of the initial
 *' time step is kept constant in the two parameters `i14_fao_yields_hist` and
 *' `i14_modeled_yields_hist`:
 
@@ -156,7 +156,7 @@ if ((s14_calib_ir2rf = 1),
 
 *' @code
 *' Calibrated yields can additionally be adjusted by calibration factors 'f14_yld_calib'
-*' determined in a calibration run. As MAgPIE optimizes yield patterns and historical regional
+*' determined in a calibration run. As MAgPIE optimizes yield patterns and FAO regional
 *' yields are outlier corrected, historical production and croparea can in some cases
 *' be better represented with this additional correction:
 
