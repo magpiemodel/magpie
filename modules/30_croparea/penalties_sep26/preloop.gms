@@ -21,7 +21,7 @@ m_sigmoid_time_interpol(i30_rotation_scenario_fader,s30_rotation_scenario_start,
 ** Fader for penalty for violating rotational constraints
 i30_rotation_incentives(t_all,i,rota30) =
   f30_rotation_incentives(rota30,"default") * (1-i30_rotation_scenario_fader(t_all) * p30_country_weight(i)) +
-  f30_rotation_incentives(rota30,"%c30_rotation_incentives%") * (i30_rotation_scenario_fader(t_all) * p30_country_weight(i));
+  f30_rotation_incentives(rota30,"%c30_rotation_policy%") * (i30_rotation_scenario_fader(t_all) * p30_country_weight(i));
 
 
 *due to some rounding errors the input data currently may contain in some cases

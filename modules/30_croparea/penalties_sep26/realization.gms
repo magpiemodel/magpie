@@ -21,7 +21,7 @@
 *' Constraints are defined for total croparea as well as for irrigated areas
 *' only, to avoid overspecialization on irrigated land. The rule set is fixed
 *' and covers only rules that carry a penalty; different levels of ambition are
-*' selected through `c30_rotation_incentives` rather than through the rules
+*' selected through `c30_rotation_policy` rather than through the rules
 *' themselves. See realization `rules_sep26` for rotational constraints
 *' implemented as hard limits, which uses a larger, scenario-dependent rule set.
 

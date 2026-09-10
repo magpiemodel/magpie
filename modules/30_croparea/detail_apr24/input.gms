@@ -14,7 +14,7 @@ $setglobal c30_bioen_water  rainfed
 $setglobal c30_rotation_rules  default
 *options: min, default, good, good_20div, setaside, legumes, sixfoldrotation, agroecology, FSEC
 
-$setglobal c30_rotation_incentives  default
+$setglobal c30_rotation_policy  default
 *options: none, default, legumes, agroecology
 
 
