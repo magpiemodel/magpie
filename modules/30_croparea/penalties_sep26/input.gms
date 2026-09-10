@@ -18,13 +18,6 @@ $setglobal c30_rotation_incentives  default
 scalars
  s30_rotation_scenario_start     Rotation scenario start year      / 2025 /
  s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
- s30_betr_scenario_start         Bioenergy land scenario start year       / 2025 /
- s30_betr_scenario_target        Bioenergy land scenario target year      / 2050 /
- s30_betr_start                  Share of bioenergy land on total cropland in start year (1) / 0 /
- s30_betr_start_noselect         Share of bioenergy land on total cropland in start year (1) / 0 /
- s30_betr_target                 Share of bioenergy land on total cropland in target year (1) / 0 /
- s30_betr_target_noselect        Share of bioenergy land on total cropland in target year (1) / 0 /
- s30_betr_penalty                Penalty for violation of betr target (USD17MER per ha) / 2460 /
  s30_annual_max_growth Max annual cropland growth as share of previous cropland (1) / Inf /
 ;
 
