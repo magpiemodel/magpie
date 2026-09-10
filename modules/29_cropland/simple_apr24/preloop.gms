@@ -11,6 +11,10 @@ vm_treecover.fx(j) = 0;
 vm_bv.fx(j,"crop_fallow",potnatveg) = 0;
 vm_bv.fx(j,"crop_tree",potnatveg) = 0;
 
+* This realization has neither fallow land nor tree cover on cropland.
+pm_treecover_start(j) = 0;
+im_fallow_start(j) = 0;
+
 ** Trajectory for cropland scenarios
 * sigmoidal interpolation between start year and target year
 m_sigmoid_time_interpol(i29_snv_scenario_fader,s29_snv_scenario_start,s29_snv_scenario_target,0,1);

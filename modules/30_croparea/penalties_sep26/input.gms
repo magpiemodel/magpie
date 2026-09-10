@@ -11,19 +11,13 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_rotation_constraints  on
-*options: on, off
+$setglobal c30_rotation_policy  default
+*options: none, default, legumes, agroforestry, agroecology
+
 
 scalars
  s30_rotation_scenario_start     Rotation scenario start year      / 2025 /
  s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
- s30_betr_scenario_start         Bioenergy land scenario start year       / 2025 /
- s30_betr_scenario_target        Bioenergy land scenario target year      / 2050 /
- s30_betr_start                  Share of bioenergy land on total cropland in start year (1) / 0 /
- s30_betr_start_noselect         Share of bioenergy land on total cropland in start year (1) / 0 /
- s30_betr_target                 Share of bioenergy land on total cropland in target year (1) / 0 /
- s30_betr_target_noselect        Share of bioenergy land on total cropland in target year (1) / 0 /
- s30_betr_penalty                Penalty for violation of betr target (USD17MER per ha) / 2460 /
  s30_annual_max_growth Max annual cropland growth as share of previous cropland (1) / Inf /
 ;
 
@@ -68,29 +62,24 @@ $endif
 
 ********* CROPAREA INITIALISATION **********************************************
 
-table fm_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
+table fm_croparea(t_past,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
-$include "./modules/30_croparea/simple_apr24/input/f30_croparea_w_initialisation.cs3"
+$include "./modules/30_croparea/input/f30_croparea_w_initialisation.cs3"
 $offdelim
 ;
-m_fillmissingyears(fm_croparea,"j,w,kcr");
 
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************
 
-parameter f30_rotation_max_shr(crp30) Maximum allowed area shares for each crop type (1)
+table f30_rotation_incentives(rota30,incentscen30) penalties for violating rotation rules (USD17MER)
+$ondelim
+$include "./modules/30_croparea/penalties_sep26/input/f30_rotation_incentives.csv"
+$offdelim
+;
+
+parameter f30_rotation_rules(rota30) Rotation min or max shares (1)
 /
 $ondelim
-$include "./modules/30_croparea/simple_apr24/input/f30_rotation_max.csv"
+$include "./modules/30_croparea/penalties_sep26/input/f30_rotation_incentives_rules.csv"
 $offdelim
-/;
-$if "%c30_rotation_constraints%" == "off" f30_rotation_max_shr(crp30) = 1;
-
-
-parameter f30_rotation_min_shr(crp30) Minimum allowed area shares for each crop type (1)
 /
-$ondelim
-$include "./modules/30_croparea/simple_apr24/input/f30_rotation_min.csv"
-$offdelim
-/;
-$if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
-
+;

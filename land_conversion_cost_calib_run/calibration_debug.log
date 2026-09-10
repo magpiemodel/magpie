@@ -1,0 +1,9 @@
+=== COMPREHENSIVE LOGGING ACTIVE (cat/messages/warnings/errors) ===
+##################################################################
+### CALIBRATE_MAGPIE START ###
+##################################################################
+### ITERATION 1 START (useGDX = 0) ###
+Loading required package: magpie4
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 0
+Starting GAMS run...

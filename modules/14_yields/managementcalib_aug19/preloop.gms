@@ -57,7 +57,7 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' to an additive term in case of a strongly underestimated baseline. The scalar
 *' `s14_limit_calib` can be used to switch limited calibration on (1) and off (0).
 
-i14_croparea_total(t_all,w,j) = sum(kcr, fm_croparea(t_all,j,w,kcr));
+i14_croparea_total(t_past,w,j) = sum(kcr, fm_croparea(t_past,j,w,kcr));
 
 *' Historic crop area patterns (`fm_croprea`) are used to calculate regional yields
 *' (`i14_modeled_yields_hist`) from the given cellular input pattern. In rare cases where

@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 -
 
 ### added
+- **30_croparea** Added realizations `penalties_sep26` and `rules_sep26`, which split `detail_apr24` into its penalty-based and hard-constraint-based rotation implementations. `penalties_sep26` is the new default, `detail_apr24` and the switch `s30_implementation` are obsolete.
+- **30_croparea** The switches `c30_rotation_rules` and `c30_rotation_incentives` are replaced by a single `c30_rotation_policy`, which selects the rule thresholds in `rules_sep26` and the penalty levels in `penalties_sep26`. Both realizations offer a `none` policy, and `agroforestry` is added as a new policy. `penalties_sep26` restricts the rule set to the rules that carry a penalty and uses a single fixed set of thresholds. Minimum-share rules are enforced for the first time. This changes results relative to `detail_apr24` and requires recalibration.
 - **15_food** Added flexible source-to-target food substitution with configurable food baskets and kcal/protein replacement basis
 - **scenario_config_ec.csv** A set of scenarios for the Earth Commission
 - **scripts/start/projects/project_EC.R** Start script for EC scenarios.

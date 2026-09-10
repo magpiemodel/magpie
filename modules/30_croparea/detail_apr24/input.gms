@@ -14,21 +14,14 @@ $setglobal c30_bioen_water  rainfed
 $setglobal c30_rotation_rules  default
 *options: min, default, good, good_20div, setaside, legumes, sixfoldrotation, agroecology, FSEC
 
-$setglobal c30_rotation_incentives  none
+$setglobal c30_rotation_policy  default
 *options: none, default, legumes, agroecology
 
 
 scalars
+ s30_implementation              Penalty-based (0) or hard constraint-based (1) rotation scenarios / 0 /
  s30_rotation_scenario_start     Rotation scenario start year      / 2025 /
  s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
- s30_implementation              Switch for rule-based (1) or penalty-based (0) implementation of rotation scenarios / 1 /
- s30_betr_scenario_start         Bioenergy land scenario start year       / 2025 /
- s30_betr_scenario_target        Bioenergy land scenario target year      / 2050 /
- s30_betr_start                  Share of bioenergy land on total cropland in start year (1) / 0 /
- s30_betr_start_noselect         Share of bioenergy land on total cropland in start year (1) / 0 /
- s30_betr_target                 Share of bioenergy land on total cropland in target year (1) / 0 /
- s30_betr_target_noselect        Share of bioenergy land on total cropland in target year (1) / 0 /
- s30_betr_penalty                Penalty for violation of betr target (USD17MER per ha) / 2460 /
  s30_annual_max_growth Max annual cropland growth as share of previous cropland (1) / Inf /
 ;
 
@@ -73,12 +66,11 @@ $endif
 
 ********* CROPAREA INITIALISATION **********************************************
 
-table fm_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
+table fm_croparea(t_past,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
 $include "./modules/30_croparea/detail_apr24/input/f30_croparea_w_initialisation.cs3"
 $offdelim
 ;
-m_fillmissingyears(fm_croparea,"j,w,kcr");
 
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************
 
