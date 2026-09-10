@@ -7,7 +7,7 @@
 
 sets
   incentscen30 rotation inventive scenarios
-  / none, default, legumes, agroecology /
+  / none, default, legumes, agroforestry, agroecology /
 
   rota30 rotational rules
   / cereals1_max, cereals2_max, resistant_max, oilcrops_max,

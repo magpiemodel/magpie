@@ -25,34 +25,28 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 prefix <- "rotations"
 
-# The two realizations express the ambition of a rotation scenario through
-# different switches: penalties_sep26 has no rules scenarios, rules_sep26 has
-# no incentives.
-realizations <- list(penalties_sep26 = "c30_rotation_incentives",
-                     rules_sep26     = "c30_rotation_rules")
+defaultCalibration <- cfg$input["calibration"]
 
-for (r in names(realizations)) {
-
-  scenarioSwitch <- realizations[[r]]
+for (r in c("penalties_sep26", "rules_sep26")) {
 
   cfg$gms$croparea <- r
-  cfg$gms$c30_rotation_rules <- "default"
-  cfg$gms$c30_rotation_incentives <- "default"
 
-  # default setting, recalibrated because the realizations differ in how
-  # strongly they constrain croparea
+  # default policy, recalibrated because the two realizations constrain
+  # croparea to a different degree
   cfg$title <- paste(prefix, r, "default", sep = "_")
+  cfg$gms$c30_rotation_policy <- "default"
+  cfg$input["calibration"] <- defaultCalibration
   cfg$recalibrate <- TRUE
   cfg$recalibrate_landconversion_cost <- TRUE
   start_run(cfg, codeCheck = FALSE)
   calibTgz <- magpie4::submitCalibration(paste("H12", prefix, r, sep = "_"))
 
-  # scenario run reuses the calibration factors of its own realization
+  # policy run reuses the calibration factors of its own realization
   cfg$input["calibration"] <- calibTgz
   cfg$recalibrate <- FALSE
   cfg$recalibrate_landconversion_cost <- FALSE
 
   cfg$title <- paste(prefix, r, "agroecology", sep = "_")
-  cfg$gms[[scenarioSwitch]] <- "agroecology"
+  cfg$gms$c30_rotation_policy <- "agroecology"
   start_run(cfg, codeCheck = FALSE)
 }
