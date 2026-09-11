@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * ----------------------------------------------------
-* Shift ageclasses due to shifting cultivation and fires
+* Shift ageclasses due to forest disturbance
 * ----------------------------------------------------
 
 * first calculate damages
