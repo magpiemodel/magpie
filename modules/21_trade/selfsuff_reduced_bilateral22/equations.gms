@@ -42,19 +42,19 @@ q21_trade_reg(h2,k_trade)..
 *' Lower bound on bilateral trade: each exporter-importer flow must be at least
 *' the importer's supply multiplied by the historical import supply ratio
 *' (optionally scaled by `i21_import_supply_scenario`), minus a flexibility
-*' window defined by the historical standard deviation times the liberalization
-*' factor. A larger `i21_stddev_lib_factor` widens the window and allows trade
+*' window defined by the historical flexibility band (rolling range) times the liberalization
+*' factor and capped at 1. A larger `i21_flexBand_lib_factor` widens the window and allows trade
 *' to deviate further below the historical pattern.
 q21_trade_lower(i_ex,i_im,k_trade)..
  v21_trade(i_ex,i_im,k_trade) =g=
     vm_supply(i_im,k_trade)
     * sum(ct, i21_import_supply_historical(i_ex,i_im,ct,k_trade) * i21_import_supply_scenario(ct)
-       - i21_stddev_lib_factor(ct) * i21_trade_bilat_stddev(ct,i_ex,i_im,k_trade));
+       - i21_trade_bilat_flexBand_capped(ct,i_ex,i_im,k_trade));
 
 
 *' Upper bound on bilateral trade: each exporter-importer flow must not exceed
 *' the importer's supply multiplied by the historical import supply ratio,
-*' plus the flexibility window (standard deviation times liberalization factor).
+*' plus the flexibility window (flexibility band times liberalization factor, capped at 1).
 *' Together with `q21_trade_lower`, these bounds create a corridor around the
 *' historical bilateral trade pattern within which the optimizer can adjust
 *' flows to minimize total costs.
@@ -62,7 +62,7 @@ q21_trade_upper(i_ex,i_im,k_trade)..
  v21_trade(i_ex,i_im,k_trade) =l=
     vm_supply(i_im,k_trade)
     * sum(ct, i21_import_supply_historical(i_ex,i_im,ct,k_trade) * i21_import_supply_scenario(ct)
-       + i21_stddev_lib_factor(ct) * i21_trade_bilat_stddev(ct,i_ex,i_im,k_trade))
+       + i21_trade_bilat_flexBand_capped(ct,i_ex,i_im,k_trade))
        + v21_import_for_feasibility(i_ex,i_im,k_trade);
 
 
