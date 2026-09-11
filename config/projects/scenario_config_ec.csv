@@ -34,7 +34,7 @@ gms$s15_exo_brans;0;0;0
 gms$s15_exo_scp;0;0;1
 gms$s15_exo_alcohol;0;0;1
 gms$c21_trade_liberalization;;l908080r807070;l909595r809090
-gms$s21_stddev_lib_factor;;2;0.5
+gms$s21_flexBand_lib_factor;;2;0.5
 gms$s21_import_supply_scenario;;0.5;0.5
 gms$c22_protect_scenario;;BH_IFL;30by30
 gms$s22_conservation_start;;2025;2025
