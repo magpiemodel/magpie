@@ -14,6 +14,10 @@ $setglobal c35_pot_forest_scenario  cc
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
+$setglobal c35_pot_forest_correction  on
+*   options:  on   (potential forest area corrected for grassland ecoregions; default)
+*             off  (uncorrected LPJmL potential forest area)
+
 scalars
 s35_hvarea Flag for harvested area and establishment (0=zero 1=exogenous 2=endogenous) / 2 /
 s35_hvarea_secdforest annual secdforest harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
@@ -57,7 +61,11 @@ $offdelim
 parameter f35_pot_forest_area(t_all,j) Potential forest area (mio. ha)
 /
 $ondelim
+$ifthen "%c35_pot_forest_correction%" == "on"
 $include "./modules/35_natveg/input/pot_forest_area.cs2"
+$else
+$include "./modules/35_natveg/input/pot_forest_area_uncorrected.cs2"
+$endif
 $offdelim
 /;
 

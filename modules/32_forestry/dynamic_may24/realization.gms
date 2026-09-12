@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The main features of the this realization are re/afforestation for CDR
+*' @description The main features of this realization are re/afforestation for CDR
 *' and timber production. Re/afforestation can be modelled exogenously (prescribed
 *' by NPI/NDC policies) and/or endogenously (incentivized by a reward for CDR).
 *' National policies implemented (NPI) and nationally determined contributions to
@@ -17,9 +17,10 @@
 *' as regrowth of natural vegetation (see @humpenoder_investigating_2014 for details on the implemenation).
 *' The regrowth of natural vegetation follows S-shaped growth curves parametrized via
 *' module [52_carbon], which provides three forest growth curves along the FRA continuum: naturally
-*' regenerating forest (Robinson et al 2025), other planted forest (a natveg-derived curve), and
-*' plantations (Bukoski et al 2022). Additionally this module handles the production of two timber
-*' products i.e., wood and woodfuel from plantation forests while still accounting for afforestation
+*' regenerating forest [@robinson_protect_2025], other planted forest (a natveg-derived curve), and
+*' plantations [@bukoski_rates_2022]. Additionally this module handles the production of two timber
+*' products i.e., wood and woodfuel from the harvestable managed-forestry pools (timber plantations and
+*' other planted forest) while still accounting for afforestation
 *' policies. New plantations are also established in the simulation step to account for future timber
 *' demand. Plantation rotation lengths are an external per-biome input (`f32_plant_rotation`,
 *' area-weighted over Koeppen classes and converted to 5-yr age classes) and are the single source of

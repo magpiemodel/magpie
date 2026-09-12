@@ -99,7 +99,7 @@ $offdelim
 /
 ;
 
-* Note: Land carbon sink adjustment factors from Grassie et al 2021 (DOI 10.1038/s41558-021-01033-6)
+* Note: Land carbon sink adjustment factors from Grassi et al 2021 (DOI 10.1038/s41558-021-01033-6)
 * are needed in the post-processing in https://github.com/pik-piam/magpie4/blob/master/R/reportEmissions.R
 * To facilitate the choice of the corresponding RCP, the adjustment factors are read-in here and
 * stored in i52_land_carbon_sink for use in the R post-processing.

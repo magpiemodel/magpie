@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description  This realization provides forest area in age-classes `im_forest_ageclass`,
-*' by default (`c28_ageclass_source=gami`) from GAMI v2.1 (Besnard et al 2024) or, with
+*' by default (`c28_ageclass_source=gami`) from GAMI v2.1 [@besnard_gami_2024] or, with
 *' `c28_ageclass_source=gfad`, from the Global Forest Age Dataset (GFAD V1.1) @poulter_global_2019.
 
 *' @limitations The age-class data give the age of forest but not why it is young. In reality much

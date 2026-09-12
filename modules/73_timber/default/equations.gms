@@ -7,7 +7,7 @@
 
 *' @equations
 
-*' Timber production cost has four components:
+*' Timber production cost has six components:
 *' 1. Base production cost: all timber (plantation + natveg) pays `im_timber_prod_cost(i)`
 *'    per tDM, regionalized via wood density (source: 89/44 USD17MER/m3 for wood/woodfuel).
 *' 2. Natveg cost premium: natveg timber pays an additional `s73_natveg_cost_premium` (15%)

@@ -241,9 +241,10 @@ q32_hvarea_forestry(j2,harvest32,ac_sub) ..
                           =e=
                           v32_land_reduction(j2,harvest32,ac_sub);
 
-** Timber plantation
-*' Woody biomass production from timber plantations is calculated by multiplying the
-*' area under production with corresponding growing stock of plantation forests, divided by the timestep length.
+** Timber plantation and other planted forest
+*' Woody biomass production from the harvestable managed-forestry pools (timber plantations and other
+*' planted forest) is calculated by multiplying the area under production with the corresponding growing
+*' stock, divided by the timestep length.
 
 q32_prod_forestry(j2)..
                          sum(kforestry, vm_prod_forestry(j2,kforestry))

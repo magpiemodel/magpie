@@ -165,10 +165,9 @@ q35_prod_other(j2)..
                 ;
 
 *' Following equations show the harvested area from natural vegetation i.e. primary
-*' forests, secondary forests and other land. Important to note here that no wood
-*' production should be realized from other land. Harvested area for production
-*' purposes can be lower oe equal than land reduction in natural vegetation as
-*' not all lost area is (or should be) used for production.
+*' forests, secondary forests and other land. Harvested area for production purposes
+*' can be lower than or equal to the land reduction in natural vegetation, as not all
+*' lost area is (or should be) used for production.
 
 q35_hvarea_secdforest(j2,ac_sub)..
                 v35_hvarea_secdforest(j2,ac_sub)
