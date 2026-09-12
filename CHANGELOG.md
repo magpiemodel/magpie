@@ -7,15 +7,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **52_carbon** Forest carbon growth curves are now observation-based (naturally regenerating: Robinson et al. 2025, leaned to the p25 lower quartile of the cell-rate distribution via `s52_natveg_growth_scalar`; plantations: Bukoski et al. 2022, carbon asymptote anchored to the observed managed plateau via `s52_plant_asymp_anchor`; other planted: derived from naturally regenerating) instead of the modelled Braakhekke et al. 2019 curves. The carbon growth curve is separated from the FRA growing-stock (timber) calibration: one realistic carbon curve for all forest, with wood matched to the FRA target by a per-region multiplier on the harvestable growing stock, shared by primary and secondary forest, with other-land wood capped by the same correction and a wood-only niche floor (`s52_gs_niche_floor`) keeping it physical in arid cells. New switch `c52_growth_par_source` (default `refit`) keeps the legacy Braakhekke curves selectable (`braakhekke`; other planted then falls back to naturally regenerating).
+- **28_ageclass** New default forest age-class source GAMI (Besnard et al. 2024, satellite-derived global forest age); GFAD remains selectable via `c28_ageclass_source`.
+- **32_forestry** Cleaned up the forestry module: the plantation rotation now comes solely from the external per-Köppen rotation table, retiring the curve-derived rotation machinery (CAI/MAI/Faustmann) and the associated unused parameters and switches.
+- **56_ghg_policy/60_bioenergy** Added the R36M414 coupled REMIND-MAgPIE scenarios to the GHG-price and 2nd-generation bioenergy-demand scenario sets.
+- **inputdata** updated to rev4.134 (FRA2025 forest data, GAMI forest ages, R36M414 coupled scenarios, grassland-corrected potential forest area, regional bookkeeping LUC-CO2 validation band)
+- **config** additional data updated to `additional_data_rev4.72.tgz` (three-curve forest growth parameters, plantation rotation lengths and carbon-asymptote targets)
 - **21_trade** Changed preprocessing calculation of bilateral trade flexibility band into the future, no longer based on historical standard deviations and rather based on mean historical ranges
 
 ### added
+- **32_forestry** Other-planted forest as its own harvestable pool with its own growth curve, matching the FRA 2025 taxonomy (naturally regenerating / other planted / plantation). Reported as `Planted Forest|+|Timber` and `Planted Forest|+|Other Planted`. Plantation rotation read from an external per-Köppen-zone table (`f32_plant_rotation.cs4`).
+- **35_natveg** Potential forest area corrected for grassland ecoregions (`c35_pot_forest_correction`, on by default): the LPJmL potential forest area is reduced by the grassland-ecoregion cover fraction (RESOLVE 2017 biomes 7-10) during preprocessing (`calcPotentialForestArea` with `calcGrassyEcoregions`, mrmagpie), where LPJmL overestimates forest cover in open grassland ecosystems; the switch selects the corrected (default) or uncorrected input file. Restricts afforestation and natural regrowth on grassland sites.
+- **73_timber** Sticky natveg harvest-capacity cost (`s73_sticky_harvest`, default on): treats natveg (primary/secondary/other) harvest capacity as a depreciating capital stock (mirrors 38_factor_costs sticky_feb18), damping the regional timestep-to-timestep source-switching sawtooth; per-source intensity via `s73_hvint_*`. FRA-pinned wood volume and carbon curves unchanged.
 - **15_food** Added flexible source-to-target food substitution with configurable food baskets and kcal/protein replacement basis
 - **scenario_config_ec.csv** A set of scenarios for the Earth Commission
 - **scripts/start/projects/project_EC.R** Start script for EC scenarios.
 
 ### removed
--
+- **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
 ### fixed
 -

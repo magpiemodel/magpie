@@ -12,133 +12,36 @@ m_sigmoid_time_interpol(i32_plant_contr_growth_fader,s32_plant_contr_growth_star
 p32_est_cost("plant") = s32_est_cost_plant;
 p32_est_cost("ndc") = s32_est_cost_natveg;
 p32_est_cost("aff") = s32_est_cost_natveg$(s32_aff_plantation = 0) + s32_est_cost_plant$(s32_aff_plantation = 1);
+** other_planted is harvestable managed forest that replants into itself -> plantation establishment cost.
+p32_est_cost("other_planted") = s32_est_cost_plant;
 
-** Calculation of Single rotation model rotation lengths
-** Using forestry carbon densitiy here via carbon density data exchange from carbon module.
-p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_plantation_ac(t_all,j,ac,"vegc");
+** External per-biome plantation rotation -- the single source of truth for both the cellular
+** (establishment/harvest) rotation and the regional (economic) rotation. The plantation carbon curve
+** (module 52) describes carbon, not merchantable stem volume, so a silvicultural rotation cannot be derived from it; the
+** rotation is instead an explicit management input: f32_plant_rotation (years by Koeppen biome),
+** area-weighted per cell and converted to 5-yr age classes. It is time-invariant, so the establishment
+** rotation is constant across t_all and the harvesting rotation is identical.
 
-** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
-** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
-loop(ac$(ord(ac) > 1),
-  p32_carbon_density_ac_marg(t_all,j,ac) = (p32_carbon_density_ac_forestry(t_all,j,ac) - p32_carbon_density_ac_forestry(t_all,j,ac-1))/5;
-  );
-p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
-
-** Calculating Instantaneous Growth Rates (IGR).
-** This is a proxy number which can be compared against interest rate in the economy to
-** make investment decisions in plantations (i.e. to keep it growing or to harvest it).
-** This parameter is then used to calculate rotation lengths.
-p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0)
-                      + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)=0);
-
-** Rotation length can be calculated based on Instantaneous Growth Rates (regional and global), current_annual_increment and mean_annual_increment.
-** The binary parameter p32_rot_flg indicates if a plantation should be kept (1) or harvested (0).
-** Example for Instantaneous Growth Rates (IGR):
-** If IGR > interest rate, plantations should be kept (1).
-** If IGR < interest rate, plantations should be harvested (0).
-
-$ifthen "%c32_rot_calc_type%" == "instantaneous_growth_rate_reg"
-  p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) >  0)
-                          + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) <= 0);
-  display "Rotation lengths are calculated based on equating instantaneous growth rate to regional interest rate.";
-
-$elseif "%c32_rot_calc_type%" == "instantaneous_growth_rate_glo"
-  p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate  >  0)
-                          + 0$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate <= 0);
-  display "Rotation lengths are calculated based on equating instantaneous growth rate to global interest rate.";
-
-$elseif "%c32_rot_calc_type%" == "current_annual_increment"
-  p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) >  0)
-                          + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) <= 0);
-  display "Rotation lengths are calculated based on maximizing current annual increment in this run.";
-
-$elseif "%c32_rot_calc_type%" == "mean_annual_increment"
-  p32_avg_increment(t_all,j,ac) = pm_carbon_density_plantation_ac(t_all,j,ac,"vegc") / ((ord(ac)+1)*5);
-  p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) >  0)
-                          + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) <= 0);
-  display "Rotation lengths are calculated based on maximizing mean annual increment in this run.";
-$endif
-
-*********************************************************************************
-
-** Faustmann rotation lengths:
-
-p32_time(ac) = ord(ac);
-
-p32_discount_factor(t_all,j,ac)         =  1/(exp(sum(cell(i,j),pm_interest(t_all,i))*p32_time(ac)));
-
-p32_net_present_value(t_all,j,ac)       = ((s32_price * p32_carbon_density_ac_forestry(t_all,j,ac) * p32_discount_factor(t_all,j,ac)))/(1-p32_discount_factor(t_all,j,ac));
-
-p32_stand_value(t_all,j,ac)             = s32_price * p32_carbon_density_ac_forestry(t_all,j,ac);
-p32_stand_value(t_all,j,ac)$(p32_stand_value(t_all,j,ac)<0.01) = 0.01;
-
-p32_investment_returns_lost(t_all,j,ac) = sum(cell(i,j),pm_interest(t_all,i)) * p32_net_present_value(t_all,j,ac);
-p32_land_rent_weighted(t_all,j,ac)      = p32_investment_returns_lost(t_all,j,ac)/p32_stand_value(t_all,j,ac) ;
-
-p32_rot_flg_faustmann(t_all,j,ac)       = 1$(p32_IGR(t_all,j,ac) > sum(cell(i,j),pm_interest(t_all,i)) + p32_land_rent_weighted(t_all,j,ac))
-                                        + 0$(p32_IGR(t_all,j,ac) <= sum(cell(i,j),pm_interest(t_all,i)) + p32_land_rent_weighted(t_all,j,ac));
-
-p32_rot_length_faustmann(t_all,j)       = sum(ac,p32_rot_flg_faustmann(t_all,j,ac));
-
-*********************************************************************************
-
-** Change rotation based on switch. If not use calculation before faustmann
-if(s32_faustmann_rotation = 0,
-  p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac));
-elseif s32_faustmann_rotation = 1,
-  p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg_faustmann(t_all,j,ac));
-);
-
-** We provide a upper limit of 90 years for commercial plantations.
-** 90 years translates to age-class 18 (90/5)
-p32_rot_length_ac_eqivalent(t_all,j)$(p32_rot_length_ac_eqivalent(t_all,j)>18) = 18;
-p32_rot_length_ac_eqivalent(t_historical,j) = p32_rot_length_ac_eqivalent("y1995",j);
-
-** Holding rotation lengths constant after the end of this century.
-p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
-
-** Number of cells in each region
+** Number of cells in each region (divisor for the regional rotation average)
 p32_ncells(i) = sum(cell(i,j),1);
 
-**** Representative regional rotation
-loop(t_all,
-  p32_rotation_regional(t_all,i) = ceil(sum(cell(i,j), p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
-  );
+** Cellular area-weighted external rotation length (years) from the per-biome Koeppen input
+p32_plant_rotation_yr(j) = 0;
+p32_plant_rotation_yr(j)$(sum(clcl, pm_climate_class(j,clcl)) > 0)
+    = sum(clcl, pm_climate_class(j,clcl) * f32_plant_rotation(clcl)) / sum(clcl, pm_climate_class(j,clcl));
 
-** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
-** back to rotation length in age-classes.
-p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
+** Convert to age-class equivalent (s32_ageclass_length-yr classes), clamped to [1, s32_max_rotation/s32_ageclass_length]
+pm_rotation_cellular_estb(t_all,j)       = round(p32_plant_rotation_yr(j)/s32_ageclass_length);
+pm_rotation_cellular_estb(t_all,j)$(pm_rotation_cellular_estb(t_all,j) < 1)  = 1;
+pm_rotation_cellular_estb(t_all,j)$(pm_rotation_cellular_estb(t_all,j) > s32_max_rotation/s32_ageclass_length) = s32_max_rotation/s32_ageclass_length;
 
-** Set harvesting rotations same as establishment rotations -- Don't move this line below extension of rotation. This is overwritten in the next loop anyways
-p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
+** Harvest rotation equals establishment rotation (time-invariant external rotation)
+p32_rotation_cellular_harvesting(t_all,j) = pm_rotation_cellular_estb(t_all,j);
 
-** RL Extension
-p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) * s32_rotation_extension ;
-
-** With the following loop, harvesting rotations are updated based on the rotation length
-** at which the establishment of plantations was made. For example, an establishment with
-** 50 year rotation in mind in year 2000 shall be available for harvest when the age of
-** this plantation is 50 years in 2050. The following loop makes sure that the harvesting
-** age is updated correctly in the future.
-
-loop(j,
-  loop(t_all,
-      p32_rotation_offset = p32_rotation_cellular_estb(t_all,j);
-* The harvest year is calculated for future based on current establishment decision
-      p32_rotation_cellular_harvesting(t_all+p32_rotation_offset,j) = p32_rotation_cellular_estb(t_all,j);
-    );
-  );
-
-** This loop fixes empty gaps.
-** For example in 2035, if establishment length was 10 (50yrs) then it should be harvested in 2085
-** But in 2040, lets say if establishment length was 11 (55yrs) then the harvesting should happen in 2095.
-** This leaves y2090 with a gap where model doesn't know which value to choose
-** At this point, it takes the values which were initialized in lines above
-** where we give harvested rotations the same value as establishment rotation to start with
-** The loop below makes some educated guess based on jumps during these blind spots and fills them with proper numbers
-loop(t_all,
-  p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
-  );
+** Representative regional (economic) rotation, derived from the SAME external cellular rotation so
+** q32_cost_establishment (equations.gms) and the establishment-demand horizon (presolve.gms) use a
+** rotation consistent with the harvest rotation. Age-class-equivalent units (as before).
+p32_rotation_regional(t_all,i) = ceil(sum(cell(i,j), pm_rotation_cellular_estb(t_all,j))/p32_ncells(i));
 
 p32_cdr_ac(t,j,ac) = 0;
 
@@ -150,27 +53,33 @@ ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off < p32_rotation_cellular_harvesting("y
 p32_plantedforest(i) = f32_plantedforest(i);
 p32_plantedforest(i)$(p32_plantedforest(i) < s32_min_plant_shr) = s32_min_plant_shr;
 
-** divide initial forestry area by number of age classes within ini32
+** Split the initial forestry area into timber plantations ("plant", the p32_plantedforest share) and the
+** pre-existing other planted forest ("other_planted", the remaining share). Both are harvestable and
+** self-replanting. "ndc" and "aff" stay empty at init and fill only via afforestation policies over time
+** (q32_aff_pol). Total forestry area and its age distribution are unchanged, so no land input change is needed.
 if(s32_initial_distribution = 0,
 ** Initialize with highest age class
-  p32_land_start_ac(j,"plant","acx") = pcm_land(j,"forestry") * sum(cell(i,j),p32_plantedforest(i));
-  p32_land_start_ac(j,"ndc","acx")   = pcm_land(j,"forestry") * sum(cell(i,j),1-p32_plantedforest(i));
+  p32_land_start_ac(j,"plant","acx")         = pcm_land(j,"forestry") * sum(cell(i,j),p32_plantedforest(i));
+  p32_land_start_ac(j,"other_planted","acx") = pcm_land(j,"forestry") * sum(cell(i,j),1-p32_plantedforest(i));
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribution among rotation age classes
-** Plantated forest area is divided into ndcs (other planted forest) and plantations
-  p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = pm_land_start(j,"forestry") * sum(cell(i,j),p32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
-  p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- p32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+  p32_land_start_ac(j,"plant",ac)$(ini32(j,ac))         = pm_land_start(j,"forestry") * sum(cell(i,j),p32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+  p32_land_start_ac(j,"other_planted",ac)$(ini32(j,ac)) = pm_land_start(j,"forestry") * sum(cell(i,j),1-p32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
 
 );
 
-** Redistribute to youngest age class in case the distribution to plantations and
-** ndcs does not match fully with LUH initialized data
+** Redistribute any residual (split not fully matching the LUH forestry area) to the youngest
+** other-planted age class.
 loop(j,
   if(pm_land_start(j,"forestry") > sum((type32,ac),p32_land_start_ac(j,type32,ac)),
-    p32_land_start_ac(j,"ndc","ac0") = p32_land_start_ac(j,"ndc","ac0") + (pm_land_start(j,"forestry") - sum((type32,ac),p32_land_start_ac(j,type32,ac)));
+    p32_land_start_ac(j,"other_planted","ac0") = p32_land_start_ac(j,"other_planted","ac0") + (pm_land_start(j,"forestry") - sum((type32,ac),p32_land_start_ac(j,type32,ac)));
     );
 );
+
+** Safety check: the forestry sub-pools must sum to the total forestry area.
+p32_forestry_check = sum((j,type32,ac), p32_land_start_ac(j,type32,ac)) - sum(j, pm_land_start(j,"forestry"));
+abort$(abs(p32_forestry_check) > 1e-6) "forestry sub-pool initialisation broke area conservation", p32_forestry_check;
 
 ** Initialize forestry land types
 pc32_land(j,type32,ac) = p32_land_start_ac(j,type32,ac);
@@ -207,6 +116,8 @@ elseif s32_aff_bii_coeff = 1,
 );
 p32_bii_coeff("ndc",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg);
 p32_bii_coeff("plant",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg);
+** other_planted is natveg-curve managed forest -> secondary (natveg) BII coefficient, like ndc.
+p32_bii_coeff("other_planted",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg);
 
 * initialize parameter
 p32_land(t,j,type32,ac) = 0;
@@ -220,8 +131,10 @@ vm_bv.l(j,"aff_co2p",potnatveg) =
   p32_bii_coeff("aff",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
 
 vm_bv.l(j,"aff_ndc",potnatveg) =
-  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"ndc",ac)) *
-  p32_bii_coeff("ndc",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+  sum(bii_class_secd, (sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"ndc",ac)) *
+    p32_bii_coeff("ndc",bii_class_secd,potnatveg)
+  + sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"other_planted",ac)) *
+    p32_bii_coeff("other_planted",bii_class_secd,potnatveg))) * fm_luh2_side_layers(j,potnatveg);
 
 vm_bv.l(j,"plant",potnatveg) =
   sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"plant",ac)) *

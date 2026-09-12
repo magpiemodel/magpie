@@ -12,16 +12,24 @@
 *' Chapman-Richards growth model, to the land modules [32_forestry] and [35_natveg]
 *' [@humpenoder_investigating_2014 and @braakhekke_modelling_2019].
 *'
-*' When enabled (`s52_growingstock_calib = 1`), the growth rate parameter `k` in the
-*' Chapman-Richards equation is calibrated per region via bisection to match
-*' FAO FRA 2025 growing stock targets. Secdforest `k` is calibrated to FRA NRF
-*' (naturally regenerating forest) growing stock using the full GFAD age distribution.
-*' Plantation `k` is calibrated to FRA plantation growing stock.
-*' Uncalibrated growth curves are preserved for use by afforestation and NDC forest
-*' commitments, which represent new establishment rather than existing managed forests.
+*' The Chapman-Richards growth parameters are read from the three-curve growth-parameter file
+*' (natveg, other_planted, plantations); the carbon curve is never bent to a timber
+*' target. Instead, when `s52_growingstock_calib = 1`, harvestable wood is matched to
+*' FAO FRA 2025 growing stock by a per-region wood multiplier `lambda`, applied to
+*' `im_growing_stock` in [14_yields] and leaving carbon density untouched:
+*' `lambda = FRA target / area-weighted growing stock of the observation-based carbon curve`
+*' (naturally regenerating forest weighted by the age-class distribution -> `pm_lambda_nrf`;
+*' plantations sampled at the cellular rotation age -> `pm_lambda_pla`).
+*' By default the naturally regenerating growth rate is leaned to the lower quartile of the observed
+*' cell-rate distribution (`s52_natveg_growth_scalar`), the plantation carbon asymptote is anchored to the
+*' observed managed plateau (`s52_plant_asymp_anchor`), and `lambda` is capped at the biomass expansion
+*' factor (`s52_lambda_bef_cap`). The legacy Braakhekke curves remain selectable via `c52_growth_par_source`.
 
-*' @limitations Carbon density asymptote (C_max) comes from LPJmL potential
-*' vegetation and may exceed observed growing stock in degraded tropical forests.
+*' @limitations The carbon density asymptote (C_max) comes from LPJmL potential vegetation. For
+*' plantations it is re-levelled to the observed managed plateau in the tropics by default
+*' (`s52_plant_asymp_anchor`); naturally regenerating forest keeps the LPJmL potential, so undisturbed
+*' regrowth is assumed to recover to natural old-growth carbon and chronically degraded forest that never
+*' reaches its potential is not represented.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/52_carbon/normal_dec17/sets.gms"
