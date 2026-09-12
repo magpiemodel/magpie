@@ -37,9 +37,9 @@ sets
    l909595r809090
    /
 
-   trade_stddev21 Standard deviation of observed bilateral trade
-   / meansd5, maxsd5, minsd5, meansd10, maxsd10, minsd10, meansd15,
-    maxsd15, minsd15 /
+   trade_flexBand21 Members of the historical flexibility band (rolling range of import supply ratios over 5 10 and 15 year windows)
+   / mean5, max5, min5, mean10, max10, min10, mean15,
+    max15, min15 /
 ;
 
 alias(h,h3);

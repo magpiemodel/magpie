@@ -9,9 +9,10 @@ parameters
  i21_trade_margin(i_ex,i_im,k_trade)                       Bilateral freight and insurance costs between region pairs (USD17MER per tDM)
  i21_trade_tariff(t_all,i_ex,i_im,k_trade)                 Bilateral specific duty tariff rates (USD17MER per tDM)
  i21_import_supply_historical(i_ex,i_im,t_all,k_trade)     Share of importer domestic supply sourced from each exporter - historical and projected (1)
- i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)           Standard deviation of historical import supply ratios used as flexibility window (1)
+ i21_trade_bilat_flexBand(t_all,i_ex,i_im,k_trade)         Flexibility band (rolling range of historical import supply ratios) (1)
+ i21_trade_bilat_flexBand_capped(t_all,i_ex,i_im,k_trade)  Applied flexibility window trade liberalization factor times flexBand, capped at one used in the trade bounds (1)
  i21_import_supply_scenario(t_all)                         Time-varying scalar on import supply ratios for scenario experiments (1)
- i21_stddev_lib_factor(t_all)                              Time-varying scalar on the flexibility window width (1)
+ i21_flexBand_lib_factor(t_all)                            Time-varying scalar on the flexibility window width (1)
  p21_import_supply_sum(i_im,t_all,k_trade)                 Sum of import supply ratios across all exporters after scenario scaling - used to cap at 1 (1)
 ;
 
