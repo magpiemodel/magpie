@@ -47,13 +47,6 @@ $include "./modules/35_natveg/input/f35_forest_shock.csv"
 $offdelim
 ;
 
-parameter f35_forest_disturbance_share(i) Share of area damaged by forest disturbances (1)
-/
-$ondelim
-$include "./modules/35_natveg/input/f35_forest_disturbance_share.cs4"
-$offdelim
-/;
-
 parameter f35_pot_forest_area(t_all,j) Potential forest area (mio. ha)
 /
 $ondelim
