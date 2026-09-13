@@ -65,7 +65,7 @@ i14_yields_calib(t,j,"pasture",w) = f14_yields(t,j,"pasture",w) * sum(cell(i,j),
 i14_yields_combined(t,j,"constgsadapt",kcr,w) = f14_yields_constgsadapt(t,j,kcr,w);
 i14_yields_combined(t,j,"gsadapt",kcr,w)   = f14_yields(t,j,kcr,w);
 
-i14_croparea_total(t_all,w,j) = sum(kcr, fm_croparea(t_all,j,w,kcr));
+i14_croparea_total(t_past,w,j) = sum(kcr, fm_croparea(t_past,j,w,kcr));
 
 **************************************************************************************
 *** STEP 1: CALCULATE modeled regional historical yields
