@@ -15,7 +15,7 @@ parameters
  p14_yields_gsadapt_ratio_cumulative(t,i)                Cumulative effect of growing period adaption from the first to the current timestep (1)
  p14_pyield_LPJ_reg(t_all,i)                             Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
  p14_pyield_corr(t,i)                                    Regional pasture management correction for historical time steps (1)
- i14_croparea_total(t_all,w,j)                           Cellular croparea (mio. ha)
+ i14_croparea_total(t_past,w,j)                          Cellular croparea (mio. ha)
  i14_modeled_yields_hist(t_all,i,yldtype,kcr)            Biophysical input yields average over region and water supply type at the historical reference year (tDM per ha per yr)
  i14_calib_target_yields_hist(t,i,kcr)                   Calibration target yields per region at the historical reference year (tDM per ha per yr)
  i14_lambda_yields(t,i,yldtype,kcr)                      Scaling factor for non-linear management calibration (1)
