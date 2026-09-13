@@ -22,26 +22,29 @@ i21_trade_margin(i_ex,i_im,k_trade)$(i21_trade_margin(i_ex,i_im,k_trade) < 1e-6)
 i21_import_supply_historical(i_ex,i_im,t_all,k_trade) = f21_import_supply_historical(i_ex,i_im,t_all,k_trade);
 
 
-* FLEXIBILITY WINDOW (STANDARD DEVIATION BOUNDS)
-* Standard deviation of import supply ratios are calculated based on the historic trade matrix,
-* by taking standard deviations of all 5-year, 10-year, and 15-year windows via rolling windows
-* from 1990 onwards,for each importer-exporter-product combination.
-* This allows for a vector of all observed std. devs for each window length in history,
-* showing how variable trade flows were over shorter and longer periods of time.
+* FLEXIBILITY BAND (ROLLING-RANGE BOUNDS)
+* The flexibility band of import supply ratios is calculated from the historic trade matrix,
+* by taking the rolling RANGE (max - min) of all 5-year, 10-year, and 15-year windows
+* from 1990 onwards, for each importer-exporter-product combination.
+* This gives, for each window length, the MEAN over all historically observed rolling ranges,
+* showing how variable trade flows typically were over shorter and longer periods of time.
 * 5/10/15 year historic windows are assigned to equivalent time steps after the calibration year
 * (sm_fix_SSP2), giving progressively wider flexibility as the projection moves further
-* from the historical period. The amount of flexibility is also set to the max observed variability
-* for each windown length, allowing for equvialent amount of future change change as observed in the past for each window length.
-* Options for mean and min also exist for less flexibility, implying less future . 
+* from the historical period. The amount of flexibility is set to the MEAN observed range
+* for each window length, allowing typical historical variability as future change.
+* The mean rolling range widens with window length (empirically monotone on the historical data;
+* the max variant is provably monotone). Options for max (peak observed variability, wider) and
+* min (narrowest) also exist. The band is capped at 1 in preprocessing; the applied lib-scaled window
+* (i21_trade_bilat_flexBand_capped, computed below) is additionally capped at 1.
 loop(t_all,
-  i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 5) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd5");
-  i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 10) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd10");
-  i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(m_year(t_all)  >= sm_fix_SSP2 + 15) = f21_trade_bilat_stddev(i_ex,i_im,k_trade,"maxsd15");
+  i21_trade_bilat_flexBand(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 5) = f21_trade_bilat_flexBand(i_ex,i_im,k_trade,"mean5");
+  i21_trade_bilat_flexBand(t_all,i_ex,i_im,k_trade)$(m_year(t_all) = sm_fix_SSP2 + 10) = f21_trade_bilat_flexBand(i_ex,i_im,k_trade,"mean10");
+  i21_trade_bilat_flexBand(t_all,i_ex,i_im,k_trade)$(m_year(t_all)  >= sm_fix_SSP2 + 15) = f21_trade_bilat_flexBand(i_ex,i_im,k_trade,"mean15");
 );
 
-* Remove intra-regional trade standard deviations (e.g. EUR.EUR) because the 
+* Remove intra-regional trade flexibility bands (e.g. EUR.EUR) because the
 * current model does not reflect the incentives for intra-regional trade
-  i21_trade_bilat_stddev(t_all,i_ex,i_im,k_trade)$(sameas(i_ex,i_im)) = 0;
+  i21_trade_bilat_flexBand(t_all,i_ex,i_im,k_trade)$(sameas(i_ex,i_im)) = 0;
 
 * BILATERAL TARIFFS
 * Initialize tariffs from input data or set to zero depending on switch.
@@ -72,21 +75,22 @@ loop(t_all,
 );
 
 * FLEXIBILITY AND SCENARIO SCALARS
-* i21_stddev_lib_factor scales the width of the flexibility window.
+* i21_flexBand_lib_factor scales the width of the flexibility window.
 * Before the calibration year it is 1 (historical bounds). After, it can be
 * increased (more flexibility, trade liberalization) or decreased (more rigid
-* trade patterns). Controlled by s21_stddev_lib_factor.
+* trade patterns). Controlled by s21_flexBand_lib_factor.
 loop(t_all,
-  i21_stddev_lib_factor(t_all)$(m_year(t_all) <= sm_fix_SSP2) =  1;
-  i21_stddev_lib_factor(t_all)$(m_year(t_all) > sm_fix_SSP2)=  s21_stddev_lib_factor;
+  i21_flexBand_lib_factor(t_all)$(m_year(t_all) <= sm_fix_SSP2) =  1;
+  i21_flexBand_lib_factor(t_all)$(m_year(t_all) > sm_fix_SSP2)=  s21_flexBand_lib_factor;
 );
 
-* i21_import_supply_scenario scales the historical import supply ratios.
-* Linearly interpolated from 1 at calibration year to the target value
-* (s21_import_supply_scenario) at the target year. Values >1 amplify
-* historical trade dependence; <1 reduce it (autarky scenario).
-i21_import_supply_scenario(t_all) = 1;
-m_linear_time_interpol(i21_import_supply_scenario,sm_fix_SSP2,s21_import_supply_scenario_targetyear,1,s21_import_supply_scenario);
+* APPLIED FLEXIBILITY WINDOW (capped at 1)
+* The window entering the trade bounds is the lib-factor-scaled flexibility band, capped
+* at 1 so that even under liberalization scenarios (s21_flexBand_lib_factor > 1) the window
+* never exceeds 100% of the importer's domestic supply. Preprocessing already caps the raw
+* band at 1; this cap additionally bounds the lib-scaled window used in q21_trade_lower/upper.
+i21_trade_bilat_flexBand_capped(t_all,i_ex,i_im,k_trade) =
+  min(i21_flexBand_lib_factor(t_all) * i21_trade_bilat_flexBand(t_all,i_ex,i_im,k_trade), 1);
 
 * Apply scenario adjustments to import supply historical for future periods.
 * f21_trade_scenario_adjustments currently remains

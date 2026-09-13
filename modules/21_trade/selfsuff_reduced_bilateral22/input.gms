@@ -20,7 +20,7 @@ scalars
   s21_trade_tariff_targetyear             Year to finish fading trade tariffs towards target multiplier          / 2050 /
   s21_import_supply_scenario              Multiplicative factor on the line                                      / 1 /
   s21_import_supply_scenario_targetyear   Target year for fade in                                                / 2050 /
-  s21_stddev_lib_factor                   Multiplicative factor on the window                                    / 1 /
+  s21_flexBand_lib_factor                   Multiplicative factor on the window                                    / 1 /
   s21_cost_import                         Cost for additional imports to maintain feasibility (USD17MER per tDM) / 1500 /
   s21_min_trade_margin_forestry           Minimum trade margin for forestry products (USD17MER per tDM)          / 62 /
   s21_trade_scenario_adjustments          Switch to apply scenario adjustments to import supply (0=off 1=on)     / 0 /
@@ -55,16 +55,18 @@ $include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_import_suppl
 $offdelim
 /;
 
-** Standard deviation of import supply ratios are calculated based on historic trade matrix, by taking standard deviations
-** of all 5-year, 10-year, and 15-year windows via rolling windows from 1990 onwards. This allows for taking the min, mean, max
-** of all observed std. devs for each window length. This allows for a data-driven approach to defining the flexibility window 
-** for future trade, as 5 years into simulation the model can deviate based on the max observed variability for within 5 years in the past,
-** and so on for 10 and 15 years. The amount of variability can also be set in the preloop, if mean, min is preferred. 
+** The flexibility band is calculated from the historic trade matrix by taking the rolling RANGE (max - min) of the
+** import supply ratios over all 5-year, 10-year, and 15-year windows from 1990 onwards, then the min, mean and max
+** of those rolling ranges for each window length. The model uses the MEAN variant (selected in the preloop): a
+** data-driven, widening flexibility window - 5 years into the simulation the model may deviate by the mean range
+** observed over 5-year windows in history, and so on for 10 and 15 years. The band is capped at 1 in preprocessing
+** (a window wider than the importer's whole domestic supply is meaningless). The max variant (peak observed
+** variability, wider, provably monotone) and the min variant are also provided and can be selected in the preloop.
 
-parameter f21_trade_bilat_stddev(i_ex,i_im,k_trade,trade_stddev21)  Standard deviation of import supply ratios over rolling windows of 5 10 and 15 years (1)
+parameter f21_trade_bilat_flexBand(i_ex,i_im,k_trade,trade_flexBand21)  Historical flexibility band (rolling range of import supply ratios) over 5 10 and 15 year windows (1)
 /
 $ondelim
-$include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_bilat_stddev.cs5"
+$include "./modules/21_trade/selfsuff_reduced_bilateral22/input/f21_trade_bilat_flexBand.cs5"
 $offdelim
 /;
 
