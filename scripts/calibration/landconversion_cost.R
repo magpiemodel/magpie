@@ -76,25 +76,30 @@ calibrationRun <- function(putfolder, calibMagpieName, logoption, useGDX) {
   cat("=== CALIBRATION_RUN END ===\n")
 }
 
-getValData <- function(histData, gdxFile) {
+# FAO validation.mif variable name (Resources|Land Cover|+|<...>) for each calibrated land type
+faoLandCoverName <- c(crop = "Cropland", past = "Pastures and Rangelands")
+
+getValData <- function(histData, gdxFile, landType = "crop") {
   require(magpie4)
   require(magclass)
   require(gdx2)
-  cat("=== retrieve validation data ===\n")
+  cat(paste0("=== retrieve validation data (landType = ", landType, ") ===\n"))
   y <- readGDX(gdxFile,"t")
-  magpie <- land(gdxFile)[, y, "crop"]
+  magpie <- land(gdxFile)[, y, landType]
   if (histData == "MAgPIEown") {
-    hist <- dimSums(readGDX(gdxFile, "f10_land")[, , "crop"], dim = 1.2)
-    valdata <- hist[, y, "crop"]
+    hist <- dimSums(readGDX(gdxFile, "f10_land")[, , landType], dim = 1.2)
+    valdata <- hist[, y, landType]
   } else if (histData == "FAO") {
-    if(file.exists("calib_data.rds")) {
-      val <- readRDS("calib_data.rds")
+    rdsFile <- paste0("calib_data_", landType, ".rds")
+    if(file.exists(rdsFile)) {
+      val <- readRDS(rdsFile)
     } else {
       val <- read.report("input/validation.mif", as.list = FALSE)
-      val <- val[getRegions(magpie),getYears(magpie),"historical.FAO_crop_past.Resources|Land Cover|+|Cropland (million ha)"]
+      faoVar <- paste0("historical.FAO_crop_past.Resources|Land Cover|+|", faoLandCoverName[[landType]], " (million ha)")
+      val <- val[getRegions(magpie),getYears(magpie),faoVar]
       names(dimnames(val)) <- names(dimnames(magpie))
-      getNames(val) <- "crop"
-      saveRDS(val, file = "calib_data.rds")
+      getNames(val) <- landType
+      saveRDS(val, file = rdsFile)
     }
     valdata <- val[,y,]
   } else {
@@ -119,15 +124,15 @@ expandHist <- function(valdata){
 
 # get ratio between modelled area and reference area
 
-getCalibFactor <- function(gdxFile, mode, histData) {
+getCalibFactor <- function(gdxFile, mode, histData, landType = "crop") {
 
   require(magclass)
   cat("=== GET_CALIB_FACTOR START ===\n")
   cat(paste0("GDX file: ", gdxFile, "\n"))
-  cat(paste0("Mode: ", mode, ", histData: ", histData, "\n"))
+  cat(paste0("Mode: ", mode, ", histData: ", histData, ", landType: ", landType, "\n"))
 
-  valdata <- getValData(histData = histData, gdxFile = gdxFile)
-  magpie <- land(gdxFile)[, getYears(valdata), "crop"]
+  valdata <- getValData(histData = histData, gdxFile = gdxFile, landType = landType)
+  magpie <- land(gdxFile)[, getYears(valdata), landType]
 
   if (mode == "gradient") {
     cat(">>> gradient calibration \n")
@@ -170,12 +175,12 @@ timeSeriesReward <- function(calibFactor) {
 }
 
 # Calculate the correction factor and save it
-updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, calibrationStep, nMaxcalib, bestCalib, histData, putfolder, levelGradientMix) {
+updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, calibrationStep, nMaxcalib, bestCalib, histData, putfolder, levelGradientMix, landType = "crop") {
   require(magclass)
   require(magpie4)
   require(gdx2)
 
-  cat(paste0("=== UPDATE_CALIB ITERATION ", calibrationStep, " START ===\n"))
+  cat(paste0("=== UPDATE_CALIB ITERATION ", calibrationStep, " (landType = ", landType, ") START ===\n"))
   cat(paste0("GDX file: ", gdxFile, "\n"))
   cat(paste0("calibAccuracy: ", calibAccuracy, "\n"))
 
@@ -184,10 +189,10 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
   }
 
 
-  
-  # we calculate two different divergence measures: divergence of level (cropland and divergence of gradient (cropland expansion)
-  calibDivergenceLevel <- getCalibFactor(gdxFile, mode = "level", histData = histData)
-  calibDivergenceGradient <- getCalibFactor(gdxFile, mode = "gradient", histData = histData)
+
+  # we calculate two different divergence measures: divergence of level (land area) and divergence of gradient (land expansion)
+  calibDivergenceLevel <- getCalibFactor(gdxFile, mode = "level", histData = histData, landType = landType)
+  calibDivergenceGradient <- getCalibFactor(gdxFile, mode = "gradient", histData = histData, landType = landType)
   # mixing calibration approaches for making the best of both approaches
   calibDivergence <- levelGradientMix * calibDivergenceLevel + (1 - levelGradientMix) * calibDivergenceGradient
   
@@ -207,7 +212,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
   } else {
     cat(">>> First iteration - initializing calibration factors (cost=1 for expanding countries, cost=2.5 for contracting, reward=0)\n")
     oldCalib <- new.magpie(cells_and_regions = getCells(calibDivergence), years = getYears(calibDivergence), names = c("cost", "reward"), fill = NA)
-    oldCalib[,,"cost"] <- (expandHist(getValData(histData = histData, gdxFile = gdxFile)) < 0) * (costMax - 1) + 1
+    oldCalib[,,"cost"] <- (expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) < 0) * (costMax - 1) + 1
     oldCalib[,,"reward"] <- 0
   }
 
@@ -224,7 +229,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
   calibFactorCost <- setNames(oldCalib[, , "cost"], NULL) * calib_correction ^ reinforcement
   calibFactorReward <- setNames(oldCalib[, , "reward"], NULL) + (calib_correction - 1) * reinforcement
   # no rewards in case that validation data shows no contraction
-  calibFactorReward[expandHist(getValData(histData = histData, gdxFile = gdxFile)) >= 0] <- 0
+  calibFactorReward[expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) >= 0] <- 0
   calibFactorReward[calibFactorReward < 0] <- 0
 
   cat(">>> Account for costMax and costMin\n")
@@ -244,13 +249,13 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
     try(write.magpie(round(x, 3), file, append = (calibrationStep != 1)))
   }
 
-  writeLog(calibDivergenceLevel, paste0(putfolder, "/land_conversion_divergence_level.cs3"), calibrationStep)
-  writeLog(calibDivergenceGradient, paste0(putfolder,  "/land_conversion_divergence_gradient.cs3"), calibrationStep)
-  writeLog(calibDivergence, paste0(putfolder,  "/land_conversion_divergence.cs3"), calibrationStep)
-  writeLog(calibFactorCost, paste0(putfolder,  "/land_conversion_cost_next_calib_factor.cs3"), calibrationStep)
-  writeLog(calibFactorReward, paste0(putfolder,  "/land_conversion_reward_next_calib_factor.cs3"), calibrationStep)
-  writeLog(setNames(oldCalib[, , "reward"], NULL), paste0(putfolder,  "/land_conversion_reward_current_calib_factor.cs3"), calibrationStep)
-  writeLog(setNames(oldCalib[, , "cost"], NULL), paste0(putfolder,  "/land_conversion_cost_current_calib_factor.cs3"), calibrationStep)
+  writeLog(calibDivergenceLevel, paste0(putfolder, "/land_conversion_divergence_level_", landType, ".cs3"), calibrationStep)
+  writeLog(calibDivergenceGradient, paste0(putfolder,  "/land_conversion_divergence_gradient_", landType, ".cs3"), calibrationStep)
+  writeLog(calibDivergence, paste0(putfolder,  "/land_conversion_divergence_", landType, ".cs3"), calibrationStep)
+  writeLog(calibFactorCost, paste0(putfolder,  "/land_conversion_cost_next_calib_factor_", landType, ".cs3"), calibrationStep)
+  writeLog(calibFactorReward, paste0(putfolder,  "/land_conversion_reward_next_calib_factor_", landType, ".cs3"), calibrationStep)
+  writeLog(setNames(oldCalib[, , "reward"], NULL), paste0(putfolder,  "/land_conversion_reward_current_calib_factor_", landType, ".cs3"), calibrationStep)
+  writeLog(setNames(oldCalib[, , "cost"], NULL), paste0(putfolder,  "/land_conversion_cost_current_calib_factor_", landType, ".cs3"), calibrationStep)
 
   # in case of sufficient convergence, stop here (no additional update of calibration factors!)
   # also stop in case there is no convergence, e.g. because the calib factors are at upper or lower bounds.
@@ -264,9 +269,9 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
     # or the "best" based on the iteration value with the lowest standard deviation of regional divergence.
     if (bestCalib == TRUE) {
       cat("Choosing the best calibration...\n")
-      divergenceData <- read.magpie(paste0(putfolder, "/land_conversion_divergence.cs3"))
-      factors_cost <- read.magpie( paste0(putfolder, "/land_conversion_cost_current_calib_factor.cs3"))
-      factors_reward <- read.magpie( paste0(putfolder, "/land_conversion_reward_current_calib_factor.cs3"))
+      divergenceData <- read.magpie(paste0(putfolder, "/land_conversion_divergence_", landType, ".cs3"))
+      factors_cost <- read.magpie( paste0(putfolder, "/land_conversion_cost_current_calib_factor_", landType, ".cs3"))
+      factors_reward <- read.magpie( paste0(putfolder, "/land_conversion_reward_current_calib_factor_", landType, ".cs3"))
       # The best iteration is chosen for each region as the calibration factors where the sum of divergence over all timesteps is minimal.
       # In case multiple iterations have the same value, the first value is returned by which.min
       calibCostBest <- calibRewardBest <- factors_cost[,,1] * 0
@@ -279,8 +284,10 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
       getNames(calibCostBest) <- NULL
       getNames(calibRewardBest) <- NULL
  
-      writeLog(calibCostBest,  paste0(putfolder, "/land_conversion_cost_current_calib_factor.cs3"), "best")
-      writeLog(calibRewardBest,  paste0(putfolder, "/land_conversion_reward_current_calib_factor.cs3"), "best")
+      # tag with the iteration at which "best" was determined (rather than a fixed "best" literal), since this
+      # branch may run again on a later iteration while a concurrently-calibrated land type has not yet converged
+      writeLog(calibCostBest,  paste0(putfolder, "/land_conversion_cost_current_calib_factor_", landType, ".cs3"), paste0("best_iter", calibrationStep))
+      writeLog(calibRewardBest,  paste0(putfolder, "/land_conversion_reward_current_calib_factor_", landType, ".cs3"), paste0("best_iter", calibrationStep))
   
       calibCostBest <- timeSeriesCost(calibCostBest)
       calibRewardBest <- timeSeriesReward(calibRewardBest)
@@ -292,7 +299,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
       calibBestFull[is.na(calibBestFull)] <- 1
 
       comment <- c(
-        " description: Regional land conversion cost calibration file",
+        paste0(" description: Regional land conversion cost calibration file (landType = ", landType, ")"),
         " unit: -",
         paste0(" note: Best calibration factor from the run"),
         " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
@@ -319,7 +326,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
     calibFull[is.na(calibFull)] <- 1
 
     comment <- c(
-      " description: Regional land conversion cost calibration file",
+      paste0(" description: Regional land conversion cost calibration file (landType = ", landType, ")"),
       " unit: -",
       paste0(" note: Calibration step ", calibrationStep),
       " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
@@ -342,6 +349,10 @@ calibrateLandconversion <- function(nMaxcalib = 20,
                              costMin = 0.2,
                              calibMagpieName = "magpie_calib",
                              calibFile = "modules/39_landconversion/input/f39_calib.csv",
+                             calibFilePast = "modules/39_landconversion/input/f39_calib_past.csv",
+                             calibAccuracyPast = calibAccuracy,
+                             costMaxPast = costMax,
+                             costMinPast = costMin,
                              putfolder = "land_conversion_cost_calib_run",
                              dataWorkspace = NULL,
                              logoption = 3,
@@ -354,6 +365,7 @@ calibrateLandconversion <- function(nMaxcalib = 20,
   if (!restart) {
     cat(paste0("\nStarting land conversion cost calibration from default values\n"))
     if (file.exists(calibFile)) file.remove(calibFile)
+    if (file.exists(calibFilePast)) file.remove(calibFilePast)
   } else {
     if (file.exists(calibFile)) cat(paste0("\nStarting land conversion cost calibration from existing values\n")) else cat(paste0("\nStarting land conversion cost calibration from default values\n"))
   }
@@ -381,9 +393,18 @@ calibrateLandconversion <- function(nMaxcalib = 20,
         file.copy(paste0(putfolder, "/fulldata.gdx"), paste0(putfolder, "/", "fulldata_calib", i, ".gdx"), overwrite = TRUE)
       }
 
-      done <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracy, costMax = costMax, costMin = costMin, 
+      # crop and pasture are calibrated concurrently from the same solve: crop and pasture compete for
+      # land, so calibrating them sequentially (crop first, then pasture) would shift the land allocation
+      # before pasture is calibrated, causing oscillation between iterations.
+      doneCrop <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracy, costMax = costMax, costMin = costMin,
                            calibFile = calibFile, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
-                           putfolder = putfolder, levelGradientMix = levelGradientMix)
+                           putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "crop")
+
+      donePast <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracyPast, costMax = costMaxPast, costMin = costMinPast,
+                           calibFile = calibFilePast, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
+                           putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "past")
+
+      done <- doneCrop && donePast
 
       if (done && useGDX == 2) {
         useGDX <- 0
@@ -398,7 +419,8 @@ calibrateLandconversion <- function(nMaxcalib = 20,
     # delete calib_magpie_gms in the main folder
     unlink(paste0(calibMagpieName, ".*"))
     unlink("fulldata.gdx")
-    unlink("calib_data.rds")
+    unlink("calib_data_crop.rds")
+    unlink("calib_data_past.rds")
 
     cat("\nLand conversion cost calibration finished\n")
   }, logfile = "calibration_debug.log", putfolder = putfolder)

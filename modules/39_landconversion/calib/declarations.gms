@@ -17,6 +17,7 @@ parameters
  i39_cost_establish(t,i,land)   Land expansion costs (USD17MER per hectare)
  i39_reward_reduction(t,i,land)   Reward for land reduction (USD17MER per hectare)
  i39_calib(t,i,type39)        Calibration factor for costs of cropland expansion and rewards for cropland reduction (1)
+ i39_calib_past(t,i,type39)   Calibration factor for costs of pasture expansion and rewards for pasture reduction (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

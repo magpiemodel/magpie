@@ -483,9 +483,10 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
   }
 
   land_calib_file <- "modules/39_landconversion/input/f39_calib.csv"
+  land_calib_file_past <- "modules/39_landconversion/input/f39_calib_past.csv"
   if(cfg$recalibrate_landconversion_cost=="ifneeded") {
-    # recalibrate if file does not exist
-    if(!file.exists(land_calib_file)) cfg$recalibrate_landconversion_cost <- TRUE else cfg$recalibrate_landconversion_cost <- FALSE
+    # recalibrate if either the cropland or the pasture calibration file does not exist
+    if(!file.exists(land_calib_file) || !file.exists(land_calib_file_past)) cfg$recalibrate_landconversion_cost <- TRUE else cfg$recalibrate_landconversion_cost <- FALSE
   }
   if(cfg$recalibrate_landconversion_cost){
     #if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
@@ -497,6 +498,10 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
                             costMax = cfg$cost_calib_max_landconversion_cost,
                             costMin = cfg$cost_calib_min_landconversion_cost,
                             calibFile = land_calib_file,
+                            calibFilePast = land_calib_file_past,
+                            calibAccuracyPast = cfg$calib_accuracy_landconversion_cost_past,
+                            costMaxPast = cfg$cost_calib_max_landconversion_cost_past,
+                            costMinPast = cfg$cost_calib_min_landconversion_cost_past,
                             dataWorkspace = cfg$val_workspace,
                             logoption = 3,
                             debug = cfg$debug,
