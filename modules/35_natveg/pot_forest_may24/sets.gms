@@ -9,7 +9,7 @@ sets
 
 * Disturbance classes in f35_forest_lost_share: those that leave the land as forest, are not
 * decided endogenously, and are land use rather than natural disturbance (the flux is booked
-* as land-use-change CO2). Selected in mrland::calcForestFireLoss. overall is never read.
+* as land-use-change CO2). Selected in mrland::calcForestLossByDriver. overall is never read.
   driver_source Source of forest disturbance
   / overall, shifting_cultivation /
 
