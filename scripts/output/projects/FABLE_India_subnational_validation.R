@@ -10,7 +10,7 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
-#Version 1.01 - Miodrag Stevanovic, Ankit Saha
+#Version 1.01 - Miodrag Stevanovic, Prantika Das, Ankit Saha
 # 1.00: first working version
 # 1.01: Second version after including new data
 
