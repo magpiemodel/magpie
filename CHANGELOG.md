@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+<<<<<<< HEAD
 - 
 
 ### added
@@ -24,6 +25,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 -
+=======
+- **21_trade** Changed preprocessing calculation of bilateral trade flexibility band into the future, no longer based on historical standard deviations and rather based on mean historical ranges
+- **main.gms** model documentation references updated with recent MAgPIE publications (2020-2025)
+- **scripts/npi_ndc** NPI/NDC/ndcdelay afforestation/reforestation (A/R) is now placed on cells by forest establishment headroom (potential minus current forest) times potential-forest carbon density, replacing the 2005 cropland+pasture area weight, so more of the prescribed target is delivered (less potential-clipping) and placement prefers higher-carbon cells; the reference year is pinned to the last observed year so the weight stays identical across climate scenarios.
+>>>>>>> upstream/develop
 
 ### added
 - **15_food** Added flexible source-to-target food substitution with configurable food baskets and kcal/protein replacement basis

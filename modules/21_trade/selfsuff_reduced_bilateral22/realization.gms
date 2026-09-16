@@ -17,13 +17,17 @@
 *' deviation of these ratios over recent history. Formally, for each
 *' exporter-importer-product combination:
 *'
-*'   supply(im,k) * [ratio(ex,im,k) * scenarioFactor - libFactor * stddev(ex,im,k)]
+*'   supply(im,k) * [ratio(ex,im,k) * scenarioFactor - flexWindow(ex,im,k)]
 *'     <= trade(ex,im,k) <=
-*'   supply(im,k) * [ratio(ex,im,k) * scenarioFactor + libFactor * stddev(ex,im,k)]
+*'   supply(im,k) * [ratio(ex,im,k) * scenarioFactor + flexWindow(ex,im,k)]
 *'
+*' where the flexibility window `flexWindow = min(libFactor * flexBand, 1)`
+*' (`i21_trade_bilat_flexBand_capped`) is the historical flexibility band
+*' (rolling range of import supply ratios, `i21_trade_bilat_flexBand`) scaled by
+*' the liberalization factor and capped at 1.
 *' The `scenarioFactor` (`i21_import_supply_scenario`) allows scaling the
 *' historical ratios up or down over time (e.g. to simulate trade liberalization
-*' or protectionism). The `libFactor` (`i21_stddev_lib_factor`) widens or
+*' or protectionism). The `libFactor` (`i21_flexBand_lib_factor`) widens or
 *' narrows the flexibility window around the historical pattern.
 *'
 *' Within these bounds, the optimizer allocates trade to minimize total costs,
