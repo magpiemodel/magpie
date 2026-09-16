@@ -17,35 +17,12 @@ if(m_year(t) <= sm_fix_SSP2,
 else
   vm_area.up(j,bioen_type_30,bioen_water_30) = Inf;
 );
-
 *' @stop
 
-crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
-crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
+* only activate constraints which are binding
 
-* create betr target and penalty scenario
-i30_betr_target(t,j) = (1-i30_betr_scenario_fader(t)) * 
-  (s30_betr_start * sum(cell(i,j), p30_country_weight(i))
-  + s30_betr_start_noselect * sum(cell(i,j), 1-p30_country_weight(i)))
- + i30_betr_scenario_fader(t)  * 
-  (s30_betr_target * sum(cell(i,j), p30_country_weight(i))
-  + s30_betr_target_noselect * sum(cell(i,j), 1-p30_country_weight(i)));
-
-if (m_year(t) <= s30_betr_scenario_start,
-  i30_betr_penalty(t) = 0;
-  v30_betr_missing.fx(j) = 0;
-  vm_rotation_penalty.fx(i) = 0;
-else
-  i30_betr_penalty(t) = s30_betr_penalty;
-  if (i30_betr_penalty(t) > 0,
-    v30_betr_missing.lo(j) = 0;
-    v30_betr_missing.up(j) = Inf;
-  else
-    v30_betr_missing.fx(j) = 0;
-  );
-  v30_betr_missing.fx(j)$(i30_betr_target(t,j) = 0) = 0;
-  vm_rotation_penalty.fx(i)$(sum(cell(i,j),i30_betr_target(t,j)) = 0) = 0;
-);
+rotamax_red30(rotamax30) = yes$(sum(i, i30_rotation_rules(t,i,rotamax30)) < sum(i2, 1));
+rotamin_red30(rotamin30) = yes$(sum(i, i30_rotation_rules(t,i,rotamin30)) > 0);
 
 *' Cropland growth constraint after SSP2 fix
 if(m_year(t) <= sm_fix_SSP2,

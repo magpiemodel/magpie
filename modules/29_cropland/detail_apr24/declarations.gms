@@ -28,10 +28,12 @@ parameters
  p29_treecover(t,j,ac)                  Cropland tree cover per age class (mio. ha)
  pc29_treecover(j,ac)                   Cropland tree cover per age class in current time step (mio. ha)
  pc29_treecover_share(j)                Share of treecover on total cropland (1)
+ pm_treecover_start(j)                  Cropland tree cover in the initial time step (mio. ha)
 
+ im_fallow_start(j)                     Fallow land in the initial time step (mio. ha)
  i29_fallow_scenario_fader(t_all)      Fallow land scenario fader (1)
- i29_fallow_target(t)                  Target share for fallow land on total cropland (1)
- i29_fallow_penalty(t)                 Penalty for violation of fallow target (USD17MER per ha)
+ i29_fallow_long_penalty(t)           Penalty for skipping long fallow (USD17MER per ha)
+ i29_fallow_short_penalty(t)           Penalty for also skipping short fallow (USD17MER per ha)
 ;
 
 positive variables
@@ -42,7 +44,8 @@ positive variables
  v29_cost_treecover_est(j)          Establishment cost for cropland tree cover (mio. USD17MER per yr)
  v29_cost_treecover_recur(j)        Recurring cost for cropland tree cover (mio. USD17MER per yr)
  vm_fallow(j)                       Fallow land is temporarily fallow cropland (mio. ha)
- v29_fallow_missing(j)              Missing fallow land towards target (mio. ha)
+ v29_fallow_short_missing(j)        Missing fallow towards short fallow threshold (mio. ha)
+ v29_fallow_long_missing(j)         Missing fallow towards long fallow (max fallow) threshold (mio. ha)
 ;
 
 equations
@@ -52,7 +55,8 @@ equations
  q29_carbon(j,ag_pools,stockType)  Cropland above ground carbon content calculation (mio. tC)
  q29_land_snv(j)                   Land constraint for the SNV policy in cropland areas (mio. ha)
  q29_land_snv_trans(j)             Land transition constraint for SNV policy in cropland areas (mio. ha)
- q29_fallow_min(j)                 Missing fallow land towards target (mio. ha)
+ q29_fallow_short(j)               Missing fallow land towards short fallow threshold (mio. ha)
+ q29_fallow_long(j)                Missing fallow land towards long fallow (max fallow) threshold (mio. ha)
  q29_fallow_max(j)                 Maximum fallow land towards target (mio. ha)
  q29_fallow_bv(j,potnatveg)        Biodiversity value for fallow land (mio. ha)
  q29_treecover(j)                  Cropland tree cover (mio. ha)
@@ -73,14 +77,16 @@ parameters
  ov29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD17MER per yr)
  ov29_cost_treecover_recur(t,j,type)      Recurring cost for cropland tree cover (mio. USD17MER per yr)
  ov_fallow(t,j,type)                      Fallow land is temporarily fallow cropland (mio. ha)
- ov29_fallow_missing(t,j,type)            Missing fallow land towards target (mio. ha)
+ ov29_fallow_short_missing(t,j,type)      Missing fallow towards short fallow threshold (mio. ha)
+ ov29_fallow_long_missing(t,j,type)       Missing fallow towards long fallow (max fallow) threshold (mio. ha)
  oq29_cropland(t,j,type)                  Total cropland calculation (mio. ha)
  oq29_avl_cropland(t,j,type)              Available cropland constraint (mio. ha)
  oq29_cost_cropland(t,j,type)             Costs and benefits related to agroforestry (mio. USD17MER per yr)
  oq29_carbon(t,j,ag_pools,stockType,type) Cropland above ground carbon content calculation (mio. tC)
  oq29_land_snv(t,j,type)                  Land constraint for the SNV policy in cropland areas (mio. ha)
  oq29_land_snv_trans(t,j,type)            Land transition constraint for SNV policy in cropland areas (mio. ha)
- oq29_fallow_min(t,j,type)                Missing fallow land towards target (mio. ha)
+ oq29_fallow_short(t,j,type)              Missing fallow land towards short fallow threshold (mio. ha)
+ oq29_fallow_long(t,j,type)               Missing fallow land towards long fallow (max fallow) threshold (mio. ha)
  oq29_fallow_max(t,j,type)                Maximum fallow land towards target (mio. ha)
  oq29_fallow_bv(t,j,potnatveg,type)       Biodiversity value for fallow land (mio. ha)
  oq29_treecover(t,j,type)                 Cropland tree cover (mio. ha)

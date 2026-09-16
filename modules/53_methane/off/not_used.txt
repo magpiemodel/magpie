@@ -2,6 +2,7 @@ name,type,reason
 vm_area,input,not needed
 vm_feed_intake,input,not needed
 fm_attributes,input,not needed
+fm_multicropping,input, not needed
 vm_manure,input,questionnaire
 vm_res_ag_burn,input,not needed
 im_maccs_mitigation,input,questionnaire
