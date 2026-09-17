@@ -78,10 +78,21 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp8p5"))
 
 start_run(cfg, codeCheck = FALSE)
 
+# overshoot 
+cfg$title <- paste0(title, "_RCP3p4-overshoot")
+
+# standard settings
+cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
+input['cellular'] <- "rev4.134beier-2026-09-16T104204_h12_c5ad1e2c_cellularmagpie_c200_MRI-ESM2-0-ssp534-over_lpjml-501e8913.tgz"
+
+start_run(cfg, codeCheck = FALSE)
 
 ######################
 #### New Switches ####
 ######################
+
+# set input back to default
+input['cellular'] <- "rev4.134beier-2026-09-16T104204_h12_bb6334c1_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-501e8913.tgz"
 
 # No growing period adaptation 
 cfg$title <- paste0(title, "_Nogsadapt")
