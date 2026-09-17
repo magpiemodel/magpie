@@ -92,6 +92,12 @@ loop(t_all,
 i21_trade_bilat_flexBand_capped(t_all,i_ex,i_im,k_trade) =
   min(i21_flexBand_lib_factor(t_all) * i21_trade_bilat_flexBand(t_all,i_ex,i_im,k_trade), 1);
 
+* i21_import_supply_scenario scales the historical import supply ratios.
+* Linearly interpolated from 1 at calibration year to the target value
+* (s21_import_supply_scenario) at the target year. 
+i21_import_supply_scenario(t_all) = 1;
+m_linear_time_interpol(i21_import_supply_scenario,sm_fix_SSP2,s21_import_supply_scenario_targetyear,1,s21_import_supply_scenario);
+
 * Apply scenario adjustments to import supply historical for future periods.
 * f21_trade_scenario_adjustments currently remains
 * all zeros so this addition has no effect until changes made in preprocessing
