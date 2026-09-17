@@ -6,12 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description
-*' This realization accounts for land conversion costs of cropland, pasture, forestry and urban land. 
-*' Costs for expansion of pasture, forestry and urban land are global and static over time.
-*' For cropland, a regional and time-dependent calibration factor is applied on 
-*' global costs for land expansion, complemented by a reward for cropland reduction in selected regions, 
-*' for a better match of regional cropland in 2015 with historic data.
-*' The calibration factor for costs of cropland expansion is lifted to a minium of 1 in all regions by 2050.
+*' This realization accounts for land conversion costs of cropland, pasture, forestry and urban land.
+*' Costs for expansion of forestry and urban land are global and static over time.
+*' For cropland and pasture, a regional and time-dependent calibration factor is applied on
+*' global costs for land expansion, complemented by a reward for cropland/pasture reduction in selected regions,
+*' for a better match of regional cropland and pasture area in 2015 with historic data.
+*' The calibration factors for costs of cropland and pasture expansion are lifted to a minium of 1 in all regions by 2050.
 *'
 *' @limitations Data availability for land conversion costs is very limited.
 
