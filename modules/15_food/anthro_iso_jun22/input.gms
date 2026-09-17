@@ -29,7 +29,8 @@ $setglobal c15_kcal_scen  healthy_BMI
 $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
 
-
+$setglobal c15_exodiet_scen EL2
+*   options:   EL2, NIN
 
 * Set-switch for countries affected by country-specific exogenous diet scenario
 * Default: all iso countries selected
@@ -257,7 +258,7 @@ $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
 *** EAT Lancet diet recommendation
-table f15_rec_EATLancet(iso,EAT_targets15,EAT_targettype15)   Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
+table f15_rec_EATLancet(iso,exodiettype,EAT_targets15,EAT_targettype15)   Minimum and maximum targets for healthy diets recommended by the EAT-Lancet Commission (kcal per capita per day)
 $ondelim
 $include "./modules/15_food/input/f15_targets_EATLancet_iso.cs3"
 $offdelim;
