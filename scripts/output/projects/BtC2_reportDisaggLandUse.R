@@ -104,6 +104,11 @@ grassHr <- setNames(landHr[, , "past"], "grass")
 
 plantationAff <- as.logical(readGDX(gdx, "s32_aff_plantation"))
 
+# other planted forest is harvested and replanted (like timber plantations), so it is
+# grouped with planted forest; older files fold it into NPiNDC and lack the category
+timberCats <- intersect(c("PlantedForest_Timber", "PlantedForest_OtherPlanted"),
+                        getItems(landSplitHr, dim = 3))
+
 if (plantationAff) {
   forestHr <- setNames(dimSums(
     landSplitHr[, , c(
@@ -113,7 +118,8 @@ if (plantationAff) {
     dim = 3
   ), "nat_regen_forest")
 
-  forestryHr <- setNames(landSplitHr[, , c("PlantedForest_Timber", "PlantedForest_Afforestation")], "forest_planted")
+  forestryHr <- setNames(dimSums(
+    landSplitHr[, , c(timberCats, "PlantedForest_Afforestation")], dim = 3), "forest_planted")
 } else {
   forestHr <- setNames(dimSums(
     landSplitHr[, , c(
@@ -123,7 +129,7 @@ if (plantationAff) {
     dim = 3
   ), "nat_regen_forest")
 
-  forestryHr <- setNames(landSplitHr[, , "PlantedForest_Timber"], "forest_planted")
+  forestryHr <- setNames(dimSums(landSplitHr[, , timberCats], dim = 3), "forest_planted")
 }
 
 # -----------------------------------------------

@@ -14,12 +14,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### added
 - **15_food** Added `c15_exodiet_scen` switch to select between exogenous diet target scenarios — EAT-Lancet 2.0 (default) and India's NIN (National Institute of Nutrition) dietary recommendations
+- **32_forestry** Other-planted forest as its own harvestable pool with its own growth curve, matching the FRA 2025 taxonomy (naturally regenerating / other planted / plantation). Reported as `Planted Forest|+|Timber` and `Planted Forest|+|Other Planted`. Plantation rotation read from an external per-Köppen-zone table (`f32_plant_rotation.cs4`).
+- **35_natveg** Potential forest area corrected for grassland ecoregions (`c35_pot_forest_correction`, on by default): the LPJmL potential forest area is reduced by the grassland-ecoregion cover fraction (RESOLVE 2017 biomes 7-10) during preprocessing (`calcPotentialForestArea` with `calcGrassyEcoregions`, mrmagpie), where LPJmL overestimates forest cover in open grassland ecosystems; the switch selects the corrected (default) or uncorrected input file. Restricts afforestation and natural regrowth on grassland sites.
+- **73_timber** Sticky natveg harvest-capacity cost (`s73_sticky_harvest`, default on): treats natveg (primary/secondary/other) harvest capacity as a depreciating capital stock (mirrors 38_factor_costs sticky_feb18), damping the regional timestep-to-timestep source-switching sawtooth; per-source intensity via `s73_hvint_*`. FRA-pinned wood volume and carbon curves unchanged.
 - **15_food** Added flexible source-to-target food substitution with configurable food baskets and kcal/protein replacement basis
 - **scenario_config_ec.csv** A set of scenarios for the Earth Commission
 - **scripts/start/projects/project_EC.R** Start script for EC scenarios.
 
 ### removed
--
+- **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
 ### fixed
 -
