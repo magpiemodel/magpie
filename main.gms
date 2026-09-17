@@ -28,7 +28,8 @@ $title magpie
 *' on a 0.5 degree resolution and include e.g. carbon densities of different vegetation types,
 *' agricultural productivity such as crop yields and water availability for irrigation. Based on
 *' the strong interaction with LPJmL, MAgPIE can also help to assess the consequences of climate
-*' change and increased CO2 in the atmosphere on the land-use sector (@stevanovic_impact_2016)
+*' change and increased CO2 in the atmosphere on the land-use sector (@stevanovic_impact_2016,
+*' @molina_bacca_landuse_2025)
 *'
 *' Available land types in MAgPIE are cropland, pasture area, forest, other land
 *' (including non-forest natural vegetation, abandoned agricultural land and deserts)
@@ -43,7 +44,9 @@ $title magpie
 *' feed, seed, processing, bioenergy and material demand ([16_demand]). Food demand is
 *' derived based on population growth ([09_drivers]) and dietary transitions, accounting
 *' for changes in intake and food waste, the shift in the share of animal calories,
-*' processed products, fruits and vegetables as well as staples ([15_food]).
+*' processed products, fruits and vegetables as well as staples ([15_food])
+*' (@bodirsky_degrowth_2022, @humpenoeder_microbial_2022, @humpenoeder_food_2024,
+*' @weindl_food_2024, @beier_boundaries_2025, @bodirsky_foodsystem_2025).
 *' Primary products can be processed to secondary products such as sugar, oil
 *' or ethanol ([20_processing]). The quantity of livestock production in
 *' combination with dynamic regional and livestock-specific feed baskets determines the
@@ -58,7 +61,8 @@ $title magpie
 *' the model's optimization process that determines where cropping activities and livestock production
 *' are allocated to. Parts of forests and other natural land area can be excluded from conversion into
 *' agricultural land if designated for wood production or located in protected areas ([32_forestry],
-*' [35_natveg]) (@kreidenweis_pasture_2018).
+*' [35_natveg]) (@kreidenweis_pasture_2018, @mishra_forestry_2021, @jeetze_landscape_2023,
+*' @mishra_cop26_2024, @jeetze_conservation_2025).
 *'
 *' Due to computational constraints, all model inputs in 0.5 degree resolution are aggregated
 *' to simulation units for the optimization process ([80_optimization]) based on a clustering
@@ -67,9 +71,9 @@ $title magpie
 *' MAgPIE estimates flows of different land-based greenhouse gases (GHGs). CO2 emissions are computed
 *' from land-use change dynamics, i.e. from conversion of different biomes into agricultural land
 *' and consequent loss of terrestrial carbon stocks (@popp_land-use_2014), also including the
-*' depletion of organic matter in soils ([59_som]). The land also serves as a sink for atmospheric
-*' carbon when agricultural land is taken out of production and the associated regrowth of natural
-*' vegetation generates negative emissions from land-use change.
+*' depletion of organic matter in soils ([59_som]) (@karstens_soc_2022). The land also serves as a
+*' sink for atmospheric carbon when agricultural land is taken out of production and the associated
+*' regrowth of natural vegetation generates negative emissions from land-use change.
 *' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
 *' pastures ([50_nr_soil_budget]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
 *' CH4 emissions are based on
@@ -80,12 +84,14 @@ $title magpie
 *' of fertilizer spreaders) (@popp_land-use_2014, @stevanovic_mitigation_2017). In addition,
 *' the model covers land-based carbon removal technologies such as bioenergy with carbon capture
 *' and sequestration (CCS) and afforestation (@humpenoder_investigating_2014,
-*' @humpenoeder_bioenergy_2018, @kreidenweis_afforestation_2016).
+*' @humpenoeder_bioenergy_2018, @kreidenweis_afforestation_2016, @windisch_temperature_2022,
+*' @humpenoeder_overcoming_2022, @windisch_permanence_2025).
 *'
 *' In response to all involved demand for agricultural commodities, costs of production,
 *' biophysical constraints and land-related policies, MAgPIE simulates major dynamics of
-*' the land-use sector like investments in research and development (R&D) ([13_tc]) (@dietrich_forecasting_2014)
-*' and associated increases in both crop yields  ([14_yields]) and biomass removal through grazing on
+*' the land-use sector like investments in research and development (R&D) ([13_tc])
+*' (@dietrich_forecasting_2014, @wang_productivity_2020) and associated increases in both crop
+*' yields ([14_yields]) and biomass removal through grazing on
 *' pastures ([31_past]), land use change ([39_landconversion]), interregional trade flows ([21_trade]),
 *' and irrigation ([41_area_equipped_for_irrigation]).
 *'

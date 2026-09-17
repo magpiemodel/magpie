@@ -263,7 +263,7 @@ sets
         / primforest, secdforest, other /
 
   forest_type forest type
-        / plantations, natveg /
+        / plantations, natveg, other_planted /
 
 ***Forestry**
   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,

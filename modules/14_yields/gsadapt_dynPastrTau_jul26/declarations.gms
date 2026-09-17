@@ -21,7 +21,7 @@ parameters
  i14_lambda_yields(t,i,yldtype,kcr)                      Scaling factor for non-linear management calibration (1)
  i14_managementcalib(t,j,yldtype,kcr,w)                  Regional management calibration factor accounting for FAO yield levels (1)
  im_growing_stock(t,j,ac,land_timber)                    Harvestable stem biomass per ha by age class (tDM per ha)
- im_growing_stock_ysf(t,j,ac)                            Harvestable stem biomass per ha by age class for young secondary forest on other land (tDM per ha)
+ im_growing_stock_oplant(t,j,ac)                         Harvestable stem biomass per ha of other-planted forest by age class (tDM per ha)
  pm_yields_semi_calib(j,kve,w)                           Potential yields calibrated to FAO regional levels (tDM per ha per yr)
  i14_calib_yields_hist(i,yldtype,w)                      Calibrated yields average over region and crop type at the historical reference year (tDM per ha per yr)
  i14_calib_yields_ratio(i,yldtype)                       Irrigated to rainfed yield ratio for calibrated yields (1)
