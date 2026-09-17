@@ -13,6 +13,7 @@
 # Version 1.1.0 - Patrick v. Jeetze, Pascal Sauer
 # 1.0.0: first working version
 # 1.1.0: SEALS coefficients are modified based on scenario settings
+# 1.1.1: adjusted to SEALS 2.0.0
 
 library(gms)
 library(gdx2)
@@ -229,7 +230,6 @@ Sys.chmod(iniLock, mode = "0664")
 
   main[min(which(grepl("    p.user_dir =", main)))] <- paste0("    p.user_dir = \'", dirBaseFiles, "\'")
   main[min(which(grepl("    p.extra_dirs", main)))] <- paste0("    p.extra_dirs = '.'")
-  # main[min(which(grepl("    p.project_name =", main)))] <- paste0("    p.project_name = \'", title, "\'")
   main[min(which(grepl("    p.project_dir =", main)))] <- paste0(
     "    p.project_dir = \'", normalizePath(dirProject), "\'"
   )
