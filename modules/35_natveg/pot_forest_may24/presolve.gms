@@ -6,19 +6,19 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * ----------------------------------------------------
-* Shift ageclasses due to shifting agriculture fires
+* Shift ageclasses due to forest disturbance
 * ----------------------------------------------------
 
 * first calculate damages
 if(s35_forest_damage=1,
-  p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
-  p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
+  p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_cultivation"))*m_timestep_length_forestry;
+  p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_cultivation"))*m_timestep_length_forestry;
   );
 
 * shifting cultivation is faded out
 if(s35_forest_damage=2,
-  p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
-  p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
+  p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_cultivation"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
+  p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_cultivation"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
   );
 
 if(s35_forest_damage=3,

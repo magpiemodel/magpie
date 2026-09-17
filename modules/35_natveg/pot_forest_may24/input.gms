@@ -28,12 +28,12 @@ s35_timber_harvest_cost_other        Cost for harvesting from other land (USD17M
 s35_timber_harvest_cost_primforest   Cost for harvesting from primary forest (USD17MER per ha) / 3690 /
 s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (1=unconstrained) (1) /1/
 s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes 2=Poulter distribution from MODIS satellite data) (1) / 2 /
-s35_forest_damage Damage simulation in forests (0=none 1=shifting agriculture 2= Damage from shifting agriculture is faded out by c35_forest_damage_end 4= f35_forest_shock scenario) / 2 /
+s35_forest_damage Damage simulation in forests (0=none 1=shifting cultivation 2=shifting cultivation faded out by s35_forest_damage_end 3=all combined_loss classes 4= f35_forest_shock scenario) / 2 /
 s35_forest_damage_end   Year of forest damage end  (1)              / 2050 /
 s35_npi_ndc_reversal    Year in which NPI NDC reversal should take place (1) / Inf /
 ;
 
-table f35_forest_lost_share(i,driver_source) Share of area damaged by forest fires (1)
+table f35_forest_lost_share(i,driver_source) Share of forest area disturbed per year by driver (1)
 $ondelim
 $include "./modules/35_natveg/input/f35_forest_lost_share.cs3"
 $offdelim
@@ -50,13 +50,6 @@ $ondelim
 $include "./modules/35_natveg/input/f35_forest_shock.csv"
 $offdelim
 ;
-
-parameter f35_forest_disturbance_share(i) Share of area damaged by forest disturbances (1)
-/
-$ondelim
-$include "./modules/35_natveg/input/f35_forest_disturbance_share.cs4"
-$offdelim
-/;
 
 parameter f35_pot_forest_area(t_all,j) Potential forest area (mio. ha)
 /

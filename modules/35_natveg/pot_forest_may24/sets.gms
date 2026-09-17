@@ -7,12 +7,15 @@
 
 sets
 
-  driver_source Source of deforestation drivers
-  / overall, deforestation, shifting_agriculture,
-  forestry, wildfire, urbanization /
+* Disturbance classes in f35_forest_lost_share: those that leave the land as forest, are not
+* decided endogenously, and are land use rather than natural disturbance (the flux is booked
+* as land-use-change CO2). Selected in mrland::calcForestLossByDriver. overall is never read.
+  driver_source Source of forest disturbance
+  / overall, shifting_cultivation /
 
-  combined_loss(driver_source) Combined loss from fire plus agriculture
-  / shifting_agriculture,wildfire /
+* One element, so s35_forest_damage = 3 equals 1; kept so re-admitting a class is one line.
+  combined_loss(driver_source) Combined loss from disturbances not modelled endogenously
+  / shifting_cultivation /
 
   pol35 Land protection policy
   / none, npi, ndc /
