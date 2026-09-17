@@ -91,9 +91,6 @@ im_growing_stock_oplant(t,j,ac) =
 im_growing_stock(t,j,ac,land_timber) = im_growing_stock(t,j,ac,land_timber)$(im_growing_stock(t,j,ac,land_timber) > 0) + 0.0001$(im_growing_stock(t,j,ac,land_timber) = 0);
 ** Set growing stock to 0 where it does not exceed a minimum for harvest
 im_growing_stock(t,j,ac,land_natveg)$(im_growing_stock(t,j,ac,land_natveg) < s14_minimum_growing_stock) = 0;
-** Apply the same positivity and minimum-growing-stock clamps to the youngsecdf growing stock
-im_growing_stock_ysf(t,j,ac) = im_growing_stock_ysf(t,j,ac)$(im_growing_stock_ysf(t,j,ac) > 0) + 0.0001$(im_growing_stock_ysf(t,j,ac) = 0);
-im_growing_stock_ysf(t,j,ac)$(im_growing_stock_ysf(t,j,ac) < s14_minimum_growing_stock) = 0;
 
 
 *' Calculate growing period adaption factor based on previous croppping pattern
