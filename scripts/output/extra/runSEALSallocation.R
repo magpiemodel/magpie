@@ -38,13 +38,13 @@ if (!exists("source_include")) {
 ### SEALS python environment name
 # see https://justinandrewjohnson.com/earth_economy_devstack/installation.html
 # for instructions on how to set up a python environment for SEALS
-sealsEnv <- "seals_dev"
+sealsEnv <- "seals_2-0-0"
 
 ### Path to SEALS base input file directory
 dirBaseFiles <- "/p/projects/magpie/users/vjeetze/seals/files"
 
 ### Path to SEALS code base
-dirSEALS <- "/p/projects/magpie/users/vjeetze/seals/files/seals/seals_dev"
+dirSEALS <- "/p/projects/magpie/users/vjeetze/seals/files/seals/seals_2-0-0"
 
 
 # ========================
@@ -124,8 +124,8 @@ Sys.chmod(iniLock, mode = "0664")
     recursive = TRUE
   )
 
-  if (!dir.exists(file.path(dirProject, "inputs"))) {
-    dir.create(file.path(dirProject, "inputs"), recursive = TRUE)
+  if (!dir.exists(file.path(dirProject, "input"))) {
+    dir.create(file.path(dirProject, "input"), recursive = TRUE)
   }
 
   rcp <- unlist(strsplit(cfg$input["cellular"], "_"))[6]
@@ -188,7 +188,7 @@ Sys.chmod(iniLock, mode = "0664")
     }
 
     sealsCoeffPath <- file.path(
-      dirProject, "inputs",
+      dirProject, "input",
       paste0("seals_global_coefficients_", title, ".csv")
     )
 
@@ -218,22 +218,21 @@ Sys.chmod(iniLock, mode = "0664")
     sealsConfig[, "coarse_projections_input_path"] <- normalizePath(file.path(dir, sealsInput))
     sealsConfig[nrow(sealsConfig), "years"] <- sealsYears
     sealsConfig[nrow(sealsConfig), "calibration_parameters_source"] <- normalizePath(sealsCoeffPath)
-    write.csv(sealsConfig, file.path(dirProject, "inputs", paste0("seals_scenario_config_", title, ".csv")),
+    write.csv(sealsConfig, file.path(dirProject, "input", paste0("seals_scenario_config_", title, ".csv")),
       row.names = FALSE, na = "", quote = FALSE # quote = FALSE is critical here!
     )
   } else {
     stop("Could not find seals_scenario_config.csv file template")
   }
 
-  main <- readLines(file.path(dirProject, "scripts", "run_test_standard.py"))
+  main <- readLines(file.path(dirProject, "scripts", "run_seals_magpie.py"))
 
   main[min(which(grepl("    p.user_dir =", main)))] <- paste0("    p.user_dir = \'", dirBaseFiles, "\'")
   main[min(which(grepl("    p.extra_dirs", main)))] <- paste0("    p.extra_dirs = '.'")
-  main[min(which(grepl("    p.project_name =", main)))] <- paste0("    p.project_name = \'", title, "\'")
+  # main[min(which(grepl("    p.project_name =", main)))] <- paste0("    p.project_name = \'", title, "\'")
   main[min(which(grepl("    p.project_dir =", main)))] <- paste0(
     "    p.project_dir = \'", normalizePath(dirProject), "\'"
   )
-  main[min(which(grepl("hb.pretty_time()", main)))] <- " "
   main[min(which(grepl("    p.base_data_dir =", main)))] <- paste0(
     "    p.base_data_dir = \'", dirBaseFiles, "/base_data\'"
   )
@@ -295,7 +294,7 @@ Sys.chmod(iniLock, mode = "0664")
     "#SBATCH --output=outfile_%j.out",
     "#SBATCH --error=outfile_%j.err",
     "#SBATCH --mail-type=END,FAIL",
-    ifelse(useDependency || inputDataExists, "#SBATCH --time=0:20:00", "#SBATCH --time=5:00:00"), "\n",
+    ifelse(useDependency || inputDataExists, "#SBATCH --time=0:40:00", "#SBATCH --time=3:00:00"), "\n",
     "#SBATCH --nodes=1",
     "#SBATCH --ntasks=1",
     ifelse(useDependency, paste0(
