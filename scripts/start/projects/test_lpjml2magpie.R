@@ -8,6 +8,9 @@
 # ----------------------------------------------------------
 # description: Test new lpjml version in magpie
 # ----------------------------------------------------------
+## Load lucode2 and gms to use setScenario later
+library(lucode2)
+library(gms)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
@@ -158,4 +161,3 @@ cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp4p5"))
 cfg <- setScenario(cfg, c("SSP3_IrrigON"), scenario_config = "config/projects/scenario_config_impacts.csv")
 
 start_run(cfg, codeCheck = FALSE)
-
