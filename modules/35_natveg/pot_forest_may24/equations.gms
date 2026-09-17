@@ -43,12 +43,9 @@
     vm_carbon_stock(j2,"primforest",ag_pools,stockType) =e=
       m_carbon_stock(vm_land,fm_carbon_density,"primforest");
 
-*' Secondary forest carbon stock uses a blended carbon density that weights the
-*' FRA-calibrated and uncalibrated natveg curves (Braakhekke et al.) by the
-*' natural-origin area share per age class. The blend is computed in presolve.
  q35_carbon_secdforest(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"secdforest",ag_pools,stockType) =e=
-      m_carbon_stock_ac(v35_secdforest,p35_carbon_density_secdforest,"ac","ac_sub");
+      m_carbon_stock_ac(v35_secdforest,pm_carbon_density_secdforest_ac,"ac","ac_sub");
 
  q35_carbon_other(j2,ag_pools,stockType) ..
     vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
@@ -163,15 +160,14 @@ q35_prod_other(j2)..
               sum(kforestry, vm_prod_natveg(j2,"other",kforestry))
                =e=
                (sum(ac_sub, v35_hvarea_other(j2,"othernat",ac_sub) * sum(ct, im_growing_stock(ct,j2,ac_sub,"other")))
-              + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, im_growing_stock_ysf(ct,j2,ac_sub))))
+              + sum(ac_sub, v35_hvarea_other(j2,"youngsecdf",ac_sub) * sum(ct, im_growing_stock(ct,j2,ac_sub,"secdforest"))))
               / m_timestep_length_forestry
                 ;
 
 *' Following equations show the harvested area from natural vegetation i.e. primary
-*' forests, secondary forests and other land. Important to note here that no wood
-*' production should be realized from other land. Harvested area for production
-*' purposes can be lower oe equal than land reduction in natural vegetation as
-*' not all lost area is (or should be) used for production.
+*' forests, secondary forests and other land. Harvested area for production purposes
+*' can be lower than or equal to the land reduction in natural vegetation, as not all
+*' lost area is (or should be) used for production.
 
 q35_hvarea_secdforest(j2,ac_sub)..
                 v35_hvarea_secdforest(j2,ac_sub)
