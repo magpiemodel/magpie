@@ -5,7 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
 pc13_land(i,"pastr") = sum(cell(i,j),pcm_land(j,"past"));
 pc13_land(i,"crop") = sum(cell(i,j),pcm_land(j,"crop"));
 
@@ -20,8 +19,9 @@ else
 
 if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 
-* We constrain tech cost to a defined share of regional GDP to avoid unrealistically
-* high endogenous tech investments
+*' Technological change costs are constrainted to a 
+*' pre-defined share of regional GDP to avoid unrealistically
+*' high endogenous tech investments
   vm_tech_cost.up(i) =
     sum((i_to_iso(i,iso),ct), im_gdp_pc_ppp_iso(ct,iso) * im_pop_iso(ct,iso)) * s13_max_gdp_shr;
 

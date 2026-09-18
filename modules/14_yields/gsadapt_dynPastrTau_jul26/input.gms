@@ -10,15 +10,18 @@ $setglobal c14_yields_scenario  cc
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
-
 scalars
-s14_limit_calib                    Relative managament calibration switch (1=limited 0=pure relative) / 1 /
-s14_calib_ir2rf                    Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /
-s14_degradation                    Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /
-s14_use_yield_calib                Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
-s14_minimum_growing_stock          Minimum growing stock for timber harvest in natural vegetation (tDM per ha) / 5 /
-s14_yld_reduction_soil_loss        Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
-sm_carbon_fraction                 Carbon fraction of dry matter (tC per tDM) / 0.5 /
+  s14_limit_calib              Relative managament calibration switch (1=limited 0=pure relative) / 1 /
+  s14_calib_ir2rf              Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /
+  s14_degradation              Switch to include yield impacts of land degradation(0=no degradation 1=with degradation) / 0 /
+  s14_yld_reduction_soil_loss  Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
+  s14_use_yield_calib          Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
+  s14_past_spillover_mode      Switch for pasture spillover mode: 0 = static scalar - 1 = regional dynamic= / 0 /
+  s14_yld_past_switch          Spillover parameter for translating technological change in the crop sector into pasture yield increases in static mode (1) / 0.25 /
+  s14_minimum_growing_stock    Minimum growing stock for timber harvest in natural vegetation (tDM per ha) / 5 /
+  sm_carbon_fraction           Carbon fraction of dry matter (tC per tDM) / 0.5 /
+  s14_use_gsadapt              Switch to use including growing period adaption (1) or not (0) for yield pattern (binary) / 1 /
+  s14_gsadapt2tau              Switch to account for growing period adaption in tau (1) or not (0) (binary) / 1 /
 ;
 
 
@@ -31,11 +34,23 @@ $offdelim
 ;
 $offEmpty
 
-table f14_yields(t_all,j,kve,w) LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
+table f14_yields_constgsadapt(t_all,j,kve,w) LPJmL potential yields per cell WITHOUT gsadapt (rainfed and irrigated) (tDM per ha per yr)
+$ondelim
+$include "./modules/14_yields/input/lpj_yields_constgsadapt.cs3"
+$offdelim
+;
+
+* set values to 1995 if nocc scenario is used, or to sm_fix_cc after sm_fix_cc if nocc_hist is used
+$if "%c14_yields_scenario%" == "nocc" f14_yields_constgsadapt(t_all,j,kve,w) = f14_yields_constgsadapt("y1995",j,kve,w);
+$if "%c14_yields_scenario%" == "nocc_hist" f14_yields_constgsadapt(t_all,j,kve,w)$(m_year(t_all) > sm_fix_cc) = f14_yields_constgsadapt(t_all,j,kve,w)$(m_year(t_all) = sm_fix_cc);
+m_fillmissingyears(f14_yields_constgsadapt,"j,kve,w");
+
+table f14_yields(t_all,j,kve,w) LPJmL potential yields WITH gsadapt per cell (rainfed and irrigated) (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/input/lpj_yields.cs3"
 $offdelim
 ;
+
 * set values to 1995 if nocc scenario is used, or to sm_fix_cc after sm_fix_cc if nocc_hist is used
 $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1995",j,kve,w);
 $if "%c14_yields_scenario%" == "nocc_hist" f14_yields(t_all,j,kve,w)$(m_year(t_all) > sm_fix_cc) = f14_yields(t_all,j,kve,w)$(m_year(t_all) = sm_fix_cc);
@@ -46,16 +61,18 @@ $ondelim
 $include "./modules/14_yields/input/f14_pasture_yields_hist.csv"
 $offdelim;
 
+$onEmpty
 table f14_yld_past_switch(t_all,i) Pasture yield spillover factor from crop-sector TC by region (1)
 $ondelim
-$include "./modules/14_yields/dynRegPastrTau_apr26/input/f14_yld_past_switch.csv"
+$if exist "./modules/14_yields/gsadapt_dynPastrTau_jul26/input/f14_yld_past_switch.csv" $include "./modules/14_yields/gsadapt_dynPastrTau_jul26/input/f14_yld_past_switch.csv"
 $offdelim
 ;
+$offEmpty
 m_fillmissingyears(f14_yld_past_switch,"i");
 
 table f14_fao_yields_hist(t_all,i,kcr) FAO yields per region (tDM per ha per yr)
 $ondelim
-$include "./modules/14_yields/dynRegPastrTau_apr26/input/f14_region_yields.cs3"
+$include "./modules/14_yields/gsadapt_dynPastrTau_jul26/input/f14_region_yields.cs3"
 $offdelim
 ;
 m_fillmissingyears(f14_fao_yields_hist,"i,kcr");
@@ -63,7 +80,7 @@ m_fillmissingyears(f14_fao_yields_hist,"i,kcr");
 parameter f14_ir2rf_ratio(i) AQUASTAT ratio of irrigated to rainfed yields per region (1)
 /
 $ondelim
-$include "./modules/14_yields/dynRegPastrTau_apr26/input/f14_ir2rf_ratio.cs4"
+$include "./modules/14_yields/gsadapt_dynPastrTau_jul26/input/f14_ir2rf_ratio.cs4"
 $offdelim
 /
 ;

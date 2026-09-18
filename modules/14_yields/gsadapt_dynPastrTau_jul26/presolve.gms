@@ -1,4 +1,4 @@
-*** |  (C) 2008-2025 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2026 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -57,8 +57,6 @@ im_growing_stock(t,j,ac,"other") =
     )
     ;
 
-*' @stop
-
 ** Wood-only niche floor (module 52): lift arid low-asymptote cells' harvestable growing stock in step with
 ** the m52 lambda denominators so lambda stays FRA-exact; carbon untouched. Applied to all three pools below.
 im_growing_stock(t,j,ac,"forestry")   = im_growing_stock(t,j,ac,"forestry")   * pm_gs_niche_fac(j);
@@ -93,3 +91,39 @@ im_growing_stock_oplant(t,j,ac) =
 im_growing_stock(t,j,ac,land_timber) = im_growing_stock(t,j,ac,land_timber)$(im_growing_stock(t,j,ac,land_timber) > 0) + 0.0001$(im_growing_stock(t,j,ac,land_timber) = 0);
 ** Set growing stock to 0 where it does not exceed a minimum for harvest
 im_growing_stock(t,j,ac,land_natveg)$(im_growing_stock(t,j,ac,land_natveg) < s14_minimum_growing_stock) = 0;
+
+
+*' Calculate growing period adaption factor based on previous croppping pattern
+if (ord(t) = 1,
+
+  p14_yields_gsadapt_ratio(t,i) = 1;
+  p14_yields_gsadapt_ratio_previous(t,i) = 1;
+  pm_yields_gsadapt_ratio_increment(t,i) = 1;
+  p14_yields_gsadapt_ratio_cumulative(t,i) = 1;
+
+else
+
+  p14_yields_gsadapt_ratio(t,i) =
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr));
+
+  p14_yields_gsadapt_ratio_previous(t,i) =
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"gsadapt",kcr,w) * pcm_area(j,w,kcr)) /
+    sum((cell(i,j),w,kcr), i14_yields_calib_combined(t-1,j,"constgsadapt",kcr,w) * pcm_area(j,w,kcr));
+
+  pm_yields_gsadapt_ratio_increment(t,i) = p14_yields_gsadapt_ratio(t,i) / p14_yields_gsadapt_ratio_previous(t,i);
+* The max(1,...) ensures the cumulative factor can only grow, never shrink.
+* This means declining adaptation opportunities are not represented — once
+* adaptation gains are accounted for via tau, they cannot be reversed.
+  p14_yields_gsadapt_ratio_cumulative(t,i) = max(1,pm_yields_gsadapt_ratio_increment(t,i)) * p14_yields_gsadapt_ratio_cumulative(t-1,i);
+
+);
+
+if(s14_gsadapt2tau = 0 OR s14_use_gsadapt = 0,
+  pm_yields_gsadapt_ratio_increment(t,i) = 1;
+  p14_yields_gsadapt_ratio_cumulative(t,i) = 1;
+);
+
+*' @stop
+
+*** EOF presolve.gms ***

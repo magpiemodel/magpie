@@ -24,5 +24,5 @@ cfg$title <- "calib_run_H12"
 cfg$output <- c("rds_report")
 cfg$force_replace <- TRUE
 cfg$qos <- "priority"
-start_run(cfg,codeCheck=FALSE)
+start_run(cfg, codeCheck = FALSE)
 magpie4::submitCalibration("H12_FAO")
