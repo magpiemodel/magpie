@@ -20,7 +20,7 @@ scalars
   s21_trade_tariff_targetyear             Year to finish fading trade tariffs towards target multiplier          / 2050 /
   s21_import_supply_scenario              Multiplicative factor on the line                                      / 1 /
   s21_import_supply_scenario_targetyear   Target year for fade in                                                / 2050 /
-  s21_flexBand_lib_factor                   Multiplicative factor on the window                                    / 1 /
+  s21_flexBand_lib_factor                 Multiplicative factor on the flexibility window                        / 1 /
   s21_cost_import                         Cost for additional imports to maintain feasibility (USD17MER per tDM) / 1500 /
   s21_min_trade_margin_forestry           Minimum trade margin for forestry products (USD17MER per tDM)          / 62 /
   s21_trade_scenario_adjustments          Switch to apply scenario adjustments to import supply (0=off 1=on)     / 0 /

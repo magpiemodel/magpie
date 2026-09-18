@@ -13,18 +13,14 @@
 *' bilateral trade data and held forward from the last observed historical period.
 *'
 *' Trade volumes are constrained by upper and lower bounds around the historical
-*' import supply ratio, with a relaxation window defined by the observed standard
-*' deviation of these ratios over recent history. Formally, for each
-*' exporter-importer-product combination:
+*' import supply ratio, with a relaxation window defined by the observed flexibility
+*' band (rolling range) of these ratios over recent history. Formally, for each
+*' exporter-importer-product combination (with flexWindow = min(libFactor * flexBand, 1)):
 *'
 *'   supply(im,k) * [ratio(ex,im,k) * scenarioFactor - flexWindow(ex,im,k)]
 *'     <= trade(ex,im,k) <=
 *'   supply(im,k) * [ratio(ex,im,k) * scenarioFactor + flexWindow(ex,im,k)]
 *'
-*' where the flexibility window `flexWindow = min(libFactor * flexBand, 1)`
-*' (`i21_trade_bilat_flexBand_capped`) is the historical flexibility band
-*' (rolling range of import supply ratios, `i21_trade_bilat_flexBand`) scaled by
-*' the liberalization factor and capped at 1.
 *' The `scenarioFactor` (`i21_import_supply_scenario`) allows scaling the
 *' historical ratios up or down over time (e.g. to simulate trade liberalization
 *' or protectionism). The `libFactor` (`i21_flexBand_lib_factor`) widens or
@@ -45,14 +41,16 @@
 *' ratios from sm_fix_SSP2 onward, enabling targeted policy experiments such
 *' as reducing a country's import dependence on a specific trading partner.
 *'
-*' The standard deviation bounds open from the simulation year (sm_fix_SSP2) onwards,
-*' with the level opening based on historically observed standard deviations, with
-*' the first 5 year time step at the max std observed over the all 5 years moving windows 
-*' of the historical period for the exporter-importer and product combination. 
-*' 10 years into the simulation period, the std dev window opens to the max std dev observed
-*' over all 10 year moving windows over the historical period, and the same happens at 15 years,
-*' after which the window remains fixed at the maximum observed historical standard deviation,
-*' allowing the flexibility window to evolve over time.
+*' The flexibility band opens from the simulation year (sm_fix_SSP2) onwards,
+*' with the level opening based on the historically observed rolling range, with
+*' the first 5 year time step at the mean range observed over all 5-year moving windows
+*' of the historical period for the exporter-importer and product combination.
+*' 10 years into the simulation period, the window opens to the mean range observed
+*' over all 10-year moving windows over the historical period, and the same happens at 15 years,
+*' after which the window remains fixed at the mean observed historical range,
+*' allowing the flexibility window to evolve over time. The mean rolling range widens
+*' with window length (empirically monotone on the historical data; the max variant is
+*' provably monotone), and the applied window is capped at 1.
 *'
 *' Non-tradable commodities (fodder, pasture, residues, bioenergy crops) are
 *' constrained to be produced within the super-region where they are consumed.
@@ -61,7 +59,7 @@
 
 *' @limitations Trade patterns are anchored to historically observed bilateral
 *' import supply ratios, so structural shifts in trade partnerships beyond
-*' the scenario adjustments are not endogenously modeled. The standard deviation
+*' the scenario adjustments are not endogenously modeled. The flexibility band
 *' window provides some flexibility but does not capture potential new trade
 *' corridors with no historical precedent. Bilateral margins and tariffs are
 *' static inputs (with optional tariff fadeout) and do not respond endogenously

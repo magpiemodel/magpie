@@ -37,7 +37,7 @@ sets
    l909595r809090
    /
 
-   trade_flexBand21 Members of the historical flexibility band (rolling range of import supply ratios over 5 10 and 15 year windows)
+   trade_flexBand21 Statistic (mean max min) and horizon of the historical flexibility band (rolling range)
    / mean5, max5, min5, mean10, max10, min10, mean15,
     max15, min15 /
 ;

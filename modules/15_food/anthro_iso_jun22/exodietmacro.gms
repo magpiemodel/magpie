@@ -591,43 +591,43 @@ elseif s15_exo_diet = 3,
     if (s15_exo_monogastric = 1,
 * upper bound for eggs
       p15_intake_detailed_scen_target(t,iso,"livst_egg")$(p15_intake_detail(t,iso,"livst_egg")
-                                                               > f15_rec_EATLancet(iso,"t_livst_egg","max")
+                                                               > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_livst_egg","max")
                                                             ) =
-             f15_rec_EATLancet(iso,"t_livst_egg","max");
+             f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_livst_egg","max");
 * upper bound for chicken
       p15_intake_detailed_scen_target(t,iso,"livst_chick")$(p15_intake_detail(t,iso,"livst_chick")
-                                                             > f15_rec_EATLancet(iso,"t_livst_chick","max")
+                                                             > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_livst_chick","max")
                                                           ) =
-           f15_rec_EATLancet(iso,"t_livst_chick","max");
+           f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_livst_chick","max");
 * upper bound for redmeat (share of pigs in redmeat)
       p15_intake_detailed_scen_target(t,iso,"livst_pig")$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
-                                                              > f15_rec_EATLancet(iso,"t_redmeat","max")
+                                                              > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_redmeat","max")
                                                            ) =
             (p15_intake_detail(t,iso,"livst_pig") / sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2)))
-               * f15_rec_EATLancet(iso,"t_redmeat","max");
+               * f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_redmeat","max");
        );
 
 *' upper bound for ruminant products
     if (s15_exo_ruminant = 1,
 * upper bound for redmeat (pig and ruminant)
       p15_intake_detailed_scen_target(t,iso,"livst_rum")$(sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2))
-                                                               > f15_rec_EATLancet(iso,"t_redmeat","max")
+                                                               > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_redmeat","max")
                                                             ) =
              (p15_intake_detail(t,iso,"livst_rum") / sum(EAT_redmeat15_2, p15_intake_detail(t,iso,EAT_redmeat15_2)))
-                * f15_rec_EATLancet(iso,"t_redmeat","max");
+                * f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_redmeat","max");
 * upper bound for milk
       p15_intake_detailed_scen_target(t,iso,"livst_milk")$(p15_intake_detail(t,iso,"livst_milk")
-                                                               > f15_rec_EATLancet(iso,"t_livst_milk","max")
+                                                               > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_livst_milk","max")
                                                             ) =
-             f15_rec_EATLancet(iso,"t_livst_milk","max");
+             f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_livst_milk","max");
     );
 
 *' lower bound for fish
     if (s15_exo_fish = 1,
          p15_intake_detailed_scen_target(t,iso,"fish")$(p15_intake_detail(t,iso,"fish")
-                                                            < f15_rec_EATLancet(iso,"t_fish","min")
+                                                            < f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_fish","min")
                                                         ) =
-               f15_rec_EATLancet(iso,"t_fish","min");
+               f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_fish","min");
     );
 
 
@@ -657,8 +657,8 @@ elseif s15_exo_diet = 3,
     if (s15_exo_fruitvegnut = 1,
 
 *' Maximum recommendation for starchy fruits:
-        p15_intake_detailed_scen_starchyfruit(t,iso)$(p15_intake_detail_starchyfruit(t,iso) > f15_rec_EATLancet(iso,"t_fruitstarch","max"))
-           = f15_rec_EATLancet(iso,"t_fruitstarch","max");
+        p15_intake_detailed_scen_starchyfruit(t,iso)$(p15_intake_detail_starchyfruit(t,iso) > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_fruitstarch","max"))
+           = f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_fruitstarch","max");
 
 *' Split the 'others' category into fruits plus vegetables and nuts
         p15_intake_detail_fruitveg(t,iso) = i15_fruit_ratio(t,iso,"others") * p15_intake_detail(t,iso,"others") + p15_intake_detailed_scen_starchyfruit(t,iso);
@@ -667,8 +667,8 @@ elseif s15_exo_diet = 3,
         p15_intake_detailed_scen_nuts(t,iso) = p15_intake_detail_nuts(t,iso);
 
 *' Minimum recommendation for fruits and vegetables:
-        p15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < f15_rec_EATLancet(iso,"t_fruitveg","min"))
-            = f15_rec_EATLancet(iso,"t_fruitveg","min");
+        p15_intake_detailed_scen_fruitveg(t,iso)$(p15_intake_detail_fruitveg(t,iso) < f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_fruitveg","min"))
+            = f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_fruitveg","min");
 
 *' Extract fruits and vegetables that are part of others category
 *  Note that starchy fruits are kept at the previously assigned maximum level
@@ -691,7 +691,7 @@ elseif s15_exo_diet = 3,
 *' considering scaling of nuts in others.
         p15_intake_detailed_scen_target(t,iso,kfo_ns)$(sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2)) > 0)
             = p15_intake_detail(t,iso,kfo_ns) / sum(kfo_ns2, p15_intake_detail(t,iso,kfo_ns2))
-                * (f15_rec_EATLancet(iso,"t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso));
+                * (f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_nutseeds","min") - p15_intake_detailed_scen_nuts(t,iso));
 
 
 * If seeds have been corrected downwards below zero because nuts target already overfulfilled with nuts in others,
@@ -704,10 +704,10 @@ elseif s15_exo_diet = 3,
     if (s15_exo_roots = 1,
 
 *' Maximum recommendation for roots:
-        p15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max")) =
-          f15_rec_EATLancet(iso,"t_roots","max");
+        p15_intake_detailed_scen_roots(t,iso)$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_roots","max")) =
+          f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_roots","max");
 
-        p15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"t_roots","max")) =
+        p15_intake_detailed_scen_target(t,iso,"potato")$(p15_intake_detail_roots(t,iso) > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_roots","max")) =
           p15_intake_detailed_scen_roots(t,iso) / p15_intake_detail_roots(t,iso) * p15_intake_detail(t,iso,"potato");
 
     );
@@ -721,33 +721,33 @@ elseif s15_exo_diet = 3,
 *' lower bound for legumes
     if (s15_exo_pulses = 1,
        p15_intake_detailed_scen_target(t,iso,EAT_pulses15)$(sum(EAT_pulses15_2, p15_intake_detail(t,iso,EAT_pulses15_2))
-                                                                 < f15_rec_EATLancet(iso,"t_legumes","min")
+                                                                 < f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_legumes","min")
                                                                ) =
             (p15_intake_detail(t,iso,EAT_pulses15) / sum(EAT_pulses15_2, p15_intake_detail(t,iso,EAT_pulses15_2)))
-             * f15_rec_EATLancet(iso,"t_legumes","min");
+             * f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_legumes","min");
     );
 
 *' upper bound for sugar
     if (s15_exo_sugar = 1,
       p15_intake_detailed_scen_target(t,iso,"sugar")$(p15_intake_detail(t,iso,"sugar")
-                                                              > f15_rec_EATLancet(iso,"t_sugar","max")
+                                                              > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_sugar","max")
                                                            ) =
-            f15_rec_EATLancet(iso,"t_sugar","max");
+            f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_sugar","max");
     );
 
 *' upper and lower bound for oils
     if (s15_exo_oils = 1,
 * oil_veg has a minimum and maximum recommendation in EAT
        p15_intake_detailed_scen_target(t,iso,"oils")$(p15_intake_detail(t,iso,"oils")
-                                                       < f15_rec_EATLancet(iso,"t_oils","min")
+                                                       < f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_oils","min")
                                                       ) =
-            f15_rec_EATLancet(iso,"t_oils","min");
+            f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_oils","min");
 
 * oil palm has a maximum recommendation in EAT
        p15_intake_detailed_scen_target(t,iso,"oils")$(p15_intake_detail(t,iso,"oils")
-                                                        > f15_rec_EATLancet(iso,"t_oils","max")
+                                                        > f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_oils","max")
                                                      ) =
-            f15_rec_EATLancet(iso,"t_oils","max");
+            f15_rec_EATLancet(iso,"%c15_exodiet_scen%","t_oils","max");
     );
 
 
