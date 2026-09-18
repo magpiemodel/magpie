@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **scripts/output/extra/runSEALSallocation.R** adjusted to SEALS v2.0.0
+- **config** additional data updated to `additional_data_rev4.73.tgz` (updated seals_scenario_config.csv to conform to SEALS v2.0.0)
 - **21_trade** Bugfix to bilateral trade flexibility band implementation, missing parameter initialization
 - **52_carbon** Forest carbon growth curves are now observation-based (naturally regenerating: Robinson et al. 2025, leaned to the p25 lower quartile of the cell-rate distribution via `s52_natveg_growth_scalar`; plantations: Bukoski et al. 2022, carbon asymptote anchored to the observed managed plateau via `s52_plant_asymp_anchor`; other planted: derived from naturally regenerating) instead of the modelled Braakhekke et al. 2019 curves. The carbon growth curve is separated from the FRA growing-stock (timber) calibration: one realistic carbon curve for all forest, with wood matched to the FRA target by a per-region multiplier on the harvestable growing stock, shared by primary and secondary forest, with other-land wood capped by the same correction and a wood-only niche floor (`s52_gs_niche_floor`) keeping it physical in arid cells. New switch `c52_growth_par_source` (default `refit`) keeps the legacy Braakhekke curves selectable (`braakhekke`; other planted then falls back to naturally regenerating).
 - **28_ageclass** New default forest age-class source GAMI (Besnard et al. 2024, satellite-derived global forest age); GFAD remains selectable via `c28_ageclass_source`.
