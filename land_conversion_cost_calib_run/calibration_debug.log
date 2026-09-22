@@ -1,0 +1,571 @@
+=== COMPREHENSIVE LOGGING ACTIVE (cat/messages/warnings/errors) ===
+##################################################################
+### CALIBRATE_MAGPIE START ###
+##################################################################
+### ITERATION 1 START (useGDX = 0) ###
+Loading required package: lucode2
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 0
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+Loading required package: gdx2
+=== UPDATE_CALIB ITERATION 1 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> First iteration - initializing calibration factors (cost=1 for expanding countries, cost=2.5 for contracting, reward=0)
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 2 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 2 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 3 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 3 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 4 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 4 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 5 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 5 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 6 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 6 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 7 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 7 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 8 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 8 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 9 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 9 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 10 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 10 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 11 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 11 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 12 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 12 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 13 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 13 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 14 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 14 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 15 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 15 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 16 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 16 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 17 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 17 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 18 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 18 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 19 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 19 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Adjust calibration factors for next iteration 
+### ITERATION 20 START (useGDX = 2) ###
+=== CALIBRATION_RUN START ===
+Putfolder: land_conversion_cost_calib_run, useGDX: 2
+Starting GAMS run...
+GAMS run completed
+=== CALIBRATION_RUN END ===
+=== UPDATE_CALIB ITERATION 20 START ===
+GDX file: fulldata.gdx
+calibAccuracy: 0.01
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: level, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> timestep calibration 
+=== GET_CALIB_FACTOR START ===
+GDX file: fulldata.gdx
+Mode: gradient, histData: MAgPIEown
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> gradient calibration 
+>>> Starting with existing calibration file
+>>> Calib factors are adjusted where needed
+=== retrieve validation data ===
+=== validation data retrieved ===
+>>> Account for costMax and costMin
+>>> write down current calib factors (and area_factors) for tracking
+Choosing the best calibration...
+
+Land conversion cost calibration finished
+=== LOGGING SESSION COMPLETE ===
