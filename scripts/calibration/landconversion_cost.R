@@ -174,8 +174,8 @@ timeSeriesReward <- function(calibFactor) {
   return(out2)
 }
 
-# Write a "neutral" calibration file: cost = 1 (no adjustment) and reward = 0 (no reward)
-# for every region and year. This reproduces the pre-Phase-1 legacy behavior for the given
+# Write a "neutral" pasture calibration file: cost = 1 (no adjustment) and reward = 0 (no reward)
+# for every region and year. This reproduces the legacy behavior for the given
 # land type -- its conversion cost is governed purely by the flat global constant
 # (s39_cost_establish_crop / s39_cost_establish_past), with no regional calibration at all.
 # Used when a land type's calibration is switched off (see calibratePasture in
