@@ -7,13 +7,11 @@
 
 sets
 
-* Disturbance classes in f35_forest_lost_share: those that leave the land as forest, are not
-* decided endogenously, and are land use rather than natural disturbance (the flux is booked
-* as land-use-change CO2). Selected in mrland::calcForestLossByDriver. overall is never read.
+* Columns of f35_forest_lost_share, as produced by mrland's calcForestLossByDriver
   driver_source Source of forest disturbance
   / overall, shifting_cultivation /
 
-* One element, so s35_forest_damage = 3 equals 1; kept so re-admitting a class is one line.
+* Classes summed under s35_forest_damage = 3
   combined_loss(driver_source) Combined loss from disturbances not modelled endogenously
   / shifting_cultivation /
 
