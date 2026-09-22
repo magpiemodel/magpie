@@ -5,6 +5,18 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+*' Update the natveg harvest-capacity capital carried into the next timestep. While inactive (the ord(t)=1
+*' seed step, or when off) it tracks the solved production, warm-starting the capital for the first active step;
+*' while active it accumulates this timestep's net investment (mirrors the sticky cost in module 38).
+if (sum(ct, p73_sticky_active(ct)) = 0,
+  p73_hvcapital(t+1,j,land_natveg) = sum(kforestry, vm_prod_natveg.l(j,land_natveg,kforestry))
+                                     * sum(cell(i,j), p73_hvcapital_need(t,i,land_natveg));
+else
+  p73_hvcapital(t+1,j,land_natveg) = p73_hvcapital(t,j,land_natveg)
+                                     + v73_invest_harvest.l(j,land_natveg)
+                                     - v73_disinvest_harvest.l(j,land_natveg);
+);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_timber(t,i,"marginal")                    = vm_cost_timber.m(i);
  ov73_prod_heaven_timber(t,j,kforestry,"marginal") = v73_prod_heaven_timber.m(j,kforestry);
@@ -34,4 +46,20 @@
  oq73_prod_wood(t,j,"lower")                       = q73_prod_wood.lo(j);
  oq73_prod_woodfuel(t,j,"lower")                   = q73_prod_woodfuel.lo(j);
  oq73_prod_residues(t,j,"lower")                   = q73_prod_residues.lo(j);
+ ov73_invest_harvest(t,j,land_natveg,"marginal")   = v73_invest_harvest.m(j,land_natveg);
+ ov73_invest_harvest(t,j,land_natveg,"level")      = v73_invest_harvest.l(j,land_natveg);
+ ov73_invest_harvest(t,j,land_natveg,"upper")      = v73_invest_harvest.up(j,land_natveg);
+ ov73_invest_harvest(t,j,land_natveg,"lower")      = v73_invest_harvest.lo(j,land_natveg);
+ oq73_invest_harvest(t,j,land_natveg,"marginal")   = q73_invest_harvest.m(j,land_natveg);
+ oq73_invest_harvest(t,j,land_natveg,"level")      = q73_invest_harvest.l(j,land_natveg);
+ oq73_invest_harvest(t,j,land_natveg,"upper")      = q73_invest_harvest.up(j,land_natveg);
+ oq73_invest_harvest(t,j,land_natveg,"lower")      = q73_invest_harvest.lo(j,land_natveg);
+ ov73_disinvest_harvest(t,j,land_natveg,"marginal")= v73_disinvest_harvest.m(j,land_natveg);
+ ov73_disinvest_harvest(t,j,land_natveg,"level")   = v73_disinvest_harvest.l(j,land_natveg);
+ ov73_disinvest_harvest(t,j,land_natveg,"upper")   = v73_disinvest_harvest.up(j,land_natveg);
+ ov73_disinvest_harvest(t,j,land_natveg,"lower")   = v73_disinvest_harvest.lo(j,land_natveg);
+ oq73_disinvest_harvest(t,j,land_natveg,"marginal")= q73_disinvest_harvest.m(j,land_natveg);
+ oq73_disinvest_harvest(t,j,land_natveg,"level")   = q73_disinvest_harvest.l(j,land_natveg);
+ oq73_disinvest_harvest(t,j,land_natveg,"upper")   = q73_disinvest_harvest.up(j,land_natveg);
+ oq73_disinvest_harvest(t,j,land_natveg,"lower")   = q73_disinvest_harvest.lo(j,land_natveg);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

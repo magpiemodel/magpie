@@ -16,11 +16,14 @@ elseif s35_secdf_distribution = 1,
 * ac0 is excluded here. Therefore no initial shifting is needed.
   i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")/(card(ac)-1);
 elseif s35_secdf_distribution = 2,
-*For the initialization of age-classes in secondary forest, forest area in 5-year age-classes based on GFAD is used 
+* Initialise secondary-forest age classes from the satellite age-class data (module 28).
  p35_secdf_ageclass(j,ac) = im_forest_ageclass(j,ac);
-* Young forest (`ac_young`) includes plantations and might be (strongly) affected by disturbances such as fire. 
-* Therefore, young forest (`ac_young`) is disregarded for the initialization of age-classes in secondary forest. 
-* Instead, age-class areas from `ac35` are used as a proxy for `ac_young`.
+* The data show a large share of very young secondary forest, especially in the tropics. MAgPIE grows
+* it on a single natural-regrowth curve and would credit a large carbon uptake as it matures. In
+* reality much of this young forest never reaches old age: recurring disturbances that MAgPIE does not
+* represent explicitly - shifting cultivation, fire, fuelwood cutting and other small-scale clearing -
+* keep resetting it. To avoid crediting regrowth that does not occur, the youngest age classes are set
+* to the area of the ~35-year class instead of keeping their observed (younger) ages.
  p35_secdf_ageclass(j,ac_young) = p35_secdf_ageclass(j,"ac35");
 * `acx` includes primary forest. Therefore, primary forest is subtracted from `acx`.
  p35_secdf_ageclass(j,"acx") = p35_secdf_ageclass(j,"acx") - pcm_land(j,"primforest");
@@ -40,14 +43,6 @@ i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - 
 *initialize parameter
 p35_land_other(t,j,othertype35,ac) = 0;
 p35_secdforest(t,j,ac) = 0;
-
-* Natural-origin tracking: secdforest from natural succession on abandoned
-* cropland uses the uncalibrated natveg growth curve (Braakhekke et al.).
-* Legacy/managed secdforest uses the FRA-calibrated curve (module 52).
-* All initial secdforest is existing/managed (natural = 0); new natural-origin area
-* enters through youngsecdf maturation in presolve.
-p35_secdforest_natural(t,j,ac) = 0;
-pc35_secdforest_natural(j,ac) = 0;
 
 * initialize forest disturbance losses
 p35_disturbance_loss_secdf(t,j,ac) = 0;

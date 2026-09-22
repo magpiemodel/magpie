@@ -14,15 +14,15 @@ sets
  / recur, mon /
 
  type32 plantation type
- / aff, ndc, plant /
+ / aff, ndc, plant, other_planted /
+
+ harvest32(type32) harvestable managed-forestry pools replanted to the same pool after harvest
+ / plant, other_planted /
 
  pol32 afforestation policy type
  / none, npi, ndc, affexp, ndcdelay /
 
  ini32(j,ac) subset for initialization of timber plantations
-
- rotation_type Rotation type
- / min, low, def, high, bio /
 
  bgp32 biogeophysical effect (degree C) of afforestation on local surface temperature
 / nobgp, ann_bph /
