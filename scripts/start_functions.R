@@ -484,14 +484,24 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
 
   land_calib_file <- "modules/39_landconversion/input/f39_calib.csv"
   land_calib_file_past <- "modules/39_landconversion/input/f39_calib_past.csv"
+  source("scripts/calibration/landconversion_cost.R")
   if(cfg$recalibrate_landconversion_cost=="ifneeded") {
-    # recalibrate if either the cropland or the pasture calibration file does not exist
-    if(!file.exists(land_calib_file) || !file.exists(land_calib_file_past)) cfg$recalibrate_landconversion_cost <- TRUE else cfg$recalibrate_landconversion_cost <- FALSE
+    # recalibrate if the cropland file is missing; if pasture calibration is switched on
+    # (calib_pasture_landconversion_cost = TRUE), also recalibrate if its file is missing; if
+    # pasture calibration is switched off, also recalibrate if its existing file isn't already
+    # neutral (cost=1/reward=0) -- this makes sure flipping calib_pasture_landconversion_cost to
+    # FALSE is never silently ignored just because a (non-neutral) leftover pasture calibration
+    # file from an earlier, pasture-calibration-enabled run happens to already exist.
+    pastFileNeedsAction <- if (cfg$calib_pasture_landconversion_cost) {
+      !file.exists(land_calib_file_past)
+    } else {
+      !isNeutralCalib(land_calib_file_past)
+    }
+    if(!file.exists(land_calib_file) || pastFileNeedsAction) cfg$recalibrate_landconversion_cost <- TRUE else cfg$recalibrate_landconversion_cost <- FALSE
   }
   if(cfg$recalibrate_landconversion_cost){
     #if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
     cat("Starting land conversion cost calibration factor calculation!\n")
-    source("scripts/calibration/landconversion_cost.R")
     calibrateLandconversion(nMaxcalib = cfg$calib_maxiter_landconversion_cost,
                             restart = cfg$restart_landconversion_cost,
                             calibAccuracy = cfg$calib_accuracy_landconversion_cost,
@@ -507,7 +517,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
                             debug = cfg$debug,
                             bestCalib = cfg$best_calib_landconversion_cost,
                             histData = cfg$cost_calib_hist_data,
-                            levelGradientMix = cfg$level_gradient_mix)
+                            levelGradientMix = cfg$level_gradient_mix,
+                            calibratePasture = cfg$calib_pasture_landconversion_cost)
     cat("Land conversion cost calibration factor calculated!\n")
   }
 

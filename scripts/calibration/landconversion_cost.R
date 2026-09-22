@@ -174,6 +174,53 @@ timeSeriesReward <- function(calibFactor) {
   return(out2)
 }
 
+# Write a "neutral" calibration file: cost = 1 (no adjustment) and reward = 0 (no reward)
+# for every region and year. This reproduces the pre-Phase-1 legacy behavior for the given
+# land type -- its conversion cost is governed purely by the flat global constant
+# (s39_cost_establish_crop / s39_cost_establish_past), with no regional calibration at all.
+# Used when a land type's calibration is switched off (see calibratePasture in
+# calibrateLandconversion()) so the input file module 39 reads still exists and is
+# well-formed, it just has no effect.
+writeNeutralCalib <- function(calibFile, regions, landType) {
+  require(magclass)
+  years <- c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5))
+  neutralCost   <- new.magpie(regions, years = paste0("y", years), fill = 1)
+  neutralReward <- new.magpie(regions, years = paste0("y", years), fill = 0)
+  neutralCost   <- time_interpolate(neutralCost, seq(2020, 2050, by = 5), integrate_interpolated_years = TRUE)
+  neutralReward <- time_interpolate(neutralReward, seq(2020, 2050, by = 5), integrate_interpolated_years = TRUE)
+
+  neutralFull <- mbind(
+    add_dimension(neutralCost, dim = 3.1, nm = "cost"),
+    add_dimension(neutralReward, dim = 3.1, nm = "reward")
+  )
+
+  comment <- c(
+    paste0(" description: Regional land conversion cost calibration file (landType = ", landType, ")"),
+    " unit: -",
+    " note: NEUTRAL/legacy file -- calibration for this land type is switched off",
+    " (cfg$calib_pasture_landconversion_cost <- FALSE). cost = 1 and reward = 0 for every",
+    " region and year, reproducing the pre-Phase-1 behavior where this land type's",
+    " conversion cost is governed only by the flat global constant, with no regional",
+    " calibration.",
+    " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
+    paste0(" creation date: ", date())
+  )
+  write.magpie(round(neutralFull, 3), calibFile, comment = comment)
+  cat(paste0(">>> Wrote neutral (legacy) calibration file for landType = ", landType, ": ", calibFile, "\n"))
+}
+
+# TRUE only if calibFile already exists and is exactly the neutral file writeNeutralCalib()
+# would produce (cost == 1 and reward == 0 everywhere). Used so that flipping
+# calibratePasture to FALSE always results in a neutral file -- an existing file left over
+# from a previous run with pasture calibration switched on is never silently reused.
+isNeutralCalib <- function(calibFile) {
+  require(magclass)
+  if (!file.exists(calibFile)) return(FALSE)
+  x <- tryCatch(read.magpie(calibFile), error = function(e) NULL)
+  if (is.null(x) || !all(c("cost", "reward") %in% getNames(x))) return(FALSE)
+  isTRUE(all(x[, , "cost"] == 1) && all(x[, , "reward"] == 0))
+}
+
 # Calculate the correction factor and save it
 updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, calibrationStep, nMaxcalib, bestCalib, histData, putfolder, levelGradientMix, landType = "crop") {
   require(magclass)
@@ -359,7 +406,8 @@ calibrateLandconversion <- function(nMaxcalib = 20,
                              debug = FALSE,
                              bestCalib = TRUE,
                              histData = "FAO",
-                             levelGradientMix = 0.3) {
+                             levelGradientMix = 0.3,
+                             calibratePasture = TRUE) {
   require(magclass)
 
   if (!restart) {
@@ -400,9 +448,22 @@ calibrateLandconversion <- function(nMaxcalib = 20,
                            calibFile = calibFile, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
                            putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "crop")
 
-      donePast <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracyPast, costMax = costMaxPast, costMin = costMinPast,
-                           calibFile = calibFilePast, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
-                           putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "past")
+      if (calibratePasture) {
+        donePast <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracyPast, costMax = costMaxPast, costMin = costMinPast,
+                             calibFile = calibFilePast, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
+                             putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "past")
+      } else {
+        # pasture calibration switched off: write the legacy/neutral file once (skipped on
+        # later iterations once it's confirmed neutral) instead of running updateCalib() for
+        # "past" at all, and treat pasture as immediately "done" so the loop's termination
+        # depends only on crop's own convergence.
+        if (!isNeutralCalib(calibFilePast)) {
+          require(magpie4)
+          pastureRegions <- getRegions(land("fulldata.gdx"))
+          writeNeutralCalib(calibFilePast, pastureRegions, landType = "past")
+        }
+        donePast <- TRUE
+      }
 
       done <- doneCrop && donePast
 
