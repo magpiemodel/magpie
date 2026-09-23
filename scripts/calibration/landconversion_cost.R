@@ -222,7 +222,7 @@ isNeutralCalib <- function(calibFile) {
 }
 
 # Calculate the correction factor and save it
-updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, calibrationStep, nMaxcalib, bestCalib, histData, putfolder, levelGradientMix, landType = "crop") {
+updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rewardMax = costMax, calibrationStep, nMaxcalib, bestCalib, histData, putfolder, levelGradientMix, landType = "crop") {
   require(magclass)
   require(magpie4)
   require(gdx2)
@@ -279,7 +279,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
   calibFactorReward[expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) >= 0] <- 0
   calibFactorReward[calibFactorReward < 0] <- 0
 
-  cat(">>> Account for costMax and costMin\n")
+  cat(">>> Account for costMax, costMin and rewardMax\n")
   if (!is.null(costMax)) {
     aboveLimit <- (calibFactorCost >= costMax)
     calibFactorCost[aboveLimit] <- costMax
@@ -288,6 +288,15 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
   if (!is.null(costMin)) {
     belowLimit <- (calibFactorCost <= costMin)
     calibFactorCost[belowLimit] <- costMin
+  }
+
+  # reward had no upper bound previously and could grow unboundedly across iterations
+  # (oldCalib[,,"reward"] accumulates the increment each step) -- cap it the same way cost is
+  # capped, defaulting to costMax so reward and cost stay on a comparable scale unless a
+  # dedicated rewardMax is supplied.
+  if (!is.null(rewardMax)) {
+    aboveLimitReward <- (calibFactorReward >= rewardMax)
+    calibFactorReward[aboveLimitReward] <- rewardMax
   }
 
   cat(">>> write down current calib factors (and area_factors) for tracking\n")
@@ -351,7 +360,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
         " unit: -",
         paste0(" note: Best calibration factor from the run"),
         " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
-        paste(" Calibration settings:",  "calibAccuracy=", calibAccuracy, "costMax=", costMax, "costMin=", costMin, "nMaxcalib=",nMaxcalib, "bestCalib=",bestCalib, "histData=",histData),
+        paste(" Calibration settings:",  "calibAccuracy=", calibAccuracy, "costMax=", costMax, "costMin=", costMin, "rewardMax=", rewardMax, "nMaxcalib=",nMaxcalib, "bestCalib=",bestCalib, "histData=",histData),
         paste0(" creation date: ", date())
       )
       write.magpie(round(calibBestFull, 3), calibFile, comment = comment)
@@ -378,7 +387,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
       " unit: -",
       paste0(" note: Calibration step ", calibrationStep),
       " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
-      paste(" Calibration settings:",  "calibAccuracy=", calibAccuracy, "costMax=", costMax, "costMin=", costMin, "nMaxcalib=", nMaxcalib, "bestCalib=", bestCalib, "histData=", histData),
+      paste(" Calibration settings:",  "calibAccuracy=", calibAccuracy, "costMax=", costMax, "costMin=", costMin, "rewardMax=", rewardMax, "nMaxcalib=", nMaxcalib, "bestCalib=", bestCalib, "histData=", histData),
       paste0(" creation date: ", date())
     )
 
@@ -395,12 +404,14 @@ calibrateLandconversion <- function(nMaxcalib = 20,
                              calibAccuracy = 0.01,
                              costMax = 2.5,
                              costMin = 0.2,
+                             rewardMax = costMax,
                              calibMagpieName = "magpie_calib",
                              calibFile = "modules/39_landconversion/input/f39_calib.csv",
                              calibFilePast = "modules/39_landconversion/input/f39_calib_past.csv",
                              calibAccuracyPast = calibAccuracy,
                              costMaxPast = costMax,
                              costMinPast = costMin,
+                             rewardMaxPast = costMaxPast,
                              putfolder = "land_conversion_cost_calib_run",
                              dataWorkspace = NULL,
                              logoption = 3,
@@ -416,7 +427,18 @@ calibrateLandconversion <- function(nMaxcalib = 20,
     if (file.exists(calibFile)) file.remove(calibFile)
     if (file.exists(calibFilePast)) file.remove(calibFilePast)
   } else {
-    if (file.exists(calibFile)) cat(paste0("\nStarting land conversion cost calibration from existing values\n")) else cat(paste0("\nStarting land conversion cost calibration from default values\n"))
+    cropExists <- file.exists(calibFile)
+    pastExists <- file.exists(calibFilePast)
+    if (cropExists && pastExists) {
+      cat(paste0("\nStarting land conversion cost calibration from existing values (crop and pasture)\n"))
+    } else if (cropExists || pastExists) {
+      cat(paste0("\nStarting land conversion cost calibration from a MIXED state: ",
+                 if (cropExists) "crop restarts from its existing calibration file, pasture starts from default values"
+                 else "pasture restarts from its existing calibration file, crop starts from default values",
+                 "\n"))
+    } else {
+      cat(paste0("\nStarting land conversion cost calibration from default values\n"))
+    }
   }
 
   # Clear log file at start
@@ -445,12 +467,12 @@ calibrateLandconversion <- function(nMaxcalib = 20,
       # crop and pasture are calibrated concurrently from the same solve: crop and pasture compete for
       # land, so calibrating them sequentially (crop first, then pasture) would shift the land allocation
       # before pasture is calibrated, causing oscillation between iterations.
-      doneCrop <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracy, costMax = costMax, costMin = costMin,
+      doneCrop <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracy, costMax = costMax, costMin = costMin, rewardMax = rewardMax,
                            calibFile = calibFile, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
                            putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "crop")
 
       if (calibratePasture) {
-        donePast <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracyPast, costMax = costMaxPast, costMin = costMinPast,
+        donePast <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracyPast, costMax = costMaxPast, costMin = costMinPast, rewardMax = rewardMaxPast,
                              calibFile = calibFilePast, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
                              putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "past")
       } else {
