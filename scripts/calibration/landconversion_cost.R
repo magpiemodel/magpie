@@ -324,17 +324,18 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
       calibCostBest <- calibRewardBest <- factors_cost[,,1] * 0
       for(i in getRegions(divergenceData)) {
         # use sum(log(divergenceData+1) as divergenceData is (magpie/data-1), and relative divergence should be equally punished in both directions
-        bestIteration <- which.min(dimSums(abs(log(divergenceData[i,,])), dim = 2))
-        calibCostBest[i,,] <- factors_cost[i,,bestIteration]
-        calibRewardBest[i,,] <- factors_reward[i,,bestIteration]
+        bestIteration <- which.min(dimSums(abs(log(divergenceData[i, , ])), dim = 2))
+        bestName      <- getNames(divergenceData)[bestIteration]
+        calibCostBest[i, , ]   <- factors_cost[i, , bestName]
+        calibRewardBest[i, , ] <- factors_reward[i, , bestName]
       }
       getNames(calibCostBest) <- NULL
       getNames(calibRewardBest) <- NULL
  
       # tag with the iteration at which "best" was determined (rather than a fixed "best" literal), since this
       # branch may run again on a later iteration while a concurrently-calibrated land type has not yet converged
-      writeLog(calibCostBest,  paste0(putfolder, "/land_conversion_cost_current_calib_factor_", landType, ".cs3"), paste0("best_iter", calibrationStep))
-      writeLog(calibRewardBest,  paste0(putfolder, "/land_conversion_reward_current_calib_factor_", landType, ".cs3"), paste0("best_iter", calibrationStep))
+      writeLog(calibCostBest,   paste0(putfolder, "/land_conversion_cost_best_calib_factor_",   landType, ".cs3"), calibrationStep)
+      writeLog(calibRewardBest, paste0(putfolder, "/land_conversion_reward_best_calib_factor_", landType, ".cs3"), calibrationStep)
   
       calibCostBest <- timeSeriesCost(calibCostBest)
       calibRewardBest <- timeSeriesReward(calibRewardBest)
