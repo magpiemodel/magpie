@@ -21,7 +21,8 @@ calc_NPI_NDC <- function(policyregions = "iso",
                          outfolder_ad_aolc   = c("policies/","../../modules/35_natveg/input/"),
                          outfolder_aff   = c("policies/","../../modules/32_forestry/input/"),
                          out_ad_file     = "npi_ndc_ad_aolc_pol.cs3",
-                         out_aff_file    = "npi_ndc_aff_pol.cs3") {
+                         out_aff_file    = "npi_ndc_aff_pol.cs3",
+                         carbon_stock_file = "../../modules/52_carbon/input/lpj_carbon_stocks_0.5.mz") {
 
   require(magclass)
   require(madrat)
@@ -37,6 +38,13 @@ calc_NPI_NDC <- function(policyregions = "iso",
 
   #read in cellular land cover (stock) from landuse initialization
   land_stock <- read.magpie(land_stock_file)
+
+  # carbon density and refYear for the afforestation/reforestation (A/R) weight below; refYear = last
+  # observed year (<= sm_fix) keeps the weight, and thus the pinned historic A/R, RCP-invariant
+  refYear <- max(getYears(land_stock, as.integer = TRUE))
+  carbon  <- read.magpie(carbon_stock_file)
+  stopifnot(identical(getItems(carbon, dim = 1), getItems(land_stock, dim = 1)))
+  vegc <- as.numeric(collapseNames(carbon[, refYear, "secdforest.vegc"]))
 
   # use pol_mapping to update spatial mapping of cells to regions
   # so that not only countries can be used for policies but also smaller
@@ -199,6 +207,13 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addline("## Afforestation - AFF (Mha)")
   addline("## Ref: BaseYear (1), Baseline (2)")
 
+  # A/R placement weight: establishment headroom (cf. GAMS pm_max_forest_est, but at 0.5 deg and fixed
+  # at refYear) x potential-forest carbon density
+  forestNow <- setNames(setYears(forest_stock[, refYear, ], NULL), NULL)
+  affWeight <- pmax(setNames(setYears(potential_forest_cell[, refYear, ], NULL), NULL) - forestNow, 0)
+  affWeight[] <- as.numeric(affWeight) * vegc
+  affWeight <- affWeight + 10^-10
+
   cat("Compute NPI  AFF policy")
   addline("")
   addline("###############")
@@ -207,7 +222,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   npi_aff <- droplevels(subset(pol_def, policy=="npi" & landpool=="affore"))
   addtable(npi_aff[,c(-2,-3)])
   npi_aff <- calc_policy(npi_aff, land_stock, pol_type="aff", pol_mapping=pol_mapping,
-                         weight=dimSums(land_stock[,2005,c("crop","past")]) + 10^-10,
+                         weight=affWeight,
                          map_file=map_file)
   getNames(npi_aff) <- "npi"
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
@@ -220,7 +235,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   ndc_aff <- droplevels(subset(pol_def, policy=="ndc" & landpool=="affore"))
   addtable(ndc_aff[,c(-2,-3)])
   ndc_aff <- calc_policy(ndc_aff, land_stock, pol_type="aff", pol_mapping=pol_mapping,
-                         weight=dimSums(land_stock[,2005,c("crop","past")]) + 10^-10,
+                         weight=affWeight,
                          map_file=map_file)
   getNames(ndc_aff) <- "ndc"
   #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
@@ -276,7 +291,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
     ndcdelay_def$policy     <- "ndcdelay"
     addtable(ndcdelay_def[,c(-2,-3)])
     ndcdelay_aff <- calc_policy(ndcdelay_def, land_stock, pol_type="aff", pol_mapping=pol_mapping,
-                                weight=dimSums(land_stock[,2005,c("crop","past")]) + 10^-10,
+                                weight=affWeight,
                                 map_file=map_file)
     getNames(ndcdelay_aff) <- "ndcdelay"
     # mirror ndc: years <= 2025 follow the NPI baseline

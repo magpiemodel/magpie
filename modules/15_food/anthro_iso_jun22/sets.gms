@@ -210,6 +210,9 @@ sets
           livst_rum, livst_pig, livst_chick, livst_egg, livst_milk, fish,
           others /
 
+exodiettype Different diet type to differentiate EL2 and other dietary recommendations
+     / EL2, NIN /
+
 EAT_targettype15 Minimum or maximum target type of the EAT Lancet recommendations
     / min, max /
 
