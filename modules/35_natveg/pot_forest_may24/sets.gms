@@ -7,12 +7,13 @@
 
 sets
 
-  driver_source Source of deforestation drivers
-  / overall, deforestation, shifting_agriculture,
-  forestry, wildfire, urbanization /
+* Columns of f35_forest_lost_share, as produced by mrland's calcForestLossByDriver
+  driver_source Source of forest disturbance
+  / overall, shifting_cultivation /
 
-  combined_loss(driver_source) Combined loss from fire plus agriculture
-  / shifting_agriculture,wildfire /
+* Classes summed under s35_forest_damage = 3
+  combined_loss(driver_source) Combined loss from disturbances not modelled endogenously
+  / shifting_cultivation /
 
   pol35 Land protection policy
   / none, npi, ndc /
