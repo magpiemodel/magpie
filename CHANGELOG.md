@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **config** Update scenario_config_susmip.csv with new values for bii targets
+- **config** additional data updated to `additional_data_rev4.74.tgz`, updated input vector including bugfix in rotation rules
 - **default.cfg** Correction: removed ALB from isoCountriesEUR list
 - **scripts/output/extra/runSEALSallocation.R** adjusted to SEALS v2.0.0
 - **config** additional data updated to `additional_data_rev4.73.tgz` (updated seals_scenario_config.csv to conform to SEALS v2.0.0)
