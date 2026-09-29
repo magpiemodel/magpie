@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **39_landconversion** regional land conversion cost calibration extended to pasture (mirrors the existing cropland mechanism); new `calib_pasture_landconversion_cost` config switch (default TRUE) allows disabling pasture calibration for legacy crop-only behavior
 - **scripts/calibration/landconversion_cost.R** reward calibration factor is now capped (previously unbounded), via new `reward_calib_max_landconversion_cost`/`_past` config options
 - **scripts/start_functions.R** `recalibrate_landconversion_cost = "ifneeded"` now accounts for the new `calib_pasture_landconversion_cost` switch: when pasture calibration is off, a pasture calibration file must be neutral (not just present) to skip recalibration, so a stale file from an earlier pasture-calibration-enabled run is never silently reused
+- **config** Update scenario_config_susmip.csv with new values for bii targets
+- **config** additional data updated to `additional_data_rev4.74.tgz`, updated input vector including bugfix in rotation rules
 - **default.cfg** Correction: removed ALB from isoCountriesEUR list
 - **scripts/output/extra/runSEALSallocation.R** adjusted to SEALS v2.0.0
 - **config** additional data updated to `additional_data_rev4.73.tgz` (updated seals_scenario_config.csv to conform to SEALS v2.0.0)
