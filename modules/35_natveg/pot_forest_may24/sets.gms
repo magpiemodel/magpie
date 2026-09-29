@@ -9,7 +9,7 @@ sets
 
 * Columns of f35_forest_lost_share, as produced by mrland's calcForestLossByDriver
   driver_source Source of forest disturbance
-  / overall, shifting_cultivation /
+  / shifting_cultivation /
 
 * Classes summed under s35_forest_damage = 3
   combined_loss(driver_source) Combined loss from disturbances not modelled endogenously
