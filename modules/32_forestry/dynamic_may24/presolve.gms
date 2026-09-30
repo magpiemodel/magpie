@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *Reduction of ac_est is not possible.
-v32_hvarea_forestry.fx(j,ac_est) = 0;
+v32_hvarea_forestry.fx(j,harvest32,ac_est) = 0;
 v32_land_reduction.fx(j,type32,ac_est) = 0;
 
 ** START ndc **
@@ -56,16 +56,21 @@ if(m_year(t) <= sm_fix_SSP2,
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation
 *' 1 = Use plantation growth curve (faster than natveg) towards LPJmL natural vegetation
 if(s32_aff_plantation = 0,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_secdforest_ac_uncalib(t,j,ac,ag_pools);
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
 elseif s32_aff_plantation = 1,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_plantation_ac_uncalib(t,j,ac,ag_pools);
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,ag_pools);
 );
 
 *' Timber plantations carbon densities:
 p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_plantation_ac(t,j,ac,ag_pools);
 
 *' NDC carbon densities are natveg carbon densities.
-p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_secdforest_ac_uncalib(t,j,ac,ag_pools);
+p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_secdforest_ac(t,j,ac,ag_pools);
+
+*' Other-planted (FRA "other planted") carbon densities: the natveg-derived curve read from f52_growth_par
+*' other_planted (built in module 52 = natveg curve, same shape, rate scaled per biome). CRITICAL:
+*' must be set before q32_carbon (which sums the full type32 set) or other_planted would be booked at density 0.
+p32_carbon_density_ac(t,j,"other_planted",ac,ag_pools) = pm_carbon_density_other_planted_ac(t,j,ac,ag_pools);
 
 *' CDR from afforestation for each age-class, depending on planning horizon.
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planning_horizon/5)
@@ -107,14 +112,14 @@ v32_land.up(j,type32,ac) = Inf;
 
 if(s32_hvarea = 0,
 *** zero. Fixed timber plantations. No harvest. No establisment.
-  v32_hvarea_forestry.fx(j,ac_sub) = 0;
-  v32_land.fx(j,"plant",ac) = pc32_land(j,"plant",ac);
+  v32_hvarea_forestry.fx(j,harvest32,ac_sub) = 0;
+  v32_land.fx(j,harvest32,ac) = pc32_land(j,harvest32,ac);
   s32_establishment_static = 1;
   s32_establishment_dynamic = 0;
 elseif s32_hvarea = 1,
 *** exogenous. All timber plantations are harvested at rotation age and are re-established such that the total plantation area remains constant.
-  v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
-  v32_land.fx(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
+  v32_land.fx(j,harvest32,ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,harvest32,ac);
+  v32_land.fx(j,harvest32,ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
   s32_establishment_static = 1;
   s32_establishment_dynamic = 0;
 
@@ -128,16 +133,16 @@ elseif s32_hvarea = 2,
 *** endogenous. All plantations are harvested at rotation age. Plantation establishment is endogenous.
 ** Fix timber plantations until the end of the rotation. "ac.off" identical to "ord(ac)-1".
 ** The offset is needed because the first element of ac is ac0, which is not included in p32_rotation_cellular_harvesting.
-  v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+  v32_land.fx(j,harvest32,ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,harvest32,ac);
 ** After the rotation period, all plantations can be harvested.
-  v32_land.lo(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
+  v32_land.lo(j,harvest32,ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
   s32_establishment_static = 0;
   s32_establishment_dynamic = 1;
 );
 ** overwrite bounds for ac_est
-v32_land.lo(j,"plant",ac_est) = 0;
-v32_land.up(j,"plant",ac_est) = Inf;
-v32_land.l(j,"plant",ac_est) = 0.001;
+v32_land.lo(j,harvest32,ac_est) = 0;
+v32_land.up(j,harvest32,ac_est) = Inf;
+v32_land.l(j,harvest32,ac_est) = 0.001;
 
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac_est
@@ -178,7 +183,12 @@ v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0
 m_boundfix(v32_land,(j,type32,ac_sub),up,1e-6);
 
 ** Calculate expected growing stock at rotation age
-i32_growing_stock_at_harvest(t,j) = sum(ac$(ac.off = p32_rotation_cellular_estb(t,j)), im_growing_stock(t,j,ac,"forestry"));
+i32_growing_stock_at_harvest(t,j) = sum(ac$(ac.off = pm_rotation_cellular_estb(t,j)), im_growing_stock(t,j,ac,"forestry"));
+
+** Growing stock of the harvestable forestry pools by harvest sub-pool, so q32_prod_forestry sums over
+** harvest32 in one term (pure re-indexing of im_growing_stock + im_growing_stock_oplant).
+p32_gs_forestry(j,ac,"plant")         = im_growing_stock(t,j,ac,"forestry");
+p32_gs_forestry(j,ac,"other_planted") = im_growing_stock_oplant(t,j,ac);
 
 * Fader for plantation share in establishment decision
 if(ord(t) = 1,
@@ -221,8 +231,10 @@ vm_bv.l(j,"aff_co2p",potnatveg) =
   p32_bii_coeff("aff",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
 
 vm_bv.l(j,"aff_ndc",potnatveg) =
-  sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"ndc",ac)) *
-  p32_bii_coeff("ndc",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+  sum(bii_class_secd, (sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"ndc",ac)) *
+    p32_bii_coeff("ndc",bii_class_secd,potnatveg)
+  + sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"other_planted",ac)) *
+    p32_bii_coeff("other_planted",bii_class_secd,potnatveg))) * fm_luh2_side_layers(j,potnatveg);
 
 vm_bv.l(j,"plant",potnatveg) =
   sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc32_land(j,"plant",ac)) *

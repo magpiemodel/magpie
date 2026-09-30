@@ -22,6 +22,11 @@ scalars
   s73_expansion                        Construction wood demand expansion factor by end of century based on industrial roundwood demand as base (1=100 percent increase) / 0 /
   s73_natveg_cost_premium              Cost premium for natveg timber production relative to plantation (1) / 0.15 /
   s73_woodfuel_stacking_factor         Stacking factor to convert stere to solid m3 (1) / 0.65 /
+  s73_sticky_harvest                   Switch for sticky natveg harvest-capacity cost 1=on 0=off (1) / 1 /
+  s73_hvint_primf                      Sticky harvest-capacity cost intensity for primary forest (1) / 1 /
+  s73_hvint_secdf                      Sticky harvest-capacity cost intensity for secondary forest (1) / 0.3 /
+  s73_hvint_other                      Sticky harvest-capacity cost intensity for other land (1) / 1 /
+  s73_hvcapital_depreciation           Depreciation rate of harvest-capacity capital (share per yr) / 0.05 /
 ;
 
 table f73_prod_specific_timber(t_all,iso,total_wood_products) End use timber product demand (mio. m3 per yr)

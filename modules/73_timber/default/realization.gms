@@ -18,6 +18,10 @@
 *' differentiate between plantation and natural vegetation sources, with natveg paying
 *' a per-tDM premium reflecting higher extraction costs. Logging residues from both
 *' roundwood and woodfuel harvest can contribute to woodfuel supply.
+*' Natural-vegetation harvest capacity (primary forest, secondary forest and other land) is treated as a
+*' depreciating capital stock (`s73_sticky_harvest`), so ramping a harvest source up or down carries an
+*' annuitized cost. This damps the timestep-to-timestep switching between harvest sources while leaving
+*' the FRA-pinned wood volume and the carbon curves unchanged.
 
 *' @limitations Timber demand cannot be determined endogenously
 
@@ -28,5 +32,6 @@ $Ifi "%phase%" == "input" $include "./modules/73_timber/default/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/73_timber/default/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/73_timber/default/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/73_timber/default/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/73_timber/default/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/73_timber/default/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

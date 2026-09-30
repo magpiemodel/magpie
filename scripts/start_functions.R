@@ -435,7 +435,12 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
     cat("Starting NPI/NDC recalculation!\n")
     source("scripts/npi_ndc/start_npi_ndc.R")
     setwd("scripts/npi_ndc")
-    calc_NPI_NDC(policyregions=cfg$policyregions)
+    # use the potential forest area matching c35_pot_forest_correction, so the cellular NPI/NDC
+    # afforestation placement stays consistent with the grassland-correction state used by the model
+    potForestFile <- if (isTRUE(cfg$gms$c35_pot_forest_correction == "off")) {
+      "../../modules/35_natveg/input/pot_forest_area_uncorrected_0.5.mz"
+    } else "../../modules/35_natveg/input/pot_forest_area_0.5.mz"
+    calc_NPI_NDC(policyregions=cfg$policyregions, potential_forest_file=potForestFile)
     setwd("../..")
     cat("NPI/NDC recalculation successful!\n")
   }

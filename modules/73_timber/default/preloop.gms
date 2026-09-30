@@ -93,3 +93,6 @@ im_timber_prod_cost(i,"woodfuel") = s73_timber_prod_cost_woodfuel / im_vol_conv(
 ** Natveg cost = base cost * (1 + premium)
 i73_timber_prod_cost_natveg(i,"wood") = im_timber_prod_cost(i,"wood") * (1 + s73_natveg_cost_premium);
 i73_timber_prod_cost_natveg(i,"woodfuel") = im_timber_prod_cost(i,"woodfuel") * (1 + s73_natveg_cost_premium);
+
+** Initialise the sticky harvest-capacity capital stock (populated per timestep in postsolve).
+p73_hvcapital(t,j,land_natveg) = 0;
