@@ -203,7 +203,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, cal
     cat(">>> Starting with existing calibration file\n")
     oldCalib <- magpiesort(read.magpie(calibFile))[,getYears(calibDivergence),]
   } else {
-    cat(">>> First iteration - initializing calibration factors (cost=1 for expanding countries, cost=2.5 for contracting, reward=0)\n")
+    cat(">>> First iteration - initializing calibration factors (cost=1, reward=0)\n")
     oldCalib <- new.magpie(cells_and_regions = getCells(calibDivergence), years = getYears(calibDivergence), names = c("cost", "reward"), fill = NA)
     oldCalib[,,"cost"] <- 1
     oldCalib[,,"reward"] <- 0
