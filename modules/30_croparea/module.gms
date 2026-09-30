@@ -21,7 +21,6 @@
 *' @authors Jan Philipp Dietrich, Florian Humpenöder, Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%croparea%" == "detail_apr24" $include "./modules/30_croparea/detail_apr24/realization.gms"
 $Ifi "%croparea%" == "penalties_sep26" $include "./modules/30_croparea/penalties_sep26/realization.gms"
 $Ifi "%croparea%" == "rules_sep26" $include "./modules/30_croparea/rules_sep26/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

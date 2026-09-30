@@ -11,7 +11,7 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_rotation_policy  default
+$setglobal c30_rotation_policy  agroecology
 *options: none, min, default, good, good_20div, legumes, agroforestry, agroecology
 
 
@@ -72,7 +72,7 @@ $offdelim
 
 table f30_rotation_rules(rota30,rotascen30) Rotation min or max shares (1)
 $ondelim
-$include "./modules/30_croparea/rules_sep26/input/f30_rotation_rules.csv"
+$include "./modules/30_croparea/rules_sep26/input/f30_rotation_rules_threshold.csv"
 $offdelim
 ;
 

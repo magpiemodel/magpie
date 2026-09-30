@@ -11,7 +11,7 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_rotation_policy  default
+$setglobal c30_rotation_policy  agroecology
 *options: none, default, legumes, agroforestry, agroecology
 
 
@@ -72,14 +72,14 @@ $offdelim
 
 table f30_rotation_incentives(rota30,incentscen30) penalties for violating rotation rules (USD17MER)
 $ondelim
-$include "./modules/30_croparea/penalties_sep26/input/f30_rotation_incentives.csv"
+$include "./modules/30_croparea/penalties_sep26/input/f30_rotation_penalty_incentives.csv"
 $offdelim
 ;
 
 parameter f30_rotation_rules(rota30) Rotation min or max shares (1)
 /
 $ondelim
-$include "./modules/30_croparea/penalties_sep26/input/f30_rotation_incentives_rules.csv"
+$include "./modules/30_croparea/penalties_sep26/input/f30_rotation_penalty_threshold.csv"
 $offdelim
 /
 ;
