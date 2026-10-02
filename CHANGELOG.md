@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH and AGO (one row per region, land pool and policy)
 - **default.cfg** module 39: exposed `s39_reward_past_reduction` and `s39_ignore_calib_past` as configurable (previously hardcoded); rescaled `s39_reward_past_reduction` default from 7380 to 5904 to match cropland's reward/cost ratio; updated stale realization comment describing pasture cost as static
 
 ### added

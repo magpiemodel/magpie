@@ -395,6 +395,8 @@ calc_flows <- function(stock) {
 # Up to the last observed year ly no loss is allocated, i.e. the observed stock applies.
 calc_ad_allowed <- function(policy, stock, ly) {
   policy <- unique(policy)
+  # one row per region (exact duplicates are removed above)
+  stopifnot(!anyDuplicated(policy$dummy))
   tp <- getYears(stock, as.integer = TRUE)
   cell_region <- getItems(stock, "iso", full = TRUE)
   regions <- unique(cell_region)
