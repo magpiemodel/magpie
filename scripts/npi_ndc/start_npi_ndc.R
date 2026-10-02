@@ -590,6 +590,9 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   }
 
   map <- readRDS(map_file)
+  # cell names are replaced by position below, so the cell order (coordinates) must match the map
+  stopifnot(identical(sub("\\.[^.]*$", "", getItems(magpie_policy, dim = 1)),
+                      sub("\\.[^.]*$", "", map$cell)))
   getItems(magpie_policy, dim = 1, raw = TRUE) <- map$cell
   magpie_policy <- madrat::toolAggregate(magpie_policy, map)
 
