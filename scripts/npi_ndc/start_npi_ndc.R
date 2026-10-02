@@ -512,7 +512,8 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   #This is a return object of this function and contains policy targets at
   #cluster level
   magpie_policy <- new.magpie(unique(pol_mapping$policyregions), tp, NULL, 0)
-  keys <- unique(policy$key)
+  # ad bounds are complete (ad_min_stock), the interpolation of targets is only needed for aff/affexp
+  keys <- if (pol_type == "ad") NULL else unique(policy$key)
   for (i in keys) {
     countries <- policy$dummy[policy$key == i]
 
