@@ -464,15 +464,20 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   if (pol_type == "ad") {
     ad <- calc_ad_allowed(policy, stock, ly)
     allowed <- ad$allowed
+    covered <- ad$covered
     if (!is.null(prior)) {
       prior <- prior[prior$dummy %in% unique(pol_mapping$policyregions), ]
       ad_prior <- calc_ad_allowed(prior, stock, ly)
       early <- tp <= switch_year
       allowed[ad_prior$covered, early] <- ad_prior$allowed[ad_prior$covered, early]
+      # regions with a prior (npi) row but without own (ndc) row keep the prior trajectory in all years
+      prior_only <- ad_prior$covered & !ad$covered
+      allowed[prior_only, ] <- ad_prior$allowed[prior_only, ]
+      covered <- covered | ad_prior$covered
     }
     cum_allowed <- t(apply(allowed, 1, cumsum))
     min_stock <- pmax(as.array(stock)[, , 1] - cum_allowed, 0)
-    min_stock[!ad$covered, ] <- 0
+    min_stock[!covered, ] <- 0
     ad_min_stock <- stock
     ad_min_stock[, , ] <- as.vector(min_stock)
   }
