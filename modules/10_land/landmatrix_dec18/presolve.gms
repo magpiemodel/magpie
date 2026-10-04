@@ -21,5 +21,3 @@ vm_lu_transitions.fx(j,land_from,"primforest") = 0;
 vm_lu_transitions.up(j,"primforest","primforest") = Inf;
 
 *' @stop
-
-m_boundfix(vm_land,(j,land),up,1e-6);
