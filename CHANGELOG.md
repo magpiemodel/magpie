@@ -7,8 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
--  **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration. 
+- **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration. 
 - **default.cfg** module 39: exposed `s39_reward_past_reduction` and `s39_ignore_calib_past` as configurable (previously hardcoded); rescaled `s39_reward_past_reduction` default from 7380 to 5904 to match cropland's reward/cost ratio; updated stale realization comment describing pasture cost as static
 - **config** Update scenario_config_susmip.csv with new values for bii targets
 - **config** additional data updated to `additional_data_rev4.74.tgz`, updated input vector including bugfix in rotation rules
@@ -41,6 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
 ### fixed
+- **scripts/npi_ndc** NPI/NDC avoided deforestation and other land conversion bounds now follow the policy targets. Previously, targets were ignored and the bound was frozen at the last observed stock. The minimum stock is now the last observed stock minus the cumulative allowed loss, and the NDC trajectory continues from the NPI trajectory after 2025
 - **scripts/calibration/landconversion_cost.R** `restart=TRUE` now reports cropland/pasture calibration-file state independently instead of assuming they match; best-iteration selection now indexes calibration factors by iteration name rather than array position, avoiding potential misalignment
 
 

@@ -136,6 +136,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addline("##############")
   npi_ad <- droplevels(subset(pol_def, policy=="npi" & landpool=="forest"))
   addtable(npi_ad[,c(-2,-3)])
+  npi_ad_def <- npi_ad
   npi_ad <- calc_policy(npi_ad, forest_stock, pol_type="ad", pol_mapping=pol_mapping,
                         map_file=map_file)
   getNames(npi_ad) <- "npi.forest"
@@ -149,7 +150,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   ndc_ad <- droplevels(subset(pol_def, policy=="ndc" & landpool=="forest"))
   addtable(ndc_ad[,c(-2,-3)])
   ndc_ad <- calc_policy(ndc_ad, forest_stock, pol_type="ad", pol_mapping=pol_mapping,
-                        map_file=map_file)
+                        map_file=map_file, prior=npi_ad_def)
   getNames(ndc_ad) <- "ndc.forest"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   ndc_ad[,which(getYears(ndc_ad,as.integer=TRUE)<=2025),] <-
@@ -170,6 +171,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addline("################")
   npi_aolc <- droplevels(subset(pol_def, policy=="npi" & landpool=="other"))
   addtable(npi_aolc[,c(-2,-3)])
+  npi_aolc_def <- npi_aolc
   npi_aolc <- calc_policy(npi_aolc, land_stock[,,"other"], pol_type="ad",
                           pol_mapping=pol_mapping, map_file=map_file)
   getNames(npi_aolc) <- "npi.other"
@@ -183,7 +185,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   ndc_aolc <- droplevels(subset(pol_def, policy=="ndc" & landpool=="other"))
   addtable(ndc_aolc[,c(-2,-3)])
   ndc_aolc <- calc_policy(ndc_aolc, land_stock[,,"other"], pol_type="ad",
-                          pol_mapping=pol_mapping, map_file=map_file)
+                          pol_mapping=pol_mapping, map_file=map_file, prior=npi_aolc_def)
   getNames(ndc_aolc) <- "ndc.other"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   ndc_aolc[,which(getYears(ndc_aolc,as.integer=TRUE)<=2025),] <-
@@ -384,10 +386,56 @@ calc_flows <- function(stock) {
   return(out)
 }
 
+### allowed loss per time step for avoided deforestation / conversion (ad) policies
+# The protection share p(t) rises linearly from 0 in baseyear to target in targetyear and stays
+# constant afterwards. The reference loss rate f_ref (Mha/yr) is the observed gross loss per cell
+# (gains in one cell do not offset losses in another), taken from the period ending in
+# baseyear (targettype 1) or in the last observed year (targettype 2, baseline).
+# The loss allowed in the time step ending in t is (1 - p(t)) * f_ref * time step length.
+# Up to the last observed year ly no loss is allocated, i.e. the observed stock applies.
+calc_ad_allowed <- function(policy, stock, ly) {
+  policy <- unique(policy)
+  # one row per region (exact duplicates are removed above)
+  stopifnot(!anyDuplicated(policy$dummy))
+  tp <- getYears(stock, as.integer = TRUE)
+  cell_region <- getItems(stock, "iso", full = TRUE)
+  regions <- unique(cell_region)
+
+  flow <- as.array(calc_flows(stock))[, , 1]
+  flow[flow < 0] <- 0
+
+  p <- matrix(0, length(regions), length(tp), dimnames = list(regions, NULL))
+  ref_year <- setNames(rep(NA_integer_, length(regions)), regions)
+  for (k in seq_len(nrow(policy))) {
+    region     <- as.character(policy$dummy[k])
+    baseyear   <- as.integer(policy$baseyear[k])
+    targetyear <- as.integer(policy$targetyear[k])
+    target     <- as.numeric(policy$target[k])
+    if (!(policy$targettype[k] %in% 1:2)) stop("unknow targettype; needs to be 1 or 2")
+    p[region, ] <- ifelse(tp < baseyear, 0,
+                   ifelse(tp >= targetyear, target, target * (tp - baseyear) / (targetyear - baseyear)))
+    # the first period (1995) has no observed flow
+    ref_year[region] <- if (policy$targettype[k] == 1) min(max(baseyear, tp[2]), ly) else ly
+  }
+
+  covered <- !is.na(ref_year[cell_region])
+  f_ref <- rep(0, length(cell_region))
+  f_ref[covered] <- flow[cbind(which(covered),
+                               match(paste0("y", ref_year[cell_region[covered]]), colnames(flow)))]
+  t_periods <- as.numeric(calc_tperiods(c(tp[1], tp)))
+  allowed <- (1 - p[cell_region, , drop = FALSE]) * f_ref * rep(t_periods, each = length(cell_region))
+  allowed[, tp <= ly] <- 0
+  return(list(allowed = allowed, covered = covered))
+}
+
 ### calc policies: npi, ndc and affexp
+# prior (ad only): policy definitions (npi) that determine the allowed loss up to switch_year,
+# so that the ndc trajectory continues from the npi trajectory instead of restarting from the
+# observed stock
 calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
                         weight=NULL, potential_stock=NULL, 
-                        map_file = Sys.glob("../../input/clustermap_rev*.rds")) {
+                        map_file = Sys.glob("../../input/clustermap_rev*.rds"),
+                        prior = NULL, switch_year = 2025) {
 
   ## For affexp: potential_stock must be provided (country-level potential forest)                          
   if (pol_type == "affexp" && is.null(potential_stock)) {
@@ -411,14 +459,27 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   #create key to distinguish different cases of baseyear, targetyear combinations
   policy$key <- paste(policy$baseyear, policy$targetyear)
 
-  #set stock to zero or Inf for countries without policies
-  # (representing no constraint for min and max constraints)
+  # ad: minimum stock = observed stock in the last observed year minus the cumulative
+  # allowed loss; zero (no constraint) for countries without policy
   if (pol_type == "ad") {
-    stock[!(getItems(stock, "iso", full = TRUE) %in% policy_countries),,] <- 0
-    #calculate flows
-    flow <- calc_flows(stock)
-    #account only for positive flows, i.e. deforestation
-    flow[flow < 0] <- 0
+    ad <- calc_ad_allowed(policy, stock, ly)
+    allowed <- ad$allowed
+    covered <- ad$covered
+    if (!is.null(prior)) {
+      prior <- prior[prior$dummy %in% unique(pol_mapping$policyregions), ]
+      ad_prior <- calc_ad_allowed(prior, stock, ly)
+      early <- tp <= switch_year
+      allowed[ad_prior$covered, early] <- ad_prior$allowed[ad_prior$covered, early]
+      # regions with a prior (npi) row but without own (ndc) row keep the prior trajectory in all years
+      prior_only <- ad_prior$covered & !ad$covered
+      allowed[prior_only, ] <- ad_prior$allowed[prior_only, ]
+      covered <- covered | ad_prior$covered
+    }
+    cum_allowed <- t(apply(allowed, 1, cumsum))
+    min_stock <- pmax(as.array(stock)[, , 1] - cum_allowed, 0)
+    min_stock[!covered, ] <- 0
+    ad_min_stock <- stock
+    ad_min_stock[, , ] <- as.vector(min_stock)
   }
 
   # affexp pre-computation: aggregate cell-level forest stock to country level
@@ -451,7 +512,8 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   #This is a return object of this function and contains policy targets at
   #cluster level
   magpie_policy <- new.magpie(unique(pol_mapping$policyregions), tp, NULL, 0)
-  keys <- unique(policy$key)
+  # ad bounds are complete (ad_min_stock), the interpolation of targets is only needed for aff/affexp
+  keys <- if (pol_type == "ad") NULL else unique(policy$key)
   for (i in keys) {
     countries <- policy$dummy[policy$key == i]
 
@@ -507,18 +569,6 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
           extrapolation_type = "constant")
       }
 
-    #set reference flow based on target type
-    if (pol_type == "ad") {
-      c_index <- (sub("\\..*$", "", getCells(stock)) %in% countries)
-      stock[c_index, tp > targetyear, ] <- setYears(stock[c_index, targetyear, ], NULL)
-      targettypes <- unique(policy[policy$key == i, "targettype"])
-      if (!all(targettypes %in% 1:2)) stop("unknow targettype; needs to be 1 or 2")
-      if (any(targettypes == 1)) {
-        t1countries <- policy$dummy[policy$key == i & policy$targettype == 1]
-        t1c_index <- (sub("\\..*$", "", getCells(flow)) %in% t1countries)
-        flow[t1c_index, , ] <- setYears(flow[t1c_index, baseyear, ], NULL)
-      }
-    }
   }
 }
 
@@ -535,12 +585,14 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   if (pol_type == "aff" || pol_type == "affexp") {
     magpie_policy <- madrat::toolAggregate(x = magpie_policy, rel = rel, weight = weight)
   } else if (pol_type == "ad") {
-    magpie_policy <- madrat::toolAggregate(x = magpie_policy, rel = rel)
-    t_periods <- calc_tperiods(c(tp[1], tp))
-    magpie_policy <- magpie_policy * flow * t_periods + stock
+    # cells are ordered as in pol_mapping and map_file
+    magpie_policy <- ad_min_stock
   }
 
   map <- readRDS(map_file)
+  # cell names are replaced by position below, so the cell order (coordinates) must match the map
+  stopifnot(identical(sub("\\.[^.]*$", "", getItems(magpie_policy, dim = 1)),
+                      sub("\\.[^.]*$", "", map$cell)))
   getItems(magpie_policy, dim = 1, raw = TRUE) <- map$cell
   magpie_policy <- madrat::toolAggregate(magpie_policy, map)
 
