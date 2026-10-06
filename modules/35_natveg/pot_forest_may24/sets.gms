@@ -11,10 +11,6 @@ sets
   driver_source Source of forest disturbance
   / shifting_cultivation /
 
-* Classes summed under s35_forest_damage = 3
-  combined_loss(driver_source) Combined loss from disturbances not modelled endogenously
-  / shifting_cultivation /
-
   pol35 Land protection policy
   / none, npi, ndc /
 
