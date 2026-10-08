@@ -42,7 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
 ### fixed
-- **10_land, 29_cropland, 35_natveg** `m_boundfix` fixes to `up` instead of `l`, removed two redundant calls (10_land, 29_cropland tree cover) (no change in results)
+- **core, 29_cropland, 35_natveg** `m_boundfix` always fixes to `up` with sensitivity 1e-6 (arguments `sufx` and `sens` removed, previously `l` at three sites), removed redundant call for 29_cropland tree cover (no change in results)
 - **scripts/npi_ndc** NPI/NDC avoided deforestation and other land conversion bounds now follow the policy targets. Previously, targets were ignored and the bound was frozen at the last observed stock. The minimum stock is now the last observed stock minus the cumulative allowed loss, and the NDC trajectory continues from the NPI trajectory after 2025
 - **scripts/calibration/landconversion_cost.R** `restart=TRUE` now reports cropland/pasture calibration-file state independently instead of assuming they match; best-iteration selection now indexes calibration factors by iteration name rather than array position, avoiding potential misalignment
 

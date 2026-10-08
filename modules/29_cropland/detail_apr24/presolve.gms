@@ -118,7 +118,7 @@ else
 * Bounds for fallow land
 vm_fallow.lo(j) = 0;
 vm_fallow.up(j) = p29_avl_cropland(t,j);
-m_boundfix(vm_fallow,(j),up,1e-6);
+m_boundfix(vm_fallow,(j));
 
 * Update biodiversity value
 vm_bv.l(j,"crop_fallow",potnatveg) = 

@@ -166,7 +166,7 @@ v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j
 );
 * upper bound
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
-m_boundfix(v35_secdforest,(j,ac_sub),up,1e-6);
+m_boundfix(v35_secdforest,(j,ac_sub));
 
 * set restoration target
 p35_land_restoration(j,"secdforest") = pm_land_conservation(t,j,"secdforest","restore");
@@ -197,7 +197,7 @@ vm_land_other.up(j,"othernat",ac_sub) = pc35_land_other(j,"othernat",ac_sub);
 * No shr limit on other (only secdforest)
 vm_land_other.up(j,"youngsecdf",ac_sub) = pc35_land_other(j,"youngsecdf",ac_sub);
 vm_land_other.fx(j,"youngsecdf",ac_est) = 0;
-m_boundfix(vm_land_other,(j,othertype35,ac_sub),up,1e-6);
+m_boundfix(vm_land_other,(j,othertype35,ac_sub));
 
 pm_max_forest_est(t,j)$(pm_max_forest_est(t,j) < sum(ac, pc35_land_other(j,"youngsecdf",ac))) = 
   sum(ac, pc35_land_other(j,"youngsecdf",ac));
@@ -217,7 +217,7 @@ pm_land_conservation(t,j,"other","restore") = p35_land_restoration(j,"other");
 vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
 
 * boundfix for land_natveg
-m_boundfix(vm_land,(j,land_natveg),up,1e-6);
+m_boundfix(vm_land,(j,land_natveg));
 
 * ----------------------------
 * Calculate carbon density
