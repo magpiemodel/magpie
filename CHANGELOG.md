@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **default.cfg** `f71_livestock_distribution_0.5.mz` added to `files2export`, so that magpie4 `production()`, `ManureExcretion()` and `NitrogenBudget()` can use `disagg_lvst = "glw"` on run outputs
 - **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
 - **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration. 
