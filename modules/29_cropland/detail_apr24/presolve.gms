@@ -79,7 +79,6 @@ if (s29_treecover_keep = 1,
 v29_treecover.lo(j,ac_est) = 0;
 v29_treecover.up(j,ac_est) = Inf;
 v29_treecover.fx(j,ac_sub) = pc29_treecover(j,ac_sub);
-m_boundfix(v29_treecover,(j,ac_sub),l,1e-6);
 
 * set treecover penalty
 if (m_year(t) <= s29_treecover_scenario_start,
@@ -119,7 +118,7 @@ else
 * Bounds for fallow land
 vm_fallow.lo(j) = 0;
 vm_fallow.up(j) = p29_avl_cropland(t,j);
-m_boundfix(vm_fallow,(j),l,1e-6);
+m_boundfix(vm_fallow,(j));
 
 * Update biodiversity value
 vm_bv.l(j,"crop_fallow",potnatveg) = 
