@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **config** additional data updated to `additional_data_rev4.78.tgz` (updated seals_scenario_config.csv and seals_global_coefficients.csv to conform to SEALS v2.1.1)
 - **scripts/output/extra/runSEALSallocation.R** adjusted to SEALS v2.1.1, runs SEALS serially on the local machine if SLURM is not available (`sealsMode`), patches the standard SEALS `run_seals.py` and takes the SEALS base data directory directly (`dirBaseData`)
 - **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
