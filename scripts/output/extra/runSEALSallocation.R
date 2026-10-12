@@ -339,6 +339,10 @@ Sys.chmod(iniLock, mode = "0664")
   if (status != 0) {
     stop("SEALS allocation failed, see ", logFile)
   }
+  message(
+    "SEALS allocation finished for ", title, ". Stitched SEALS allocation outputs are in ",
+    "'./output/seals/intermediate/stitched_lulc_simplified_scenarios'"
+  )
 }
 
 # --------------------------------
