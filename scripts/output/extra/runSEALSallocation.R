@@ -307,7 +307,7 @@ Sys.chmod(iniLock, mode = "0664")
       "#SBATCH --dependency=afterok:", dependsID,
       "\n#SBATCH --kill-on-invalid-dep=yes"
     ), "") , "\n",
-    "#SBATCH --cpus-per-task=64", "\n",
+    "#SBATCH --cpus-per-task=32", "\n",
     paste("source", miniforgePath),
     paste("conda activate", sealsEnv), "\n",
     paste("python", paste0("run_seals_", title, ".py"))
