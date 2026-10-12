@@ -327,7 +327,7 @@ Sys.chmod(iniLock, mode = "0664")
     stop("Could not find conda on the PATH, which is required to run SEALS locally")
   }
   runLock <- filelock::lock(file.path(dirProject, "seals_local.lock"), exclusive = TRUE, timeout = Inf)
-  on.exit(filelock::unlock(runLock))
+  withr::defer(filelock::unlock(runLock))
 
   dirScripts <- normalizePath(file.path(dirProject, "scripts"))
   logFile <- file.path(dirScripts, paste0("outfile_local_", title, ".log"))
