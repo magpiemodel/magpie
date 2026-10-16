@@ -33,7 +33,7 @@
 *' @limitations The satellite age-class data (module [28_ageclass]) contain a large share of very
 *' young secondary forest whose regrowth MAgPIE would over-credit, because disturbances that keep this
 *' forest young in reality (shifting cultivation, fire, small-scale clearing) are not represented
-*' explicitly. To avoid this, the youngest secondary-forest age classes are initialised with the area
+*' explicitly; shifting cultivation enters only as the uniform regional loss rate above. To avoid this, the youngest secondary-forest age classes are initialised with the area
 *' of the ~35-year class. Additionally, in this module realization, harvested secondary forest stays
 *' secondary forest and harvested primary forest is reclassified as secondary forest.
 *' Secondary-forest harvest is not age-differentiated, so cost-minimising harvest draws first on the

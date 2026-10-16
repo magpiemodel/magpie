@@ -80,6 +80,7 @@ p35_land_start_ac(j,ac,"secdforest") = i35_secdforest(j,ac);
 * -----------------------------
 * Set forest damage trajectory
 * -----------------------------
+abort$(s35_forest_damage = 3) "s35_forest_damage = 3 does not exist in pot_forest_oct26";
 m_sigmoid_time_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);
 
 * ---------------------------------------
