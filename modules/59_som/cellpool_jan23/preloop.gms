@@ -6,21 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *****************************
-*** SOM initialisation    ***
-*****************************
-
-i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"other","soilc") - f59_topsoilc_density(t_all,j);
-
-pc59_som_pool(j,"crop") =
-  sum((climate59,kcr),sum(clcl_climate59(clcl,climate59),
-      pm_climate_class(j,clcl)) * sum(cell(i,j), f59_cratio_landuse(i,climate59,kcr))
-      * f59_topsoilc_density("y1995",j) * sum(w, fm_croparea("y1995",j,w,kcr)));
-
-pc59_som_pool(j,noncropland59) =
-  f59_topsoilc_density("y1995",j) * pm_land_start(j,noncropland59);
-
-
-*****************************
 *** cshare calculation    ***
 *****************************
 
@@ -89,18 +74,26 @@ i59_cratio_scm(j) = sum(climate59, sum(clcl_climate59(clcl,climate59),
 *' @stop
 
 *********************************************
-*** fallow and tree cover initialisation  ***
+*** soil carbon pool initialisation       ***
 *********************************************
 
-*' @code The cropland pool initialised above only covers the croparea. Fallow
-*' land and tree cover carry no croparea, but do enter the cropland target stock
-*' `q59_som_target_cropland`. Their soil carbon is therefore initialized here with the
-*' same stock change factors the target uses:
+*' @code The cropland pool is initialised here. Croparea carries crop-specific factors. 
+*' Fallow land and tree cover add to the croparea pool to build the cropland pool.
+
+pc59_som_pool(j,"crop") =
+  sum((climate59,kcr),sum(clcl_climate59(clcl,climate59),
+      pm_climate_class(j,clcl)) * sum(cell(i,j), f59_cratio_landuse(i,climate59,kcr))
+      * f59_topsoilc_density("y1995",j) * sum(w, fm_croparea("y1995",j,w,kcr)));
 
 pc59_som_pool(j,"crop") = pc59_som_pool(j,"crop")
   + (im_fallow_start(j) * i59_cratio_fallow(j)
      + pm_treecover_start(j) * i59_cratio_treecover)
     * f59_topsoilc_density("y1995",j);
+
+*' The remaining land types carry no crop-specific stock change factors:
+
+pc59_som_pool(j,noncropland59) =
+  f59_topsoilc_density("y1995",j) * pm_land_start(j,noncropland59);
 
 *' @stop
 
@@ -110,6 +103,8 @@ pc59_som_pool(j,"crop") = pc59_som_pool(j,"crop")
 
 * starting value of carbon stocks 1995 is only an estimate.
 * ATTENTION: emissions in 1995 are not meaningful
+
+i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"other","soilc") - f59_topsoilc_density(t_all,j);
 
 pcm_carbon_stock(j,"crop","soilc",stockType) =
   pc59_som_pool(j,"crop") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
