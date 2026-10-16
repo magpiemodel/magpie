@@ -7,7 +7,7 @@
 
 sets
 
-* Columns of f35_forest_lost_share, as produced by mrland's calcForestLossByDriver
+* Columns of f35_forest_lost_share_gfw.cs3, as written by mrland's calcForestLossShare
   driver_source Source of forest disturbance
   / shifting_cultivation /
 
