@@ -180,7 +180,7 @@ else
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
-m_boundfix(v32_land,(j,type32,ac_sub),up,1e-6);
+m_boundfix(v32_land,(j,type32,ac_sub));
 
 ** Calculate expected growing stock at rotation age
 i32_growing_stock_at_harvest(t,j) = sum(ac$(ac.off = pm_rotation_cellular_estb(t,j)), im_growing_stock(t,j,ac,"forestry"));

@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
+- **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
+- **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration. 
+- **default.cfg** module 39: exposed `s39_reward_past_reduction` and `s39_ignore_calib_past` as configurable (previously hardcoded); rescaled `s39_reward_past_reduction` default from 7380 to 5904 to match cropland's reward/cost ratio; updated stale realization comment describing pasture cost as static
 - **config** Update scenario_config_susmip.csv with new values for bii targets
 - **config** additional data updated to `additional_data_rev4.74.tgz`, updated input vector including bugfix in rotation rules
 - **default.cfg** Correction: removed ALB from isoCountriesEUR list
@@ -33,13 +37,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **15_food** Added flexible source-to-target food substitution with configurable food baskets and kcal/protein replacement basis
 - **scenario_config_ec.csv** A set of scenarios for the Earth Commission
 - **scripts/start/projects/project_EC.R** Start script for EC scenarios.
-
+- **39_landconversion** regional land conversion cost calibration extended to pasture (mirrors the existing cropland mechanism); new `calib_pasture_landconversion_cost` config switch (default TRUE) allows disabling pasture calibration for legacy crop-only behavior
+- **scripts/calibration/landconversion_cost.R** reward calibration factor is now capped (previously unbounded), via new `reward_calib_max_landconversion_cost`/`_past` config options
+- **scripts/start_functions.R** `recalibrate_landconversion_cost = "ifneeded"` now accounts for the new `calib_pasture_landconversion_cost` switch: when pasture calibration is off, a pasture calibration file must be neutral (not just present) to skip recalibration, so a stale file from an earlier pasture-calibration-enabled run is never silently reused
 ### removed
 - **30_croparea** Removed the `detail_apr24` realization and its switch `s30_implementation`, superseded by `penalties_sep26` (`s30_implementation = 0`) and `rules_sep26` (`s30_implementation = 1`).
 - **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
 ### fixed
--
+- **core, 29_cropland, 35_natveg** `m_boundfix` always fixes to `up` with sensitivity 1e-6 (arguments `sufx` and `sens` removed, previously `l` at three sites), removed redundant call for 29_cropland tree cover (no change in results)
+- **scripts/npi_ndc** NPI/NDC avoided deforestation and other land conversion bounds now follow the policy targets. Previously, targets were ignored and the bound was frozen at the last observed stock. The minimum stock is now the last observed stock minus the cumulative allowed loss, and the NDC trajectory continues from the NPI trajectory after 2025
+- **scripts/calibration/landconversion_cost.R** `restart=TRUE` now reports cropland/pasture calibration-file state independently instead of assuming they match; best-iteration selection now indexes calibration factors by iteration name rather than array position, avoiding potential misalignment
 
 
 ## [4.14.1] - 2026-08-25
