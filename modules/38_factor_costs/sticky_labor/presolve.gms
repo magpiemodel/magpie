@@ -51,7 +51,11 @@ if (s38_target_labor_share = 0,
 v38_laborhours_need.l(j,kcr) = sum(cell(i,j), p38_labor_need(t,i,kcr) / pm_hourly_costs(t,i,"baseline"));
 v38_capital_need.l(j,kcr,mobil38) = sum(cell(i,j), p38_capital_need(t,i,kcr,mobil38));
 
-* update CES parameters (calibrating to baseline labor and capital needs)
+* update CES parameters (calibrating to baseline labor and capital needs):
+* The calibration assumes the full annuity price of capital (p38_intr_depr) and the baseline wage. The resulting
+* labor and capital needs are therefore only the cost-minimizing choice at these prices. They can change in the
+* optimization with any change in the effective prices of labor or capital (e.g. productivity change due to heat 
+* stress or wage changes, or capital that is already available from previous investments).
 i38_ces_shr(j,kcr) = sum(cell(i,j), (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)) / (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par) + pm_hourly_costs(t,i,"baseline") * v38_laborhours_need.l(j,kcr)**(1 + s38_ces_elast_par)));
 i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(-s38_ces_elast_par) + (1 - i38_ces_shr(j,kcr)) * v38_laborhours_need.l(j,kcr)**(-s38_ces_elast_par)]**(-1/s38_ces_elast_par)));
 
