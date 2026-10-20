@@ -11,7 +11,7 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_rotation_policy  agroecology
+$setglobal c30_rotation_policy  default
 *options: none, min, default, good, good_20div, legumes, agroforestry, agroecology
 
 

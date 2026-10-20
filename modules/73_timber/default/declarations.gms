@@ -43,16 +43,16 @@ q73_disinvest_harvest(j,land_natveg)                                        Redu
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_timber(t,i,type)                    Actual cost of harvesting timber from forests (mio. USD17MER per yr)
- ov73_prod_heaven_timber(t,j,kforestry,type) Production of woody biomass from heaven (mio. tDM per yr)
- ov73_prod_residues(t,j,type)                Production of residues from industrial roundwood harvest (mio. tDM per yr)
- oq73_cost_timber(t,i,type)                  Actual cost of harvesting timber from forests (mio. USD17MER per yr)
- oq73_prod_wood(t,j,type)                    Production of industrial roundwood (mio. tDM per yr)
- oq73_prod_woodfuel(t,j,type)                Production of wood fuel (mio. tDM per yr)
- oq73_prod_residues(t,j,type)                Production of residues from industrial roundwood harvest (mio. tDM per yr)
- ov73_invest_harvest(t,j,land_natveg,type)   Investment into natveg harvest capacity (mio. USD17MER per yr)
- oq73_invest_harvest(t,j,land_natveg,type)   Investment into natveg harvest capacity (mio. USD17MER per yr)
+ ov_cost_timber(t,i,type)                     Actual cost of harvesting timber from forests (mio. USD17MER per yr)
+ ov73_prod_heaven_timber(t,j,kforestry,type)  Production of woody biomass from heaven (mio. tDM per yr)
+ ov73_prod_residues(t,j,type)                 Production of residues from industrial roundwood harvest (mio. tDM per yr)
+ ov73_invest_harvest(t,j,land_natveg,type)    Investment into natveg harvest capacity (mio. USD17MER per yr)
  ov73_disinvest_harvest(t,j,land_natveg,type) Reduction of natveg harvest below existing harvest capacity (mio. USD17MER per yr)
+ oq73_cost_timber(t,i,type)                   Actual cost of harvesting timber from forests (mio. USD17MER per yr)
+ oq73_prod_wood(t,j,type)                     Production of industrial roundwood (mio. tDM per yr)
+ oq73_prod_woodfuel(t,j,type)                 Production of wood fuel (mio. tDM per yr)
+ oq73_prod_residues(t,j,type)                 Production of residues from industrial roundwood harvest (mio. tDM per yr)
+ oq73_invest_harvest(t,j,land_natveg,type)    Investment into natveg harvest capacity (mio. USD17MER per yr)
  oq73_disinvest_harvest(t,j,land_natveg,type) Reduction of natveg harvest below existing harvest capacity (mio. USD17MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

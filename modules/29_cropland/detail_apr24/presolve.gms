@@ -110,7 +110,7 @@ if (s29_fallow_max = 0,
 else
     vm_fallow.lo(j) = 0;
     vm_fallow.up(j) = p29_avl_cropland(t,j);
-    m_boundfix(vm_fallow,(j),l,1e-6);
+    m_boundfix(vm_fallow,(j));
     v29_fallow_short_missing.lo(j) = 0;
     v29_fallow_short_missing.up(j) = p29_avl_cropland(t,j);
     m_boundfix(v29_fallow_short_missing,(j));
