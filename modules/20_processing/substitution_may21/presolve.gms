@@ -17,3 +17,9 @@ v20_secondary_substitutes.up(i2,"molasses",kpr)=Inf;
 v20_secondary_substitutes.up(i2,"distillers_grain",kpr)=Inf;
 v20_secondary_substitutes.up(i2,"oilcakes",kpr)=Inf;
 v20_secondary_substitutes.up(i2,"brans",kcereals20)=Inf;
+
+*' The fibres balanceflow is removed in regions without a domestic cotton route
+*' (`pm_no_cotton_route`, see 21_trade). Fibres are only produced by ginning domestic
+*' cotton (`q20_processing_aggregation_cotton`), so the balanceflow cannot count as production there.
+i20_processing_balanceflow(ct,i,ksd) = f20_processing_balanceflow(ct,i,ksd);
+i20_processing_balanceflow(ct,i,"fibres")$(pm_no_cotton_route(ct,i) = 1) = 0;

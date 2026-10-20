@@ -7,6 +7,7 @@
 
 
 parameters
+ pm_no_cotton_route(t_all,i)                    Switch for regions without a domestic cotton route (1 = no cotton production possible) (1)
  i21_trade_margin(h,k_trade)                    Trade margins (USD17MER per tDM)
  i21_trade_tariff(h,k_trade)                    Trade tariffs (USD17MER per tDM)
 ;
