@@ -22,8 +22,7 @@ source("scripts/start_functions.R")
 # get default settings
 source("config/default.cfg")
 
-cfg$results_folder <- "output/:title:"
-cfg$force_replace <- TRUE
+cfg$results_folder <- "output/:title::date:"
 prefix <- "rotations"
 
 defaultCalibration <- cfg$input["calibration"]
@@ -32,18 +31,26 @@ for (r in c("penalties_sep26", "rules_sep26")) {
 
   cfg$gms$croparea <- r
 
-  # default policy, land conversion costs recalibrated because the two
-  # realizations constrain croparea to a different degree. Yield calibration
-  # stays off, as in the default config (s14_use_yield_calib = 0).
-  cfg$title <- paste(prefix, r, "default", sep = "_")
-  cfg$gms$c30_rotation_policy <- "default"
+  # Each realization is recalibrated from the same archive baseline, so the two
+  # calibrations are independent of each other and of run order. Resetting
+  # cfg$input["calibration"] also makes prepare() redistribute the archive, so the
+  # calibration starts from its factors rather than from the previous realization's.
+  # Land conversion costs only: yield calibration stays off, matching the default
+  # config (s14_use_yield_calib = 0).
   cfg$input["calibration"] <- defaultCalibration
   cfg$recalibrate <- FALSE
   cfg$recalibrate_landconversion_cost <- TRUE
+
+  cfg$title <- paste(prefix, r, "default", sep = "_")
+  cfg$gms$c30_rotation_policy <- "default"
   start_run(cfg, codeCheck = FALSE)
+
+  # The calibration above has just written f39_calib.csv and f39_calib_past.csv into
+  # modules/39_landconversion/input/, so submitCalibration() archives a complete set.
   calibTgz <- magpie4::submitCalibration(paste("H12", prefix, r, sep = "_"))
 
-  # policy run reuses the calibration factors of its own realization
+  # The policy run reuses its own realization's freshly computed factors instead of
+  # recalibrating again, so that the only difference to the run above is the policy.
   cfg$input["calibration"] <- calibTgz
   cfg$recalibrate_landconversion_cost <- FALSE
 
