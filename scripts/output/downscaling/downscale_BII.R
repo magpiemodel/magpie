@@ -6,8 +6,13 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ------------------------------------------------------------------------------------------------
-# description: Downscale MAgPIE results to 0.5 degree resolution using landuseinit as reference data
+# description: Downscale the BII of MAgPIE to 0.5 degree on the downscaled land (cell.bii_0.5.mz)
 # comparison script: FALSE
 # ------------------------------------------------------------------------------------------------
 library(mrdownscale)
-downscaleRun(outputdir, "DOWNSCALEDMAGPIE")
+
+# the tgz of the madrat collection; its cell.* files go to the output folder
+tgz <- downscaleRun(outputdir, "DOWNSCALEDMAGPIE", downscaling = "transitions", harmonization = "none",
+                    product = "BII")
+files <- grep("cell\\.", untar(tgz, list = TRUE), value = TRUE)
+untar(tgz, files = files, exdir = outputdir)
