@@ -26,7 +26,7 @@ source("config/default.cfg")
 cfg$force_replace <- TRUE
 
 cfg$results_folder <- "output/:title:"
-cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
+cfg$output <- c("rds_report","downscaling/downscale_land", "downscaling/downscale_BII", "downscaling/downscale_landConservation")#"extra/highres"
 
 prefix <- "CN72"
 

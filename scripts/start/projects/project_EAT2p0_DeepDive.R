@@ -31,7 +31,7 @@ cfg$qos <- "standby_highMem"
 cfg$output <- c(
   "output_check",
   "extra/highres",
-  "extra/disaggregation",
+  "downscaling/downscale_land", "downscaling/downscale_BII", "downscaling/downscale_landConservation",
   "projects/FSEC_nitrogenPollution",
   "projects/FSEC_water",
   "projects/agmip_report",

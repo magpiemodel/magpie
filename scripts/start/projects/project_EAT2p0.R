@@ -31,7 +31,7 @@ cfg$qos <- "standby_highMem"
 cfg$output <- c(
   "output_check",
   # "extra/highres", # do manually on last magpie run
-  "extra/disaggregation",
+  "downscaling/downscale_land", "downscaling/downscale_BII", "downscaling/downscale_landConservation",
   # "projects/FSEC_nitrogenPollution", # do manually on last (high-res) magpie run
   # "projects/FSEC_water", # do manually on last (high-res) magpie run
   "projects/agmip_report",
