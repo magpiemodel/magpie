@@ -9,10 +9,14 @@
 *' @equations
 
 *' Constant elasticity of substitution (CES) production function for one unit of output.
-*' The CES function accounts for capital `v38_capital_need` and labor `v38_laborhours_need` requirements.
-*' The efficiency of labor is affected by the labor productivity factor `pm_labor_prod` based on climate 
-*' change impacts, which is provided by the labor productivity module [37_labor_prod], and by the factor 
+*' The CES function accounts for capital `v38_capital_need` and labor `v38_laborhours_need` requirements
+*' and allows for shifts between them in response to changes in their relative prices.
+*' The efficiency of labor is affected by the labor productivity factor `pm_labor_prod` based on climate
+*' change impacts, which is provided by the labor productivity module [37_labor_prod], and by the factor
 *' `pm_productivity_gain_from_wages` based on increased wages from [36_employment].
+*' The effective price of capital is affected by pre-existing capital stocks: capital that is already available
+*' does not require new investment (see `q38_investment_immobile` and `q38_investment_mobile`) and is therefore
+*' cheaper than the price of capital assumed in the calibration.
 *' The calculation of total capital and labor costs is covered by the equations `q38_cost_prod_crop` and `q38_cost_prod_inv`.
 *' The conceptual and analytical details of the CES function including the labor productivity factor are documented in @orlov_ces_2021.
 
