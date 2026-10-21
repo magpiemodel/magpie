@@ -18,8 +18,17 @@ v20_secondary_substitutes.up(i2,"distillers_grain",kpr)=Inf;
 v20_secondary_substitutes.up(i2,"oilcakes",kpr)=Inf;
 v20_secondary_substitutes.up(i2,"brans",kcereals20)=Inf;
 
-*' The fibres balanceflow is removed in regions without a domestic cotton route
-*' (`pm_no_cotton_route`, see 21_trade). Fibres are only produced by ginning domestic
-*' cotton (`q20_processing_aggregation_cotton`), so the balanceflow cannot count as production there.
+
+*' Interaction with 21_trade: fibres can only be produced from domestic cotton (ginning).
+*' In some cases, the reported fibre production differs from what can be obtained from
+*' processing the reported domestic cotton. The processing balanceflow covers this difference
+*' for consistency.
+*' If however a (super)region reports no cotton production at all, its self-sufficiency
+*' ratio is 0 in the trade realization `selfsuff_reduced`. All cotton then has to be imported,
+*' i.e. domestic cotton production is forced to zero, and therefore no fibres can be produced
+*' domestically either. The trade module therefore also sets the fibres self-sufficiency ratio
+*' to 0 in this case, so that all fibres are imported. The processing balanceflow represents
+*' domestic fibre production, so it is set to 0 for these regions as well for consistency.
+
 i20_processing_balanceflow(ct,i,ksd) = f20_processing_balanceflow(ct,i,ksd);
 i20_processing_balanceflow(ct,i,"fibres")$(pm_no_cotton_route(ct,i) = 1) = 0;
