@@ -26,7 +26,7 @@ source("config/default.cfg")
 cfg$gms$s13_max_gdp_shr <- 0.01
 
 cfg$results_folder <- "output/:title:"
-#cfg$output <- c("rds_report","downscaling/downscale_land", "downscaling/downscale_BII", "downscaling/downscale_landConservation")#"extra/highres"
+#cfg$output <- c("rds_report","downscaling/downscale_default")#"extra/highres"
 prefix <- "rota_penalty18"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")

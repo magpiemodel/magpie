@@ -30,7 +30,7 @@ cfg$force_download <- TRUE
 cfg$qos <- "standby_highMem"
 cfg$output <- c(
   "output_check",
-  "downscaling/downscale_land", "downscaling/downscale_BII", "downscaling/downscale_landConservation",
+  "downscaling/downscale_default",
   "projects/FSEC_nitrogenPollution",
   "projects/FSEC_water",
   "projects/agmip_report",

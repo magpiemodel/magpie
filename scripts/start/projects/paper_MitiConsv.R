@@ -78,7 +78,7 @@ for (scen in scenarios) {
   cfg$results_folder <- "output/:title::date:"
 
   cfg$output <- c(
-    "output_check", "downscaling/downscale_land", "downscaling/downscale_BII", "downscaling/downscale_landConservation", "rds_report", "downscaling/runSEALSallocation"
+    "output_check", "downscaling/downscale_default", "rds_report", "downscaling/runSEALSallocation"
   )
 
   # Climate change switched off for these runs

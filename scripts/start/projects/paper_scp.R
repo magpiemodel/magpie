@@ -29,7 +29,7 @@ prefix <- "SCP44"
 cfg$results_folder <- "output/:title:"
 
 # output scripts
-cfg$output <- c("rds_report","downscaling/downscale_land", "downscaling/downscale_BII", "downscaling/downscale_landConservation")
+cfg$output <- c("rds_report","downscaling/downscale_default")
 
 ### Scenario setup
 # SSP2 as basis

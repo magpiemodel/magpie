@@ -6,13 +6,13 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ------------------------------------------------------------------------------------------------
-# description: Downscale the BII of MAgPIE to 0.5 degree on the downscaled land (cell.bii_0.5.mz)
+# description: Default downscaling of MAgPIE to 0.5 degree along the transitions of the run: land (with land split, crop area shares, transitions and peatland), BII and land conservation
 # comparison script: FALSE
 # ------------------------------------------------------------------------------------------------
 library(mrdownscale)
 
 # the tgz of the madrat collection; its cell.* files go to the output folder
 tgz <- downscaleRun(outputdir, "DOWNSCALEDMAGPIE", downscaling = "transitions", harmonization = "none",
-                    product = "BII")
+                    product = c("land", "BII", "landConservation"))
 files <- grep("cell\\.", untar(tgz, list = TRUE), value = TRUE)
 untar(tgz, files = files, exdir = outputdir)

@@ -217,7 +217,7 @@ fsecScenario <- function(scenario,
   cfg$recalibrate <- FALSE
   cfg$qos         <- "standby_highMem"
   cfg$output      <- c(if (highres) "extra/highres",
-                       "downscaling/downscale_land", "downscaling/downscale_BII", "downscaling/downscale_landConservation",
+                       "downscaling/downscale_default",
                        "projects/FSEC_cropDiversityGrid",
                        "projects/FSEC_dietaryIndicators",
                        "projects/FSEC_costs",
