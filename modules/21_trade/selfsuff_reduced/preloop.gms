@@ -18,6 +18,14 @@ i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hard
  );
 );
 
+*' If cotton cannot be produced domestically (cotton self-sufficiency = 0),
+*' fibres have no production route, because they are only produced by ginning
+*' domestic cotton (see 20_processing). The fibres self-sufficiency floor is
+*' therefore removed and the interface parameter `pm_no_cotton_route` tells
+*' 20_processing to drop the fibres balanceflow.
+pm_no_cotton_route(t_all,i) = 1$(sum(supreg(h,i), f21_self_suff(t_all,h,"cottn_pro")) = 0);
+f21_self_suff(t_all,h,"fibres")$(f21_self_suff(t_all,h,"cottn_pro") = 0) = 0;
+
 i21_exports(t_all,h,k_trade) =  ((f21_self_suff(t_all,h,k_trade) * f21_dom_supply(t_all,h,k_trade)) - f21_dom_supply(t_all,h,k_trade))$(f21_self_suff(t_all,h,k_trade) > 1);
 i21_exp_glo(t_all,k_trade) = sum(h, i21_exports(t_all,h,k_trade));
 i21_exp_shr(t_all,h,k_trade) = i21_exports(t_all,h,k_trade) / (i21_exp_glo(t_all,k_trade) +  0.001$(i21_exp_glo(t_all,k_trade) = 0));
