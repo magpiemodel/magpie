@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **38_factor_costs/sticky_labor** documentation: clarified that the CES function allows for shifts between labor and capital in response to any change in their relative prices (labor productivity, wages, effective capital price given existing capital stocks), not only to shocks.
 - **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
 - **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration. 
@@ -43,6 +44,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
 ### fixed
+- **20_processing/21_trade** Fixed infeasibility of fibres in regions without a domestic cotton route (e.g. IDN in H20): where cotton self-sufficiency is 0, the fibres self-sufficiency floor (`f21_self_suff`) and the fibres processing balanceflow are set to 0
 - **35_natveg** `pot_forest_may24` (default): the input revision brings a corrected `f35_forest_lost_share.cs3`. Africa's tree cover loss in the Curtis et al. 2018 table had been transcribed as 3 instead of 39 Mha, so SSA's shifting-agriculture damage rate rises about 13-fold. The same revision maps 20 countries to their Curtis region anew (19 Middle East and North African countries had been under Latin America) and weights countries by natural forest area in 2010 instead of 2015. Default results change.
 - **core, 29_cropland, 35_natveg** `m_boundfix` always fixes to `up` with sensitivity 1e-6 (arguments `sufx` and `sens` removed, previously `l` at three sites), removed redundant call for 29_cropland tree cover (no change in results)
 - **scripts/npi_ndc** NPI/NDC avoided deforestation and other land conversion bounds now follow the policy targets. Previously, targets were ignored and the bound was frozen at the last observed stock. The minimum stock is now the last observed stock minus the cumulative allowed loss, and the NDC trajectory continues from the NPI trajectory after 2025
