@@ -33,7 +33,10 @@ s35_forest_damage_end   Year of forest damage end  (1)              / 2050 /
 s35_npi_ndc_reversal    Year in which NPI NDC reversal should take place (1) / Inf /
 ;
 
-table f35_forest_lost_share(i,driver_source) Share of forest area disturbed per year by driver (1)
+* Mean annual forest loss 2015-2024 by driver (GFW, Sims et al. 2025), as a share of FRA 2020 naturally
+* regenerating forest area in 2020. The data measure loss of tree cover; MAgPIE applies the share as a
+* disturbance: the area stays forest and is reset to the youngest age classes (see presolve.gms).
+table f35_forest_lost_share(i,driver_source) Share of forest area lost per year by driver (1)
 $ondelim
 $include "./modules/35_natveg/input/f35_forest_lost_share_gfw.cs3"
 $offdelim
