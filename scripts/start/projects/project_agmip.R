@@ -29,7 +29,7 @@ cfg$force_download <- FALSE
 #cfg$results_folder <- "output/:title:"
 cfg$results_folder <- "output/:title::date:"
 
-cfg$output <- c("rds_report","projects/agmip_report","validation","extra/disaggregation")
+cfg$output <- c("rds_report","projects/agmip_report","validation","downscaling/downscale_default")
 
 
 
