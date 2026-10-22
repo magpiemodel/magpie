@@ -14,9 +14,10 @@
 *' managed Land) [@bondeau_lpjml_2007]. In the initial year of the simulation
 *' period, crop yields and pasture productivity are calibrated at the regional
 *' level to meet the observed cropland and pasture area as reported by FAO
-*' [@FAOSTAT]. For the simulation of the temporal development of agricultural
-*' yields, the module receives information about the agricultural land use
-*' intensity represented by the $\tau$ factor coming from the module [13_tc].
+*' [@FAOSTAT].
+*' For the simulation of the temporal development of agricultural yields beyond 
+*' biophysical processes, the module receives information about the agricultural land 
+*' use intensity represented by the $\tau$ factor coming from the module [13_tc].
 *' Irrigated yields can optionally be calibrated to meet irrigated-rainfed
 *' country-level yield ratios as reported by Aquastat [@fao_aquastat_2016].
 *'
@@ -24,10 +25,8 @@
 *' by the modules [30_crop] and [31_past].
 *'
 *' @authors Jan Philipp Dietrich, Isabelle Weindl, Florian Humpenöder,
-*' Anne Biewald, Kristine Karstens, Alexandre Köberle
-
+*' Anne Biewald, Kristine Karstens, Felicitas Beier, Alexandre Köberle
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%yields%" == "dynRegPastrTau_apr26" $include "./modules/14_yields/dynRegPastrTau_apr26/realization.gms"
-$Ifi "%yields%" == "managementcalib_aug19" $include "./modules/14_yields/managementcalib_aug19/realization.gms"
+$Ifi "%yields%" == "gsadapt_dynPastrTau_jul26" $include "./modules/14_yields/gsadapt_dynPastrTau_jul26/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
