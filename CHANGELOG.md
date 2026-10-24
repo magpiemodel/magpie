@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **default.cfg** `f71_livestock_distribution_0.5.mz` added to `files2export`, so that magpie4 `production()`, `ManureExcretion()` and `NitrogenBudget()` can use `disagg_lvst = "glw"` on run outputs
 - **38_factor_costs/sticky_labor** documentation: clarified that the CES function allows for shifts between labor and capital in response to any change in their relative prices (labor productivity, wages, effective capital price given existing capital stocks), not only to shocks.
 - **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
