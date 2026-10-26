@@ -24,7 +24,8 @@ source("scripts/projects/fsec.R")
 # Settings of the business-as-usual run from scripts/start/test_runs.R
 cfg <- fsecScenario(scenario = "c_BAU", highres = FALSE)
 cfg$force_replace <- TRUE
-cfg$results_folder <- "output/:title:"
+cfg$title <- "recalibrateFSEC"
+cfg$results_folder <- "output/:title::date:"
 
 # Derive new land conversion cost calibration factors instead of using the ones
 # shipped with the calibration input data. The resulting factors are written to
