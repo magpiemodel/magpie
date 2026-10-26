@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **29_cropland** Fallow land is functional: missing fallow is priced by a two-tier penalty (long and short fallow threshold) that fades towards scenario targets, and fallow is initialised as the residual of the land initialisation. Default `s29_fallow_max` 0 -> 0.8, so fallow exists in the default and base-year croparea falls below the initialisation data.
+- **30_croparea** Croparea is now initiatlized with data that excludes fallow. Rotational constraints are expressed relative to total cropland instead of the sum of crop areas, since with fallow active the two differ. `fm_croparea` is declared over `t_past` instead of `t_all`.
+- **18_residues/53_methane** Regional `f18_multicropping` replaced by cellular `fm_multicropping(t_all,j,w,kcr)`, so residue biomass and rice CH4 scale with harvested instead of physical area.
+- **59_som** Fallow has its own soil stock change factor instead of borrowing the one for maize, split into bare fallow (dry) and vegetated set-aside (moist) via the new set `climate59moist`. Fallow and tree cover are now part of the initial cropland soil carbon pool, which they already entered on the target side.
+- **scripts/calibration/landconversion_cost.R** Gentler calibration schedule to damp oscillation in early iterations: initial cost factor 1 for all regions, reinforcement 10/5/2/1, reward increment divided by 5. Calibration factors change even on unchanged data.
+- **inputdata** updated to rev4.137cropUp and additional data rev4.77. The LandInG croparea initialisation separates harvested from physical area, which is what makes fallow land and multiple cropping visible; croparea totals and crop composition differ from earlier revisions.
 - **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
 - **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration. 
@@ -28,6 +34,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/npi_ndc** NPI/NDC/ndcdelay afforestation/reforestation (A/R) is now placed on cells by forest establishment headroom (potential minus current forest) times potential-forest carbon density, replacing the 2005 cropland+pasture area weight, so more of the prescribed target is delivered (less potential-clipping) and placement prefers higher-carbon cells; the reference year is pinned to the last observed year so the weight stays identical across climate scenarios.
 
 ### added
+- **scripts/output/extra** `crop_rotations_validation.R` compares base-year croparea and fallow per cluster against the croparea initialisation data.
 - **30_croparea** Added realizations `penalties_sep26` and `rules_sep26`, which split the former `detail_apr24` into its penalty-based and hard-constraint-based rotation implementations. `penalties_sep26` is the new default.
 - **30_croparea** The switches `c30_rotation_rules` and `c30_rotation_incentives` are replaced by a single `c30_rotation_policy`, which selects the rule thresholds in `rules_sep26` and the penalty levels in `penalties_sep26`. Both realizations offer a `none` policy, and `agroforestry` is added as a new policy. `penalties_sep26` restricts the rule set to the rules that carry a penalty and uses a single fixed set of thresholds. Minimum-share rules are enforced for the first time. This changes results relative to `detail_apr24` and requires recalibration.
 - **15_food** Added `c15_exodiet_scen` switch to select between exogenous diet target scenarios — EAT-Lancet 2.0 (default) and India's NIN (National Institute of Nutrition) dietary recommendations
@@ -41,6 +48,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/calibration/landconversion_cost.R** reward calibration factor is now capped (previously unbounded), via new `reward_calib_max_landconversion_cost`/`_past` config options
 - **scripts/start_functions.R** `recalibrate_landconversion_cost = "ifneeded"` now accounts for the new `calib_pasture_landconversion_cost` switch: when pasture calibration is off, a pasture calibration file must be neutral (not just present) to skip recalibration, so a stale file from an earlier pasture-calibration-enabled run is never silently reused
 ### removed
+- **30_croparea** Removed the `simple_apr24` realization, the bioenergy tree (betr) target machinery including the `s30_betr_*` switches, and `i30_rotation_rules`.
 - **30_croparea** Removed the `detail_apr24` realization and its switch `s30_implementation`, superseded by `penalties_sep26` (`s30_implementation = 0`) and `rules_sep26` (`s30_implementation = 1`).
 - **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
