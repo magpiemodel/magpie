@@ -39,18 +39,12 @@ mapFile <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
 gdx <- file.path(outputdir, "fulldata.gdx")
 landHrFile <- file.path(outputdir, "cell.land_0.5.mz")
 landSplitHrFile <- file.path(outputdir, "cell.land_split_0.5.mz")
-landConsvHrFile <- file.path(outputdir, "cell.conservation_land_0.5.mz")
+transitionsHrFile <- file.path(outputdir, "cell.land_transitions_0.5.mz")
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 
 # -----------------------------------------
 #  Helper functions
 # -----------------------------------------
-
-.calcDiffLand <- function(landPool) {
-  dlandPool <- landPool[, 2:nyears(landPool), ] -
-    setYears(landPool[, 1:nyears(landPool) - 1, ], tail(getYears(landPool), -1))
-  return(dlandPool)
-}
 
 .printSuffix <- function(suffix) {
   suffix <- ifelse(suffix == "", "", paste0("_", suffix))
@@ -66,223 +60,94 @@ cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
   return(projectName)
 }
 
+# Area of a report class: the sum of the land split items of the class (classOf: class by item).
+.classArea <- function(landSplit, classOf, class) {
+  return(setNames(dimSums(landSplit[, , names(which(classOf == class))], dim = 3), class))
+}
+
+# Other land of one origin (from toolGriddedLandOrigin) as report class; zero where no area has that origin.
+.originArea <- function(otherOrigin, origin, class) {
+  item <- paste("other", origin, sep = ".")
+  if (item %in% getItems(otherOrigin, dim = 3)) {
+    return(setNames(otherOrigin[, , item], class))
+  } else {
+    return(setNames(otherOrigin[, , 1] * 0, class))
+  }
+}
+
 
 # ----------------------
 # Read input data
 # ----------------------
 
-# MAgPIE land pools per time step
-landLr <- readGDX(gdx, "ov_land", select = list(type = "level"))
-# Land reduction during model optimisation
-landReducOptLr <- readGDX(gdx, "ov_landreduction", select = list(type = "level"))
-
 # Read disaggregated MAgPIE outputs
 landHr <- read.magpie(landHrFile)[, 1985, , invert = TRUE]
 landSplitHr <- read.magpie(landSplitHrFile)[, 1985, , invert = TRUE]
-landConsvHr <- read.magpie(landConsvHrFile)
+# gross grid cell transitions between the land types by stage, with managed forest (timber plantations
+# and other planted forest) as a type of its own
+transitionsHr <- read.magpie(transitionsHrFile)
+fromLabel <- getItems(transitionsHr, "from", full = TRUE)
+fromLabel[getItems(transitionsHr, "fromType", full = TRUE) %in% c("plant", "other_planted")] <- "timber"
+transitionLabel <- paste(getItems(transitionsHr, "stage", full = TRUE), fromLabel,
+                         getItems(transitionsHr, "to", full = TRUE), sep = ".")
+transitionsHr <- mbind(lapply(unique(transitionLabel), function(label) {
+  setNames(dimSums(transitionsHr[, , which(transitionLabel == label)], dim = 3), label)
+}))
+getSets(transitionsHr, fulldim = FALSE)[3] <- "stage.from.to"
 
 
-# ----------------------
-# Cropland classes
-# ----------------------
+# ----------------------------------------------------
+# Cropland, grassland, forest and built-up classes
+# ----------------------------------------------------
 
-cropOtherLr <- setNames(dimSums(landSplitHr[, , c("crop_kfo_rf", "crop_kfo_ir")], dim = 3), "crop_other")
-cropBELr <- setNames(dimSums(landSplitHr[, , c("crop_kbe_rf", "crop_kbe_ir")], dim = 3), "crop_2G_bioen")
-careaHr <- mbind(cropOtherLr, cropBELr)
-
-# ----------------------
-# Grassland class
-# ----------------------
-
-# Grassland share
-grassHr <- setNames(landHr[, , "past"], "grass")
-
-
-# ----------------------
-# Forest classes
-# ----------------------
-
-plantationAff <- as.logical(readGDX(gdx, "s32_aff_plantation"))
-
-# other planted forest is harvested and replanted (like timber plantations), so it is
-# grouped with planted forest; older files fold it into NPiNDC and lack the category
-timberCats <- intersect(c("PlantedForest_Timber", "PlantedForest_OtherPlanted"),
-                        getItems(landSplitHr, dim = 3))
-
-if (plantationAff) {
-  forestHr <- setNames(dimSums(
-    landSplitHr[, , c(
-      "primforest", "secdforest",
-      "PlantedForest_NPiNDC"
-    )],
-    dim = 3
-  ), "nat_regen_forest")
-
-  forestryHr <- setNames(dimSums(
-    landSplitHr[, , c(timberCats, "PlantedForest_Afforestation")], dim = 3), "forest_planted")
+# report class of each item of the land split; afforestation counts as planted forest if it is
+# established as plantation, other planted forest (harvested and replanted) always does
+splitItems <- getItems(landSplitHr, dim = 3)
+classOf <- setNames(rep(NA_character_, length(splitItems)), splitItems)
+classOf[startsWith(splitItems, "crop.")] <- "crop_other"
+classOf[startsWith(splitItems, "crop.kbe.")] <- "crop_2G_bioen"
+classOf[startsWith(splitItems, "past.")] <- "grass"
+classOf[startsWith(splitItems, "primforest.") | startsWith(splitItems, "secdforest.")] <- "nat_regen_forest"
+classOf[startsWith(splitItems, "forestry.")] <- "forest_planted"
+classOf["forestry.ndc.total"] <- "nat_regen_forest"
+if (as.logical(readGDX(gdx, "s32_aff_plantation"))) {
+  classOf["forestry.aff.total"] <- "forest_planted"
 } else {
-  forestHr <- setNames(dimSums(
-    landSplitHr[, , c(
-      "primforest", "secdforest",
-      "PlantedForest_Afforestation", "PlantedForest_NPiNDC"
-    )],
-    dim = 3
-  ), "nat_regen_forest")
-
-  forestryHr <- setNames(dimSums(landSplitHr[, , timberCats], dim = 3), "forest_planted")
+  classOf["forestry.aff.total"] <- "nat_regen_forest"
 }
+classOf[startsWith(splitItems, "urban.")] <- "built_up_areas"
+
+stateHr <- mbind(.classArea(landSplitHr, classOf, "crop_other"),
+                 .classArea(landSplitHr, classOf, "crop_2G_bioen"),
+                 .classArea(landSplitHr, classOf, "grass"),
+                 .classArea(landSplitHr, classOf, "nat_regen_forest"),
+                 .classArea(landSplitHr, classOf, "forest_planted"))
+urbanHr <- .classArea(landSplitHr, classOf, "built_up_areas")
+
 
 # -----------------------------------------------
 # Recovered (abandoned & restored) & other land
 # -----------------------------------------------
 
-# define sets
-otherLandTypes <- c("rest_abn_crop", "rest_abn_grass", "rest_forest", "other")
-origLandTypes <- otherLandTypes[otherLandTypes != "other"]
-
-### Other land expansion and reduction
-
-otherDiff <- .calcDiffLand(landHr[, , "other"])
-otherExpan <- otherDiff
-otherExpan[otherDiff < 0] <- 0
-
-otherReduc <- otherDiff
-otherReduc[otherReduc > 0] <- 0
-otherReduc <- abs(otherReduc)
-
-# --- Contribution of abandoned managed land types to other land expansion -------
-
-# Reduction of managed land types
-mnglandReduc <- mbind(
-  .calcDiffLand(landHr[, , c("crop", "past")]),
-  .calcDiffLand(landSplitHr[, , "PlantedForest_Timber"])
-)
-mnglandReduc[mnglandReduc > 0] <- 0
-# Contribution of managed land types to total managed land reduction
-mnglandReducShr <- mnglandReduc / dimSums(mnglandReduc, dim = 3)
-mnglandReducShr[is.nan(mnglandReducShr)] <- 0
-
-# Contribution of managed land reduction to transition to other land
-otherExpanMngShr <- abs(dimSums(mnglandReduc, dim = 3)) / otherExpan
-otherExpanMngShr[is.na(otherExpanMngShr) | is.infinite(otherExpanMngShr)] <- 0
-otherExpanMngShr[otherExpanMngShr > 1] <- 1
-# make sure that managed land transition to other is 0 in first time step
-otherExpanMngShr[, 1, ] <- 0
-
-# Share of total other land expansion attributed to overall managed land reduction
-otherExpanMng <- otherExpanMngShr * otherExpan
-# residual other land expansion
-otherExpanResidual <- (1 - otherExpanMngShr) * otherExpan
-
-# Attribute other land expansion to reduction of different managed land types
-otherExpanOrig <- mnglandReducShr * otherExpanMng
-getNames(otherExpanOrig) <- origLandTypes
-
-# --- Contribution of secondary forest maturation to other land reduction -------
-
-# Secondary forest maturation is happening before optimisation
-# so the ratio between other land reduction during the optimisation
-# and total other land reduction between time steps gives the share
-# of other land that is reduced due to maturation.
-# This share is calculated at the native MAgPIE resolution and
-# then disaggregated to estimate the contribution of secondary forest
-# maturation to other land reduction at 0.5 degrees.
-
-# Overall other land reduction at MAgPIE cluster level
-otherDiffLr <- .calcDiffLand(landLr[, , "other"])
-otherReducLr <- otherDiffLr
-otherReducLr[otherReducLr > 0] <- 0
-otherReducLr <- abs(otherReducLr)
-
-# Other land reduction during optimisation divided by total other land reduction
-# to derive the share of secondary forest maturation in total other land reduction
-otherSecdforestMatShr <- landReducOptLr[, -1, "other"] / otherReducLr
-otherSecdforestMatShr[!is.finite(otherSecdforestMatShr) | otherSecdforestMatShr > 1] <- 1
-# make sure that secondary forest maturation is 0 in the first time step
-otherSecdforestMatShr[, 1, ] <- 0
-
-# Weighted disaggregation of forest maturation share to 0.5 degree
-disaggWeightLr <- dimSums(landLr[, -1, "other"], dim = 3)
-otherSecdforestMatShr <- toolAggregate(otherSecdforestMatShr * disaggWeightLr,
-                                       rel = mapFile, from = "cluster", to = "cell")
-disaggWeightHr <- toolAggregate(disaggWeightLr, rel = mapFile, from = "cluster", to = "cell")
-otherSecdforestMatShr <- otherSecdforestMatShr / disaggWeightHr
-otherSecdforestMatShr[is.na(otherSecdforestMatShr)] <- 0
-
-# --- Attribute other land change -------
-
-otherHr <- new.magpie(
-  cells_and_regions = getCells(landHr),
-  years = getYears(landHr),
-  names = otherLandTypes,
-  fill = NA,
-  sets = names(dimnames(landHr))
-)
-otherHr[, 1, "other"] <- landHr[, 1, "other"]
-otherHr[, , origLandTypes] <- 0
-
-for (yrIdx in 2:nyears(landHr)) {
-  # --- Abandoned/restored & other land expansion -------
-
-  # concatenate attributed and residual other land expansion
-  otherExpanAll <- mbind(otherExpanOrig[, yrIdx - 1, ], otherExpanResidual[, yrIdx - 1, ])
-  # Allocate abandoned/restored & other land expansion
-  otherHr[, yrIdx, ] <- setYears(otherHr[, yrIdx - 1, ], NULL) + otherExpanAll
-
-  # --- Abandoned/restored & other land reduction -------
-
-  # Total secondary forest maturation in time step
-  secdforestMaturation <- setNames(otherReduc[, yrIdx - 1, ] * otherSecdforestMatShr[, yrIdx - 1, ], NULL)
-  # Total secondary forest maturation cannot be larger than
-  # abandoned/restored land in previous time step.
-  totAbnLand <- setYears(dimSums(otherHr[, yrIdx - 1, origLandTypes], dim = 3), NULL)
-  secdforestMaturation[secdforestMaturation > totAbnLand] <- totAbnLand[secdforestMaturation > totAbnLand]
-
-  # Residual other land reduction in time step
-  otherReducResidual <- setYears(otherReduc[, yrIdx - 1, ], NULL) - secdforestMaturation
-  otherReducResidual[otherReducResidual > otherHr[, yrIdx, "other"]] <-
-    otherHr[, yrIdx, "other"][otherReducResidual > otherHr[, yrIdx, "other"]]
-
-  # Using MAgPIE cluster transitions underestimates loss of recovered land
-  missAbnReduction <- setNames(
-    otherReduc[, yrIdx - 1, ] - dimSums(secdforestMaturation + otherReducResidual, dim = 3),
-    NULL
-  )
-  secdforestMaturation <- secdforestMaturation + missAbnReduction
-
-  # Total secondary forest maturation is attributed to abandoned/restored land types
-  origLandTypesShr <- otherHr[, yrIdx - 1, origLandTypes] / dimSums(otherHr[, yrIdx - 1, origLandTypes], dim = 3)
-  origLandTypesShr[!is.finite(origLandTypesShr)] <- 0
-  secdforestMaturation <- secdforestMaturation * setYears(origLandTypesShr, NULL)
-
-  # Allocate abandoned/restored & other land reduction
-  otherReducAll <- mbind(secdforestMaturation, otherReducResidual)
-  otherHr[, yrIdx, ] <- setYears(otherHr[, yrIdx, ], NULL) - otherReducAll
-}
-
-
-# ----------------------
-# Urban land
-# ----------------------
-
-urbanHr <- setNames(landHr[, , "urban"], "built_up_areas")
+# Other land by origin along the grid cell transitions from the first time step on: area that came from
+# cropland, pasture or managed forest counts as recovering land of that origin until it leaves other
+# land (maturation to secondary forest or conversion); the newest area leaves first. Area from
+# afforestation and NDC forest counts as other land.
+otherOriginHr <- mrdownscale::toolGriddedLandOrigin(transitionsHr[, -1, ], landHr[, 1, ], "other")
+recoveringHr <- mbind(.originArea(otherOriginHr, "crop", "rest_abn_crop"),
+                      .originArea(otherOriginHr, "past", "rest_abn_grass"),
+                      .originArea(otherOriginHr, "timber", "rest_forest"))
+otherHr <- mbind(recoveringHr, setNames(landHr[, , "other"] - dimSums(recoveringHr, dim = 3), "other"))
 
 
 # ----------------------
 # Combine classes
 # ----------------------
 
-landOut <- mbind(
-  careaHr,
-  grassHr,
-  forestHr,
-  forestryHr,
-  otherHr,
-  urbanHr
-)
+landOut <- mbind(stateHr, otherHr, urbanHr)
 landOut[is.na(landOut)] <- 0
 
-# caculate total land area
+# calculate total land area
 landArea <- dimSums(landOut, dim = 3, na.rm = TRUE)
 
 # land cover share output

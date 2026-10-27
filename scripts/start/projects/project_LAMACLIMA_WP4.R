@@ -38,7 +38,7 @@ cfg$gms$c37_labor_intensity <- "400W"
 cfg$gms$c37_labor_uncertainty <- "ensmean"
 
 cfg$results_folder <- "output/:title:"
-cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2","extra/highres")
+cfg$output <- c("rds_report","downscaling/downscale_default","downscaling/downscale_LUH","extra/highres")
 cfg$qos <- "priority_highMem"
 
 #### Main scenarios
