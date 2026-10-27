@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ------------------------------------------------------------------------------------------------
-# description: Default downscaling of MAgPIE to 0.5 degree along the transitions of the run: land (with land split, crop area shares, transitions and peatland), BII and land conservation
+# description: Downscale land (with land split, crop area shares, transitions and peatland), BII and land conservation to 0.5 degree along the transitions of the run
 # comparison script: FALSE
 # ------------------------------------------------------------------------------------------------
 library(mrdownscale)
@@ -18,3 +18,6 @@ tgz <- downscaleRun(outputdir, "DOWNSCALEDMAGPIE", downscaling = "transitions", 
                     cachefolder = file.path(outputdir, "cache/downscaling"))
 files <- grep("cell\\.", untar(tgz, list = TRUE), value = TRUE)
 untar(tgz, files = files, exdir = outputdir)
+# without the tgz, a rerun computes again: retrieveData would return an existing tgz of the same arguments even
+# after code changes, while the madrat cache recomputes what the changes affect
+unlink(tgz)

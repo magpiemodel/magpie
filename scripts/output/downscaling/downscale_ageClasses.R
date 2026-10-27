@@ -17,3 +17,6 @@ tgz <- downscaleRun(outputdir, "DOWNSCALEDMAGPIE", downscaling = "transitions", 
                     product = "ageClasses", cachefolder = file.path(outputdir, "cache/downscaling"))
 files <- grep("cell\\.", untar(tgz, list = TRUE), value = TRUE)
 untar(tgz, files = files, exdir = outputdir)
+# without the tgz, a rerun computes again: retrieveData would return an existing tgz of the same arguments even
+# after code changes, while the madrat cache recomputes what the changes affect
+unlink(tgz)
