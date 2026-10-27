@@ -11,8 +11,10 @@
 # ------------------------------------------------------------------------------------------------
 library(mrdownscale)
 
-# the tgz of the madrat collection; its cell.* files go to the output folder
+# the tgz of the madrat collection; its cell.* files go to the output folder. The madrat cache stays in the
+# output folder, because only the downscaling of this run reuses it
 tgz <- downscaleRun(outputdir, "DOWNSCALEDMAGPIE", downscaling = "transitions", harmonization = "none",
-                    product = c("land", "BII", "landConservation"))
+                    product = c("land", "BII", "landConservation"),
+                    cachefolder = file.path(outputdir, "cache/downscaling"))
 files <- grep("cell\\.", untar(tgz, list = TRUE), value = TRUE)
 untar(tgz, files = files, exdir = outputdir)
