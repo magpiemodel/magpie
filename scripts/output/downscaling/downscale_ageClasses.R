@@ -11,12 +11,9 @@
 # ------------------------------------------------------------------------------------------------
 library(mrdownscale)
 
-# the tgz of the madrat collection; its cell.* files go to the output folder. The madrat cache stays in the
-# output folder, because only the downscaling of this run reuses it
-tgz <- downscaleRun(outputdir, "DOWNSCALEDMAGPIE", downscaling = "transitions", harmonization = "none",
-                    product = "ageClasses", cachefolder = file.path(outputdir, "cache/downscaling"))
-files <- grep("cell\\.", untar(tgz, list = TRUE), value = TRUE)
-untar(tgz, files = files, exdir = outputdir)
-# without the tgz, a rerun computes again: retrieveData would return an existing tgz of the same arguments even
-# after code changes, while the madrat cache recomputes what the changes affect
-unlink(tgz)
+# the cell.* files go to the output folder. The madrat cache goes to the output folder, because only the
+# downscaling of this run reuses it. The allocation runs on the cores of the SLURM job, outside SLURM on one core
+downscaleRun(outputdir, "DOWNSCALEDMAGPIE", downscaling = "transitions", harmonization = "none",
+             product = "ageClasses", logFile = "consistencyCheck_downscale_ageClasses.log",
+             cachefolder = file.path(outputdir, "cache/downscaling"), archive = FALSE,
+             cores = as.integer(Sys.getenv("SLURM_CPUS_PER_TASK", "1")))
