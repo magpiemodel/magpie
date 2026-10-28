@@ -19,8 +19,8 @@
 
 q13_cost_tc(i2, tautype) ..
   v13_cost_tc(i2, tautype) =e= sum(ct, pc13_land(i2, tautype) *
-                     i13_tc_factor(ct) * sum(supreg(h2,i2),v13_tau_core(h2,tautype))**
-                     i13_tc_exponent(ct) * (1+pm_interest(ct,i2))**15);
+                     i13_tc_factor(ct) * v13_tau_core(i2, tautype)**i13_tc_exponent(ct) 
+                     * (1 + pm_interest(ct,i2))**15);
 
 
 *' The shifting is performed because investments into technological change
@@ -38,26 +38,27 @@ q13_cost_tc(i2, tautype) ..
 *' (annuity with infinite time horizon):
 
 q13_tech_cost(i2, tautype) ..
- v13_tech_cost(i2, tautype) =e= sum(supreg(h2,i2), v13_tau_core(h2,tautype)/pc13_tau(h2,tautype)-1) * v13_cost_tc(i2,tautype)
-                               * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
+ v13_tech_cost(i2, tautype) =e=  (v13_tau_core(i2,tautype) / pcm_tau_core(i2,tautype) - 1) * v13_cost_tc(i2,tautype)
+                               * sum(ct, pm_interest(ct,i2) / (1 + pm_interest(ct,i2)));
 
 q13_tech_cost_sum(i2) ..
  vm_tech_cost(i2) =e= sum(tautype, v13_tech_cost(i2, tautype));
 
 *' Enforce gsadapt yield increases in tau, so that tc costs apply
-q13_lower_bound_tau(j2) ..
-  vm_tau(j2,"crop") =g= pcm_tau(j2,"crop") * sum((ct, cell(i2,j2)), pm_yields_gsadapt_ratio_increment(ct,i2));
+q13_lower_bound_tau(i2) ..
+  v13_tau_core(i2,"crop") =g= pcm_tau_core(i2,"crop") * sum(ct, pm_yields_gsadapt_ratio_increment(ct,i2));
 
 *' The overall land use intensity factor `vm_tau` is a linear combination between the
 *' land use intensity factors `v13_tau_core` for regular cropland and `v13_tau_consv`
 *' for cropland in conservation priority areas.
 
 q13_tau(j2,tautype)..
-    vm_tau(j2,tautype) =e= sum((ct, cell(i2,j2), supreg(h2,i2)), (1-p13_cropland_consv_shr(ct,j2)) * v13_tau_core(h2,tautype) + p13_cropland_consv_shr(ct,j2) * v13_tau_consv(h2,tautype));
+    vm_tau(j2,tautype) =e= sum((ct, cell(i2,j2)), (1 - p13_cropland_consv_shr(ct,j2)) * v13_tau_core(i2,tautype) + 
+                                                  p13_cropland_consv_shr(ct,j2) * v13_tau_consv(i2,tautype));
 
 *' `v13_tau_consv` for cropland in conservation priority areas is linked to `v13_tau_core`
 *' through a multiplication factor that can lower land use intensity in
 *' conservation priority areas.
 
-q13_tau_consv(h2,tautype)$(c13_croparea_consv_tau_increase = 1 OR sum(ct, m_year(ct)) < s13_croparea_consv_start)..
- v13_tau_consv(h2,tautype) =e= p13_croparea_consv_tau_factor(h2) * v13_tau_core(h2,tautype);
+q13_tau_consv(i2,tautype)$(c13_croparea_consv_tau_increase = 1 OR sum(ct, m_year(ct)) < s13_croparea_consv_start)..
+ v13_tau_consv(i2,tautype) =e= p13_croparea_consv_tau_factor(i2) * v13_tau_core(i2,tautype);

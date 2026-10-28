@@ -186,7 +186,7 @@ if ((s14_calib_ir2rf = 1),
 ***MANAGEMENT CALIBRATION FOR 2ND GENERATION BIOENERGY CROPS (tau scaling)****************
 *' Tau-based management calibration applied on top of the biophysical yields.
 i14_yields_calib_combined(t,j,yldtype,kbe14,w) = i14_yields_calib_combined(t,j,yldtype,kbe14,w) *
-                                                    sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
+                                                    sum(cell(i,j), fm_tau1995(i)) / smax(i,fm_tau1995(i));
 *******************************************************************************************
 
 * Set yields to gsadapt values (pasture yields are not affected by growing period adaption)
