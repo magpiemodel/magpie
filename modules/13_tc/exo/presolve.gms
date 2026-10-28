@@ -31,48 +31,44 @@ if(c13_croparea_consv = 1,
 
 );
 
-* ISO country weights are calculated based on the available cropland area in each country
-p13_country_wght_supreg(h) = sum((i_to_iso(i,iso), supreg(h,i)), p13_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum((i_to_iso(i,iso), supreg(h,i)), pm_avl_cropland_iso(iso));
-
 * Country-weighted tau reduction factor for conservation land
-p13_croparea_consv_tau_factor(h) = (s13_croparea_consv_tau_factor * p13_country_wght_supreg(h)
-                            + s13_croparea_consv_tau_factor_noselect * (1-p13_country_wght_supreg(h)));
+p13_croparea_consv_tau_factor(i) = (s13_croparea_consv_tau_factor * p13_country_weight(i)
+                                   + s13_croparea_consv_tau_factor_noselect * (1 - p13_country_weight(i)));
 
 
-if (smin((h,tautype), f13_tau_scenario(t,h,tautype)) <= 0,
+if (smin((i,tautype), f13_tau_scenario(t,i,tautype)) <= 0,
   abort "tau value of 0 detected in at least one region!";
 );
 
-p13_tau_core(h,tautype) = f13_tau_scenario(t,h,tautype);
+p13_tau_core(i,tautype) = f13_tau_scenario(t,i,tautype);
 
 * p13_tau_consv is linked to p13_tau_core through the
 * reduction factor for conservation land
 if (c13_croparea_consv_tau_increase = 1 OR m_year(t) < s13_croparea_consv_start,
-  p13_tau_consv(h,tautype) = p13_croparea_consv_tau_factor(h) * f13_tau_scenario(t,h,tautype);
-  pc13_tau_consv(h,tautype) = p13_tau_consv(h,tautype);
+  p13_tau_consv(i,tautype) = p13_croparea_consv_tau_factor(i) * f13_tau_scenario(t,i,tautype);
+  pc13_tau_consv(i,tautype) = p13_tau_consv(i,tautype);
 elseif c13_croparea_consv_tau_increase = 0 AND m_year(t) >= s13_croparea_consv_start,
-  p13_tau_consv(h,tautype) = pc13_tau_consv(h,tautype);
+  p13_tau_consv(i,tautype) = pc13_tau_consv(i,tautype);
 );
 
 * The overall land use intensity factor `vm_tau` is a linear combination between the
 * land use intensity factors `p13_tau` for regular cropland and `p13_tau_consv`
 * for cropland in conservation priority areas.
 
-vm_tau.fx(j,tautype) = sum((cell(i,j), supreg(h,i)), (1-p13_cropland_consv_shr(t,j)) * p13_tau_core(h,tautype) + p13_cropland_consv_shr(t,j) * p13_tau_consv(h,tautype));
+vm_tau.fx(j,tautype) = sum(cell(i,j), (1-p13_cropland_consv_shr(t,j)) * p13_tau_core(i,tautype) + p13_cropland_consv_shr(t,j) * p13_tau_consv(i,tautype));
 
 * The costs are shifted over 15 years (exponent 15) to reflect the average
 * time it takes investments in tc to pay off.
 
 p13_cost_tc(i,tautype) = pc13_land(i,tautype) * i13_tc_factor(t)
-                     * sum(supreg(h,i), p13_tau_core(h,tautype))**i13_tc_exponent(t)
-                     * (1+pm_interest(t,i))**15;
+                     * p13_tau_core(i,tautype)**i13_tc_exponent(t)
+                     * (1 + pm_interest(t,i))**15;
 
-p13_tech_cost(i,tautype) = (sum(supreg(h,i),p13_tau_core(h,tautype)/pc13_tau(h,tautype))-1) * p13_cost_tc(i,tautype)
+p13_tech_cost(i,tautype) = (p13_tau_core(i,tautype) / pcm_tau_core(i,tautype) - 1) * p13_cost_tc(i,tautype)
                                * pm_interest(t,i)/(1+pm_interest(t,i));
 
 vm_tech_cost.fx(i) = sum(tautype, p13_tech_cost(i,tautype));
 
-if(ord(t) = 1,
-  pc13_tau_consv(h,tautype) = p13_croparea_consv_tau_factor(h) * pc13_tau(h,"crop");
-  pcm_tau(j,tautype) = sum((cell(i,j), supreg(h,i)), (1-p13_cropland_consv_shr(t,j)) * pc13_tau(h,tautype) + p13_cropland_consv_shr(t,j) * pc13_tau_consv(h,tautype));
+if (ord(t) = 1,
+  pc13_tau_consv(i,tautype) = p13_croparea_consv_tau_factor(i) * pcm_tau_core(i,"crop");
 );

@@ -15,9 +15,9 @@ loop(t,
  );
 );
 
-pc13_tau(h,"crop")        = fm_tau1995(h);
-pc13_tau(h,"pastr")       = f13_pastr_tau_hist("y1995",h);
-pc13_tcguess(h,tautype)   = f13_tcguess(h);
+pcm_tau_core(i,"crop")    = fm_tau1995(i);
+pcm_tau_core(i,"pastr")   = f13_pastr_tau_hist("y1995",i);
+pc13_tcguess(i,tautype)   = f13_tcguess(i);
 
 
 * Country switch to determine countries for which certain policies shall be applied.
