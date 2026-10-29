@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
+ pm_no_cotton_route(t_all,i)                    Flag for regions without a domestic cotton route (1 = no cotton production possible) (1)
  i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
  i21_exp_shr(t_all,h,k_trade)                   Trade export shr (1)
  i21_trade_margin(h,k_trade)                    Trade margins (USD17MER per tDM)
