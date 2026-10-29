@@ -14,6 +14,7 @@
 # 1.0.0: first working version
 # 1.1.0: SEALS coefficients are modified based on scenario settings
 # 1.1.1: adjusted to SEALS 2.0.0
+# 1.2.0: adjusted to SEALS 2.1.1; SEALS runs serially on the local machine if SLURM is not available
 
 library(gms)
 library(gdx2)
@@ -36,16 +37,21 @@ if (!exists("source_include")) {
 # User settings
 # ========================
 
-### SEALS python environment name
+### Name of the conda environment with SEALS installed
 # see https://justinandrewjohnson.com/earth_economy_devstack/installation.html
 # for instructions on how to set up a python environment for SEALS
-sealsEnv <- "seals_2-0-0"
+sealsEnv <- "seals_2-1-1"
 
-### Path to SEALS base input file directory
-dirBaseFiles <- "/p/projects/magpie/users/vjeetze/seals/files"
+### SEALS base data folder, i.e. the folder named "base_data" (contains seals/, lulc/, ...).
+### SEALS downloads missing base data into it
+dirBaseData <- "/p/projects/magpie/users/vjeetze/seals/files/base_data"
 
-### Path to SEALS code base
-dirSEALS <- "/p/projects/magpie/users/vjeetze/seals/files/seals/seals_2-0-0"
+### SEALS code clone, i.e. the folder that contains seals/run_seals.py
+dirSEALS <- "/p/projects/magpie/users/vjeetze/seals/files/seals/seals_2-1-1"
+
+### Where SEALS runs: "auto" (SLURM if available, else local), "slurm" (one job
+### per scenario) or "local" (scenarios run one after another on this machine)
+sealsMode <- "auto"
 
 
 # ========================
@@ -78,19 +84,24 @@ reportLandUseForSEALS(
 # ========================
 
 # Check whether base data and local SEALS code repo exist
-if (length(list.files(dirBaseFiles)) == 0) {
+if (!dir.exists(dirBaseData) || dir.exists(file.path(dirBaseData, "base_data"))) {
   stop(paste(
-    "Please set the path to the SEALS base data",
-    "directory under 'User settings' of the",
-    "extra/runSEALSallocation.R script."
+    "Please set dirBaseData to the SEALS base data folder itself (the folder named",
+    "'base_data') under 'User settings' of the extra/runSEALSallocation.R script."
   ))
-} else if (length(list.files(dirSEALS)) == 0) {
+} else if (!file.exists(file.path(dirSEALS, "seals", "run_seals.py"))) {
   stop(paste(
     "Please set the path to your local clone",
-    "of the SEALS code under 'User settings' of the",
+    "of the SEALS code (containing seals/run_seals.py) under 'User settings' of the",
     "extra/runSEALSallocation.R script."
   ))
 }
+
+if (sealsMode == "auto") {
+  sealsMode <- if (nzchar(Sys.which("sbatch"))) "slurm" else "local"
+}
+stopifnot(sealsMode %in% c("slurm", "local"))
+message("SEALS run mode: ", sealsMode)
 
 ### Path to miniforge installation
 miniforgePath <- "/p/projects/rd3mod/miniforge3/v25-3-0_3/bin/activate"
@@ -111,19 +122,12 @@ Sys.chmod(iniLock, mode = "0664")
 # Prepare SEALS start script
 # --------------------------------
 
-.setupSEALSrun <- function(cfg, sealsInput, dir, dirProject, dirSEALS, dirBaseFiles) {
+.setupSEALSrun <- function(cfg, sealsInput, dir, dirProject, dirSEALS, dirBaseData) {
   if (!dir.exists(file.path(dirProject, "scripts"))) {
     dir.create(file.path(dirProject, "scripts"), recursive = TRUE)
   }
 
   title <- cfg$title
-
-  file.copy(
-    from = list.files(file.path(dirSEALS, "seals"), full.names = TRUE),
-    to = file.path(dirProject, "scripts"),
-    overwrite = TRUE,
-    recursive = TRUE
-  )
 
   if (!dir.exists(file.path(dirProject, "input"))) {
     dir.create(file.path(dirProject, "input"), recursive = TRUE)
@@ -226,19 +230,19 @@ Sys.chmod(iniLock, mode = "0664")
     stop("Could not find seals_scenario_config.csv file template")
   }
 
-  main <- readLines(file.path(dirProject, "scripts", "run_seals_magpie.py"))
-
-  main[min(which(grepl("    p.user_dir =", main)))] <- paste0("    p.user_dir = \'", dirBaseFiles, "\'")
-  main[min(which(grepl("    p.extra_dirs", main)))] <- paste0("    p.extra_dirs = '.'")
-  main[min(which(grepl("    p.project_dir =", main)))] <- paste0(
-    "    p.project_dir = \'", normalizePath(dirProject), "\'"
-  )
-  main[min(which(grepl("    p.base_data_dir =", main)))] <- paste0(
-    "    p.base_data_dir = \'", dirBaseFiles, "/base_data\'"
-  )
-  main[min(which(grepl("    p.scenario_definitions_filename =", main)))] <- paste0(
-    "    p.scenario_definitions_filename = \'", paste0("seals_scenario_config_", title, ".csv"), "\'"
-  )
+  # Patch the standard SEALS run file: project and base data directory, scenario definitions
+  main <- readLines(file.path(dirSEALS, "seals", "run_seals.py"))
+  patterns <- c("p = hb\\.ProjectFlow\\(.*", "p\\.scenario_definitions_filename = .*")
+  if (any(vapply(patterns, function(x) sum(grepl(x, main)), integer(1)) != 1)) {
+    stop("Unexpected structure of ", file.path(dirSEALS, "seals", "run_seals.py"))
+  }
+  main <- sub(patterns[1], paste0(
+    "p = hb.ProjectFlow(project_dir='", normalizePath(dirProject, winslash = "/"), "', run_mode='check')\n",
+    "    p.base_data_dir = '", normalizePath(dirBaseData, winslash = "/"), "'"
+  ), main)
+  main <- sub(patterns[2], paste0(
+    "p.scenario_definitions_filename = 'seals_scenario_config_", title, ".csv'"
+  ), main)
 
   writeLines(main, file.path(dirProject, "scripts", paste0("run_seals_", title, ".py")))
 
@@ -277,10 +281,12 @@ Sys.chmod(iniLock, mode = "0664")
           inputDataExists <- TRUE
         } else {
           stop("Initial data preparation run (Job ID: ",
-               dependsID, ") did not complete successfully. Status: ", jobState)
+               dependsID, ") did not complete successfully. Status: ", jobState,
+               ". Delete ", file.path(dirProject, "seals.lock"), " to start the input data preparation again.")
         }
       } else {
-        stop("Could not find initial data preparation run (Job ID: ", dependsID, ") in SLURM history")
+        stop("Could not find initial data preparation run (Job ID: ", dependsID, ") in SLURM history. Delete ",
+             file.path(dirProject, "seals.lock"), " to start the input data preparation again.")
       }
     }
   }
@@ -301,7 +307,7 @@ Sys.chmod(iniLock, mode = "0664")
       "#SBATCH --dependency=afterok:", dependsID,
       "\n#SBATCH --kill-on-invalid-dep=yes"
     ), "") , "\n",
-    "#SBATCH --cpus-per-task=64", "\n",
+    "#SBATCH --cpus-per-task=32", "\n",
     paste("source", miniforgePath),
     paste("conda activate", sealsEnv), "\n",
     paste("python", paste0("run_seals_", title, ".py"))
@@ -312,6 +318,31 @@ Sys.chmod(iniLock, mode = "0664")
   if (slurmID) {
     return(id)
   }
+}
+
+# Run SEALS on this machine. Concurrent calls wait for the lock,
+# so scenarios run one after another and reuse the input data of the first run
+.runSEALSlocal <- function(title, dirProject, sealsEnv) {
+  if (!nzchar(Sys.which("conda"))) {
+    stop("Could not find conda on the PATH, which is required to run SEALS locally")
+  }
+  runLock <- filelock::lock(file.path(dirProject, "seals_local.lock"), exclusive = TRUE, timeout = Inf)
+  withr::defer(filelock::unlock(runLock))
+
+  dirScripts <- normalizePath(file.path(dirProject, "scripts"))
+  logFile <- file.path(dirScripts, paste0("outfile_local_", title, ".log"))
+  message("Running SEALS allocation locally, log file: ", logFile)
+  status <- system2("conda", c(
+    "run", "--cwd", shQuote(dirScripts), "-n", sealsEnv,
+    "python", paste0("run_seals_", title, ".py")
+  ), stdout = logFile, stderr = logFile)
+  if (status != 0) {
+    stop("SEALS allocation failed, see ", logFile)
+  }
+  message(
+    "SEALS allocation finished for ", title, ". Stitched SEALS allocation outputs are in ",
+    "'./output/seals/intermediate/stitched_lulc_simplified_scenarios'"
+  )
 }
 
 # --------------------------------
@@ -327,10 +358,13 @@ if (!is.null(lockOn)) {
     dir = outputdir,
     dirProject = dirProject,
     dirSEALS = dirSEALS,
-    dirBaseFiles = dirBaseFiles
+    dirBaseData = dirBaseData
   )
 
-  if (!file.exists(sealsLock) || file.size(sealsLock) == 0) {
+  if (sealsMode == "local") {
+    filelock::unlock(lockOn)
+    .runSEALSlocal(title = title, dirProject = dirProject, sealsEnv = sealsEnv)
+  } else if (!file.exists(sealsLock) || file.size(sealsLock) == 0) {
     message(paste(
       "Starting SEALS allocation with input data creation.\n",
       "Stitched SEALS allocation outputs will be written to",

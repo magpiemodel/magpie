@@ -50,7 +50,7 @@ q20_processing_aggregation_cotton(i2) ..
 *' To avoid perfect substitutability between different primary commodities being transformed into the same
 *' secondary product (e.g. oil from sunflower or oil palm), we use share factor coefficients, `i20_processing_shares`,
 *' which indicate how much of the secondary products comes from which primary products.
-*' The parameter `f20_processing_balanceflow` accounts for differences in conversion efficiency among various countries
+*' The parameter `i20_processing_balanceflow` accounts for differences in conversion efficiency among various countries
 *' whereas the conversion factors remain global. The `v20_secondary_substitutes` are used to avoid overproduction of couple products: for each couple product,
 *' there is one secondary product (usually the cheaper one) which can be substituted by other commodities
 *' (see also equations below). The secondary product overproduction `vm_secondary_overproduction` is used to move overproduction
@@ -59,7 +59,7 @@ q20_processing_aggregation_cotton(i2) ..
 q20_processing(i2,kpr,ksd) ..
   sum(processing20, v20_dem_processing(i2,processing20,kpr)
          * sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr)))  =e=
- (vm_prod_reg(i2,ksd) - sum(ct,f20_processing_balanceflow(ct,i2,ksd)))
+ (vm_prod_reg(i2,ksd) - sum(ct,i20_processing_balanceflow(ct,i2,ksd)))
          * sum(ct,i20_processing_shares(ct,i2,ksd,kpr))
          - v20_secondary_substitutes(i2,ksd,kpr)
          + vm_secondary_overproduction(i2,ksd,kpr);
