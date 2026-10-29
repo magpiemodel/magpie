@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **inputdata** additional data updated to `additional_data_rev4.78.tgz` (updated seals_scenario_config.csv and seals_global_coefficients.csv to conform to SEALS v2.1.1)
+- **scripts/output/extra/runSEALSallocation.R** adjusted to SEALS v2.1.1, runs SEALS serially on the local machine if SLURM is not available (`sealsMode`), patches the standard SEALS `run_seals.py` and takes the SEALS base data directory directly (`dirBaseData`)
 - **inputdata** updated to rev4.137 (new fodder data, added ForestGrassi2023 source, updated hourly labor costs, added ScenarioMIP CMIP7 REMIND-MAgPIE runs, updated forest loss drivers)
 - **38_factor_costs** if `c38_fac_req` is set to `reg`, crop factor requirements (`i38_fac_req`) are now kept constant after the last historical year (last `t_past`) instead of after the hard-coded year 2010 (all realizations)
 - **38_factor_costs/sticky_labor** historical capital shares are now used for all years of `t_past` (and the regression with offset afterwards) instead of only before 2010, consistent with the other realizations
@@ -14,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **38_factor_costs/sticky_labor** documentation: clarified that the CES function allows for shifts between labor and capital in response to any change in their relative prices (labor productivity, wages, effective capital price given existing capital stocks), not only to shocks.
 - **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
-- **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration. 
+- **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration.
 - **default.cfg** module 39: exposed `s39_reward_past_reduction` and `s39_ignore_calib_past` as configurable (previously hardcoded); rescaled `s39_reward_past_reduction` default from 7380 to 5904 to match cropland's reward/cost ratio; updated stale realization comment describing pasture cost as static
 - **config** Update scenario_config_susmip.csv with new values for bii targets
 - **config** additional data updated to `additional_data_rev4.74.tgz`, updated input vector including bugfix in rotation rules
