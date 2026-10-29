@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **inputdata** updated to rev4.137 (new fodder data, added ForestGrassi2023 source, updated hourly labor costs, added ScenarioMIP CMIP7 REMIND-MAgPIE runs, updated forest loss drivers)
+- **38_factor_costs** if `c38_fac_req` is set to `reg`, crop factor requirements (`i38_fac_req`) are now kept constant after the last historical year (last `t_past`) instead of after the hard-coded year 2010 (all realizations)
+- **38_factor_costs/sticky_labor** historical capital shares are now used for all years of `t_past` (and the regression with offset afterwards) instead of only before 2010, consistent with the other realizations
+- **default.cfg** updated description of `c38_fac_req`: regional factor requirements are kept constant after the last historical year
 - **38_factor_costs/sticky_labor** documentation: clarified that the CES function allows for shifts between labor and capital in response to any change in their relative prices (labor productivity, wages, effective capital price given existing capital stocks), not only to shocks.
 - **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
@@ -45,6 +48,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
 ### fixed
+- **38_factor_costs/sticky_feb18** Bugfix: the condition that selects the historical capital shares for past years used `t_all` instead of `t`, so it was never true and the regression was applied to past years as well. Historical shares are now used for `t_past`.
 - **20_processing/21_trade** Fixed infeasibility of fibres in regions without a domestic cotton route (e.g. IDN in H20): where cotton self-sufficiency is 0, the fibres self-sufficiency floor (`f21_self_suff`) and the fibres processing balanceflow are set to 0
 - **35_natveg** `pot_forest_may24` (default): input revision rev4.137 brings a corrected `f35_forest_lost_share.cs3`. Africa's tree cover loss in the Curtis et al. 2018 table had been transcribed as 3 instead of 39 Mha, so SSA's shifting-agriculture damage rate rises about 13-fold. The same revision maps 20 countries to their Curtis region anew (19 Middle East and North African countries had been under Latin America) and weights countries by natural forest area in 2010 instead of 2015. Default results change.
 - **core, 29_cropland, 35_natveg** `m_boundfix` always fixes to `up` with sensitivity 1e-6 (arguments `sufx` and `sens` removed, previously `l` at three sites), removed redundant call for 29_cropland tree cover (no change in results)
