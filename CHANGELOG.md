@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **default.cfg** `f71_livestock_distribution_0.5.mz` added to `files2export`, so that magpie4 `production()`, `ManureExcretion()` and `NitrogenBudget()` can use `disaggLvst = "glw"` on run outputs
 - **inputdata** additional data updated to `additional_data_rev4.78.tgz` (updated seals_scenario_config.csv and seals_global_coefficients.csv to conform to SEALS v2.1.1)
 - **scripts/output/extra/runSEALSallocation.R** adjusted to SEALS v2.1.1, runs SEALS serially on the local machine if SLURM is not available (`sealsMode`), patches the standard SEALS `run_seals.py` and takes the SEALS base data directory directly (`dirBaseData`)
 - **inputdata** updated to rev4.137 (new fodder data, added ForestGrassi2023 source, updated hourly labor costs, added ScenarioMIP CMIP7 REMIND-MAgPIE runs, updated forest loss drivers)
