@@ -4,6 +4,62 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+## [Unreleased]
+
+### changed
+- **inputdata** additional data updated to `additional_data_rev4.78.tgz` (updated seals_scenario_config.csv and seals_global_coefficients.csv to conform to SEALS v2.1.1)
+- **scripts/output/extra/runSEALSallocation.R** adjusted to SEALS v2.1.1, runs SEALS serially on the local machine if SLURM is not available (`sealsMode`), patches the standard SEALS `run_seals.py` and takes the SEALS base data directory directly (`dirBaseData`)
+- **inputdata** updated to rev4.137 (new fodder data, added ForestGrassi2023 source, updated hourly labor costs, added ScenarioMIP CMIP7 REMIND-MAgPIE runs, updated forest loss drivers)
+- **38_factor_costs** if `c38_fac_req` is set to `reg`, crop factor requirements (`i38_fac_req`) are now kept constant after the last historical year (last `t_past`) instead of after the hard-coded year 2010 (all realizations)
+- **38_factor_costs/sticky_labor** historical capital shares are now used for all years of `t_past` (and the regression with offset afterwards) instead of only before 2010, consistent with the other realizations
+- **default.cfg** updated description of `c38_fac_req`: regional factor requirements are kept constant after the last historical year
+- **38_factor_costs/sticky_labor** documentation: clarified that the CES function allows for shifts between labor and capital in response to any change in their relative prices (labor productivity, wages, effective capital price given existing capital stocks), not only to shocks.
+- **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
+- **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
+- **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration.
+- **default.cfg** module 39: exposed `s39_reward_past_reduction` and `s39_ignore_calib_past` as configurable (previously hardcoded); rescaled `s39_reward_past_reduction` default from 7380 to 5904 to match cropland's reward/cost ratio; updated stale realization comment describing pasture cost as static
+- **config** Update scenario_config_susmip.csv with new values for bii targets
+- **config** additional data updated to `additional_data_rev4.74.tgz`, updated input vector including bugfix in rotation rules
+- **default.cfg** Correction: removed ALB from isoCountriesEUR list
+- **scripts/output/extra/runSEALSallocation.R** adjusted to SEALS v2.0.0
+- **config** additional data updated to `additional_data_rev4.73.tgz` (updated seals_scenario_config.csv to conform to SEALS v2.0.0)
+- **21_trade** Bugfix to bilateral trade flexibility band implementation, missing parameter initialization
+- **52_carbon** Forest carbon growth curves are now observation-based (naturally regenerating: Robinson et al. 2025, leaned to the p25 lower quartile of the cell-rate distribution via `s52_natveg_growth_scalar`; plantations: Bukoski et al. 2022, carbon asymptote anchored to the observed managed plateau via `s52_plant_asymp_anchor`; other planted: derived from naturally regenerating) instead of the modelled Braakhekke et al. 2019 curves. The carbon growth curve is separated from the FRA growing-stock (timber) calibration: one realistic carbon curve for all forest, with wood matched to the FRA target by a per-region multiplier on the harvestable growing stock, shared by primary and secondary forest, with other-land wood capped by the same correction and a wood-only niche floor (`s52_gs_niche_floor`) keeping it physical in arid cells. New switch `c52_growth_par_source` (default `refit`) keeps the legacy Braakhekke curves selectable (`braakhekke`; other planted then falls back to naturally regenerating).
+- **28_ageclass** New default forest age-class source GAMI (Besnard et al. 2024, satellite-derived global forest age); GFAD remains selectable via `c28_ageclass_source`.
+- **32_forestry** Cleaned up the forestry module: the plantation rotation now comes solely from the external per-Köppen rotation table, retiring the curve-derived rotation machinery (CAI/MAI/Faustmann) and the associated unused parameters and switches.
+- **56_ghg_policy/60_bioenergy** Added the R36M414 coupled REMIND-MAgPIE scenarios to the GHG-price and 2nd-generation bioenergy-demand scenario sets.
+- **inputdata** updated to rev4.134 (FRA2025 forest data, GAMI forest ages, R36M414 coupled scenarios, grassland-corrected potential forest area, regional bookkeeping LUC-CO2 validation band)
+- **config** additional data updated to `additional_data_rev4.72.tgz` (three-curve forest growth parameters, plantation rotation lengths and carbon-asymptote targets)
+- **21_trade** Changed preprocessing calculation of bilateral trade flexibility band into the future, no longer based on historical standard deviations and rather based on mean historical ranges
+- **main.gms** model documentation references updated with recent MAgPIE publications (2020-2025)
+- **scripts/npi_ndc** NPI/NDC/ndcdelay afforestation/reforestation (A/R) is now placed on cells by forest establishment headroom (potential minus current forest) times potential-forest carbon density, replacing the 2005 cropland+pasture area weight, so more of the prescribed target is delivered (less potential-clipping) and placement prefers higher-carbon cells; the reference year is pinned to the last observed year so the weight stays identical across climate scenarios.
+
+### added
+- **35_natveg** new realization `pot_forest_oct26`: as `pot_forest_may24`, but forest loss to shifting cultivation comes from the GFW/UMD tree cover loss by dominant driver (Sims et al. 2025, 1 km driver map crossed with Hansen annual loss, 2015-2024 mean; input file `f35_forest_lost_share_gfw.cs3`) instead of the Curtis et al. 2018 regional table. `driver_source` is `shifting_cultivation`; `combined_loss` (`s35_forest_damage` option 3) and the unused `f35_forest_disturbance_share` are not part of it. `pot_forest_may24` stays the default
+- **15_food** Added `c15_exodiet_scen` switch to select between exogenous diet target scenarios — EAT-Lancet 2.0 (default) and India's NIN (National Institute of Nutrition) dietary recommendations
+- **32_forestry** Other-planted forest as its own harvestable pool with its own growth curve, matching the FRA 2025 taxonomy (naturally regenerating / other planted / plantation). Reported as `Planted Forest|+|Timber` and `Planted Forest|+|Other Planted`. Plantation rotation read from an external per-Köppen-zone table (`f32_plant_rotation.cs4`).
+- **35_natveg** Potential forest area corrected for grassland ecoregions (`c35_pot_forest_correction`, on by default): the LPJmL potential forest area is reduced by the grassland-ecoregion cover fraction (RESOLVE 2017 biomes 7-10) during preprocessing (`calcPotentialForestArea` with `calcGrassyEcoregions`, mrmagpie), where LPJmL overestimates forest cover in open grassland ecosystems; the switch selects the corrected (default) or uncorrected input file. Restricts afforestation and natural regrowth on grassland sites.
+- **73_timber** Sticky natveg harvest-capacity cost (`s73_sticky_harvest`, default on): treats natveg (primary/secondary/other) harvest capacity as a depreciating capital stock (mirrors 38_factor_costs sticky_feb18), damping the regional timestep-to-timestep source-switching sawtooth; per-source intensity via `s73_hvint_*`. FRA-pinned wood volume and carbon curves unchanged.
+- **15_food** Added flexible source-to-target food substitution with configurable food baskets and kcal/protein replacement basis
+- **scenario_config_ec.csv** A set of scenarios for the Earth Commission
+- **scripts/start/projects/project_EC.R** Start script for EC scenarios.
+- **39_landconversion** regional land conversion cost calibration extended to pasture (mirrors the existing cropland mechanism); new `calib_pasture_landconversion_cost` config switch (default TRUE) allows disabling pasture calibration for legacy crop-only behavior
+- **scripts/calibration/landconversion_cost.R** reward calibration factor is now capped (previously unbounded), via new `reward_calib_max_landconversion_cost`/`_past` config options
+- **scripts/start_functions.R** `recalibrate_landconversion_cost = "ifneeded"` now accounts for the new `calib_pasture_landconversion_cost` switch: when pasture calibration is off, a pasture calibration file must be neutral (not just present) to skip recalibration, so a stale file from an earlier pasture-calibration-enabled run is never silently reused
+### removed
+- **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
+
+### fixed
+- **modules** updated various auto-generated .gms files (including `sets.gms` now matching downloaded input data)
+- **scripts** fixed behavior of `cfg$calib_pasture_landconversion_cost <- FALSE`
+- **38_factor_costs/sticky_feb18** Bugfix: the condition that selects the historical capital shares for past years used `t_all` instead of `t`, so it was never true and the regression was applied to past years as well. Historical shares are now used for `t_past`.
+- **20_processing/21_trade** Fixed infeasibility of fibres in regions without a domestic cotton route (e.g. IDN in H20): where cotton self-sufficiency is 0, the fibres self-sufficiency floor (`f21_self_suff`) and the fibres processing balanceflow are set to 0
+- **35_natveg** `pot_forest_may24` (default): input revision rev4.137 brings a corrected `f35_forest_lost_share.cs3`. Africa's tree cover loss in the Curtis et al. 2018 table had been transcribed as 3 instead of 39 Mha, so SSA's shifting-agriculture damage rate rises about 13-fold. The same revision maps 20 countries to their Curtis region anew (19 Middle East and North African countries had been under Latin America) and weights countries by natural forest area in 2010 instead of 2015. Default results change.
+- **core, 29_cropland, 35_natveg** `m_boundfix` always fixes to `up` with sensitivity 1e-6 (arguments `sufx` and `sens` removed, previously `l` at three sites), removed redundant call for 29_cropland tree cover (no change in results)
+- **scripts/npi_ndc** NPI/NDC avoided deforestation and other land conversion bounds now follow the policy targets. Previously, targets were ignored and the bound was frozen at the last observed stock. The minimum stock is now the last observed stock minus the cumulative allowed loss, and the NDC trajectory continues from the NPI trajectory after 2025
+- **scripts/calibration/landconversion_cost.R** `restart=TRUE` now reports cropland/pasture calibration-file state independently instead of assuming they match; best-iteration selection now indexes calibration factors by iteration name rather than array position, avoiding potential misalignment
+
+
 ## [4.14.1] - 2026-08-25
 
 ### changed

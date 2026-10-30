@@ -72,7 +72,8 @@ if (s15_food_subst_functional_form = 1,
   m_linear_time_interpol(p15_alcohol_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_alcohol_substitution);
   m_linear_time_interpol(p15_livestock_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_livestock_substitution);
   m_linear_time_interpol(p15_rumdairy_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_rumdairy_substitution);
-  m_linear_time_interpol(p15_rumdairy_scp_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,    s15_rumdairy_scp_substitution);
+  m_linear_time_interpol(p15_rumdairy_scp_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_rumdairy_scp_substitution);
+  m_linear_time_interpol(p15_flexfood_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_flexfood_substitution);
   if(s15_livescen_target = 1,
     m_linear_time_interpol(p15_livestock_threshold_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,1);
   else
@@ -86,7 +87,8 @@ elseif s15_food_subst_functional_form = 2,
   m_sigmoid_time_interpol(p15_alcohol_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_alcohol_substitution);
   m_sigmoid_time_interpol(p15_livestock_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_livestock_substitution);
   m_sigmoid_time_interpol(p15_rumdairy_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_rumdairy_substitution);
-  m_sigmoid_time_interpol(p15_rumdairy_scp_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,  s15_rumdairy_scp_substitution);
+  m_sigmoid_time_interpol(p15_rumdairy_scp_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_rumdairy_scp_substitution);
+  m_sigmoid_time_interpol(p15_flexfood_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,s15_flexfood_substitution);
   if(s15_livescen_target = 1,
    m_sigmoid_time_interpol(p15_livestock_threshold_subst_fader,s15_food_substitution_start,s15_food_substitution_target,0,1);
   else
@@ -103,6 +105,7 @@ i15_alcohol_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_alcohol_subst_fader
 i15_livestock_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_livestock_subst_fader(t);
 i15_rumdairy_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_rumdairy_subst_fader(t);
 i15_rumdairy_scp_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_rumdairy_scp_subst_fader(t);
+i15_flexfood_fadeout(t,iso) = 1 - p15_country_switch(iso)*p15_flexfood_subst_fader(t);
 i15_livestock_fadeout_threshold(t,iso) = 1 - p15_country_switch(iso)*p15_livestock_threshold_subst_fader(t);
 
 
