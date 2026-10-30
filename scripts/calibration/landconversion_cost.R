@@ -215,7 +215,7 @@ writeNeutralCalib <- function(calibFile, regions, landType) {
 # from a previous run with pasture calibration switched on is never silently reused.
 isNeutralCalib <- function(calibFile) {
   require(magclass)
-  if (!file.exists(calibFile)) return(FALSE)
+  if (!file.exists(calibFile)) return(TRUE)
   x <- tryCatch(read.magpie(calibFile), error = function(e) NULL)
   if (is.null(x) || !all(c("cost", "reward") %in% getNames(x))) return(FALSE)
   isTRUE(all(x[, , "cost"] == 1) && all(x[, , "reward"] == 0))
