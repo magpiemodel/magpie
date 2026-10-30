@@ -51,6 +51,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### fixed
 - **modules** updated various auto-generated .gms files (including `sets.gms` now matching downloaded input data)
+- **scripts** fixed behavior of `cfg$calib_pasture_landconversion_cost <- FALSE`
 - **38_factor_costs/sticky_feb18** Bugfix: the condition that selects the historical capital shares for past years used `t_all` instead of `t`, so it was never true and the regression was applied to past years as well. Historical shares are now used for `t_past`.
 - **20_processing/21_trade** Fixed infeasibility of fibres in regions without a domestic cotton route (e.g. IDN in H20): where cotton self-sufficiency is 0, the fibres self-sufficiency floor (`f21_self_suff`) and the fibres processing balanceflow are set to 0
 - **35_natveg** `pot_forest_may24` (default): input revision rev4.137 brings a corrected `f35_forest_lost_share.cs3`. Africa's tree cover loss in the Curtis et al. 2018 table had been transcribed as 3 instead of 39 Mha, so SSA's shifting-agriculture damage rate rises about 13-fold. The same revision maps 20 countries to their Curtis region anew (19 Middle East and North African countries had been under Latin America) and weights countries by natural forest area in 2010 instead of 2015. Default results change.
