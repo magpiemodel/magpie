@@ -216,7 +216,6 @@ fsecScenario <- function(scenario,
   cfg$title       <- paste(v, scenario, sep = "")
   cfg$recalibrate <- FALSE
   cfg$calib_pasture_landconversion_cost <- FALSE
-  cfg$gms$s39_ignore_calib_past <- 1
   cfg$qos         <- "standby_highMem"
   cfg$output      <- c(if (highres) "extra/highres",
                        "extra/disaggregation",
