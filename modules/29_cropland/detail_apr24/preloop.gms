@@ -37,7 +37,8 @@ if (s29_treecover_map = 1,
 elseif s29_treecover_map = 0,
   pc29_treecover(j,ac) = 0
 );
-vm_treecover.l(j) = sum(ac, pc29_treecover(j,ac));
+pm_treecover_start(j) = sum(ac, pc29_treecover(j,ac));
+vm_treecover.l(j) = pm_treecover_start(j);
 
 *' Switch for tree cover on cropland:
 *' 0 = Use natveg growth curve towards LPJmL natural vegetation
@@ -58,8 +59,19 @@ p29_country_switch(policy_countries29) = 1;
 pm_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
 p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
 
-* Initialize biodiversity value
-vm_fallow.l(j) = 0;
+* Initialize fallow and biodiversity start value.
+* Consistent starting level: fallow = cropland initialisation - croparea
+* initialisation - tree cover initialisation, so the base-year optimization
+* starts from a state consistent with vm_land = initialisation. The inner
+* max(0,..) guards against negative raw fm_croparea values. The outer max(0,..)
+* guards against croparea plus tree cover exceeding the cropland initialisation,
+* which is possible because they originate from different data sources.
+im_fallow_start(j) =
+  max(0, pm_land_hist("y1995",j,"crop")
+         - sum((kcr,w), max(0, fm_croparea("y1995",j,w,kcr)))
+         - pm_treecover_start(j));
+
+vm_fallow.l(j)$(s29_fallow_max > 0) = im_fallow_start(j);
 vm_bv.l(j,"crop_fallow",potnatveg) = 
   vm_fallow.l(j) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 

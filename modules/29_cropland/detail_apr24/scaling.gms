@@ -8,7 +8,8 @@
 *q29_avl_cropland.scale(j) = 1e-3;
 *q29_cropland.scale(j) = 1e-2;
 *q29_fallow_max.scale(j) = 1e-2;
-*q29_fallow_min.scale(j) = 1e-3;
+*q29_fallow_short.scale(j) = 1e-3;
+*q29_fallow_long.scale(j) = 1e-3;
 *q29_land_snv_trans.scale(j) = 1e-5;
 *q29_treecover.scale(j) = 1e-2;
 *q29_treecover_est.scale(j,ac) = 1e-2;

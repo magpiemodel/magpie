@@ -16,19 +16,22 @@
 *' [53_methane] and [59_som].
 *'
 *' This realization allows for different scenarios of rotational
-*' constraints which are either implemented via hard constraints or penalty payments 
-*' if constraints are exceeded. Rotational constraints are defined for total croparea 
-*' as well as for irrigated areas only to avoid overspecialization on irrigated land.
+*' constraints, which are implemented as hard constraints that cannot be
+*' exceeded at any price. Rotational constraints are defined for total croparea.
+*' No separate constraint is applied to irrigated areas, as a hard limit on
+*' irrigated shares can easily render the model infeasible. See realization
+*' `penalties_sep26` for rotational constraints implemented as penalty payments,
+*' which uses a smaller, fixed rule set and does include the irrigated constraint.
 
 *' @limitations There are currently no known limitations of this realization.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/30_croparea/detail_apr24/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/30_croparea/detail_apr24/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/30_croparea/detail_apr24/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/30_croparea/detail_apr24/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/30_croparea/detail_apr24/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/30_croparea/detail_apr24/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/30_croparea/detail_apr24/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/30_croparea/detail_apr24/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/30_croparea/rules_sep26/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/30_croparea/rules_sep26/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/30_croparea/rules_sep26/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/30_croparea/rules_sep26/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/30_croparea/rules_sep26/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/30_croparea/rules_sep26/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/30_croparea/rules_sep26/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/30_croparea/rules_sep26/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

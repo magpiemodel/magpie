@@ -22,6 +22,9 @@ climate59_2019 Climate classes of IPCC 2019
 climate59(climate59_2019) Climate classes of IPCC 2006
 /temperate_dry,temperate_moist,tropical_dry,tropical_moist/
 
+climate59moist(climate59) Moist climate classes of IPCC 2006
+/temperate_moist,tropical_moist/
+
 *** Csa, Dwa should be dry (maybe others as well)
 
 clcl_climate59(clcl,climate59) Climate classification types

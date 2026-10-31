@@ -6,62 +6,55 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Test new rotational constraint scenarios
+# description: Compare the two rotational constraint realizations of module 30_croparea
 # ----------------------------------------------------------
-
 
 ######################################
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(gms)
-library(lucode2)
+library(magpie4)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-#start MAgPIE run
+# get default settings
 source("config/default.cfg")
-cfg$gms$s13_max_gdp_shr <- 0.01
 
-cfg$results_folder <- "output/:title:"
-#cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
-prefix <- "rota_penalty18"
+cfg$results_folder <- "output/:title::date:"
+prefix <- "rotations"
 
-cfg$title <- paste(prefix,"olddefault",sep="_")
-start_run(cfg,codeCheck=FALSE)
+defaultCalibration <- cfg$input["calibration"]
 
-#cfg$title <- paste(prefix,"olddefault_stickydynamic",sep="_")
-#cfg$input <- c(regional    = "rev4.68_h12_magpie.tgz",
-#               cellular    = "rev4.68_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-#               validation  = "rev4.68_h12_validation.tgz",
-#               additional  = "additional_data_rev4.18.tgz",
-#               calibration = "calibration_H12_sticky_feb18_dynamic_rotation_14Jun22.tgz")
+for (r in c("penalties_sep26", "rules_sep26")) {
 
-#cfg$gms$c38_sticky_mode <- "dynamic"
-#start_run(cfg,codeCheck=FALSE)
+  cfg$gms$croparea <- r
 
-cfg$title <- paste(prefix,"newdefault",sep="_")
-cfg$gms$crop    <- "penalty_apr22"
-cfg$gms$som    <- "cellpool_jan23"
-cfg$gms$c30_rotation_scenario = "default"
+  # Each realization is recalibrated from the same archive baseline, so the two
+  # calibrations are independent of each other and of run order. Resetting
+  # cfg$input["calibration"] also makes prepare() redistribute the archive, so the
+  # calibration starts from its factors rather than from the previous realization's.
+  # Land conversion costs only: yield calibration stays off, matching the default
+  # config (s14_use_yield_calib = 0).
+  cfg$input["calibration"] <- defaultCalibration
+  cfg$recalibrate <- FALSE
+  cfg$recalibrate_landconversion_cost <- TRUE
 
+  cfg$title <- paste(prefix, r, "default", sep = "_")
+  cfg$gms$c30_rotation_policy <- "default"
+  start_run(cfg, codeCheck = FALSE)
 
-#cfg$qos <- "priority"
-cfg$recalibrate <- TRUE
-cfg$recalibrate_landconversion_cost <- TRUE
-start_run(cfg,codeCheck=FALSE)
-magpie4::submitCalibration("H12_sticky_feb18_dynamic_rotation2")
-cfg$recalibrate <- FALSE
-cfg$recalibrate_landconversion_cost <- FALSE
+  # The calibration above has just written f39_calib.csv and f39_calib_past.csv into
+  # modules/39_landconversion/input/, so submitCalibration() archives a complete set.
+  calibTgz <- magpie4::submitCalibration(paste("H12", prefix, r, sep = "_"))
 
-for (scenario in c("none","default","fallow","legumes","agroforestry","agroecology")){
-  for (byyear in c("by2030","by2050")){
-    cfg$gms$c30_rotation_scenario = scenario
-    cfg$gms$c30_rotation_scenario_speed = byyear
-    cfg$title <- paste(prefix,scenario,byyear,sep="_")
-    start_run(cfg,codeCheck=FALSE)
-  }
+  # The policy run reuses its own realization's freshly computed factors instead of
+  # recalibrating again, so that the only difference to the run above is the policy.
+  cfg$input["calibration"] <- calibTgz
+  cfg$recalibrate_landconversion_cost <- FALSE
 
+  cfg$title <- paste(prefix, r, "agroecology", sep = "_")
+  cfg$gms$c30_rotation_policy <- "agroecology"
+  start_run(cfg, codeCheck = FALSE)
 }

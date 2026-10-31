@@ -258,24 +258,26 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
     cat(">>> Starting with existing calibration file\n")
     oldCalib <- magpiesort(read.magpie(calibFile))[,getYears(calibDivergence),]
   } else {
-    cat(">>> First iteration - initializing calibration factors (cost=1 for expanding countries, cost=2.5 for contracting, reward=0)\n")
+    cat(">>> First iteration - initializing calibration factors (cost=1, reward=0)\n")
     oldCalib <- new.magpie(cells_and_regions = getCells(calibDivergence), years = getYears(calibDivergence), names = c("cost", "reward"), fill = NA)
-    oldCalib[,,"cost"] <- (expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) < 0) * (costMax - 1) + 1
+    oldCalib[,,"cost"] <- 1
     oldCalib[,,"reward"] <- 0
   }
 
   ### use first steps to calibrate stronger, such that calibration factors can also achieve low/high levels
-  if(calibrationStep <= 8) {
+  if(calibrationStep <= 5) { 
     reinforcement <- 10
+  } else if (calibrationStep <= 8) {
+    reinforcement <- 5
   } else if (calibrationStep <= 11) {
-    reinforcement <- 5 
+    reinforcement <- 2
   } else {
     reinforcement <- 1
   } 
-  
+
   cat(">>> Calib factors are adjusted where needed\n")
   calibFactorCost <- setNames(oldCalib[, , "cost"], NULL) * calib_correction ^ reinforcement
-  calibFactorReward <- setNames(oldCalib[, , "reward"], NULL) + (calib_correction - 1) * reinforcement
+  calibFactorReward <- setNames(oldCalib[, , "reward"], NULL) + (calib_correction - 1) * reinforcement / 5
   # no rewards in case that validation data shows no contraction
   calibFactorReward[expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) >= 0] <- 0
   calibFactorReward[calibFactorReward < 0] <- 0

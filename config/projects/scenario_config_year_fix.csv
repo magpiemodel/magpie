@@ -8,7 +8,6 @@ gms$s22_conservation_start;2020;2025
 gms$s29_snv_scenario_start;2020;2025
 gms$s29_treecover_scenario_start;2020;2025
 gms$s29_fallow_scenario_start;2020;2025
-gms$s30_betr_scenario_start;2020;2025
 gms$s30_rotation_scenario_start;2020;2025
 gms$s38_startyear_labor_substitution;2020;2025
 gms$s42_efp_startyear;2020;2025

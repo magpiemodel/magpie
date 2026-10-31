@@ -46,6 +46,14 @@ $include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_LU_2019reg.cs3"
 $offdelim
 ;
 
+parameter f59_cratio_landuse_fallow(climate59_2019) Ratio of soil carbon relative to potential natural vegetation soil carbon for fallow land (1)
+/
+$ondelim
+$include "./modules/59_som/cellpool_jan23/input/ch5_F_LU_2019_fallow.csv"
+$offdelim
+/
+;
+
 table f59_cratio_tillage(climate59,tillage59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different soil management (1)
 $ondelim
 $include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_MG.csv"

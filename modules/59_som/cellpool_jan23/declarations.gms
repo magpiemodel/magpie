@@ -14,6 +14,7 @@ parameters
           i59_scm_target(t,j)                  Target for the share of cropland under soil carbon managament (1)
           i59_cratio(j,kcr,w)                  Ratio of carbon density of land relative to natural vegetaion (1)
           i59_cratio_fallow(j)                 Ratio of carbon density of fallow land relative to natural vegetation (1)
+          i59_cratio_fallow_climate(climate59) Ratio of carbon density of fallow land relative to natural vegetation by climate zone (1)
           i59_cratio_treecover                 Ratio of carbon density of tree cover on cropland relative to natural vegetation (1)
           i59_cratio_scm(j)                    Ratio of carbon density of cropland under soil carbon managament relative to natural vegetation (1)
           i59_scm_scenario_fader(t_all)        Cropland soil carbon management scenario fader (1)

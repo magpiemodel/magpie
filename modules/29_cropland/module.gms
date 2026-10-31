@@ -10,6 +10,9 @@
 *' @description Cropland is defined as the sum of croparea, fallow land and tree cover on cropland. 
 *' Croparea and corresponding carbon stocks are provided from [30_crop].
 *' Area and carbon stocks for fallow land and tree cover are defined in this module.
+*' Fallow reduces production costs, increases land requirements, can be shortened
+*' (if flexible) to intensify, relaxes rotational constraitns, and slightly affects 
+*' soil carbon, biodiversity intactness index, and nitrogen fixation. 
 
 
 *' @authors Florian Humpenöder, Benjamin Bodirsky, Patrick v. Jeetze
