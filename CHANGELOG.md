@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- **scripts/output/downscaling** The 0.5 degree downscaling of land, BII and land conservation runs in mrdownscale (`downscale_default.R` via `downscaleRun`). It downscales the cluster transitions of the land module, including the presolve shifts of natural vegetation, so that the cluster states and transitions of the model hold; the scenario constraints of the run (available cropland with SNV, land protection, potential forest, peatland) are kept where they can hold, and their excess is reported per year in `cell.land_constraint_excess.csv`. The spatial output files keep their names. New files are `cell.land_transitions_0.5.mz` and the diagnostics `cell.land_diagnostics.csv`, `cell.land_transition_change.csv` and `cell.peatland_excess.csv`.
+- **config/default.cfg** The default output runs `downscaling/downscale_default` instead of `extra/disaggregation`; `SNVTargetCropland_0.5.mz` and `pot_forest_area_uncorrected_0.5.mz` are exported to the output folder.
+- **scripts/output** `extra/mrdownscale_LUH2.R` renamed to `downscaling/downscale_LUH.R`; `reportMAgPIE2SEALS.R` and `runSEALSallocation.R` moved from `extra` to `downscaling`; the start scripts and `scripts/projects/fsec.R` use the new script names.
 - **inputdata** additional data rev4.77: corrected NPI/NDC policy rows for BEN, ETH, AGO and IDN (one row per region, land pool and policy)
 - **39_landconversion/calib/input.gms**: default.cfg sets 5904 (4800 * 1.23), so changed the GAMS default to match.
 - **default.cfg** module 39: Adjusted description for pasture calibration in module 39, adding that `cfg$gms$s39_ignore_calib_past <- 1 ` switches the pasture factors off in GAMS without any recalibration. 
@@ -28,6 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/npi_ndc** NPI/NDC/ndcdelay afforestation/reforestation (A/R) is now placed on cells by forest establishment headroom (potential minus current forest) times potential-forest carbon density, replacing the 2005 cropland+pasture area weight, so more of the prescribed target is delivered (less potential-clipping) and placement prefers higher-carbon cells; the reference year is pinned to the last observed year so the weight stays identical across climate scenarios.
 
 ### added
+- **scripts/output/downscaling** `downscale_ageClasses.R` downscales the age classes of secondary forest, forestry and other land to 0.5 degree on the downscaled land (optional, not in the default output).
 - **15_food** Added `c15_exodiet_scen` switch to select between exogenous diet target scenarios — EAT-Lancet 2.0 (default) and India's NIN (National Institute of Nutrition) dietary recommendations
 - **32_forestry** Other-planted forest as its own harvestable pool with its own growth curve, matching the FRA 2025 taxonomy (naturally regenerating / other planted / plantation). Reported as `Planted Forest|+|Timber` and `Planted Forest|+|Other Planted`. Plantation rotation read from an external per-Köppen-zone table (`f32_plant_rotation.cs4`).
 - **35_natveg** Potential forest area corrected for grassland ecoregions (`c35_pot_forest_correction`, on by default): the LPJmL potential forest area is reduced by the grassland-ecoregion cover fraction (RESOLVE 2017 biomes 7-10) during preprocessing (`calcPotentialForestArea` with `calcGrassyEcoregions`, mrmagpie), where LPJmL overestimates forest cover in open grassland ecosystems; the switch selects the corrected (default) or uncorrected input file. Restricts afforestation and natural regrowth on grassland sites.
@@ -39,6 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/calibration/landconversion_cost.R** reward calibration factor is now capped (previously unbounded), via new `reward_calib_max_landconversion_cost`/`_past` config options
 - **scripts/start_functions.R** `recalibrate_landconversion_cost = "ifneeded"` now accounts for the new `calib_pasture_landconversion_cost` switch: when pasture calibration is off, a pasture calibration file must be neutral (not just present) to skip recalibration, so a stale file from an earlier pasture-calibration-enabled run is never silently reused
 ### removed
+- **scripts/output/extra** `disaggregation.R`, `disaggregation_LUH2.R` and `mrdownscale.R`, replaced by the scripts in `scripts/output/downscaling`.
 - **52_carbon/35_natveg/32_forestry** Retired workarounds that are no longer needed once the wood calibration is separated from the carbon growth curve: the k-bisection growth-curve calibration, the "natural-origin" secondary-forest carbon blend and harvest floor, and the young-secondary-forest wood-harvest loophole.
 
 ### fixed
