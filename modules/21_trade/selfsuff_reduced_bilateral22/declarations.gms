@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
+ pm_no_cotton_route(t_all,i)                               Flag for regions without a domestic cotton route (1 = no cotton production possible) (1)
  i21_trade_margin(i_ex,i_im,k_trade)                       Bilateral freight and insurance costs between region pairs (USD17MER per tDM)
  i21_trade_tariff(t_all,i_ex,i_im,k_trade)                 Bilateral specific duty tariff rates (USD17MER per tDM)
  i21_import_supply_historical(i_ex,i_im,t_all,k_trade)     Share of importer domestic supply sourced from each exporter historical and projected (1)

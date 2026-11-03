@@ -209,13 +209,14 @@ writeNeutralCalib <- function(calibFile, regions, landType) {
   cat(paste0(">>> Wrote neutral (legacy) calibration file for landType = ", landType, ": ", calibFile, "\n"))
 }
 
-# TRUE only if calibFile already exists and is exactly the neutral file writeNeutralCalib()
+# TRUE if calibFile doesn't exist or is exactly the neutral file writeNeutralCalib()
 # would produce (cost == 1 and reward == 0 everywhere). Used so that flipping
 # calibratePasture to FALSE always results in a neutral file -- an existing file left over
-# from a previous run with pasture calibration switched on is never silently reused.
+# from a previous run with pasture calibration switched on is never silently reused,
+# while a missing calibration file will be treated as neutral calibration by MAgPIE.
 isNeutralCalib <- function(calibFile) {
   require(magclass)
-  if (!file.exists(calibFile)) return(FALSE)
+  if (!file.exists(calibFile)) return(TRUE)
   x <- tryCatch(read.magpie(calibFile), error = function(e) NULL)
   if (is.null(x) || !all(c("cost", "reward") %in% getNames(x))) return(FALSE)
   isTRUE(all(x[, , "cost"] == 1) && all(x[, , "reward"] == 0))

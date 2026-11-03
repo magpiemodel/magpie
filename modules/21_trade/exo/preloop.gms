@@ -17,3 +17,5 @@ elseif (s21_trade_tariff=0),
 i21_trade_margin(h,"wood")$(i21_trade_margin(h,"wood") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
 i21_trade_margin(h,"woodfuel")$(i21_trade_margin(h,"woodfuel") < s21_min_trade_margin_forestry) = s21_min_trade_margin_forestry;
 
+* Trade is exogenous, so there is no self-sufficiency band that could close the cotton route.
+pm_no_cotton_route(t_all,i) = 0;
