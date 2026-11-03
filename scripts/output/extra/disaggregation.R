@@ -381,7 +381,7 @@ land_split_hr <- mbind(crop_hr, land_split_hr)
 
 rm(crop_kfo_rf, crop_kfo_ir, crop_kbe_rf, crop_kbe_ir, crop_hr, area_hr)
 
-# split "forestry" into timber plantations, pre-scribed afforestation (NPi/NDC) and endogenous afforestation (CO2 price driven)
+# split "forestry" into timber plantations, afforestation (NPi/NDC and CO2-price), and other planted forest
 message("Disaggregating forestry")
 farea <- dimSums(landForestry(gdx, level = "cell"), dim = "ac")
 farea_shr <- farea / (dimSums(farea, dim = 3) + 10^-10)
@@ -390,11 +390,13 @@ farea_hr <- madrat::toolAggregate(farea_shr, map_file, to = "cell") * setNames(l
 # check
 if (abs(sum(dimSums(farea_hr, dim = 3) - setNames(land_split_hr[, , "forestry"], NULL), na.rm = T)) > 0.1) warning("large Difference in forestry disaggregation detected!")
 # rename
-df <- data.frame(matrix(nrow = 3, ncol = 2))
+df <- data.frame(matrix(nrow = 4, ncol = 2))
 names(df) <- c("internal", "output")
 df[1, ] <- c("aff", "PlantedForest_Afforestation")
 df[2, ] <- c("ndc", "PlantedForest_NPiNDC")
 df[3, ] <- c("plant", "PlantedForest_Timber")
+# other planted forest is a separate forestry pool, kept as its own gridded category
+df[4, ] <- c("other_planted", "PlantedForest_OtherPlanted")
 farea_hr <- madrat::toolAggregate(farea_hr, df, from = "internal", to = "output", dim = 3.1)
 
 # drop forestry

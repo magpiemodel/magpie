@@ -12,8 +12,6 @@ $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
-$setglobal c32_rot_calc_type  current_annual_increment
-* options mean_annual_increment, current_annual_increment, instantaneous_growth_rate_reg, instantaneous_growth_rate_glo
 $setglobal c32_shock_scenario  none
 * options none 002lin2030 004lin2030 008lin2030 016lin2030
 
@@ -26,15 +24,11 @@ scalars
   s32_recurring_cost              Recurring costs (USD17MER per ha) / 615 /
   s32_harvesting_cost             Harvesting cost (USD17MER per ha) / 1230 /
   s32_planning_horizon             Afforestation planing horizon (years)            / 50 /
-  s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
-  s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
   s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution / 1 /
-  s32_price                       Price for timber (USD17MER)      / 55 /
   s32_free_land_cost              Penalty for technial area balance term (USD17MER per ha) / 1e+06 /
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
   s32_tcre_local                  Switch for local (1) or global (0) TRCE factors (1) / 1 /
-  s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_max_self_suff               Upper ceiling for the self sufficiency used in calculation for establishment decision (1) / 0.8 /
   s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
   s32_max_aff_area_glo            Switch for global or regional afforestation constraint (1) / 1 /
@@ -48,6 +42,8 @@ scalars
   s32_npi_ndc_reversal              Year in which NPI NDC reversal should take place (1) / Inf /
   s32_min_plant_shr                 Minimum share of plantations in planted forests (1) / 0.05 /
   s32_annual_aff_limit              Annual upper limit for re-afforestation as share of overall forest establishment potential (1) / 0.03 /
+  s32_max_rotation                  Maximum commercial plantation rotation (yr) / 90 /
+  s32_ageclass_length               Length of one age class (yr) / 5 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
@@ -92,6 +88,14 @@ $ondelim
 $include "./modules/32_forestry/input/f32_plantedforest.cs4"
 $offdelim
 /;
+
+parameter f32_plant_rotation(clcl) Representative managed-plantation rotation length by Koeppen biome (yr)
+/
+$ondelim
+$include "./modules/32_forestry/input/f32_plant_rotation.cs4"
+$offdelim
+/
+;
 
 table f32_forest_shock(t_all, shock_scen32) Forest carbon shock scenarios (area share affected per year)
 $ondelim

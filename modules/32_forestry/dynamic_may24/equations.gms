@@ -59,15 +59,15 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  vm_land_forestry(j2,type32) =e= sum(ac, v32_land(j2,type32,ac));
 
  q32_land_expansion_forestry(j2,type32) ..
- vm_landexpansion_forestry(j2,type32) =e= v32_land_expansion(j2,type32) - (v32_land_replant(j2))$sameas(type32,"plant");
+ vm_landexpansion_forestry(j2,type32) =e= v32_land_expansion(j2,type32) - sum(harvest32$sameas(type32,harvest32), v32_land_replant(j2,harvest32));
 
  q32_land_reduction_forestry(j2,type32) ..
- vm_landreduction_forestry(j2,type32) =e= sum(ac_sub, v32_land_reduction(j2,type32,ac_sub)) - (v32_land_replant(j2))$sameas(type32,"plant");
+ vm_landreduction_forestry(j2,type32) =e= sum(ac_sub, v32_land_reduction(j2,type32,ac_sub)) - sum(harvest32$sameas(type32,harvest32), v32_land_replant(j2,harvest32));
 
- q32_land_replant(j2) ..
-  v32_land_replant(j2)
+ q32_land_replant(j2,harvest32) ..
+  v32_land_replant(j2,harvest32)
   =e=
-  sum(ac_sub, v32_hvarea_forestry(j2,ac_sub)) * sum(cell(i2,j2), min(1, sum(ct, p32_future_to_current_demand_ratio(ct,i2))))$s32_establishment_dynamic;
+  sum(ac_sub, v32_hvarea_forestry(j2,harvest32,ac_sub)) * sum(cell(i2,j2), min(1, sum(ct, p32_future_to_current_demand_ratio(ct,i2))))$s32_establishment_dynamic;
 
 *' The constraint `q32_aff_pol` accounts for the exogenous re/afforestation prescribed by NPI/NDC policies.
 
@@ -132,8 +132,10 @@ q32_bv_aff(j2,potnatveg) .. vm_bv(j2,"aff_co2p",potnatveg)
 
 q32_bv_ndc(j2,potnatveg) .. vm_bv(j2,"aff_ndc",potnatveg)
           =e=
-          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"ndc",ac)) *
-          p32_bii_coeff("ndc",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
+          sum(bii_class_secd, (sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"ndc",ac)) *
+            p32_bii_coeff("ndc",bii_class_secd,potnatveg)
+          + sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"other_planted",ac)) *
+            p32_bii_coeff("other_planted",bii_class_secd,potnatveg))) * fm_luh2_side_layers(j2,potnatveg);
 
 q32_bv_plant(j2,potnatveg) .. vm_bv(j2,"plant",potnatveg)
           =e=
@@ -167,7 +169,7 @@ q32_cost_establishment(i2)..
   v32_cost_establishment(i2)
   =e=
    (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * p32_est_cost(type32))
-    - sum(cell(i2,j2), v32_land_replant(j2)) * (p32_est_cost("plant") - s32_est_cost_plant_reest)
+    - sum((cell(i2,j2),harvest32), v32_land_replant(j2,harvest32) * (p32_est_cost(harvest32) - s32_est_cost_plant_reest))
    ) * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
    + sum((ct,kforestry), v32_prod_forestry_future(i2) * p32_forestry_product_dist(ct,i2,kforestry) * im_timber_prod_cost(i2,kforestry))
      / ((1+sum(ct,pm_interest(ct,i2)))**sum(ct, p32_rotation_regional(ct,i2)*5));
@@ -210,10 +212,10 @@ q32_establishment_demand(i2)$s32_establishment_dynamic ..
 
 *' Harvested areas are fully re-established at cell level, unless the ratio of future and current demand drops below 1.
 
-q32_establishment_hvarea(j2)$s32_establishment_dynamic ..
-              sum(ac_est, v32_land(j2,"plant",ac_est))
+q32_establishment_hvarea(j2,harvest32)$s32_establishment_dynamic ..
+              sum(ac_est, v32_land(j2,harvest32,ac_est))
               =g=
-              sum(ac_sub, v32_hvarea_forestry(j2,ac_sub)) * sum(cell(i2,j2), min(1, sum(ct, p32_future_to_current_demand_ratio(ct,i2))))
+              sum(ac_sub, v32_hvarea_forestry(j2,harvest32,ac_sub)) * sum(cell(i2,j2), min(1, sum(ct, p32_future_to_current_demand_ratio(ct,i2))))
               ;
 
 *' If plantations should be static (defined by `s32_establishment_static`) then
@@ -221,8 +223,8 @@ q32_establishment_hvarea(j2)$s32_establishment_dynamic ..
 *' this keeps the plantation area static but accounts for age-class changes and
 *' regrowth during every time step.
 
-q32_establishment_fixed(j2)$s32_establishment_static ..
-  sum(ac, v32_land(j2,"plant",ac)) =e= sum(ac, pc32_land(j2,"plant",ac));
+q32_establishment_fixed(j2,harvest32)$s32_establishment_static ..
+  sum(ac, v32_land(j2,harvest32,ac)) =e= sum(ac, pc32_land(j2,harvest32,ac));
 
 
 *' This constraint distributes additions to forestry land over ac_est,
@@ -234,19 +236,21 @@ v32_land(j2,type32,ac_est) =e= sum(ac_est2, v32_land(j2,type32,ac_est2))/card(ac
 *' Change in forestry area is the difference between plantation area from previous time
 *' step ('pc32_land') and optimized plantation area from current time step ('v32_land')
 
-q32_hvarea_forestry(j2,ac_sub) ..
-                          v32_hvarea_forestry(j2,ac_sub)
+q32_hvarea_forestry(j2,harvest32,ac_sub) ..
+                          v32_hvarea_forestry(j2,harvest32,ac_sub)
                           =e=
-                          v32_land_reduction(j2,"plant",ac_sub);
+                          v32_land_reduction(j2,harvest32,ac_sub);
 
-** Timber plantation
-*' Woody biomass production from timber plantations is calculated by multiplying the
-*' area under production with corresponding growing stock of plantation forests, divided by the timestep length.
+** Timber plantation and other planted forest
+*' Woody biomass production from the harvestable managed-forestry pools (timber plantations and other
+*' planted forest) is calculated by multiplying the area under production with the corresponding growing
+*' stock, divided by the timestep length.
 
 q32_prod_forestry(j2)..
                          sum(kforestry, vm_prod_forestry(j2,kforestry))
                          =e=
-                         sum(ac_sub, v32_hvarea_forestry(j2,ac_sub) * sum(ct, im_growing_stock(ct,j2,ac_sub,"forestry"))) / m_timestep_length_forestry;
+                         sum((harvest32,ac_sub), v32_hvarea_forestry(j2,harvest32,ac_sub) * p32_gs_forestry(j2,ac_sub,harvest32))
+                         / m_timestep_length_forestry;
 
 *' Harvesting cost in plantations is defined as the cost incurred while removing
 *' biomass from such forests.
@@ -254,7 +258,7 @@ q32_prod_forestry(j2)..
 q32_cost_hvarea(i2)..
                     v32_cost_hvarea(i2)
                     =e=
-                    sum((ct,cell(i2,j2),ac_sub), v32_hvarea_forestry(j2,ac_sub))   * s32_harvesting_cost
+                    sum((ct,cell(i2,j2),harvest32,ac_sub), v32_hvarea_forestry(j2,harvest32,ac_sub))   * s32_harvesting_cost
                     ;
 
 *** EOF equations.gms ***

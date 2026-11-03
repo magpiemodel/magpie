@@ -11,7 +11,7 @@ ac_gfad Forest age classes in GFAD data set
 class6, class7, class8, class9, class10,
 class11, class12, class13, class14, class15 /
 
-ac_young(ac) Young age classes
+ac_young(ac) Young age classes (below about 35 years)
 / ac0, ac5, ac10, ac15, ac20, ac25, ac30 /
 
 ac_gfad_to_ac(ac_gfad,ac) mapping between ac and ac_gfad
