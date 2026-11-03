@@ -136,3 +136,7 @@ i21_trade_margin(i_ex, i_im,"woodfuel")$(i21_trade_margin(i_ex, i_im,"woodfuel")
 v21_import_for_feasibility.fx(i_ex,i_im,k_trade) = 0;
 v21_import_for_feasibility.lo(i_ex,i_im,k_import21) = 0;
 v21_import_for_feasibility.up(i_ex,i_im,k_import21) = Inf;
+
+* Trade bands are based on bilateral import supply ratios, not on self-sufficiency,
+* so the cotton route is never closed by the trade constraints.
+pm_no_cotton_route(t_all,i) = 0;

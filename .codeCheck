@@ -3,6 +3,7 @@ capitalExclusionList:
   - iso
   - type
   - age
+  - h
   - k
   - som
   - ssp1
