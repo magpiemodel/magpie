@@ -62,6 +62,8 @@ repeat
       s80_counter = sum(h2,p80_counter(h2));
       display s80_counter;
       display magpie.modelStat;
+*     async solves write no solve summary, so this is the only source of solve times
+      display magpie.resUsd;
       display vm_cost_glo.l;
       magpie.modelStat$(magpie.modelStat=NA) = 13;
       

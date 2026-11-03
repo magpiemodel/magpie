@@ -9,12 +9,11 @@
 $if "%c38_fac_req%" == "glo" i38_fac_req(t,i,kcr) = f38_fac_req(kcr);
 $if "%c38_fac_req%" == "reg" i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg(t,i,kcr);
 
+* factor requirements are kept constant before 1995 and after the last historical year
 if (m_year(t)<=1995,
  i38_fac_req(t,i,kcr) = i38_fac_req("y1995",i,kcr);
-elseif m_year(t)>=2010,
- i38_fac_req(t,i,kcr) = i38_fac_req("y2010",i,kcr);
-else
- i38_fac_req(t,i,kcr) = i38_fac_req(t,i,kcr);
+elseif m_year(t) > sum(t_past$(ord(t_past) eq card(t_past)), m_year(t_past)),
+ i38_fac_req(t,i,kcr) = sum(t_past$(ord(t_past) eq card(t_past)), i38_fac_req(t_past,i,kcr));
 );
 
 p38_labor_need(t,i,kcr) = i38_fac_req(t,i,kcr)  * pm_factor_cost_shares(t,i,"labor");
@@ -51,7 +50,11 @@ if (s38_target_labor_share = 0,
 v38_laborhours_need.l(j,kcr) = sum(cell(i,j), p38_labor_need(t,i,kcr) / pm_hourly_costs(t,i,"baseline"));
 v38_capital_need.l(j,kcr,mobil38) = sum(cell(i,j), p38_capital_need(t,i,kcr,mobil38));
 
-* update CES parameters (calibrating to baseline labor and capital needs)
+* update CES parameters (calibrating to baseline labor and capital needs):
+* The calibration assumes the full annuity price of capital (p38_intr_depr) and the baseline wage. The resulting
+* labor and capital needs are therefore only the cost-minimizing choice at these prices. They can change in the
+* optimization with any change in the effective prices of labor or capital (e.g. productivity change due to heat 
+* stress or wage changes, or capital that is already available from previous investments).
 i38_ces_shr(j,kcr) = sum(cell(i,j), (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)) / (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par) + pm_hourly_costs(t,i,"baseline") * v38_laborhours_need.l(j,kcr)**(1 + s38_ces_elast_par)));
 i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(-s38_ces_elast_par) + (1 - i38_ces_shr(j,kcr)) * v38_laborhours_need.l(j,kcr)**(-s38_ces_elast_par)]**(-1/s38_ces_elast_par)));
 

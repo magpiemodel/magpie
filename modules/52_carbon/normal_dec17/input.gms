@@ -34,18 +34,45 @@ fm_carbon_density(t_all,j,land_forest,c_pools)$(fm_carbon_density(t_all,j,land_f
 * fm_carbon_density does not provide meaningful numbers for urban.
 fm_carbon_density(t_all,j,"urban","soilc") = fm_carbon_density(t_all,j,"other","soilc")
 
+$setglobal c52_growth_par_source  refit
+* options: refit (default), braakhekke
+
 parameter f52_growth_par(clcl,chap_par,forest_type) Parameters for chapman-richards equation (1)
 /
 $ondelim
+$ifthen "%c52_growth_par_source%" == "braakhekke"
 $include "./modules/52_carbon/input/f52_growth_par.csv"
+$else
+$include "./modules/52_carbon/input/f52_growth_par_3curve.csv"
+$endif
 $offdelim
 /
 ;
 
+* legacy Braakhekke curves carry no other_planted type -> fall back to naturally regenerating forest
+$ifthen "%c52_growth_par_source%" == "braakhekke"
+f52_growth_par(clcl,chap_par,"other_planted") = f52_growth_par(clcl,chap_par,"natveg");
+$endif
+
 scalars
-  s52_growingstock_calib Switch for growing stock calibration of secdforest growth curves 1=on 0=off (1) / 1 /
-  s52_k_high_secdf       Upper bound for secdforest k bisection - kept low because FRA NRF growing stock is below LPJmL potential in most regions (1) / 0.1 /
-  s52_k_high_plant       Upper bound for plantation k bisection - slightly higher than secdf because plantations can exceed natural growth rates (1) / 0.15 /
+  s52_growingstock_calib   Switch for growing-stock wood-multiplier (lambda) calibration to FRA - natural forest and plantations 1=on 0=off (1) / 1 /
+  s52_gs_niche_floor       Niche floor on mature secdforest veg carbon for the WOOD conversion only - lifts arid divide-by-near-zero cells 0=off (tC per ha) / 15 /
+  s52_plant_asymp_anchor   Anchor plantation carbon asymptote to observed managed plateau - 0=off (LPJmL natural) 1=tropical-only 2=all Bukoski biomes (1) / 1 /
+  s52_natveg_growth_scalar Global multiplier on the naturally regenerating vegetation growth-rate k - secdforest other natural land and the natveg-derived other-planted curve - default 0.83 = lower quartile (p25) of Robinson 2025 mapped cell rates - carbon only 1=central (1) / 0.83 /
+  s52_lambda_bef_cap       Cap wood multiplier lambda at the biomass expansion factor - lambda greater than BEF implies harvested stemwood exceeding aboveground biomass 1=on 0=off (1) / 1 /
+;
+
+f52_growth_par(clcl,"k","natveg")        = s52_natveg_growth_scalar * f52_growth_par(clcl,"k","natveg");
+f52_growth_par(clcl,"k","other_planted") = s52_natveg_growth_scalar * f52_growth_par(clcl,"k","other_planted");
+
+set clcl_trop52(clcl) Tropical Koeppen classes for the plantation asymptote anchor / Af, Am, As, Aw /;
+
+parameter f52_plant_asymp_agc(clcl) Managed-plantation aboveground-C asymptote target - Bukoski 2022 (tC per ha)
+/
+$ondelim
+$include "./modules/52_carbon/input/f52_plant_asymp_agc.cs4"
+$offdelim
+/
 ;
 
 parameter f52_fra_nrf_gs(i) FRA growing stock target for naturally regenerating forests (m3 per ha)
@@ -72,7 +99,7 @@ $offdelim
 /
 ;
 
-* Note: Land carbon sink adjustment factors from Grassie et al 2021 (DOI 10.1038/s41558-021-01033-6)
+* Note: Land carbon sink adjustment factors from Grassi et al 2021 (DOI 10.1038/s41558-021-01033-6)
 * are needed in the post-processing in https://github.com/pik-piam/magpie4/blob/master/R/reportEmissions.R
 * To facilitate the choice of the corresponding RCP, the adjustment factors are read-in here and
 * stored in i52_land_carbon_sink for use in the R post-processing.
