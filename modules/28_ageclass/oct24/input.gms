@@ -5,8 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-table f28_forestageclasses(j,ac_gfad) Forest area in 15 10-year age classes from GFAD (Mha)
+$setglobal c28_ageclass_source  gami
+* options: gfad (GFAD V1.1), gami (GAMI v2.1, default)
+
+table f28_forestageclasses(j,ac_gfad) Forest area in 15 10-year age classes (Mha)
 $ondelim
+$ifthen "%c28_ageclass_source%" == "gami"
+$include "./modules/28_ageclass/input/forestageclasses_gami.cs3"
+$else
 $include "./modules/28_ageclass/input/forestageclasses.cs3"
+$endif
 $offdelim
 ;
