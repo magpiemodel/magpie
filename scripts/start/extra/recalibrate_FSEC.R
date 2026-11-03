@@ -24,6 +24,7 @@ cfg       <- fsecScenario(scenario = "c_BAU", highres = FALSE)
 cfg$title <- "calib_run_FSEC"
 cfg$results_folder                  <- "output/:title::date:"
 cfg$recalibrate_landconversion_cost <- TRUE
+cfg$calib_pasture_landconversion_cost <- TRUE
 cfg$output                          <- c("rds_report")
 cfg$force_replace                   <- TRUE
 cfg$qos <- "priority"
