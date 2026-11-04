@@ -13,7 +13,7 @@ p38_capital_cost_shares_iso(t,iso) = f38_reg_parameters("slope") * log10(im_gdp_
                                                     f38_reg_parameters("intercept") +
                                                     p38_capital_share_calibration(iso);
 
-p38_capital_cost_shares_iso(t,iso)$(sum(sameas(t_past,t_all),1) = 1) = f38_historical_share(t,iso);
+p38_capital_cost_shares_iso(t,iso)$(sum(sameas(t_past,t),1) = 1) = f38_historical_share(t,iso);
 
 * aggregate factor cost shares
 pm_factor_cost_shares(t,i,"capital") = sum(t_past$(ord(t_past) eq card(t_past)), 

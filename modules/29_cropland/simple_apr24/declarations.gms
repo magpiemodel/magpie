@@ -15,6 +15,8 @@ parameters
  p29_country_switch(iso)             Switch indicating whether country is affected by selected cropland policy (1)
  pm_avl_cropland_iso(iso)           Available land area for cropland at ISO level (mio. ha)
  i29_snv_scenario_fader(t_all)      SNV scenario fader (1)
+ pm_treecover_start(j)              Cropland tree cover in the initial time step (mio. ha)
+ im_fallow_start(j)                 Fallow land in the initial time step (mio. ha)
 ;
 
 positive variables

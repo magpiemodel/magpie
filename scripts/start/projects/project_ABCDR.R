@@ -72,8 +72,6 @@ for (pol in c("NDC","1p5deg","1p5deg-Diet")) {
         cfg$gms$c60_2ndgen_biodem    <- paste0("R32M46-", if (ssp=="SSP2") "SSP2EU" else ssp,"-PkBudg650")
       }
       cfg$gms$s29_treecover_target <- shr / (2045 - 2025) * (2060 - 2025) # Continue linear increase after 2045 until 2060
-      cfg$gms$s30_betr_target <- 0
-      cfg$gms$s30_betr_penalty <- 0
       cfg$gms$s29_treecover_plantation <- growth
       cfg$gms$s29_treecover_bii_coeff <- growth
       start_run(cfg, codeCheck = FALSE)
