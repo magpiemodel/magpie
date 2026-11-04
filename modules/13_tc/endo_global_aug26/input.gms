@@ -70,7 +70,7 @@ $offdelim
 
 table f13_stock_payout(delay,curve) Stock payout curve for R&D investment (1)
 $ondelim
-$include "./modules/13_tc/input/f13_stock_payout.cs4"
+$include "./modules/13_tc/input/f13_stock_payout.cs3"
 $offdelim
 ;
 
