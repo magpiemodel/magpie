@@ -95,5 +95,7 @@ q13_rd_stock_global_init(t_past)..
 *' To initialize the TC R&D stock, historical investments to reproduce the historical tau values are estimated.
 *' In order to get accurate estimates in the relevant range (1995 and after), an expected initial overshoot of investments
 *' from 0 investments before 1965 is allowed by excluding 1965 and 1970 from the loss calculation.
+*' A minor L2 regularization term is added to get a smoother investment distribution.
 q13_init_approximation_error..
-  v13_init_approximation_error =e= sum((t_past, h2), sqr(v13_tau_init(t_past, h2) - f13_tau_historical(t_past, h2))$(m_year(t_past) > 1970 AND f13_tau_historical(t_past, h2) > 0));
+  v13_init_approximation_error =e= sum((t_past, h2), sqr(v13_tau_init(t_past, h2) - f13_tau_historical(t_past, h2))$(m_year(t_past) > 1970 AND m_year(t_past) < 2000 AND f13_tau_historical(t_past, h2) > 0))
+                                   + sum((t_past, i2), sqr(v13_rd_investment_init(t_past, i2) / 5000));
