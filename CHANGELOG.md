@@ -12,8 +12,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **18_residues/53_methane** Regional `f18_multicropping` replaced by cellular `fm_multicropping(t_all,j,w,kcr)`, so residue biomass and rice CH4 scale with harvested instead of physical area.
 - **59_som** Fallow has its own soil stock change factor instead of borrowing the one for maize, split into bare fallow (dry) and vegetated set-aside (moist) via the new set `climate59moist`. Fallow and tree cover are now part of the initial cropland soil carbon pool, which they already entered on the target side.
 - **scripts/calibration/landconversion_cost.R** Gentler calibration schedule to damp oscillation in early iterations: initial cost factor 1 for all regions, reinforcement 10/5/2/1, reward increment divided by 5. Calibration factors change even on unchanged data.
-- **inputdata** updated to rev4.137cropUp and additional data rev4.77. The LandInG croparea initialisation separates harvested from physical area, which is what makes fallow land and multiple cropping visible; croparea totals and crop composition differ from earlier revisions.
-
+- **inputdata** updated to rev4.138 and additional data rev4.77. The LandInG croparea initialisation separates harvested from physical area, which is what makes fallow land and multiple cropping visible; croparea totals and crop composition differ from earlier revisions.
+- **inputdata** updated to rev 4.137 as part of module 35: new realization pot_forest_oct26 with shifting cultivation from Sims et al. (2025)
+  
 ### added
 - **scripts/output/extra** `crop_rotations_validation.R` compares base-year croparea and fallow per cluster against the croparea initialisation data.
 - **30_croparea** Added realizations `penalties_sep26` and `rules_sep26`, which split the former `detail_apr24` into its penalty-based and hard-constraint-based rotation implementations. `penalties_sep26` is the new default.
