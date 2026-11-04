@@ -14,20 +14,19 @@
 library(magpie4)
 library(magclass)
 library(gms)
+library(lucode2)
 
 source("scripts/start_functions.R")
 source("scripts/projects/fsec.R")
 
 # Calibration run
-cfg       <- fsecScenario(scenario = "c_BAU")
+cfg       <- fsecScenario(scenario = "c_BAU", highres = FALSE)
 cfg$title <- "calib_run_FSEC"
-cfg$results_folder                  <- "output/:title:"
-cfg$recalibrate                     <- TRUE # required when penality_apr22 activated
-cfg$best_calib                      <- TRUE
+cfg$results_folder                  <- "output/:title::date:"
 cfg$recalibrate_landconversion_cost <- TRUE
 cfg$calib_pasture_landconversion_cost <- TRUE
 cfg$output                          <- c("rds_report")
 cfg$force_replace                   <- TRUE
 cfg$qos <- "priority"
 start_run(cfg, codeCheck = FALSE)
-magpie4::submitCalibration("FSEC_FAO")
+magpie4::submitCalibration("FSEC")
