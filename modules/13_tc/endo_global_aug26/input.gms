@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c13_payout_curve constant
+$setglobal c13_payout_curve phaseout
 * options: constant, phaseout
 
 scalars
