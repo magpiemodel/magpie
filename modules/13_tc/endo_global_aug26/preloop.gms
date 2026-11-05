@@ -41,7 +41,7 @@ v13_tau_init.lo(t_past, h) = 0.1;
 v13_rd_investment_init.fx(t_past, i)$(sum(supreg(h,i), f13_tau_historical(t_past, h)) = 0) = 0;
 
 * For best comparison with default TC, fix investments to 0 after 1995.
-v13_rd_investment_init.fx(t_past, i)$(m_year(t_past) > 1995) = 0;
+* v13_rd_investment_init.fx(t_past, i)$(m_year(t_past) > 1995) = 0;
 
 solve m13_rd_stock_init USING nlp MINIMIZING v13_init_approximation_error;
 
