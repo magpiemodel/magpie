@@ -17,7 +17,7 @@ source("scripts/start_functions.R")
 
 # source default configuration
 source("config/default.cfg")
-title <- "LPJmL5_sep26"
+title <- "LPJmL5_nov26"
 cfg$recalibrate_landconversion_cost <- TRUE
 
 #################
@@ -35,6 +35,7 @@ start_run(cfg, codeCheck = FALSE)
 #####################################
 # rcp 1.9
 cfg$title <- paste0(title, "_RCP1.9")
+cfg$input["cellular"] <- "rev4.139L2M_h12_6d79c4f9_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp1p9"))
@@ -43,6 +44,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # rcp 2.6
 cfg$title <- paste0(title, "_RCP2.6")
+cfg$input["cellular"] <- "rev4.139L2M_h12_37743fe6_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp2p6"))
@@ -51,6 +53,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # rcp 4.5
 cfg$title <- paste0(title, "_RCP4.5")
+cfg$input["cellular"] <- "rev4.139L2M_h12_bb6334c1_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp4p5"))
@@ -59,6 +62,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # rcp 6.0
 cfg$title <- paste0(title, "_RCP6.0")
+cfg$input["cellular"] <- "rev4.139L2M_h12_96ff3aa7_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp6p0"))
@@ -67,6 +71,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # rcp 7.0
 cfg$title <- paste0(title, "_RCP7.0")
+cfg$input["cellular"] <- "rev4.139L2M_h12_91083b9a_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp7p0"))
@@ -75,6 +80,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # rcp 8.5
 cfg$title <- paste0(title, "_RCP8.5")
+cfg$input["cellular"] <- "rev4.139L2M_h12_c1171d6b_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp8p5"))
@@ -86,7 +92,7 @@ cfg$title <- paste0(title, "_RCP3p4-overshoot")
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI"))
-input['cellular'] <- "rev4.134beier-2026-09-16T104204_h12_c5ad1e2c_cellularmagpie_c200_MRI-ESM2-0-ssp534-over_lpjml-501e8913.tgz"
+cfg$input["cellular"] <- "rev4.139L2M_h12_c5ad1e2c_cellularmagpie_c200_MRI-ESM2-0-ssp534-over_lpjml-501e8913.tgz"
 
 start_run(cfg, codeCheck = FALSE)
 
@@ -95,7 +101,7 @@ start_run(cfg, codeCheck = FALSE)
 ######################
 
 # set input back to default
-input['cellular'] <- "rev4.134beier-2026-09-16T104204_h12_bb6334c1_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-501e8913.tgz"
+cfg$input["cellular"] <- "rev4.139L2M_h12_bb6334c1_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-501e8913.tgz"
 
 # No growing period adaptation 
 cfg$title <- paste0(title, "_Nogsadapt")
@@ -137,6 +143,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # SSP3_Base
 cfg$title <- paste0(title, "_SSP3_Base")
+cfg$input["cellular"] <- "rev4.139L2M_h12_bb6334c1_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp4p5"))
@@ -146,6 +153,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # SSP3_GrowON
 cfg$title <- paste0(title, "_SSP3_GrowON")
+cfg$input["cellular"] <- "rev4.139L2M_h12_bb6334c1_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp4p5"))
@@ -155,6 +163,7 @@ start_run(cfg, codeCheck = FALSE)
 
 # SSP3_IrrigON
 cfg$title <- paste0(title, "_SSP3_IrrigON")
+cfg$input["cellular"] <- "rev4.139L2M_h12_bb6334c1_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-501e8913.tgz"
 
 # standard settings
 cfg <- setScenario(cfg, c("cc", "SSP2", "NPI", "rcp4p5"))
