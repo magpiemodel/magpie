@@ -5,8 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pcm_tau(j, tautype) = vm_tau.l(j, tautype);
-pc13_tau(h, tautype) = p13_tau_core(h, tautype);
+pcm_tau_core(i, tautype) = p13_tau_core(i, tautype);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_tau(t,j,tautype,"marginal") = vm_tau.m(j,tautype);

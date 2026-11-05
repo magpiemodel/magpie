@@ -46,7 +46,7 @@ sets
                       VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
-parameter fm_tau1995(h) Agricultural land use intensity tau in 1995 (1)
+parameter fm_tau1995(i) Agricultural land use intensity tau in 1995 (1)
 /
 $ondelim
 $include "./modules/13_tc/input/fm_tau1995.cs4"
@@ -68,13 +68,13 @@ $offdelim
 ;
 
 
-table f13_tau_scenario(t_all,h,tautype) tau scenario (1)
+table f13_tau_scenario(t_all,i,tautype) tau scenario (1)
 $ondelim
 $include "./modules/13_tc/input/f13_tau_scenario.csv"
 $offdelim
 ;
 
-table f13_pastr_tau_hist(t_all,h) Historical managed pasture tau (1)
+table f13_pastr_tau_hist(t_all,i) Historical managed pasture tau (1)
 $ondelim
 $include "./modules/13_tc/input/f13_pastr_tau_hist.csv"
 $offdelim

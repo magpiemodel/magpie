@@ -5,23 +5,23 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
 pc13_land(i,"pastr") = sum(cell(i,j),pcm_land(j,"past"));
 pc13_land(i,"crop") = sum(cell(i,j),pcm_land(j,"crop"));
 
 if (sum(sameas(t_past,t),1) = 1 AND s13_ignore_tau_historical = 0,
-  v13_tau_core.lo(h,"pastr") =   f13_pastr_tau_hist(t,h);
-  v13_tau_core.lo(h,"crop") =    f13_tau_historical(t,h);
+  v13_tau_core.lo(i,"pastr") =   f13_pastr_tau_hist(t,i);
+  v13_tau_core.lo(i,"crop") =    f13_tau_historical(t,i);
 else
-  v13_tau_core.lo(h, tautype) =    pc13_tau(h, tautype);
+  v13_tau_core.lo(i, tautype) =    pcm_tau_core(i, tautype);
 );
 
-  v13_tau_core.up(h,tautype) = 2 * pc13_tau(h,tautype);
+  v13_tau_core.up(i,tautype) = 2 * pcm_tau_core(i,tautype);
 
 if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 
-* We constrain tech cost to a defined share of regional GDP to avoid unrealistically
-* high endogenous tech investments
+*' Technological change costs are constrainted to a 
+*' pre-defined share of regional GDP to avoid unrealistically
+*' high endogenous tech investments
   vm_tech_cost.up(i) =
     sum((i_to_iso(i,iso),ct), im_gdp_pc_ppp_iso(ct,iso) * im_pop_iso(ct,iso)) * s13_max_gdp_shr;
 
@@ -46,7 +46,8 @@ if(c13_croparea_consv = 1,
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by available cropland area.
-    p13_country_weight(i) = sum(i_to_iso(i,iso), p13_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
+    p13_country_weight(i) = sum(i_to_iso(i,iso), p13_country_switch(iso) * 
+                                                 pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
     p13_cropland_consv_shr(t,j) = i13_croparea_consv_fader(t) *
     (s13_croparea_consv_shr * sum(cell(i,j), p13_country_weight(i))
     + s13_croparea_consv_shr_noselect * sum(cell(i,j), 1-p13_country_weight(i)));
@@ -55,27 +56,23 @@ if(c13_croparea_consv = 1,
 
 );
 
-* ISO country weights are calculated based on the available cropland area in each country
-p13_country_wght_supreg(h) = sum((i_to_iso(i,iso), supreg(h,i)), p13_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum((i_to_iso(i,iso), supreg(h,i)), pm_avl_cropland_iso(iso));
-
 * Country-weighted tau reduction factor for conservation land
-p13_croparea_consv_tau_factor(h) = (s13_croparea_consv_tau_factor * p13_country_wght_supreg(h)
-                            + s13_croparea_consv_tau_factor_noselect * (1-p13_country_wght_supreg(h)));
+p13_croparea_consv_tau_factor(i) = (s13_croparea_consv_tau_factor * p13_country_weight(i)
+                                   + s13_croparea_consv_tau_factor_noselect * (1 - p13_country_weight(i)));
 
 if (ord(t) = 1,
-  pc13_tau_consv(h,tautype) = p13_croparea_consv_tau_factor(h) * pc13_tau(h,"crop");
+  pc13_tau_consv(i,tautype) = p13_croparea_consv_tau_factor(i) * pcm_tau_core(i,"crop");
 elseif c13_croparea_consv_tau_increase = 0 AND m_year(t) >= s13_croparea_consv_start,
-  v13_tau_consv.fx(h,tautype) = pc13_tau_consv(h,tautype);
+  v13_tau_consv.fx(i,tautype) = pc13_tau_consv(i,tautype);
 );
 
 
 * educated guess for tau levels:
-if(ord(t) = 1,
-  v13_tau_core.l(h,tautype) = pc13_tau(h,tautype);
-  v13_tau_consv.l(h,tautype) = pc13_tau_consv(h,tautype);
-  vm_tau.l(j,tautype) = sum((cell(i,j), supreg(h,i)),(1-p13_cropland_consv_shr(t,j)) * v13_tau_core.l(h,tautype) + p13_cropland_consv_shr(t,j) * v13_tau_consv.l(h,tautype));
-  pcm_tau(j,tautype) = vm_tau.l(j,tautype);
+if (ord(t) = 1,
+  v13_tau_core.l(i,tautype) = pcm_tau_core(i,tautype);
+  v13_tau_consv.l(i,tautype) = pc13_tau_consv(i,tautype);
+  vm_tau.l(j,tautype) = sum(cell(i,j),(1-p13_cropland_consv_shr(t,j)) * v13_tau_core.l(i,tautype) + p13_cropland_consv_shr(t,j) * v13_tau_consv.l(i,tautype));
 else
-  v13_tau_core.l(h,tautype) = pc13_tau(h,tautype)*(1+pc13_tcguess(h,tautype))**m_yeardiff(t);
-  v13_tau_consv.l(h,tautype) = p13_croparea_consv_tau_factor(h) * v13_tau_core.l(h,tautype);
+  v13_tau_core.l(i,tautype) = pcm_tau_core(i,tautype)*(1+pc13_tcguess(i,tautype))**m_yeardiff(t);
+  v13_tau_consv.l(i,tautype) = p13_croparea_consv_tau_factor(i) * v13_tau_core.l(i,tautype);
 );
