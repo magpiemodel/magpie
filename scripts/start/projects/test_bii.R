@@ -25,7 +25,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
-cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
+cfg$output <- c("rds_report","downscaling/downscale_default")#"extra/highres"
 
 prefix <- "BII07"
 
