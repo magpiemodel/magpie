@@ -34,7 +34,7 @@ cfg$input <- c(regional    = "rev4.96_26df900e_magpie.tgz",
                patch       = "MMEmuR12_rev4.96.tgz")
 
 
-cfg$output <- c("output_check", "extra/disaggregation", "rds_report")
+cfg$output <- c("output_check", "downscaling/downscale_default", "rds_report")
 
 #load config presetswrite it before starting the run.
 preset <-  "GENIE_SCP"
