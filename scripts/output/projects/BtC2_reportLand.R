@@ -25,10 +25,17 @@ if (!exists("source_include")) {
 
 projectName <- "BtC2v04"
 
+# cores of the SLURM job; jobs without --cpus-per-task (coupled runs) use the cores of the node, at most 3;
+# outside SLURM one core
+cores <- as.integer(Sys.getenv("SLURM_CPUS_PER_TASK", unset = NA))
+if (is.na(cores)) {
+  cores <- min(as.integer(Sys.getenv("SLURM_CPUS_ON_NODE", "1")), 3)
+}
+
 # the classes per grid cell (cell.land_btc2_0.5.mz) and the NetCDF, from the madrat cache of the default
 # downscaling of this run (scripts/output/downscaling/downscale_default.R), which it computes if missing
 downscaleRun(outputdir, "BTC2", projectName = projectName, cachefolder = file.path(outputdir, "cache/downscaling"),
-             archive = FALSE, cores = as.integer(Sys.getenv("SLURM_CPUS_PER_TASK", "1")))
+             archive = FALSE, cores = cores)
 
 # regional land by class (Mha), one CSV per year
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))

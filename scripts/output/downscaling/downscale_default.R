@@ -28,6 +28,6 @@ downscaleRun(outputdir, "DOWNSCALEDMAGPIE", downscaling = "transitions", harmoni
 
 # the cache only serves later scripts of this run that reuse it (they recompute it if it is missing)
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-if (!any("downscaling/downscale_ageClasses" %in% cfg$output)) {
+if (!any(c("downscaling/downscale_ageClasses", "projects/BtC2_reportLand") %in% cfg$output)) {
   unlink(file.path(outputdir, "cache/downscaling"), recursive = TRUE)
 }
