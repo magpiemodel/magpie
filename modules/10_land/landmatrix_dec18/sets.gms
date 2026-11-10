@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  t_ini10  Time periods with land initialization data
+  t_ini10(t_past)  Time periods with land initialization data
        / y1995, y2000, y2005, y2010, y2015 /
 
   luh2_side_layers10 side layers from LUH2

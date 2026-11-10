@@ -62,20 +62,30 @@
 *' Two penalties are applied for the violation of fallow land rules. Both act on
 *' missing fallow land, i.e. where fallow land is lower than a certain fraction of
 *' total cropland. The long fallow penalty applies to the fallow shortfall below
-*' the maximum fallow share; the additional short fallow penalty applies to the
+*' the long fallow threshold; the additional short fallow penalty applies to the
 *' shortfall below the short fallow threshold.
 
-  q29_fallow_short(j2)$(s29_fallow_max > 0) ..
+  q29_fallow_short(j2) ..
     v29_fallow_short_missing(j2) =g=
       vm_land(j2,"crop") * s29_fallow_short_threshold - vm_fallow(j2);
 
-  q29_fallow_long(j2)$(s29_fallow_max > 0) ..
+  q29_fallow_long(j2)..
     v29_fallow_long_missing(j2) =g=
       vm_land(j2,"crop") * s29_fallow_long_threshold - vm_fallow(j2);
 
-  q29_fallow_max(j2)$(s29_fallow_max > 0) ..
+*' Fallow land is capped at a fixed share of total cropland. 
+*' Under the FAO cropland definition, land that lies fallow five years in a row 
+*' is no longer counted as cropland.
+
+  q29_fallow_max(j2) ..
     vm_fallow(j2) =l=
       vm_land(j2,"crop") * s29_fallow_max;
+
+*' Fallow land can be fixed to the share observed in the land initialisation data.
+
+  q29_fallow_fix(j2)$(s29_fallow_fix = 1) ..
+    vm_fallow(j2) =e=
+      vm_land(j2,"crop") * sum(ct, i29_fallow_share_fix(ct,j2));
 
 *' Fallow land biodiversity value is based on perennial crops. 
 
