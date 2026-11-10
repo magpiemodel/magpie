@@ -73,7 +73,7 @@
     v29_fallow_long_missing(j2) =g=
       vm_land(j2,"crop") * s29_fallow_long_threshold - vm_fallow(j2);
 
-*' Fallow land is capped at a fixed share of total cropland. This is a definitional
+*' Fallow land is capped at a fixed share of total cropland. 
 *' Under the FAO cropland definition, land that lies fallow five years in a row 
 *' is no longer counted as cropland.
 
