@@ -15,6 +15,10 @@
 *' Alternatively, `s29_fallow_fix` pins the fallow share to the share observed in the
 *' land initialisation data, in which case fallow land no longer responds to the model.
 
+*' Fallow land is capped at `s29_fallow_max` of total cropland in either case. The cap
+*' follows the FAO cropland definition, beyond which land lying fallow would no longer
+*' be classified as cropland, and is therefore not a scenario parameter.
+
 *' This realisation also includes the option to reserve a minimum semi-natural
 *' vegetation share within the total available cropland for other land cover
 *' classes, including grassland, forest, and other land (by a given target year),

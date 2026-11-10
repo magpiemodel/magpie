@@ -87,7 +87,9 @@ i29_fallow_share_reg(t_past,i)$(sum(cell(i,j), pm_land_hist(t_past,j,"crop")) > 
 i29_fallow_share_fix(t_past,j)$(pm_land_hist(t_past,j,"crop") <= 1e-6)
   = sum(cell(i,j), i29_fallow_share_reg(t_past,i));
 
-i29_fallow_share_fix(t_all,j) = min(1, i29_fallow_share_fix(t_all,j));
+* Clipped at the maximum fallow share, which q29_fallow_max enforces. 
+* Pinning them there would make the model infeasible.
+i29_fallow_share_fix(t_all,j) = min(s29_fallow_max, i29_fallow_share_fix(t_all,j));
 m_fillmissingyears(i29_fallow_share_fix,"j");
 
 im_fallow_start(j) = i29_fallow_area("y1995",j);
