@@ -69,7 +69,7 @@ p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_switch(iso) * pm_avl_cr
 * originate from different data sources.
 * pm_treecover_start has no time dimension, so the initial tree cover is subtracted in
 * all years; there is no historical tree cover series to use instead.
-p29_fallow_area(t_past,j) = max(0, pm_land_hist(t_past,j,"crop")
+i29_fallow_area(t_past,j) = max(0, pm_land_hist(t_past,j,"crop")
                                  - sum((kcr,w), max(0, fm_croparea(t_past,j,w,kcr)))
                                  - pm_treecover_start(j));
 
@@ -77,20 +77,20 @@ p29_fallow_area(t_past,j) = max(0, pm_land_hist(t_past,j,"crop")
 * earlier years of t_past come out zero and are never read, and m_fillmissingyears
 * carries 2015 forward over the remainder of t_all.
 i29_fallow_share_fix(t_past,j)$(pm_land_hist(t_past,j,"crop") > 1e-6)
-  = p29_fallow_area(t_past,j) / pm_land_hist(t_past,j,"crop");
+  = i29_fallow_area(t_past,j) / pm_land_hist(t_past,j,"crop");
 
 * Cells without cropland in the initialisation take their region's average share.
-p29_fallow_share_reg(t_past,i)$(sum(cell(i,j), pm_land_hist(t_past,j,"crop")) > 1e-6)
-  = sum(cell(i,j), p29_fallow_area(t_past,j))
+i29_fallow_share_reg(t_past,i)$(sum(cell(i,j), pm_land_hist(t_past,j,"crop")) > 1e-6)
+  = sum(cell(i,j), i29_fallow_area(t_past,j))
     / sum(cell(i,j), pm_land_hist(t_past,j,"crop"));
 
 i29_fallow_share_fix(t_past,j)$(pm_land_hist(t_past,j,"crop") <= 1e-6)
-  = sum(cell(i,j), p29_fallow_share_reg(t_past,i));
+  = sum(cell(i,j), i29_fallow_share_reg(t_past,i));
 
 i29_fallow_share_fix(t_all,j) = min(1, i29_fallow_share_fix(t_all,j));
 m_fillmissingyears(i29_fallow_share_fix,"j");
 
-im_fallow_start(j) = p29_fallow_area("y1995",j);
+im_fallow_start(j) = i29_fallow_area("y1995",j);
 
 vm_fallow.l(j) = im_fallow_start(j);
 vm_bv.l(j,"crop_fallow",potnatveg) = 

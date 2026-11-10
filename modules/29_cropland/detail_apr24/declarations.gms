@@ -31,8 +31,8 @@ parameters
  pm_treecover_start(j)                  Cropland tree cover in the initial time step (mio. ha)
 
  im_fallow_start(j)                     Fallow land in the initial time step (mio. ha)
- p29_fallow_area(t_past,j)              Fallow land in the land initialisation data (mio. ha)
- p29_fallow_share_reg(t_past,i)         Regional share of cropland left fallow in the land initialisation data (1)
+ i29_fallow_area(t_past,j)              Fallow land in the land initialisation data (mio. ha)
+ i29_fallow_share_reg(t_past,i)         Regional share of cropland left fallow in the land initialisation data (1)
  i29_fallow_share_fix(t_all,j)          Share of cropland left fallow when s29_fallow_fix is active (1)
  i29_fallow_scenario_fader(t_all)      Fallow land scenario fader (1)
  i29_fallow_long_penalty(t)           Penalty for skipping long fallow (USD17MER per ha)
