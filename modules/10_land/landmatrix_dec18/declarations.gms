@@ -7,7 +7,7 @@
 
 parameters
  pm_land_start(j,land)         Land initialization area (mio. ha)
- pm_land_hist(t_ini10,j,land)  Land area for historial time steps (mio. ha)
+ pm_land_hist(t_past,j,land)   Land area for historical time steps (mio. ha) - populated for t_ini10 only
  pcm_land(j,land)              Land area in previous time step including possible changes after optimization (mio. ha)
 ;
 

@@ -9,8 +9,11 @@
 *' fallow land and tree cover on cropland. Correspondingly, cropland carbon stocks consist 
 *' of carbons stocks for croparea, fallow land and tree cover on cropland.
 *' The development of fallow land and tree cover on cropland depends on targets defined 
-*' as a certain fraction of total cropland. These targets can be either exogenously enforced 
-*' (rule-based) or endogenously incentivized by a penalty term, which enters the objective function. 
+*' as a certain fraction of total cropland. These targets can be either exogenously enforced
+*' (rule-based) or endogenously incentivized by a penalty term, which enters the objective function.
+
+*' Alternatively, `s29_fallow_fix` pins the fallow share to the share observed in the
+*' land initialisation data, in which case fallow land no longer responds to the model.
 
 *' This realisation also includes the option to reserve a minimum semi-natural
 *' vegetation share within the total available cropland for other land cover

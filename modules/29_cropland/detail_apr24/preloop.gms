@@ -59,19 +59,40 @@ p29_country_switch(policy_countries29) = 1;
 pm_avl_cropland_iso(iso) = f29_avl_cropland_iso(iso,"%c29_marginal_land%");
 p29_country_weight(i) = sum(i_to_iso(i,iso), p29_country_switch(iso) * pm_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), pm_avl_cropland_iso(iso));
 
-* Initialize fallow and biodiversity start value.
-* Consistent starting level: fallow = cropland initialisation - croparea
-* initialisation - tree cover initialisation, so the base-year optimization
-* starts from a state consistent with vm_land = initialisation. The inner
-* max(0,..) guards against negative raw fm_croparea values. The outer max(0,..)
-* guards against croparea plus tree cover exceeding the cropland initialisation,
-* which is possible because they originate from different data sources.
-im_fallow_start(j) =
-  max(0, pm_land_hist("y1995",j,"crop")
-         - sum((kcr,w), max(0, fm_croparea("y1995",j,w,kcr)))
-         - pm_treecover_start(j));
+* Fallow land in the land initialisation data: cropland initialisation - croparea
+* initialisation - tree cover initialisation. Used to initialize fallow, so that the
+* base-year optimization starts from a state consistent with vm_land = initialisation,
+* and to pin the fallow share when s29_fallow_fix is active.
+* The inner max(0,..) guards against negative raw fm_croparea values; module 30 clips
+* them, but its preloop runs after this one. The outer max(0,..) guards against croparea
+* plus tree cover exceeding the cropland initialisation, which is possible because they
+* originate from different data sources.
+* pm_treecover_start has no time dimension, so the initial tree cover is subtracted in
+* all years; there is no historical tree cover series to use instead.
+p29_fallow_area(t_past,j) = max(0, pm_land_hist(t_past,j,"crop")
+                                 - sum((kcr,w), max(0, fm_croparea(t_past,j,w,kcr)))
+                                 - pm_treecover_start(j));
 
-vm_fallow.l(j)$(s29_fallow_max > 0) = im_fallow_start(j);
+* Share of cropland left fallow. pm_land_hist is only populated for 1995-2015, so
+* earlier years of t_past come out zero and are never read, and m_fillmissingyears
+* carries 2015 forward over the remainder of t_all.
+i29_fallow_share_fix(t_past,j)$(pm_land_hist(t_past,j,"crop") > 1e-6)
+  = p29_fallow_area(t_past,j) / pm_land_hist(t_past,j,"crop");
+
+* Cells without cropland in the initialisation take their region's average share.
+p29_fallow_share_reg(t_past,i)$(sum(cell(i,j), pm_land_hist(t_past,j,"crop")) > 1e-6)
+  = sum(cell(i,j), p29_fallow_area(t_past,j))
+    / sum(cell(i,j), pm_land_hist(t_past,j,"crop"));
+
+i29_fallow_share_fix(t_past,j)$(pm_land_hist(t_past,j,"crop") <= 1e-6)
+  = sum(cell(i,j), p29_fallow_share_reg(t_past,i));
+
+i29_fallow_share_fix(t_all,j) = min(1, i29_fallow_share_fix(t_all,j));
+m_fillmissingyears(i29_fallow_share_fix,"j");
+
+im_fallow_start(j) = p29_fallow_area("y1995",j);
+
+vm_fallow.l(j) = im_fallow_start(j);
 vm_bv.l(j,"crop_fallow",potnatveg) = 
   vm_fallow.l(j) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
