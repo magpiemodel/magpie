@@ -209,13 +209,14 @@ writeNeutralCalib <- function(calibFile, regions, landType) {
   cat(paste0(">>> Wrote neutral (legacy) calibration file for landType = ", landType, ": ", calibFile, "\n"))
 }
 
-# TRUE only if calibFile already exists and is exactly the neutral file writeNeutralCalib()
+# TRUE if calibFile doesn't exist or is exactly the neutral file writeNeutralCalib()
 # would produce (cost == 1 and reward == 0 everywhere). Used so that flipping
 # calibratePasture to FALSE always results in a neutral file -- an existing file left over
-# from a previous run with pasture calibration switched on is never silently reused.
+# from a previous run with pasture calibration switched on is never silently reused,
+# while a missing calibration file will be treated as neutral calibration by MAgPIE.
 isNeutralCalib <- function(calibFile) {
   require(magclass)
-  if (!file.exists(calibFile)) return(FALSE)
+  if (!file.exists(calibFile)) return(TRUE)
   x <- tryCatch(read.magpie(calibFile), error = function(e) NULL)
   if (is.null(x) || !all(c("cost", "reward") %in% getNames(x))) return(FALSE)
   isTRUE(all(x[, , "cost"] == 1) && all(x[, , "reward"] == 0))
@@ -257,24 +258,26 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
     cat(">>> Starting with existing calibration file\n")
     oldCalib <- magpiesort(read.magpie(calibFile))[,getYears(calibDivergence),]
   } else {
-    cat(">>> First iteration - initializing calibration factors (cost=1 for expanding countries, cost=2.5 for contracting, reward=0)\n")
+    cat(">>> First iteration - initializing calibration factors (cost=1, reward=0)\n")
     oldCalib <- new.magpie(cells_and_regions = getCells(calibDivergence), years = getYears(calibDivergence), names = c("cost", "reward"), fill = NA)
-    oldCalib[,,"cost"] <- (expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) < 0) * (costMax - 1) + 1
+    oldCalib[,,"cost"] <- 1
     oldCalib[,,"reward"] <- 0
   }
 
   ### use first steps to calibrate stronger, such that calibration factors can also achieve low/high levels
-  if(calibrationStep <= 8) {
+  if(calibrationStep <= 5) { 
     reinforcement <- 10
+  } else if (calibrationStep <= 8) {
+    reinforcement <- 5
   } else if (calibrationStep <= 11) {
-    reinforcement <- 5 
+    reinforcement <- 2
   } else {
     reinforcement <- 1
   } 
-  
+
   cat(">>> Calib factors are adjusted where needed\n")
   calibFactorCost <- setNames(oldCalib[, , "cost"], NULL) * calib_correction ^ reinforcement
-  calibFactorReward <- setNames(oldCalib[, , "reward"], NULL) + (calib_correction - 1) * reinforcement
+  calibFactorReward <- setNames(oldCalib[, , "reward"], NULL) + (calib_correction - 1) * reinforcement / 5
   # no rewards in case that validation data shows no contraction
   calibFactorReward[expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) >= 0] <- 0
   calibFactorReward[calibFactorReward < 0] <- 0
