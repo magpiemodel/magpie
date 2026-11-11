@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_croparea** Removed the `detail_apr24` realization and its switch `s30_implementation`, superseded by `penalties_sep26` (`s30_implementation = 0`) and `rules_sep26` (`s30_implementation = 1`).
 
 ### fixed
--
+- **29_cropland/detail_apr24** Fixed edge-case infeasibility where the SNV-reduced cropland cap fell below the non-removable tree cover on cropland
 
 
 ## [4.14.2] - 2026-11-03
