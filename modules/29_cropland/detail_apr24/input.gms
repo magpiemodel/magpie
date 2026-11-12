@@ -28,6 +28,7 @@ scalars
  s29_treecover_penalty_before    Penalty for violation of treecover target before scenario start (USD17MER per ha) / 0 /
  s29_treecover_penalty           Penalty for violation of treecover target after sceanrio start (USD17MER per ha) / 6150 /
  s29_treecover_map               Treecover map for initialization (binary) / 0 /
+ s29_treecover_reference_year    Reference year for treecover target calculation (-1=dynamic or year) / -1 /
 
  s29_fallow_max                  Maximum share of fallow land on total cropland (1) / 0.8 /
  s29_fallow_scenario_start       Fallow land scenario start year       / 2025 /
