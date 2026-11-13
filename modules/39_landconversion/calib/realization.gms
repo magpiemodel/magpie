@@ -11,7 +11,8 @@
 *' For cropland and pasture, a regional and time-dependent calibration factor is applied on
 *' global costs for land expansion, complemented by a reward for cropland/pasture reduction in selected regions,
 *' for a better match of regional cropland and pasture area in 2015 with historic data.
-*' The calibration factors for costs of cropland and pasture expansion are lifted to a minium of 1 in all regions by 2050.
+*' After the historical period, switches determine whether the calibration factors converge
+*' to their neutral value or are kept constant.
 *'
 *' @limitations Data availability for land conversion costs is very limited.
 

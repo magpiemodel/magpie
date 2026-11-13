@@ -14,6 +14,14 @@ scalars
  s39_cost_establish_urban      Cost for urban land expansion (USD17MER per hectare)    / 12300 /
  s39_ignore_calib        Switch for ignoring cropland calibration factors (1) / 0 /
  s39_ignore_calib_past   Switch for ignoring pasture calibration factors (1) / 0 /
+ s39_expansioncost_upwards_convergence            Switch for cropland expansion cost calibration factors below 1 moving up to 1 after the historical period (1) / 1 /
+ s39_expansioncost_upwards_convergence_past       Switch for pasture expansion cost calibration factors below 1 moving up to 1 after the historical period (1) / 1 /
+ s39_expansioncost_downwards_convergence          Switch for cropland expansion cost calibration factors above 1 moving down to 1 after the historical period (1) / 0 /
+ s39_expansioncost_downwards_convergence_past     Switch for pasture expansion cost calibration factors above 1 moving down to 1 after the historical period (1) / 0 /
+ s39_contractionreward_downwards_convergence      Switch for cropland reduction reward calibration factors moving down to 0 after the historical period (1) / 1 /
+ s39_contractionreward_downwards_convergence_past Switch for pasture reduction reward calibration factors moving down to 0 after the historical period (1) / 1 /
+ s39_convergence_year        Year in which converging cropland calibration factors reach their neutral value (year) / 2050 /
+ s39_convergence_year_past   Year in which converging pasture calibration factors reach their neutral value (year) / 2050 /
 ;
 
 $onEmpty
