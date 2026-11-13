@@ -7,22 +7,6 @@
 
 
 
-if(m_year(t) <= sm_fix_SSP2,
- i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
- i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
- i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
- i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
-else
- i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept")*p15_country_switch(iso)
-                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","intercept")*(1-p15_country_switch(iso));
- i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation")*p15_country_switch(iso)
-                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","saturation")*(1-p15_country_switch(iso));
- i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation")*p15_country_switch(iso)
-                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","halfsaturation")*(1-p15_country_switch(iso));
- i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation")*p15_country_switch(iso)
-                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_switch(iso));
-);
-
 option nlp = conopt4;
 option threads = 1;
 
@@ -243,6 +227,42 @@ display "starting demand model for initialisation run....";
 v15_income_pc_real_ppp_iso.lo(iso)=10;
 v15_income_pc_real_ppp_iso.fx(iso)=im_gdp_pc_ppp_iso(t,iso);
 
+*' @code
+*' The parameters of the food demand regressions are set to the selected food
+*' scenario (`c15_food_scenario` in the selected countries, `c15_food_scenario_noselect`
+*' in all others):
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept")*p15_country_switch(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","intercept")*(1-p15_country_switch(iso));
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation")*p15_country_switch(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","saturation")*(1-p15_country_switch(iso));
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation")*p15_country_switch(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","halfsaturation")*(1-p15_country_switch(iso));
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation")*p15_country_switch(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_switch(iso));
+
+*' In the last time step before the scenarios diverge (`sm_fix_SSP2`), the food
+*' demand model is additionally solved with these scenario parameters. The
+*' difference to the SSP2 solution of the same time step is added to the
+*' calibration in later time steps (see below), so that food demand continues
+*' smoothly from the last SSP2-based value instead of jumping to the curve of
+*' the scenario parametrization.
+if(m_year(t) <= sm_fix_SSP2 AND m_year(t+1) > sm_fix_SSP2,
+  solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+  if(m15_food_demand.modelstat > 2 AND m15_food_demand.modelstat ne 7,
+    abort "Food Demand Model with scenario parameters became infeasible in the last SSP2 time step. Stop run.";
+  );
+  p15_kcal_regr_scen(iso,kfo) = v15_kcal_regr.l(iso,kfo);
+);
+
+*' Until `sm_fix_SSP2`, all scenarios use the SSP2 parameters:
+if(m_year(t) <= sm_fix_SSP2,
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
+);
+*' @stop
+
 solve m15_food_demand USING nlp MAXIMIZING v15_objective;
 
 * in case of problems try CONOPT3
@@ -311,6 +331,20 @@ else
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
                      i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)
                      * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
+);
+
+*' In the last time step before the scenarios diverge (`sm_fix_SSP2`), the
+*' difference between the SSP2 and the scenario parametrization is stored.
+*' After `sm_fix_SSP2`, it is added to the calibration and follows the same
+*' fade-out as the historical calibration (`c15_calibscen`), relative to the
+*' fade-out factor of the last time step before the scenarios diverge.
+if(m_year(t) <= sm_fix_SSP2 AND m_year(t+1) > sm_fix_SSP2,
+    p15_kcal_calib_switch(iso,kfo) = v15_kcal_regr.l(iso,kfo) - p15_kcal_regr_scen(iso,kfo);
+    s15_kcal_calib_fadeout_switch = f15_kcal_calib_fadeout(t,"%c15_calibscen%");
+elseif m_year(t) > sm_fix_SSP2 AND s15_kcal_calib_fadeout_switch > 0,
+    p15_kcal_calib(t,iso,kfo) = p15_kcal_calib(t,iso,kfo)
+                              + p15_kcal_calib_switch(iso,kfo)
+                              * f15_kcal_calib_fadeout(t,"%c15_calibscen%") / s15_kcal_calib_fadeout_switch;
 );
 
 

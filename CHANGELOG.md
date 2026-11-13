@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_croparea** Removed the `detail_apr24` realization and its switch `s30_implementation`, superseded by `penalties_sep26` (`s30_implementation = 0`) and `rules_sep26` (`s30_implementation = 1`).
 
 ### fixed
--
+- **15_food** Food demand no longer jumps when the regression parameters switch from SSP2 to the scenario after `sm_fix_SSP2`. The difference between the SSP2 and the scenario parametrization in the last time step before the switch is added to the calibration and follows the fade-out of `c15_calibscen`. SSP2 results are unchanged.
 
 
 ## [4.14.2] - 2026-11-03
