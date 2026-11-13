@@ -157,37 +157,44 @@ getCalibFactor <- function(gdxFile, mode, histData, landType = "crop") {
   return(magpiesort(out))
 }
 
-timeSeriesCost <- function(calibFactor) {
-  out2 <- new.magpie(getRegions(calibFactor), years = c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5)), fill = 1)
-  out2[, getYears(calibFactor), ] <- calibFactor
-  out2050 <- setYears(calibFactor[,"y2015",],NULL)
-  out2050[out2050 < 1] <- 1
-  out2[, seq(2050, 2150, by = 5), ] <- out2050
-  out2 <- time_interpolate(out2, seq(2020, 2050, by = 5), integrate_interpolated_years = T)
-  return(out2)
-}
+# The calibration files only contain the calibration period. The development of the
+# calibration factors after the last historical time step is set in module 39 (GAMS),
+# see s39_expansioncost_upwards_convergence and related switches.
 
-timeSeriesReward <- function(calibFactor) {
-  out2 <- new.magpie(getRegions(calibFactor), years = c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5)), fill = 0)
-  out2[, getYears(calibFactor), ] <- calibFactor
-  out2 <- time_interpolate(out2, seq(2020, 2050, by = 5), integrate_interpolated_years = T)
-  return(out2)
+# Translate the contraction multiplier setting into the fixed cost calibration factor that
+# is applied in region-timesteps with historical land contraction.
+# "off" (or NULL, e.g. from configs predating this setting) returns NULL: no fixed value.
+# "costMax" returns costMax. A number is used as it is.
+resolveContractionMultiplier <- function(contractionMultiplier, costMin, costMax) {
+  if (is.null(contractionMultiplier) || identical(contractionMultiplier, "off")) {
+    return(NULL)
+  }
+  if (identical(contractionMultiplier, "costMax")) {
+    if (is.null(costMax)) stop("contractionMultiplier = \"costMax\" requires costMax to be set")
+    return(costMax)
+  }
+  if (!is.numeric(contractionMultiplier) || length(contractionMultiplier) != 1 || is.na(contractionMultiplier)) {
+    stop("contractionMultiplier has to be \"off\", \"costMax\" or a single number, but is: ",
+         paste(contractionMultiplier, collapse = ", "))
+  }
+  if ((!is.null(costMin) && contractionMultiplier < costMin) || (!is.null(costMax) && contractionMultiplier > costMax)) {
+    warning("contractionMultiplier (", contractionMultiplier, ") lies outside of [costMin, costMax] = [",
+            costMin, ", ", costMax, "]. It is applied anyway.")
+  }
+  return(contractionMultiplier)
 }
 
 # Write a "neutral" pasture calibration file: cost = 1 (no adjustment) and reward = 0 (no reward)
-# for every region and year. This reproduces the legacy behavior for the given
+# for every region and year of the calibration period. This reproduces the legacy behavior for the given
 # land type -- its conversion cost is governed purely by the flat global constant
 # (s39_cost_establish_crop / s39_cost_establish_past), with no regional calibration at all.
 # Used when a land type's calibration is switched off (see calibratePasture in
 # calibrateLandconversion()) so the input file module 39 reads still exists and is
 # well-formed, it just has no effect.
-writeNeutralCalib <- function(calibFile, regions, landType) {
+writeNeutralCalib <- function(calibFile, regions, years, landType) {
   require(magclass)
-  years <- c(seq(1995, 2015, by = 5), seq(2050, 2150, by = 5))
-  neutralCost   <- new.magpie(regions, years = paste0("y", years), fill = 1)
-  neutralReward <- new.magpie(regions, years = paste0("y", years), fill = 0)
-  neutralCost   <- time_interpolate(neutralCost, seq(2020, 2050, by = 5), integrate_interpolated_years = TRUE)
-  neutralReward <- time_interpolate(neutralReward, seq(2020, 2050, by = 5), integrate_interpolated_years = TRUE)
+  neutralCost   <- new.magpie(regions, years = years, fill = 1)
+  neutralReward <- new.magpie(regions, years = years, fill = 0)
 
   neutralFull <- mbind(
     add_dimension(neutralCost, dim = 3.1, nm = "cost"),
@@ -223,7 +230,7 @@ isNeutralCalib <- function(calibFile) {
 }
 
 # Calculate the correction factor and save it
-updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rewardMax = costMax, calibrationStep, nMaxcalib, bestCalib, histData, putfolder, levelGradientMix, landType = "crop") {
+updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rewardMax = costMax, contractionMultiplier = "off", calibrationStep, nMaxcalib, bestCalib, histData, putfolder, levelGradientMix, landType = "crop") {
   require(magclass)
   require(magpie4)
   require(gdx2)
@@ -231,6 +238,8 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
   cat(paste0("=== UPDATE_CALIB ITERATION ", calibrationStep, " (landType = ", landType, ") START ===\n"))
   cat(paste0("GDX file: ", gdxFile, "\n"))
   cat(paste0("calibAccuracy: ", calibAccuracy, "\n"))
+
+  contractionCost <- resolveContractionMultiplier(contractionMultiplier, costMin = costMin, costMax = costMax)
 
   if (!(modelstat(gdxFile)[1, 1, 1] %in% c(1, 2, 7))) {
     stop("Calibration run infeasible")
@@ -264,6 +273,17 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
     oldCalib[,,"reward"] <- 0
   }
 
+  # region-timesteps in which the validation data shows land contraction
+  contracting <- expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) < 0
+  # with a contraction multiplier, the cost calibration factor of these region-timesteps is fixed
+  # at that value and not touched by the iterations; only the reward is calibrated there
+  if (!is.null(contractionCost)) {
+    cat(paste0(">>> Cost calibration factor fixed at ", contractionCost, " in region-timesteps with historical contraction\n"))
+    oldCost <- setNames(oldCalib[, , "cost"], NULL)
+    oldCost[contracting] <- contractionCost
+    oldCalib[, , "cost"] <- oldCost
+  }
+
   ### use first steps to calibrate stronger, such that calibration factors can also achieve low/high levels
   if(calibrationStep <= 5) { 
     reinforcement <- 10
@@ -279,7 +299,7 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
   calibFactorCost <- setNames(oldCalib[, , "cost"], NULL) * calib_correction ^ reinforcement
   calibFactorReward <- setNames(oldCalib[, , "reward"], NULL) + (calib_correction - 1) * reinforcement / 5
   # no rewards in case that validation data shows no contraction
-  calibFactorReward[expandHist(getValData(histData = histData, gdxFile = gdxFile, landType = landType)) >= 0] <- 0
+  calibFactorReward[!contracting] <- 0
   calibFactorReward[calibFactorReward < 0] <- 0
 
   cat(">>> Account for costMax, costMin and rewardMax\n")
@@ -291,6 +311,11 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
   if (!is.null(costMin)) {
     belowLimit <- (calibFactorCost <= costMin)
     calibFactorCost[belowLimit] <- costMin
+  }
+
+  # applied after costMax/costMin, so that the fixed value is kept even if it lies outside of these limits
+  if (!is.null(contractionCost)) {
+    calibFactorCost[contracting] <- contractionCost
   }
 
   # reward had no upper bound previously and could grow unboundedly across iterations
@@ -349,9 +374,6 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
       writeLog(calibCostBest,   paste0(putfolder, "/land_conversion_cost_best_calib_factor_",   landType, ".cs3"), calibrationStep)
       writeLog(calibRewardBest, paste0(putfolder, "/land_conversion_reward_best_calib_factor_", landType, ".cs3"), calibrationStep)
   
-      calibCostBest <- timeSeriesCost(calibCostBest)
-      calibRewardBest <- timeSeriesReward(calibRewardBest)
-  
       calibBestFull <- mbind(
         add_dimension(calibCostBest, dim = 3.1, nm = "cost"),
         add_dimension(calibRewardBest, dim = 3.1, nm = "reward")
@@ -361,9 +383,11 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
       comment <- c(
         paste0(" description: Regional land conversion cost calibration file (landType = ", landType, ")"),
         " unit: -",
-        paste0(" note: Best calibration factor from the run"),
+        paste0(" note: Best calibration factor from the run. Calibration period only; the development after the last historical year is set in module 39"),
         " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
-        paste(" Calibration settings:",  "calibAccuracy=", calibAccuracy, "costMax=", costMax, "costMin=", costMin, "rewardMax=", rewardMax, "nMaxcalib=",nMaxcalib, "bestCalib=",bestCalib, "histData=",histData),
+        paste(" Calibration settings:",  "calibAccuracy=", calibAccuracy, "costMax=", costMax, "costMin=", costMin, "rewardMax=", rewardMax,
+              "contractionMultiplier=", if (is.null(contractionMultiplier)) "off" else contractionMultiplier,
+              "nMaxcalib=",nMaxcalib, "bestCalib=",bestCalib, "histData=",histData),
         paste0(" creation date: ", date())
       )
       write.magpie(round(calibBestFull, 3), calibFile, comment = comment)
@@ -376,9 +400,6 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
     }
   } else {
     cat("Adjust calibration factors for next iteration \n")
-    calibFactorCost <- timeSeriesCost(calibFactorCost)
-    calibFactorReward <- timeSeriesReward(calibFactorReward)
-
     calibFull <- mbind(
       add_dimension(calibFactorCost, dim = 3.1, nm = "cost"),
       add_dimension(calibFactorReward, dim = 3.1, nm = "reward")
@@ -388,9 +409,11 @@ updateCalib <- function(gdxFile, calibAccuracy, calibFile, costMax, costMin, rew
     comment <- c(
       paste0(" description: Regional land conversion cost calibration file (landType = ", landType, ")"),
       " unit: -",
-      paste0(" note: Calibration step ", calibrationStep),
+      paste0(" note: Calibration step ", calibrationStep, ". Calibration period only; the development after the last historical year is set in module 39"),
       " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
-      paste(" Calibration settings:",  "calibAccuracy=", calibAccuracy, "costMax=", costMax, "costMin=", costMin, "rewardMax=", rewardMax, "nMaxcalib=", nMaxcalib, "bestCalib=", bestCalib, "histData=", histData),
+      paste(" Calibration settings:",  "calibAccuracy=", calibAccuracy, "costMax=", costMax, "costMin=", costMin, "rewardMax=", rewardMax,
+            "contractionMultiplier=", if (is.null(contractionMultiplier)) "off" else contractionMultiplier,
+            "nMaxcalib=", nMaxcalib, "bestCalib=", bestCalib, "histData=", histData),
       paste0(" creation date: ", date())
     )
 
@@ -408,6 +431,7 @@ calibrateLandconversion <- function(nMaxcalib = 20,
                              costMax = 2.5,
                              costMin = 0.2,
                              rewardMax = costMax,
+                             contractionMultiplier = "off",
                              calibMagpieName = "magpie_calib",
                              calibFile = "modules/39_landconversion/input/f39_calib.csv",
                              calibFilePast = "modules/39_landconversion/input/f39_calib_past.csv",
@@ -415,6 +439,7 @@ calibrateLandconversion <- function(nMaxcalib = 20,
                              costMaxPast = costMax,
                              costMinPast = costMin,
                              rewardMaxPast = costMaxPast,
+                             contractionMultiplierPast = "off",
                              putfolder = "land_conversion_cost_calib_run",
                              dataWorkspace = NULL,
                              logoption = 3,
@@ -471,11 +496,13 @@ calibrateLandconversion <- function(nMaxcalib = 20,
       # land, so calibrating them sequentially (crop first, then pasture) would shift the land allocation
       # before pasture is calibrated, causing oscillation between iterations.
       doneCrop <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracy, costMax = costMax, costMin = costMin, rewardMax = rewardMax,
+                           contractionMultiplier = contractionMultiplier,
                            calibFile = calibFile, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
                            putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "crop")
 
       if (calibratePasture) {
         donePast <- updateCalib(gdxFile = "fulldata.gdx", calibAccuracy = calibAccuracyPast, costMax = costMaxPast, costMin = costMinPast, rewardMax = rewardMaxPast,
+                             contractionMultiplier = contractionMultiplierPast,
                              calibFile = calibFilePast, calibrationStep = i, nMaxcalib = nMaxcalib, bestCalib = bestCalib, histData = histData,
                              putfolder = putfolder, levelGradientMix = levelGradientMix, landType = "past")
       } else {
@@ -485,8 +512,8 @@ calibrateLandconversion <- function(nMaxcalib = 20,
         # depends only on crop's own convergence.
         if (!isNeutralCalib(calibFilePast)) {
           require(magpie4)
-          pastureRegions <- getRegions(land("fulldata.gdx"))
-          writeNeutralCalib(calibFilePast, pastureRegions, landType = "past")
+          pastureLand <- land("fulldata.gdx")
+          writeNeutralCalib(calibFilePast, regions = getRegions(pastureLand), years = getYears(pastureLand), landType = "past")
         }
         donePast <- TRUE
       }
