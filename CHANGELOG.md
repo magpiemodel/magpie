@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **30_croparea** Removed the `detail_apr24` realization and its switch `s30_implementation`, superseded by `penalties_sep26` (`s30_implementation = 0`) and `rules_sep26` (`s30_implementation = 1`).
 
 ### fixed
-- **scripts** `scripts/projects/fsec.R` no longer switches off the pasture land conversion cost calibration. With the default `recalibrate_landconversion_cost = "ifneeded"` this triggered a full recalibration of the land conversion costs (cropland included) in every FSEC run, which also overwrote `f39_calib.csv` in the model folder. FSEC runs now use the cropland and pasture factors of `calibration_FSEC_penalties_30Oct26.tgz`.
+- 
 
 
 ## [4.14.2] - 2026-11-03
