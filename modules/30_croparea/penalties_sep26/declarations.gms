@@ -9,7 +9,8 @@ parameters
  i30_rotation_incentives(t_all,i,rota30)  Penalty for violating rotational constraints (USD17MER per ha)
  i30_rotation_scenario_fader(t_all)     Crop rotation scenario fader (1)
  p30_country_weight(i)                  Policy country weight per region (1)
- p30_country_switch(iso)                 Switch indicating whether country is affected by selected policy (1)
+ p30_country_switch(iso)                Switch indicating whether country is affected by selected policy (1)
+ pcm_area(j,w,kcr)                      Croparea from previous time step (mio. ha)
 ;
 
 positive variables

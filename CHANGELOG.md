@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### changed
+- input data revision update to rev4.140 that includes major update of LPJmL data (LPJmL version 5)
+- switch for pasture spillover that was previously introduced as a separat module (`dynRegPastrTau_apr26`), which is now deleted
+- switches (`s14_use_gsadapt` and `s14_gsadapt2tau`) and functionality to include yield trend of growing period adaptation to climate change and account for the costs in `13_tc`
 - **29_cropland** Fallow land is functional: missing fallow is priced by a two-tier penalty (long and short fallow threshold) that fades towards scenario targets, and fallow is initialised as the residual of the land initialisation. Default `s29_fallow_max` 0 -> 0.8, so fallow exists in the default and base-year croparea falls below the initialisation data.
 - **30_croparea** Croparea is now initiatlized with data that excludes fallow. Rotational constraints are expressed relative to total cropland instead of the sum of crop areas, since with fallow active the two differ. `fm_croparea` is declared over `t_past` instead of `t_all`.
 - **18_residues/53_methane** Regional `f18_multicropping` replaced by cellular `fm_multicropping(t_all,j,w,kcr)`, so residue biomass and rice CH4 scale with harvested instead of physical area.
@@ -15,13 +18,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **inputdata** updated to rev4.138 and additional data rev4.77. The LandInG croparea initialisation separates harvested from physical area, which is what makes fallow land and multiple cropping visible; croparea totals and crop composition differ from earlier revisions.
   
 ### added
+- **14_yields** Added `gsadapt_dynPastrTau_jul26` realization that enforces lower bound for tau for growing period adaptation when gsadapt switch is activated
+- **scripts/start/projects** added start script for AGRIMATE project
 - **scripts/output/extra** `crop_rotations_validation.R` compares base-year croparea and fallow per cluster against the croparea initialisation data.
 - **30_croparea** Added realizations `penalties_sep26` and `rules_sep26`, which split the former `detail_apr24` into its penalty-based and hard-constraint-based rotation implementations. `penalties_sep26` is the new default.
 - **30_croparea** The switches `c30_rotation_rules` and `c30_rotation_incentives` are replaced by a single `c30_rotation_policy`, which selects the rule thresholds in `rules_sep26` and the penalty levels in `penalties_sep26`. Both realizations offer a `none` policy, and `agroforestry` is added as a new policy. `penalties_sep26` restricts the rule set to the rules that carry a penalty and uses a single fixed set of thresholds. Minimum-share rules are enforced for the first time. This changes results relative to `detail_apr24` and requires recalibration.
 
 ### removed
+- **14_yields** Removed the `dynRegPastrTau_apr26` and `managementcalib_aug19` realizations and merged them into one common realization gsadapt_dynPastrTau_jul26
 - **30_croparea** Removed the `simple_apr24` realization, the bioenergy tree (betr) target machinery including the `s30_betr_*` switches, and `i30_rotation_rules`.
 - **30_croparea** Removed the `detail_apr24` realization and its switch `s30_implementation`, superseded by `penalties_sep26` (`s30_implementation = 0`) and `rules_sep26` (`s30_implementation = 1`).
+
 
 ### fixed
 -

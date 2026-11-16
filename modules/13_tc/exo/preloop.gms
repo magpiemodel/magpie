@@ -15,8 +15,8 @@ loop(t,
  );
 );
 
-pc13_tau(h,"crop")        = fm_tau1995(h);
-pc13_tau(h,"pastr")       = f13_pastr_tau_hist("y1995",h);
+pcm_tau_core(i,"crop")        = fm_tau1995(i);
+pcm_tau_core(i,"pastr")       = f13_pastr_tau_hist("y1995",i);
 
 * Country switch to determine countries for which certain policies shall be applied.
 * In the default case, the policy affects all countries when activated.

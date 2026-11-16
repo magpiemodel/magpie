@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The endo realization stands for endogenous implementation of
+*' @description The endo_jan22 realization stands for endogenous implementation of
 *' technological change and land use intensification. The intensification rates
 *' are calculated endogenously based on an interplay between land use intensity
 *' $\tau$ and technological change costs (as shown schematically in the figure

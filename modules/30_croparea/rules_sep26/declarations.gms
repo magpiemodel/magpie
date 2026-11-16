@@ -6,10 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i30_rotation_rules(t_all,i,rota30)       Rotational constraints (1)
+ i30_rotation_rules(t_all,i,rota30)     Rotational constraints (1)
  i30_rotation_scenario_fader(t_all)     Crop rotation scenario fader (1)
  p30_country_weight(i)                  Policy country weight per region (1)
- p30_country_switch(iso)                 Switch indicating whether country is affected by selected policy (1)
+ p30_country_switch(iso)                Switch indicating whether country is affected by selected policy (1)
+ pcm_area(j,w,kcr)                      Croparea from previous time step (mio. ha)
 ;
 
 positive variables
