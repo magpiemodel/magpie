@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### changed
 - **29_cropland** Fallow land is functional: missing fallow is priced by a two-tier penalty (long and short fallow threshold) that fades towards scenario targets, and fallow is initialised as the residual of the land initialisation. Default `s29_fallow_max` 0 -> 0.8, so fallow exists in the default and base-year croparea falls below the initialisation data.
+- **29_cropland** `s29_fallow_max` is no longer a config switch and is not exposed in `default.cfg`. The 0.8 cap stays active as a definitional bound: beyond it, land lying fallow is no longer classified as cropland under the FAO definition. It no longer doubles as a switch for disabling fallow entirely.
 - **30_croparea** Croparea is now initiatlized with data that excludes fallow. Rotational constraints are expressed relative to total cropland instead of the sum of crop areas, since with fallow active the two differ. `fm_croparea` is declared over `t_past` instead of `t_all`.
 - **18_residues/53_methane** Regional `f18_multicropping` replaced by cellular `fm_multicropping(t_all,j,w,kcr)`, so residue biomass and rice CH4 scale with harvested instead of physical area.
 - **59_som** Fallow has its own soil stock change factor instead of borrowing the one for maize, split into bare fallow (dry) and vegetated set-aside (moist) via the new set `climate59moist`. Fallow and tree cover are now part of the initial cropland soil carbon pool, which they already entered on the target side.
@@ -15,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **inputdata** updated to rev4.138 and additional data rev4.77. The LandInG croparea initialisation separates harvested from physical area, which is what makes fallow land and multiple cropping visible; croparea totals and crop composition differ from earlier revisions.
   
 ### added
+- **29_cropland** New switch `s29_fallow_fix` (default off) pins the fallow share to the share observed in the land initialisation data (cropland minus croparea minus tree cover, with the regional average in cells without cropland), instead of letting the fallow penalties determine it. 
 - **scripts/output/extra** `crop_rotations_validation.R` compares base-year croparea and fallow per cluster against the croparea initialisation data.
 - **30_croparea** Added realizations `penalties_sep26` and `rules_sep26`, which split the former `detail_apr24` into its penalty-based and hard-constraint-based rotation implementations. `penalties_sep26` is the new default.
 - **30_croparea** The switches `c30_rotation_rules` and `c30_rotation_incentives` are replaced by a single `c30_rotation_policy`, which selects the rule thresholds in `rules_sep26` and the penalty levels in `penalties_sep26`. Both realizations offer a `none` policy, and `agroforestry` is added as a new policy. `penalties_sep26` restricts the rule set to the rules that carry a penalty and uses a single fixed set of thresholds. Minimum-share rules are enforced for the first time. This changes results relative to `detail_apr24` and requires recalibration.
