@@ -22,6 +22,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
                          outfolder_aff   = c("policies/","../../modules/32_forestry/input/"),
                          out_ad_file     = "npi_ndc_ad_aolc_pol.cs3",
                          out_aff_file    = "npi_ndc_aff_pol.cs3",
+                         out_aff_lock_file = "npi_ndc_aff_lock_share.cs3",
                          carbon_stock_file = "../../modules/52_carbon/input/lpj_carbon_stocks_0.5.mz") {
 
   require(magclass)
@@ -221,12 +222,15 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addline("###############")
   addline("### NPI AFF ###")
   addline("###############")
-  npi_aff <- droplevels(subset(pol_def, policy=="npi" & landpool=="affore"))
-  addtable(npi_aff[,c(-2,-3)])
-  npi_aff <- calc_policy(npi_aff, land_stock, pol_type="aff", pol_mapping=pol_mapping,
+  npi_aff_def <- droplevels(subset(pol_def, policy=="npi" & landpool=="affore"))
+  addtable(npi_aff_def[,c(-2,-3)])
+  npi_aff <- calc_policy(npi_aff_def, land_stock, pol_type="aff", pol_mapping=pol_mapping,
                          weight=affWeight,
                          map_file=map_file)
   getNames(npi_aff) <- "npi"
+  # policy-region level (not disaggregated) for the lock share of q32_ndc_aff_limit
+  npi_aff_reg <- calc_policy(npi_aff_def, land_stock, pol_type="aff", pol_mapping=pol_mapping, level="region")
+  getNames(npi_aff_reg) <- "npi"
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
 
   cat("Compute NDC AFF policy")
@@ -234,19 +238,14 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addline("###############")
   addline("### NDC AFF ###")
   addline("###############")
-  ndc_aff <- droplevels(subset(pol_def, policy=="ndc" & landpool=="affore"))
-  addtable(ndc_aff[,c(-2,-3)])
-  ndc_aff <- calc_policy(ndc_aff, land_stock, pol_type="aff", pol_mapping=pol_mapping,
+  ndc_aff_def <- droplevels(subset(pol_def, policy=="ndc" & landpool=="affore"))
+  addtable(ndc_aff_def[,c(-2,-3)])
+  ndc_aff <- calc_policy(ndc_aff_def, land_stock, pol_type="aff", pol_mapping=pol_mapping,
                          weight=affWeight,
                          map_file=map_file)
   getNames(ndc_aff) <- "ndc"
-  #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
-  ndc_aff[,which(getYears(ndc_aff,as.integer=TRUE)<=2025),] <-
-    npi_aff[,which(getYears(npi_aff,as.integer=TRUE)<=2025),]
-
-  none_aff_pol <- npi_aff
-  none_aff_pol[] <- 0
-  getNames(none_aff_pol) <- "none"
+  ndc_aff_reg <- calc_policy(ndc_aff_def, land_stock, pol_type="aff", pol_mapping=pol_mapping, level="region")
+  getNames(ndc_aff_reg) <- "ndc"
   cat(paste0(" (time elapsed: ", format(proc.time()["elapsed"] - ptm, width = 6, nsmall = 2, digits = 2), "s)\n"))
 
   cat("Compute NDCDELAY AFF policy")
@@ -282,6 +281,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   # derive ndcdelay from the ndc afforestation definitions by shifting future targetyears
   ndcdelay_def <- droplevels(subset(pol_def, policy=="ndc" & landpool=="affore"))
   ndcdelay_aff <- NULL
+  ndcdelay_aff_reg <- NULL
   if (nrow(ndcdelay_def) > 0) {
     iso   <- ifelse(ndcdelay_def$dummy %in% c("LAX","CEX","ATX","OTX"), "BRA",
                     as.character(ndcdelay_def$dummy))
@@ -296,16 +296,9 @@ calc_NPI_NDC <- function(policyregions = "iso",
                                 weight=affWeight,
                                 map_file=map_file)
     getNames(ndcdelay_aff) <- "ndcdelay"
-    # mirror ndc: years <= 2025 follow the NPI baseline
-    ndcdelay_aff[,which(getYears(ndcdelay_aff,as.integer=TRUE)<=2025),] <-
-      npi_aff[,which(getYears(npi_aff,as.integer=TRUE)<=2025),]
-    # Floor at the NPI baseline. Without this, the delayed (slower) ndc ramp can sit below the
-    # npi-2025 level at 2030, so the cumulative target decreases making negative per-timestep
-    # afforestation flow. NPI is already-implemented policy, so the
-    # roll-back delays the extra NDC ambition but never afforests less than NPI.
-    npi_floor <- npi_aff
-    getNames(npi_floor) <- "ndcdelay"
-    ndcdelay_aff <- pmax(ndcdelay_aff, npi_floor)
+    ndcdelay_aff_reg <- calc_policy(ndcdelay_def, land_stock, pol_type="aff", pol_mapping=pol_mapping,
+                                    level="region")
+    getNames(ndcdelay_aff_reg) <- "ndcdelay"
   }
   cat(paste0(" (time elapsed: ", format(proc.time()["elapsed"] - ptm, width = 6, nsmall = 2, digits = 2), "s)\n"))
 
@@ -323,6 +316,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
 
   affexp_def <- droplevels(subset(pol_def, policy == "affexp"))
   affexp <- NULL
+  affexp_reg <- NULL
 
   if (nrow(affexp_def) > 0) {
     addtable(affexp_def[, c(-2, -3)])
@@ -341,18 +335,11 @@ calc_NPI_NDC <- function(policyregions = "iso",
                           weight          = affexp_weight,
                           map_file        = map_file)
     getNames(affexp) <- "affexp"
-
-    # Build affexp on top of npi_aff baseline, mirroring how ndc_aff uses npi_aff:
-    #   years <= 2025 : copy npi values directly
-    #   years >  2025 : npi[2025] (frozen) + own expansion increment
-    npi_for_affexp <- npi_aff
-    getNames(npi_for_affexp) <- "affexp"
-    affexp[, which(getYears(affexp, as.integer = TRUE) <= 2025), ] <-
-      npi_for_affexp[, which(getYears(npi_for_affexp, as.integer = TRUE) <= 2025), ]
-    npi_at_2025 <- setYears(npi_for_affexp[, "y2025", ], NULL)
-    for (yr in getYears(affexp)[getYears(affexp, as.integer = TRUE) > 2025]) {
-      affexp[, yr, ] <- npi_at_2025 + setYears(affexp[, yr, ], NULL)
-    }
+    affexp_reg <- calc_policy(affexp_def, forest_stock, pol_type = "affexp",
+                              pol_mapping     = pol_mapping,
+                              potential_stock = potential_forest,
+                              level           = "region")
+    getNames(affexp_reg) <- "affexp"
 
   } else {
     cat(" (no affexp rows in policy_definitions.csv, skipping)")
@@ -360,13 +347,86 @@ calc_NPI_NDC <- function(policyregions = "iso",
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
 
   # Write AFF policies: none / npi / ndc / affexp / ndcdelay (affexp & ndcdelay included only when defined)
-  aff_list <- list(none_aff_pol, npi_aff, ndc_aff)
-  if (!is.null(affexp))       aff_list <- c(aff_list, list(affexp))
-  if (!is.null(ndcdelay_aff)) aff_list <- c(aff_list, list(ndcdelay_aff))
-  aff_pol <- do.call(mbind, aff_list)
+  aff_pol <- combine_aff_pol(npi_aff, ndc_aff, affexp, ndcdelay_aff)
   afffiles <- paste0(outfolder_aff, out_aff_file)
   write.magpie(round(aff_pol, 6), afffiles[1])
   if(length(afffiles) > 1) for (i in 2:length(afffiles)) file.copy(afffiles[1],afffiles[i], overwrite=TRUE)
+
+  # Write the lock share for q32_ndc_aff_limit, from the same policies combined at policy-region level
+  aff_pol_reg <- combine_aff_pol(npi_aff_reg, ndc_aff_reg, affexp_reg, ndcdelay_aff_reg)
+  lock_share <- calc_aff_lock_share(aff_pol_reg, land_stock, map_file)
+  lockfiles <- paste0(outfolder_aff, out_aff_lock_file)
+  write.magpie(round(lock_share, 6), lockfiles[1])
+  if(length(lockfiles) > 1) for (i in 2:length(lockfiles)) file.copy(lockfiles[1],lockfiles[i], overwrite=TRUE)
+}
+
+### combine the afforestation policies (cumulative stock, Mha) at any spatial level
+combine_aff_pol <- function(npi, ndc, affexp = NULL, ndcdelay = NULL) {
+  early <- which(getYears(npi, as.integer = TRUE) <= 2025)
+  none <- npi
+  none[] <- 0
+  getNames(none) <- "none"
+  #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
+  ndc[, early, ] <- npi[, early, ]
+  aff_list <- list(none, npi, ndc)
+  if (!is.null(affexp)) {
+    # Build affexp on top of npi baseline, mirroring how ndc uses npi:
+    #   years <= 2025 : copy npi values directly
+    #   years >  2025 : npi[2025] (frozen) + own expansion increment
+    npi_for_affexp <- npi
+    getNames(npi_for_affexp) <- "affexp"
+    affexp[, early, ] <- npi_for_affexp[, early, ]
+    npi_at_2025 <- setYears(npi_for_affexp[, "y2025", ], NULL)
+    for (yr in getYears(affexp)[getYears(affexp, as.integer = TRUE) > 2025]) {
+      affexp[, yr, ] <- npi_at_2025 + setYears(affexp[, yr, ], NULL)
+    }
+    aff_list <- c(aff_list, list(affexp))
+  }
+  if (!is.null(ndcdelay)) {
+    # mirror ndc: years <= 2025 follow the NPI baseline
+    ndcdelay[, early, ] <- npi[, early, ]
+    # Floor at the NPI baseline. Without this, the delayed (slower) ndc ramp can sit below the
+    # npi-2025 level at 2030, so the cumulative target decreases making negative per-timestep
+    # afforestation flow. NPI is already-implemented policy, so the
+    # roll-back delays the extra NDC ambition but never afforests less than NPI.
+    npi_floor <- npi
+    getNames(npi_floor) <- "ndcdelay"
+    ndcdelay <- pmax(ndcdelay, npi_floor)
+    aff_list <- c(aff_list, list(ndcdelay))
+  }
+  return(do.call(mbind, aff_list))
+}
+
+### lock share for q32_ndc_aff_limit (s32_ndc_aff_limit = 1): the share of each cluster's natural forest
+### (primforest + secdforest, observed, at the start of the time step) that lies in policy regions whose
+### afforestation stock rises in the time step ending in t. Clusters mix policy regions, so the lock covers only
+### this share of the cluster's natural forest, not the forest of every region in the cluster.
+calc_aff_lock_share <- function(aff_pol_reg, land_stock, map_file) {
+  tp <- getYears(aff_pol_reg, as.integer = TRUE)
+  # 1 where the policy region's afforestation stock rises in the time step ending in t, 0 otherwise
+  rising <- aff_pol_reg
+  rising[, 1, ] <- 0
+  rising[, -1, ] <- (aff_pol_reg[, -1, ] - setYears(aff_pol_reg[, -length(tp), ], tp[-1])) > 0
+
+  # natural forest in the last observed year at or before the start of each time step
+  ly <- getYears(land_stock, as.integer = TRUE)
+  start_year <- vapply(pmax(tp - 5, min(ly)), function(y) max(ly[ly <= y]), numeric(1))
+  # sum first: dimSums merges repeated years, and steps after the last observed year repeat it
+  natforest <- dimSums(land_stock[, , c("primforest", "secdforest")], dim = 3)[, start_year, ]
+  getYears(natforest) <- tp
+
+  # each cell takes its policy region's flag; natural forest in rising regions, per cell
+  rel <- data.frame(from = getItems(land_stock, "iso", full = TRUE), to = getItems(land_stock, dim = 1))
+  locked <- natforest * madrat::toolAggregate(rising, rel)
+
+  map <- readRDS(map_file)
+  # cell names are replaced by position below, so the cell order (coordinates) must match the map
+  stopifnot(identical(sub("\\.[^.]*$", "", getItems(land_stock, dim = 1)), sub("\\.[^.]*$", "", map$cell)))
+  getItems(natforest, dim = 1, raw = TRUE) <- map$cell
+  getItems(locked, dim = 1, raw = TRUE) <- map$cell
+  share <- madrat::toolAggregate(locked, map) / madrat::toolAggregate(natforest, map)
+  share[is.nan(share)] <- 0
+  return(share)
 }
 
 
@@ -435,7 +495,7 @@ calc_ad_allowed <- function(policy, stock, ly) {
 calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
                         weight=NULL, potential_stock=NULL, 
                         map_file = Sys.glob("../../input/clustermap_rev*.rds"),
-                        prior = NULL, switch_year = 2025) {
+                        prior = NULL, switch_year = 2025, level = "cluster") {
 
   ## For affexp: potential_stock must be provided (country-level potential forest)                          
   if (pol_type == "affexp" && is.null(potential_stock)) {
@@ -571,6 +631,12 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
 
   }
 }
+
+  # level = "region": the aff/affexp stock per policy region, before disaggregation
+  if (level == "region") {
+    if (pol_type == "ad") stop("calc_policy(level = 'region') is only available for aff and affexp")
+    return(magpie_policy)
+  }
 
   #calculate the reduction target in absolute numbers / dissagregate to cells
   
