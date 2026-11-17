@@ -87,13 +87,13 @@ reportLandUseForSEALS(
 if (!dir.exists(dirBaseData) || dir.exists(file.path(dirBaseData, "base_data"))) {
   stop(paste(
     "Please set dirBaseData to the SEALS base data folder itself (the folder named",
-    "'base_data') under 'User settings' of the extra/runSEALSallocation.R script."
+    "'base_data') under 'User settings' of the downscaling/runSEALSallocation.R script."
   ))
 } else if (!file.exists(file.path(dirSEALS, "seals", "run_seals.py"))) {
   stop(paste(
     "Please set the path to your local clone",
     "of the SEALS code (containing seals/run_seals.py) under 'User settings' of the",
-    "extra/runSEALSallocation.R script."
+    "downscaling/runSEALSallocation.R script."
   ))
 }
 

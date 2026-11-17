@@ -13,15 +13,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **59_som** Fallow has its own soil stock change factor instead of borrowing the one for maize, split into bare fallow (dry) and vegetated set-aside (moist) via the new set `climate59moist`. Fallow and tree cover are now part of the initial cropland soil carbon pool, which they already entered on the target side.
 - **scripts/calibration/landconversion_cost.R** Gentler calibration schedule to damp oscillation in early iterations: initial cost factor 1 for all regions, reinforcement 10/5/2/1, reward increment divided by 5. Calibration factors change even on unchanged data.
 - **inputdata** updated to rev4.138 and additional data rev4.77. The LandInG croparea initialisation separates harvested from physical area, which is what makes fallow land and multiple cropping visible; croparea totals and crop composition differ from earlier revisions.
-  
+- **scripts/output/downscaling** The 0.5 degree downscaling of land, BII and land conservation runs in mrdownscale (`downscale_default.R`) and follows the cluster transitions of the model.
+- **config/default.cfg** The default output runs `downscaling/downscale_default` instead of `extra/disaggregation`; `SNVTargetCropland_0.5.mz` and `pot_forest_area_uncorrected_0.5.mz` are exported to the output folder.
+- **scripts/output** `extra/mrdownscale_LUH2.R` renamed to `downscaling/downscale_LUH.R`; `reportMAgPIE2SEALS.R` and `runSEALSallocation.R` moved from `extra` to `downscaling`; the start scripts and `scripts/projects/fsec.R` use the new script names.
+- **scripts/output/projects** `BtC2_reportDisaggLandUse.R` replaced by `BtC2_reportLand.R`, which computes the land classes of Bending the Curve 2.0 with `fullBTC2` of mrdownscale.
+
 ### added
 - **scripts/output/extra** `crop_rotations_validation.R` compares base-year croparea and fallow per cluster against the croparea initialisation data.
 - **30_croparea** Added realizations `penalties_sep26` and `rules_sep26`, which split the former `detail_apr24` into its penalty-based and hard-constraint-based rotation implementations. `penalties_sep26` is the new default.
 - **30_croparea** The switches `c30_rotation_rules` and `c30_rotation_incentives` are replaced by a single `c30_rotation_policy`, which selects the rule thresholds in `rules_sep26` and the penalty levels in `penalties_sep26`. Both realizations offer a `none` policy, and `agroforestry` is added as a new policy. `penalties_sep26` restricts the rule set to the rules that carry a penalty and uses a single fixed set of thresholds. Minimum-share rules are enforced for the first time. This changes results relative to `detail_apr24` and requires recalibration.
+- **scripts/output/downscaling** `downscale_ageClasses.R` downscales the age classes of secondary forest, forestry and other land to 0.5 degree on the downscaled land (optional, not in the default output).
 
 ### removed
 - **30_croparea** Removed the `simple_apr24` realization, the bioenergy tree (betr) target machinery including the `s30_betr_*` switches, and `i30_rotation_rules`.
 - **30_croparea** Removed the `detail_apr24` realization and its switch `s30_implementation`, superseded by `penalties_sep26` (`s30_implementation = 0`) and `rules_sep26` (`s30_implementation = 1`).
+- **scripts/output/extra** `disaggregation.R`, `disaggregation_LUH2.R` and `mrdownscale.R`, replaced by the scripts in `scripts/output/downscaling`.
 
 ### fixed
 -
