@@ -74,10 +74,14 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  q32_aff_pol(j2) ..
  sum(ac_est, v32_land(j2,"ndc",ac_est)) + v32_ndc_area_missing(j2) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
-*' The constraint `q32_ndc_aff_limit` makes sure that NPI/NDC re/afforestation does not happen at the cost of forests and other natural vegetation.
+*' The NPI/NDC afforestation lock `q32_ndc_aff_limit` (`s32_ndc_aff_limit`: 0 = off, 1 = on) makes sure that NPI/NDC
+*' re/afforestation does not happen at the cost of natural forests in the policy regions that afforest. In a cluster
+*' with NPI/NDC afforestation in the time step, natural forest conversion is limited to the natural forest outside
+*' these regions (`p32_aff_lock_share`, from `scripts/npi_ndc/start_npi_ndc.R`); secondary forest can be harvested.
 
- q32_ndc_aff_limit(j2) ..
- sum(ct, p32_aff_pol_timestep(ct,j2)) * vm_natforest_reduction(j2) =e= 0;
+ q32_ndc_aff_limit(j2)$(s32_ndc_aff_limit = 1 AND sum(ct, p32_aff_pol_timestep(ct,j2)) > 0) ..
+ vm_natforest_conversion(j2) =l=
+   sum(ct, 1 - p32_aff_lock_share(ct,j2)) * (pcm_land(j2,"primforest") + pcm_land(j2,"secdforest"));
 
 *' The annual upper limit for re-afforestation is based on an annual share (`s32_annual_aff_limit`) of the overall forest establishment potential (`pm_max_forest_est`).
 
