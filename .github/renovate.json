@@ -3,5 +3,7 @@
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "enabledManagers": ["github-actions"],
   "baseBranchPatterns": ["develop"],
-  "groupName": "GitHub Actions"
+  "groupName": "GitHub Actions",
+  "automerge": false,
+  "minimumReleaseAge": "10 days"
 }
