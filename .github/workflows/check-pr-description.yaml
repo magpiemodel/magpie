@@ -2,6 +2,10 @@ on:
   pull_request:
     types: [opened, reopened, edited, ready_for_review]
 
+name: check-pr-description
+
+permissions: {}
+
 jobs:
   check-pr-template:
     if: github.event.pull_request.draft == false

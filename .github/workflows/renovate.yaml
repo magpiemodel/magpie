@@ -1,0 +1,47 @@
+name: renovate
+
+# Updates pinned action SHAs in .github/workflows via PRs against develop.
+# Needs a GitHub App token: GITHUB_TOKEN cannot push to .github/workflows and
+# its PRs do not trigger the check workflows.
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency: renovate
+
+jobs:
+  renovate:
+    if: github.repository == 'magpiemodel/magpie'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        id: app-token
+        with:
+          client-id: ${{ vars.RENOVATE_MAGPIE_CLIENT_ID }}
+          private-key: ${{ secrets.RENOVATE_MAGPIE_APP_PRIVATE_KEY }}
+
+      - name: Get bot git identity
+        id: bot
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: |
+          userId=$(gh api "users/${APP_SLUG}%5Bbot%5D" --jq .id)
+          echo "author=${APP_SLUG}[bot] <${userId}+${APP_SLUG}[bot]@users.noreply.github.com>" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - name: Run Renovate
+        run: npx --yes renovate@44.225.1
+        env:
+          RENOVATE_TOKEN: ${{ steps.app-token.outputs.token }}
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+          RENOVATE_GIT_AUTHOR: ${{ steps.bot.outputs.author }}
+          RENOVATE_ONBOARDING: "false"
