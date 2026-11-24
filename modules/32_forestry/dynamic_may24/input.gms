@@ -74,7 +74,7 @@ $offdelim
 $onEmpty
 table f32_aff_lock_share(t_all,j,pol32) Share of natural forest in policy regions with rising NPI NDC afforestation stock (1)
 $ondelim
-$if exist "./modules/32_forestry/input/npi_ndc_aff_lock_share.cs3" $include "./modules/32_forestry/input/npi_ndc_aff_lock_share.cs3"
+$include "./modules/32_forestry/input/npi_ndc_aff_lock_share.cs3"
 $offdelim
 ;
 $offEmpty
