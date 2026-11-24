@@ -49,21 +49,23 @@ $include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_LU_2019reg.cs3"
 $offdelim
 ;
 
-table f59_cratio_landuse_fallow(climate59_2019,*) Ratio of soil carbon relative to potential natural vegetation soil carbon for fallow land (1)
+parameter f59_cratio_landuse_fallow(climate59_2019) Ratio of soil carbon relative to potential natural vegetation soil carbon for fallow land (1)
+/
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_LU_2019_fallow.cs3"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_LU_2019_fallow.csv"
 $offdelim
+/
 ;
 
 table f59_cratio_tillage(climate59_2019,tillage59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different soil management (1)
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_MG_2019.cs3"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_MG_2019.csv"
 $offdelim
 ;
 
 table f59_cratio_inputs(climate59_2019,inputs59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different input intensity  (1)
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_I_2019.cs3"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_I_2019.csv"
 $offdelim
 ;
 
@@ -73,7 +75,7 @@ $setglobal c59_irrigation_scenario  on
 
 table f59_cratio_irrigation(climate59_2019,w,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different irrigation schemes  (1)
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_IRR_trost.cs3"
+$include "./modules/59_som/cellpool_jan23/input/f59_trost_F_IRR.cs3"
 $offdelim
 ;
 $if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59_2019,w,kcr) = 1;
