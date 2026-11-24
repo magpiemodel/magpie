@@ -48,11 +48,11 @@ i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
 *' For moist regions, assume F_LU factor of set-aside.
 *' Assumed to have no irrigation, so irrigation multiplier is 1.
 
-i59_cratio_fallow_climate(climate59) = f59_cratio_landuse_fallow(climate59)
+i59_cratio_fallow_climate(climate59) = f59_cratio_landuse_fallow(climate59,"fallow")
                 * f59_cratio_tillage(climate59,"full_tillage")
                 * f59_cratio_inputs(climate59,"low_input");
 
-i59_cratio_fallow_climate(climate59moist) = f59_cratio_landuse_fallow(climate59moist);
+i59_cratio_fallow_climate(climate59moist) = f59_cratio_landuse_fallow(climate59moist,"fallow");
 
 i59_cratio_fallow(j) = sum(climate59,
                 sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
@@ -136,3 +136,7 @@ pc59_land_before(j,land) = pm_land_start(j,land);
 p59_carbon_density(t,j,land) = 0;
 pc59_carbon_density(j,land) = 0;
 pc59_carbon_density(j,land)$(pc59_land_before(j,land) > 1e-10) = pc59_som_pool(j,land) / pc59_land_before(j,land);
+
+* Initialize total cropland reference snapshot to zero
+* Will be filled in presolve when using fixed year mode (s59_scm_reference_year > 0)
+p59_land_scm_reference(j) = 0;

@@ -11,18 +11,22 @@
 *' as the sum over all crop types and management regimes is calculated  by taking 
 *' carbon shares (`cratio`) of the natural reference `f59_topsoilc_density` with
 *' (1) crop and irrigation type specific assumptions `i59_cratio` for all cropareas,
-*' (2) based on the share of dedicated soil carbon managament (SCM) `i59_scm_target`
-*'     on cropareas an additional increase of `i59_cratio_scm - 1` for these areas,
+*' (2) based on the soil carbon managament (SCM) area `v59_area_scm` on cropareas
+*'     and `v59_area_fallow_scm` on fallow land
+*'     an additional increase of `i59_cratio_scm - 1` for these areas;
+*'     in share mode (`s59_scm_mode` = 0) the SCM area is a given share of each cell's
+*'     cropland area and fallow land, in area mode (`s59_scm_mode` = 1) it is
+*'     allocated endogenously towards a regional area target and can include fallow land,
 *' (3+4) dedicated factors `i59_cratio_fallow` and `i59_cratio_treecover` for fallow
-*'       and treecover areas 
+*'       and treecover areas
 *' leading to on overall target stock given by
 
 q59_som_target_cropland(j2) ..
               v59_som_target(j2,"crop")
-                =e= (sum((kcr,w), vm_area(j2,kcr,w) * i59_cratio(j2,kcr,w)) + 
-                     sum((kcr,w,ct), vm_area(j2,kcr,w) * i59_scm_target(ct,j2) *
-                     i59_cratio(j2,kcr,w) * (i59_cratio_scm(j2) - 1))
-                     + vm_fallow(j2) * i59_cratio_fallow(j2) 
+                =e= (sum((kcr,w), vm_area(j2,kcr,w) * i59_cratio(j2,kcr,w)) +
+                     sum((kcr,w), v59_area_scm(j2,kcr,w,"scm") * i59_cratio(j2,kcr,w) * (i59_cratio_scm(j2) - 1))
+                     + vm_fallow(j2) * i59_cratio_fallow(j2)
+                     + v59_area_fallow_scm(j2) * i59_cratio_fallow(j2) * (i59_cratio_scm(j2) - 1)
                      + vm_treecover(j2) * i59_cratio_treecover)
                     * sum(ct,f59_topsoilc_density(ct,j2));
 
@@ -93,10 +97,53 @@ q59_nr_som_fertilizer2(j2) ..
 *' Here we assume a maximum of 200 kg on the expanded area.
 
 
-*' Cost for soil carbon management are based on a per hectare value
+*' The total area under each crop type and irrigation regime must equal the
+*' sum of SCM and non-SCM managed area
+
+  q59_area_scm_tot(j2,kcr,w) ..
+    sum(scmtype59, v59_area_scm(j2,kcr,w,scmtype59))
+    =e= vm_area(j2,kcr,w);
+
+*' In `share` mode, the area under soil carbon management is fixed to the share
+*' of soil carbon management of each cell's cropland area, on cropareas and on
+*' fallow land, without crop type restrictions
+
+  q59_scm_share(j2,kcr,w)$(s59_scm_mode = 0) ..
+    v59_area_scm(j2,kcr,w,"scm")
+    =e= vm_area(j2,kcr,w) * sum(ct, i59_scm_target(ct,j2));
+
+  q59_area_fallow_scm_share(j2)$(s59_scm_mode = 0) ..
+    v59_area_fallow_scm(j2)
+    =e= vm_fallow(j2) * sum(ct, i59_scm_target(ct,j2));
+
+*' In `area` mode, the SCM area on fallow land cannot exceed the total fallow
+*' area of the cell
+
+  q59_area_fallow_scm(j2)$(s59_scm_mode = 1) ..
+    v59_area_fallow_scm(j2)
+    =l= vm_fallow(j2);
+
+*' The total area under soil carbon management, including fallow land under SCM,
+*' must equal the absolute area target at the regional level. The target is
+*' calculated from the share target times the cropland area of the previous
+*' timestep, allowing spatial flexibility across clusters.
+
+  q59_scm_target_constraint(i2)$(s59_scm_mode = 1) ..
+    sum(cell(i2,j2), sum((kcr,w), v59_area_scm(j2,kcr,w,"scm")) + v59_area_fallow_scm(j2))
+    =e= sum(ct, i59_scm_target_area(ct,i2));
+
+*' To prevent clustering of SCM in cells with highest carbon stocks,
+*' limit SCM area per cell to a maximum share of the cell's total eligible
+*' cropland area (annual crops and fallow)
+
+  q59_scm_max_per_cell(j2)$(s59_scm_mode = 1) ..
+    sum((kscm59,w), v59_area_scm(j2,kscm59,w,"scm")) + v59_area_fallow_scm(j2)
+    =l= (sum((kscm59,w), vm_area(j2,kscm59,w)) + vm_fallow(j2)) * s59_scm_max_share_per_cell;
+
+*' Cost for soil carbon management are based on the actual area under SCM,
+*' including fallow land under SCM
 
   q59_cost_scm(j2) ..
-    vm_cost_scm(j2) =e= 
-      sum((kcr,w), vm_area(j2,kcr,w)) *
-       sum(ct, i59_scm_target(ct,j2)) * s59_cost_scm_recur;
+    vm_cost_scm(j2) =e=
+      (sum((kcr,w), v59_area_scm(j2,kcr,w,"scm")) + v59_area_fallow_scm(j2)) * s59_cost_scm_recur;
 
