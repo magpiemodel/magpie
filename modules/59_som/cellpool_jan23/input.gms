@@ -13,9 +13,9 @@ scalars
   s59_scm_scenario_start          Soil carbon management scenario start year / 2025 /
   s59_scm_scenario_target         Soil carbon management scenario target year / 2050 /
   s59_cost_scm_recur              Soil carbon management recurring cost (USD17MER per ha) / 65 /
-  s59_scm_mode                    Soil carbon management mode (0 = relative share on cell's cropland and fallow area, 1 = absolute area target with endogenous allocation) / 0 /
-  s59_scm_max_share_per_cell      Maximum share of SCM on cropland per cell to prevent clustering, used in s59_scm_mode = 1 (1) / 1 /
-  s59_scm_reference_year          Reference year for SCM target calculation, used in s59_scm_mode = 1 (-1=dynamic or year) / -1 /
+  s59_scm_mode                    Soil carbon management mode relative share (0) or absolute area target with endogenous allocation (1) / 0 /
+  s59_scm_max_share_per_cell      Maximum share of SCM on cropland per cell to prevent clustering used with mode 1 (1) / 1 /
+  s59_scm_reference_year          Reference year for SCM target calculation used with mode 1 or dynamic mode (-1) / -1 /
 ;
 
 *' @code 
@@ -59,13 +59,13 @@ $offdelim
 
 table f59_cratio_tillage(climate59_2019,tillage59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different soil management (1)
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_MG_2019.csv"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_MG_2019.cs3"
 $offdelim
 ;
 
 table f59_cratio_inputs(climate59_2019,inputs59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different input intensity  (1)
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_I_2019.csv"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_I_2019.cs3"
 $offdelim
 ;
 
