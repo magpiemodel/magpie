@@ -93,16 +93,18 @@ if (s29_treecover_mode = 0,
   i29_treecover_target(t,j) = i29_treecover_scenario_fader(t) *
     (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
     + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)));
-else if (s29_treecover_reference_year <= 0,
-  i29_treecover_target_area(t,j) = i29_treecover_scenario_fader(t) *
-    (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
-    + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)))
-    * pc29_land_crop(j);
 else
-  i29_treecover_target_area(t,j) = i29_treecover_scenario_fader(t) *
-    (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
-    + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)))
-    * p29_land_crop_reference(j);
+  if (s29_treecover_reference_year <= 0,
+    i29_treecover_target_area(t,j) = i29_treecover_scenario_fader(t) *
+      (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
+      + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)))
+      * pc29_land_crop(j);
+  else
+    i29_treecover_target_area(t,j) = i29_treecover_scenario_fader(t) *
+      (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
+      + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)))
+      * p29_land_crop_reference(j);
+  );
 );
 
 * calculate treecover share 
