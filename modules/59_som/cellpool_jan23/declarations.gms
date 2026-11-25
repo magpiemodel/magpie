@@ -12,7 +12,7 @@ parameters
           i59_tillage_share(i,tillage59)       Share of land under tillage class (1)
           i59_input_share(i,inputs59)          Share of land under input class (1)
           i59_scm_target(t,j)                  Target for the share of cropland under soil carbon managament (1)
-          i59_scm_target_area(t,i)             Target area for soil carbon management at regional level in absolute terms, used in s59_scm_mode = 1 (mio. ha)
+          i59_scm_target_area(t,i)             Target area for soil carbon management at regional level in absolute terms used in s59_scm_mode = 1 (mio. ha)
           p59_land_scm_reference(j)            Total cropland area snapshot for SCM target calculation when using fixed reference year (mio. ha)
           i59_cratio(j,kcr,w)                  Ratio of carbon density of land relative to natural vegetaion (1)
           i59_cratio_fallow(j)                 Ratio of carbon density of fallow land relative to natural vegetation (1)
@@ -36,11 +36,11 @@ equations
          q59_carbon_soil(j,land,stockType)                Soil carbon content calculation (mio. tC)
          q59_cost_scm(j)                                  Recurring cost for soil carbon management on cropland (mio. USD17MER per yr)
          q59_area_scm_tot(j,kcr,w)                        SCM and non-SCM area must sum to total cropland area (mio. ha)
-         q59_scm_share(j,kcr,w)                           SCM area equals cell share of cropland area, active in s59_scm_mode = 0 (mio. ha)
-         q59_area_fallow_scm_share(j)                     Fallow SCM area equals cell share of fallow area, active in s59_scm_mode = 0 (mio. ha)
-         q59_area_fallow_scm(j)                           Fallow area under soil carbon management cannot exceed total fallow area, active in s59_scm_mode = 1 (mio. ha)
-         q59_scm_target_constraint(i)                     Total SCM area equals regional target, active in s59_scm_mode = 1 (mio. ha)
-         q59_scm_max_per_cell(j)                          Upper bound on SCM area per cell to prevent clustering, active in s59_scm_mode = 1 (mio. ha)
+         q59_scm_share(j,kcr,w)                           SCM area equals cell share of cropland area active in s59_scm_mode = 0 (mio. ha)
+         q59_area_fallow_scm_share(j)                     Fallow SCM area equals cell share of fallow area active in s59_scm_mode = 0 (mio. ha)
+         q59_area_fallow_scm(j)                           Fallow area under soil carbon management cannot exceed total fallow area active in s59_scm_mode = 1 (mio. ha)
+         q59_scm_target_constraint(i)                     Total SCM area equals regional target active in s59_scm_mode = 1 (mio. ha)
+         q59_scm_max_per_cell(j)                          Upper bound on SCM area per cell to prevent clustering active in s59_scm_mode = 1 (mio. ha)
 ;
 
 positive variables

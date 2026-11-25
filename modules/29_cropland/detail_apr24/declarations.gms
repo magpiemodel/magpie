@@ -21,8 +21,8 @@ parameters
  i29_snv_scenario_fader(t_all)      SNV scenario fader (1)
 
  i29_treecover_scenario_fader(t_all)    Cropland treecover scenario fader (1)
- i29_treecover_target(t,j)              Target share for treecover (1), used when s29_treecover_mode = 0
- i29_treecover_target_area(t,j)         Target area for treecover in absolute terms (mio. ha), used when s29_treecover_mode = 1
+ i29_treecover_target(t,j)              Target share for treecover (1) used when s29_treecover_mode = 0
+ i29_treecover_target_area(t,j)         Target area for treecover in absolute terms (mio. ha) used when s29_treecover_mode = 1
  pc29_land_crop(j)                      Total cropland area from previous timestep (mio. ha)
  p29_land_crop_reference(j)             Cropland area snapshot for treecover target when using fixed reference year (mio. ha)
  i29_treecover_penalty(t)               Penalty for violation of treecover target (USD17MER per ha)
