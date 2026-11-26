@@ -8,6 +8,10 @@
 
 
 
+if (m_year(t) <= s14_past_spill_fix,
+  p14_tau_ref(j) = pcm_tau(j,"crop");
+);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_yld(t,j,kve,w,"marginal")          = vm_yld.m(j,kve,w);
  oq14_yield_crop(t,j,kcr,w,"marginal") = q14_yield_crop.m(j,kcr,w);
