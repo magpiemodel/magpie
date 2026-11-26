@@ -18,6 +18,7 @@ s14_degradation                    Switch to include yield impacts of land degra
 s14_use_yield_calib                Switch for using or not using yield calibration factors from the preprocessing (1=use facs 0=not use facs) / 0 /
 s14_minimum_growing_stock          Minimum growing stock for timber harvest in natural vegetation (tDM per ha) / 5 /
 s14_yld_past_switch                Spillover parameter for translating technological change in the crop sector into pasture yieldincreases  (1)     / 0.25 /
+s14_past_spill_fix                 Year until which the crop-to-pasture yield spillover is zero (0 = from 1995) (year) / 0 /
 s14_yld_reduction_soil_loss        Decline of land productivity in areas with severe soil loss (1)     / 0.08 /
 sm_carbon_fraction                 Carbon fraction of dry matter (tC per tDM) / 0.5 /
 ;
