@@ -89,7 +89,7 @@ if (sum(sameas(t_past,t),1) = 1 or m_year(t) <= s15_kcal_calib_end,
        i15_processed_kcal_structure_iso(t,iso,kfo_pf)$(sum(kfo_pf2,f15_kcal_pc_iso(t,iso,kfo_pf2)) = 0) = i15_processed_kcal_structure_iso(t-1,iso,kfo_pf);
        i15_staples_kcal_structure_iso(t,iso,kfo_st)$(sum(kfo_st2,f15_kcal_pc_iso(t,iso,kfo_st2)) = 0) = i15_staples_kcal_structure_iso(t-1,iso,kfo_st);
 * Projected years apply the fadeouts relative to this year
-       p15_rum_fadeout_lastcalib(iso)$(i15_rum_share_fadeout(t,iso) > 0) = i15_rum_share_fadeout(t,iso);
+       p15_rum_fadeout_lastcalib(iso)$(i15_rum_share_fadeout(t,iso) > 0 and sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2)) > 0) = i15_rum_share_fadeout(t,iso);
        p15_milk_fadeout_india_lastcalib$(i15_milk_share_fadeout_india(t) > 0) = i15_milk_share_fadeout_india(t);
      );
 
@@ -305,7 +305,7 @@ if (sum(sameas(t_past,t),1) = 1 or m_year(t) <= s15_kcal_calib_end,
       p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = p15_kcal_calib_lastcalibyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
       p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = p15_balanceflow_kcal_lastcalibyear(iso,kfo);
     );
-    p15_kcal_calib_lastcalibyear(iso,kfo) = p15_kcal_calib(t,iso,kfo);
+    p15_kcal_calib_lastcalibyear(iso,kfo)$(sum(sameas(t_past,t),1) = 1 or sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2)) > 0) = p15_kcal_calib(t,iso,kfo);
     p15_balanceflow_kcal_lastcalibyear(iso,kfo) = p15_balanceflow_kcal_iso(t,iso,kfo);
 
 else
