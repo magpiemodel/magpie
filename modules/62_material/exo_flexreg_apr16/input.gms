@@ -27,6 +27,7 @@ $offdelim
 /
 ;
 
+scalar s62_hist_end Last year of historical material demand if after t_past (0 = t_past only) (year) / 0 /;
 scalar s62_include_bioplastic switch whether future bioplastic demand should be included (0 or 1) / 1 /;
 scalar s62_max_dem_bioplastic maximum demand for bioplastics (mio. tDM per yr) / 0 /;
 scalar s62_midpoint_dem_bioplastic midpoint of logistic function for bioplastic demand (yr) / 2050 /;
