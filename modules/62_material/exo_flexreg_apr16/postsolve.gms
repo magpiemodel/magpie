@@ -10,7 +10,7 @@
 *' This is only carried out when the model is still running in the time period
 *' before (and including) y2010 with this model version.
 
-if (sum(sameas(t_past,t),1) = 1,
+if (sum(sameas(t_past,t),1) = 1 or m_year(t) <= s62_hist_end,
  p62_dem_material_lastcalibyear(i,kall) = f62_dem_material(t,i,kall);
  p62_dem_food_lastcalibyear(i) = sum(kfo, vm_dem_food.l(i,kfo));
 );

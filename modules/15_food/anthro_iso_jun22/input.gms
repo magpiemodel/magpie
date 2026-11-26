@@ -72,6 +72,7 @@ scalars
 s15_elastic_demand                  Elastic demand switch (1=elastic 0=exogenous) (1) / 0 /
 s15_tax_recycling                   Tax recycling multiplier (1=distribution neutral) (1) / 1 / 
 s15_calibrate                       Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /
+s15_kcal_calib_end                  Last year of kcal calibration if after t_past (0 = t_past only) (year) / 0 /
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 s15_maxiter                         Scalar defining maximum number of iterations (1) / 10 /
 s15_convergence                     Convergence criterion (1) / 0.005 /

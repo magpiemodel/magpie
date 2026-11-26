@@ -34,7 +34,7 @@ option threads = 1;
 *' which declines in the course of the century at the cost of chicken meat.
 *' @stop
 
-if (sum(sameas(t_past,t),1) = 1,
+if (sum(sameas(t_past,t),1) = 1 or m_year(t) <= s15_kcal_calib_end,
 
 *** Calculate the share of individual food products within major food groups, and replace zero shares with regional averages
 * First set it to equal shares, just in case there is no population
@@ -82,6 +82,17 @@ if (sum(sameas(t_past,t),1) = 1,
                                );
 
 
+* Countries without kcal data in a calibration year after t_past keep the previous structure
+     if (sum(sameas(t_past,t),1) = 0,
+       i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)$(sum(kfo_ap2,f15_kcal_pc_iso(t,iso,kfo_ap2)) = 0) = i15_livestock_kcal_structure_iso_raw(t-1,iso,kfo_ap);
+       i15_livestock_kcal_structure_iso(t,iso,kfo_ap) = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);
+       i15_processed_kcal_structure_iso(t,iso,kfo_pf)$(sum(kfo_pf2,f15_kcal_pc_iso(t,iso,kfo_pf2)) = 0) = i15_processed_kcal_structure_iso(t-1,iso,kfo_pf);
+       i15_staples_kcal_structure_iso(t,iso,kfo_st)$(sum(kfo_st2,f15_kcal_pc_iso(t,iso,kfo_st2)) = 0) = i15_staples_kcal_structure_iso(t-1,iso,kfo_st);
+* Projected years apply the fadeouts relative to this year
+       p15_rum_fadeout_lastcalib(iso)$(i15_rum_share_fadeout(t,iso) > 0 and sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2)) > 0) = i15_rum_share_fadeout(t,iso);
+       p15_milk_fadeout_india_lastcalib$(i15_milk_share_fadeout_india(t) > 0) = i15_milk_share_fadeout_india(t);
+     );
+
  else
 * Assumptions on future calorie structure within food groups for future projections:
      i15_staples_kcal_structure_iso(t,iso,kfo_st) =i15_staples_kcal_structure_iso(t-1,iso,kfo_st);
@@ -90,22 +101,22 @@ if (sum(sameas(t_past,t),1) = 1,
      i15_livestock_kcal_structure_iso(t,iso,kfo_ap)     = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);
      i15_livestock_kcal_structure_iso(t,iso,"livst_chick") =
                                  i15_livestock_kcal_structure_iso_raw(t,iso,"livst_chick")
-                                 + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-i15_rum_share_fadeout(t,iso));
+                                 + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-i15_rum_share_fadeout(t,iso) / p15_rum_fadeout_lastcalib(iso));
     i15_livestock_kcal_structure_iso(t,iso,"livst_rum") =
-                                 i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * i15_rum_share_fadeout(t,iso);
+                                 i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * i15_rum_share_fadeout(t,iso) / p15_rum_fadeout_lastcalib(iso);
 
 * Substitute milk demand in India with chicken, egg and fish (equally distributed) because milk demand in India shows an implausible increase
       i15_livestock_kcal_structure_iso(t,"IND","livst_milk") =
-                                 i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * i15_milk_share_fadeout_india(t);
+                                 i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * i15_milk_share_fadeout_india(t) / p15_milk_fadeout_india_lastcalib;
       i15_livestock_kcal_structure_iso(t,"IND","livst_chick") =
                   i15_livestock_kcal_structure_iso(t,"IND","livst_chick")
-                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
+                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t) / p15_milk_fadeout_india_lastcalib) * 1/3;
       i15_livestock_kcal_structure_iso(t,"IND","livst_egg") =
                   i15_livestock_kcal_structure_iso(t,"IND","livst_egg")
-                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
+                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t) / p15_milk_fadeout_india_lastcalib) * 1/3;
       i15_livestock_kcal_structure_iso(t,"IND","fish") =
                   i15_livestock_kcal_structure_iso(t,"IND","fish")
-                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
+                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t) / p15_milk_fadeout_india_lastcalib) * 1/3;
  );
 
 
@@ -283,20 +294,19 @@ v15_income_pc_real_ppp_iso.up(iso)=Inf;
 *' demand estimates can still be used for all countries, but MAgPIE only considers
 *' demand from FAOSTAT countries.
 
-if (sum(sameas(t_past,t),1) = 1,
+if (sum(sameas(t_past,t),1) = 1 or m_year(t) <= s15_kcal_calib_end,
     p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = 0;
     p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = 0;
     p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regr.l(iso, kfo);
     p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regr.l(iso, kfo);
 
-    p15_kcal_calib_lastcalibyear(iso,kfo) = p15_kcal_calib(t,iso,kfo);
+* Countries without kcal data in a calibration year after t_past keep their last calibration
+    if (sum(sameas(t_past,t),1) = 0,
+      p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = p15_kcal_calib_lastcalibyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
+      p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = p15_balanceflow_kcal_lastcalibyear(iso,kfo);
+    );
+    p15_kcal_calib_lastcalibyear(iso,kfo)$(sum(sameas(t_past,t),1) = 1 or sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2)) > 0) = p15_kcal_calib(t,iso,kfo);
     p15_balanceflow_kcal_lastcalibyear(iso,kfo) = p15_balanceflow_kcal_iso(t,iso,kfo);
-
-    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
-                      f15_bmi_shr_past(t,iso,age,sex,bmi_group15) -
-                      v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
-    i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)=
-                      i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 else
 *' Depending on the scenario switch c15_calibscen, the divergence of the demand from the
@@ -306,6 +316,15 @@ else
 *' over time.
     p15_balanceflow_kcal_iso(t,iso,kfo) = p15_balanceflow_kcal_lastcalibyear(iso,kfo);
 
+);
+
+if (sum(sameas(t_past,t),1) = 1,
+    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
+                      f15_bmi_shr_past(t,iso,age,sex,bmi_group15) -
+                      v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
+    i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)=
+                      i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+else
 *' Depending on the scenario switch c15_calibscen, the divergence of the BMI shares from the
 *' historical data is kept constant over time or faded out.
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =

@@ -127,6 +127,8 @@ parameters
 
 * diet calibration
   p15_kcal_calib(t,iso,kfo)                   Balance flow to diverge from mean calories of regressions (kcal per cap per day)
+  p15_rum_fadeout_lastcalib(iso)              Ruminant share fadeout in the last kcal calibration year after t_past (1)
+  p15_milk_fadeout_india_lastcalib            Indian milk share fadeout in the last kcal calibration year after t_past (1)
   p15_kcal_calib_lastcalibyear(iso,kfo)       Calibration factor for the last year with observations (kcal per cap per day)
   p15_balanceflow_kcal(t,i,kfo)               Balance flow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
   p15_balanceflow_kcal_iso(t,iso,kfo)         Balance flow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)

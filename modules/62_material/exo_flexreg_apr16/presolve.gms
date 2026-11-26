@@ -12,7 +12,7 @@
 *' How this switch affects the material demand calculations is explained in the
 *' equation(s) accompanying this module.
 
-if (sum(sameas(t_past,t),1) = 1,
+if (sum(sameas(t_past,t),1) = 1 or m_year(t) <= s62_hist_end,
   s62_historical=1;
 else
  s62_historical=0;
@@ -26,7 +26,7 @@ p62_scaling_factor(i)$(p62_dem_food_lastcalibyear(i) > 0) = sum(kfo, vm_dem_food
 * In t_past, biomass demand for bioplastic is already included in the general material demand, which is 
 * scaled for future years. Therefore we calculate the amount of biomass that is counted twice, and subtract
 * it in the final biomass demand equation. 
-if (sum(sameas(t_past,t),1) = 1,
+if (sum(sameas(t_past,t),1) = 1 or m_year(t) <= s62_hist_end,
   p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate(t,i,kall);
   p62_bioplastic_substrate_lastcalibyear(i,kall) = min(p62_bioplastic_substrate(t,i,kall), f62_dem_material(t,i,kall));
 else
