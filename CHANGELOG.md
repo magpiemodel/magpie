@@ -13,8 +13,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **59_som** Fallow has its own soil stock change factor instead of borrowing the one for maize, split into bare fallow (dry) and vegetated set-aside (moist) via the new set `climate59moist`. Fallow and tree cover are now part of the initial cropland soil carbon pool, which they already entered on the target side.
 - **scripts/calibration/landconversion_cost.R** Gentler calibration schedule to damp oscillation in early iterations: initial cost factor 1 for all regions, reinforcement 10/5/2/1, reward increment divided by 5. Calibration factors change even on unchanged data.
 - **inputdata** updated to rev4.138 and additional data rev4.77. The LandInG croparea initialisation separates harvested from physical area, which is what makes fallow land and multiple cropping visible; croparea totals and crop composition differ from earlier revisions.
+- **scripts/npi_ndc/start_npi_ndc.R** also computes the afforestation policies per policy region and writes the lock share (`npi_ndc_aff_lock_share.cs3`, read into `p32_aff_lock_share`); the per-cluster afforestation policy table is unchanged. `scripts/downloader/inputdelete.cfg` removes the file when new input data are downloaded. `scripts/start_functions.R` recalculates the NPI/NDC tables when this file is missing.
   
 ### added
+- **32_forestry** added switch `s32_ndc_aff_limit` (NPI/NDC afforestation lock on natural forest conversion in the afforesting policy regions, 0 off, 1 on) and input `npi_ndc_aff_lock_share.cs3` (share of each cluster's natural forest in policy regions with rising NPI/NDC afforestation)
+- **35_natveg** added interface `vm_natforest_conversion` (primary forest reduction plus secondary forest reduction net of its harvest), declared free
 - **scripts/output/extra** `crop_rotations_validation.R` compares base-year croparea and fallow per cluster against the croparea initialisation data.
 - **30_croparea** Added realizations `penalties_sep26` and `rules_sep26`, which split the former `detail_apr24` into its penalty-based and hard-constraint-based rotation implementations. `penalties_sep26` is the new default.
 - **30_croparea** The switches `c30_rotation_rules` and `c30_rotation_incentives` are replaced by a single `c30_rotation_policy`, which selects the rule thresholds in `rules_sep26` and the penalty levels in `penalties_sep26`. Both realizations offer a `none` policy, and `agroforestry` is added as a new policy. `penalties_sep26` restricts the rule set to the rules that carry a penalty and uses a single fixed set of thresholds. Minimum-share rules are enforced for the first time. This changes results relative to `detail_apr24` and requires recalibration.
@@ -22,9 +25,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### removed
 - **30_croparea** Removed the `simple_apr24` realization, the bioenergy tree (betr) target machinery including the `s30_betr_*` switches, and `i30_rotation_rules`.
 - **30_croparea** Removed the `detail_apr24` realization and its switch `s30_implementation`, superseded by `penalties_sep26` (`s30_implementation = 0`) and `rules_sep26` (`s30_implementation = 1`).
+- **35_natveg** removed interface `vm_natforest_reduction` and equation `q35_natforest_reduction`: their only reader was the old lock.
 
 ### fixed
--
+- **15_food** Food demand no longer jumps when the regression parameters switch from SSP2 to the scenario after `sm_fix_SSP2`. The difference between the SSP2 and the scenario parametrization in the last time step before the switch is added to the calibration and follows the fade-out of `c15_calibscen`. `pm_kcal_pc_initial` is rounded to 2 decimals like `p15_kcal_pc_calibrated`. SSP2 results are unchanged except for rounding-related changes.
+- **32_forestry** NPI/NDC afforestation lock (`q32_ndc_aff_limit`). Before, any NPI/NDC afforestation in a cluster set all natural forest reduction there to zero, so one country's afforestation froze the natural forest of every country in the cluster and also blocked timber harvest of secondary forest. Now natural forest conversion (`vm_natforest_conversion`) in such a cluster may not exceed the natural forest outside the policy regions whose afforestation rises in the time step (`p32_aff_lock_share`, new switch `s32_ndc_aff_limit`: 0 off, 1 on, default 1). Secondary forest can be harvested for timber but not cleared; primary forest can be neither. Land use changes from 2000 on (default run, World 2050: forest -79 Mha, other land +71 Mha); in 1995, with no cluster locked, the reformulation gives another optimum (prices, timber emissions). The land-conversion cost calibration is not updated.
 
 
 ## [4.14.2] - 2026-11-03
