@@ -195,3 +195,5 @@ if ((s14_degradation = 1),
 );
 
 *' @stop
+
+p14_tau_ref(j) = sum((cell(i,j), supreg(h,i)), fm_tau1995(h));

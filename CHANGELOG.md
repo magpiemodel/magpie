@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **scripts/npi_ndc/start_npi_ndc.R** also computes the afforestation policies per policy region and writes the lock share (`npi_ndc_aff_lock_share.cs3`, read into `p32_aff_lock_share`); the per-cluster afforestation policy table is unchanged. `scripts/downloader/inputdelete.cfg` removes the file when new input data are downloaded. `scripts/start_functions.R` recalculates the NPI/NDC tables when this file is missing.
   
 ### added
+- **14_yields** New switch `s14_past_spill_fix` sets the base year of crop tau in the crop-to-pasture yield spillover (default 0 = input tau of 1995, as before), e.g. 2020; together with `s70_past_mngmnt_factor_fix` at the same year, pasture intensification already in the historical yield series is not counted twice.
 - **32_forestry** added switch `s32_ndc_aff_limit` (NPI/NDC afforestation lock on natural forest conversion in the afforesting policy regions, 0 off, 1 on) and input `npi_ndc_aff_lock_share.cs3` (share of each cluster's natural forest in policy regions with rising NPI/NDC afforestation)
 - **35_natveg** added interface `vm_natforest_conversion` (primary forest reduction plus secondary forest reduction net of its harvest), declared free
 - **scripts/output/extra** `crop_rotations_validation.R` compares base-year croparea and fallow per cluster against the croparea initialisation data.

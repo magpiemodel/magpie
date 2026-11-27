@@ -37,4 +37,4 @@ q14_yield_past(j2,w) ..
  sum(ct,(i14_yields_calib(ct,j2,"pasture",w))
  * sum(cell(i2,j2),pm_past_mngmnt_factor(ct,i2)))
  * (1 + sum(ct, sum(cell(i2,j2), f14_yld_past_switch(ct,i2)))
-      * (sum((cell(i2,j2), supreg(h2,i2)), pcm_tau(j2,"crop") / fm_tau1995(h2)) - 1));
+      * (sum((cell(i2,j2), supreg(h2,i2)), pcm_tau(j2,"crop") / p14_tau_ref(j2)) - 1));
