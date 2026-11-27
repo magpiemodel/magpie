@@ -13,6 +13,9 @@ scalars
   s59_scm_scenario_start          Soil carbon management scenario start year / 2025 /
   s59_scm_scenario_target         Soil carbon management scenario target year / 2050 /
   s59_cost_scm_recur              Soil carbon management recurring cost (USD17MER per ha) / 65 /
+  s59_scm_mode                    Soil carbon management mode relative share (0) or absolute area target with endogenous allocation (1) / 0 /
+  s59_scm_max_share_per_cell      Maximum share of SCM on cropland per cell to prevent clustering used with mode 1 (1) / 1 /
+  s59_scm_reference_year          Reference year for SCM target calculation used with mode 1 or dynamic mode (-1) / -1 /
 ;
 
 *' @code 
@@ -49,20 +52,20 @@ $offdelim
 parameter f59_cratio_landuse_fallow(climate59_2019) Ratio of soil carbon relative to potential natural vegetation soil carbon for fallow land (1)
 /
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/ch5_F_LU_2019_fallow.csv"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_LU_2019_fallow.csv"
 $offdelim
 /
 ;
 
-table f59_cratio_tillage(climate59,tillage59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different soil management (1)
+table f59_cratio_tillage(climate59_2019,tillage59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different soil management (1)
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_MG.csv"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_MG_2019.cs3"
 $offdelim
 ;
 
-table f59_cratio_inputs(climate59,inputs59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different input intensity  (1)
+table f59_cratio_inputs(climate59_2019,inputs59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different input intensity  (1)
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_I.csv"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_I_2019.cs3"
 $offdelim
 ;
 
@@ -70,12 +73,12 @@ $setglobal c59_irrigation_scenario  on
 *   options:   on  (higher carbon sequestration under irrigation)
 *              off (no carbon sequestration under irrigation)
 
-table f59_cratio_irrigation(climate59,w,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different irrigation schemes  (1)
+table f59_cratio_irrigation(climate59_2019,w,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different irrigation schemes  (1)
 $ondelim
-$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_IRR.cs3"
+$include "./modules/59_som/cellpool_jan23/input/f59_trost_F_IRR.cs3"
 $offdelim
 ;
-$if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59,w,kcr) = 1;
+$if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59_2019,w,kcr) = 1;
 
 $setglobal c59_som_scenario  cc
 *   options:  cc        (climate change)

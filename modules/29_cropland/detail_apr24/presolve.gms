@@ -70,17 +70,51 @@ s29_shift = m_timestep_length_forestry/5;
 pc29_treecover(j,ac) = p29_treecover(t,j,ac);
 v29_treecover.l(j,ac) = p29_treecover(t,j,ac);
 
-* create treecover target and penalty scenario
-i29_treecover_target(t,j) = i29_treecover_scenario_fader(t) * 
-  (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
-  + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)));
+* Initialize/update cropland area tracker for treecover target calculation
+* For first timestep, use initial cropland area; for later timesteps, use previous solution
+if (sum(t_past, 1) = 0,
+  pc29_land_crop(j) = pcm_land(j,"crop");
+else
+  pc29_land_crop(j) = vm_land.l(j,"crop");
+);
+
+* Target calculation, depending on s29_treecover_mode:
+*   s29_treecover_mode = 0: share target, applied to current cropland area in the
+*                           equation (original behaviour)
+*   s29_treecover_mode = 1: absolute area target, reference area selected by
+*                           s29_treecover_reference_year
+*     s29_treecover_reference_year = -1: Use previous timestep cropland area (dynamic mode)
+*     s29_treecover_reference_year > 0:  Use fixed reference year cropland area (fixed year mode)
+* The absolute target decouples the treecover target from current cropland area
+* decisions while allowing spatial flexibility
+if (s29_treecover_mode = 0,
+  i29_treecover_target(t,j) = i29_treecover_scenario_fader(t) *
+    (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
+    + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)));
+else
+  if (s29_treecover_reference_year <= 0,
+    i29_treecover_target_area(t,j) = i29_treecover_scenario_fader(t) *
+      (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
+      + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)))
+      * pc29_land_crop(j);
+  else
+*   The reference year area for fixed year mode is stored in postsolve
+    i29_treecover_target_area(t,j) = i29_treecover_scenario_fader(t) *
+      (s29_treecover_target * sum(cell(i,j), p29_country_weight(i))
+      + s29_treecover_target_noselect * sum(cell(i,j), 1-p29_country_weight(i)))
+      * p29_land_crop_reference(j);
+  );
+);
 
 * calculate treecover share 
 pc29_treecover_share(j) = 0;
 pc29_treecover_share(j)$(pcm_land(j,"crop") > 1e-10) = sum(ac, pc29_treecover(j,ac)) / pcm_land(j,"crop"); 
 pc29_treecover_share(j)$(pc29_treecover_share(j) > s29_treecover_max) = s29_treecover_max;
-if (s29_treecover_keep = 1,
+if (s29_treecover_keep = 1 AND s29_treecover_mode = 0,
  i29_treecover_target(t,j)$(i29_treecover_target(t,j) < pc29_treecover_share(j)) = pc29_treecover_share(j);
+);
+if (s29_treecover_keep = 1 AND s29_treecover_mode = 1,
+ i29_treecover_target_area(t,j)$(i29_treecover_target_area(t,j) < sum(ac, pc29_treecover(j,ac))) = sum(ac, pc29_treecover(j,ac));
 );
 
 * Bounds for treecover. Only ac_est can increase in optimization. ac_sub is fixed.

@@ -12,10 +12,19 @@ pc59_carbon_density(j,land)$(pc59_land_before(j,land) > 1e-10) = pc59_som_pool(j
 *** Carry the soil carbon stock forward to the next timestep (as done for the above-ground pools in 56_ghg_policy).
 pcm_carbon_stock(j,land,"soilc",stockType) = vm_carbon_stock.l(j,land,"soilc",stockType);
 
+* Store the solved total cropland area of the reference year (fixed year mode)
+if (s59_scm_reference_year > 0,
+  if (m_year(t) = s59_scm_reference_year,
+    p59_land_scm_reference(j) = pcm_land(j,"crop");
+  );
+);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov59_som_target(t,j,land,"marginal")                      = v59_som_target.m(j,land);
  ov59_som_pool(t,j,land,"marginal")                        = v59_som_pool.m(j,land);
  ov_cost_scm(t,j,"marginal")                               = vm_cost_scm.m(j);
+ ov59_area_scm(t,j,kcr,w,scmtype59,"marginal")             = v59_area_scm.m(j,kcr,w,scmtype59);
+ ov59_area_fallow_scm(t,j,"marginal")                      = v59_area_fallow_scm.m(j);
  ov_nr_som(t,j,"marginal")                                 = vm_nr_som.m(j);
  ov_nr_som_fertilizer(t,j,"marginal")                      = vm_nr_som_fertilizer.m(j);
  oq59_som_target_cropland(t,j,"marginal")                  = q59_som_target_cropland.m(j);
@@ -26,9 +35,17 @@ pcm_carbon_stock(j,land,"soilc",stockType) = vm_carbon_stock.l(j,land,"soilc",st
  oq59_nr_som_fertilizer2(t,j,"marginal")                   = q59_nr_som_fertilizer2.m(j);
  oq59_carbon_soil(t,j,land,stockType,"marginal")           = q59_carbon_soil.m(j,land,stockType);
  oq59_cost_scm(t,j,"marginal")                             = q59_cost_scm.m(j);
+ oq59_area_scm_tot(t,j,kcr,w,"marginal")                   = q59_area_scm_tot.m(j,kcr,w);
+ oq59_scm_share(t,j,kcr,w,"marginal")                      = q59_scm_share.m(j,kcr,w);
+ oq59_area_fallow_scm_share(t,j,"marginal")                = q59_area_fallow_scm_share.m(j);
+ oq59_area_fallow_scm(t,j,"marginal")                      = q59_area_fallow_scm.m(j);
+ oq59_scm_target_constraint(t,i,"marginal")                = q59_scm_target_constraint.m(i);
+ oq59_scm_max_per_cell(t,j,"marginal")                     = q59_scm_max_per_cell.m(j);
  ov59_som_target(t,j,land,"level")                         = v59_som_target.l(j,land);
  ov59_som_pool(t,j,land,"level")                           = v59_som_pool.l(j,land);
  ov_cost_scm(t,j,"level")                                  = vm_cost_scm.l(j);
+ ov59_area_scm(t,j,kcr,w,scmtype59,"level")                = v59_area_scm.l(j,kcr,w,scmtype59);
+ ov59_area_fallow_scm(t,j,"level")                         = v59_area_fallow_scm.l(j);
  ov_nr_som(t,j,"level")                                    = vm_nr_som.l(j);
  ov_nr_som_fertilizer(t,j,"level")                         = vm_nr_som_fertilizer.l(j);
  oq59_som_target_cropland(t,j,"level")                     = q59_som_target_cropland.l(j);
@@ -39,9 +56,17 @@ pcm_carbon_stock(j,land,"soilc",stockType) = vm_carbon_stock.l(j,land,"soilc",st
  oq59_nr_som_fertilizer2(t,j,"level")                      = q59_nr_som_fertilizer2.l(j);
  oq59_carbon_soil(t,j,land,stockType,"level")              = q59_carbon_soil.l(j,land,stockType);
  oq59_cost_scm(t,j,"level")                                = q59_cost_scm.l(j);
+ oq59_area_scm_tot(t,j,kcr,w,"level")                      = q59_area_scm_tot.l(j,kcr,w);
+ oq59_scm_share(t,j,kcr,w,"level")                         = q59_scm_share.l(j,kcr,w);
+ oq59_area_fallow_scm_share(t,j,"level")                   = q59_area_fallow_scm_share.l(j);
+ oq59_area_fallow_scm(t,j,"level")                         = q59_area_fallow_scm.l(j);
+ oq59_scm_target_constraint(t,i,"level")                   = q59_scm_target_constraint.l(i);
+ oq59_scm_max_per_cell(t,j,"level")                        = q59_scm_max_per_cell.l(j);
  ov59_som_target(t,j,land,"upper")                         = v59_som_target.up(j,land);
  ov59_som_pool(t,j,land,"upper")                           = v59_som_pool.up(j,land);
  ov_cost_scm(t,j,"upper")                                  = vm_cost_scm.up(j);
+ ov59_area_scm(t,j,kcr,w,scmtype59,"upper")                = v59_area_scm.up(j,kcr,w,scmtype59);
+ ov59_area_fallow_scm(t,j,"upper")                         = v59_area_fallow_scm.up(j);
  ov_nr_som(t,j,"upper")                                    = vm_nr_som.up(j);
  ov_nr_som_fertilizer(t,j,"upper")                         = vm_nr_som_fertilizer.up(j);
  oq59_som_target_cropland(t,j,"upper")                     = q59_som_target_cropland.up(j);
@@ -52,9 +77,17 @@ pcm_carbon_stock(j,land,"soilc",stockType) = vm_carbon_stock.l(j,land,"soilc",st
  oq59_nr_som_fertilizer2(t,j,"upper")                      = q59_nr_som_fertilizer2.up(j);
  oq59_carbon_soil(t,j,land,stockType,"upper")              = q59_carbon_soil.up(j,land,stockType);
  oq59_cost_scm(t,j,"upper")                                = q59_cost_scm.up(j);
+ oq59_area_scm_tot(t,j,kcr,w,"upper")                      = q59_area_scm_tot.up(j,kcr,w);
+ oq59_scm_share(t,j,kcr,w,"upper")                         = q59_scm_share.up(j,kcr,w);
+ oq59_area_fallow_scm_share(t,j,"upper")                   = q59_area_fallow_scm_share.up(j);
+ oq59_area_fallow_scm(t,j,"upper")                         = q59_area_fallow_scm.up(j);
+ oq59_scm_target_constraint(t,i,"upper")                   = q59_scm_target_constraint.up(i);
+ oq59_scm_max_per_cell(t,j,"upper")                        = q59_scm_max_per_cell.up(j);
  ov59_som_target(t,j,land,"lower")                         = v59_som_target.lo(j,land);
  ov59_som_pool(t,j,land,"lower")                           = v59_som_pool.lo(j,land);
  ov_cost_scm(t,j,"lower")                                  = vm_cost_scm.lo(j);
+ ov59_area_scm(t,j,kcr,w,scmtype59,"lower")                = v59_area_scm.lo(j,kcr,w,scmtype59);
+ ov59_area_fallow_scm(t,j,"lower")                         = v59_area_fallow_scm.lo(j);
  ov_nr_som(t,j,"lower")                                    = vm_nr_som.lo(j);
  ov_nr_som_fertilizer(t,j,"lower")                         = vm_nr_som_fertilizer.lo(j);
  oq59_som_target_cropland(t,j,"lower")                     = q59_som_target_cropland.lo(j);
@@ -65,4 +98,10 @@ pcm_carbon_stock(j,land,"soilc",stockType) = vm_carbon_stock.l(j,land,"soilc",st
  oq59_nr_som_fertilizer2(t,j,"lower")                      = q59_nr_som_fertilizer2.lo(j);
  oq59_carbon_soil(t,j,land,stockType,"lower")              = q59_carbon_soil.lo(j,land,stockType);
  oq59_cost_scm(t,j,"lower")                                = q59_cost_scm.lo(j);
+ oq59_area_scm_tot(t,j,kcr,w,"lower")                      = q59_area_scm_tot.lo(j,kcr,w);
+ oq59_scm_share(t,j,kcr,w,"lower")                         = q59_scm_share.lo(j,kcr,w);
+ oq59_area_fallow_scm_share(t,j,"lower")                   = q59_area_fallow_scm_share.lo(j);
+ oq59_area_fallow_scm(t,j,"lower")                         = q59_area_fallow_scm.lo(j);
+ oq59_scm_target_constraint(t,i,"lower")                   = q59_scm_target_constraint.lo(i);
+ oq59_scm_max_per_cell(t,j,"lower")                        = q59_scm_max_per_cell.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

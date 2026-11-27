@@ -42,21 +42,11 @@ i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
                  * f59_cratio_irrigation(climate59,w,kcr));
 
 
-*' Fallow management: for dry regions, assume bare fallow and full tillage to save water, 
-*' implemented through IPCC F_LU factor for long-term cultivated cropland with full tillage
-*' and low inputs @ipcc_2019_ch5 (IPCC 2019, Table 5.5).
-*' For moist regions, assume F_LU factor of set-aside.
-*' Assumed to have no irrigation, so irrigation multiplier is 1.
-
-i59_cratio_fallow_climate(climate59) = f59_cratio_landuse_fallow(climate59)
-                * f59_cratio_tillage(climate59,"full_tillage")
-                * f59_cratio_inputs(climate59,"low_input");
-
-i59_cratio_fallow_climate(climate59moist) = f59_cratio_landuse_fallow(climate59moist);
-
+*' The fallow stock change factor also varies by climate zone and is mapped to the
+*' cells accordingly:
 i59_cratio_fallow(j) = sum(climate59,
                 sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
-                * i59_cratio_fallow_climate(climate59));
+                * f59_cratio_landuse_fallow(climate59));
 
 *' For treecover in cropland (e.g. agroforestry areas) we assume natural soil carbon
 *' values as target value, and thus set the value to `1`:
@@ -136,3 +126,7 @@ pc59_land_before(j,land) = pm_land_start(j,land);
 p59_carbon_density(t,j,land) = 0;
 pc59_carbon_density(j,land) = 0;
 pc59_carbon_density(j,land)$(pc59_land_before(j,land) > 1e-10) = pc59_som_pool(j,land) / pc59_land_before(j,land);
+
+* Initialize total cropland reference snapshot to zero
+* Will be filled in postsolve when using fixed year mode (s59_scm_reference_year > 0)
+p59_land_scm_reference(j) = 0;

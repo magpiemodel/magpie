@@ -21,7 +21,10 @@ parameters
  i29_snv_scenario_fader(t_all)      SNV scenario fader (1)
 
  i29_treecover_scenario_fader(t_all)    Cropland treecover scenario fader (1)
- i29_treecover_target(t,j)              Target share for treecover on total cropland (1)
+ i29_treecover_target(t,j)              Target share for treecover (1) used when s29_treecover_mode = 0
+ i29_treecover_target_area(t,j)         Target area for treecover in absolute terms (mio. ha) used when s29_treecover_mode = 1
+ pc29_land_crop(j)                      Total cropland area from previous timestep (mio. ha)
+ p29_land_crop_reference(j)             Cropland area snapshot for treecover target when using fixed reference year (mio. ha)
  i29_treecover_penalty(t)               Penalty for violation of treecover target (USD17MER per ha)
  p29_treecover_bii_coeff(bii_class_secd,potnatveg)  BII coefficient for cropland treecover (1)
  p29_carbon_density_ac(t,j,ac,ag_pools) Carbon density for ac and ag_pools (tC per ha)
@@ -60,7 +63,8 @@ equations
  q29_fallow_max(j)                 Maximum fallow land towards target (mio. ha)
  q29_fallow_bv(j,potnatveg)        Biodiversity value for fallow land (mio. ha)
  q29_treecover(j)                  Cropland tree cover (mio. ha)
- q29_treecover_min(j)              Missing treecover area towards target (mio. ha)
+ q29_treecover_min(j)              Missing treecover area towards share target (mio. ha)
+ q29_treecover_min_area(j)         Missing treecover area towards absolute area target (mio. ha)
  q29_treecover_max(j)              Maximum treecover area (mio. ha)
  q29_treecover_bv(j,potnatveg)     Biodiversity value for cropland treecover (mio. ha)
  q29_cost_treecover_est(j)         Establishment cost for cropland tree cover (mio. USD17MER per yr)
@@ -90,7 +94,8 @@ parameters
  oq29_fallow_max(t,j,type)                Maximum fallow land towards target (mio. ha)
  oq29_fallow_bv(t,j,potnatveg,type)       Biodiversity value for fallow land (mio. ha)
  oq29_treecover(t,j,type)                 Cropland tree cover (mio. ha)
- oq29_treecover_min(t,j,type)             Missing treecover area towards target (mio. ha)
+ oq29_treecover_min(t,j,type)             Missing treecover area towards share target (mio. ha)
+ oq29_treecover_min_area(t,j,type)        Missing treecover area towards absolute area target (mio. ha)
  oq29_treecover_max(t,j,type)             Maximum treecover area (mio. ha)
  oq29_treecover_bv(t,j,potnatveg,type)    Biodiversity value for cropland treecover (mio. ha)
  oq29_cost_treecover_est(t,j,type)        Establishment cost for cropland tree cover (mio. USD17MER per yr)

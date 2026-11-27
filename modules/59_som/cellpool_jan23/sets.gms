@@ -10,6 +10,16 @@ sets
 noncropland59(land) Soil carbon conserving landuse types
 /past, forestry, primforest, secdforest, other, urban/
 
+scmtype59 Soil carbon management area types
+/scm, noscm/
+
+knoscm59(kcr) Crops excluded from soil carbon management (perennials and rice)
+/betr, begr, oilpalm, sugr_cane, rice_pro, others/
+
+kscm59(kcr) Crops eligible for soil carbon management (annuals)
+/tece, maiz, trce, soybean, rapeseed, groundnut, sunflower, 
+ puls_pro, potato, cassav_sp, sugr_beet, foddr, cottn_pro/
+
 tillage59 Tillage categories of IPCC
 /full_tillage,reduced_tillage,no_tillage/
 
@@ -21,9 +31,6 @@ climate59_2019 Climate classes of IPCC 2019
 
 climate59(climate59_2019) Climate classes of IPCC 2006
 /temperate_dry,temperate_moist,tropical_dry,tropical_moist/
-
-climate59moist(climate59) Moist climate classes of IPCC 2006
-/temperate_moist,tropical_moist/
 
 *** Csa, Dwa should be dry (maybe others as well)
 

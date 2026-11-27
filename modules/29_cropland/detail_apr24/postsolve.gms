@@ -7,6 +7,13 @@
 
 pc29_treecover(j,ac) = v29_treecover.l(j,ac);
 
+* Store the solved cropland area of the reference year (fixed year mode)
+if (s29_treecover_reference_year > 0,
+  if (m_year(t) = s29_treecover_reference_year,
+    p29_land_crop_reference(j) = pcm_land(j,"crop");
+  );
+);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_cropland(t,j,"marginal")               = vm_cost_cropland.m(j);
  ov_treecover(t,j,"marginal")                   = vm_treecover.m(j);
@@ -29,6 +36,7 @@ pc29_treecover(j,ac) = v29_treecover.l(j,ac);
  oq29_fallow_bv(t,j,potnatveg,"marginal")       = q29_fallow_bv.m(j,potnatveg);
  oq29_treecover(t,j,"marginal")                 = q29_treecover.m(j);
  oq29_treecover_min(t,j,"marginal")             = q29_treecover_min.m(j);
+ oq29_treecover_min_area(t,j,"marginal")        = q29_treecover_min_area.m(j);
  oq29_treecover_max(t,j,"marginal")             = q29_treecover_max.m(j);
  oq29_treecover_bv(t,j,potnatveg,"marginal")    = q29_treecover_bv.m(j,potnatveg);
  oq29_cost_treecover_est(t,j,"marginal")        = q29_cost_treecover_est.m(j);
@@ -55,6 +63,7 @@ pc29_treecover(j,ac) = v29_treecover.l(j,ac);
  oq29_fallow_bv(t,j,potnatveg,"level")          = q29_fallow_bv.l(j,potnatveg);
  oq29_treecover(t,j,"level")                    = q29_treecover.l(j);
  oq29_treecover_min(t,j,"level")                = q29_treecover_min.l(j);
+ oq29_treecover_min_area(t,j,"level")           = q29_treecover_min_area.l(j);
  oq29_treecover_max(t,j,"level")                = q29_treecover_max.l(j);
  oq29_treecover_bv(t,j,potnatveg,"level")       = q29_treecover_bv.l(j,potnatveg);
  oq29_cost_treecover_est(t,j,"level")           = q29_cost_treecover_est.l(j);
@@ -81,6 +90,7 @@ pc29_treecover(j,ac) = v29_treecover.l(j,ac);
  oq29_fallow_bv(t,j,potnatveg,"upper")          = q29_fallow_bv.up(j,potnatveg);
  oq29_treecover(t,j,"upper")                    = q29_treecover.up(j);
  oq29_treecover_min(t,j,"upper")                = q29_treecover_min.up(j);
+ oq29_treecover_min_area(t,j,"upper")           = q29_treecover_min_area.up(j);
  oq29_treecover_max(t,j,"upper")                = q29_treecover_max.up(j);
  oq29_treecover_bv(t,j,potnatveg,"upper")       = q29_treecover_bv.up(j,potnatveg);
  oq29_cost_treecover_est(t,j,"upper")           = q29_cost_treecover_est.up(j);
@@ -107,6 +117,7 @@ pc29_treecover(j,ac) = v29_treecover.l(j,ac);
  oq29_fallow_bv(t,j,potnatveg,"lower")          = q29_fallow_bv.lo(j,potnatveg);
  oq29_treecover(t,j,"lower")                    = q29_treecover.lo(j);
  oq29_treecover_min(t,j,"lower")                = q29_treecover_min.lo(j);
+ oq29_treecover_min_area(t,j,"lower")           = q29_treecover_min_area.lo(j);
  oq29_treecover_max(t,j,"lower")                = q29_treecover_max.lo(j);
  oq29_treecover_bv(t,j,potnatveg,"lower")       = q29_treecover_bv.lo(j,potnatveg);
  oq29_cost_treecover_est(t,j,"lower")           = q29_cost_treecover_est.lo(j);

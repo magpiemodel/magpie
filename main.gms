@@ -160,7 +160,7 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     5   19   12   12    7   33   25    8   16   12   33   18
+*     5   20   12   12    7   33   25    8   16   12   32   18
 * 
 * Regionscode: 62eff8f7
 *###################### R SECTION END (VERSION INFO) ###########################

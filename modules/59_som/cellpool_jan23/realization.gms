@@ -6,17 +6,27 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description
-*' The cellpool_aug23 realization is built on revised IPCC 2019 Guidelines for
+*' The cellpool_jan23 realization is built on revised IPCC 2019 Guidelines for
 *' National Greenhouse Gas Inventories (@calvo_buendia_ipcc_2019). It calculates the loss of
 *' soil carbon due to cropping activities and management based on stock change factors,
 *' compared to potential natural vegetation.
 *' This approach also accounts for the temporal dimension of soil organic carbon change,
 *' since it assumes a gradual step of 15% in the direction of the new equilibrium soil
 *' organic carbon pool each year. Stock change factors tracks crop types as well as
-*' management (e.g. irrigation) and input differences on cropland. 
-*' Dedicated soil carbon management can be switched on for a share of cropland, characterized 
+*' management (e.g. irrigation) and input differences on cropland. Fallow land is
+*' included in the cropland SOM target with a dedicated stock change factor.
+*' Dedicated soil carbon management (SCM) can be switched on for a share of cropland, characterized 
 *' by a higher input factor, which according to the IPCC guidelines reflects improved agronomic 
-*' practices. Target shares are set exogenously and are phased in over time.  
+*' practices. Target shares are set exogenously and are phased in over time.
+*' Two allocation modes are available via `s59_scm_mode`. In share mode (0), SCM is applied
+*' on a given relative share of each cell's cropland area, including fallow land.
+*' In area mode (1), the share target is translated into an absolute regional area target
+*' (`i59_scm_target_area`), based either on previous timestep cropland area (dynamic) or
+*' on a fixed reference year's cropland area (`s59_scm_reference_year`), and the
+*' allocation of SCM to cells is endogenous (`v59_area_scm`, `v59_area_fallow_scm`).
+*' In area mode, SCM on cropareas is restricted to annual crops, fallow land under SCM
+*' is capped by the cell's fallow area, and the SCM area per cell is capped by
+*' `s59_scm_max_share_per_cell`.
 
 *' @limitations It is assumed that pastures and rangelandes as well as managed forests
 *' do not change in soil carbon compared to the natural reference state. Moreover only

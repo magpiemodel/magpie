@@ -78,3 +78,7 @@ vm_bv.l(j,"crop_fallow",potnatveg) =
 vm_bv.l(j,"crop_tree",potnatveg) =
   sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), pc29_treecover(j,ac)) * 
   fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j,potnatveg);
+
+* Initialize reference area snapshot to zero
+* Will be filled in postsolve when using fixed year mode (s29_treecover_reference_year > 0)
+p29_land_crop_reference(j) = 0;
