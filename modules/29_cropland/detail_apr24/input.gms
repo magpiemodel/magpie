@@ -40,7 +40,7 @@ scalars
  s29_fallow_short_penalty_target Target penalty value for also skipping short fallow (USD17MER per ha) / 300 /
  s29_fallow_short_threshold      Share of fallow land below which short fallows starts (1) / 0.2 /
  s29_fallow_long_threshold       Share of fallow land below which long fallows starts (1) / 0.66 /
- s29_fader_functional_form       Switch for functional form of faders (1) / 2 /
+ s29_fader_functional_form       Switch for functional form of faders (1) / 1 /
 ;
 
 
