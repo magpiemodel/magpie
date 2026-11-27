@@ -42,15 +42,7 @@ else
 *   s59_scm_reference_year > 0:  Use fixed reference year total cropland area (fixed year mode)
 * Reference area is total cropland including fallow and treecover (consistent with
 * treecover target, avoids perverse incentive)
-* Store total cropland snapshot when we reach the reference year (if using fixed year mode)
-* This snapshot is then used for all subsequent SCM target calculations
-* NOTE: s59_scm_reference_year should be <= s59_scm_scenario_start to ensure
-*       the snapshot is taken before the SCM policy begins
-  if (s59_scm_reference_year > 0,
-    if (m_year(t) = s59_scm_reference_year,
-      p59_land_scm_reference(j) = pcm_land(j,"crop");
-    );
-  );
+* The reference year area for fixed year mode is stored in postsolve
   if (s59_scm_reference_year <= 0,
     i59_scm_target_area(t,i) = i59_scm_scenario_fader(t) *
       (s59_scm_target * p59_country_weight(i) * sum(cell(i,j), pcm_land(j,"crop"))

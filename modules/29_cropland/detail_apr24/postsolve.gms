@@ -7,6 +7,13 @@
 
 pc29_treecover(j,ac) = v29_treecover.l(j,ac);
 
+* Store the solved cropland area of the reference year (fixed year mode)
+if (s29_treecover_reference_year > 0,
+  if (m_year(t) = s29_treecover_reference_year,
+    p29_land_crop_reference(j) = pcm_land(j,"crop");
+  );
+);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_cropland(t,j,"marginal")               = vm_cost_cropland.m(j);
  ov_treecover(t,j,"marginal")                   = vm_treecover.m(j);
