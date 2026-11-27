@@ -12,6 +12,13 @@ pc59_carbon_density(j,land)$(pc59_land_before(j,land) > 1e-10) = pc59_som_pool(j
 *** Carry the soil carbon stock forward to the next timestep (as done for the above-ground pools in 56_ghg_policy).
 pcm_carbon_stock(j,land,"soilc",stockType) = vm_carbon_stock.l(j,land,"soilc",stockType);
 
+* Store the solved total cropland area of the reference year (fixed year mode)
+if (s59_scm_reference_year > 0,
+  if (m_year(t) = s59_scm_reference_year,
+    p59_land_scm_reference(j) = pcm_land(j,"crop");
+  );
+);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov59_som_target(t,j,land,"marginal")                      = v59_som_target.m(j,land);
  ov59_som_pool(t,j,land,"marginal")                        = v59_som_pool.m(j,land);
