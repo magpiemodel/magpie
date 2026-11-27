@@ -59,6 +59,7 @@ scalars
   s15_yeardiff                       Number of 5-year time intervalls between time steps (1)
   s15_count                          Loop counter for interpolating body height estimates between longer timesteps (1)
   s15_run_diet_postprocessing        run diet postprocessing (1)
+  s15_kcal_calib_fadeout_switch      Calibration fadeout factor in the last time step before sm_fix_SSP2 (1) / 0 /
 ;
 
 parameters
@@ -128,6 +129,8 @@ parameters
 * diet calibration
   p15_kcal_calib(t,iso,kfo)                   Balance flow to diverge from mean calories of regressions (kcal per cap per day)
   p15_kcal_calib_lastcalibyear(iso,kfo)       Calibration factor for the last year with observations (kcal per cap per day)
+  p15_kcal_regr_scen(iso,kfo)                 Regression food demand with scenario parameters in the last time step before sm_fix_SSP2 (kcal per cap per day)
+  p15_kcal_calib_switch(iso,kfo)              Calibration offset for the switch from SSP2 to scenario parameters after sm_fix_SSP2 (kcal per cap per day)
   p15_balanceflow_kcal(t,i,kfo)               Balance flow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
   p15_balanceflow_kcal_iso(t,iso,kfo)         Balance flow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
   p15_balanceflow_kcal_lastcalibyear(iso,kfo) Balance flow of last historic time step for mismatch between FAOSTAT and demand estimates (kcal per capita per day)

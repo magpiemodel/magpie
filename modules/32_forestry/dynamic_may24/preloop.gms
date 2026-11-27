@@ -89,6 +89,10 @@ pm_land_plantation(j,ac) = pc32_land(j,"plant",ac);
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
+** Share of natural forest locked by NPI/NDC afforestation (q32_ndc_aff_limit). The input is given per
+** five-year period; for longer time steps the largest share of the periods within the step is used.
+p32_aff_lock_share(t,j) = smax(t_all$(m_year(t_all) > m_year(t-1) AND m_year(t_all) <= m_year(t)),
+                               f32_aff_lock_share(t_all,j,"%c32_aff_policy%"));
 
 
 *fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
