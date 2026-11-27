@@ -28,8 +28,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **35_natveg** removed interface `vm_natforest_reduction` and equation `q35_natforest_reduction`: their only reader was the old lock.
 
 ### fixed
+- **29_cropland/detail_apr24** Fixed edge-case infeasibility where the SNV-reduced cropland cap fell below the non-removable tree cover on cropland
 - **15_food** Food demand no longer jumps when the regression parameters switch from SSP2 to the scenario after `sm_fix_SSP2`. The difference between the SSP2 and the scenario parametrization in the last time step before the switch is added to the calibration and follows the fade-out of `c15_calibscen`. `pm_kcal_pc_initial` is rounded to 2 decimals like `p15_kcal_pc_calibrated`. SSP2 results are unchanged except for rounding-related changes.
 - **32_forestry** NPI/NDC afforestation lock (`q32_ndc_aff_limit`). Before, any NPI/NDC afforestation in a cluster set all natural forest reduction there to zero, so one country's afforestation froze the natural forest of every country in the cluster and also blocked timber harvest of secondary forest. Now natural forest conversion (`vm_natforest_conversion`) in such a cluster may not exceed the natural forest outside the policy regions whose afforestation rises in the time step (`p32_aff_lock_share`, new switch `s32_ndc_aff_limit`: 0 off, 1 on, default 1). Secondary forest can be harvested for timber but not cleared; primary forest can be neither. Land use changes from 2000 on (default run, World 2050: forest -79 Mha, other land +71 Mha); in 1995, with no cluster locked, the reformulation gives another optimum (prices, timber emissions). The land-conversion cost calibration is not updated.
+
 
 
 ## [4.14.2] - 2026-11-03
