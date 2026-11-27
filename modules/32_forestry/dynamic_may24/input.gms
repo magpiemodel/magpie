@@ -32,6 +32,7 @@ scalars
   s32_max_self_suff               Upper ceiling for the self sufficiency used in calculation for establishment decision (1) / 0.8 /
   s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
   s32_max_aff_area_glo            Switch for global or regional afforestation constraint (1) / 1 /
+  s32_ndc_aff_limit               Switch for the NPI NDC afforestation lock on natural forest conversion in the afforesting policy regions (0=off 1=on) (1) / 1 /
   s32_aff_prot                    Switch for protection of afforested areas (0=until end of planning horizon 1=forever) / 1 /
   s32_plant_contr_growth_startyear  Start year for plantation contribution growth fader (year) / 1995 /
   s32_plant_contr_growth_endyear    End year for plantation contribution growth fader (year) / 2025 /
@@ -69,6 +70,14 @@ $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim
 ;
+
+$onEmpty
+table f32_aff_lock_share(t_all,j,pol32) Share of natural forest in policy regions with rising NPI NDC afforestation stock (1)
+$ondelim
+$include "./modules/32_forestry/input/npi_ndc_aff_lock_share.cs3"
+$offdelim
+;
+$offEmpty
 
 table f32_aff_bgp(j,bgp32) Biogeophysical temperature change of afforestation (degree C)
 $ondelim

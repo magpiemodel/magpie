@@ -381,11 +381,12 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE,
                         !("affexp" %in% magclass::getNames(aff_pol))
     ndcdelay_missing <- (cfg$gms$c32_aff_policy == "ndcdelay") &&
                         !("ndcdelay" %in% magclass::getNames(aff_pol))
+    lock_share_missing <- !file.exists("modules/32_forestry/input/npi_ndc_aff_lock_share.cs3")
 
     if((all(aff_pol == 0)  && (cfg$gms$c32_aff_policy != "none"))  ||
        (all(ad_pol == 0)   && (cfg$gms$c35_ad_policy != "none"))   ||
        (all(aolc_pol == 0) && (cfg$gms$c35_aolc_policy != "none")) ||
-       affexp_missing || ndcdelay_missing)
+       affexp_missing || ndcdelay_missing || lock_share_missing)
     {
       cfg$recalc_npi_ndc <- TRUE
     } else cfg$recalc_npi_ndc <- FALSE

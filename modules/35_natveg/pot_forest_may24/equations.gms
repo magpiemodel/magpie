@@ -78,8 +78,15 @@
 
  q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
 
- q35_natforest_reduction(j2) .. vm_natforest_reduction(j2) =e=
- v35_primforest_reduction(j2) + sum(ac_sub, v35_secdforest_reduction(j2,ac_sub));
+*' Natural forest conversion, declared free but never negative: all terms are positive variables that count losses
+*' against the previous time step. Primary forest reduction counts in full, harvest included: by design the lock counts
+*' primary forest harvest as conversion, although harvested primary forest regrows as secondary forest, as harvested
+*' secondary forest does (`q35_secdforest_regeneration`). Secondary forest reduction counts net of its harvested area,
+*' which `q35_hvarea_secdforest` keeps at or below the reduction. Read by the NPI/NDC afforestation lock in [32_forestry].
+
+ q35_natforest_conversion(j2) .. vm_natforest_conversion(j2) =e=
+ v35_primforest_reduction(j2)
+ + sum(ac_sub, v35_secdforest_reduction(j2,ac_sub) - v35_hvarea_secdforest(j2,ac_sub));
 
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
 *' The gross change in natural vegetation is calculated based on land expansion and
