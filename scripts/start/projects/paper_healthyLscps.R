@@ -150,6 +150,7 @@ for (ssp in SSPs) {
 
     # permanent habitats in agricultural landscapes
     if (any(actions %in% c("BIOS", "SNV20"))) {
+      cfg$gms$s29_fader_functional_form <- 2
       cfg$gms$s29_snv_shr <- 0.2
       cfg$gms$s29_snv_scenario_start <- 2020
       cfg$gms$s29_snv_scenario_target <- 2030

@@ -42,6 +42,8 @@ cfg$gms$s15_elastic_demand <- 1
 cfg$gms$s56_limit_ch4_n2o_price <- 734
 cfg$gms$s32_annual_aff_limit <- 0.03
 
+cfg$gms$s29_fader_functional_form <- 2
+
 ### Main scenarios
 
 #H-SSP3-rollBack
